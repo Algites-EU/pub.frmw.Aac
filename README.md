@@ -32,10 +32,10 @@ Briefly describe the structure, for example:
                     ├── run/
                     ├── src/
                     |    ├── product/
-                    |    |      ├── java/
+                    |    |      ├── python/
                     |    |      └── (other-tech-specific-folder)/
                     |    └── develop/
-                    |           ├── java/
+                    |           ├── python/
                     |           └── (other-tech-specific-folder)/
                     ├── doc/
                     └── README.md
@@ -77,32 +77,31 @@ Describe:
 - example dependency coordinates,
 - or how to run the application.
 
-Example (Maven):
-
-```xml
-<dependency>
-  <groupId>eu.algites...</groupId>
-  <artifactId>...</artifactId>
-  <version>...</version>
-</dependency>
-```
-
----
-
-## 🛠 Development
-
-Typical workflow:
+Example (pip):
 
 ```bash
-git clone https://github.com/Algites-EU/<repo>.git
-cd <repo>
-./gradlew build
+python -m pip install algites-...
 ```
 
-or
+Example (`pyproject.toml`):
+
+```toml
+[project]
+dependencies = [
+    "algites-...>=1.0.0",
+]
+```
+
+Example (`requirements.txt`):
+
+```text
+algites-...>=1.0.0
+```
+
+Example with custom package index:
 
 ```bash
-mvn clean verify
+python -m pip install --index-url https://.../simple/ algites-...
 ```
 
 ---
