@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "_AAC.schema.workspace-component-requirements/1",
+  "type": "object",
+  "required": ["workspace_component_requirements"],
+  "additionalProperties": false,
+  "properties": {
+    "workspace_component_requirements": {
+      "type": "object",
+      "required": ["workspace_id", "requirements"],
+      "additionalProperties": false,
+      "properties": {
+        "workspace_id": {"type": "string", "minLength": 1},
+        "update_policy": {"enum": ["MANUAL", "NOTIFY", "AUTO_COMPATIBLE", "AUTO_LOCKED"], "default": "MANUAL"},
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["component_id"],
+            "additionalProperties": false,
+            "properties": {
+              "component_id": {"type": "string", "minLength": 1},
+              "versions": {"type": "array", "items": {"type": "integer", "minimum": 1}, "uniqueItems": true},
+              "required": {"type": "boolean", "default": true},
+              "source_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+              "name": {},
+              "description": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

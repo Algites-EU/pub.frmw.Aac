@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AAC Simple Audit Configuration 1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "output": {
+      "type": "object",
+      "default": {"type": "STDOUT"},
+      "x-aac-name": {"text": "Output", "resource_key": "aac.simpleaudit.config.output.name"},
+      "x-aac-description": {"text": "Selects where audit records are written.", "resource_key": "aac.simpleaudit.config.output.description"},
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": ["STDOUT", "FILE"],
+          "default": "STDOUT",
+          "x-aac-name": {"text": "Output type", "resource_key": "aac.simpleaudit.config.output.type.name"}
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "x-aac-name": {"text": "File path", "resource_key": "aac.simpleaudit.config.output.path.name"}
+        }
+      },
+      "required": ["type"],
+      "allOf": [
+        {
+          "if": {"properties": {"type": {"const": "FILE"}}, "required": ["type"]},
+          "then": {"required": ["path"]}
+        }
+      ]
+    },
+    "format": {
+      "enum": ["JSON", "TEXT"],
+      "default": "JSON",
+      "x-aac-name": {"text": "Format", "resource_key": "aac.simpleaudit.config.format.name"},
+      "x-aac-description": {"text": "Selects the serialized audit-record format.", "resource_key": "aac.simpleaudit.config.format.description"}
+    }
+  }
+}

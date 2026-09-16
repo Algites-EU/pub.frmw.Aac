@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AAC Configuration Profile 1",
+  "type": "object",
+  "required": [
+    "configuration_profile"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "configuration_profile": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "configuration_scopes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "configuration_scopes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "type",
+              "resolver"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "resolver": {
+                "type": "string",
+                "minLength": 1
+              },
+              "policy_authority": {
+                "type": "boolean"
+              },
+              "mandatory": {
+                "type": "boolean"
+              },
+              "configuration_providers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "priority": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "name": {
+                "$ref": "#/$defs/displayText"
+              },
+              "description": {
+                "$ref": "#/$defs/displayText"
+              }
+            }
+          }
+        },
+        "name": {
+          "$ref": "#/$defs/displayText"
+        },
+        "description": {
+          "$ref": "#/$defs/displayText"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "displayText": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "resource_key": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "anyOf": [
+            {
+              "required": [
+                "text"
+              ]
+            },
+            {
+              "required": [
+                "resource_key"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

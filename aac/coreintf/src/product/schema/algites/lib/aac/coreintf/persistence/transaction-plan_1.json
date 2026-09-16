@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "_AAC.schema.persistence-transaction-plan/1",
+  "title": "AAC Persistence Transaction Plan 1",
+  "type": "object",
+  "required": [
+    "format_version",
+    "transaction_id",
+    "transaction_type",
+    "created_at",
+    "read_set",
+    "write_set",
+    "metadata"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": 1
+    },
+    "transaction_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "transaction_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "read_set": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "record_id",
+          "expect_absent"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expected_record_revision": {
+            "type": [
+              "integer",
+              "string",
+              "null"
+            ]
+          },
+          "expect_absent": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "write_set": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "record_id",
+          "operation",
+          "metadata"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "operation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target_record_revision": {
+            "type": [
+              "integer",
+              "string",
+              "null"
+            ]
+          },
+          "metadata": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "_AAC.schema.persistence-transaction-state/1",
+  "title": "AAC Persistence Transaction State 1",
+  "type": "object",
+  "required": [
+    "format_version",
+    "transaction_id",
+    "phase",
+    "updated_at",
+    "diagnostics"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": 1
+    },
+    "transaction_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase": {
+      "enum": [
+        "PREPARED",
+        "COMMIT_STARTED",
+        "COMMITTED",
+        "CLEANUP_COMPLETED",
+        "ABORTED"
+      ]
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "_AAC.schema.active-package-set/2",
+  "title": "AAC Active Package Set 2",
+  "type": "object",
+  "required": [
+    "format_version",
+    "record_revision",
+    "selections"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": 2
+    },
+    "record_revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "last_transaction_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "selections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "application_scope_id",
+          "component_id",
+          "component_version",
+          "sha256",
+          "selected_at"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "application_scope_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "component_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "component_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sha256": {
+            "type": "string",
+            "minLength": 1
+          },
+          "selected_at": {
+            "type": "string"
+          },
+          "previous_sha256": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "previous_version": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          }
+        }
+      }
+    }
+  }
+}

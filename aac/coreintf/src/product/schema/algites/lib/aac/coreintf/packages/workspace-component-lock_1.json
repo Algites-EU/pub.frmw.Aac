@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "_AAC.schema.workspace-component-lock/1",
+  "type": "object",
+  "required": ["workspace_component_lock"],
+  "additionalProperties": false,
+  "properties": {
+    "workspace_component_lock": {
+      "type": "object",
+      "required": ["workspace_id", "entries"],
+      "additionalProperties": false,
+      "properties": {
+        "workspace_id": {"type": "string", "minLength": 1},
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["component_id", "component_version", "sha256", "source_id", "artifact_uri", "artifact_filename", "package_format", "descriptor_path"],
+            "additionalProperties": false,
+            "properties": {
+              "component_id": {"type": "string", "minLength": 1},
+              "component_version": {"type": "integer", "minimum": 1},
+              "sha256": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"},
+              "source_id": {"type": "string", "minLength": 1},
+              "artifact_uri": {"type": "string", "minLength": 1},
+              "artifact_filename": {"type": "string", "minLength": 1},
+              "package_format": {"type": "string", "minLength": 1},
+              "descriptor_path": {"type": "string", "minLength": 1},
+              "runtime_package": {"type": ["string", "null"]},
+              "verifier_id": {"type": ["string", "null"]},
+              "sidecars": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["uri", "suffix"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "uri": {"type": "string", "minLength": 1},
+                    "suffix": {"type": "string", "pattern": "^\\..+"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

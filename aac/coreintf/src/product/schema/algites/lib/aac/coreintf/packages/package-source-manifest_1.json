@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "_AAC.schema.package-source-manifest/1",
+  "type": "object",
+  "required": ["format_version", "packages"],
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {"const": 1},
+    "packages": {"type": "array"}
+  }
+}

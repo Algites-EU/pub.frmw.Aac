@@ -1,0 +1,4 @@
+artifact:
+  type: python
+  name: Algites Application Components Simple Audit
+  description: Minimal AAC observation provider writing normalized observation input to standard output or a file

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AAC Configuration Provider Document 2",
+  "type": "object",
+  "required": [
+    "format_version",
+    "configuration_scope",
+    "configuration_target",
+    "record_revision",
+    "payload"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": 2
+    },
+    "configuration_scope": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "configuration_target": {
+      "type": "object",
+      "required": [
+        "kind",
+        "component_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "COMPONENT",
+            "PROVIDER_INSTANCE"
+          ]
+        },
+        "component_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider_instance_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "configuration_schema_id",
+        "configuration_schema_version",
+        "written_by_component_version",
+        "values",
+        "policies"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "configuration_schema_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "configuration_schema_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "written_by_component_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "values": {
+          "type": "object"
+        },
+        "policies": {
+          "type": "object"
+        },
+        "metadata": {
+          "type": "object"
+        }
+      }
+    },
+    "record_revision": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

@@ -1,0 +1,4 @@
+artifact:
+  type: python
+  name: Algites Application Components Core Implementation
+  description: Reusable Python implementation of the Algites Application Components runtime

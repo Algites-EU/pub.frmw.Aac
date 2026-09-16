@@ -1,0 +1,4 @@
+artifact:
+  type: python
+  name: Algites Application Components UI Interfaces
+  description: Technology-neutral UI contracts and view models for AAC administration

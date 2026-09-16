@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "_AAC.schema.core-state-store/2",
+  "title": "AAC Core State Store 2",
+  "type": "object",
+  "required": [
+    "format_version",
+    "revision_kind",
+    "records"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": 2
+    },
+    "revision_kind": {
+      "const": "MONOTONIC_INTEGER"
+    },
+    "records": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "required": [
+            "record_revision",
+            "payload"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "record_revision": {
+              "$ref": "../common/persistence/record-revision-monotonic-integer_1.json"
+            },
+            "payload": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}

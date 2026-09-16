@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AAC Entitlement Issuing Request 1",
+  "type": "object",
+  "required": [
+    "entitlement_request"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "entitlement_request": {
+      "type": "object",
+      "required": [
+        "format_version",
+        "request_id",
+        "requested_entitlement_scope",
+        "subject",
+        "components"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "const": 1
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requested_entitlement_scope": {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "subject": {
+          "type": "object",
+          "required": [
+            "id"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "display_name": {
+              "type": "string"
+            },
+            "attributes": {
+              "type": "object"
+            }
+          }
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "requested_grants"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "requested_grants": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "capability",
+                    "permissions"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "capability": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "version"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "version": {
+                          "type": "integer",
+                          "minimum": 1
+                        }
+                      }
+                    },
+                    "permissions": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "generated_at": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "request_digest": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

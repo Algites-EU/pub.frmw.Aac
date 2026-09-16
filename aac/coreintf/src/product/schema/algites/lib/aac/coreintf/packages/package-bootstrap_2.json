@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "_AAC.schema.package-bootstrap/2",
+  "type": "object",
+  "required": [
+    "package_bootstrap"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "package_bootstrap": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "layout"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 2
+        },
+        "layout": {
+          "type": "object",
+          "required": [
+            "product_root"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "product_root": {
+              "type": "string",
+              "minLength": 1
+            },
+            "package_store_subdirectory": {
+              "type": "string",
+              "minLength": 1,
+              "default": "plugins"
+            },
+            "downloaded_subdirectory": {
+              "type": "string",
+              "minLength": 1,
+              "default": "downloaded"
+            },
+            "installed_subdirectory": {
+              "type": "string",
+              "minLength": 1,
+              "default": "installed"
+            },
+            "obsolete_subdirectory": {
+              "type": "string",
+              "minLength": 1,
+              "default": "obsolete"
+            },
+            "core_state_subdirectory": {
+              "type": "string",
+              "minLength": 1,
+              "default": "aac-state"
+            },
+            "transactions_subdirectory": {
+              "type": "string",
+              "minLength": 1,
+              "default": "transactions"
+            }
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "uri"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1,
+                "default": "MANIFEST"
+              },
+              "uri": {
+                "type": "string",
+                "minLength": 1
+              },
+              "authentication_profile_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "verifier_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "priority": {
+                "type": "integer",
+                "default": 0
+              },
+              "settings": {
+                "type": "object"
+              },
+              "name": {},
+              "description": {}
+            }
+          }
+        },
+        "automation_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "verify_on_download": {
+              "type": "boolean",
+              "default": true
+            },
+            "require_entitlement_for_automatic_paid_component": {
+              "type": "boolean",
+              "default": true
+            },
+            "allow_automatic_download": {
+              "type": "boolean",
+              "default": true
+            },
+            "allow_automatic_install": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "metadata": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

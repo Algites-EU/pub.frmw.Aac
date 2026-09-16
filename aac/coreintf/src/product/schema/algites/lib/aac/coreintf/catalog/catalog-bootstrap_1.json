@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["catalog_bootstrap"],
+  "additionalProperties": false,
+  "properties": {
+    "catalog_bootstrap": {
+      "type": "object",
+      "required": ["schema_version", "product_id", "technology_id"],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {"const": 1},
+        "product_id": {"type": "string", "minLength": 1},
+        "technology_id": {"type": "string", "minLength": 1},
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "type", "uri"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {"type": "string", "minLength": 1},
+              "type": {"type": "string", "minLength": 1},
+              "uri": {"type": "string", "minLength": 1},
+              "authentication_profile_id": {"type": "string", "minLength": 1},
+              "priority": {"type": "integer"},
+              "settings": {"type": "object"},
+              "name": {"$ref": "#/$defs/displayText"},
+              "description": {"$ref": "#/$defs/displayText"}
+            }
+          }
+        },
+        "metadata": {"type": "object"}
+      }
+    }
+  },
+  "$defs": {
+    "displayText": {
+      "oneOf": [
+        {"type": "string", "minLength": 1},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "text": {"type": "string", "minLength": 1},
+            "resource_key": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "algites-aac-uiqt"
+version = "1.0.dev0"
+description = "PySide6 administration UI for Algites Application Components"
+readme = "README.md"
+requires-python = ">=3.13"
+license = "LicenseRef-Proprietary"
+authors = [{name = "Algites"}]
+dependencies = [
+  "algites-aac-coreintf==1.0.dev0",
+  "algites-aac-coreimpl==1.0.dev0",
+  "algites-aac-uiintf==1.0.dev0",
+  "PySide6>=6.7",
+]
+
+[tool.setuptools.packages.find]
+where = ["src/product/python"]
+include = ["algites.lib.aac.uiqt*"]
+namespaces = true
+
+[tool.pytest.ini_options]
+testpaths = ["src/develop/python"]
+addopts = "--import-mode=importlib"
+cache_dir = "run/develop/pytest/cache"

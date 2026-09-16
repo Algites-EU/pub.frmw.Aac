@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AAC Configuration Persisted Payload 1",
+  "type": "object",
+  "required": ["configuration_target", "configuration_schema", "written_by_component_version", "values", "policies"],
+  "additionalProperties": false,
+  "properties": {
+    "configuration_target": {
+      "type": "object",
+      "required": ["kind", "component_id"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {"enum": ["COMPONENT", "PROVIDER_INSTANCE"]},
+        "component_id": {"type": "string", "minLength": 1},
+        "provider_instance_id": {"type": "string", "minLength": 1}
+      },
+      "allOf": [
+        {"if": {"properties": {"kind": {"const": "PROVIDER_INSTANCE"}}}, "then": {"required": ["provider_instance_id"]}}
+      ]
+    },
+    "configuration_schema": {
+      "type": "object",
+      "required": ["id", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "version": {"type": "integer", "minimum": 1}
+      }
+    },
+    "written_by_component_version": {"type": "integer", "minimum": 1},
+    "values": {"type": "object"},
+    "policies": {"type": "object"},
+    "metadata": {"type": "object"}
+  }
+}
