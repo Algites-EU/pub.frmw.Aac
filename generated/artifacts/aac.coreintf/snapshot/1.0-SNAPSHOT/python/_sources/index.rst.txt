@@ -1,6 +1,8 @@
 aac.coreintf
 ============
 
+Python API reference generated from the artifact source tree.
+
 .. toctree::
    :maxdepth: 2
    :caption: API reference
