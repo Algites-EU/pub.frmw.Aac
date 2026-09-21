@@ -1,7 +1,7 @@
 sourceRepository:
   id: pub.frmw.ApplicationComponents
   groupId: eu.algites.frmw.app
-  name: Algites Appliction COmponents framework public repository
+  name: Algites Appliction Components framework public repository
 
 versionContext:
   releaseLine: "1"
