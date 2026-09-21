@@ -1,0 +1,15 @@
+coreintf.bindings
+=================
+
+.. py:module:: coreintf.bindings
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/bindings/decorators/index
+
+

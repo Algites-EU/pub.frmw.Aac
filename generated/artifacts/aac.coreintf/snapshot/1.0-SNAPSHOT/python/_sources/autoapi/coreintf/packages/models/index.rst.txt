@@ -1,0 +1,811 @@
+coreintf.packages.models
+========================
+
+.. py:module:: coreintf.packages.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.packages.models.AInStoredPackageState
+   coreintf.packages.models.AInPackageUpdatePolicy
+   coreintf.packages.models.AIcPackageStoreLayout
+   coreintf.packages.models.AIcPackageSidecar
+   coreintf.packages.models.AIcPackageCandidate
+   coreintf.packages.models.AIcPackageProvenance
+   coreintf.packages.models.AIcStoredPackage
+   coreintf.packages.models.AIcWorkspaceComponentRequirement
+   coreintf.packages.models.AIcWorkspaceComponentRequirements
+   coreintf.packages.models.AIcWorkspaceComponentLockEntry
+   coreintf.packages.models.AIcWorkspaceComponentLock
+   coreintf.packages.models.AIcPackageAutomationPolicy
+   coreintf.packages.models.AIcPackageSourceRegistration
+   coreintf.packages.models.AIcPackageBootstrap
+   coreintf.packages.models.AIcPackageSelection
+   coreintf.packages.models.AIcPackageSelectionManifest
+   coreintf.packages.models.AIcPackageTransactionRecovery
+   coreintf.packages.models.AIcPackageReconciliationAction
+   coreintf.packages.models.AIcPackageReconciliationPlan
+   coreintf.packages.models.AIcComponentUpgradeReplacement
+   coreintf.packages.models.AIcUpgradeCompatibilityDiagnostic
+   coreintf.packages.models.AIcComponentUpgradePlan
+   coreintf.packages.models.AIcComponentUpgradeTransactionOutcome
+
+
+Module Contents
+---------------
+
+.. py:class:: AInStoredPackageState
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: DOWNLOADED
+      :value: 'DOWNLOADED'
+
+
+
+   .. py:attribute:: INSTALLED
+      :value: 'INSTALLED'
+
+
+
+   .. py:attribute:: OBSOLETE
+      :value: 'OBSOLETE'
+
+
+
+.. py:class:: AInPackageUpdatePolicy
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: MANUAL
+      :value: 'MANUAL'
+
+
+
+   .. py:attribute:: NOTIFY
+      :value: 'NOTIFY'
+
+
+
+   .. py:attribute:: AUTO_COMPATIBLE
+      :value: 'AUTO_COMPATIBLE'
+
+
+
+   .. py:attribute:: AUTO_LOCKED
+      :value: 'AUTO_LOCKED'
+
+
+
+.. py:class:: AIcPackageStoreLayout
+
+   Product-supplied filesystem layout for AAC-managed package artifacts.
+
+   AAC recommends ``plugins/downloaded``, ``plugins/installed`` and ``plugins/obsolete``
+   below the product-owned root, but every relative name remains product-overridable.
+
+
+   .. py:attribute:: product_root
+      :type:  str
+
+
+   .. py:attribute:: package_store_subdirectory
+      :type:  str
+      :value: 'plugins'
+
+
+
+   .. py:attribute:: downloaded_subdirectory
+      :type:  str
+      :value: 'downloaded'
+
+
+
+   .. py:attribute:: installed_subdirectory
+      :type:  str
+      :value: 'installed'
+
+
+
+   .. py:attribute:: obsolete_subdirectory
+      :type:  str
+      :value: 'obsolete'
+
+
+
+   .. py:attribute:: core_state_subdirectory
+      :type:  str
+      :value: 'aac-state'
+
+
+
+   .. py:attribute:: transactions_subdirectory
+      :type:  str
+      :value: 'transactions'
+
+
+
+   .. py:attribute:: core_lock_filename
+      :type:  str
+      :value: 'core.lock'
+
+
+
+.. py:class:: AIcPackageSidecar
+
+   .. py:attribute:: uri
+      :type:  str
+
+
+   .. py:attribute:: suffix
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcPackageCandidate
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: source_id
+      :type:  str
+
+
+   .. py:attribute:: artifact_uri
+      :type:  str
+
+
+   .. py:attribute:: artifact_filename
+      :type:  str
+
+
+   .. py:attribute:: package_format
+      :type:  str
+
+
+   .. py:attribute:: descriptor_path
+      :type:  str
+
+
+   .. py:attribute:: source_uri
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: expected_sha256
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: runtime_package
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: verifier_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: authentication_profile_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: sidecars
+      :type:  tuple[AIcPackageSidecar, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcPackageProvenance
+
+   .. py:attribute:: source_id
+      :type:  str
+
+
+   .. py:attribute:: source_uri
+      :type:  str | None
+
+
+   .. py:attribute:: artifact_uri
+      :type:  str
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: downloaded_at
+      :type:  str
+
+
+   .. py:attribute:: verifier_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: signer_identity
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: verification_metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcStoredPackage
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: state
+      :type:  AInStoredPackageState
+
+
+   .. py:attribute:: artifact_path
+      :type:  str
+
+
+   .. py:attribute:: package_format
+      :type:  str
+
+
+   .. py:attribute:: descriptor_path
+      :type:  str
+
+
+   .. py:attribute:: runtime_package
+      :type:  str | None
+
+
+   .. py:attribute:: provenance
+      :type:  AIcPackageProvenance
+
+
+   .. py:attribute:: sidecar_paths
+      :type:  Mapping[str, str]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:property:: identity
+      :type: tuple[str, int, str]
+
+
+
+.. py:class:: AIcWorkspaceComponentRequirement
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: required
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: source_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:method:: accepts(version: int) -> bool
+
+
+.. py:class:: AIcWorkspaceComponentRequirements
+
+   .. py:attribute:: workspace_id
+      :type:  str
+
+
+   .. py:attribute:: requirements
+      :type:  tuple[AIcWorkspaceComponentRequirement, Ellipsis]
+
+
+   .. py:attribute:: update_policy
+      :type:  AInPackageUpdatePolicy
+
+
+.. py:class:: AIcWorkspaceComponentLockEntry
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: source_id
+      :type:  str
+
+
+   .. py:attribute:: artifact_uri
+      :type:  str
+
+
+   .. py:attribute:: artifact_filename
+      :type:  str
+
+
+   .. py:attribute:: package_format
+      :type:  str
+
+
+   .. py:attribute:: descriptor_path
+      :type:  str
+
+
+   .. py:attribute:: source_uri
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: runtime_package
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: verifier_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: sidecars
+      :type:  tuple[AIcPackageSidecar, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcWorkspaceComponentLock
+
+   .. py:attribute:: workspace_id
+      :type:  str
+
+
+   .. py:attribute:: entries
+      :type:  tuple[AIcWorkspaceComponentLockEntry, Ellipsis]
+
+
+   .. py:method:: entry(component_id: str) -> AIcWorkspaceComponentLockEntry | None
+
+
+.. py:class:: AIcPackageAutomationPolicy
+
+   .. py:attribute:: verify_on_download
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: require_entitlement_for_automatic_paid_component
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: allow_automatic_download
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: allow_automatic_install
+      :type:  bool
+      :value: True
+
+
+
+.. py:class:: AIcPackageSourceRegistration
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: uri
+      :type:  str
+
+
+   .. py:attribute:: authentication_profile_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: verifier_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: priority
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: settings
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcPackageBootstrap
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: layout
+      :type:  AIcPackageStoreLayout
+
+
+   .. py:attribute:: sources
+      :type:  tuple[AIcPackageSourceRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: automation_policy
+      :type:  AIcPackageAutomationPolicy
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcPackageSelection
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: selected_at
+      :type:  str
+
+
+   .. py:attribute:: previous_sha256
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: previous_version
+      :type:  int | None
+      :value: None
+
+
+
+.. py:class:: AIcPackageSelectionManifest
+
+   .. py:attribute:: record_revision
+      :type:  int
+
+
+   .. py:attribute:: selections
+      :type:  tuple[AIcPackageSelection, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: last_transaction_id
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcPackageTransactionRecovery
+
+   .. py:attribute:: transaction_id
+      :type:  str
+
+
+   .. py:attribute:: phase
+      :type:  coreintf.persistence.AInPersistenceTransactionPhase
+
+
+   .. py:attribute:: action
+      :type:  str
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcPackageReconciliationAction
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: action
+      :type:  str
+
+
+   .. py:attribute:: candidate
+      :type:  AIcPackageCandidate | None
+      :value: None
+
+
+
+   .. py:attribute:: reason
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcPackageReconciliationPlan
+
+   .. py:attribute:: workspace_id
+      :type:  str
+
+
+   .. py:attribute:: policy
+      :type:  AInPackageUpdatePolicy
+
+
+   .. py:attribute:: actions
+      :type:  tuple[AIcPackageReconciliationAction, Ellipsis]
+
+
+.. py:class:: AIcComponentUpgradeReplacement
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: previous_version
+      :type:  int
+
+
+   .. py:attribute:: target_version
+      :type:  int
+
+
+   .. py:attribute:: previous_sha256
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: target_sha256
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcUpgradeCompatibilityDiagnostic
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: message
+      :type:  str
+
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: requirement_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: capability_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: consumer_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: provider_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: available_provider_component_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: blocking
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: code
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcComponentUpgradePlan
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: replacements
+      :type:  tuple[AIcComponentUpgradeReplacement, Ellipsis]
+
+
+   .. py:attribute:: compatible
+      :type:  bool
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[AIcUpgradeCompatibilityDiagnostic, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcComponentUpgradeTransactionOutcome
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: replacements
+      :type:  tuple[AIcComponentUpgradeReplacement, Ellipsis]
+
+
+   .. py:attribute:: rolled_back
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

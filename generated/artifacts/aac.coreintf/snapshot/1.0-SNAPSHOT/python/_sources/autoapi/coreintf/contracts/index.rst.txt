@@ -1,0 +1,15 @@
+coreintf.contracts
+==================
+
+.. py:module:: coreintf.contracts
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/contracts/models/index
+
+

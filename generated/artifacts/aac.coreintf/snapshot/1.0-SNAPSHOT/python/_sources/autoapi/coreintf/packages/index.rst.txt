@@ -1,0 +1,16 @@
+coreintf.packages
+=================
+
+.. py:module:: coreintf.packages
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/packages/models/index
+   /autoapi/coreintf/packages/provider/index
+
+

@@ -1,0 +1,149 @@
+coreintf.migration.models
+=========================
+
+.. py:module:: coreintf.migration.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.migration.models.AInSchemaRuntimeInterpretation
+   coreintf.migration.models.AInPersistenceConvergenceStatus
+   coreintf.migration.models.AInPersistenceConvergenceAttemptStatus
+   coreintf.migration.models.AIcSchemaCompatibilityAssessment
+
+
+Module Contents
+---------------
+
+.. py:class:: AInSchemaRuntimeInterpretation
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   How an active component can consume one persisted schema representation.
+
+   Runtime interpretation is deliberately independent from whether the stored representation is
+   already the component's preferred write version and from whether a persistence-convergence
+   migration happens to exist.
+
+
+   .. py:attribute:: DIRECT
+      :value: 'DIRECT'
+
+
+
+   .. py:attribute:: TRANSFORMED
+      :value: 'TRANSFORMED'
+
+
+
+   .. py:attribute:: UNSUPPORTED
+      :value: 'UNSUPPORTED'
+
+
+
+.. py:class:: AInPersistenceConvergenceStatus
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Whether a persisted representation can be safely converged to the target write version.
+
+
+   .. py:attribute:: NOT_NEEDED
+      :value: 'NOT_NEEDED'
+
+
+
+   .. py:attribute:: SUPPORTED
+      :value: 'SUPPORTED'
+
+
+
+   .. py:attribute:: NOT_SUPPORTED
+      :value: 'NOT_SUPPORTED'
+
+
+
+.. py:class:: AInPersistenceConvergenceAttemptStatus
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: SUCCEEDED
+      :value: 'SUCCEEDED'
+
+
+
+   .. py:attribute:: FAILED_RETRYABLE
+      :value: 'FAILED_RETRYABLE'
+
+
+
+.. py:class:: AIcSchemaCompatibilityAssessment
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: source_version
+      :type:  int
+
+
+   .. py:attribute:: target_write_version
+      :type:  int
+
+
+   .. py:attribute:: at_target_write_version
+      :type:  bool
+
+
+   .. py:attribute:: runtime_interpretation
+      :type:  AInSchemaRuntimeInterpretation
+
+
+   .. py:attribute:: migration_path
+      :type:  tuple[coreintf.descriptor.AIcSchemaMigrationStepDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:property:: directly_readable
+      :type: bool
+
+
+
+   .. py:property:: requires_runtime_transformation
+      :type: bool
+
+
+
+   .. py:property:: runtime_supported
+      :type: bool
+
+
+
+   .. py:method:: persistence_convergence_status(*, safe_persistence_available: bool) -> AInPersistenceConvergenceStatus
+
+

@@ -1,0 +1,18 @@
+manifestVersion: 1
+artifact:
+  repositoryId: pub.frmw.ApplicationComponents
+  localArtifactId: aac.coreintf
+  artifactCoordinateId: pub.frmw.ApplicationComponents_aac.coreintf
+  version: 1.0-SNAPSHOT
+  sourcePath: aac/coreintf
+  structureKind: artifact
+  name: "Algites Application Components Core Interfaces"
+  description: "Public bindings for Algites Application Components contracts and lifecycle interfaces in specified technologies"
+sourceMetadata:
+  descriptorHierarchy:
+    - structureKind: repository
+      path: algites-source-repository.yml
+      sha256: 51fb233af9fe219d4898277664ff1a91c2e896b15596ead2b9de044b559dc0bc
+    - structureKind: artifact
+      path: aac/coreintf/algites-artifact.yml
+      sha256: 9b1f76718fcde829688c668fcefa1d5988730c61bc130f1e5bdb68b9f299ee5b

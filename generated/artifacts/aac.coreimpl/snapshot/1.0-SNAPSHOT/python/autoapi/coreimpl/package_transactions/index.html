@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>coreimpl.package_transactions &#8212; aac.coreimpl  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-coreimpl.package_transactions">
+<span id="coreimpl-package-transactions"></span><h1>coreimpl.package_transactions<a class="headerlink" href="#module-coreimpl.package_transactions" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore" title="coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcDurablePackageSelectionManifestStore</span></code></a></p></td>
+<td><p>Authoritative revisioned active package-set record.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.package_transactions.AIcPackageReplacementJournalHandle" title="coreimpl.package_transactions.AIcPackageReplacementJournalHandle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcPackageReplacementJournalHandle</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.package_transactions.AIcPackageReplacementJournal" title="coreimpl.package_transactions.AIcPackageReplacementJournal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcPackageReplacementJournal</span></code></a></p></td>
+<td><p>Package-replacement binding of the generic durable persistence transaction journal.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.package_transactions.manifest_to_raw" title="coreimpl.package_transactions.manifest_to_raw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">manifest_to_raw</span></code></a>(→ dict[str, object])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.package_transactions.manifest_from_raw" title="coreimpl.package_transactions.manifest_from_raw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">manifest_from_raw</span></code></a>(...)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.manifest_to_raw">
+<span class="sig-prename descclassname"><span class="pre">coreimpl.package_transactions.</span></span><span class="sig-name descname"><span class="pre">manifest_to_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manifest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreimpl.package_transactions.manifest_to_raw" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.manifest_from_raw">
+<span class="sig-prename descclassname"><span class="pre">coreimpl.package_transactions.</span></span><span class="sig-name descname"><span class="pre">manifest_from_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest</span></span></span><a class="headerlink" href="#coreimpl.package_transactions.manifest_from_raw" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.package_transactions.</span></span><span class="sig-name descname"><span class="pre">AIcDurablePackageSelectionManifestStore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutation_lock_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore" title="Link to this definition">¶</a></dt>
+<dd><p>Authoritative revisioned active package-set record.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore.path" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore.mutation_lock_path">
+<span class="sig-name descname"><span class="pre">mutation_lock_path</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore.mutation_lock_path" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest</span></span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore.read" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manifest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_record_revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore.write" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournalHandle">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.package_transactions.</span></span><span class="sig-name descname"><span class="pre">AIcPackageReplacementJournalHandle</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournalHandle" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournalHandle.transaction_id">
+<span class="sig-name descname"><span class="pre">transaction_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournalHandle.transaction_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournalHandle.application_scope_id">
+<span class="sig-name descname"><span class="pre">application_scope_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournalHandle.application_scope_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournalHandle.source_manifest">
+<span class="sig-name descname"><span class="pre">source_manifest</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournalHandle.source_manifest" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournalHandle.target_manifest">
+<span class="sig-name descname"><span class="pre">target_manifest</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournalHandle.target_manifest" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournalHandle.target_packages">
+<span class="sig-name descname"><span class="pre">target_packages</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournalHandle.target_packages" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournalHandle.core_state_snapshot">
+<span class="sig-name descname"><span class="pre">core_state_snapshot</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournalHandle.core_state_snapshot" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.package_transactions.</span></span><span class="sig-name descname"><span class="pre">AIcPackageReplacementJournal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.packages.AIcPackageStoreLayout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection_manifest_store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore" title="coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore"><span class="pre">AIcDurablePackageSelectionManifestStore</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">core_state_store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.persistence.AIiStateStore</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal" title="Link to this definition">¶</a></dt>
+<dd><p>Package-replacement binding of the generic durable persistence transaction journal.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.layout">
+<span class="sig-name descname"><span class="pre">layout</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.layout" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.state_root">
+<span class="sig-name descname"><span class="pre">state_root</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.state_root" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.selection_manifest_store">
+<span class="sig-name descname"><span class="pre">selection_manifest_store</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.selection_manifest_store" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.core_state_store">
+<span class="sig-name descname"><span class="pre">core_state_store</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.core_state_store" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.journal">
+<span class="sig-name descname"><span class="pre">journal</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.journal" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.transactions_root">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">transactions_root</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.transactions_root" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.active_pointer">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">active_pointer</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.active_pointer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.active_transaction_id">
+<span class="sig-name descname"><span class="pre">active_transaction_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.active_transaction_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.begin">
+<span class="sig-name descname"><span class="pre">begin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_manifest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_manifest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">algites.lib.aac.coreintf.packages.AIcStoredPackage</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">core_state_snapshot</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreimpl.package_transactions.AIcPackageReplacementJournalHandle" title="coreimpl.package_transactions.AIcPackageReplacementJournalHandle"><span class="pre">AIcPackageReplacementJournalHandle</span></a></span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.begin" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.mark_cutover_started">
+<span class="sig-name descname"><span class="pre">mark_cutover_started</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transaction_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_snapshot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.mark_cutover_started" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.release_cutover_lock">
+<span class="sig-name descname"><span class="pre">release_cutover_lock</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.release_cutover_lock" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.mark_target_committed">
+<span class="sig-name descname"><span class="pre">mark_target_committed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transaction_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.mark_target_committed" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.mark_rolled_back">
+<span class="sig-name descname"><span class="pre">mark_rolled_back</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transaction_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagnostics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.mark_rolled_back" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.mark_cleanup_completed">
+<span class="sig-name descname"><span class="pre">mark_cleanup_completed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transaction_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagnostics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.mark_cleanup_completed" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.finish">
+<span class="sig-name descname"><span class="pre">finish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transaction_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.finish" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.package_transactions.AIcPackageReplacementJournal.recover">
+<span class="sig-name descname"><span class="pre">recover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_store</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.packages.AIcPackageTransactionRecovery</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.package_transactions.AIcPackageReplacementJournal.recover" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">aac.coreimpl</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../../_sources/autoapi/coreimpl/package_transactions/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

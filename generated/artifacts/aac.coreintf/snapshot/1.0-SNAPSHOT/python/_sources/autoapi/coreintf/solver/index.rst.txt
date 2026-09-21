@@ -1,0 +1,15 @@
+coreintf.solver
+===============
+
+.. py:module:: coreintf.solver
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/solver/models/index
+
+

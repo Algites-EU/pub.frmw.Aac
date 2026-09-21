@@ -1,0 +1,79 @@
+coreintf.authentication.provider
+================================
+
+.. py:module:: coreintf.authentication.provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.authentication.provider.AIiSecretResolver
+   coreintf.authentication.provider.AIiSecretProvider
+   coreintf.authentication.provider.AIiAuthenticationHandler
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiSecretResolver
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: resolve_secret(reference: coreintf.authentication.models.AIcSecretReference, context: Mapping[str, object] | None = None) -> str | bytes
+      :abstractmethod:
+
+
+      Resolve secret material without exposing storage details to the caller.
+
+
+
+.. py:class:: AIiSecretProvider
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: capabilities(context: Mapping[str, object] | None = None) -> tuple[coreintf.authentication.models.AInSecretProviderCapability, Ellipsis]
+
+
+   .. py:method:: resolve(reference: coreintf.authentication.models.AIcSecretReference, context: Mapping[str, object] | None = None) -> str | bytes
+      :abstractmethod:
+
+
+      Resolve one secret reference.
+
+
+
+   .. py:method:: put(key: str, value: str | bytes, context: Mapping[str, object] | None = None) -> None
+
+
+   .. py:method:: delete(key: str, context: Mapping[str, object] | None = None) -> None
+
+
+.. py:class:: AIiAuthenticationHandler
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: authenticate(request: coreintf.authentication.models.AIcAuthenticationRequest, secret_resolver: AIiSecretResolver) -> coreintf.authentication.models.AIcAuthenticationMaterial
+      :abstractmethod:
+
+
+      Produce transport-neutral authentication material for a connection attempt.
+
+
+

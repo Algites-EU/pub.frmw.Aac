@@ -1,0 +1,243 @@
+coreintf.persistence.store
+==========================
+
+.. py:module:: coreintf.persistence.store
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.persistence.store.AInRecordRevisionKind
+   coreintf.persistence.store.AInPersistenceCapability
+   coreintf.persistence.store.AInStateMutationKind
+   coreintf.persistence.store.AIcPersistedRecord
+   coreintf.persistence.store.AIcStateMutation
+   coreintf.persistence.store.AIcPersistenceReadExpectation
+   coreintf.persistence.store.AIiStateStore
+
+
+Module Contents
+---------------
+
+.. py:class:: AInRecordRevisionKind
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Schema/persistence-contract declaration for record revision representation.
+
+
+   .. py:attribute:: MONOTONIC_INTEGER
+      :value: 'MONOTONIC_INTEGER'
+
+
+
+   .. py:attribute:: OPAQUE_STRING
+      :value: 'OPAQUE_STRING'
+
+
+
+.. py:class:: AInPersistenceCapability
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: READ
+      :value: 'READ'
+
+
+
+   .. py:attribute:: SINGLE_RECORD_CAS
+      :value: 'SINGLE_RECORD_CAS'
+
+
+
+   .. py:attribute:: MULTI_RECORD_TRANSACTION
+      :value: 'MULTI_RECORD_TRANSACTION'
+
+
+
+.. py:class:: AInStateMutationKind
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: PUT
+      :value: 'PUT'
+
+
+
+   .. py:attribute:: DELETE
+      :value: 'DELETE'
+
+
+
+.. py:class:: AIcPersistedRecord
+
+   .. py:attribute:: namespace
+      :type:  str
+
+
+   .. py:attribute:: key
+      :type:  str
+
+
+   .. py:attribute:: record_revision
+      :type:  int | str
+
+
+   .. py:attribute:: payload
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcStateMutation
+
+   .. py:attribute:: kind
+      :type:  AInStateMutationKind
+
+
+   .. py:attribute:: namespace
+      :type:  str
+
+
+   .. py:attribute:: key
+      :type:  str
+
+
+   .. py:attribute:: value
+      :type:  Mapping[str, object] | None
+      :value: None
+
+
+
+   .. py:attribute:: expected_record_revision
+      :type:  int | str | None
+      :value: None
+
+
+
+   .. py:attribute:: expect_absent
+      :type:  bool
+      :value: False
+
+
+
+   .. py:method:: put(namespace: str, key: str, value: Mapping[str, object], *, expected_record_revision: int | str | None = None, expect_absent: bool = False) -> AIcStateMutation
+      :staticmethod:
+
+
+
+   .. py:method:: delete(namespace: str, key: str, *, expected_record_revision: int | str | None = None) -> AIcStateMutation
+      :staticmethod:
+
+
+
+.. py:class:: AIcPersistenceReadExpectation
+
+   .. py:attribute:: namespace
+      :type:  str
+
+
+   .. py:attribute:: key
+      :type:  str
+
+
+   .. py:attribute:: expected_record_revision
+      :type:  int | str | None
+      :value: None
+
+
+
+   .. py:attribute:: expect_absent
+      :type:  bool
+      :value: False
+
+
+
+.. py:class:: AIiStateStore
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Core-owned normalized persistence adapter.
+
+   Values are JSON-compatible normalized payloads wrapped by persistence-owned record revisions.
+   The revision representation is declared by the persistence contract, not repeated as type
+   metadata in each record. ``apply`` MUST commit all supplied mutations atomically or leave the
+   store unchanged. Mutations carrying expected revisions MUST fail rather than overwrite a record
+   that changed since it was read.
+
+
+   .. py:property:: revision_kind
+      :type: AInRecordRevisionKind
+
+      :abstractmethod:
+
+
+
+   .. py:method:: capabilities() -> tuple[AInPersistenceCapability, Ellipsis]
+
+
+   .. py:method:: get_record(namespace: str, key: str) -> AIcPersistedRecord | None
+      :abstractmethod:
+
+
+
+   .. py:method:: list_records(namespace: str) -> Mapping[str, AIcPersistedRecord]
+      :abstractmethod:
+
+
+
+   .. py:method:: get(namespace: str, key: str) -> Mapping[str, object] | None
+
+
+   .. py:method:: list(namespace: str) -> Mapping[str, Mapping[str, object]]
+
+
+   .. py:method:: put(namespace: str, key: str, value: Mapping[str, object]) -> AIcPersistedRecord
+
+
+   .. py:method:: delete(namespace: str, key: str) -> None
+
+
+   .. py:method:: apply(mutations: tuple[AIcStateMutation, Ellipsis], *, read_expectations: tuple[AIcPersistenceReadExpectation, Ellipsis] = ()) -> tuple[AIcPersistedRecord, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: snapshot() -> Mapping[str, Mapping[str, AIcPersistedRecord]]
+      :abstractmethod:
+
+
+
+   .. py:method:: restore(snapshot: Mapping[str, Mapping[str, AIcPersistedRecord]]) -> None
+      :abstractmethod:
+
+
+

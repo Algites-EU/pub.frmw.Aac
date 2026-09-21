@@ -1,0 +1,16 @@
+coreintf.lifecycle
+==================
+
+.. py:module:: coreintf.lifecycle
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/lifecycle/hooks/index
+   /autoapi/coreintf/lifecycle/models/index
+
+

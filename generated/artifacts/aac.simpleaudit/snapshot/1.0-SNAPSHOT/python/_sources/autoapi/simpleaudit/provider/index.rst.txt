@@ -1,0 +1,28 @@
+simpleaudit.provider
+====================
+
+.. py:module:: simpleaudit.provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   simpleaudit.provider.AIcSimpleAuditObserver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSimpleAuditObserver(configuration: Mapping[str, object] | None = None)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.runtime.AIiProviderRuntime`, :py:obj:`algites.lib.aac.coreintf.observation.AIiObservationProvider`
+
+
+   Reference observer that writes one record per received observation input.
+
+
+   .. py:method:: observe(observation_input: algites.lib.aac.coreintf.observation.AIcObservationInput) -> algites.lib.aac.coreintf.observation.AIcObservationOutput
+
+

@@ -1,0 +1,37 @@
+test_all
+========
+
+.. py:module:: test_all
+
+.. autoapi-nested-parse::
+
+   Run AAC tests in small functional blocks.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   test_all.ROOT
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   test_all.run_pytest
+   test_all.main
+
+
+Module Contents
+---------------
+
+.. py:data:: ROOT
+
+.. py:function:: run_pytest(cwd: pathlib.Path, product_paths: list[pathlib.Path], targets: list[str]) -> None
+
+.. py:function:: main() -> int
+

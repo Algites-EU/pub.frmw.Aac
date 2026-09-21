@@ -1,0 +1,230 @@
+coreintf.readiness.models
+=========================
+
+.. py:module:: coreintf.readiness.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.readiness.models.AInReadinessState
+   coreintf.readiness.models.AInReadinessRequirementSource
+   coreintf.readiness.models.AIcReadinessRequirementDescriptor
+   coreintf.readiness.models.AIcReadinessReason
+   coreintf.readiness.models.AIcReadinessResult
+   coreintf.readiness.models.AIcProviderReadiness
+   coreintf.readiness.models.AIcCapabilityReadiness
+   coreintf.readiness.models.AIcComponentReadiness
+
+
+Module Contents
+---------------
+
+.. py:class:: AInReadinessState
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: READY
+      :value: 'READY'
+
+
+
+   .. py:attribute:: DEGRADED
+      :value: 'DEGRADED'
+
+
+
+   .. py:attribute:: NOT_READY
+      :value: 'NOT_READY'
+
+
+
+.. py:class:: AInReadinessRequirementSource
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: COMPONENT_CONFIGURATION
+      :value: 'COMPONENT_CONFIGURATION'
+
+
+
+   .. py:attribute:: PROVIDER_CONFIGURATION
+      :value: 'PROVIDER_CONFIGURATION'
+
+
+
+   .. py:attribute:: CONTEXT
+      :value: 'CONTEXT'
+
+
+
+.. py:class:: AIcReadinessRequirementDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: source
+      :type:  AInReadinessRequirementSource
+
+
+   .. py:attribute:: key
+      :type:  str
+
+
+   .. py:attribute:: missing_state
+      :type:  AInReadinessState
+
+
+   .. py:attribute:: message
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcReadinessReason
+
+   .. py:attribute:: code
+      :type:  str
+
+
+   .. py:attribute:: message
+      :type:  str
+
+
+   .. py:attribute:: state
+      :type:  AInReadinessState
+
+
+   .. py:attribute:: requirement_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: key
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcReadinessResult
+
+   .. py:attribute:: state
+      :type:  AInReadinessState
+
+
+   .. py:attribute:: reasons
+      :type:  tuple[AIcReadinessReason, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcProviderReadiness
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: state
+      :type:  AInReadinessState
+
+
+   .. py:attribute:: reasons
+      :type:  tuple[AIcReadinessReason, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcCapabilityReadiness
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: state
+      :type:  AInReadinessState
+
+
+   .. py:attribute:: provider_instance_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: reasons
+      :type:  tuple[AIcReadinessReason, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcComponentReadiness
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: state
+      :type:  AInReadinessState
+
+
+   .. py:attribute:: provider_instance_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: reasons
+      :type:  tuple[AIcReadinessReason, Ellipsis]
+      :value: ()
+
+
+

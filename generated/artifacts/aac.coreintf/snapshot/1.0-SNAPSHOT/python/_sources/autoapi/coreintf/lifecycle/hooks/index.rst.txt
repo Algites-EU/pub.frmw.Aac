@@ -1,0 +1,61 @@
+coreintf.lifecycle.hooks
+========================
+
+.. py:module:: coreintf.lifecycle.hooks
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.lifecycle.hooks.AIiProvisioningHook
+   coreintf.lifecycle.hooks.AIiValidationHook
+   coreintf.lifecycle.hooks.AIiUnprovisioningHook
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiProvisioningHook
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: provision(context: coreintf.provisioning.AIcProvisionContext) -> coreintf.provisioning.AIcProvisioningResult
+      :abstractmethod:
+
+
+
+.. py:class:: AIiValidationHook
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: validate(context: coreintf.lifecycle.models.AIcLifecycleContext) -> coreintf.lifecycle.models.AIcValidationResult
+      :abstractmethod:
+
+
+
+.. py:class:: AIiUnprovisioningHook
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: unprovision(context: coreintf.provisioning.AIcProvisionContext) -> coreintf.provisioning.AIcProvisioningResult
+      :abstractmethod:
+
+
+

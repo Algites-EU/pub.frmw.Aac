@@ -1,0 +1,133 @@
+uiqt.widgets
+============
+
+.. py:module:: uiqt.widgets
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   uiqt.widgets.AIcQtFormDialog
+   uiqt.widgets.AIcQtRequirementDialog
+   uiqt.widgets.AIcQtObservationDialog
+   uiqt.widgets.AIcAacAdministrationWidget
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcQtFormDialog(form: algites.lib.aac.uiintf.AIcUiForm, parent: PySide6.QtWidgets.QWidget | None = None)
+
+   Bases: :py:obj:`PySide6.QtWidgets.QDialog`
+
+
+   .. py:attribute:: form
+
+
+   .. py:method:: selected_configuration_provider_option()
+
+
+   .. py:method:: values() -> dict[str, object]
+
+
+.. py:class:: AIcQtRequirementDialog(editor: algites.lib.aac.uiintf.AIcUiRequirementEditor, parent: PySide6.QtWidgets.QWidget | None = None)
+
+   Bases: :py:obj:`PySide6.QtWidgets.QDialog`
+
+
+   .. py:attribute:: editor
+
+
+   .. py:attribute:: list
+
+
+   .. py:method:: selected_provider_instance_ids() -> tuple[str, Ellipsis]
+
+
+.. py:class:: AIcQtObservationDialog(binding: algites.lib.aac.uiintf.AIcUiObservationBinding, parent: PySide6.QtWidgets.QWidget | None = None)
+
+   Bases: :py:obj:`PySide6.QtWidgets.QDialog`
+
+
+   .. py:attribute:: binding
+
+
+   .. py:attribute:: capability
+
+
+   .. py:attribute:: versions
+
+
+   .. py:attribute:: operations
+
+
+   .. py:attribute:: pre
+
+
+   .. py:attribute:: post
+
+
+   .. py:method:: value() -> algites.lib.aac.uiintf.AIcUiObservationBinding
+
+
+.. py:class:: AIcAacAdministrationWidget(controller: algites.lib.aac.uiintf.AIiAacUiController, parent: PySide6.QtWidgets.QWidget | None = None)
+
+   Bases: :py:obj:`PySide6.QtWidgets.QWidget`
+
+
+   Reusable baseline AAC administration widget.
+
+   Product code owns the QApplication/event loop.  This widget edits only Core-owned
+   configuration/topology through AIiAacUiController.
+
+
+   .. py:attribute:: controller
+
+
+   .. py:attribute:: tabs
+
+
+   .. py:attribute:: components_table
+
+
+   .. py:attribute:: catalog_table
+
+
+   .. py:attribute:: catalog_product
+
+
+   .. py:attribute:: catalog_technology
+
+
+   .. py:attribute:: catalog_search
+
+
+   .. py:attribute:: packages_table
+
+
+   .. py:attribute:: package_scope
+
+
+   .. py:attribute:: solver_solutions
+
+
+   .. py:attribute:: package_result
+
+
+   .. py:attribute:: instances_table
+
+
+   .. py:attribute:: bindings_table
+
+
+   .. py:attribute:: observation_table
+
+
+   .. py:attribute:: entitlement_table
+
+
+   .. py:method:: refresh() -> None
+
+

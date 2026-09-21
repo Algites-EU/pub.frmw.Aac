@@ -1,0 +1,949 @@
+coreintf.configuration.models
+=============================
+
+.. py:module:: coreintf.configuration.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.configuration.models.AInConfigurationPolicyMode
+   coreintf.configuration.models.AInConfigurationValueSourceKind
+   coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy
+   coreintf.configuration.models.AInConfigurationTargetKind
+   coreintf.configuration.models.AInConfigurationProviderCapability
+   coreintf.configuration.models.AInConfigurationMutationOperation
+   coreintf.configuration.models.AIcConfigurationTarget
+   coreintf.configuration.models.AIcConfigurationPolicy
+   coreintf.configuration.models.AIcConfigurationContribution
+   coreintf.configuration.models.AIcConfigurationChange
+   coreintf.configuration.models.AIcConfigurationChangeSet
+   coreintf.configuration.models.AIcConfigurationMutationResult
+   coreintf.configuration.models.AIcConfigurationProviderBinding
+   coreintf.configuration.models.AIcConfigurationScopeDefinition
+   coreintf.configuration.models.AIcConfigurationProfile
+   coreintf.configuration.models.AIcConfigurationProviderRegistration
+   coreintf.configuration.models.AIcConfigurationProfileSourceRegistration
+   coreintf.configuration.models.AIcConfigurationScopeResolverRegistration
+   coreintf.configuration.models.AIcConfigurationBootstrap
+   coreintf.configuration.models.AIcConfigurationProviderSnapshot
+   coreintf.configuration.models.AIcConfigurationProviderAccess
+   coreintf.configuration.models.AIcConfigurationProviderRequest
+   coreintf.configuration.models.AIcConfigurationScopeResolutionRequest
+   coreintf.configuration.models.AIcResolvedConfigurationScope
+   coreintf.configuration.models.AIcConfigurationContributionProvenance
+   coreintf.configuration.models.AIcEffectiveConfigurationPolicy
+   coreintf.configuration.models.AIcEffectiveConfigurationValue
+   coreintf.configuration.models.AIcEffectiveConfiguration
+   coreintf.configuration.models.AIcConfigurationPersistedPayload
+   coreintf.configuration.models.AIcConfigurationMigrationRequest
+   coreintf.configuration.models.AIcConfigurationMigrationResult
+
+
+Module Contents
+---------------
+
+.. py:class:: AInConfigurationPolicyMode
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: LOCK
+      :value: 'LOCK'
+
+
+
+   .. py:attribute:: MIN
+      :value: 'MIN'
+
+
+
+   .. py:attribute:: MAX
+      :value: 'MAX'
+
+
+
+   .. py:attribute:: IN_SET
+      :value: 'IN_SET'
+
+
+
+   .. py:attribute:: NOT_IN_SET
+      :value: 'NOT_IN_SET'
+
+
+
+   .. py:attribute:: DEFAULT
+      :value: 'DEFAULT'
+
+
+
+.. py:class:: AInConfigurationValueSourceKind
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: EXPLICIT
+      :value: 'EXPLICIT'
+
+
+
+   .. py:attribute:: POLICY_LOCK
+      :value: 'POLICY_LOCK'
+
+
+
+   .. py:attribute:: POLICY_DEFAULT
+      :value: 'POLICY_DEFAULT'
+
+
+
+   .. py:attribute:: SCHEMA_DEFAULT
+      :value: 'SCHEMA_DEFAULT'
+
+
+
+   .. py:attribute:: UNDEFINED
+      :value: 'UNDEFINED'
+
+
+
+.. py:class:: AInWorkspaceConfigurationProfilePolicy
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: FORBIDDEN
+      :value: 'FORBIDDEN'
+
+
+
+   .. py:attribute:: ALLOWED
+      :value: 'ALLOWED'
+
+
+
+   .. py:attribute:: ALLOWED_IF_SIGNED
+      :value: 'ALLOWED_IF_SIGNED'
+
+
+
+.. py:class:: AInConfigurationTargetKind
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: COMPONENT
+      :value: 'COMPONENT'
+
+
+
+   .. py:attribute:: PROVIDER_INSTANCE
+      :value: 'PROVIDER_INSTANCE'
+
+
+
+.. py:class:: AInConfigurationProviderCapability
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: READ
+      :value: 'READ'
+
+
+
+   .. py:attribute:: WRITE_VALUE
+      :value: 'WRITE_VALUE'
+
+
+
+   .. py:attribute:: DELETE_VALUE
+      :value: 'DELETE_VALUE'
+
+
+
+   .. py:attribute:: WRITE_POLICY
+      :value: 'WRITE_POLICY'
+
+
+
+   .. py:attribute:: DELETE_POLICY
+      :value: 'DELETE_POLICY'
+
+
+
+   .. py:attribute:: ATOMIC_CHANGE_SET
+      :value: 'ATOMIC_CHANGE_SET'
+
+
+
+.. py:class:: AInConfigurationMutationOperation
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: SET_VALUE
+      :value: 'SET_VALUE'
+
+
+
+   .. py:attribute:: DELETE_VALUE
+      :value: 'DELETE_VALUE'
+
+
+
+   .. py:attribute:: SET_POLICY
+      :value: 'SET_POLICY'
+
+
+
+   .. py:attribute:: DELETE_POLICY
+      :value: 'DELETE_POLICY'
+
+
+
+.. py:class:: AIcConfigurationTarget
+
+   .. py:attribute:: kind
+      :type:  AInConfigurationTargetKind
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: key
+      :type: str
+
+
+
+.. py:class:: AIcConfigurationPolicy
+
+   .. py:attribute:: mode
+      :type:  AInConfigurationPolicyMode
+
+
+   .. py:attribute:: value
+      :type:  object
+
+
+.. py:class:: AIcConfigurationContribution
+
+   .. py:attribute:: property_id
+      :type:  str
+
+
+   .. py:attribute:: value
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: has_value
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: policy_modes
+      :type:  tuple[AIcConfigurationPolicy, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: configuration_schema_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: configuration_schema_version
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: written_by_component_version
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcConfigurationChange
+
+   .. py:attribute:: property_id
+      :type:  str
+
+
+   .. py:attribute:: operation
+      :type:  AInConfigurationMutationOperation
+
+
+   .. py:attribute:: value
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: has_value
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: policy_modes
+      :type:  tuple[AIcConfigurationPolicy, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcConfigurationChangeSet
+
+   .. py:attribute:: configuration_scope
+      :type:  coreintf.context.AIcConfigurationScope
+
+
+   .. py:attribute:: configuration_provider_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_target
+      :type:  AIcConfigurationTarget
+
+
+   .. py:attribute:: changes
+      :type:  tuple[AIcConfigurationChange, Ellipsis]
+
+
+   .. py:attribute:: expected_record_revision
+      :type:  str | int | None
+      :value: None
+
+
+
+   .. py:attribute:: configuration_schema_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: configuration_schema_version
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: written_by_component_version
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: actor_context
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcConfigurationMutationResult
+
+   .. py:attribute:: record_revision
+      :type:  str | int | None
+      :value: None
+
+
+
+   .. py:attribute:: changed_property_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcConfigurationProviderBinding
+
+   .. py:attribute:: configuration_provider_id
+      :type:  str
+
+
+   .. py:attribute:: priority
+      :type:  int
+      :value: 0
+
+
+
+.. py:class:: AIcConfigurationScopeDefinition
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: configuration_scope_type
+      :type:  str
+
+
+   .. py:attribute:: configuration_scope_resolver_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_providers
+      :type:  tuple[AIcConfigurationProviderBinding, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: policy_authority
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcConfigurationProfile
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: configuration_scopes
+      :type:  tuple[AIcConfigurationScopeDefinition, Ellipsis]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcConfigurationProviderRegistration
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: settings
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: authentication_profile_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcConfigurationProfileSourceRegistration
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: uri
+      :type:  str
+
+
+   .. py:attribute:: authentication_profile_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: required
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcConfigurationScopeResolverRegistration
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: settings
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcConfigurationBootstrap
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: default_configuration_profile_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_profiles
+      :type:  tuple[AIcConfigurationProfile, Ellipsis]
+
+
+   .. py:attribute:: configuration_providers
+      :type:  tuple[AIcConfigurationProviderRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: configuration_scope_resolvers
+      :type:  tuple[AIcConfigurationScopeResolverRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: configuration_profile_sources
+      :type:  tuple[AIcConfigurationProfileSourceRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: workspace_configuration_profiles
+      :type:  AInWorkspaceConfigurationProfilePolicy
+
+
+   .. py:attribute:: mandatory_configuration_scope_definition_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:method:: profile(profile_id: str | None = None) -> AIcConfigurationProfile
+
+
+.. py:class:: AIcConfigurationProviderSnapshot
+
+   .. py:attribute:: configuration_scope
+      :type:  coreintf.context.AIcConfigurationScope
+
+
+   .. py:attribute:: configuration_target
+      :type:  AIcConfigurationTarget
+
+
+   .. py:attribute:: record_revision
+      :type:  str | int | None
+
+
+   .. py:attribute:: payload
+      :type:  AIcConfigurationPersistedPayload
+
+
+.. py:class:: AIcConfigurationProviderAccess
+
+   .. py:attribute:: configuration_scope
+      :type:  coreintf.context.AIcConfigurationScope
+
+
+   .. py:attribute:: configuration_provider_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_target
+      :type:  AIcConfigurationTarget
+
+
+   .. py:attribute:: technical_capabilities
+      :type:  tuple[AInConfigurationProviderCapability, Ellipsis]
+
+
+   .. py:attribute:: authorized_capabilities
+      :type:  tuple[AInConfigurationProviderCapability, Ellipsis]
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: allows(capability: AInConfigurationProviderCapability) -> bool
+
+
+.. py:class:: AIcConfigurationProviderRequest
+
+   .. py:attribute:: configuration_target
+      :type:  AIcConfigurationTarget
+
+
+   .. py:attribute:: configuration_scope
+      :type:  coreintf.context.AIcConfigurationScope
+
+
+   .. py:attribute:: context
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcConfigurationScopeResolutionRequest
+
+   .. py:attribute:: configuration_scope_type
+      :type:  str
+
+
+   .. py:attribute:: definition_id
+      :type:  str
+
+
+   .. py:attribute:: context
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcResolvedConfigurationScope
+
+   .. py:attribute:: definition_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_scope
+      :type:  coreintf.context.AIcConfigurationScope
+
+
+   .. py:attribute:: configuration_providers
+      :type:  tuple[AIcConfigurationProviderBinding, Ellipsis]
+
+
+   .. py:attribute:: policy_authority
+      :type:  bool
+      :value: True
+
+
+
+.. py:class:: AIcConfigurationContributionProvenance
+
+   .. py:attribute:: configuration_scope
+      :type:  coreintf.context.AIcConfigurationScope
+
+
+   .. py:attribute:: configuration_provider_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_provider_priority
+      :type:  int
+
+
+   .. py:attribute:: provider_record_revision
+      :type:  str | int | None
+      :value: None
+
+
+
+.. py:class:: AIcEffectiveConfigurationPolicy
+
+   .. py:attribute:: lock
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: has_lock
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: minimum
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: maximum
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: in_set
+      :type:  tuple[object, Ellipsis] | None
+      :value: None
+
+
+
+   .. py:attribute:: not_in_set
+      :type:  tuple[object, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: provenance
+      :type:  tuple[tuple[AIcConfigurationPolicy, AIcConfigurationContributionProvenance], Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcEffectiveConfigurationValue
+
+   .. py:attribute:: property_id
+      :type:  str
+
+
+   .. py:attribute:: value
+      :type:  object | None
+
+
+   .. py:attribute:: source_kind
+      :type:  AInConfigurationValueSourceKind
+
+
+   .. py:attribute:: provenance
+      :type:  AIcConfigurationContributionProvenance | None
+
+
+   .. py:attribute:: effective_policy
+      :type:  AIcEffectiveConfigurationPolicy
+
+
+   .. py:attribute:: shadowed_provenance
+      :type:  tuple[AIcConfigurationContributionProvenance, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcEffectiveConfiguration
+
+   .. py:attribute:: configuration_target
+      :type:  AIcConfigurationTarget
+
+
+   .. py:attribute:: values
+      :type:  Mapping[str, AIcEffectiveConfigurationValue]
+
+
+   .. py:attribute:: configuration_scopes
+      :type:  tuple[AIcResolvedConfigurationScope, Ellipsis]
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: plain_values() -> dict[str, object | None]
+
+
+.. py:class:: AIcConfigurationPersistedPayload
+
+   .. py:attribute:: configuration_target
+      :type:  AIcConfigurationTarget
+
+
+   .. py:attribute:: configuration_schema_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_schema_version
+      :type:  int
+
+
+   .. py:attribute:: written_by_component_version
+      :type:  int
+
+
+   .. py:attribute:: values
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: policies
+      :type:  Mapping[str, tuple[AIcConfigurationPolicy, Ellipsis]]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcConfigurationMigrationRequest
+
+   .. py:attribute:: source
+      :type:  AIcConfigurationPersistedPayload
+
+
+   .. py:attribute:: target_configuration_schema_version
+      :type:  int
+
+
+.. py:class:: AIcConfigurationMigrationResult
+
+   .. py:attribute:: configuration_schema_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_schema_version
+      :type:  int
+
+
+   .. py:attribute:: values
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: policies
+      :type:  Mapping[str, tuple[AIcConfigurationPolicy, Ellipsis]]
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

@@ -1,0 +1,16 @@
+coreintf.verification
+=====================
+
+.. py:module:: coreintf.verification
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/verification/models/index
+   /autoapi/coreintf/verification/provider/index
+
+

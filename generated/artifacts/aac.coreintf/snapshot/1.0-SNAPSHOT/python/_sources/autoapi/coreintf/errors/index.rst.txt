@@ -1,0 +1,172 @@
+coreintf.errors
+===============
+
+.. py:module:: coreintf.errors
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   coreintf.errors.AIxAACError
+   coreintf.errors.AIxContractError
+   coreintf.errors.AIxDescriptorError
+   coreintf.errors.AIxLifecycleError
+   coreintf.errors.AIxPermissionDenied
+   coreintf.errors.AIxPersistedSchemaIncompatible
+   coreintf.errors.AIxPersistedPayloadMigrationError
+   coreintf.errors.AIxAuthorizationDenied
+   coreintf.errors.AIxPackageManagementError
+   coreintf.errors.AIxPackageDigestMismatch
+   coreintf.errors.AIxPackageRevisionConflict
+
+
+Module Contents
+---------------
+
+.. py:exception:: AIxAACError
+
+   Bases: :py:obj:`Exception`
+
+
+   Base error for the public AAC Python binding.
+
+
+.. py:exception:: AIxContractError
+
+   Bases: :py:obj:`AIxAACError`
+
+
+   Raised for an invalid capability contract.
+
+
+.. py:exception:: AIxDescriptorError
+
+   Bases: :py:obj:`AIxAACError`
+
+
+   Raised for an invalid component descriptor.
+
+
+.. py:exception:: AIxLifecycleError
+
+   Bases: :py:obj:`AIxAACError`
+
+
+   Raised for a lifecycle contract failure.
+
+
+.. py:exception:: AIxPermissionDenied(message: str = 'permission for operation is missing', *, capability_id: str | None = None, capability_version: int | None = None, permission_id: str | None = None, retry_disposition=None, remediation_hint: str | None = None)
+
+   Bases: :py:obj:`AIxAACError`
+
+
+   Standard provider operation denial based on the current entitlement context.
+
+
+   .. py:attribute:: capability_id
+      :value: None
+
+
+
+   .. py:attribute:: capability_version
+      :value: None
+
+
+
+   .. py:attribute:: permission_id
+      :value: None
+
+
+
+   .. py:attribute:: retry_disposition
+
+
+   .. py:attribute:: remediation_hint
+      :value: None
+
+
+
+.. py:exception:: AIxPersistedSchemaIncompatible(schema_id: str, source_version: int, target_version: int, message: str | None = None)
+
+   Bases: :py:obj:`AIxAACError`
+
+
+   Stored component-owned payload cannot be interpreted/migrated by the installed component.
+
+
+   .. py:attribute:: schema_id
+
+
+   .. py:attribute:: source_version
+
+
+   .. py:attribute:: target_version
+
+
+.. py:exception:: AIxPersistedPayloadMigrationError
+
+   Bases: :py:obj:`AIxAACError`
+
+
+   A component-owned persisted payload migration failed contract validation.
+
+
+.. py:exception:: AIxAuthorizationDenied(message: str = 'authorization for operation is missing', *, capability_id: str | None = None, capability_version: int | None = None, operation_id: str | None = None, required_all_of: tuple[str, Ellipsis] = (), required_any_of: tuple[str, Ellipsis] = ())
+
+   Bases: :py:obj:`AIxAACError`
+
+
+   Core bridge rejected a capability invocation before provider execution.
+
+
+   .. py:attribute:: capability_id
+      :value: None
+
+
+
+   .. py:attribute:: capability_version
+      :value: None
+
+
+
+   .. py:attribute:: operation_id
+      :value: None
+
+
+
+   .. py:attribute:: required_all_of
+      :value: ()
+
+
+
+   .. py:attribute:: required_any_of
+      :value: ()
+
+
+
+.. py:exception:: AIxPackageManagementError
+
+   Bases: :py:obj:`AIxAACError`
+
+
+   Base error for package-store/source/install operations.
+
+
+.. py:exception:: AIxPackageDigestMismatch
+
+   Bases: :py:obj:`AIxPackageManagementError`
+
+
+   Downloaded or copied package bytes do not match the expected digest.
+
+
+.. py:exception:: AIxPackageRevisionConflict
+
+   Bases: :py:obj:`AIxPackageManagementError`
+
+
+   Requested package selection/lock cannot be reconciled deterministically.
+
+

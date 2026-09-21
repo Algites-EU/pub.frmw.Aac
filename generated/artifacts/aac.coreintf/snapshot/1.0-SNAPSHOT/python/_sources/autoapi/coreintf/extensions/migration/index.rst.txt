@@ -1,0 +1,34 @@
+coreintf.extensions.migration
+=============================
+
+.. py:module:: coreintf.extensions.migration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.extensions.migration.AIiEntityExtensionDataMigrator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiEntityExtensionDataMigrator
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: migrate(request: coreintf.extensions.models.AIcEntityExtensionMigrationRequest) -> coreintf.extensions.models.AIcEntityExtensionMigrationResult
+      :abstractmethod:
+
+
+      Transform one component-owned payload without directly mutating Core persistence.
+
+
+

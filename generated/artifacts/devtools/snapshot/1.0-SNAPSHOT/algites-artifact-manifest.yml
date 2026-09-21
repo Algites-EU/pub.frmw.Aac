@@ -1,0 +1,18 @@
+manifestVersion: 1
+artifact:
+  repositoryId: pub.frmw.ApplicationComponents
+  localArtifactId: devtools
+  artifactCoordinateId: pub.frmw.ApplicationComponents_devtools
+  version: 1.0-SNAPSHOT
+  sourcePath: devtools
+  structureKind: artifact
+  name: "AAC Development Tools"
+  description: "Repository development, verification, build and capability-binding generation tools"
+sourceMetadata:
+  descriptorHierarchy:
+    - structureKind: repository
+      path: algites-source-repository.yml
+      sha256: 51fb233af9fe219d4898277664ff1a91c2e896b15596ead2b9de044b559dc0bc
+    - structureKind: artifact
+      path: devtools/algites-artifact.yml
+      sha256: 8be4a9c5c6f2cd0483f824839d13dd8fb9030a3c948404d647cfd350efbcfd25

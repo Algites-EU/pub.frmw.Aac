@@ -1,0 +1,19 @@
+generate_capability_bindings
+============================
+
+.. py:module:: generate_capability_bindings
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   generate_capability_bindings.main
+
+
+Module Contents
+---------------
+
+.. py:function:: main() -> int
+

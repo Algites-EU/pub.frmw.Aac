@@ -1,0 +1,120 @@
+coreimpl.entitlement
+====================
+
+.. py:module:: coreimpl.entitlement
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.entitlement.AIcEntitlementProviderRegistry
+   coreimpl.entitlement.AIcEntitlementEvidenceVerifierRegistry
+   coreimpl.entitlement.AIcTrustedBootstrapEntitlementEvidenceVerifier
+   coreimpl.entitlement.AIcEntitlementLicensingScopeResolverRegistry
+   coreimpl.entitlement.AIcStaticEntitlementLicensingScopeResolver
+   coreimpl.entitlement.AIcStaticEntitlementProvider
+   coreimpl.entitlement.AIcEntitlementContextResolver
+   coreimpl.entitlement.AIcEntitlementManager
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementProviderRegistry
+
+   .. py:method:: register(entitlement_provider_id: str, provider: algites.lib.aac.coreintf.entitlement.AIiEntitlementProvider) -> None
+
+
+   .. py:method:: get(entitlement_provider_id: str) -> algites.lib.aac.coreintf.entitlement.AIiEntitlementProvider
+
+
+.. py:class:: AIcEntitlementEvidenceVerifierRegistry
+
+   .. py:method:: register(evidence_type: str, verifier: algites.lib.aac.coreintf.entitlement.AIiEntitlementEvidenceVerifier) -> None
+
+
+   .. py:method:: verify(evidence: algites.lib.aac.coreintf.entitlement.AIcEntitlementEvidence) -> algites.lib.aac.coreintf.entitlement.AIcEntitlementEvidenceVerification
+
+
+.. py:class:: AIcTrustedBootstrapEntitlementEvidenceVerifier
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.entitlement.AIiEntitlementEvidenceVerifier`
+
+
+   Reference verifier for evidence already authenticated by a trusted bootstrap provider.
+
+   This is intentionally not a cryptographic file verifier. Signed-file/Sigstore evidence can
+   register a different AIiEntitlementEvidenceVerifier without changing entitlement semantics.
+
+
+   .. py:method:: verify(evidence: algites.lib.aac.coreintf.entitlement.AIcEntitlementEvidence) -> algites.lib.aac.coreintf.entitlement.AIcEntitlementEvidenceVerification
+
+
+.. py:class:: AIcEntitlementLicensingScopeResolverRegistry
+
+   .. py:method:: register(licensing_scope_resolver_id: str, resolver: algites.lib.aac.coreintf.entitlement.AIiEntitlementLicensingScopeResolver) -> None
+
+
+   .. py:method:: get(licensing_scope_resolver_id: str) -> algites.lib.aac.coreintf.entitlement.AIiEntitlementLicensingScopeResolver
+
+
+.. py:class:: AIcStaticEntitlementLicensingScopeResolver
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.entitlement.AIiEntitlementLicensingScopeResolver`
+
+
+   .. py:method:: resolve(request: algites.lib.aac.coreintf.entitlement.AIcEntitlementLicensingScopeResolutionRequest) -> algites.lib.aac.coreintf.entitlement.AIcEntitlementLicensingScope | None
+
+
+   .. py:method:: resolve_subject(request: algites.lib.aac.coreintf.entitlement.AIcEntitlementLicensingScopeResolutionRequest) -> algites.lib.aac.coreintf.entitlement.AIcEntitlementSubject | None
+
+
+.. py:class:: AIcStaticEntitlementProvider(evidence: Mapping[str, Iterable[algites.lib.aac.coreintf.entitlement.AIcEntitlementEvidence | algites.lib.aac.coreintf.entitlement.AIcEntitlementDocument]])
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.entitlement.AIiEntitlementProvider`
+
+
+   In-memory evidence provider for tests/trusted bootstrap configuration.
+
+
+   .. py:method:: evidence(request: algites.lib.aac.coreintf.entitlement.AIcEntitlementProviderRequest) -> tuple[algites.lib.aac.coreintf.entitlement.AIcEntitlementEvidence, Ellipsis]
+
+
+.. py:class:: AIcEntitlementContextResolver(resolvers: AIcEntitlementLicensingScopeResolverRegistry)
+
+   .. py:attribute:: resolvers
+
+
+   .. py:method:: resolve(profile: algites.lib.aac.coreintf.entitlement.AIcEntitlementProfile, context: Mapping[str, object]) -> tuple[algites.lib.aac.coreintf.entitlement.AIcResolvedEntitlementLicensingScope, Ellipsis]
+
+
+.. py:class:: AIcEntitlementManager(providers: AIcEntitlementProviderRegistry | None = None, verifiers: AIcEntitlementEvidenceVerifierRegistry | None = None, trusted_issuers: coreimpl.entitlement_trust.AIcTrustedEntitlementIssuerRegistry | None = None, request_validator: Callable[[algites.lib.aac.coreintf.entitlement.AIcEntitlementDocument], None] | None = None)
+
+   Validate evidence and aggregate effective rights per capability version.
+
+
+   .. py:attribute:: providers
+
+
+   .. py:attribute:: verifiers
+
+
+   .. py:attribute:: trusted_issuers
+
+
+   .. py:attribute:: request_validator
+      :value: None
+
+
+
+   .. py:method:: evaluate_component(descriptor: algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor, *, licensing_scopes: tuple[algites.lib.aac.coreintf.entitlement.AIcResolvedEntitlementLicensingScope, Ellipsis] = (), provider_instance: algites.lib.aac.coreintf.instances.AIcProviderInstance | None = None, context: Mapping[str, object] | None = None, now: datetime.datetime | None = None) -> algites.lib.aac.coreintf.entitlement.AIcEntitlementContext
+
+
+   .. py:method:: cached_context(component_id: str, provider_instance_id: str | None = None) -> algites.lib.aac.coreintf.entitlement.AIcEntitlementContext | None
+
+
+   .. py:method:: cached_contexts() -> tuple[algites.lib.aac.coreintf.entitlement.AIcEntitlementContext, Ellipsis]
+
+

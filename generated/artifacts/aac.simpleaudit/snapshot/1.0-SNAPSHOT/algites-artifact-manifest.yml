@@ -1,0 +1,18 @@
+manifestVersion: 1
+artifact:
+  repositoryId: pub.frmw.ApplicationComponents
+  localArtifactId: aac.simpleaudit
+  artifactCoordinateId: pub.frmw.ApplicationComponents_aac.simpleaudit
+  version: 1.0-SNAPSHOT
+  sourcePath: aac/simpleaudit
+  structureKind: artifact
+  name: "Algites Application Components Simple Audit"
+  description: "Minimal AAC observation provider writing normalized observation input to standard output or a file"
+sourceMetadata:
+  descriptorHierarchy:
+    - structureKind: repository
+      path: algites-source-repository.yml
+      sha256: 51fb233af9fe219d4898277664ff1a91c2e896b15596ead2b9de044b559dc0bc
+    - structureKind: artifact
+      path: aac/simpleaudit/algites-artifact.yml
+      sha256: e790d7a45b859d770dabf04d60d5a190dda1aeefe237e6d289a96cfed63cd065

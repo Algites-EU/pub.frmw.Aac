@@ -1,0 +1,34 @@
+coreintf.authorization.provider
+===============================
+
+.. py:module:: coreintf.authorization.provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.authorization.provider.AIiAuthorizationProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiAuthorizationProvider
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: authorize(request: coreintf.authorization.models.AIcAuthorizationRequest) -> coreintf.authorization.models.AIcAuthorizationDecision
+      :abstractmethod:
+
+
+      Return an application authorization decision independent of transport credentials.
+
+
+

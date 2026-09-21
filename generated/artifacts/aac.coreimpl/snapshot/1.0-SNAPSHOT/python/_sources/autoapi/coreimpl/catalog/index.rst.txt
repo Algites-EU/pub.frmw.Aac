@@ -1,0 +1,97 @@
+coreimpl.catalog
+================
+
+.. py:module:: coreimpl.catalog
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.catalog.AIcCatalogDocumentLoader
+   coreimpl.catalog.AIcStaticCatalogProvider
+   coreimpl.catalog.AIcDocumentCatalogProvider
+   coreimpl.catalog.AIcFilesystemCatalogProvider
+   coreimpl.catalog.AIcHttpCatalogProvider
+   coreimpl.catalog.AIcCatalogProviderRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogDocumentLoader
+
+   .. py:method:: load_text(text: str, *, source: str = '<memory>', source_uri: str | None = None) -> algites.lib.aac.coreintf.catalog.AIcCatalogDocument
+      :staticmethod:
+
+
+
+.. py:class:: AIcStaticCatalogProvider(source_id: str, document: algites.lib.aac.coreintf.catalog.AIcCatalogDocument)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.catalog.AIiCatalogProvider`
+
+
+   .. py:attribute:: source_id
+
+
+   .. py:attribute:: document
+
+
+   .. py:method:: query(query: algites.lib.aac.coreintf.catalog.AIcCatalogQuery) -> tuple[algites.lib.aac.coreintf.catalog.AIcCatalogEntry, Ellipsis]
+
+
+.. py:class:: AIcDocumentCatalogProvider(source_id: str, uri: str, *, authentication: coreimpl.authentication.AIcAuthenticationService | None = None, authentication_profile_id: str | None = None, timeout_seconds: float = 30.0, context: Mapping[str, object] | None = None)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.catalog.AIiCatalogProvider`
+
+
+   .. py:attribute:: source_id
+
+
+   .. py:attribute:: uri
+
+
+   .. py:attribute:: authentication
+      :value: None
+
+
+
+   .. py:attribute:: authentication_profile_id
+      :value: None
+
+
+
+   .. py:attribute:: timeout_seconds
+
+
+   .. py:attribute:: context
+
+
+   .. py:method:: document() -> algites.lib.aac.coreintf.catalog.AIcCatalogDocument
+
+
+   .. py:method:: query(query: algites.lib.aac.coreintf.catalog.AIcCatalogQuery) -> tuple[algites.lib.aac.coreintf.catalog.AIcCatalogEntry, Ellipsis]
+
+
+.. py:class:: AIcFilesystemCatalogProvider(source_id: str, uri: str, *, authentication: coreimpl.authentication.AIcAuthenticationService | None = None, authentication_profile_id: str | None = None, timeout_seconds: float = 30.0, context: Mapping[str, object] | None = None)
+
+   Bases: :py:obj:`AIcDocumentCatalogProvider`
+
+
+.. py:class:: AIcHttpCatalogProvider(source_id: str, uri: str, *, authentication: coreimpl.authentication.AIcAuthenticationService | None = None, authentication_profile_id: str | None = None, timeout_seconds: float = 30.0, context: Mapping[str, object] | None = None)
+
+   Bases: :py:obj:`AIcDocumentCatalogProvider`
+
+
+.. py:class:: AIcCatalogProviderRegistry
+
+   .. py:method:: register(source_id: str, provider: algites.lib.aac.coreintf.catalog.AIiCatalogProvider, *, priority: int = 0) -> None
+
+
+   .. py:method:: get(source_id: str) -> algites.lib.aac.coreintf.catalog.AIiCatalogProvider
+
+
+   .. py:method:: query(query: algites.lib.aac.coreintf.catalog.AIcCatalogQuery) -> tuple[algites.lib.aac.coreintf.catalog.AIcCatalogEntry, Ellipsis]
+
+

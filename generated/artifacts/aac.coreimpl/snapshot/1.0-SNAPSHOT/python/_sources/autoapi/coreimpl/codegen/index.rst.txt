@@ -1,0 +1,31 @@
+coreimpl.codegen
+================
+
+.. py:module:: coreimpl.codegen
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.codegen.AIcPythonCapabilityBindingGenerator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPythonCapabilityBindingGenerator(schemas: coreimpl.schemas.AIcSchemaRegistry)
+
+   Generate Python ABC/DTO source from one canonical capability contract.
+
+   The generated interface is a language binding, never a second source of truth.
+   Authorization decorators are generated from the canonical operation metadata.
+
+
+   .. py:attribute:: schemas
+
+
+   .. py:method:: generate(contract: algites.lib.aac.coreintf.contracts.AIcCapabilityContract, *, canonical_resource: str | None = None) -> str
+
+

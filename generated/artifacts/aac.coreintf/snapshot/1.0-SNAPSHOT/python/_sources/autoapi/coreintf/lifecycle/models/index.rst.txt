@@ -1,0 +1,239 @@
+coreintf.lifecycle.models
+=========================
+
+.. py:module:: coreintf.lifecycle.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.lifecycle.models.AInLifecycleStage
+   coreintf.lifecycle.models.AInLifecycleState
+   coreintf.lifecycle.models.AIcLifecycleContext
+   coreintf.lifecycle.models.AIcValidationResult
+   coreintf.lifecycle.models.AIcLifecycleStatus
+
+
+Module Contents
+---------------
+
+.. py:class:: AInLifecycleStage
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: DISCOVER
+      :value: 'DISCOVER'
+
+
+
+   .. py:attribute:: VERIFY
+      :value: 'VERIFY'
+
+
+
+   .. py:attribute:: ADMIT_CONTRACTS
+      :value: 'ADMIT_CONTRACTS'
+
+
+
+   .. py:attribute:: PROVISION
+      :value: 'PROVISION'
+
+
+
+   .. py:attribute:: VALIDATE
+      :value: 'VALIDATE'
+
+
+
+   .. py:attribute:: EVALUATE_ENTITLEMENT
+      :value: 'EVALUATE_ENTITLEMENT'
+
+
+
+   .. py:attribute:: RESOLVE
+      :value: 'RESOLVE'
+
+
+
+   .. py:attribute:: INSTANTIATE
+      :value: 'INSTANTIATE'
+
+
+
+   .. py:attribute:: WIRE
+      :value: 'WIRE'
+
+
+
+   .. py:attribute:: ACTIVATABLE
+      :value: 'ACTIVATABLE'
+
+
+
+   .. py:attribute:: ACTIVATE
+      :value: 'ACTIVATE'
+
+
+
+   .. py:attribute:: SUSPEND
+      :value: 'SUSPEND'
+
+
+
+   .. py:attribute:: DEACTIVATE
+      :value: 'DEACTIVATE'
+
+
+
+   .. py:attribute:: UNPROVISION
+      :value: 'UNPROVISION'
+
+
+
+.. py:class:: AInLifecycleState
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: INSTALLED
+      :value: 'INSTALLED'
+
+
+
+   .. py:attribute:: VERIFIED
+      :value: 'VERIFIED'
+
+
+
+   .. py:attribute:: PROVISIONED_UNCONFIGURED
+      :value: 'PROVISIONED_UNCONFIGURED'
+
+
+
+   .. py:attribute:: PROVISIONED
+      :value: 'PROVISIONED'
+
+
+
+   .. py:attribute:: RESOLVED
+      :value: 'RESOLVED'
+
+
+
+   .. py:attribute:: INSTANTIATED
+      :value: 'INSTANTIATED'
+
+
+
+   .. py:attribute:: WIRED
+      :value: 'WIRED'
+
+
+
+   .. py:attribute:: ACTIVATABLE
+      :value: 'ACTIVATABLE'
+
+
+
+   .. py:attribute:: ACTIVE
+      :value: 'ACTIVE'
+
+
+
+   .. py:attribute:: SUSPENDED
+      :value: 'SUSPENDED'
+
+
+
+   .. py:attribute:: FAILED
+      :value: 'FAILED'
+
+
+
+   .. py:attribute:: DEACTIVATED
+      :value: 'DEACTIVATED'
+
+
+
+.. py:class:: AIcLifecycleContext
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcValidationResult
+
+   .. py:attribute:: valid
+      :type:  bool
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcLifecycleStatus
+
+   .. py:attribute:: state
+      :type:  AInLifecycleState
+
+
+   .. py:attribute:: completed_stages
+      :type:  tuple[AInLifecycleStage, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: last_failure_stage
+      :type:  AInLifecycleStage | None
+      :value: None
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

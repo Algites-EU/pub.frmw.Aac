@@ -1,0 +1,111 @@
+coreimpl.bootstrap
+==================
+
+.. py:module:: coreimpl.bootstrap
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.bootstrap.AIcConfigurationBootstrapLoader
+   coreimpl.bootstrap.AIcConfigurationProfileLoader
+   coreimpl.bootstrap.AIcBootstrapResourceLoader
+   coreimpl.bootstrap.AIcSecurityBootstrapLoader
+   coreimpl.bootstrap.AIcEntitlementBootstrapLoader
+   coreimpl.bootstrap.AIcCatalogBootstrapLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationBootstrapLoader
+
+   Load the non-recursive fixed-schema configuration bootstrap contract.
+
+   Products may package an equivalent fixed schema of their own; this generic AAC
+   implementation ships schema version 1 as the baseline contract.
+
+
+   .. py:method:: load_file(path: str | pathlib.Path) -> algites.lib.aac.coreintf.configuration.AIcConfigurationBootstrap
+      :staticmethod:
+
+
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> algites.lib.aac.coreintf.configuration.AIcConfigurationBootstrap
+      :staticmethod:
+
+
+
+.. py:class:: AIcConfigurationProfileLoader
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> algites.lib.aac.coreintf.configuration.AIcConfigurationProfile
+      :staticmethod:
+
+
+
+.. py:class:: AIcBootstrapResourceLoader(authentication=None, timeout_seconds: float = 10.0)
+
+   Read trusted bootstrap/profile bytes from file or HTTP(S).
+
+   Whether a supplied URI is trusted is decided by the product/installation. This class
+   deliberately does not turn a user-supplied URI into an authority by itself.
+
+
+   .. py:attribute:: authentication
+      :value: None
+
+
+
+   .. py:attribute:: timeout_seconds
+
+
+   .. py:method:: read_text(uri: str, *, authentication_profile_id: str | None = None, context=None) -> str
+
+
+.. py:class:: AIcSecurityBootstrapLoader
+
+   Load the product-supplied fixed-schema security bootstrap.
+
+   The source itself is an external trust boundary. This loader validates structure; a
+   product/installation decides which source path/bytes are trusted before calling it.
+
+
+   .. py:method:: load_file(path: str | pathlib.Path) -> algites.lib.aac.coreintf.authentication.AIcSecurityBootstrap
+      :staticmethod:
+
+
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> algites.lib.aac.coreintf.authentication.AIcSecurityBootstrap
+      :staticmethod:
+
+
+
+.. py:class:: AIcEntitlementBootstrapLoader
+
+   .. py:method:: load_file(path: str | pathlib.Path)
+      :staticmethod:
+
+
+
+   .. py:method:: load_text(text: str, source: str = '<memory>')
+      :staticmethod:
+
+
+
+.. py:class:: AIcCatalogBootstrapLoader
+
+   Load product/technology-scoped AAC catalog source registrations.
+
+
+   .. py:method:: load_file(path: str | pathlib.Path)
+      :staticmethod:
+
+
+
+   .. py:method:: load_text(text: str, source: str = '<memory>')
+      :staticmethod:
+
+
+

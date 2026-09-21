@@ -1,0 +1,8 @@
+aac.uiintf
+==========
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API reference
+
+   autoapi/index

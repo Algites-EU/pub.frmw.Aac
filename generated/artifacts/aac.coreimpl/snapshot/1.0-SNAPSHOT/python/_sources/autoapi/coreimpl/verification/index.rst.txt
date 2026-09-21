@@ -1,0 +1,31 @@
+coreimpl.verification
+=====================
+
+.. py:module:: coreimpl.verification
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.verification.AIcPythonPackageVerifier
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPythonPackageVerifier
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.verification.AIiPackageVerifier`
+
+
+   Baseline Python-profile verifier.
+
+   It verifies that a package-backed component resolves to an importable module. Signature/trust
+   verification can be supplied by replacing this Core-owned verifier.
+
+
+   .. py:method:: verify(verification_input: algites.lib.aac.coreintf.verification.AIcVerificationInput) -> algites.lib.aac.coreintf.verification.AIcVerificationOutput
+
+

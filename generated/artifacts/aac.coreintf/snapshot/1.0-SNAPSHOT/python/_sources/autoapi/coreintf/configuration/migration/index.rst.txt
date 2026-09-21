@@ -1,0 +1,34 @@
+coreintf.configuration.migration
+================================
+
+.. py:module:: coreintf.configuration.migration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.configuration.migration.AIiConfigurationMigrator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiConfigurationMigrator
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: migrate(request: coreintf.configuration.models.AIcConfigurationMigrationRequest) -> coreintf.configuration.models.AIcConfigurationMigrationResult
+      :abstractmethod:
+
+
+      Transform values and policy-modes without directly mutating persistence.
+
+
+

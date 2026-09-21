@@ -1,0 +1,132 @@
+coreintf.extensions.models
+==========================
+
+.. py:module:: coreintf.extensions.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.extensions.models.AIcCoreEntityRef
+   coreintf.extensions.models.AIcCoreEntityContext
+   coreintf.extensions.models.AIcEntityExtensionDataEnvelope
+   coreintf.extensions.models.AIcEntityExtensionDataRecord
+   coreintf.extensions.models.AIcEntityExtensionMigrationRequest
+   coreintf.extensions.models.AIcEntityExtensionMigrationResult
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCoreEntityRef
+
+   .. py:attribute:: entity_type_id
+      :type:  str
+
+
+   .. py:attribute:: entity_id
+      :type:  str
+
+
+.. py:class:: AIcCoreEntityContext
+
+   .. py:attribute:: entity
+      :type:  AIcCoreEntityRef
+
+
+   .. py:attribute:: core_entity_schema_id
+      :type:  str
+
+
+   .. py:attribute:: core_entity_schema_version
+      :type:  int
+
+
+   .. py:attribute:: normalized_snapshot
+      :type:  object | None
+      :value: None
+
+
+
+.. py:class:: AIcEntityExtensionDataEnvelope
+
+   .. py:attribute:: owner_component_id
+      :type:  str
+
+
+   .. py:attribute:: component_extension_schema_id
+      :type:  str
+
+
+   .. py:attribute:: component_extension_schema_version
+      :type:  int
+
+
+   .. py:attribute:: written_by_component_version
+      :type:  int
+
+
+   .. py:attribute:: core_entity
+      :type:  AIcCoreEntityRef
+
+
+   .. py:attribute:: payload
+      :type:  object
+
+
+   .. py:attribute:: payload_format
+      :type:  str
+      :value: 'NORMALIZED'
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcEntityExtensionDataRecord
+
+   .. py:attribute:: record_revision
+      :type:  int | str
+
+
+   .. py:attribute:: envelope
+      :type:  AIcEntityExtensionDataEnvelope
+
+
+.. py:class:: AIcEntityExtensionMigrationRequest
+
+   .. py:attribute:: entity_context
+      :type:  AIcCoreEntityContext
+
+
+   .. py:attribute:: source
+      :type:  AIcEntityExtensionDataEnvelope
+
+
+   .. py:attribute:: target_component_extension_schema_version
+      :type:  int
+
+
+.. py:class:: AIcEntityExtensionMigrationResult
+
+   .. py:attribute:: component_extension_schema_id
+      :type:  str
+
+
+   .. py:attribute:: component_extension_schema_version
+      :type:  int
+
+
+   .. py:attribute:: payload
+      :type:  object
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

@@ -1,0 +1,121 @@
+sigstore.verifier
+=================
+
+.. py:module:: sigstore.verifier
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   sigstore.verifier.AInSigstoreVerificationMode
+   sigstore.verifier.AIcSigstoreTrustPolicy
+   sigstore.verifier.AIcSigstorePackageVerifier
+   sigstore.verifier.AIcSigstoreEntitlementEvidenceVerifier
+
+
+Module Contents
+---------------
+
+.. py:class:: AInSigstoreVerificationMode
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: IDENTITY
+      :value: 'IDENTITY'
+
+
+
+   .. py:attribute:: GITHUB
+      :value: 'GITHUB'
+
+
+
+.. py:class:: AIcSigstoreTrustPolicy
+
+   .. py:attribute:: mode
+      :type:  AInSigstoreVerificationMode
+
+
+   .. py:attribute:: cert_identity
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: oidc_issuer
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: repository
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: offline
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: bundle_suffix
+      :type:  str
+      :value: '.sigstore.json'
+
+
+
+   .. py:attribute:: trust_config
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcSigstorePackageVerifier(policy: AIcSigstoreTrustPolicy, *, runner: Callable[[Sequence[str]], subprocess.CompletedProcess[str]] | None = None)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.verification.AIiPackageVerifier`
+
+
+   Verify an artifact using the official ``sigstore`` Python CLI module.
+
+   The signature proves artifact integrity; the supplied trust policy determines which
+   signer/publisher identity is accepted. The verifier never falls back to "any valid signer".
+
+
+   .. py:attribute:: policy
+
+
+   .. py:method:: verify(verification_input: algites.lib.aac.coreintf.verification.AIcVerificationInput) -> algites.lib.aac.coreintf.verification.AIcVerificationOutput
+
+
+.. py:class:: AIcSigstoreEntitlementEvidenceVerifier(policies: dict[str, AIcSigstoreTrustPolicy], *, runner: Callable[[Sequence[str]], subprocess.CompletedProcess[str]] | None = None)
+
+   Detached Sigstore verifier for entitlement-document files.
+
+   The configured policy is selected by the document issuer id. Core separately applies
+   its trusted-issuer/component policy, so a cryptographically valid but unauthorized signer
+   does not become a trusted license issuer merely by being validly signed.
+
+
+   .. py:attribute:: policies
+
+
+   .. py:method:: verify(evidence)
+
+

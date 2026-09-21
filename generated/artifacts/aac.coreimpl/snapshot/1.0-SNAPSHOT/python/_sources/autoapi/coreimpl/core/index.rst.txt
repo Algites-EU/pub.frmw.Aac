@@ -1,0 +1,514 @@
+coreimpl.core
+=============
+
+.. py:module:: coreimpl.core
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.core.AIcInstalledComponent
+   coreimpl.core.AIcUpgradeOutcome
+   coreimpl.core.AIcPythonCandidateImportSnapshot
+   coreimpl.core.AIcApplicationComponentCore
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcInstalledComponent
+
+   .. py:attribute:: discovered
+      :type:  coreimpl.descriptor.AIcDiscoveredComponent
+
+
+   .. py:attribute:: origin
+      :type:  algites.lib.aac.coreintf.descriptor.AInComponentOrigin
+
+
+   .. py:property:: descriptor
+
+
+.. py:class:: AIcUpgradeOutcome
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: previous_version
+      :type:  int
+
+
+   .. py:attribute:: current_version
+      :type:  int
+
+
+   .. py:attribute:: graph
+      :type:  coreimpl.graph.AIcResolvedApplicationGraph
+
+
+.. py:class:: AIcPythonCandidateImportSnapshot
+
+   .. py:attribute:: sys_path
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: modules
+      :type:  dict[str, object]
+
+
+   .. py:attribute:: package_prefixes
+      :type:  tuple[str, Ellipsis]
+
+
+.. py:class:: AIcApplicationComponentCore(*, store: algites.lib.aac.coreintf.persistence.AIiStateStore | None = None, entitlement_provider: algites.lib.aac.coreintf.entitlement.AIiEntitlementProvider | None = None, entitlement_licensing_scope: algites.lib.aac.coreintf.entitlement.AIcEntitlementLicensingScope | None = None, entitlement_remediator: algites.lib.aac.coreintf.entitlement.AIiEntitlementRemediator | None = None, authorization_provider: algites.lib.aac.coreintf.authorization.AIiAuthorizationProvider | None = None, verifier: algites.lib.aac.coreintf.verification.AIiPackageVerifier | None = None)
+
+   Reusable AAC composition root for the Python technology profile.
+
+
+   .. py:attribute:: store
+
+
+   .. py:attribute:: schemas
+
+
+   .. py:attribute:: contracts
+
+
+   .. py:attribute:: authentication
+
+
+   .. py:attribute:: security_bootstrap
+      :type:  algites.lib.aac.coreintf.authentication.AIcSecurityBootstrap | None
+      :value: None
+
+
+
+   .. py:attribute:: configuration_providers
+
+
+   .. py:attribute:: configuration_scope_resolvers
+
+
+   .. py:attribute:: configuration_context_resolver
+
+
+   .. py:attribute:: configuration_migrations
+
+
+   .. py:attribute:: entity_extension_migrations
+
+
+   .. py:attribute:: configuration_reads
+
+
+   .. py:attribute:: configuration_resolver
+
+
+   .. py:attribute:: configuration_mutations
+
+
+   .. py:attribute:: configuration_bootstrap
+      :type:  algites.lib.aac.coreintf.configuration.AIcConfigurationBootstrap | None
+      :value: None
+
+
+
+   .. py:attribute:: active_configuration_scopes
+      :value: ()
+
+
+
+   .. py:attribute:: application_context
+      :type:  dict[str, object]
+
+
+   .. py:attribute:: entity_extension_store
+      :type:  algites.lib.aac.coreintf.extensions.AIiEntityExtensionDataStore | None
+      :value: None
+
+
+
+   .. py:attribute:: entitlement_requests
+
+
+   .. py:attribute:: entitlement_providers
+
+
+   .. py:attribute:: entitlement_verifiers
+
+
+   .. py:attribute:: trusted_entitlement_issuers
+
+
+   .. py:attribute:: licensing_scope_resolvers
+
+
+   .. py:attribute:: entitlement_context_resolver
+
+
+   .. py:attribute:: entitlement
+
+
+   .. py:attribute:: entitlement_remediator
+      :value: None
+
+
+
+   .. py:attribute:: entitlement_bootstrap
+      :type:  algites.lib.aac.coreintf.entitlement.AIcEntitlementBootstrap | None
+      :value: None
+
+
+
+   .. py:attribute:: active_licensing_scopes
+      :type:  tuple[algites.lib.aac.coreintf.entitlement.AIcResolvedEntitlementLicensingScope, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: authorization_provider
+      :value: None
+
+
+
+   .. py:attribute:: verifier
+
+
+   .. py:attribute:: namespaces
+
+
+   .. py:attribute:: catalogs
+
+
+   .. py:attribute:: catalog_bootstrap
+      :type:  algites.lib.aac.coreintf.catalog.AIcCatalogBootstrap | None
+      :value: None
+
+
+
+   .. py:attribute:: catalog_product_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: catalog_technology_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: package_bootstrap
+      :type:  algites.lib.aac.coreintf.packages.AIcPackageBootstrap | None
+      :value: None
+
+
+
+   .. py:attribute:: package_manager
+      :type:  coreimpl.packages.AIcPackageManager | None
+      :value: None
+
+
+
+   .. py:method:: active_application_scope_ids() -> tuple[str, Ellipsis]
+
+      Return currently active application-scope identifiers in deterministic order.
+
+
+
+   .. py:method:: provider_readiness(application_scope_id: str, provider_instance_id: str) -> algites.lib.aac.coreintf.readiness.AIcProviderReadiness | None
+
+
+   .. py:method:: component_readiness(application_scope_id: str, component_id: str) -> algites.lib.aac.coreintf.readiness.AIcComponentReadiness
+
+
+   .. py:method:: capability_readiness(application_scope_id: str) -> tuple[algites.lib.aac.coreintf.readiness.AIcCapabilityReadiness, Ellipsis]
+
+
+   .. py:method:: refresh_provider_readiness(application_scope_id: str, provider_instance_id: str) -> algites.lib.aac.coreintf.readiness.AIcProviderReadiness
+
+
+   .. py:method:: refresh_component_readiness(application_scope_id: str, component_id: str) -> algites.lib.aac.coreintf.readiness.AIcComponentReadiness
+
+
+   .. py:method:: register_catalog_provider(source_id: str, provider: algites.lib.aac.coreintf.catalog.AIiCatalogProvider, *, priority: int = 0) -> None
+
+
+   .. py:method:: apply_catalog_bootstrap(bootstrap: algites.lib.aac.coreintf.catalog.AIcCatalogBootstrap) -> None
+
+
+   .. py:method:: query_catalog(query: algites.lib.aac.coreintf.catalog.AIcCatalogQuery) -> tuple[algites.lib.aac.coreintf.catalog.AIcCatalogEntry, Ellipsis]
+
+
+   .. py:method:: query_default_catalog(*, component_id: str | None = None, text: str | None = None, provides_capability_id: str | None = None, requires_capability_id: str | None = None) -> tuple[algites.lib.aac.coreintf.catalog.AIcCatalogEntry, Ellipsis]
+
+
+   .. py:method:: catalog_package_candidate(source_id: str, product_id: str, technology_id: str, component_id: str, component_version: int, artifact_id: str) -> algites.lib.aac.coreintf.packages.AIcPackageCandidate
+
+
+   .. py:method:: download_catalog_package(source_id: str, product_id: str, technology_id: str, component_id: str, component_version: int, artifact_id: str) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: install_catalog_package(source_id: str, product_id: str, technology_id: str, component_id: str, component_version: int, artifact_id: str) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: configure_package_management(layout: algites.lib.aac.coreintf.packages.AIcPackageStoreLayout, *, automation_policy: algites.lib.aac.coreintf.packages.AIcPackageAutomationPolicy = AIcPackageAutomationPolicy()) -> coreimpl.packages.AIcPackageManager
+
+
+   .. py:method:: apply_package_bootstrap(bootstrap: algites.lib.aac.coreintf.packages.AIcPackageBootstrap) -> None
+
+
+   .. py:method:: register_package_source(source_id: str, source, *, priority: int = 0) -> None
+
+
+   .. py:method:: register_package_verifier(verifier_id: str, verifier: algites.lib.aac.coreintf.verification.AIiPackageVerifier) -> None
+
+
+   .. py:method:: plan_workspace_packages(requirements: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentRequirements, lock: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentLock | None = None) -> algites.lib.aac.coreintf.packages.AIcPackageReconciliationPlan
+
+
+   .. py:method:: download_package(candidate: algites.lib.aac.coreintf.packages.AIcPackageCandidate) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: install_downloaded_package(candidate: algites.lib.aac.coreintf.packages.AIcPackageCandidate, downloaded: algites.lib.aac.coreintf.packages.AIcStoredPackage) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: select_package(application_scope_id: str, package: algites.lib.aac.coreintf.packages.AIcStoredPackage)
+
+
+   .. py:method:: rollback_package_selection(application_scope_id: str, component_id: str)
+
+
+   .. py:method:: mark_package_obsolete(package: algites.lib.aac.coreintf.packages.AIcStoredPackage) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: restore_obsolete_package(package: algites.lib.aac.coreintf.packages.AIcStoredPackage) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: reconcile_workspace_packages(requirements: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentRequirements, lock: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentLock | None = None, *, application_scope_id: str | None = None, execute_automatic: bool = False) -> algites.lib.aac.coreintf.packages.AIcPackageReconciliationPlan
+
+
+   .. py:method:: solve_compatible_target_state(application_scope_id: str, requests: tuple[algites.lib.aac.coreintf.solver.AIcTargetStateRequest, Ellipsis], *, workspace_requirements: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentRequirements | None = None, workspace_lock: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentLock | None = None, max_alternatives: int = 3) -> algites.lib.aac.coreintf.solver.AIcTargetStateSolverResult
+
+
+   .. py:method:: apply_target_state_solution(application_scope_id: str, solution: algites.lib.aac.coreintf.solver.AIcTargetStateSolution, *, trusted_namespace_prefixes: tuple[str, Ellipsis] = ()) -> algites.lib.aac.coreintf.packages.AIcComponentUpgradeTransactionOutcome
+
+
+   .. py:method:: register_entitlement_evidence_verifier(evidence_type: str, verifier: algites.lib.aac.coreintf.entitlement.AIiEntitlementEvidenceVerifier) -> None
+
+
+   .. py:method:: register_trusted_entitlement_issuer(rule: algites.lib.aac.coreintf.entitlement.AIcTrustedEntitlementIssuerRule) -> None
+
+
+   .. py:method:: register_file_entitlement_provider(entitlement_provider_id: str, root: str, *, pattern: str = '*.entitlement.yml', evidence_type: str = 'SIGNED_FILE', sidecar_suffix: str = '.sigstore.json') -> None
+
+
+   .. py:method:: refresh_entitlements_if_due(now=None) -> tuple[str, Ellipsis]
+
+
+   .. py:method:: register_secret_provider(secret_provider_id: str, provider: algites.lib.aac.coreintf.authentication.AIiSecretProvider, *, bootstrap_safe: bool = False) -> None
+
+
+   .. py:method:: register_authentication_handler(mechanism: str, handler: algites.lib.aac.coreintf.authentication.AIiAuthenticationHandler) -> None
+
+
+   .. py:method:: apply_security_bootstrap(bootstrap: algites.lib.aac.coreintf.authentication.AIcSecurityBootstrap) -> None
+
+
+   .. py:method:: register_configuration_provider(configuration_provider_id: str, provider: algites.lib.aac.coreintf.configuration.AIiConfigurationProvider) -> None
+
+
+   .. py:method:: register_configuration_scope_resolver(configuration_scope_resolver_id: str, resolver: algites.lib.aac.coreintf.configuration.AIiConfigurationScopeResolver) -> None
+
+
+   .. py:method:: configure_entity_extension_store(store: algites.lib.aac.coreintf.extensions.AIiEntityExtensionDataStore | None) -> None
+
+      Attach the product-owned semantic extension-data store.
+
+      Stored extension payloads may remain at older readable/migratable schema versions. Core
+      normalizes them on read; persistence convergence is independent from component cutover.
+
+
+
+   .. py:method:: register_entity_context(context: algites.lib.aac.coreintf.extensions.AIcCoreEntityContext) -> None
+
+      Expose an active Core entity to AAC for extension-data compatibility/migration.
+
+
+
+   .. py:method:: unregister_entity_context(entity_type_id: str, entity_id: str) -> None
+
+
+   .. py:property:: entity_contexts
+      :type: tuple[algites.lib.aac.coreintf.extensions.AIcCoreEntityContext, Ellipsis]
+
+
+
+   .. py:method:: read_entity_extension_data(entity_type_id: str, entity_id: str, component_id: str, *, persist_migration: bool = True)
+
+      Return extension data interpretable by the currently installed component.
+
+      A transformation-required stored envelope is transformed and validated in memory first. If the
+      store permits conditional mutation, Core may then try to persist the normalized envelope
+      with the snapshot's ``record_revision`` as ``expected_record_revision``. Persistence
+      failure is deliberately ignored: the migrated in-memory representation remains usable and
+      a later read can retry convergence.
+
+
+
+   .. py:method:: converge_persisted_component_data(component_ids: tuple[str, Ellipsis] | None = None)
+
+      Retry best-effort persistence convergence for currently installed components.
+
+      This operation is intentionally outside component replacement transactions. It is safe to
+      retry after startup or administrative request because each payload is persisted
+      independently with provider/store concurrency checks where available.
+
+
+
+   .. py:method:: register_entitlement_provider(entitlement_provider_id: str, provider: algites.lib.aac.coreintf.entitlement.AIiEntitlementProvider) -> None
+
+
+   .. py:method:: register_licensing_scope_resolver(licensing_scope_resolver_id: str, resolver: algites.lib.aac.coreintf.entitlement.AIiEntitlementLicensingScopeResolver) -> None
+
+
+   .. py:method:: apply_configuration_bootstrap(bootstrap: algites.lib.aac.coreintf.configuration.AIcConfigurationBootstrap, *, context: dict[str, object] | None = None, configuration_profile_id: str | None = None) -> tuple
+
+
+   .. py:method:: apply_entitlement_bootstrap(bootstrap: algites.lib.aac.coreintf.entitlement.AIcEntitlementBootstrap, *, context: dict[str, object] | None = None, entitlement_profile_id: str | None = None) -> tuple[algites.lib.aac.coreintf.entitlement.AIcResolvedEntitlementLicensingScope, Ellipsis]
+
+
+   .. py:method:: resolve_scoped_configuration(*, configuration_target: algites.lib.aac.coreintf.configuration.AIcConfigurationTarget, property_ids, accepted_configuration_scope_types=None, schema_defaults=None) -> algites.lib.aac.coreintf.configuration.AIcEffectiveConfiguration
+
+
+   .. py:method:: apply_configuration_changes(change_set: algites.lib.aac.coreintf.configuration.AIcConfigurationChangeSet)
+
+
+   .. py:method:: configuration_provider_access(configuration_provider_id, configuration_scope, configuration_target, actor_context=None)
+
+
+   .. py:method:: resolve_component_scoped_configuration(component_id: str) -> algites.lib.aac.coreintf.configuration.AIcEffectiveConfiguration
+
+
+   .. py:method:: resolve_provider_scoped_configuration(instance_id: str) -> algites.lib.aac.coreintf.configuration.AIcEffectiveConfiguration
+
+
+   .. py:method:: verify_python_artifact(wheel_path: str, package: str, resource_name: str = 'component.yml') -> coreimpl.descriptor.AIcDiscoveredComponent
+
+      Verify a wheel before importing any code from the component package.
+
+
+
+   .. py:method:: install_verified_python_package(verified: coreimpl.descriptor.AIcDiscoveredComponent, resource_name: str = 'component.yml', *, trusted_namespace_prefixes: tuple[str, Ellipsis] = ()) -> AIcInstalledComponent
+
+
+   .. py:method:: install_python_package(package: str, resource_name: str = 'component.yml', *, trusted_namespace_prefixes: tuple[str, Ellipsis] = (), artifact_path: str | None = None) -> AIcInstalledComponent
+
+
+   .. py:method:: install_aac_package(package: str, resource_name: str = 'component.yml', *, artifact_path: str | None = None) -> AIcInstalledComponent
+
+
+   .. py:method:: register_builtin_python_component(package: str, resource_name: str = 'component.yml', *, trusted_namespace_prefixes: tuple[str, Ellipsis] = ()) -> AIcInstalledComponent
+
+      Admit product-shipped code as a first-class AAC component without package installation.
+
+      Built-in components use the same contracts, configuration, entitlement, bindings and
+      Core bridge as external components. Their requested capability authorizations are
+      pre-approved by product trust when provider instances are provisioned.
+
+
+
+   .. py:method:: authorization_context(principal: algites.lib.aac.coreintf.authorization.AIcAuthorizationPrincipal | None)
+
+
+   .. py:method:: set_component_authorization_grant(consumer_instance_id: str, requirement_id: str, permission_ids: tuple[str, Ellipsis], *, approved_by: str | None = None) -> algites.lib.aac.coreintf.authorization.AIcComponentAuthorizationGrant
+
+
+   .. py:method:: component_authorization_grant(consumer_instance_id: str, requirement_id: str)
+
+
+   .. py:method:: installed(component_id: str) -> AIcInstalledComponent
+
+
+   .. py:method:: installed_components() -> tuple[AIcInstalledComponent, Ellipsis]
+
+
+   .. py:method:: create_provider_instance(component_id: str, provider_definition_id: str, *, name: str = 'default', configuration: dict[str, object] | None = None) -> algites.lib.aac.coreintf.instances.AIcProviderInstance
+
+
+   .. py:method:: rename_provider_instance(instance_id: str, name: str) -> algites.lib.aac.coreintf.instances.AIcProviderInstance
+
+
+   .. py:method:: remove_provider_instance(instance_id: str) -> None
+
+
+   .. py:method:: configure_provider_instance(instance_id: str, configuration: dict[str, object]) -> algites.lib.aac.coreintf.instances.AIcProviderInstance
+
+
+   .. py:method:: set_binding_preference(preference: algites.lib.aac.coreintf.instances.AIcBindingPreference) -> None
+
+
+   .. py:method:: configure_observer(binding: algites.lib.aac.coreintf.observation.AIcObservationBinding) -> None
+
+
+   .. py:method:: activate_application(application_scope_id: str) -> coreimpl.graph.AIcResolvedApplicationGraph
+
+
+   .. py:method:: plan_python_package_upgrades(application_scope_id: str, packages: tuple[str, Ellipsis], resource_name: str = 'component.yml', *, artifact_paths: dict[str, str] | None = None) -> algites.lib.aac.coreintf.packages.AIcComponentUpgradePlan
+
+      Validate a complete multi-component target state without changing the live state.
+
+      All replacements participate in one hypothetical graph.  Intermediate states obtained by
+      applying replacements one at a time are intentionally irrelevant.
+
+
+
+   .. py:method:: upgrade_python_packages(application_scope_id: str, packages: tuple[str, Ellipsis], resource_name: str = 'component.yml', *, trusted_namespace_prefixes: tuple[str, Ellipsis] = (), artifact_paths: dict[str, str] | None = None) -> algites.lib.aac.coreintf.packages.AIcComponentUpgradeTransactionOutcome
+
+      Replace one or more components as one logical transaction.
+
+      The complete target contract catalog and provider graph are preflighted before any runtime
+      is deactivated.  During commit, every candidate is admitted before the graph is resolved,
+      so no intermediate one-component state is required to be valid.  Core state, schemas,
+      contracts and descriptors are restored together if commit or target activation fails.
+
+
+
+   .. py:method:: upgrade_python_package(application_scope_id: str, package: str, resource_name: str = 'component.yml', *, trusted_namespace_prefixes: tuple[str, Ellipsis] = (), artifact_path: str | None = None) -> AIcUpgradeOutcome
+
+      Compatibility wrapper over the multi-component transaction primitive.
+
+
+
+   .. py:method:: plan_aac_package_upgrades(application_scope_id: str, packages: tuple[str, Ellipsis], resource_name: str = 'component.yml') -> algites.lib.aac.coreintf.packages.AIcComponentUpgradePlan
+
+
+   .. py:method:: upgrade_aac_packages(application_scope_id: str, packages: tuple[str, Ellipsis], resource_name: str = 'component.yml') -> algites.lib.aac.coreintf.packages.AIcComponentUpgradeTransactionOutcome
+
+
+   .. py:method:: upgrade_aac_package(application_scope_id: str, package: str, resource_name: str = 'component.yml', *, artifact_path: str | None = None) -> AIcUpgradeOutcome
+
+
+   .. py:method:: plan_stored_package_upgrades(application_scope_id: str, packages: tuple[algites.lib.aac.coreintf.packages.AIcStoredPackage, Ellipsis]) -> algites.lib.aac.coreintf.packages.AIcComponentUpgradePlan
+
+
+   .. py:method:: upgrade_stored_packages(application_scope_id: str, packages: tuple[algites.lib.aac.coreintf.packages.AIcStoredPackage, Ellipsis], *, trusted_namespace_prefixes: tuple[str, Ellipsis] = ()) -> algites.lib.aac.coreintf.packages.AIcComponentUpgradeTransactionOutcome
+
+      Crash-safe transactional replacement of a complete stored-package target set.
+
+      Target artifacts are verified/staged before this method.  Preflight and persisted-data
+      interpretability are side-effect free.  Before runtime cutover Core writes a durable journal
+      containing the source Core state and the planned source/target package-set generations.
+      The atomic active-package-set manifest replacement is the durable commit boundary.
+
+
+
+   .. py:method:: revalidate_entitlements(application_scope_id: str) -> tuple[str, Ellipsis]
+
+
+   .. py:method:: unprovision_component(application_scope_id: str, component_id: str) -> None
+
+

@@ -1,0 +1,8 @@
+aac.coreimpl
+============
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API reference
+
+   autoapi/index

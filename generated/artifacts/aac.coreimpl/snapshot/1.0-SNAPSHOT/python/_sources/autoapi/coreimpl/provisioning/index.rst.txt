@@ -1,0 +1,69 @@
+coreimpl.provisioning
+=====================
+
+.. py:module:: coreimpl.provisioning
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.provisioning.AIcProvisioningOutcome
+   coreimpl.provisioning.AIcProvisioningEngine
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProvisioningOutcome
+
+   .. py:attribute:: created_instance_ids
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: state
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: hook_called
+      :type:  bool
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcProvisioningEngine(registry: coreimpl.instances.AIcProviderInstanceRegistry | None = None, *, schema_registry: coreimpl.schemas.AIcSchemaRegistry | None = None, store: algites.lib.aac.coreintf.persistence.AIiStateStore | None = None, binding_store: coreimpl.bindings.AIcBindingStore | None = None)
+
+   Core-controlled declarative provisioning with optional statically declared callback.
+
+
+   .. py:attribute:: store
+
+
+   .. py:attribute:: registry
+
+
+   .. py:attribute:: schemas
+
+
+   .. py:attribute:: bindings
+      :value: None
+
+
+
+   .. py:method:: provision(application_scope_id: str, descriptor: algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor) -> AIcProvisioningOutcome
+
+
+   .. py:method:: validate_instances(descriptor: algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor) -> tuple[str, Ellipsis]
+
+
+   .. py:method:: state(application_scope_id: str, component_id: str) -> Mapping[str, object]
+
+
+   .. py:method:: unprovision(application_scope_id: str, descriptor: algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor) -> None
+
+

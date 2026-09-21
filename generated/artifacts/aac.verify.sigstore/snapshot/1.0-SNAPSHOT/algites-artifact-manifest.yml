@@ -1,0 +1,18 @@
+manifestVersion: 1
+artifact:
+  repositoryId: pub.frmw.ApplicationComponents
+  localArtifactId: aac.verify.sigstore
+  artifactCoordinateId: pub.frmw.ApplicationComponents_aac.verify.sigstore
+  version: 1.0-SNAPSHOT
+  sourcePath: aac/verify/sigstore
+  structureKind: artifact
+  name: "AAC Sigstore Package Verifier"
+  description: "Sigstore package verification provider for Algites Application Components in specified technologies"
+sourceMetadata:
+  descriptorHierarchy:
+    - structureKind: repository
+      path: algites-source-repository.yml
+      sha256: 51fb233af9fe219d4898277664ff1a91c2e896b15596ead2b9de044b559dc0bc
+    - structureKind: artifact
+      path: aac/verify/sigstore/algites-artifact.yml
+      sha256: 1863eed24d4a24c90bd6cb4f6a9c4f254e2a0aedc3db45300c05c54a39750539

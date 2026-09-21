@@ -1,0 +1,160 @@
+coreimpl.authentication
+=======================
+
+.. py:module:: coreimpl.authentication
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.authentication.AIcSecretProviderRegistry
+   coreimpl.authentication.AIcEnvironmentSecretProvider
+   coreimpl.authentication.AIcFileSecretProvider
+   coreimpl.authentication.AIcAuthenticationHandlerRegistry
+   coreimpl.authentication.AIcAuthenticationProfileRegistry
+   coreimpl.authentication.AIcNoneAuthenticationHandler
+   coreimpl.authentication.AIcBasicAuthenticationHandler
+   coreimpl.authentication.AIcBearerAuthenticationHandler
+   coreimpl.authentication.AIcClientCertificateAuthenticationHandler
+   coreimpl.authentication.AIcAuthenticationService
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSecretProviderRegistry
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.authentication.AIiSecretResolver`
+
+
+   .. py:method:: register(secret_provider_id: str, provider: algites.lib.aac.coreintf.authentication.AIiSecretProvider) -> None
+
+
+   .. py:method:: contains(secret_provider_id: str) -> bool
+
+
+   .. py:method:: get(secret_provider_id: str) -> algites.lib.aac.coreintf.authentication.AIiSecretProvider
+
+
+   .. py:method:: resolve_secret(reference: algites.lib.aac.coreintf.authentication.AIcSecretReference, context: Mapping[str, object] | None = None) -> str | bytes
+
+
+.. py:class:: AIcEnvironmentSecretProvider(prefix: str = '')
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.authentication.AIiSecretProvider`
+
+
+   .. py:attribute:: prefix
+      :value: ''
+
+
+
+   .. py:method:: resolve(reference: algites.lib.aac.coreintf.authentication.AIcSecretReference, context: Mapping[str, object] | None = None) -> str
+
+
+.. py:class:: AIcFileSecretProvider(root: str | pathlib.Path, *, read_only: bool = True, encoding: str = 'utf-8')
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.authentication.AIiSecretProvider`
+
+
+   Small filesystem secret provider.
+
+   It is intentionally policy-neutral: filesystem ownership/permissions protect the bytes;
+   AAC authorization still controls which application operations may request/use them.
+
+
+   .. py:attribute:: root
+
+
+   .. py:attribute:: read_only
+      :value: True
+
+
+
+   .. py:attribute:: encoding
+      :value: 'utf-8'
+
+
+
+   .. py:method:: capabilities(context: Mapping[str, object] | None = None)
+
+
+   .. py:method:: resolve(reference: algites.lib.aac.coreintf.authentication.AIcSecretReference, context: Mapping[str, object] | None = None) -> str
+
+
+   .. py:method:: put(key: str, value: str | bytes, context: Mapping[str, object] | None = None) -> None
+
+
+   .. py:method:: delete(key: str, context: Mapping[str, object] | None = None) -> None
+
+
+.. py:class:: AIcAuthenticationHandlerRegistry
+
+   .. py:method:: register(mechanism: str, handler: algites.lib.aac.coreintf.authentication.AIiAuthenticationHandler) -> None
+
+
+   .. py:method:: get(mechanism: str) -> algites.lib.aac.coreintf.authentication.AIiAuthenticationHandler
+
+
+.. py:class:: AIcAuthenticationProfileRegistry
+
+   .. py:method:: register(profile: algites.lib.aac.coreintf.authentication.AIcAuthenticationProfile) -> None
+
+
+   .. py:method:: contains(profile_id: str) -> bool
+
+
+   .. py:method:: get(profile_id: str) -> algites.lib.aac.coreintf.authentication.AIcAuthenticationProfile
+
+
+.. py:class:: AIcNoneAuthenticationHandler
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.authentication.AIiAuthenticationHandler`
+
+
+   .. py:method:: authenticate(request, secret_resolver)
+
+
+.. py:class:: AIcBasicAuthenticationHandler
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.authentication.AIiAuthenticationHandler`
+
+
+   .. py:method:: authenticate(request, secret_resolver)
+
+
+.. py:class:: AIcBearerAuthenticationHandler
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.authentication.AIiAuthenticationHandler`
+
+
+   .. py:method:: authenticate(request, secret_resolver)
+
+
+.. py:class:: AIcClientCertificateAuthenticationHandler
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.authentication.AIiAuthenticationHandler`
+
+
+   .. py:method:: authenticate(request, secret_resolver)
+
+
+.. py:class:: AIcAuthenticationService(secret_providers: AIcSecretProviderRegistry | None = None)
+
+   .. py:attribute:: secret_providers
+
+
+   .. py:attribute:: profiles
+
+
+   .. py:attribute:: handlers
+
+
+   .. py:method:: register_profile(profile: algites.lib.aac.coreintf.authentication.AIcAuthenticationProfile) -> None
+
+
+   .. py:method:: material(profile_id: str | None, *, transport_kind: str, endpoint: str | None = None, context: Mapping[str, object] | None = None) -> algites.lib.aac.coreintf.authentication.AIcAuthenticationMaterial
+
+

@@ -1,0 +1,122 @@
+coreimpl.invocation
+===================
+
+.. py:module:: coreimpl.invocation
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.invocation.AIcObjectCapabilityEndpoint
+   coreimpl.invocation.AIcEndpointRegistry
+   coreimpl.invocation.AIcInvocationDispatcher
+   coreimpl.invocation.AIcCoreCapabilityHandle
+   coreimpl.invocation.AIcCapabilityHandleFactory
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.invocation.authorization_principal_context
+   coreimpl.invocation.invoke_handle_with_parent_context
+
+
+Module Contents
+---------------
+
+.. py:function:: authorization_principal_context(principal: algites.lib.aac.coreintf.authorization.AIcAuthorizationPrincipal | None)
+
+.. py:class:: AIcObjectCapabilityEndpoint(provider: object)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.invocation.AIiCapabilityEndpoint`
+
+
+   In-process Python profile adapter using operation id -> method name mapping.
+
+
+   .. py:attribute:: provider
+
+
+   .. py:method:: invoke(invocation_input: algites.lib.aac.coreintf.invocation.AIcInvocationInput) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
+
+
+.. py:class:: AIcEndpointRegistry
+
+   .. py:method:: register(provider_instance_id: str, endpoint: algites.lib.aac.coreintf.invocation.AIiCapabilityEndpoint) -> None
+
+
+   .. py:method:: register_object(provider_instance_id: str, runtime: object) -> None
+
+
+   .. py:method:: unregister(provider_instance_id: str) -> None
+
+
+   .. py:method:: get(provider_instance_id: str) -> algites.lib.aac.coreintf.invocation.AIiCapabilityEndpoint
+
+
+.. py:class:: AIcInvocationDispatcher(contracts: coreimpl.contracts.AIcActiveContractCatalog, observations: coreimpl.observation.AIcObservationDispatcher | None = None, component_authorizations: coreimpl.authorization.AIcComponentAuthorizationGrantStore | None = None, principal_authorization_provider: algites.lib.aac.coreintf.authorization.AIiAuthorizationProvider | None = None, *, entitlement_remediator: algites.lib.aac.coreintf.entitlement.AIiEntitlementRemediator | None = None, entitlement_refresh_callback: Callable[[], None] | None = None)
+
+   .. py:attribute:: contracts
+
+
+   .. py:attribute:: observations
+      :value: None
+
+
+
+   .. py:attribute:: component_authorizations
+      :value: None
+
+
+
+   .. py:attribute:: principal_authorization_provider
+      :value: None
+
+
+
+   .. py:attribute:: entitlement_remediator
+      :value: None
+
+
+
+   .. py:attribute:: entitlement_refresh_callback
+      :value: None
+
+
+
+   .. py:method:: invoke(endpoint: algites.lib.aac.coreintf.invocation.AIiCapabilityEndpoint, invocation_input: algites.lib.aac.coreintf.invocation.AIcInvocationInput) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
+
+
+.. py:class:: AIcCoreCapabilityHandle(binding: algites.lib.aac.coreintf.instances.AIcBinding, endpoints: AIcEndpointRegistry, dispatcher: AIcInvocationDispatcher)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.invocation.AIiCapabilityHandle`
+
+
+   .. py:property:: binding
+      :type: algites.lib.aac.coreintf.instances.AIcBinding
+
+
+
+   .. py:method:: invoke(operation_id: str, arguments: Mapping[str, object] | None = None) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
+
+
+.. py:function:: invoke_handle_with_parent_context(handle: algites.lib.aac.coreintf.invocation.AIiCapabilityHandle, parent_invocation_id: str | None, operation_id: str, arguments: Mapping[str, object] | None = None) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
+
+   Invoke a Core handle while restoring causal context received over a runtime boundary.
+
+
+.. py:class:: AIcCapabilityHandleFactory(endpoints: AIcEndpointRegistry, dispatcher: AIcInvocationDispatcher)
+
+   .. py:attribute:: endpoints
+
+
+   .. py:attribute:: dispatcher
+
+
+   .. py:method:: for_consumer(consumer_instance_id: str, bindings: tuple[algites.lib.aac.coreintf.instances.AIcBinding, Ellipsis]) -> dict[str, tuple[algites.lib.aac.coreintf.invocation.AIiCapabilityHandle, Ellipsis]]
+
+

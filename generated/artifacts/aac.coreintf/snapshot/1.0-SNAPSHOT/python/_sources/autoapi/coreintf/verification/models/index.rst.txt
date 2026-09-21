@@ -1,0 +1,74 @@
+coreintf.verification.models
+============================
+
+.. py:module:: coreintf.verification.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.verification.models.AIcVerificationInput
+   coreintf.verification.models.AIcVerificationOutput
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcVerificationInput
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: package
+      :type:  str | None
+
+
+   .. py:attribute:: source
+      :type:  str
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: artifact_path
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcVerificationOutput
+
+   .. py:attribute:: valid
+      :type:  bool
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: verifier_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: signer_identity
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

@@ -1,0 +1,132 @@
+coreimpl.package_transactions
+=============================
+
+.. py:module:: coreimpl.package_transactions
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore
+   coreimpl.package_transactions.AIcPackageReplacementJournalHandle
+   coreimpl.package_transactions.AIcPackageReplacementJournal
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.package_transactions.manifest_to_raw
+   coreimpl.package_transactions.manifest_from_raw
+
+
+Module Contents
+---------------
+
+.. py:function:: manifest_to_raw(manifest: algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest) -> dict[str, object]
+
+.. py:function:: manifest_from_raw(raw: Mapping[str, object]) -> algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest
+
+.. py:class:: AIcDurablePackageSelectionManifestStore(path: pathlib.Path, *, mutation_lock_path: pathlib.Path | None = None)
+
+   Authoritative revisioned active package-set record.
+
+
+   .. py:attribute:: path
+
+
+   .. py:attribute:: mutation_lock_path
+
+
+   .. py:method:: read() -> algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest
+
+
+   .. py:method:: write(manifest: algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest, *, expected_record_revision: int | None = None) -> None
+
+
+.. py:class:: AIcPackageReplacementJournalHandle
+
+   .. py:attribute:: transaction_id
+      :type:  str
+
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: source_manifest
+      :type:  algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest
+
+
+   .. py:attribute:: target_manifest
+      :type:  algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest
+
+
+   .. py:attribute:: target_packages
+      :type:  tuple[tuple[str, int, str], Ellipsis]
+
+
+   .. py:attribute:: core_state_snapshot
+      :type:  object
+
+
+.. py:class:: AIcPackageReplacementJournal(layout: algites.lib.aac.coreintf.packages.AIcPackageStoreLayout, selection_manifest_store: AIcDurablePackageSelectionManifestStore, core_state_store: algites.lib.aac.coreintf.persistence.AIiStateStore)
+
+   Package-replacement binding of the generic durable persistence transaction journal.
+
+
+   .. py:attribute:: layout
+
+
+   .. py:attribute:: state_root
+
+
+   .. py:attribute:: selection_manifest_store
+
+
+   .. py:attribute:: core_state_store
+
+
+   .. py:attribute:: journal
+
+
+   .. py:property:: transactions_root
+      :type: pathlib.Path
+
+
+
+   .. py:property:: active_pointer
+      :type: pathlib.Path
+
+
+
+   .. py:method:: active_transaction_id() -> str | None
+
+
+   .. py:method:: begin(application_scope_id: str, source_manifest: algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest, target_manifest: algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest, packages: tuple[algites.lib.aac.coreintf.packages.AIcStoredPackage, Ellipsis], core_state_snapshot) -> AIcPackageReplacementJournalHandle
+
+
+   .. py:method:: mark_cutover_started(transaction_id: str, source_snapshot=None) -> None
+
+
+   .. py:method:: release_cutover_lock() -> None
+
+
+   .. py:method:: mark_target_committed(transaction_id: str) -> None
+
+
+   .. py:method:: mark_rolled_back(transaction_id: str, diagnostics: tuple[str, Ellipsis] = ()) -> None
+
+
+   .. py:method:: mark_cleanup_completed(transaction_id: str, diagnostics: tuple[str, Ellipsis] = ()) -> None
+
+
+   .. py:method:: finish(transaction_id: str) -> None
+
+
+   .. py:method:: recover(package_store) -> algites.lib.aac.coreintf.packages.AIcPackageTransactionRecovery | None
+
+

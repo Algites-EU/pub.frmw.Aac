@@ -1,0 +1,33 @@
+coreintf.observation.provider
+=============================
+
+.. py:module:: coreintf.observation.provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.observation.provider.AIiObservationProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiObservationProvider
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Python binding of `_AAC.capability.observation` version 1.
+
+
+   .. py:method:: observe(observation_input: coreintf.observation.models.AIcObservationInput) -> coreintf.observation.models.AIcObservationOutput
+      :abstractmethod:
+
+
+      Consume one read-only normalized observation event.
+
+
+

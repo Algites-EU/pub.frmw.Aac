@@ -1,0 +1,18 @@
+manifestVersion: 1
+artifact:
+  repositoryId: pub.frmw.ApplicationComponents
+  localArtifactId: aac.uiintf
+  artifactCoordinateId: pub.frmw.ApplicationComponents_aac.uiintf
+  version: 1.0-SNAPSHOT
+  sourcePath: aac/uiintf
+  structureKind: artifact
+  name: "Algites Application Components UI Interfaces"
+  description: "Technology-neutral UI contracts and view models for AAC administration"
+sourceMetadata:
+  descriptorHierarchy:
+    - structureKind: repository
+      path: algites-source-repository.yml
+      sha256: 51fb233af9fe219d4898277664ff1a91c2e896b15596ead2b9de044b559dc0bc
+    - structureKind: artifact
+      path: aac/uiintf/algites-artifact.yml
+      sha256: 33addc0ca525604fc44e510a6923eb72ff29ec123ebb348d67b78d2da4147cb5

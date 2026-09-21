@@ -1,0 +1,73 @@
+coreimpl.contracts
+==================
+
+.. py:module:: coreimpl.contracts
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.contracts.AIcAdmittedContract
+   coreimpl.contracts.AIcActiveContractCatalog
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAdmittedContract
+
+   .. py:attribute:: contract
+      :type:  algites.lib.aac.coreintf.contracts.AIcCapabilityContract
+
+
+   .. py:attribute:: source
+      :type:  str
+
+
+   .. py:attribute:: fingerprint
+      :type:  str
+
+
+.. py:class:: AIcActiveContractCatalog(schema_registry: coreimpl.schemas.AIcSchemaRegistry | None = None)
+
+   .. py:attribute:: schema_registry
+
+
+   .. py:method:: admit(contract: algites.lib.aac.coreintf.contracts.AIcCapabilityContract, *, source: str = '<memory>') -> AIcAdmittedContract
+
+
+   .. py:method:: admit_text(text: str, *, source: str = '<memory>') -> AIcAdmittedContract
+
+
+   .. py:method:: admit_file(path: str | pathlib.Path) -> AIcAdmittedContract
+
+
+   .. py:method:: admit_package_resource(package: str, resource_name: str) -> AIcAdmittedContract
+
+
+   .. py:method:: admit_builtin_contracts() -> tuple[AIcAdmittedContract, Ellipsis]
+
+
+   .. py:method:: get(capability_id: str, version: int) -> algites.lib.aac.coreintf.contracts.AIcCapabilityContract
+
+
+   .. py:method:: contains(capability_id: str, version: int) -> bool
+
+
+   .. py:method:: versions(capability_id: str) -> tuple[int, Ellipsis]
+
+
+   .. py:method:: negotiate(capability_id: str, consumer_versions: tuple[int, Ellipsis] | list[int], provider_versions: tuple[int, Ellipsis] | list[int], lifecycle_allowed_versions: tuple[int, Ellipsis] | list[int] | None = None) -> int
+
+
+   .. py:method:: snapshot()
+
+
+   .. py:method:: restore(snapshot) -> None
+
+
+   .. py:method:: operation(capability_id: str, version: int, operation_id: str) -> algites.lib.aac.coreintf.contracts.AIcCapabilityOperation
+
+

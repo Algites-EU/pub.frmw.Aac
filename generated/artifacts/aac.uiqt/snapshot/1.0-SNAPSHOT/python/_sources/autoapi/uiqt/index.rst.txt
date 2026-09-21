@@ -1,0 +1,16 @@
+uiqt
+====
+
+.. py:module:: uiqt
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/uiqt/controller/index
+   /autoapi/uiqt/widgets/index
+
+

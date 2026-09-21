@@ -1,0 +1,16 @@
+coreintf.entitlement
+====================
+
+.. py:module:: coreintf.entitlement
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/entitlement/models/index
+   /autoapi/coreintf/entitlement/provider/index
+
+

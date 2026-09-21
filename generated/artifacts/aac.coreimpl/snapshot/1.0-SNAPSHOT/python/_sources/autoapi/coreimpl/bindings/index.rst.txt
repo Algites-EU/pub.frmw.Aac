@@ -1,0 +1,68 @@
+coreimpl.bindings
+=================
+
+.. py:module:: coreimpl.bindings
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.bindings.AIcBindingStore
+   coreimpl.bindings.AIcBindingPreferenceStore
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcBindingStore(store: algites.lib.aac.coreintf.persistence.AIiStateStore | None = None)
+
+   .. py:attribute:: store
+
+
+   .. py:method:: key(binding: algites.lib.aac.coreintf.instances.AIcBinding) -> str
+      :staticmethod:
+
+
+
+   .. py:method:: all() -> tuple[algites.lib.aac.coreintf.instances.AIcBinding, Ellipsis]
+
+
+   .. py:method:: put(binding: algites.lib.aac.coreintf.instances.AIcBinding) -> None
+
+
+   .. py:method:: replace_requirement(consumer_instance_id: str, requirement_id: str, bindings: tuple[algites.lib.aac.coreintf.instances.AIcBinding, Ellipsis]) -> None
+
+
+   .. py:method:: replace_all(bindings: tuple[algites.lib.aac.coreintf.instances.AIcBinding, Ellipsis]) -> None
+
+
+   .. py:method:: for_consumer(consumer_instance_id: str) -> tuple[algites.lib.aac.coreintf.instances.AIcBinding, Ellipsis]
+
+
+   .. py:method:: references_instance(provider_instance_id: str) -> tuple[algites.lib.aac.coreintf.instances.AIcBinding, Ellipsis]
+
+
+.. py:class:: AIcBindingPreferenceStore(store: algites.lib.aac.coreintf.persistence.AIiStateStore | None = None)
+
+   .. py:attribute:: store
+
+
+   .. py:method:: key(consumer_instance_id: str, requirement_id: str) -> str
+      :staticmethod:
+
+
+
+   .. py:method:: put(preference: algites.lib.aac.coreintf.instances.AIcBindingPreference) -> None
+
+
+   .. py:method:: get(consumer_instance_id: str, requirement_id: str) -> algites.lib.aac.coreintf.instances.AIcBindingPreference | None
+
+
+   .. py:method:: delete(consumer_instance_id: str, requirement_id: str) -> None
+
+
+   .. py:method:: all() -> tuple[algites.lib.aac.coreintf.instances.AIcBindingPreference, Ellipsis]
+
+

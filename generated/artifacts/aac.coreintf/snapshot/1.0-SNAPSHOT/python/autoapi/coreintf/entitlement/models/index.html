@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>coreintf.entitlement.models &#8212; aac.coreintf  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-coreintf.entitlement.models">
+<span id="coreintf-entitlement-models"></span><h1>coreintf.entitlement.models<a class="headerlink" href="#module-coreintf.entitlement.models" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementLicensingScope" title="coreintf.entitlement.models.AIcEntitlementLicensingScope"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementLicensingScope</span></code></a></p></td>
+<td><p>Concrete entitlement licensing-scope identity.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AInPermissionRetryDisposition" title="coreintf.entitlement.models.AInPermissionRetryDisposition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInPermissionRetryDisposition</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementSubject" title="coreintf.entitlement.models.AIcEntitlementSubject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementSubject</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementIssuer" title="coreintf.entitlement.models.AIcEntitlementIssuer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementIssuer</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementPermissionGrant" title="coreintf.entitlement.models.AIcEntitlementPermissionGrant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementPermissionGrant</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementCapabilityGrant" title="coreintf.entitlement.models.AIcEntitlementCapabilityGrant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementCapabilityGrant</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementComponentGrant" title="coreintf.entitlement.models.AIcEntitlementComponentGrant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementComponentGrant</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementRequestReference" title="coreintf.entitlement.models.AIcEntitlementRequestReference"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementRequestReference</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementDocument" title="coreintf.entitlement.models.AIcEntitlementDocument"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementDocument</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcRequestedCapabilityGrant" title="coreintf.entitlement.models.AIcRequestedCapabilityGrant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcRequestedCapabilityGrant</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcRequestedComponentGrant" title="coreintf.entitlement.models.AIcRequestedComponentGrant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcRequestedComponentGrant</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementIssuingRequest" title="coreintf.entitlement.models.AIcEntitlementIssuingRequest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementIssuingRequest</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementEvidence" title="coreintf.entitlement.models.AIcEntitlementEvidence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementEvidence</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementEvidenceVerification" title="coreintf.entitlement.models.AIcEntitlementEvidenceVerification"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementEvidenceVerification</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementProviderRequest" title="coreintf.entitlement.models.AIcEntitlementProviderRequest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementProviderRequest</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementGrantProvenance" title="coreintf.entitlement.models.AIcEntitlementGrantProvenance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementGrantProvenance</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEffectiveEntitlementPermission" title="coreintf.entitlement.models.AIcEffectiveEntitlementPermission"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEffectiveEntitlementPermission</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcCapabilityEntitlementContext" title="coreintf.entitlement.models.AIcCapabilityEntitlementContext"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcCapabilityEntitlementContext</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementContext" title="coreintf.entitlement.models.AIcEntitlementContext"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementContext</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementProviderBinding" title="coreintf.entitlement.models.AIcEntitlementProviderBinding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementProviderBinding</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule" title="coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcTrustedEntitlementIssuerRule</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementRemediationRequest" title="coreintf.entitlement.models.AIcEntitlementRemediationRequest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementRemediationRequest</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementRemediationOutcome" title="coreintf.entitlement.models.AIcEntitlementRemediationOutcome"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementRemediationOutcome</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition" title="coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementLicensingScopeDefinition</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementProfile" title="coreintf.entitlement.models.AIcEntitlementProfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementProfile</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementProviderRegistration" title="coreintf.entitlement.models.AIcEntitlementProviderRegistration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementProviderRegistration</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration" title="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementLicensingScopeResolverRegistration</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementBootstrap" title="coreintf.entitlement.models.AIcEntitlementBootstrap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementBootstrap</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest" title="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementLicensingScopeResolutionRequest</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope" title="coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcResolvedEntitlementLicensingScope</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScope">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementLicensingScope</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScope" title="Link to this definition">¶</a></dt>
+<dd><p>Concrete entitlement licensing-scope identity.</p>
+<p>The type is an extensible component-declared licensing contract identifier,
+not a configuration-scope enum.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScope.type">
+<span class="sig-name descname"><span class="pre">type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScope.type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScope.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScope.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScope.key">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">key</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScope.key" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AInPermissionRetryDisposition">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AInPermissionRetryDisposition</span></span><a class="headerlink" href="#coreintf.entitlement.models.AInPermissionRetryDisposition" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AInPermissionRetryDisposition.SAFE_AFTER_ENTITLEMENT_CHANGE">
+<span class="sig-name descname"><span class="pre">SAFE_AFTER_ENTITLEMENT_CHANGE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SAFE_AFTER_ENTITLEMENT_CHANGE'</span></span><a class="headerlink" href="#coreintf.entitlement.models.AInPermissionRetryDisposition.SAFE_AFTER_ENTITLEMENT_CHANGE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AInPermissionRetryDisposition.DO_NOT_RETRY">
+<span class="sig-name descname"><span class="pre">DO_NOT_RETRY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DO_NOT_RETRY'</span></span><a class="headerlink" href="#coreintf.entitlement.models.AInPermissionRetryDisposition.DO_NOT_RETRY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementSubject">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementSubject</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementSubject" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementSubject.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementSubject.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementSubject.display_name">
+<span class="sig-name descname"><span class="pre">display_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementSubject.display_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementSubject.attributes">
+<span class="sig-name descname"><span class="pre">attributes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementSubject.attributes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementIssuer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementIssuer</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementIssuer" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementIssuer.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementIssuer.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementIssuer.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementIssuer.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementPermissionGrant">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementPermissionGrant</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementPermissionGrant" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementPermissionGrant.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementPermissionGrant.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementPermissionGrant.valid_from">
+<span class="sig-name descname"><span class="pre">valid_from</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementPermissionGrant.valid_from" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementPermissionGrant.valid_until">
+<span class="sig-name descname"><span class="pre">valid_until</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementPermissionGrant.valid_until" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementPermissionGrant.constraints">
+<span class="sig-name descname"><span class="pre">constraints</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementPermissionGrant.constraints" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementPermissionGrant.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementPermissionGrant.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementCapabilityGrant">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementCapabilityGrant</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementCapabilityGrant" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementCapabilityGrant.capability_id">
+<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementCapabilityGrant.capability_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementCapabilityGrant.capability_version">
+<span class="sig-name descname"><span class="pre">capability_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementCapabilityGrant.capability_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementCapabilityGrant.permissions">
+<span class="sig-name descname"><span class="pre">permissions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementPermissionGrant" title="coreintf.entitlement.models.AIcEntitlementPermissionGrant"><span class="pre">AIcEntitlementPermissionGrant</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementCapabilityGrant.permissions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementComponentGrant">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementComponentGrant</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementComponentGrant" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementComponentGrant.component_id">
+<span class="sig-name descname"><span class="pre">component_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementComponentGrant.component_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementComponentGrant.grants">
+<span class="sig-name descname"><span class="pre">grants</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementCapabilityGrant" title="coreintf.entitlement.models.AIcEntitlementCapabilityGrant"><span class="pre">AIcEntitlementCapabilityGrant</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementComponentGrant.grants" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRequestReference">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementRequestReference</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRequestReference" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRequestReference.request_id">
+<span class="sig-name descname"><span class="pre">request_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRequestReference.request_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRequestReference.request_digest">
+<span class="sig-name descname"><span class="pre">request_digest</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRequestReference.request_digest" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementDocument</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument.format_version">
+<span class="sig-name descname"><span class="pre">format_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument.format_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument.entitlement_id">
+<span class="sig-name descname"><span class="pre">entitlement_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument.entitlement_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument.issuer">
+<span class="sig-name descname"><span class="pre">issuer</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementIssuer" title="coreintf.entitlement.models.AIcEntitlementIssuer"><span class="pre">AIcEntitlementIssuer</span></a></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument.issuer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument.licensing_scope">
+<span class="sig-name descname"><span class="pre">licensing_scope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementLicensingScope" title="coreintf.entitlement.models.AIcEntitlementLicensingScope"><span class="pre">AIcEntitlementLicensingScope</span></a></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument.licensing_scope" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument.subject">
+<span class="sig-name descname"><span class="pre">subject</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementSubject" title="coreintf.entitlement.models.AIcEntitlementSubject"><span class="pre">AIcEntitlementSubject</span></a></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument.subject" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument.components">
+<span class="sig-name descname"><span class="pre">components</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementComponentGrant" title="coreintf.entitlement.models.AIcEntitlementComponentGrant"><span class="pre">AIcEntitlementComponentGrant</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument.components" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument.issued_for_request">
+<span class="sig-name descname"><span class="pre">issued_for_request</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementRequestReference" title="coreintf.entitlement.models.AIcEntitlementRequestReference"><span class="pre">AIcEntitlementRequestReference</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument.issued_for_request" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument.issued_at">
+<span class="sig-name descname"><span class="pre">issued_at</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument.issued_at" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument.valid_from">
+<span class="sig-name descname"><span class="pre">valid_from</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument.valid_from" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument.valid_until">
+<span class="sig-name descname"><span class="pre">valid_until</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument.valid_until" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementDocument.component">
+<span class="sig-name descname"><span class="pre">component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementComponentGrant" title="coreintf.entitlement.models.AIcEntitlementComponentGrant"><span class="pre">AIcEntitlementComponentGrant</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementDocument.component" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcRequestedCapabilityGrant">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcRequestedCapabilityGrant</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcRequestedCapabilityGrant" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcRequestedCapabilityGrant.capability_id">
+<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcRequestedCapabilityGrant.capability_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcRequestedCapabilityGrant.capability_version">
+<span class="sig-name descname"><span class="pre">capability_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcRequestedCapabilityGrant.capability_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcRequestedCapabilityGrant.permissions">
+<span class="sig-name descname"><span class="pre">permissions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcRequestedCapabilityGrant.permissions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcRequestedComponentGrant">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcRequestedComponentGrant</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcRequestedComponentGrant" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcRequestedComponentGrant.component_id">
+<span class="sig-name descname"><span class="pre">component_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcRequestedComponentGrant.component_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcRequestedComponentGrant.requested_grants">
+<span class="sig-name descname"><span class="pre">requested_grants</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcRequestedCapabilityGrant" title="coreintf.entitlement.models.AIcRequestedCapabilityGrant"><span class="pre">AIcRequestedCapabilityGrant</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcRequestedComponentGrant.requested_grants" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementIssuingRequest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementIssuingRequest</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementIssuingRequest" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementIssuingRequest.format_version">
+<span class="sig-name descname"><span class="pre">format_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementIssuingRequest.format_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementIssuingRequest.request_id">
+<span class="sig-name descname"><span class="pre">request_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementIssuingRequest.request_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementIssuingRequest.requested_licensing_scope">
+<span class="sig-name descname"><span class="pre">requested_licensing_scope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementLicensingScope" title="coreintf.entitlement.models.AIcEntitlementLicensingScope"><span class="pre">AIcEntitlementLicensingScope</span></a></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementIssuingRequest.requested_licensing_scope" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementIssuingRequest.subject">
+<span class="sig-name descname"><span class="pre">subject</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementSubject" title="coreintf.entitlement.models.AIcEntitlementSubject"><span class="pre">AIcEntitlementSubject</span></a></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementIssuingRequest.subject" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementIssuingRequest.components">
+<span class="sig-name descname"><span class="pre">components</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcRequestedComponentGrant" title="coreintf.entitlement.models.AIcRequestedComponentGrant"><span class="pre">AIcRequestedComponentGrant</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementIssuingRequest.components" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementIssuingRequest.generated_at">
+<span class="sig-name descname"><span class="pre">generated_at</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementIssuingRequest.generated_at" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementIssuingRequest.request_digest">
+<span class="sig-name descname"><span class="pre">request_digest</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementIssuingRequest.request_digest" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementIssuingRequest.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementIssuingRequest.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementEvidence">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementEvidence</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementEvidence" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementEvidence.document">
+<span class="sig-name descname"><span class="pre">document</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementDocument" title="coreintf.entitlement.models.AIcEntitlementDocument"><span class="pre">AIcEntitlementDocument</span></a></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementEvidence.document" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementEvidence.evidence_type">
+<span class="sig-name descname"><span class="pre">evidence_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementEvidence.evidence_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementEvidence.source">
+<span class="sig-name descname"><span class="pre">source</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementEvidence.source" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementEvidence.verification_material">
+<span class="sig-name descname"><span class="pre">verification_material</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementEvidence.verification_material" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementEvidenceVerification">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementEvidenceVerification</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementEvidenceVerification" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementEvidenceVerification.valid">
+<span class="sig-name descname"><span class="pre">valid</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementEvidenceVerification.valid" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementEvidenceVerification.verifier_id">
+<span class="sig-name descname"><span class="pre">verifier_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementEvidenceVerification.verifier_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementEvidenceVerification.diagnostics">
+<span class="sig-name descname"><span class="pre">diagnostics</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementEvidenceVerification.diagnostics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementEvidenceVerification.signer_identity">
+<span class="sig-name descname"><span class="pre">signer_identity</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementEvidenceVerification.signer_identity" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementEvidenceVerification.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementEvidenceVerification.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProviderRequest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementProviderRequest</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProviderRequest" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProviderRequest.licensing_scope">
+<span class="sig-name descname"><span class="pre">licensing_scope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementLicensingScope" title="coreintf.entitlement.models.AIcEntitlementLicensingScope"><span class="pre">AIcEntitlementLicensingScope</span></a></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProviderRequest.licensing_scope" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProviderRequest.context">
+<span class="sig-name descname"><span class="pre">context</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProviderRequest.context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProviderRequest.subject">
+<span class="sig-name descname"><span class="pre">subject</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementSubject" title="coreintf.entitlement.models.AIcEntitlementSubject"><span class="pre">AIcEntitlementSubject</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProviderRequest.subject" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementGrantProvenance">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementGrantProvenance</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementGrantProvenance" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementGrantProvenance.entitlement_provider_id">
+<span class="sig-name descname"><span class="pre">entitlement_provider_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementGrantProvenance.entitlement_provider_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementGrantProvenance.entitlement_id">
+<span class="sig-name descname"><span class="pre">entitlement_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementGrantProvenance.entitlement_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementGrantProvenance.issuer_id">
+<span class="sig-name descname"><span class="pre">issuer_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementGrantProvenance.issuer_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementGrantProvenance.licensing_scope">
+<span class="sig-name descname"><span class="pre">licensing_scope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementLicensingScope" title="coreintf.entitlement.models.AIcEntitlementLicensingScope"><span class="pre">AIcEntitlementLicensingScope</span></a></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementGrantProvenance.licensing_scope" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementGrantProvenance.capability_id">
+<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementGrantProvenance.capability_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementGrantProvenance.capability_version">
+<span class="sig-name descname"><span class="pre">capability_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementGrantProvenance.capability_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementGrantProvenance.permission_id">
+<span class="sig-name descname"><span class="pre">permission_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementGrantProvenance.permission_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementGrantProvenance.valid_from">
+<span class="sig-name descname"><span class="pre">valid_from</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementGrantProvenance.valid_from" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementGrantProvenance.valid_until">
+<span class="sig-name descname"><span class="pre">valid_until</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementGrantProvenance.valid_until" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEffectiveEntitlementPermission">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEffectiveEntitlementPermission</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEffectiveEntitlementPermission" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEffectiveEntitlementPermission.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEffectiveEntitlementPermission.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEffectiveEntitlementPermission.effective_from">
+<span class="sig-name descname"><span class="pre">effective_from</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEffectiveEntitlementPermission.effective_from" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEffectiveEntitlementPermission.effective_until">
+<span class="sig-name descname"><span class="pre">effective_until</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEffectiveEntitlementPermission.effective_until" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEffectiveEntitlementPermission.constraints">
+<span class="sig-name descname"><span class="pre">constraints</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEffectiveEntitlementPermission.constraints" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEffectiveEntitlementPermission.provenance">
+<span class="sig-name descname"><span class="pre">provenance</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementGrantProvenance" title="coreintf.entitlement.models.AIcEntitlementGrantProvenance"><span class="pre">AIcEntitlementGrantProvenance</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEffectiveEntitlementPermission.provenance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEffectiveEntitlementPermission.implicit">
+<span class="sig-name descname"><span class="pre">implicit</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEffectiveEntitlementPermission.implicit" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcCapabilityEntitlementContext">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcCapabilityEntitlementContext</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcCapabilityEntitlementContext" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcCapabilityEntitlementContext.capability_id">
+<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcCapabilityEntitlementContext.capability_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcCapabilityEntitlementContext.capability_version">
+<span class="sig-name descname"><span class="pre">capability_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcCapabilityEntitlementContext.capability_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcCapabilityEntitlementContext.permissions">
+<span class="sig-name descname"><span class="pre">permissions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEffectiveEntitlementPermission" title="coreintf.entitlement.models.AIcEffectiveEntitlementPermission"><span class="pre">AIcEffectiveEntitlementPermission</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcCapabilityEntitlementContext.permissions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcCapabilityEntitlementContext.has_permission">
+<span class="sig-name descname"><span class="pre">has_permission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">permission_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcCapabilityEntitlementContext.has_permission" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementContext">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementContext</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementContext" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementContext.component_id">
+<span class="sig-name descname"><span class="pre">component_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementContext.component_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementContext.capabilities">
+<span class="sig-name descname"><span class="pre">capabilities</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcCapabilityEntitlementContext" title="coreintf.entitlement.models.AIcCapabilityEntitlementContext"><span class="pre">AIcCapabilityEntitlementContext</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementContext.capabilities" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementContext.next_transition_at">
+<span class="sig-name descname"><span class="pre">next_transition_at</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementContext.next_transition_at" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementContext.diagnostics">
+<span class="sig-name descname"><span class="pre">diagnostics</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementContext.diagnostics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementContext.capability">
+<span class="sig-name descname"><span class="pre">capability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capability_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capability_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreintf.entitlement.models.AIcCapabilityEntitlementContext" title="coreintf.entitlement.models.AIcCapabilityEntitlementContext"><span class="pre">AIcCapabilityEntitlementContext</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementContext.capability" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementContext.has_permission">
+<span class="sig-name descname"><span class="pre">has_permission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capability_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capability_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permission_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementContext.has_permission" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProviderBinding">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementProviderBinding</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProviderBinding" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProviderBinding.entitlement_provider_id">
+<span class="sig-name descname"><span class="pre">entitlement_provider_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProviderBinding.entitlement_provider_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcTrustedEntitlementIssuerRule</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule.issuer_id">
+<span class="sig-name descname"><span class="pre">issuer_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule.issuer_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule.component_ids">
+<span class="sig-name descname"><span class="pre">component_ids</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule.component_ids" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule.evidence_types">
+<span class="sig-name descname"><span class="pre">evidence_types</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule.evidence_types" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule.signer_identities">
+<span class="sig-name descname"><span class="pre">signer_identities</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule.signer_identities" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule.allows">
+<span class="sig-name descname"><span class="pre">allows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evidence_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signer_identity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule.allows" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRemediationRequest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementRemediationRequest</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRemediationRequest" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRemediationRequest.component_id">
+<span class="sig-name descname"><span class="pre">component_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRemediationRequest.component_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRemediationRequest.provider_instance_id">
+<span class="sig-name descname"><span class="pre">provider_instance_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRemediationRequest.provider_instance_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRemediationRequest.capability_id">
+<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRemediationRequest.capability_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRemediationRequest.capability_version">
+<span class="sig-name descname"><span class="pre">capability_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRemediationRequest.capability_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRemediationRequest.permission_id">
+<span class="sig-name descname"><span class="pre">permission_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRemediationRequest.permission_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRemediationRequest.remediation_hint">
+<span class="sig-name descname"><span class="pre">remediation_hint</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRemediationRequest.remediation_hint" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRemediationRequest.context">
+<span class="sig-name descname"><span class="pre">context</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRemediationRequest.context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRemediationOutcome">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementRemediationOutcome</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRemediationOutcome" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRemediationOutcome.changed">
+<span class="sig-name descname"><span class="pre">changed</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRemediationOutcome.changed" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementRemediationOutcome.diagnostics">
+<span class="sig-name descname"><span class="pre">diagnostics</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementRemediationOutcome.diagnostics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementLicensingScopeDefinition</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.licensing_scope_type">
+<span class="sig-name descname"><span class="pre">licensing_scope_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.licensing_scope_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.licensing_scope_resolver_id">
+<span class="sig-name descname"><span class="pre">licensing_scope_resolver_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.licensing_scope_resolver_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.entitlement_providers">
+<span class="sig-name descname"><span class="pre">entitlement_providers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementProviderBinding" title="coreintf.entitlement.models.AIcEntitlementProviderBinding"><span class="pre">AIcEntitlementProviderBinding</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.entitlement_providers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.mandatory">
+<span class="sig-name descname"><span class="pre">mandatory</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.mandatory" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProfile">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementProfile</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProfile" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProfile.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProfile.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProfile.version">
+<span class="sig-name descname"><span class="pre">version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProfile.version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProfile.licensing_scopes">
+<span class="sig-name descname"><span class="pre">licensing_scopes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition" title="coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition"><span class="pre">AIcEntitlementLicensingScopeDefinition</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProfile.licensing_scopes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProfile.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProfile.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProfile.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProfile.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProviderRegistration">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementProviderRegistration</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProviderRegistration" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProviderRegistration.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProviderRegistration.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProviderRegistration.type">
+<span class="sig-name descname"><span class="pre">type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProviderRegistration.type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProviderRegistration.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProviderRegistration.settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProviderRegistration.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProviderRegistration.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementProviderRegistration.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementProviderRegistration.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementLicensingScopeResolverRegistration</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration.type">
+<span class="sig-name descname"><span class="pre">type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration.type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration.settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementBootstrap">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementBootstrap</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementBootstrap" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementBootstrap.schema_version">
+<span class="sig-name descname"><span class="pre">schema_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementBootstrap.schema_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementBootstrap.default_entitlement_profile_id">
+<span class="sig-name descname"><span class="pre">default_entitlement_profile_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementBootstrap.default_entitlement_profile_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementBootstrap.entitlement_profiles">
+<span class="sig-name descname"><span class="pre">entitlement_profiles</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementProfile" title="coreintf.entitlement.models.AIcEntitlementProfile"><span class="pre">AIcEntitlementProfile</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementBootstrap.entitlement_profiles" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementBootstrap.entitlement_providers">
+<span class="sig-name descname"><span class="pre">entitlement_providers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementProviderRegistration" title="coreintf.entitlement.models.AIcEntitlementProviderRegistration"><span class="pre">AIcEntitlementProviderRegistration</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementBootstrap.entitlement_providers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementBootstrap.licensing_scope_resolvers">
+<span class="sig-name descname"><span class="pre">licensing_scope_resolvers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration" title="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration"><span class="pre">AIcEntitlementLicensingScopeResolverRegistration</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementBootstrap.licensing_scope_resolvers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementBootstrap.trusted_issuers">
+<span class="sig-name descname"><span class="pre">trusted_issuers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule" title="coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule"><span class="pre">AIcTrustedEntitlementIssuerRule</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementBootstrap.trusted_issuers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementBootstrap.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementBootstrap.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementBootstrap.profile">
+<span class="sig-name descname"><span class="pre">profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementProfile" title="coreintf.entitlement.models.AIcEntitlementProfile"><span class="pre">AIcEntitlementProfile</span></a></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementBootstrap.profile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementLicensingScopeResolutionRequest</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest.licensing_scope_type">
+<span class="sig-name descname"><span class="pre">licensing_scope_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest.licensing_scope_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest.definition_id">
+<span class="sig-name descname"><span class="pre">definition_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest.definition_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest.context">
+<span class="sig-name descname"><span class="pre">context</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest.context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.entitlement.models.</span></span><span class="sig-name descname"><span class="pre">AIcResolvedEntitlementLicensingScope</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope.definition_id">
+<span class="sig-name descname"><span class="pre">definition_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope.definition_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope.licensing_scope">
+<span class="sig-name descname"><span class="pre">licensing_scope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementLicensingScope" title="coreintf.entitlement.models.AIcEntitlementLicensingScope"><span class="pre">AIcEntitlementLicensingScope</span></a></span><a class="headerlink" href="#coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope.licensing_scope" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope.entitlement_providers">
+<span class="sig-name descname"><span class="pre">entitlement_providers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementProviderBinding" title="coreintf.entitlement.models.AIcEntitlementProviderBinding"><span class="pre">AIcEntitlementProviderBinding</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope.entitlement_providers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope.subject">
+<span class="sig-name descname"><span class="pre">subject</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.entitlement.models.AIcEntitlementSubject" title="coreintf.entitlement.models.AIcEntitlementSubject"><span class="pre">AIcEntitlementSubject</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope.subject" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">aac.coreintf</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../../../_sources/autoapi/coreintf/entitlement/models/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

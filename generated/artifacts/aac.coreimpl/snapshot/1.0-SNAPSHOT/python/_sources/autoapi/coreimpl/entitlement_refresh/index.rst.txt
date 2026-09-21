@@ -1,0 +1,27 @@
+coreimpl.entitlement_refresh
+============================
+
+.. py:module:: coreimpl.entitlement_refresh
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.entitlement_refresh.AIcEntitlementRefreshPlanner
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementRefreshPlanner
+
+   Find the earliest effective-entitlement transition cached by Core.
+
+
+   .. py:method:: due(contexts: tuple[algites.lib.aac.coreintf.entitlement.AIcEntitlementContext, Ellipsis], now: datetime.datetime | None = None) -> bool
+      :staticmethod:
+
+
+

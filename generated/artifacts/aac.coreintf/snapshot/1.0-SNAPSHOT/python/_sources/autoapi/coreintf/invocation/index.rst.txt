@@ -1,0 +1,17 @@
+coreintf.invocation
+===================
+
+.. py:module:: coreintf.invocation
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/invocation/endpoint/index
+   /autoapi/coreintf/invocation/handle/index
+   /autoapi/coreintf/invocation/models/index
+
+

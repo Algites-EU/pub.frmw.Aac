@@ -1,0 +1,16 @@
+uiintf
+======
+
+.. py:module:: uiintf
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/uiintf/controller/index
+   /autoapi/uiintf/models/index
+
+

@@ -1,0 +1,48 @@
+coreimpl.graph
+==============
+
+.. py:module:: coreimpl.graph
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.graph.AIcResolvedApplicationGraph
+   coreimpl.graph.AIcApplicationGraphOrchestrator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcResolvedApplicationGraph
+
+   .. py:attribute:: bindings
+      :type:  tuple[algites.lib.aac.coreintf.instances.AIcBinding, Ellipsis]
+
+
+   .. py:attribute:: provider_first_order
+      :type:  tuple[str, Ellipsis]
+
+
+.. py:class:: AIcApplicationGraphOrchestrator(registry: coreimpl.instances.AIcProviderInstanceRegistry, resolver: coreimpl.resolution.AIcBindingResolver, bindings: coreimpl.bindings.AIcBindingStore, preferences: coreimpl.bindings.AIcBindingPreferenceStore)
+
+   .. py:attribute:: registry
+
+
+   .. py:attribute:: resolver
+
+
+   .. py:attribute:: bindings
+
+
+   .. py:attribute:: preferences
+
+
+   .. py:method:: resolve(descriptors: dict[str, algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor]) -> AIcResolvedApplicationGraph
+
+
+   .. py:method:: set_preference(preference: algites.lib.aac.coreintf.instances.AIcBindingPreference) -> None
+
+

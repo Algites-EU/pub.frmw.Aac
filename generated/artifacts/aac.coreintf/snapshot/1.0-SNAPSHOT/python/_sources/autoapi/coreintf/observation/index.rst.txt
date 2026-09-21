@@ -1,0 +1,16 @@
+coreintf.observation
+====================
+
+.. py:module:: coreintf.observation
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/observation/models/index
+   /autoapi/coreintf/observation/provider/index
+
+

@@ -1,0 +1,205 @@
+coreintf.contracts.models
+=========================
+
+.. py:module:: coreintf.contracts.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.contracts.models.AInConsumerCardinality
+   coreintf.contracts.models.AIcCapabilityRef
+   coreintf.contracts.models.AIcAuthorizationPermissionDescriptor
+   coreintf.contracts.models.AIcOperationAuthorizationRequirement
+   coreintf.contracts.models.AIcCapabilityOperation
+   coreintf.contracts.models.AIcCapabilityContract
+
+
+Module Contents
+---------------
+
+.. py:class:: AInConsumerCardinality
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: SINGLE
+      :value: 'SINGLE'
+
+
+
+   .. py:attribute:: MULTIPLE
+      :value: 'MULTIPLE'
+
+
+
+.. py:class:: AIcCapabilityRef
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+.. py:class:: AIcAuthorizationPermissionDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcOperationAuthorizationRequirement
+
+   .. py:attribute:: all_of
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: any_of
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:property:: permission_ids
+      :type: tuple[str, Ellipsis]
+
+
+
+   .. py:method:: is_satisfied_by(permissions: set[str] | frozenset[str] | tuple[str, Ellipsis]) -> bool
+
+
+.. py:class:: AIcCapabilityOperation
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: input_type
+      :type:  str
+      :value: 'Object'
+
+
+
+   .. py:attribute:: output_type
+      :type:  str
+      :value: 'Object'
+
+
+
+   .. py:attribute:: input_schema
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: output_schema
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: authorization
+      :type:  AIcOperationAuthorizationRequirement | None
+      :value: None
+
+
+
+   .. py:attribute:: sensitive_input_paths
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: sensitive_output_paths
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcCapabilityContract
+
+   .. py:attribute:: capability
+      :type:  AIcCapabilityRef
+
+
+   .. py:attribute:: operations
+      :type:  tuple[AIcCapabilityOperation, Ellipsis]
+
+
+   .. py:attribute:: authorization_permissions
+      :type:  tuple[AIcAuthorizationPermissionDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:method:: operation(operation_id: str) -> AIcCapabilityOperation
+
+
+   .. py:method:: authorization_permission(permission_id: str) -> AIcAuthorizationPermissionDescriptor
+
+

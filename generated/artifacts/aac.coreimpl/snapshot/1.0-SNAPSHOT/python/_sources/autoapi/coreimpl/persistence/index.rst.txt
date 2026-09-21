@@ -1,0 +1,96 @@
+coreimpl.persistence
+====================
+
+.. py:module:: coreimpl.persistence
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.persistence.AIcInMemoryStateStore
+   coreimpl.persistence.AIcJsonFileStateStore
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.persistence.state_snapshot_to_raw
+   coreimpl.persistence.state_snapshot_from_raw
+   coreimpl.persistence.state_put_mutation
+   coreimpl.persistence.state_delete_mutation
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcInMemoryStateStore
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.persistence.AIiStateStore`
+
+
+   .. py:property:: revision_kind
+      :type: algites.lib.aac.coreintf.persistence.AInRecordRevisionKind
+
+
+
+   .. py:method:: get_record(namespace: str, key: str) -> algites.lib.aac.coreintf.persistence.AIcPersistedRecord | None
+
+
+   .. py:method:: list_records(namespace: str) -> Mapping[str, algites.lib.aac.coreintf.persistence.AIcPersistedRecord]
+
+
+   .. py:method:: apply(mutations: tuple[algites.lib.aac.coreintf.persistence.AIcStateMutation, Ellipsis], *, read_expectations: tuple[algites.lib.aac.coreintf.persistence.AIcPersistenceReadExpectation, Ellipsis] = ()) -> tuple[algites.lib.aac.coreintf.persistence.AIcPersistedRecord, Ellipsis]
+
+
+   .. py:method:: snapshot() -> Mapping[str, Mapping[str, algites.lib.aac.coreintf.persistence.AIcPersistedRecord]]
+
+
+   .. py:method:: restore(snapshot: Mapping[str, Mapping[str, algites.lib.aac.coreintf.persistence.AIcPersistedRecord]]) -> None
+
+
+.. py:class:: AIcJsonFileStateStore(path: str | pathlib.Path, *, mutation_lock_path: str | pathlib.Path | None = None)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.persistence.AIiStateStore`
+
+
+   Revisioned atomic JSON persistence adapter for Core-owned normalized state.
+
+
+   .. py:attribute:: path
+
+
+   .. py:attribute:: mutation_lock_path
+
+
+   .. py:property:: revision_kind
+      :type: algites.lib.aac.coreintf.persistence.AInRecordRevisionKind
+
+
+
+   .. py:method:: get_record(namespace: str, key: str) -> algites.lib.aac.coreintf.persistence.AIcPersistedRecord | None
+
+
+   .. py:method:: list_records(namespace: str) -> Mapping[str, algites.lib.aac.coreintf.persistence.AIcPersistedRecord]
+
+
+   .. py:method:: apply(mutations: tuple[algites.lib.aac.coreintf.persistence.AIcStateMutation, Ellipsis], *, read_expectations: tuple[algites.lib.aac.coreintf.persistence.AIcPersistenceReadExpectation, Ellipsis] = ()) -> tuple[algites.lib.aac.coreintf.persistence.AIcPersistedRecord, Ellipsis]
+
+
+   .. py:method:: snapshot() -> Mapping[str, Mapping[str, algites.lib.aac.coreintf.persistence.AIcPersistedRecord]]
+
+
+   .. py:method:: restore(snapshot: Mapping[str, Mapping[str, algites.lib.aac.coreintf.persistence.AIcPersistedRecord]]) -> None
+
+
+.. py:function:: state_snapshot_to_raw(snapshot: Mapping[str, Mapping[str, algites.lib.aac.coreintf.persistence.AIcPersistedRecord]]) -> dict[str, object]
+
+.. py:function:: state_snapshot_from_raw(raw: Mapping[str, object]) -> Mapping[str, Mapping[str, algites.lib.aac.coreintf.persistence.AIcPersistedRecord]]
+
+.. py:function:: state_put_mutation(store: algites.lib.aac.coreintf.persistence.AIiStateStore, namespace: str, key: str, value: Mapping[str, object]) -> algites.lib.aac.coreintf.persistence.AIcStateMutation
+
+.. py:function:: state_delete_mutation(store: algites.lib.aac.coreintf.persistence.AIiStateStore, namespace: str, key: str) -> algites.lib.aac.coreintf.persistence.AIcStateMutation
+

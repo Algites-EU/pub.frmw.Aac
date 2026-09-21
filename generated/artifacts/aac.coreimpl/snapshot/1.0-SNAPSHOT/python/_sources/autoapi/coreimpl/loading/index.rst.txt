@@ -1,0 +1,35 @@
+coreimpl.loading
+================
+
+.. py:module:: coreimpl.loading
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   coreimpl.loading.T
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.loading.load_symbol
+   coreimpl.loading.load_class
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:function:: load_symbol(reference: str) -> object
+
+   Load `module:qualname` without probing component classes for undeclared hooks.
+
+
+.. py:function:: load_class(reference: str, expected_base: type[T] | None = None) -> type[T]
+

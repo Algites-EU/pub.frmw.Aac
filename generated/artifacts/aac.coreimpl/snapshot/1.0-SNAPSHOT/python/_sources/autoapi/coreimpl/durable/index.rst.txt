@@ -1,0 +1,69 @@
+coreimpl.durable
+================
+
+.. py:module:: coreimpl.durable
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.durable.AIcInterProcessLockState
+   coreimpl.durable.AIcInterProcessFileLock
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.durable.fsync_directory
+   coreimpl.durable.fsync_file
+   coreimpl.durable.atomic_write_json
+   coreimpl.durable.atomic_write_text
+   coreimpl.durable.durable_replace
+   coreimpl.durable.durable_unlink
+
+
+Module Contents
+---------------
+
+.. py:function:: fsync_directory(path: pathlib.Path) -> None
+
+   Best-effort directory sync after durable namespace changes.
+
+
+.. py:function:: fsync_file(path: pathlib.Path) -> None
+
+.. py:function:: atomic_write_json(path: pathlib.Path, value: Mapping[str, Any]) -> None
+
+.. py:function:: atomic_write_text(path: pathlib.Path, value: str) -> None
+
+.. py:function:: durable_replace(source: pathlib.Path, target: pathlib.Path) -> None
+
+.. py:function:: durable_unlink(path: pathlib.Path) -> None
+
+.. py:class:: AIcInterProcessLockState
+
+   .. py:attribute:: thread_lock
+
+
+   .. py:attribute:: depth
+      :value: 0
+
+
+
+   .. py:attribute:: stream
+      :value: None
+
+
+
+.. py:class:: AIcInterProcessFileLock(path: pathlib.Path)
+
+   Reentrant-in-process, exclusive cross-process filesystem-domain lock.
+
+
+   .. py:attribute:: path
+
+

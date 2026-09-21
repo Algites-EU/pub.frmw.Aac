@@ -1,0 +1,63 @@
+coreimpl
+========
+
+.. py:module:: coreimpl
+
+.. autoapi-nested-parse::
+
+   Reusable Python implementation of Algites Application Components.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreimpl/authentication/index
+   /autoapi/coreimpl/authorization/index
+   /autoapi/coreimpl/bindings/index
+   /autoapi/coreimpl/bootstrap/index
+   /autoapi/coreimpl/catalog/index
+   /autoapi/coreimpl/codegen/index
+   /autoapi/coreimpl/configuration/index
+   /autoapi/coreimpl/configuration_providers/index
+   /autoapi/coreimpl/contracts/index
+   /autoapi/coreimpl/core/index
+   /autoapi/coreimpl/descriptor/index
+   /autoapi/coreimpl/durable/index
+   /autoapi/coreimpl/entitlement/index
+   /autoapi/coreimpl/entitlement_documents/index
+   /autoapi/coreimpl/entitlement_providers/index
+   /autoapi/coreimpl/entitlement_refresh/index
+   /autoapi/coreimpl/entitlement_requests/index
+   /autoapi/coreimpl/entitlement_trust/index
+   /autoapi/coreimpl/errors/index
+   /autoapi/coreimpl/extensions/index
+   /autoapi/coreimpl/graph/index
+   /autoapi/coreimpl/instances/index
+   /autoapi/coreimpl/invocation/index
+   /autoapi/coreimpl/lifecycle/index
+   /autoapi/coreimpl/loading/index
+   /autoapi/coreimpl/migration/index
+   /autoapi/coreimpl/namespace/index
+   /autoapi/coreimpl/observation/index
+   /autoapi/coreimpl/package_documents/index
+   /autoapi/coreimpl/package_transactions/index
+   /autoapi/coreimpl/packages/index
+   /autoapi/coreimpl/persistence/index
+   /autoapi/coreimpl/process/index
+   /autoapi/coreimpl/provisioning/index
+   /autoapi/coreimpl/readiness/index
+   /autoapi/coreimpl/resolution/index
+   /autoapi/coreimpl/runtime/index
+   /autoapi/coreimpl/schema_resources/index
+   /autoapi/coreimpl/schemas/index
+   /autoapi/coreimpl/solver/index
+   /autoapi/coreimpl/subinterpreter/index
+   /autoapi/coreimpl/transactions/index
+   /autoapi/coreimpl/upgrade/index
+   /autoapi/coreimpl/verification/index
+
+

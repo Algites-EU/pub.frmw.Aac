@@ -1,0 +1,31 @@
+coreintf.packages.provider
+==========================
+
+.. py:module:: coreintf.packages.provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.packages.provider.AIiPackageSource
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiPackageSource
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: candidates(requirement: coreintf.packages.models.AIcWorkspaceComponentRequirement) -> tuple[coreintf.packages.models.AIcPackageCandidate, Ellipsis]
+      :abstractmethod:
+
+
+

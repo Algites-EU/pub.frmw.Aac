@@ -1,0 +1,18 @@
+manifestVersion: 1
+artifact:
+  repositoryId: pub.frmw.ApplicationComponents
+  localArtifactId: aac.uiqt
+  artifactCoordinateId: pub.frmw.ApplicationComponents_aac.uiqt
+  version: 1.0-SNAPSHOT
+  sourcePath: aac/uiqt
+  structureKind: artifact
+  name: "Algites Application Components Qt UI"
+  description: "Administration UI implementation for AAC in specified technologies (PySide6 for python)"
+sourceMetadata:
+  descriptorHierarchy:
+    - structureKind: repository
+      path: algites-source-repository.yml
+      sha256: 51fb233af9fe219d4898277664ff1a91c2e896b15596ead2b9de044b559dc0bc
+    - structureKind: artifact
+      path: aac/uiqt/algites-artifact.yml
+      sha256: 29bf1f0198980e09172a42b7b9fe1ae14eca3dcf2804f18b39e66f1748c03e81

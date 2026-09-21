@@ -1,0 +1,16 @@
+coreintf.persistence
+====================
+
+.. py:module:: coreintf.persistence
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/persistence/store/index
+   /autoapi/coreintf/persistence/transaction/index
+
+

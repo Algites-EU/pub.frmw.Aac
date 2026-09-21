@@ -1,0 +1,39 @@
+coreimpl.authorization
+======================
+
+.. py:module:: coreimpl.authorization
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.authorization.AIcComponentAuthorizationGrantStore
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcComponentAuthorizationGrantStore(store: algites.lib.aac.coreintf.persistence.AIiStateStore | None = None)
+
+   .. py:attribute:: store
+
+
+   .. py:method:: key(consumer_instance_id: str, requirement_id: str) -> str
+      :staticmethod:
+
+
+
+   .. py:method:: put(grant: algites.lib.aac.coreintf.authorization.AIcComponentAuthorizationGrant) -> None
+
+
+   .. py:method:: get(consumer_instance_id: str, requirement_id: str) -> algites.lib.aac.coreintf.authorization.AIcComponentAuthorizationGrant | None
+
+
+   .. py:method:: delete(consumer_instance_id: str, requirement_id: str) -> None
+
+
+   .. py:method:: all() -> tuple[algites.lib.aac.coreintf.authorization.AIcComponentAuthorizationGrant, Ellipsis]
+
+

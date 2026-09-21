@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>coreintf.configuration.provider &#8212; aac.coreintf  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-coreintf.configuration.provider">
+<span id="coreintf-configuration-provider"></span><h1>coreintf.configuration.provider<a class="headerlink" href="#module-coreintf.configuration.provider" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.provider.AIiConfigurationProvider" title="coreintf.configuration.provider.AIiConfigurationProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIiConfigurationProvider</span></code></a></p></td>
+<td><p>Helper class that provides a standard way to create an ABC using</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.provider.AIiConfigurationScopeResolver" title="coreintf.configuration.provider.AIiConfigurationScopeResolver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIiConfigurationScopeResolver</span></code></a></p></td>
+<td><p>Helper class that provides a standard way to create an ABC using</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.provider.AIiConfigurationMutationAuthorizer" title="coreintf.configuration.provider.AIiConfigurationMutationAuthorizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIiConfigurationMutationAuthorizer</span></code></a></p></td>
+<td><p>Helper class that provides a standard way to create an ABC using</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationProvider">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.provider.</span></span><span class="sig-name descname"><span class="pre">AIiConfigurationProvider</span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationProvider" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationProvider.revision_kind">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">revision_kind</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.persistence.AInRecordRevisionKind</span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationProvider.revision_kind" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationProvider.persistence_capabilities">
+<span class="sig-name descname"><span class="pre">persistence_capabilities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationProviderRequest" title="coreintf.configuration.models.AIcConfigurationProviderRequest"><span class="pre">coreintf.configuration.models.AIcConfigurationProviderRequest</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">coreintf.persistence.AInPersistenceCapability</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationProvider.persistence_capabilities" title="Link to this definition">¶</a></dt>
+<dd><p>Declare persistence guarantees independently from logical configuration operations.</p>
+<p>The baseline is read-only. Writable providers override this method when they can guarantee
+conditional single-record replacement or genuine multi-record transactions. An atomic
+change-set inside one configuration document is still a single-record mutation and MUST
+NOT be advertised as <code class="docutils literal notranslate"><span class="pre">MULTI_RECORD_TRANSACTION</span></code> merely because several properties change.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationProvider.snapshot">
+<span class="sig-name descname"><span class="pre">snapshot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationProviderRequest" title="coreintf.configuration.models.AIcConfigurationProviderRequest"><span class="pre">coreintf.configuration.models.AIcConfigurationProviderRequest</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationProviderSnapshot" title="coreintf.configuration.models.AIcConfigurationProviderSnapshot"><span class="pre">coreintf.configuration.models.AIcConfigurationProviderSnapshot</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationProvider.snapshot" title="Link to this definition">¶</a></dt>
+<dd><p>Return a versioned persisted snapshot when this provider exposes one.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationProvider.contributions">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">contributions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationProviderRequest" title="coreintf.configuration.models.AIcConfigurationProviderRequest"><span class="pre">coreintf.configuration.models.AIcConfigurationProviderRequest</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationContribution" title="coreintf.configuration.models.AIcConfigurationContribution"><span class="pre">coreintf.configuration.models.AIcConfigurationContribution</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationProvider.contributions" title="Link to this definition">¶</a></dt>
+<dd><p>Return normalized contributions for one target in one concrete configuration-scope.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationProvider.capabilities">
+<span class="sig-name descname"><span class="pre">capabilities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationProviderRequest" title="coreintf.configuration.models.AIcConfigurationProviderRequest"><span class="pre">coreintf.configuration.models.AIcConfigurationProviderRequest</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AInConfigurationProviderCapability" title="coreintf.configuration.models.AInConfigurationProviderCapability"><span class="pre">coreintf.configuration.models.AInConfigurationProviderCapability</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationProvider.capabilities" title="Link to this definition">¶</a></dt>
+<dd><p>Return technical provider capabilities for this target/scope/context.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationProvider.apply_changes">
+<span class="sig-name descname"><span class="pre">apply_changes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">change_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationChangeSet" title="coreintf.configuration.models.AIcConfigurationChangeSet"><span class="pre">coreintf.configuration.models.AIcConfigurationChangeSet</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationMutationResult" title="coreintf.configuration.models.AIcConfigurationMutationResult"><span class="pre">coreintf.configuration.models.AIcConfigurationMutationResult</span></a></span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationProvider.apply_changes" title="Link to this definition">¶</a></dt>
+<dd><p>Atomically apply a normalized change-set when supported.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationProvider.replace_payload">
+<span class="sig-name descname"><span class="pre">replace_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationProviderRequest" title="coreintf.configuration.models.AIcConfigurationProviderRequest"><span class="pre">coreintf.configuration.models.AIcConfigurationProviderRequest</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationPersistedPayload" title="coreintf.configuration.models.AIcConfigurationPersistedPayload"><span class="pre">coreintf.configuration.models.AIcConfigurationPersistedPayload</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_record_revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationMutationResult" title="coreintf.configuration.models.AIcConfigurationMutationResult"><span class="pre">coreintf.configuration.models.AIcConfigurationMutationResult</span></a></span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationProvider.replace_payload" title="Link to this definition">¶</a></dt>
+<dd><p>Atomically replace a complete versioned payload, primarily for Core-orchestrated migration.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationScopeResolver">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.provider.</span></span><span class="sig-name descname"><span class="pre">AIiConfigurationScopeResolver</span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationScopeResolver" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationScopeResolver.resolve">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">resolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationScopeResolutionRequest" title="coreintf.configuration.models.AIcConfigurationScopeResolutionRequest"><span class="pre">coreintf.configuration.models.AIcConfigurationScopeResolutionRequest</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">coreintf.context.AIcConfigurationScope</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationScopeResolver.resolve" title="Link to this definition">¶</a></dt>
+<dd><p>Resolve one profile configuration-scope definition to a concrete identity.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationMutationAuthorizer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.provider.</span></span><span class="sig-name descname"><span class="pre">AIiConfigurationMutationAuthorizer</span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationMutationAuthorizer" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationMutationAuthorizer.authorized_capabilities">
+<span class="sig-name descname"><span class="pre">authorized_capabilities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationProviderRequest" title="coreintf.configuration.models.AIcConfigurationProviderRequest"><span class="pre">coreintf.configuration.models.AIcConfigurationProviderRequest</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">actor_context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider_capabilities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AInConfigurationProviderCapability" title="coreintf.configuration.models.AInConfigurationProviderCapability"><span class="pre">coreintf.configuration.models.AInConfigurationProviderCapability</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AInConfigurationProviderCapability" title="coreintf.configuration.models.AInConfigurationProviderCapability"><span class="pre">coreintf.configuration.models.AInConfigurationProviderCapability</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationMutationAuthorizer.authorized_capabilities" title="Link to this definition">¶</a></dt>
+<dd><p>Return mutation capabilities the current application principal may use.</p>
+<p>The safe default exposes only READ. Concrete product authorizers should override.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.configuration.provider.AIiConfigurationMutationAuthorizer.authorize">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">authorize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">change_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../models/index.html#coreintf.configuration.models.AIcConfigurationChangeSet" title="coreintf.configuration.models.AIcConfigurationChangeSet"><span class="pre">coreintf.configuration.models.AIcConfigurationChangeSet</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreintf.configuration.provider.AIiConfigurationMutationAuthorizer.authorize" title="Link to this definition">¶</a></dt>
+<dd><p>Authorize one Core-mediated configuration mutation for the current principal/context.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">aac.coreintf</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../../../_sources/autoapi/coreintf/configuration/provider/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,118 @@
+coreintf.configuration.provider
+===============================
+
+.. py:module:: coreintf.configuration.provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.configuration.provider.AIiConfigurationProvider
+   coreintf.configuration.provider.AIiConfigurationScopeResolver
+   coreintf.configuration.provider.AIiConfigurationMutationAuthorizer
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiConfigurationProvider
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:property:: revision_kind
+      :type: coreintf.persistence.AInRecordRevisionKind
+
+
+
+   .. py:method:: persistence_capabilities(request: coreintf.configuration.models.AIcConfigurationProviderRequest) -> tuple[coreintf.persistence.AInPersistenceCapability, Ellipsis]
+
+      Declare persistence guarantees independently from logical configuration operations.
+
+      The baseline is read-only. Writable providers override this method when they can guarantee
+      conditional single-record replacement or genuine multi-record transactions. An atomic
+      change-set inside one configuration document is still a single-record mutation and MUST
+      NOT be advertised as ``MULTI_RECORD_TRANSACTION`` merely because several properties change.
+
+
+
+   .. py:method:: snapshot(request: coreintf.configuration.models.AIcConfigurationProviderRequest) -> coreintf.configuration.models.AIcConfigurationProviderSnapshot | None
+
+      Return a versioned persisted snapshot when this provider exposes one.
+
+
+
+   .. py:method:: contributions(request: coreintf.configuration.models.AIcConfigurationProviderRequest) -> tuple[coreintf.configuration.models.AIcConfigurationContribution, Ellipsis]
+      :abstractmethod:
+
+
+      Return normalized contributions for one target in one concrete configuration-scope.
+
+
+
+   .. py:method:: capabilities(request: coreintf.configuration.models.AIcConfigurationProviderRequest) -> tuple[coreintf.configuration.models.AInConfigurationProviderCapability, Ellipsis]
+
+      Return technical provider capabilities for this target/scope/context.
+
+
+
+   .. py:method:: apply_changes(change_set: coreintf.configuration.models.AIcConfigurationChangeSet) -> coreintf.configuration.models.AIcConfigurationMutationResult
+
+      Atomically apply a normalized change-set when supported.
+
+
+
+   .. py:method:: replace_payload(request: coreintf.configuration.models.AIcConfigurationProviderRequest, payload: coreintf.configuration.models.AIcConfigurationPersistedPayload, expected_record_revision: str | int | None = None) -> coreintf.configuration.models.AIcConfigurationMutationResult
+
+      Atomically replace a complete versioned payload, primarily for Core-orchestrated migration.
+
+
+
+.. py:class:: AIiConfigurationScopeResolver
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: resolve(request: coreintf.configuration.models.AIcConfigurationScopeResolutionRequest) -> coreintf.context.AIcConfigurationScope | None
+      :abstractmethod:
+
+
+      Resolve one profile configuration-scope definition to a concrete identity.
+
+
+
+.. py:class:: AIiConfigurationMutationAuthorizer
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: authorized_capabilities(request: coreintf.configuration.models.AIcConfigurationProviderRequest, actor_context, provider_capabilities: tuple[coreintf.configuration.models.AInConfigurationProviderCapability, Ellipsis]) -> tuple[coreintf.configuration.models.AInConfigurationProviderCapability, Ellipsis]
+
+      Return mutation capabilities the current application principal may use.
+
+      The safe default exposes only READ. Concrete product authorizers should override.
+
+
+
+   .. py:method:: authorize(change_set: coreintf.configuration.models.AIcConfigurationChangeSet) -> tuple[bool, tuple[str, Ellipsis]]
+      :abstractmethod:
+
+
+      Authorize one Core-mediated configuration mutation for the current principal/context.
+
+
+

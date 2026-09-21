@@ -1,0 +1,183 @@
+coreintf.observation.models
+===========================
+
+.. py:module:: coreintf.observation.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.observation.models.AInObservationPhase
+   coreintf.observation.models.AInObservationOutcome
+   coreintf.observation.models.AIcObservationInput
+   coreintf.observation.models.AIcObservationOutput
+   coreintf.observation.models.AIcObservationSelector
+   coreintf.observation.models.AIcObservationBinding
+
+
+Module Contents
+---------------
+
+.. py:class:: AInObservationPhase
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: PRE
+      :value: 'PRE'
+
+
+
+   .. py:attribute:: POST
+      :value: 'POST'
+
+
+
+.. py:class:: AInObservationOutcome
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: SUCCESS
+      :value: 'SUCCESS'
+
+
+
+   .. py:attribute:: ERROR
+      :value: 'ERROR'
+
+
+
+.. py:class:: AIcObservationInput
+
+   .. py:attribute:: invocation_id
+      :type:  str
+
+
+   .. py:attribute:: parent_invocation_id
+      :type:  str | None
+
+
+   .. py:attribute:: phase
+      :type:  AInObservationPhase
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: operation_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str
+
+
+   .. py:attribute:: arguments
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: outcome
+      :type:  AInObservationOutcome | None
+      :value: None
+
+
+
+   .. py:attribute:: result
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: error
+      :type:  Mapping[str, object] | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcObservationOutput
+
+   .. py:attribute:: accepted
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: diagnostic
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcObservationSelector
+
+   .. py:attribute:: capability
+      :type:  str
+      :value: '*'
+
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: operations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: phases
+      :type:  tuple[AInObservationPhase, Ellipsis]
+
+
+   .. py:method:: matches(value: AIcObservationInput) -> bool
+
+
+.. py:class:: AIcObservationBinding
+
+   .. py:attribute:: observer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: selectors
+      :type:  tuple[AIcObservationSelector, Ellipsis]
+
+

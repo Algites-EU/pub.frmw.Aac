@@ -1,0 +1,16 @@
+coreintf.authentication
+=======================
+
+.. py:module:: coreintf.authentication
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/authentication/models/index
+   /autoapi/coreintf/authentication/provider/index
+
+

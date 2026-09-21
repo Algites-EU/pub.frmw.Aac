@@ -1,0 +1,38 @@
+coreimpl.namespace
+==================
+
+.. py:module:: coreimpl.namespace
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.namespace.AIxNamespacePolicyError
+   coreimpl.namespace.AIcReservedNamespace
+   coreimpl.namespace.AIcNamespacePolicy
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxNamespacePolicyError
+
+   Bases: :py:obj:`coreimpl.errors.AIxCoreImplementationError`
+
+
+.. py:class:: AIcReservedNamespace
+
+   .. py:attribute:: prefix
+      :type:  str
+
+
+.. py:class:: AIcNamespacePolicy
+
+   .. py:method:: reserve(prefix: str) -> None
+
+
+   .. py:method:: validate(descriptor: algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor, trusted_prefixes: tuple[str, Ellipsis] = ()) -> None
+
+

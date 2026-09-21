@@ -1,0 +1,94 @@
+coreintf.entitlement.provider
+=============================
+
+.. py:module:: coreintf.entitlement.provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.entitlement.provider.AIiEntitlementProvider
+   coreintf.entitlement.provider.AIiEntitlementLicensingScopeResolver
+   coreintf.entitlement.provider.AIiEntitlementEvidenceVerifier
+   coreintf.entitlement.provider.AIiEntitlementRemediator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiEntitlementProvider
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: evidence(request: coreintf.entitlement.models.AIcEntitlementProviderRequest) -> tuple[coreintf.entitlement.models.AIcEntitlementEvidence, Ellipsis]
+      :abstractmethod:
+
+
+      Return entitlement evidence applicable to one concrete entitlement licensing-scope subject.
+
+
+
+.. py:class:: AIiEntitlementLicensingScopeResolver
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: resolve(request: coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest) -> coreintf.entitlement.models.AIcEntitlementLicensingScope | None
+      :abstractmethod:
+
+
+      Resolve one entitlement-profile definition to a trusted concrete scope identity.
+
+
+
+   .. py:method:: resolve_subject(request: coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest) -> coreintf.entitlement.models.AIcEntitlementSubject | None
+
+      Resolve trusted subject metadata; default uses the resolved scope id only.
+
+
+
+.. py:class:: AIiEntitlementEvidenceVerifier
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: verify(evidence: coreintf.entitlement.models.AIcEntitlementEvidence) -> coreintf.entitlement.models.AIcEntitlementEvidenceVerification
+      :abstractmethod:
+
+
+      Verify entitlement evidence without interpreting component-owned permission semantics.
+
+
+
+.. py:class:: AIiEntitlementRemediator
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: remediate(request: coreintf.entitlement.models.AIcEntitlementRemediationRequest) -> coreintf.entitlement.models.AIcEntitlementRemediationOutcome
+      :abstractmethod:
+
+
+      Attempt to obtain/refresh entitlement evidence for one denied permission.
+
+
+
