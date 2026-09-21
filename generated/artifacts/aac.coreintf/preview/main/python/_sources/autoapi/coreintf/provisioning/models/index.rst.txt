@@ -1,0 +1,57 @@
+coreintf.provisioning.models
+============================
+
+.. py:module:: coreintf.provisioning.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.provisioning.models.AIcProvisionContext
+   coreintf.provisioning.models.AIcRequestedStateChange
+   coreintf.provisioning.models.AIcProvisioningResult
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProvisionContext
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: component
+      :type:  coreintf.descriptor.AIcComponentDescriptor
+
+
+   .. py:attribute:: existing_state
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcRequestedStateChange
+
+   .. py:attribute:: key
+      :type:  str
+
+
+   .. py:attribute:: value
+      :type:  object
+
+
+.. py:class:: AIcProvisioningResult
+
+   .. py:attribute:: requested_changes
+      :type:  tuple[AIcRequestedStateChange, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

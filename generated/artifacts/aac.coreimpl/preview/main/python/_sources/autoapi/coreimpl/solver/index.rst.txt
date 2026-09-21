@@ -1,0 +1,128 @@
+coreimpl.solver
+===============
+
+.. py:module:: coreimpl.solver
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.solver.AIcSolverRequirement
+   coreimpl.solver.AIcSolverCandidate
+   coreimpl.solver.AIcCompatibleTargetStateSolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSolverRequirement
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: cardinality
+      :type:  algites.lib.aac.coreintf.contracts.AInConsumerCardinality
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+
+
+.. py:class:: AIcSolverCandidate
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: provides
+      :type:  tuple[tuple[str, tuple[int, Ellipsis]], Ellipsis]
+
+
+   .. py:attribute:: requires
+      :type:  tuple[AIcSolverRequirement, Ellipsis]
+
+
+   .. py:attribute:: persistent_schemas
+      :type:  tuple[algites.lib.aac.coreintf.catalog.AIcCatalogPersistentSchema, Ellipsis]
+
+
+   .. py:attribute:: entitlements
+      :type:  tuple[algites.lib.aac.coreintf.descriptor.AIcCapabilityEntitlementDescriptor, Ellipsis]
+
+
+   .. py:attribute:: entitlement_licensing_scopes
+      :type:  tuple[algites.lib.aac.coreintf.descriptor.AIcEntitlementLicensingScopeDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: descriptor
+      :type:  algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor | None
+      :value: None
+
+
+
+   .. py:attribute:: stored_package
+      :type:  algites.lib.aac.coreintf.packages.AIcStoredPackage | None
+      :value: None
+
+
+
+   .. py:attribute:: catalog_entry
+      :type:  algites.lib.aac.coreintf.catalog.AIcCatalogEntry | None
+      :value: None
+
+
+
+   .. py:attribute:: catalog_artifact_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: source_id
+      :type: str | None
+
+
+
+   .. py:property:: local_state
+      :type: algites.lib.aac.coreintf.packages.AInStoredPackageState | None
+
+
+
+   .. py:property:: entropy_key
+      :type: tuple
+
+
+
+.. py:class:: AIcCompatibleTargetStateSolver(core)
+
+   Find catalog-backed compatible upgrade sets for the current component population.
+
+   The solver deliberately does not add entirely new component ids.  It changes versions of
+   components already present in the active target population.  This keeps Build 19 focused on
+   automatic multi-component upgrade closure; topology-expanding installation can be layered on
+   later without weakening replacement transaction semantics.
+
+
+   .. py:attribute:: core
+
+
+   .. py:method:: solve(application_scope_id: str, requests: tuple[algites.lib.aac.coreintf.solver.AIcTargetStateRequest, Ellipsis], *, workspace_requirements: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentRequirements | None = None, workspace_lock: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentLock | None = None, max_alternatives: int = 3, max_combinations: int = 20000) -> algites.lib.aac.coreintf.solver.AIcTargetStateSolverResult
+
+

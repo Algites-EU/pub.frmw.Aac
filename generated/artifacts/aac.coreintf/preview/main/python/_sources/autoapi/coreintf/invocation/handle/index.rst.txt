@@ -1,0 +1,37 @@
+coreintf.invocation.handle
+==========================
+
+.. py:module:: coreintf.invocation.handle
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.invocation.handle.AIiCapabilityHandle
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiCapabilityHandle
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Core-owned consumer-side handle for one resolved provider-instance binding.
+
+
+   .. py:property:: binding
+      :type: coreintf.instances.AIcBinding
+
+      :abstractmethod:
+
+
+
+   .. py:method:: invoke(operation_id: str, arguments: Mapping[str, object] | None = None) -> coreintf.invocation.models.AIcInvocationOutput
+      :abstractmethod:
+
+
+

@@ -1,0 +1,58 @@
+coreintf.runtime.process_host
+=============================
+
+.. py:module:: coreintf.runtime.process_host
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.runtime.process_host.AIcProcessCapabilityHandle
+   coreintf.runtime.process_host.AIcHostChannel
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreintf.runtime.process_host.main
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProcessCapabilityHandle(binding: coreintf.instances.AIcBinding, requirement_id: str, handle_index: int, channel: AIcHostChannel)
+
+   Bases: :py:obj:`coreintf.invocation.AIiCapabilityHandle`
+
+
+   Process-local consumer handle backed by Core over the host control channel.
+
+
+   .. py:property:: binding
+      :type: coreintf.instances.AIcBinding
+
+
+
+   .. py:method:: invoke(operation_id: str, arguments: Mapping[str, object] | None = None) -> coreintf.invocation.AIcInvocationOutput
+
+
+.. py:class:: AIcHostChannel
+
+   .. py:method:: read() -> dict[str, object] | None
+
+
+   .. py:method:: write(frame: Mapping[str, object]) -> None
+
+
+   .. py:method:: respond(request_id: str, *, success: bool, result: object | None = None, error: Mapping[str, object] | None = None) -> None
+
+
+   .. py:method:: core_invoke(requirement_id: str, handle_index: int, operation_id: str, arguments: Mapping[str, object], parent_invocation_id: str | None) -> Mapping[str, object]
+
+
+.. py:function:: main() -> int
+

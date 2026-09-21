@@ -1,0 +1,15 @@
+coreintf.readiness
+==================
+
+.. py:module:: coreintf.readiness
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/readiness/models/index
+
+

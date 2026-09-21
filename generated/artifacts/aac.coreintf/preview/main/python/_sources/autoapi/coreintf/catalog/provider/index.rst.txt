@@ -1,0 +1,31 @@
+coreintf.catalog.provider
+=========================
+
+.. py:module:: coreintf.catalog.provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.catalog.provider.AIiCatalogProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiCatalogProvider
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: query(query: coreintf.catalog.models.AIcCatalogQuery) -> tuple[coreintf.catalog.models.AIcCatalogEntry, Ellipsis]
+      :abstractmethod:
+
+
+

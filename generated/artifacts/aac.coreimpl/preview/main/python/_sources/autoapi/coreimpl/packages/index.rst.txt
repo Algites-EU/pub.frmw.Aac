@@ -1,0 +1,270 @@
+coreimpl.packages
+=================
+
+.. py:module:: coreimpl.packages
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.packages.AIcPackageVerifierRegistry
+   coreimpl.packages.AIcStaticPackageSource
+   coreimpl.packages.AIcManifestPackageSource
+   coreimpl.packages.AIcPackageSourceRegistry
+   coreimpl.packages.AIcPackageStore
+   coreimpl.packages.AIcPackageSelectionStore
+   coreimpl.packages.AIcPackageManager
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageVerifierRegistry
+
+   .. py:method:: register(verifier_id: str, verifier: algites.lib.aac.coreintf.verification.AIiPackageVerifier) -> None
+
+
+   .. py:method:: get(verifier_id: str) -> algites.lib.aac.coreintf.verification.AIiPackageVerifier
+
+
+   .. py:method:: contains(verifier_id: str) -> bool
+
+
+.. py:class:: AIcStaticPackageSource(source_id: str, candidates: tuple[algites.lib.aac.coreintf.packages.AIcPackageCandidate, Ellipsis], *, priority: int = 0)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.packages.AIiPackageSource`
+
+
+   .. py:attribute:: source_id
+
+
+   .. py:attribute:: priority
+      :value: 0
+
+
+
+   .. py:method:: candidates(requirement: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentRequirement) -> tuple[algites.lib.aac.coreintf.packages.AIcPackageCandidate, Ellipsis]
+
+
+.. py:class:: AIcManifestPackageSource(source_id: str, manifest_uri: str, *, authentication: coreimpl.authentication.AIcAuthenticationService | None = None, authentication_profile_id: str | None = None, verifier_id: str | None = None, priority: int = 0, timeout_seconds: float = 30.0, context: Mapping[str, object] | None = None)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.packages.AIiPackageSource`
+
+
+   Reference file/HTTP package source backed by a small JSON/YAML manifest.
+
+
+   .. py:attribute:: source_id
+
+
+   .. py:attribute:: manifest_uri
+
+
+   .. py:attribute:: authentication
+      :value: None
+
+
+
+   .. py:attribute:: authentication_profile_id
+      :value: None
+
+
+
+   .. py:attribute:: verifier_id
+      :value: None
+
+
+
+   .. py:attribute:: priority
+      :value: 0
+
+
+
+   .. py:attribute:: timeout_seconds
+
+
+   .. py:attribute:: context
+
+
+   .. py:method:: candidates(requirement: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentRequirement) -> tuple[algites.lib.aac.coreintf.packages.AIcPackageCandidate, Ellipsis]
+
+
+.. py:class:: AIcPackageSourceRegistry
+
+   .. py:method:: register(source_id: str, source: algites.lib.aac.coreintf.packages.AIiPackageSource, *, priority: int = 0) -> None
+
+
+   .. py:method:: get(source_id: str) -> algites.lib.aac.coreintf.packages.AIiPackageSource
+
+
+   .. py:method:: candidates(requirement: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentRequirement) -> tuple[algites.lib.aac.coreintf.packages.AIcPackageCandidate, Ellipsis]
+
+
+.. py:class:: AIcPackageStore(layout: algites.lib.aac.coreintf.packages.AIcPackageStoreLayout)
+
+   Filesystem artifact store. Installed artifacts are immutable; active state is metadata elsewhere.
+
+
+   .. py:attribute:: layout
+
+
+   .. py:attribute:: root
+
+
+   .. py:attribute:: downloaded_root
+
+
+   .. py:attribute:: installed_root
+
+
+   .. py:attribute:: obsolete_root
+
+
+   .. py:method:: store_downloaded(candidate: algites.lib.aac.coreintf.packages.AIcPackageCandidate, *, authentication: coreimpl.authentication.AIcAuthenticationService | None = None, context: Mapping[str, object] | None = None) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: install(downloaded: algites.lib.aac.coreintf.packages.AIcStoredPackage, verifier: algites.lib.aac.coreintf.verification.AIiPackageVerifier, *, verifier_id: str | None = None) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: mark_obsolete(installed: algites.lib.aac.coreintf.packages.AIcStoredPackage) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: restore_obsolete(obsolete: algites.lib.aac.coreintf.packages.AIcStoredPackage) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: records(state: algites.lib.aac.coreintf.packages.AInStoredPackageState | None = None, component_id: str | None = None) -> tuple[algites.lib.aac.coreintf.packages.AIcStoredPackage, Ellipsis]
+
+
+   .. py:method:: find(component_id: str, version: int, sha256: str, state: algites.lib.aac.coreintf.packages.AInStoredPackageState = AInStoredPackageState.INSTALLED) -> algites.lib.aac.coreintf.packages.AIcStoredPackage | None
+
+
+.. py:class:: AIcPackageSelectionStore(store: algites.lib.aac.coreintf.persistence.AIiStateStore | None = None, manifest_store: coreimpl.package_transactions.AIcDurablePackageSelectionManifestStore | None = None)
+
+   .. py:attribute:: store
+
+
+   .. py:attribute:: manifest_store
+      :value: None
+
+
+
+   .. py:method:: manifest() -> algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest
+
+
+   .. py:method:: get(application_scope_id: str, component_id: str) -> algites.lib.aac.coreintf.packages.AIcPackageSelection | None
+
+
+   .. py:method:: all() -> tuple[algites.lib.aac.coreintf.packages.AIcPackageSelection, Ellipsis]
+
+
+   .. py:method:: plan_replacements(application_scope_id: str, packages: tuple[algites.lib.aac.coreintf.packages.AIcStoredPackage, Ellipsis]) -> tuple[algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest, algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest]
+
+
+   .. py:method:: commit_planned(source: algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest, target: algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest, *, transaction_id: str | None = None) -> algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest
+
+
+   .. py:method:: select(application_scope_id: str, package: algites.lib.aac.coreintf.packages.AIcStoredPackage) -> algites.lib.aac.coreintf.packages.AIcPackageSelection
+
+
+   .. py:method:: references(package: algites.lib.aac.coreintf.packages.AIcStoredPackage) -> tuple[algites.lib.aac.coreintf.packages.AIcPackageSelection, Ellipsis]
+
+
+   .. py:method:: rollback(application_scope_id: str, component_id: str, package_store: AIcPackageStore) -> algites.lib.aac.coreintf.packages.AIcPackageSelection
+
+
+.. py:class:: AIcPackageManager(layout: algites.lib.aac.coreintf.packages.AIcPackageStoreLayout, *, authentication: coreimpl.authentication.AIcAuthenticationService | None = None, store: algites.lib.aac.coreintf.persistence.AIiStateStore | None = None, automation_policy: algites.lib.aac.coreintf.packages.AIcPackageAutomationPolicy = AIcPackageAutomationPolicy())
+
+   .. py:attribute:: authentication
+
+
+   .. py:attribute:: package_store
+
+
+   .. py:attribute:: sources
+
+
+   .. py:attribute:: verifiers
+
+
+   .. py:attribute:: state_store
+
+
+   .. py:attribute:: selection_manifest_store
+
+
+   .. py:attribute:: selections
+
+
+   .. py:attribute:: transactions
+
+
+   .. py:attribute:: transaction_recovery
+
+
+   .. py:attribute:: automation_policy
+
+
+   .. py:method:: register_source(source_id: str, source: algites.lib.aac.coreintf.packages.AIiPackageSource, *, priority: int = 0) -> None
+
+
+   .. py:method:: register_verifier(verifier_id: str, verifier: algites.lib.aac.coreintf.verification.AIiPackageVerifier) -> None
+
+
+   .. py:method:: download(candidate: algites.lib.aac.coreintf.packages.AIcPackageCandidate, *, fallback_verifier: algites.lib.aac.coreintf.verification.AIiPackageVerifier | None = None, context: Mapping[str, object] | None = None) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: install(candidate: algites.lib.aac.coreintf.packages.AIcPackageCandidate, downloaded: algites.lib.aac.coreintf.packages.AIcStoredPackage, *, fallback_verifier: algites.lib.aac.coreintf.verification.AIiPackageVerifier | None = None) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: descriptor_from_artifact(package: algites.lib.aac.coreintf.packages.AIcStoredPackage) -> algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor
+
+
+   .. py:method:: automatic_entitlement_allows(descriptor: algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor, effective_permission_ids: set[tuple[str, int, str]]) -> bool
+      :staticmethod:
+
+
+
+   .. py:method:: mark_obsolete(package: algites.lib.aac.coreintf.packages.AIcStoredPackage) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: restore_obsolete(package: algites.lib.aac.coreintf.packages.AIcStoredPackage) -> algites.lib.aac.coreintf.packages.AIcStoredPackage
+
+
+   .. py:method:: begin_replacement_transaction(application_scope_id: str, packages: tuple[algites.lib.aac.coreintf.packages.AIcStoredPackage, Ellipsis], core_state_snapshot: Mapping[str, Mapping[str, Mapping[str, object]]])
+
+
+   .. py:method:: mark_replacement_cutover_started(transaction) -> None
+
+
+   .. py:method:: commit_replacement_selections(transaction) -> tuple[algites.lib.aac.coreintf.packages.AIcPackageSelectionManifest, tuple[str, Ellipsis]]
+
+
+   .. py:method:: complete_replacement_transaction(transaction, packages: tuple[algites.lib.aac.coreintf.packages.AIcStoredPackage, Ellipsis]) -> tuple[tuple[algites.lib.aac.coreintf.packages.AIcStoredPackage, Ellipsis], tuple[str, Ellipsis]]
+
+
+   .. py:method:: rollback_replacement_transaction(transaction, diagnostics: tuple[str, Ellipsis] = ()) -> None
+
+
+   .. py:method:: release_replacement_cutover_lock() -> None
+
+
+   .. py:method:: activate_replacements(application_scope_id: str, packages: tuple[algites.lib.aac.coreintf.packages.AIcStoredPackage, Ellipsis]) -> tuple[dict[str, algites.lib.aac.coreintf.packages.AIcStoredPackage | None], tuple[algites.lib.aac.coreintf.packages.AIcStoredPackage, Ellipsis]]
+
+      Atomically select a replacement set and retire unselected old artifacts.
+
+      Core replacement code uses the explicit durable transaction methods above.  This convenience
+      method remains for package-only callers and still commits the full selection set atomically.
+
+
+
+   .. py:method:: rollback_replacements(application_scope_id: str, previous: Mapping[str, algites.lib.aac.coreintf.packages.AIcStoredPackage | None], targets: tuple[algites.lib.aac.coreintf.packages.AIcStoredPackage, Ellipsis]) -> None
+
+      Legacy in-process compensation helper for package-only callers.
+
+
+
+   .. py:method:: plan_workspace(requirements: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentRequirements, lock: algites.lib.aac.coreintf.packages.AIcWorkspaceComponentLock | None = None) -> algites.lib.aac.coreintf.packages.AIcPackageReconciliationPlan
+
+

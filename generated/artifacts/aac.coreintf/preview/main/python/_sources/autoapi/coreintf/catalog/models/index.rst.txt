@@ -1,0 +1,550 @@
+coreintf.catalog.models
+=======================
+
+.. py:module:: coreintf.catalog.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.catalog.models.AIcCatalogQuery
+   coreintf.catalog.models.AIcCatalogPublisher
+   coreintf.catalog.models.AIcCatalogIcon
+   coreintf.catalog.models.AIcCatalogCapabilityOffer
+   coreintf.catalog.models.AIcCatalogCapabilityRequirement
+   coreintf.catalog.models.AInCatalogPersistentSchemaKind
+   coreintf.catalog.models.AIcCatalogPersistentSchema
+   coreintf.catalog.models.AIcCatalogArtifactLocator
+   coreintf.catalog.models.AIcCatalogArtifact
+   coreintf.catalog.models.AIcCatalogRelease
+   coreintf.catalog.models.AIcCatalogComponent
+   coreintf.catalog.models.AIcCatalogDocument
+   coreintf.catalog.models.AIcCatalogEntry
+   coreintf.catalog.models.AIcCatalogSourceRegistration
+   coreintf.catalog.models.AIcCatalogBootstrap
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogQuery
+
+   Technology-scoped catalog query.
+
+   ``product_id`` and ``technology_id`` are mandatory AAC catalog dimensions.
+   Component ids and versions are interpreted only inside that scope.
+
+
+   .. py:attribute:: product_id
+      :type:  str
+
+
+   .. py:attribute:: technology_id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: text
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: provides_capability_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: requires_capability_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: categories
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: tags
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcCatalogPublisher
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcCatalogIcon
+
+   .. py:attribute:: url
+      :type:  str
+
+
+.. py:class:: AIcCatalogCapabilityOffer
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+.. py:class:: AIcCatalogCapabilityRequirement
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: cardinality
+      :type:  coreintf.contracts.AInConsumerCardinality
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+      :value: True
+
+
+
+.. py:class:: AInCatalogPersistentSchemaKind
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: COMPONENT_CONFIGURATION
+      :value: 'COMPONENT_CONFIGURATION'
+
+
+
+   .. py:attribute:: PROVIDER_CONFIGURATION
+      :value: 'PROVIDER_CONFIGURATION'
+
+
+
+   .. py:attribute:: ENTITY_EXTENSION
+      :value: 'ENTITY_EXTENSION'
+
+
+
+.. py:class:: AIcCatalogPersistentSchema
+
+   .. py:attribute:: kind
+      :type:  AInCatalogPersistentSchemaKind
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: write_version
+      :type:  int
+
+
+   .. py:attribute:: provider_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: entity_type_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: identity
+      :type: tuple[str, str | None]
+
+
+
+.. py:class:: AIcCatalogArtifactLocator
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: uri
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: repository_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: coordinates
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcCatalogArtifact
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: locator
+      :type:  AIcCatalogArtifactLocator
+
+
+   .. py:attribute:: artifact_filename
+      :type:  str
+
+
+   .. py:attribute:: package_format
+      :type:  str
+
+
+   .. py:attribute:: descriptor_path
+      :type:  str
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: runtime_package
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: verifier_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: authentication_profile_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: sidecars
+      :type:  tuple[coreintf.packages.AIcPackageSidecar, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: platforms
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: architectures
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcCatalogRelease
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: provides
+      :type:  tuple[AIcCatalogCapabilityOffer, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: requires
+      :type:  tuple[AIcCatalogCapabilityRequirement, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: entitlement_licensing_scopes
+      :type:  tuple[coreintf.descriptor.AIcEntitlementLicensingScopeDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: provided_capability_entitlements
+      :type:  tuple[coreintf.descriptor.AIcCapabilityEntitlementDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: persistent_schemas
+      :type:  tuple[AIcCatalogPersistentSchema, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: artifacts
+      :type:  tuple[AIcCatalogArtifact, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: published_at
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: release_notes_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcCatalogComponent
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: releases
+      :type:  tuple[AIcCatalogRelease, Ellipsis]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: publisher
+      :type:  AIcCatalogPublisher | None
+      :value: None
+
+
+
+   .. py:attribute:: homepage_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: documentation_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: support_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: entitlement_info_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: icon
+      :type:  AIcCatalogIcon | None
+      :value: None
+
+
+
+   .. py:attribute:: categories
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: tags
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcCatalogDocument
+
+   .. py:attribute:: format_version
+      :type:  int
+
+
+   .. py:attribute:: product_id
+      :type:  str
+
+
+   .. py:attribute:: technology_id
+      :type:  str
+
+
+   .. py:attribute:: components
+      :type:  tuple[AIcCatalogComponent, Ellipsis]
+
+
+   .. py:attribute:: generated_at
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcCatalogEntry
+
+   .. py:attribute:: source_id
+      :type:  str
+
+
+   .. py:attribute:: product_id
+      :type:  str
+
+
+   .. py:attribute:: technology_id
+      :type:  str
+
+
+   .. py:attribute:: component
+      :type:  AIcCatalogComponent
+
+
+   .. py:attribute:: release
+      :type:  AIcCatalogRelease
+
+
+   .. py:property:: component_id
+      :type: str
+
+
+
+   .. py:property:: component_version
+      :type: int
+
+
+
+.. py:class:: AIcCatalogSourceRegistration
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: uri
+      :type:  str
+
+
+   .. py:attribute:: authentication_profile_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: priority
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: settings
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcCatalogBootstrap
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: product_id
+      :type:  str
+
+
+   .. py:attribute:: technology_id
+      :type:  str
+
+
+   .. py:attribute:: sources
+      :type:  tuple[AIcCatalogSourceRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

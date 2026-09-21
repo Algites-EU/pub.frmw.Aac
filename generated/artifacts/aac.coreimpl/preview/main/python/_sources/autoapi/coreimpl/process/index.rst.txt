@@ -1,0 +1,125 @@
+coreimpl.process
+================
+
+.. py:module:: coreimpl.process
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.process.AIcJsonLineProcessEndpoint
+   coreimpl.process.AIcProcessProviderRuntime
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcJsonLineProcessEndpoint(command: Sequence[str], *, cwd: str | None = None, env: Mapping[str, str] | None = None, timeout: float = 30.0)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.invocation.AIiCapabilityEndpoint`
+
+
+   Legacy one-invocation-per-process endpoint retained for explicit utility use.
+
+   Normal AAC PROCESS provider runtimes use AIcProcessProviderRuntime below, which owns
+   one persistent process per provider instance for the full runtime lifecycle.
+
+
+   .. py:attribute:: command
+
+
+   .. py:attribute:: cwd
+      :value: None
+
+
+
+   .. py:attribute:: env
+
+
+   .. py:attribute:: timeout
+      :value: 30.0
+
+
+
+   .. py:method:: invoke(invocation_input: algites.lib.aac.coreintf.invocation.AIcInvocationInput) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
+
+
+.. py:class:: AIcProcessProviderRuntime(application_scope_id: str, instance: algites.lib.aac.coreintf.instances.AIcProviderInstance, provider_definition: algites.lib.aac.coreintf.descriptor.AIcProviderDefinitionDescriptor, entitlement: algites.lib.aac.coreintf.entitlement.AIcEntitlementContext | None = None, *, component_configuration: algites.lib.aac.coreintf.configuration.AIcEffectiveConfiguration | None = None, provider_instance_configuration: algites.lib.aac.coreintf.configuration.AIcEffectiveConfiguration | None = None)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.runtime.AIiProviderRuntime`, :py:obj:`algites.lib.aac.coreintf.invocation.AIiCapabilityEndpoint`
+
+
+   Persistent AAC PROCESS runtime: exactly one child process per provider instance.
+
+   Core owns the Popen handle, process lifetime and JSON-lines IPC channel.  Provider
+   configuration and module state are therefore naturally instance-local.  Requests are
+   serialized per instance; nested calls to already resolved consumed capabilities travel
+   back to Core using `core_invoke` frames and are safe because the resolved instance graph
+   is acyclic.
+
+
+   .. py:attribute:: application_scope_id
+
+
+   .. py:attribute:: instance
+
+
+   .. py:attribute:: provider_definition
+
+
+   .. py:attribute:: command
+
+
+   .. py:attribute:: cwd
+
+
+   .. py:attribute:: timeout
+
+
+   .. py:attribute:: environment
+
+
+   .. py:property:: process_id
+      :type: int
+
+
+
+   .. py:property:: is_running
+      :type: bool
+
+
+
+   .. py:property:: stderr_tail
+      :type: tuple[str, Ellipsis]
+
+
+
+   .. py:method:: invoke(invocation_input: algites.lib.aac.coreintf.invocation.AIcInvocationInput) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
+
+
+   .. py:method:: entitlement_changed(entitlement: algites.lib.aac.coreintf.entitlement.AIcEntitlementContext) -> None
+
+
+   .. py:method:: wire(bindings: Mapping[str, tuple[algites.lib.aac.coreintf.invocation.AIiCapabilityHandle, Ellipsis]]) -> None
+
+
+   .. py:method:: prepare_activation() -> None
+
+
+   .. py:method:: readiness() -> algites.lib.aac.coreintf.readiness.AIcReadinessResult
+
+
+   .. py:method:: activate() -> None
+
+
+   .. py:method:: suspend(reason: str) -> None
+
+
+   .. py:method:: deactivate(reason: str) -> None
+
+
+   .. py:method:: close() -> None
+
+

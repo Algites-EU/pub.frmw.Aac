@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>coreimpl.configuration &#8212; aac.coreimpl  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="coreimpl.configuration_providers" href="../configuration_providers/index.html" />
+    <link rel="prev" title="coreimpl.codegen" href="../codegen/index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-coreimpl.configuration">
+<span id="coreimpl-configuration"></span><h1>coreimpl.configuration<a class="headerlink" href="#module-coreimpl.configuration" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationProviderRegistry" title="coreimpl.configuration.AIcConfigurationProviderRegistry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationProviderRegistry</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationScopeResolverRegistry" title="coreimpl.configuration.AIcConfigurationScopeResolverRegistry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationScopeResolverRegistry</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.configuration.AIcStaticConfigurationScopeResolver" title="coreimpl.configuration.AIcStaticConfigurationScopeResolver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcStaticConfigurationScopeResolver</span></code></a></p></td>
+<td><p>Simple bootstrap/test resolver using a type-&gt;id mapping from the request context.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.configuration.AIcStaticConfigurationProvider" title="coreimpl.configuration.AIcStaticConfigurationProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcStaticConfigurationProvider</span></code></a></p></td>
+<td><p>In-memory read-only provider useful for bootstrap defaults/tests.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.configuration.AIcAllowOwnNamespaceConfigurationMutationAuthorizer" title="coreimpl.configuration.AIcAllowOwnNamespaceConfigurationMutationAuthorizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcAllowOwnNamespaceConfigurationMutationAuthorizer</span></code></a></p></td>
+<td><p>Baseline Core authorizer: caller may mutate only its own component namespace.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationMutationService" title="coreimpl.configuration.AIcConfigurationMutationService"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationMutationService</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationProviderReadResult" title="coreimpl.configuration.AIcConfigurationProviderReadResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationProviderReadResult</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationReadService" title="coreimpl.configuration.AIcConfigurationReadService"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationReadService</span></code></a></p></td>
+<td><p>Normalize versioned provider snapshots before they enter configuration resolution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationContextResolver" title="coreimpl.configuration.AIcConfigurationContextResolver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationContextResolver</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationContributionRecord" title="coreimpl.configuration.AIcConfigurationContributionRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationContributionRecord</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationResolver" title="coreimpl.configuration.AIcConfigurationResolver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationResolver</span></code></a></p></td>
+<td><p>Resolve provider contributions for a concrete ordered configuration-scope chain.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationProviderRegistry">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.configuration.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationProviderRegistry</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationProviderRegistry" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationProviderRegistry.register">
+<span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration_provider_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIiConfigurationProvider</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationProviderRegistry.register" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationProviderRegistry.contains">
+<span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration_provider_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationProviderRegistry.contains" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationProviderRegistry.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration_provider_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.configuration.AIiConfigurationProvider</span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationProviderRegistry.get" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationScopeResolverRegistry">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.configuration.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationScopeResolverRegistry</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationScopeResolverRegistry" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationScopeResolverRegistry.register">
+<span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration_scope_resolver_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIiConfigurationScopeResolver</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationScopeResolverRegistry.register" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationScopeResolverRegistry.contains">
+<span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration_scope_resolver_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationScopeResolverRegistry.contains" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationScopeResolverRegistry.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration_scope_resolver_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.configuration.AIiConfigurationScopeResolver</span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationScopeResolverRegistry.get" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcStaticConfigurationScopeResolver">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.configuration.</span></span><span class="sig-name descname"><span class="pre">AIcStaticConfigurationScopeResolver</span></span><a class="headerlink" href="#coreimpl.configuration.AIcStaticConfigurationScopeResolver" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">algites.lib.aac.coreintf.configuration.AIiConfigurationScopeResolver</span></code></p>
+<p>Simple bootstrap/test resolver using a type-&gt;id mapping from the request context.</p>
+<p>SYSTEM commonly resolves without an id. Other configuration-scope types are present
+only when the supplied context contains an identity for that type.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcStaticConfigurationScopeResolver.resolve">
+<span class="sig-name descname"><span class="pre">resolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationScopeResolutionRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.context.AIcConfigurationScope</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcStaticConfigurationScopeResolver.resolve" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcStaticConfigurationProvider">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.configuration.</span></span><span class="sig-name descname"><span class="pre">AIcStaticConfigurationProvider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contributions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationContribution</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.configuration.AIcStaticConfigurationProvider" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">algites.lib.aac.coreintf.configuration.AIiConfigurationProvider</span></code></p>
+<p>In-memory read-only provider useful for bootstrap defaults/tests.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcStaticConfigurationProvider.contributions">
+<span class="sig-name descname"><span class="pre">contributions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationContribution</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcStaticConfigurationProvider.contributions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcAllowOwnNamespaceConfigurationMutationAuthorizer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.configuration.</span></span><span class="sig-name descname"><span class="pre">AIcAllowOwnNamespaceConfigurationMutationAuthorizer</span></span><a class="headerlink" href="#coreimpl.configuration.AIcAllowOwnNamespaceConfigurationMutationAuthorizer" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">algites.lib.aac.coreintf.configuration.AIiConfigurationMutationAuthorizer</span></code></p>
+<p>Baseline Core authorizer: caller may mutate only its own component namespace.</p>
+<p>Product profiles can replace this with principal/role-aware authorization.  The actor
+component id is supplied as <code class="docutils literal notranslate"><span class="pre">actor_context['component_id']</span></code>; product/UI administrative
+principals may set <code class="docutils literal notranslate"><span class="pre">configuration_admin=True</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcAllowOwnNamespaceConfigurationMutationAuthorizer.authorized_capabilities">
+<span class="sig-name descname"><span class="pre">authorized_capabilities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actor_context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider_capabilities</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.configuration.AIcAllowOwnNamespaceConfigurationMutationAuthorizer.authorized_capabilities" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcAllowOwnNamespaceConfigurationMutationAuthorizer.authorize">
+<span class="sig-name descname"><span class="pre">authorize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">change_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationChangeSet</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcAllowOwnNamespaceConfigurationMutationAuthorizer.authorize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationMutationService">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.configuration.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationMutationService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">providers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationProviderRegistry" title="coreimpl.configuration.AIcConfigurationProviderRegistry"><span class="pre">AIcConfigurationProviderRegistry</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">authorizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIiConfigurationMutationAuthorizer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationMutationService" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationMutationService.providers">
+<span class="sig-name descname"><span class="pre">providers</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationMutationService.providers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationMutationService.authorizer">
+<span class="sig-name descname"><span class="pre">authorizer</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationMutationService.authorizer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationMutationService.access">
+<span class="sig-name descname"><span class="pre">access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actor_context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationProviderAccess</span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationMutationService.access" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationMutationService.access_for">
+<span class="sig-name descname"><span class="pre">access_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration_provider_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actor_context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationProviderAccess</span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationMutationService.access_for" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationMutationService.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">change_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationChangeSet</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationMutationResult</span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationMutationService.apply" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationProviderReadResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.configuration.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationProviderReadResult</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationProviderReadResult" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationProviderReadResult.contributions">
+<span class="sig-name descname"><span class="pre">contributions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationContribution</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationProviderReadResult.contributions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationProviderReadResult.diagnostics">
+<span class="sig-name descname"><span class="pre">diagnostics</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationProviderReadResult.diagnostics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationReadService">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.configuration.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationReadService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">providers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">migrations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema_declaration_resolver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema_registry</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_migrations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationReadService" title="Link to this definition">¶</a></dt>
+<dd><p>Normalize versioned provider snapshots before they enter configuration resolution.</p>
+<p>Unsupported persisted representations are preserved by their provider and treated as an
+unavailable contribution.  They do not abort resolution; diagnostics explain why the
+contribution was omitted.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationReadService.providers">
+<span class="sig-name descname"><span class="pre">providers</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationReadService.providers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationReadService.migrations">
+<span class="sig-name descname"><span class="pre">migrations</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationReadService.migrations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationReadService.schema_declaration_resolver">
+<span class="sig-name descname"><span class="pre">schema_declaration_resolver</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationReadService.schema_declaration_resolver" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationReadService.schema_registry">
+<span class="sig-name descname"><span class="pre">schema_registry</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationReadService.schema_registry" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationReadService.persist_migrations">
+<span class="sig-name descname"><span class="pre">persist_migrations</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationReadService.persist_migrations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationReadService.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration_provider_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationProviderReadResult" title="coreimpl.configuration.AIcConfigurationProviderReadResult"><span class="pre">AIcConfigurationProviderReadResult</span></a></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationReadService.read" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationReadService.contributions">
+<span class="sig-name descname"><span class="pre">contributions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration_provider_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationReadService.contributions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationContextResolver">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.configuration.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationContextResolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resolvers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationScopeResolverRegistry" title="coreimpl.configuration.AIcConfigurationScopeResolverRegistry"><span class="pre">AIcConfigurationScopeResolverRegistry</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationContextResolver" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationContextResolver.resolvers">
+<span class="sig-name descname"><span class="pre">resolvers</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationContextResolver.resolvers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationContextResolver.resolve">
+<span class="sig-name descname"><span class="pre">resolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationProfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">algites.lib.aac.coreintf.configuration.AIcResolvedConfigurationScope</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationContextResolver.resolve" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationContributionRecord">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.configuration.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationContributionRecord</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationContributionRecord" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationContributionRecord.contribution">
+<span class="sig-name descname"><span class="pre">contribution</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationContribution</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationContributionRecord.contribution" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationContributionRecord.provenance">
+<span class="sig-name descname"><span class="pre">provenance</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationContributionProvenance</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationContributionRecord.provenance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationContributionRecord.policy_authority">
+<span class="sig-name descname"><span class="pre">policy_authority</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationContributionRecord.policy_authority" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationResolver">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.configuration.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationResolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">providers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationProviderRegistry" title="coreimpl.configuration.AIcConfigurationProviderRegistry"><span class="pre">AIcConfigurationProviderRegistry</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_service</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.configuration.AIcConfigurationReadService" title="coreimpl.configuration.AIcConfigurationReadService"><span class="pre">AIcConfigurationReadService</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationResolver" title="Link to this definition">¶</a></dt>
+<dd><p>Resolve provider contributions for a concrete ordered configuration-scope chain.</p>
+<p>This class intentionally owns no persistence. It consumes normalized contributions
+from registered configuration-providers and implements deterministic policy/value
+semantics from the generic AAC specification.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationResolver.providers">
+<span class="sig-name descname"><span class="pre">providers</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationResolver.providers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationResolver.read_service">
+<span class="sig-name descname"><span class="pre">read_service</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationResolver.read_service" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.configuration.AIcConfigurationResolver.resolve">
+<span class="sig-name descname"><span class="pre">resolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">configuration_target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIcConfigurationTarget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">configuration_scopes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">algites.lib.aac.coreintf.configuration.AIcResolvedConfigurationScope</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">property_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accepted_configuration_scope_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema_defaults</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.configuration.AIcEffectiveConfiguration</span></span></span><a class="headerlink" href="#coreimpl.configuration.AIcConfigurationResolver.resolve" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">aac.coreimpl</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">coreimpl</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">API Reference</a><ul>
+  <li><a href="../index.html">coreimpl</a><ul>
+      <li>Previous: <a href="../codegen/index.html" title="previous chapter">coreimpl.codegen</a></li>
+      <li>Next: <a href="../configuration_providers/index.html" title="next chapter">coreimpl.configuration_providers</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../../_sources/autoapi/coreimpl/configuration/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

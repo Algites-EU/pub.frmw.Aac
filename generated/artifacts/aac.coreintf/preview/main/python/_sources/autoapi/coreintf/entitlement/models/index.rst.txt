@@ -1,0 +1,756 @@
+coreintf.entitlement.models
+===========================
+
+.. py:module:: coreintf.entitlement.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.entitlement.models.AIcEntitlementLicensingScope
+   coreintf.entitlement.models.AInPermissionRetryDisposition
+   coreintf.entitlement.models.AIcEntitlementSubject
+   coreintf.entitlement.models.AIcEntitlementIssuer
+   coreintf.entitlement.models.AIcEntitlementPermissionGrant
+   coreintf.entitlement.models.AIcEntitlementCapabilityGrant
+   coreintf.entitlement.models.AIcEntitlementComponentGrant
+   coreintf.entitlement.models.AIcEntitlementRequestReference
+   coreintf.entitlement.models.AIcEntitlementDocument
+   coreintf.entitlement.models.AIcRequestedCapabilityGrant
+   coreintf.entitlement.models.AIcRequestedComponentGrant
+   coreintf.entitlement.models.AIcEntitlementIssuingRequest
+   coreintf.entitlement.models.AIcEntitlementEvidence
+   coreintf.entitlement.models.AIcEntitlementEvidenceVerification
+   coreintf.entitlement.models.AIcEntitlementProviderRequest
+   coreintf.entitlement.models.AIcEntitlementGrantProvenance
+   coreintf.entitlement.models.AIcEffectiveEntitlementPermission
+   coreintf.entitlement.models.AIcCapabilityEntitlementContext
+   coreintf.entitlement.models.AIcEntitlementContext
+   coreintf.entitlement.models.AIcEntitlementProviderBinding
+   coreintf.entitlement.models.AIcTrustedEntitlementIssuerRule
+   coreintf.entitlement.models.AIcEntitlementRemediationRequest
+   coreintf.entitlement.models.AIcEntitlementRemediationOutcome
+   coreintf.entitlement.models.AIcEntitlementLicensingScopeDefinition
+   coreintf.entitlement.models.AIcEntitlementProfile
+   coreintf.entitlement.models.AIcEntitlementProviderRegistration
+   coreintf.entitlement.models.AIcEntitlementLicensingScopeResolverRegistration
+   coreintf.entitlement.models.AIcEntitlementBootstrap
+   coreintf.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest
+   coreintf.entitlement.models.AIcResolvedEntitlementLicensingScope
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementLicensingScope
+
+   Concrete entitlement licensing-scope identity.
+
+   The type is an extensible component-declared licensing contract identifier,
+   not a configuration-scope enum.
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: key
+      :type: str
+
+
+
+.. py:class:: AInPermissionRetryDisposition
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: SAFE_AFTER_ENTITLEMENT_CHANGE
+      :value: 'SAFE_AFTER_ENTITLEMENT_CHANGE'
+
+
+
+   .. py:attribute:: DO_NOT_RETRY
+      :value: 'DO_NOT_RETRY'
+
+
+
+.. py:class:: AIcEntitlementSubject
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: display_name
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: attributes
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcEntitlementIssuer
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcEntitlementPermissionGrant
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: valid_from
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: valid_until
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: constraints
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcEntitlementCapabilityGrant
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permissions
+      :type:  tuple[AIcEntitlementPermissionGrant, Ellipsis]
+
+
+.. py:class:: AIcEntitlementComponentGrant
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: grants
+      :type:  tuple[AIcEntitlementCapabilityGrant, Ellipsis]
+
+
+.. py:class:: AIcEntitlementRequestReference
+
+   .. py:attribute:: request_id
+      :type:  str
+
+
+   .. py:attribute:: request_digest
+      :type:  str
+
+
+.. py:class:: AIcEntitlementDocument
+
+   .. py:attribute:: format_version
+      :type:  int
+
+
+   .. py:attribute:: entitlement_id
+      :type:  str
+
+
+   .. py:attribute:: issuer
+      :type:  AIcEntitlementIssuer
+
+
+   .. py:attribute:: licensing_scope
+      :type:  AIcEntitlementLicensingScope
+
+
+   .. py:attribute:: subject
+      :type:  AIcEntitlementSubject
+
+
+   .. py:attribute:: components
+      :type:  tuple[AIcEntitlementComponentGrant, Ellipsis]
+
+
+   .. py:attribute:: issued_for_request
+      :type:  AIcEntitlementRequestReference | None
+      :value: None
+
+
+
+   .. py:attribute:: issued_at
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: valid_from
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: valid_until
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:method:: component(component_id: str) -> AIcEntitlementComponentGrant | None
+
+
+.. py:class:: AIcRequestedCapabilityGrant
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permissions
+      :type:  tuple[str, Ellipsis]
+
+
+.. py:class:: AIcRequestedComponentGrant
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: requested_grants
+      :type:  tuple[AIcRequestedCapabilityGrant, Ellipsis]
+
+
+.. py:class:: AIcEntitlementIssuingRequest
+
+   .. py:attribute:: format_version
+      :type:  int
+
+
+   .. py:attribute:: request_id
+      :type:  str
+
+
+   .. py:attribute:: requested_licensing_scope
+      :type:  AIcEntitlementLicensingScope
+
+
+   .. py:attribute:: subject
+      :type:  AIcEntitlementSubject
+
+
+   .. py:attribute:: components
+      :type:  tuple[AIcRequestedComponentGrant, Ellipsis]
+
+
+   .. py:attribute:: generated_at
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: request_digest
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcEntitlementEvidence
+
+   .. py:attribute:: document
+      :type:  AIcEntitlementDocument
+
+
+   .. py:attribute:: evidence_type
+      :type:  str
+
+
+   .. py:attribute:: source
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: verification_material
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcEntitlementEvidenceVerification
+
+   .. py:attribute:: valid
+      :type:  bool
+
+
+   .. py:attribute:: verifier_id
+      :type:  str
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: signer_identity
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcEntitlementProviderRequest
+
+   .. py:attribute:: licensing_scope
+      :type:  AIcEntitlementLicensingScope
+
+
+   .. py:attribute:: context
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: subject
+      :type:  AIcEntitlementSubject | None
+      :value: None
+
+
+
+.. py:class:: AIcEntitlementGrantProvenance
+
+   .. py:attribute:: entitlement_provider_id
+      :type:  str
+
+
+   .. py:attribute:: entitlement_id
+      :type:  str
+
+
+   .. py:attribute:: issuer_id
+      :type:  str
+
+
+   .. py:attribute:: licensing_scope
+      :type:  AIcEntitlementLicensingScope
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permission_id
+      :type:  str
+
+
+   .. py:attribute:: valid_from
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: valid_until
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcEffectiveEntitlementPermission
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: effective_from
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: effective_until
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: constraints
+      :type:  tuple[Mapping[str, object], Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: provenance
+      :type:  tuple[AIcEntitlementGrantProvenance, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: implicit
+      :type:  bool
+      :value: False
+
+
+
+.. py:class:: AIcCapabilityEntitlementContext
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permissions
+      :type:  Mapping[str, AIcEffectiveEntitlementPermission]
+
+
+   .. py:method:: has_permission(permission_id: str) -> bool
+
+
+.. py:class:: AIcEntitlementContext
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: capabilities
+      :type:  tuple[AIcCapabilityEntitlementContext, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: next_transition_at
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: capability(capability_id: str, capability_version: int) -> AIcCapabilityEntitlementContext | None
+
+
+   .. py:method:: has_permission(capability_id: str, capability_version: int, permission_id: str) -> bool
+
+
+.. py:class:: AIcEntitlementProviderBinding
+
+   .. py:attribute:: entitlement_provider_id
+      :type:  str
+
+
+.. py:class:: AIcTrustedEntitlementIssuerRule
+
+   .. py:attribute:: issuer_id
+      :type:  str
+
+
+   .. py:attribute:: component_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: evidence_types
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: signer_identities
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: allows(component_id: str, evidence_type: str, signer_identity: str | None = None) -> bool
+
+
+.. py:class:: AIcEntitlementRemediationRequest
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str | None
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permission_id
+      :type:  str | None
+
+
+   .. py:attribute:: remediation_hint
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: context
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcEntitlementRemediationOutcome
+
+   .. py:attribute:: changed
+      :type:  bool
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcEntitlementLicensingScopeDefinition
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: licensing_scope_type
+      :type:  str
+
+
+   .. py:attribute:: licensing_scope_resolver_id
+      :type:  str
+
+
+   .. py:attribute:: entitlement_providers
+      :type:  tuple[AIcEntitlementProviderBinding, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcEntitlementProfile
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: licensing_scopes
+      :type:  tuple[AIcEntitlementLicensingScopeDefinition, Ellipsis]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcEntitlementProviderRegistration
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: settings
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcEntitlementLicensingScopeResolverRegistration
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: settings
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcEntitlementBootstrap
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: default_entitlement_profile_id
+      :type:  str
+
+
+   .. py:attribute:: entitlement_profiles
+      :type:  tuple[AIcEntitlementProfile, Ellipsis]
+
+
+   .. py:attribute:: entitlement_providers
+      :type:  tuple[AIcEntitlementProviderRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: licensing_scope_resolvers
+      :type:  tuple[AIcEntitlementLicensingScopeResolverRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: trusted_issuers
+      :type:  tuple[AIcTrustedEntitlementIssuerRule, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:method:: profile(profile_id: str | None = None) -> AIcEntitlementProfile
+
+
+.. py:class:: AIcEntitlementLicensingScopeResolutionRequest
+
+   .. py:attribute:: licensing_scope_type
+      :type:  str
+
+
+   .. py:attribute:: definition_id
+      :type:  str
+
+
+   .. py:attribute:: context
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcResolvedEntitlementLicensingScope
+
+   .. py:attribute:: definition_id
+      :type:  str
+
+
+   .. py:attribute:: licensing_scope
+      :type:  AIcEntitlementLicensingScope
+
+
+   .. py:attribute:: entitlement_providers
+      :type:  tuple[AIcEntitlementProviderBinding, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: subject
+      :type:  AIcEntitlementSubject | None
+      :value: None
+
+
+

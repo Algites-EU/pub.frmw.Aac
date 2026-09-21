@@ -1,0 +1,975 @@
+uiintf.models
+=============
+
+.. py:module:: uiintf.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   uiintf.models.AInUiFieldType
+   uiintf.models.AIcUiConfigurationScope
+   uiintf.models.AIcUiConfigurationProviderOption
+   uiintf.models.AIcUiChoice
+   uiintf.models.AIcUiField
+   uiintf.models.AIcUiFieldGroup
+   uiintf.models.AIcUiForm
+   uiintf.models.AIcUiComponent
+   uiintf.models.AIcUiProviderInstance
+   uiintf.models.AIcUiBinding
+   uiintf.models.AIcUiRequirement
+   uiintf.models.AIcUiRequirementEditor
+   uiintf.models.AIcUiObservationSelector
+   uiintf.models.AIcUiObservationBinding
+   uiintf.models.AIcUiEntitlementPermission
+   uiintf.models.AIcUiEntitlementStatus
+   uiintf.models.AIcUiCatalogPackageArtifact
+   uiintf.models.AIcUiPackageArtifact
+   uiintf.models.AIcUiUpgradeReplacement
+   uiintf.models.AIcUiUpgradeDiagnostic
+   uiintf.models.AIcUiUpgradePlan
+
+
+Module Contents
+---------------
+
+.. py:class:: AInUiFieldType
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: STRING
+      :value: 'STRING'
+
+
+
+   .. py:attribute:: INTEGER
+      :value: 'INTEGER'
+
+
+
+   .. py:attribute:: NUMBER
+      :value: 'NUMBER'
+
+
+
+   .. py:attribute:: BOOLEAN
+      :value: 'BOOLEAN'
+
+
+
+   .. py:attribute:: ENUM
+      :value: 'ENUM'
+
+
+
+   .. py:attribute:: MULTILINE
+      :value: 'MULTILINE'
+
+
+
+   .. py:attribute:: JSON
+      :value: 'JSON'
+
+
+
+   .. py:attribute:: SECRET_REFERENCE
+      :value: 'SECRET_REFERENCE'
+
+
+
+   .. py:attribute:: FILE
+      :value: 'FILE'
+
+
+
+   .. py:attribute:: DIRECTORY
+      :value: 'DIRECTORY'
+
+
+
+   .. py:attribute:: INSTANCE_REFERENCE
+      :value: 'INSTANCE_REFERENCE'
+
+
+
+   .. py:attribute:: CAPABILITY_REFERENCE
+      :value: 'CAPABILITY_REFERENCE'
+
+
+
+.. py:class:: AIcUiConfigurationScope
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: editable
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: policy_authority
+      :type:  bool
+      :value: False
+
+
+
+   .. py:property:: key
+      :type: str
+
+
+
+.. py:class:: AIcUiConfigurationProviderOption
+
+   .. py:attribute:: configuration_scope
+      :type:  AIcUiConfigurationScope
+
+
+   .. py:attribute:: configuration_provider_id
+      :type:  str
+
+
+   .. py:attribute:: technical_capabilities
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: authorized_capabilities
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: record_revision
+      :type:  str | int | None
+      :value: None
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:property:: can_write_value
+      :type: bool
+
+
+
+   .. py:property:: can_write_policy
+      :type: bool
+
+
+
+.. py:class:: AIcUiChoice
+
+   .. py:attribute:: value
+      :type:  object
+
+
+   .. py:attribute:: label
+      :type:  str
+
+
+   .. py:attribute:: description
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcUiField
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: label
+      :type:  str
+
+
+   .. py:attribute:: field_type
+      :type:  AInUiFieldType
+
+
+   .. py:attribute:: value
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: required
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: read_only
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: description
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: choices
+      :type:  tuple[AIcUiChoice, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: multiple
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: secret
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: accepted_configuration_scope_types
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: effective_configuration_scope
+      :type:  AIcUiConfigurationScope | None
+      :value: None
+
+
+
+   .. py:attribute:: effective_configuration_provider_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: value_source_kind
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: policy_modes
+      :type:  tuple[Mapping[str, object], Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcUiFieldGroup
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: label
+      :type:  str
+
+
+   .. py:attribute:: fields
+      :type:  tuple[AIcUiField, Ellipsis]
+
+
+   .. py:attribute:: description
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcUiForm
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: title
+      :type:  str
+
+
+   .. py:attribute:: groups
+      :type:  tuple[AIcUiFieldGroup, Ellipsis]
+
+
+   .. py:attribute:: configuration_scopes
+      :type:  tuple[AIcUiConfigurationScope, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: active_configuration_profile_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: configuration_provider_options
+      :type:  tuple[AIcUiConfigurationProviderOption, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: description
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: fields
+      :type: tuple[AIcUiField, Ellipsis]
+
+
+
+.. py:class:: AIcUiComponent
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: provider_definition_ids
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: permission_count
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: name
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: origin
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: readiness_state
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: readiness_reasons
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcUiProviderInstance
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: provider_definition_id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: state
+      :type:  str
+
+
+   .. py:attribute:: configuration_schema
+      :type:  str | None
+
+
+   .. py:attribute:: readiness_state
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: readiness_reasons
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcUiBinding
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: requirement_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+.. py:class:: AIcUiRequirement
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: consumer_instance_name
+      :type:  str
+
+
+   .. py:attribute:: requirement_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: cardinality
+      :type:  str
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+
+
+   .. py:attribute:: selected_provider_instance_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: requested_authorizations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: granted_authorizations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: name
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcUiRequirementEditor
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: requirement_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: cardinality
+      :type:  str
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+
+
+   .. py:attribute:: selected_provider_instance_ids
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: provider_choices
+      :type:  tuple[AIcUiChoice, Ellipsis]
+
+
+   .. py:attribute:: requested_authorizations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: granted_authorizations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: authorization_choices
+      :type:  tuple[AIcUiChoice, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcUiObservationSelector
+
+   .. py:attribute:: capability
+      :type:  str
+      :value: '*'
+
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: operations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: phases
+      :type:  tuple[str, Ellipsis]
+      :value: ('PRE', 'POST')
+
+
+
+.. py:class:: AIcUiObservationBinding
+
+   .. py:attribute:: observer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: selectors
+      :type:  tuple[AIcUiObservationSelector, Ellipsis]
+
+
+.. py:class:: AIcUiEntitlementPermission
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permission_id
+      :type:  str
+
+
+   .. py:attribute:: effective_from
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: effective_until
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: licensing_scope
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: entitlement_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: issuer_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: name
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: implicit
+      :type:  bool
+      :value: False
+
+
+
+.. py:class:: AIcUiEntitlementStatus
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: permissions
+      :type:  tuple[AIcUiEntitlementPermission, Ellipsis]
+
+
+   .. py:attribute:: next_transition_at
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcUiCatalogPackageArtifact
+
+   .. py:attribute:: source_id
+      :type:  str
+
+
+   .. py:attribute:: product_id
+      :type:  str
+
+
+   .. py:attribute:: technology_id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: artifact_id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: publisher
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: package_format
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: artifact_uri
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: sha256
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: provides
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: requires
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: entitlement_summary
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: entitlement_info_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: homepage_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: documentation_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: icon_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: downloaded
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: installed
+      :type:  bool
+      :value: False
+
+
+
+   .. py:property:: identity
+      :type: tuple[str, str, str, str, int, str]
+
+
+
+.. py:class:: AIcUiPackageArtifact
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: state
+      :type:  str
+
+
+   .. py:attribute:: selected_application_scope_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: source_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: signer_identity
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: artifact_path
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: identity
+      :type: tuple[str, int, str]
+
+
+
+   .. py:property:: selected
+      :type: bool
+
+
+
+.. py:class:: AIcUiUpgradeReplacement
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: previous_version
+      :type:  int
+
+
+   .. py:attribute:: target_version
+      :type:  int
+
+
+.. py:class:: AIcUiUpgradeDiagnostic
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: message
+      :type:  str
+
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: requirement_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: capability_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: consumer_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: provider_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: available_provider_component_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: blocking
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: code
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcUiUpgradePlan
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: replacements
+      :type:  tuple[AIcUiUpgradeReplacement, Ellipsis]
+
+
+   .. py:attribute:: compatible
+      :type:  bool
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[AIcUiUpgradeDiagnostic, Ellipsis]
+      :value: ()
+
+
+

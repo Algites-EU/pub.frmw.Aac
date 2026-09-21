@@ -1,0 +1,116 @@
+coreimpl.schemas
+================
+
+.. py:module:: coreimpl.schemas
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   coreimpl.schemas.DefaultingDraft202012Validator
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.schemas.AIcRegisteredSchema
+   coreimpl.schemas.AIcSchemaRegistry
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.schemas.split_versioned_schema_name
+
+
+Module Contents
+---------------
+
+.. py:function:: split_versioned_schema_name(resource_name: str) -> tuple[str, int]
+
+.. py:data:: DefaultingDraft202012Validator
+
+.. py:class:: AIcRegisteredSchema
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: resource_name
+      :type:  str
+
+
+   .. py:attribute:: schema
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: source
+      :type:  str
+
+
+   .. py:property:: key
+      :type: str
+
+
+
+.. py:class:: AIcSchemaRegistry
+
+   .. py:method:: register(resource_name: str, schema: Mapping[str, object], *, source: str = '<memory>') -> AIcRegisteredSchema
+
+
+   .. py:method:: register_text(resource_name: str, text: str, *, source: str = '<memory>') -> AIcRegisteredSchema
+
+
+   .. py:method:: register_file(path: str | pathlib.Path) -> AIcRegisteredSchema
+
+
+   .. py:method:: register_package_resource(package: str, resource_name: str) -> AIcRegisteredSchema
+
+
+   .. py:method:: get(resource_name: str) -> AIcRegisteredSchema
+
+
+   .. py:method:: get_identity(schema_id: str, version: int) -> AIcRegisteredSchema
+
+
+   .. py:method:: versions(schema_id: str) -> tuple[int, Ellipsis]
+
+
+   .. py:method:: normalize(resource_name: str, value: Mapping[str, object] | None, *, apply_defaults: bool = True) -> dict[str, object]
+
+
+   .. py:method:: normalize_value(resource_name: str, value: object, *, apply_defaults: bool = True) -> object
+
+
+   .. py:method:: validate_resolved_configuration(resource_name: str, value: Mapping[str, object] | None) -> tuple[str, Ellipsis]
+
+      Validate a resolved runtime configuration without treating top-level ``required`` as availability.
+
+      AAC multi-provider resolution may legitimately yield missing/UNDEFINED top-level values.
+      ``required`` remains meaningful inside concrete nested structures that are present, but
+      runtime availability/readiness is not inferred from top-level JSON Schema requiredness.
+
+
+
+   .. py:method:: configuration_property_metadata(resource_name: str) -> tuple[tuple[str, Ellipsis], dict[str, tuple[str, Ellipsis]], dict[str, object]]
+
+
+   .. py:method:: snapshot()
+
+
+   .. py:method:: restore(snapshot) -> None
+
+
+   .. py:method:: validate(resource_name: str, value: Mapping[str, object] | None) -> tuple[str, Ellipsis]
+
+

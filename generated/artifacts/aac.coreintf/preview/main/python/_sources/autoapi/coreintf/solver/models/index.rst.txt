@@ -1,0 +1,321 @@
+coreintf.solver.models
+======================
+
+.. py:module:: coreintf.solver.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.solver.models.AInTargetStateRequestMode
+   coreintf.solver.models.AInTargetStateChangeDirection
+   coreintf.solver.models.AIcTargetStateRequest
+   coreintf.solver.models.AIcSolverExplanation
+   coreintf.solver.models.AIcSolverEntitlementDiagnostic
+   coreintf.solver.models.AIcSolverReadinessDiagnostic
+   coreintf.solver.models.AIcTargetStateSelection
+   coreintf.solver.models.AIcTargetStateSolution
+   coreintf.solver.models.AIcTargetStateSolverResult
+
+
+Module Contents
+---------------
+
+.. py:class:: AInTargetStateRequestMode
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: EXACT
+      :value: 'EXACT'
+
+
+
+   .. py:attribute:: ONE_OF
+      :value: 'ONE_OF'
+
+
+
+   .. py:attribute:: LATEST_COMPATIBLE
+      :value: 'LATEST_COMPATIBLE'
+
+
+
+.. py:class:: AInTargetStateChangeDirection
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: INSTALL
+      :value: 'INSTALL'
+
+
+
+   .. py:attribute:: UPGRADE
+      :value: 'UPGRADE'
+
+
+
+   .. py:attribute:: DOWNGRADE
+      :value: 'DOWNGRADE'
+
+
+
+   .. py:attribute:: UNCHANGED
+      :value: 'UNCHANGED'
+
+
+
+.. py:class:: AIcTargetStateRequest
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: mode
+      :type:  AInTargetStateRequestMode
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: exact(component_id: str, version: int) -> AIcTargetStateRequest
+      :classmethod:
+
+
+
+   .. py:method:: latest(component_id: str) -> AIcTargetStateRequest
+      :classmethod:
+
+
+
+.. py:class:: AIcSolverExplanation
+
+   .. py:attribute:: code
+      :type:  str
+
+
+   .. py:attribute:: message
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: caused_by_component_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: capability_id
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcSolverEntitlementDiagnostic
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permission_id
+      :type:  str
+
+
+   .. py:attribute:: possible_licensing_scopes
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: granted
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: entitlement_info_url
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcSolverReadinessDiagnostic
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: state
+      :type:  coreintf.readiness.AInReadinessState
+
+
+   .. py:attribute:: message
+      :type:  str
+
+
+.. py:class:: AIcTargetStateSelection
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: current_version
+      :type:  int | None
+
+
+   .. py:attribute:: target_version
+      :type:  int
+
+
+   .. py:attribute:: direction
+      :type:  AInTargetStateChangeDirection
+
+
+   .. py:attribute:: requested
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: source_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: artifact_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: target_sha256
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: download_required
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: install_required
+      :type:  bool
+      :value: False
+
+
+
+.. py:class:: AIcTargetStateSolution
+
+   .. py:attribute:: selections
+      :type:  tuple[AIcTargetStateSelection, Ellipsis]
+
+
+   .. py:attribute:: explanations
+      :type:  tuple[AIcSolverExplanation, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: entitlement_diagnostics
+      :type:  tuple[AIcSolverEntitlementDiagnostic, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: readiness_diagnostics
+      :type:  tuple[AIcSolverReadinessDiagnostic, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: recommended
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: contains_downgrade
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: freshness_penalty
+      :type:  int
+      :value: 0
+
+
+
+   .. py:property:: changed
+      :type: tuple[AIcTargetStateSelection, Ellipsis]
+
+
+
+.. py:class:: AIcTargetStateSolverResult
+
+   .. py:attribute:: requests
+      :type:  tuple[AIcTargetStateRequest, Ellipsis]
+
+
+   .. py:attribute:: primary
+      :type:  AIcTargetStateSolution | None
+
+
+   .. py:attribute:: alternatives
+      :type:  tuple[AIcTargetStateSolution, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[AIcSolverExplanation, Ellipsis]
+      :value: ()
+
+
+

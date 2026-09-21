@@ -1,0 +1,15 @@
+sigstore
+========
+
+.. py:module:: sigstore
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/sigstore/verifier/index
+
+

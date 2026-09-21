@@ -1,0 +1,60 @@
+coreintf.presentation.models
+============================
+
+.. py:module:: coreintf.presentation.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.presentation.models.AIcDisplayText
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreintf.presentation.models.normalize_display_text
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDisplayText
+
+   Technology-neutral user-visible text metadata.
+
+   `text` is the immediate/fallback rendering. `resource_key` is an opaque
+   localization key for a future/product-provided localization engine.
+   AAC Core does not resolve resource keys itself.
+
+
+   .. py:attribute:: text
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: resource_key
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: fallback
+      :type: str
+
+
+
+.. py:function:: normalize_display_text(value: object | None) -> AIcDisplayText | None
+
+   Normalize a descriptor/contract display-text value.
+
+   Accepted forms are a plain string or a mapping with `text` and/or
+   `resource_key`. Kept as a function rather than an implicit parser so
+   technology bindings can use the same model without a localization engine.
+
+

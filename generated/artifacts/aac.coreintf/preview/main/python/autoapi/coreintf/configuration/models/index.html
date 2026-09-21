@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>coreintf.configuration.models &#8212; aac.coreintf  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="coreintf.configuration.provider" href="../provider/index.html" />
+    <link rel="prev" title="coreintf.configuration.migration" href="../migration/index.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-coreintf.configuration.models">
+<span id="coreintf-configuration-models"></span><h1>coreintf.configuration.models<a class="headerlink" href="#module-coreintf.configuration.models" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AInConfigurationPolicyMode" title="coreintf.configuration.models.AInConfigurationPolicyMode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInConfigurationPolicyMode</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AInConfigurationValueSourceKind" title="coreintf.configuration.models.AInConfigurationValueSourceKind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInConfigurationValueSourceKind</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy" title="coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInWorkspaceConfigurationProfilePolicy</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AInConfigurationTargetKind" title="coreintf.configuration.models.AInConfigurationTargetKind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInConfigurationTargetKind</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AInConfigurationProviderCapability" title="coreintf.configuration.models.AInConfigurationProviderCapability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInConfigurationProviderCapability</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AInConfigurationMutationOperation" title="coreintf.configuration.models.AInConfigurationMutationOperation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInConfigurationMutationOperation</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationTarget" title="coreintf.configuration.models.AIcConfigurationTarget"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationTarget</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationPolicy" title="coreintf.configuration.models.AIcConfigurationPolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationPolicy</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationContribution" title="coreintf.configuration.models.AIcConfigurationContribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationContribution</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationChange" title="coreintf.configuration.models.AIcConfigurationChange"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationChange</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationChangeSet" title="coreintf.configuration.models.AIcConfigurationChangeSet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationChangeSet</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationMutationResult" title="coreintf.configuration.models.AIcConfigurationMutationResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationMutationResult</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProviderBinding" title="coreintf.configuration.models.AIcConfigurationProviderBinding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationProviderBinding</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationScopeDefinition" title="coreintf.configuration.models.AIcConfigurationScopeDefinition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationScopeDefinition</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProfile" title="coreintf.configuration.models.AIcConfigurationProfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationProfile</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProviderRegistration" title="coreintf.configuration.models.AIcConfigurationProviderRegistration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationProviderRegistration</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProfileSourceRegistration" title="coreintf.configuration.models.AIcConfigurationProfileSourceRegistration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationProfileSourceRegistration</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationScopeResolverRegistration" title="coreintf.configuration.models.AIcConfigurationScopeResolverRegistration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationScopeResolverRegistration</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationBootstrap" title="coreintf.configuration.models.AIcConfigurationBootstrap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationBootstrap</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProviderSnapshot" title="coreintf.configuration.models.AIcConfigurationProviderSnapshot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationProviderSnapshot</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProviderAccess" title="coreintf.configuration.models.AIcConfigurationProviderAccess"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationProviderAccess</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProviderRequest" title="coreintf.configuration.models.AIcConfigurationProviderRequest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationProviderRequest</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationScopeResolutionRequest" title="coreintf.configuration.models.AIcConfigurationScopeResolutionRequest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationScopeResolutionRequest</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcResolvedConfigurationScope" title="coreintf.configuration.models.AIcResolvedConfigurationScope"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcResolvedConfigurationScope</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationContributionProvenance" title="coreintf.configuration.models.AIcConfigurationContributionProvenance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationContributionProvenance</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcEffectiveConfigurationPolicy" title="coreintf.configuration.models.AIcEffectiveConfigurationPolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEffectiveConfigurationPolicy</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcEffectiveConfigurationValue" title="coreintf.configuration.models.AIcEffectiveConfigurationValue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEffectiveConfigurationValue</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcEffectiveConfiguration" title="coreintf.configuration.models.AIcEffectiveConfiguration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEffectiveConfiguration</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationPersistedPayload" title="coreintf.configuration.models.AIcConfigurationPersistedPayload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationPersistedPayload</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationMigrationRequest" title="coreintf.configuration.models.AIcConfigurationMigrationRequest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationMigrationRequest</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationMigrationResult" title="coreintf.configuration.models.AIcConfigurationMigrationResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConfigurationMigrationResult</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationPolicyMode">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AInConfigurationPolicyMode</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationPolicyMode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationPolicyMode.LOCK">
+<span class="sig-name descname"><span class="pre">LOCK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'LOCK'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationPolicyMode.LOCK" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationPolicyMode.MIN">
+<span class="sig-name descname"><span class="pre">MIN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MIN'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationPolicyMode.MIN" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationPolicyMode.MAX">
+<span class="sig-name descname"><span class="pre">MAX</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MAX'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationPolicyMode.MAX" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationPolicyMode.IN_SET">
+<span class="sig-name descname"><span class="pre">IN_SET</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'IN_SET'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationPolicyMode.IN_SET" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationPolicyMode.NOT_IN_SET">
+<span class="sig-name descname"><span class="pre">NOT_IN_SET</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NOT_IN_SET'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationPolicyMode.NOT_IN_SET" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationPolicyMode.DEFAULT">
+<span class="sig-name descname"><span class="pre">DEFAULT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DEFAULT'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationPolicyMode.DEFAULT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationValueSourceKind">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AInConfigurationValueSourceKind</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationValueSourceKind" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationValueSourceKind.EXPLICIT">
+<span class="sig-name descname"><span class="pre">EXPLICIT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'EXPLICIT'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationValueSourceKind.EXPLICIT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationValueSourceKind.POLICY_LOCK">
+<span class="sig-name descname"><span class="pre">POLICY_LOCK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'POLICY_LOCK'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationValueSourceKind.POLICY_LOCK" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationValueSourceKind.POLICY_DEFAULT">
+<span class="sig-name descname"><span class="pre">POLICY_DEFAULT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'POLICY_DEFAULT'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationValueSourceKind.POLICY_DEFAULT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationValueSourceKind.SCHEMA_DEFAULT">
+<span class="sig-name descname"><span class="pre">SCHEMA_DEFAULT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SCHEMA_DEFAULT'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationValueSourceKind.SCHEMA_DEFAULT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationValueSourceKind.UNDEFINED">
+<span class="sig-name descname"><span class="pre">UNDEFINED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UNDEFINED'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationValueSourceKind.UNDEFINED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AInWorkspaceConfigurationProfilePolicy</span></span><a class="headerlink" href="#coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy.FORBIDDEN">
+<span class="sig-name descname"><span class="pre">FORBIDDEN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FORBIDDEN'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy.FORBIDDEN" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy.ALLOWED">
+<span class="sig-name descname"><span class="pre">ALLOWED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ALLOWED'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy.ALLOWED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy.ALLOWED_IF_SIGNED">
+<span class="sig-name descname"><span class="pre">ALLOWED_IF_SIGNED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ALLOWED_IF_SIGNED'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy.ALLOWED_IF_SIGNED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationTargetKind">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AInConfigurationTargetKind</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationTargetKind" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationTargetKind.COMPONENT">
+<span class="sig-name descname"><span class="pre">COMPONENT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'COMPONENT'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationTargetKind.COMPONENT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationTargetKind.PROVIDER_INSTANCE">
+<span class="sig-name descname"><span class="pre">PROVIDER_INSTANCE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PROVIDER_INSTANCE'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationTargetKind.PROVIDER_INSTANCE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationProviderCapability">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AInConfigurationProviderCapability</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationProviderCapability" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationProviderCapability.READ">
+<span class="sig-name descname"><span class="pre">READ</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'READ'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationProviderCapability.READ" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationProviderCapability.WRITE_VALUE">
+<span class="sig-name descname"><span class="pre">WRITE_VALUE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'WRITE_VALUE'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationProviderCapability.WRITE_VALUE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationProviderCapability.DELETE_VALUE">
+<span class="sig-name descname"><span class="pre">DELETE_VALUE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DELETE_VALUE'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationProviderCapability.DELETE_VALUE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationProviderCapability.WRITE_POLICY">
+<span class="sig-name descname"><span class="pre">WRITE_POLICY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'WRITE_POLICY'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationProviderCapability.WRITE_POLICY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationProviderCapability.DELETE_POLICY">
+<span class="sig-name descname"><span class="pre">DELETE_POLICY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DELETE_POLICY'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationProviderCapability.DELETE_POLICY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationProviderCapability.ATOMIC_CHANGE_SET">
+<span class="sig-name descname"><span class="pre">ATOMIC_CHANGE_SET</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ATOMIC_CHANGE_SET'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationProviderCapability.ATOMIC_CHANGE_SET" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationMutationOperation">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AInConfigurationMutationOperation</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationMutationOperation" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationMutationOperation.SET_VALUE">
+<span class="sig-name descname"><span class="pre">SET_VALUE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SET_VALUE'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationMutationOperation.SET_VALUE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationMutationOperation.DELETE_VALUE">
+<span class="sig-name descname"><span class="pre">DELETE_VALUE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DELETE_VALUE'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationMutationOperation.DELETE_VALUE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationMutationOperation.SET_POLICY">
+<span class="sig-name descname"><span class="pre">SET_POLICY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SET_POLICY'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationMutationOperation.SET_POLICY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AInConfigurationMutationOperation.DELETE_POLICY">
+<span class="sig-name descname"><span class="pre">DELETE_POLICY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DELETE_POLICY'</span></span><a class="headerlink" href="#coreintf.configuration.models.AInConfigurationMutationOperation.DELETE_POLICY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationTarget">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationTarget</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationTarget" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationTarget.kind">
+<span class="sig-name descname"><span class="pre">kind</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AInConfigurationTargetKind" title="coreintf.configuration.models.AInConfigurationTargetKind"><span class="pre">AInConfigurationTargetKind</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationTarget.kind" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationTarget.component_id">
+<span class="sig-name descname"><span class="pre">component_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationTarget.component_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationTarget.provider_instance_id">
+<span class="sig-name descname"><span class="pre">provider_instance_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationTarget.provider_instance_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationTarget.key">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">key</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationTarget.key" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationPolicy">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationPolicy</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationPolicy" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationPolicy.mode">
+<span class="sig-name descname"><span class="pre">mode</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AInConfigurationPolicyMode" title="coreintf.configuration.models.AInConfigurationPolicyMode"><span class="pre">AInConfigurationPolicyMode</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationPolicy.mode" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationPolicy.value">
+<span class="sig-name descname"><span class="pre">value</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationPolicy.value" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContribution">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationContribution</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContribution" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContribution.property_id">
+<span class="sig-name descname"><span class="pre">property_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContribution.property_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContribution.value">
+<span class="sig-name descname"><span class="pre">value</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContribution.value" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContribution.has_value">
+<span class="sig-name descname"><span class="pre">has_value</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContribution.has_value" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContribution.policy_modes">
+<span class="sig-name descname"><span class="pre">policy_modes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationPolicy" title="coreintf.configuration.models.AIcConfigurationPolicy"><span class="pre">AIcConfigurationPolicy</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContribution.policy_modes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContribution.configuration_schema_id">
+<span class="sig-name descname"><span class="pre">configuration_schema_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContribution.configuration_schema_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContribution.configuration_schema_version">
+<span class="sig-name descname"><span class="pre">configuration_schema_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContribution.configuration_schema_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContribution.written_by_component_version">
+<span class="sig-name descname"><span class="pre">written_by_component_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContribution.written_by_component_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContribution.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContribution.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChange">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationChange</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChange" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChange.property_id">
+<span class="sig-name descname"><span class="pre">property_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChange.property_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChange.operation">
+<span class="sig-name descname"><span class="pre">operation</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AInConfigurationMutationOperation" title="coreintf.configuration.models.AInConfigurationMutationOperation"><span class="pre">AInConfigurationMutationOperation</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChange.operation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChange.value">
+<span class="sig-name descname"><span class="pre">value</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChange.value" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChange.has_value">
+<span class="sig-name descname"><span class="pre">has_value</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChange.has_value" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChange.policy_modes">
+<span class="sig-name descname"><span class="pre">policy_modes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationPolicy" title="coreintf.configuration.models.AIcConfigurationPolicy"><span class="pre">AIcConfigurationPolicy</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChange.policy_modes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChangeSet">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationChangeSet</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChangeSet" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChangeSet.configuration_scope">
+<span class="sig-name descname"><span class="pre">configuration_scope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.context.AIcConfigurationScope</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChangeSet.configuration_scope" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChangeSet.configuration_provider_id">
+<span class="sig-name descname"><span class="pre">configuration_provider_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChangeSet.configuration_provider_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChangeSet.configuration_target">
+<span class="sig-name descname"><span class="pre">configuration_target</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationTarget" title="coreintf.configuration.models.AIcConfigurationTarget"><span class="pre">AIcConfigurationTarget</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChangeSet.configuration_target" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChangeSet.changes">
+<span class="sig-name descname"><span class="pre">changes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationChange" title="coreintf.configuration.models.AIcConfigurationChange"><span class="pre">AIcConfigurationChange</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChangeSet.changes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChangeSet.expected_record_revision">
+<span class="sig-name descname"><span class="pre">expected_record_revision</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChangeSet.expected_record_revision" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChangeSet.configuration_schema_id">
+<span class="sig-name descname"><span class="pre">configuration_schema_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChangeSet.configuration_schema_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChangeSet.configuration_schema_version">
+<span class="sig-name descname"><span class="pre">configuration_schema_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChangeSet.configuration_schema_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChangeSet.written_by_component_version">
+<span class="sig-name descname"><span class="pre">written_by_component_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChangeSet.written_by_component_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationChangeSet.actor_context">
+<span class="sig-name descname"><span class="pre">actor_context</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationChangeSet.actor_context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMutationResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationMutationResult</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMutationResult" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMutationResult.record_revision">
+<span class="sig-name descname"><span class="pre">record_revision</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMutationResult.record_revision" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMutationResult.changed_property_ids">
+<span class="sig-name descname"><span class="pre">changed_property_ids</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMutationResult.changed_property_ids" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMutationResult.diagnostics">
+<span class="sig-name descname"><span class="pre">diagnostics</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMutationResult.diagnostics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderBinding">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationProviderBinding</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderBinding" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderBinding.configuration_provider_id">
+<span class="sig-name descname"><span class="pre">configuration_provider_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderBinding.configuration_provider_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderBinding.priority">
+<span class="sig-name descname"><span class="pre">priority</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderBinding.priority" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeDefinition">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationScopeDefinition</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeDefinition" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeDefinition.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeDefinition.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeDefinition.configuration_scope_type">
+<span class="sig-name descname"><span class="pre">configuration_scope_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeDefinition.configuration_scope_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeDefinition.configuration_scope_resolver_id">
+<span class="sig-name descname"><span class="pre">configuration_scope_resolver_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeDefinition.configuration_scope_resolver_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeDefinition.configuration_providers">
+<span class="sig-name descname"><span class="pre">configuration_providers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProviderBinding" title="coreintf.configuration.models.AIcConfigurationProviderBinding"><span class="pre">AIcConfigurationProviderBinding</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeDefinition.configuration_providers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeDefinition.policy_authority">
+<span class="sig-name descname"><span class="pre">policy_authority</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeDefinition.policy_authority" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeDefinition.mandatory">
+<span class="sig-name descname"><span class="pre">mandatory</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeDefinition.mandatory" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeDefinition.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeDefinition.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeDefinition.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeDefinition.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfile">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationProfile</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfile" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfile.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfile.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfile.version">
+<span class="sig-name descname"><span class="pre">version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfile.version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfile.configuration_scopes">
+<span class="sig-name descname"><span class="pre">configuration_scopes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationScopeDefinition" title="coreintf.configuration.models.AIcConfigurationScopeDefinition"><span class="pre">AIcConfigurationScopeDefinition</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfile.configuration_scopes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfile.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfile.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfile.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfile.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderRegistration">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationProviderRegistration</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderRegistration" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderRegistration.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderRegistration.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderRegistration.type">
+<span class="sig-name descname"><span class="pre">type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderRegistration.type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderRegistration.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderRegistration.settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderRegistration.authentication_profile_id">
+<span class="sig-name descname"><span class="pre">authentication_profile_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderRegistration.authentication_profile_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderRegistration.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderRegistration.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderRegistration.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderRegistration.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfileSourceRegistration">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationProfileSourceRegistration</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfileSourceRegistration" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfileSourceRegistration.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfileSourceRegistration.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfileSourceRegistration.uri">
+<span class="sig-name descname"><span class="pre">uri</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfileSourceRegistration.uri" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfileSourceRegistration.authentication_profile_id">
+<span class="sig-name descname"><span class="pre">authentication_profile_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfileSourceRegistration.authentication_profile_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfileSourceRegistration.required">
+<span class="sig-name descname"><span class="pre">required</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfileSourceRegistration.required" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfileSourceRegistration.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfileSourceRegistration.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProfileSourceRegistration.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProfileSourceRegistration.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeResolverRegistration">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationScopeResolverRegistration</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeResolverRegistration" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeResolverRegistration.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeResolverRegistration.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeResolverRegistration.type">
+<span class="sig-name descname"><span class="pre">type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeResolverRegistration.type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeResolverRegistration.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeResolverRegistration.settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeResolverRegistration.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeResolverRegistration.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeResolverRegistration.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeResolverRegistration.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationBootstrap">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationBootstrap</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationBootstrap" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationBootstrap.schema_version">
+<span class="sig-name descname"><span class="pre">schema_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationBootstrap.schema_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationBootstrap.default_configuration_profile_id">
+<span class="sig-name descname"><span class="pre">default_configuration_profile_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationBootstrap.default_configuration_profile_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationBootstrap.configuration_profiles">
+<span class="sig-name descname"><span class="pre">configuration_profiles</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProfile" title="coreintf.configuration.models.AIcConfigurationProfile"><span class="pre">AIcConfigurationProfile</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationBootstrap.configuration_profiles" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationBootstrap.configuration_providers">
+<span class="sig-name descname"><span class="pre">configuration_providers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProviderRegistration" title="coreintf.configuration.models.AIcConfigurationProviderRegistration"><span class="pre">AIcConfigurationProviderRegistration</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationBootstrap.configuration_providers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationBootstrap.configuration_scope_resolvers">
+<span class="sig-name descname"><span class="pre">configuration_scope_resolvers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationScopeResolverRegistration" title="coreintf.configuration.models.AIcConfigurationScopeResolverRegistration"><span class="pre">AIcConfigurationScopeResolverRegistration</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationBootstrap.configuration_scope_resolvers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationBootstrap.configuration_profile_sources">
+<span class="sig-name descname"><span class="pre">configuration_profile_sources</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProfileSourceRegistration" title="coreintf.configuration.models.AIcConfigurationProfileSourceRegistration"><span class="pre">AIcConfigurationProfileSourceRegistration</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationBootstrap.configuration_profile_sources" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationBootstrap.workspace_configuration_profiles">
+<span class="sig-name descname"><span class="pre">workspace_configuration_profiles</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy" title="coreintf.configuration.models.AInWorkspaceConfigurationProfilePolicy"><span class="pre">AInWorkspaceConfigurationProfilePolicy</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationBootstrap.workspace_configuration_profiles" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationBootstrap.mandatory_configuration_scope_definition_ids">
+<span class="sig-name descname"><span class="pre">mandatory_configuration_scope_definition_ids</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationBootstrap.mandatory_configuration_scope_definition_ids" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationBootstrap.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationBootstrap.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationBootstrap.profile">
+<span class="sig-name descname"><span class="pre">profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProfile" title="coreintf.configuration.models.AIcConfigurationProfile"><span class="pre">AIcConfigurationProfile</span></a></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationBootstrap.profile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderSnapshot">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationProviderSnapshot</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderSnapshot" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderSnapshot.configuration_scope">
+<span class="sig-name descname"><span class="pre">configuration_scope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.context.AIcConfigurationScope</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderSnapshot.configuration_scope" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderSnapshot.configuration_target">
+<span class="sig-name descname"><span class="pre">configuration_target</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationTarget" title="coreintf.configuration.models.AIcConfigurationTarget"><span class="pre">AIcConfigurationTarget</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderSnapshot.configuration_target" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderSnapshot.record_revision">
+<span class="sig-name descname"><span class="pre">record_revision</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderSnapshot.record_revision" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderSnapshot.payload">
+<span class="sig-name descname"><span class="pre">payload</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationPersistedPayload" title="coreintf.configuration.models.AIcConfigurationPersistedPayload"><span class="pre">AIcConfigurationPersistedPayload</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderSnapshot.payload" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderAccess">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationProviderAccess</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderAccess" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderAccess.configuration_scope">
+<span class="sig-name descname"><span class="pre">configuration_scope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.context.AIcConfigurationScope</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderAccess.configuration_scope" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderAccess.configuration_provider_id">
+<span class="sig-name descname"><span class="pre">configuration_provider_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderAccess.configuration_provider_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderAccess.configuration_target">
+<span class="sig-name descname"><span class="pre">configuration_target</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationTarget" title="coreintf.configuration.models.AIcConfigurationTarget"><span class="pre">AIcConfigurationTarget</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderAccess.configuration_target" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderAccess.technical_capabilities">
+<span class="sig-name descname"><span class="pre">technical_capabilities</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AInConfigurationProviderCapability" title="coreintf.configuration.models.AInConfigurationProviderCapability"><span class="pre">AInConfigurationProviderCapability</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderAccess.technical_capabilities" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderAccess.authorized_capabilities">
+<span class="sig-name descname"><span class="pre">authorized_capabilities</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AInConfigurationProviderCapability" title="coreintf.configuration.models.AInConfigurationProviderCapability"><span class="pre">AInConfigurationProviderCapability</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderAccess.authorized_capabilities" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderAccess.diagnostics">
+<span class="sig-name descname"><span class="pre">diagnostics</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderAccess.diagnostics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderAccess.allows">
+<span class="sig-name descname"><span class="pre">allows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capability</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreintf.configuration.models.AInConfigurationProviderCapability" title="coreintf.configuration.models.AInConfigurationProviderCapability"><span class="pre">AInConfigurationProviderCapability</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderAccess.allows" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderRequest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationProviderRequest</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderRequest" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderRequest.configuration_target">
+<span class="sig-name descname"><span class="pre">configuration_target</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationTarget" title="coreintf.configuration.models.AIcConfigurationTarget"><span class="pre">AIcConfigurationTarget</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderRequest.configuration_target" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderRequest.configuration_scope">
+<span class="sig-name descname"><span class="pre">configuration_scope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.context.AIcConfigurationScope</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderRequest.configuration_scope" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationProviderRequest.context">
+<span class="sig-name descname"><span class="pre">context</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationProviderRequest.context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeResolutionRequest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationScopeResolutionRequest</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeResolutionRequest" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeResolutionRequest.configuration_scope_type">
+<span class="sig-name descname"><span class="pre">configuration_scope_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeResolutionRequest.configuration_scope_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeResolutionRequest.definition_id">
+<span class="sig-name descname"><span class="pre">definition_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeResolutionRequest.definition_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationScopeResolutionRequest.context">
+<span class="sig-name descname"><span class="pre">context</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationScopeResolutionRequest.context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcResolvedConfigurationScope">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcResolvedConfigurationScope</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcResolvedConfigurationScope" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcResolvedConfigurationScope.definition_id">
+<span class="sig-name descname"><span class="pre">definition_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcResolvedConfigurationScope.definition_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcResolvedConfigurationScope.configuration_scope">
+<span class="sig-name descname"><span class="pre">configuration_scope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.context.AIcConfigurationScope</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcResolvedConfigurationScope.configuration_scope" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcResolvedConfigurationScope.configuration_providers">
+<span class="sig-name descname"><span class="pre">configuration_providers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationProviderBinding" title="coreintf.configuration.models.AIcConfigurationProviderBinding"><span class="pre">AIcConfigurationProviderBinding</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcResolvedConfigurationScope.configuration_providers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcResolvedConfigurationScope.policy_authority">
+<span class="sig-name descname"><span class="pre">policy_authority</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcResolvedConfigurationScope.policy_authority" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContributionProvenance">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationContributionProvenance</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContributionProvenance" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContributionProvenance.configuration_scope">
+<span class="sig-name descname"><span class="pre">configuration_scope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.context.AIcConfigurationScope</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContributionProvenance.configuration_scope" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContributionProvenance.configuration_provider_id">
+<span class="sig-name descname"><span class="pre">configuration_provider_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContributionProvenance.configuration_provider_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContributionProvenance.configuration_provider_priority">
+<span class="sig-name descname"><span class="pre">configuration_provider_priority</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContributionProvenance.configuration_provider_priority" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationContributionProvenance.provider_record_revision">
+<span class="sig-name descname"><span class="pre">provider_record_revision</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationContributionProvenance.provider_record_revision" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationPolicy">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcEffectiveConfigurationPolicy</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationPolicy" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationPolicy.lock">
+<span class="sig-name descname"><span class="pre">lock</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationPolicy.lock" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationPolicy.has_lock">
+<span class="sig-name descname"><span class="pre">has_lock</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationPolicy.has_lock" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationPolicy.minimum">
+<span class="sig-name descname"><span class="pre">minimum</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationPolicy.minimum" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationPolicy.maximum">
+<span class="sig-name descname"><span class="pre">maximum</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationPolicy.maximum" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationPolicy.in_set">
+<span class="sig-name descname"><span class="pre">in_set</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationPolicy.in_set" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationPolicy.not_in_set">
+<span class="sig-name descname"><span class="pre">not_in_set</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationPolicy.not_in_set" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationPolicy.provenance">
+<span class="sig-name descname"><span class="pre">provenance</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationPolicy" title="coreintf.configuration.models.AIcConfigurationPolicy"><span class="pre">AIcConfigurationPolicy</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationContributionProvenance" title="coreintf.configuration.models.AIcConfigurationContributionProvenance"><span class="pre">AIcConfigurationContributionProvenance</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationPolicy.provenance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationValue">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcEffectiveConfigurationValue</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationValue" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationValue.property_id">
+<span class="sig-name descname"><span class="pre">property_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationValue.property_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationValue.value">
+<span class="sig-name descname"><span class="pre">value</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationValue.value" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationValue.source_kind">
+<span class="sig-name descname"><span class="pre">source_kind</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AInConfigurationValueSourceKind" title="coreintf.configuration.models.AInConfigurationValueSourceKind"><span class="pre">AInConfigurationValueSourceKind</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationValue.source_kind" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationValue.provenance">
+<span class="sig-name descname"><span class="pre">provenance</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationContributionProvenance" title="coreintf.configuration.models.AIcConfigurationContributionProvenance"><span class="pre">AIcConfigurationContributionProvenance</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationValue.provenance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationValue.effective_policy">
+<span class="sig-name descname"><span class="pre">effective_policy</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AIcEffectiveConfigurationPolicy" title="coreintf.configuration.models.AIcEffectiveConfigurationPolicy"><span class="pre">AIcEffectiveConfigurationPolicy</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationValue.effective_policy" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfigurationValue.shadowed_provenance">
+<span class="sig-name descname"><span class="pre">shadowed_provenance</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationContributionProvenance" title="coreintf.configuration.models.AIcConfigurationContributionProvenance"><span class="pre">AIcConfigurationContributionProvenance</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfigurationValue.shadowed_provenance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfiguration">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcEffectiveConfiguration</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfiguration" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfiguration.configuration_target">
+<span class="sig-name descname"><span class="pre">configuration_target</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationTarget" title="coreintf.configuration.models.AIcConfigurationTarget"><span class="pre">AIcConfigurationTarget</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfiguration.configuration_target" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfiguration.values">
+<span class="sig-name descname"><span class="pre">values</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AIcEffectiveConfigurationValue" title="coreintf.configuration.models.AIcEffectiveConfigurationValue"><span class="pre">AIcEffectiveConfigurationValue</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfiguration.values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfiguration.configuration_scopes">
+<span class="sig-name descname"><span class="pre">configuration_scopes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcResolvedConfigurationScope" title="coreintf.configuration.models.AIcResolvedConfigurationScope"><span class="pre">AIcResolvedConfigurationScope</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfiguration.configuration_scopes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfiguration.diagnostics">
+<span class="sig-name descname"><span class="pre">diagnostics</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfiguration.diagnostics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcEffectiveConfiguration.plain_values">
+<span class="sig-name descname"><span class="pre">plain_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcEffectiveConfiguration.plain_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationPersistedPayload">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationPersistedPayload</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationPersistedPayload" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationPersistedPayload.configuration_target">
+<span class="sig-name descname"><span class="pre">configuration_target</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationTarget" title="coreintf.configuration.models.AIcConfigurationTarget"><span class="pre">AIcConfigurationTarget</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationPersistedPayload.configuration_target" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationPersistedPayload.configuration_schema_id">
+<span class="sig-name descname"><span class="pre">configuration_schema_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationPersistedPayload.configuration_schema_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationPersistedPayload.configuration_schema_version">
+<span class="sig-name descname"><span class="pre">configuration_schema_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationPersistedPayload.configuration_schema_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationPersistedPayload.written_by_component_version">
+<span class="sig-name descname"><span class="pre">written_by_component_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationPersistedPayload.written_by_component_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationPersistedPayload.values">
+<span class="sig-name descname"><span class="pre">values</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationPersistedPayload.values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationPersistedPayload.policies">
+<span class="sig-name descname"><span class="pre">policies</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationPolicy" title="coreintf.configuration.models.AIcConfigurationPolicy"><span class="pre">AIcConfigurationPolicy</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationPersistedPayload.policies" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationPersistedPayload.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationPersistedPayload.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMigrationRequest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationMigrationRequest</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMigrationRequest" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMigrationRequest.source">
+<span class="sig-name descname"><span class="pre">source</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationPersistedPayload" title="coreintf.configuration.models.AIcConfigurationPersistedPayload"><span class="pre">AIcConfigurationPersistedPayload</span></a></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMigrationRequest.source" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMigrationRequest.target_configuration_schema_version">
+<span class="sig-name descname"><span class="pre">target_configuration_schema_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMigrationRequest.target_configuration_schema_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMigrationResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.configuration.models.</span></span><span class="sig-name descname"><span class="pre">AIcConfigurationMigrationResult</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMigrationResult" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMigrationResult.configuration_schema_id">
+<span class="sig-name descname"><span class="pre">configuration_schema_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMigrationResult.configuration_schema_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMigrationResult.configuration_schema_version">
+<span class="sig-name descname"><span class="pre">configuration_schema_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMigrationResult.configuration_schema_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMigrationResult.values">
+<span class="sig-name descname"><span class="pre">values</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMigrationResult.values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMigrationResult.policies">
+<span class="sig-name descname"><span class="pre">policies</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.configuration.models.AIcConfigurationPolicy" title="coreintf.configuration.models.AIcConfigurationPolicy"><span class="pre">AIcConfigurationPolicy</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMigrationResult.policies" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.configuration.models.AIcConfigurationMigrationResult.diagnostics">
+<span class="sig-name descname"><span class="pre">diagnostics</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.configuration.models.AIcConfigurationMigrationResult.diagnostics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">aac.coreintf</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">coreintf</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">API Reference</a><ul>
+  <li><a href="../../index.html">coreintf</a><ul>
+  <li><a href="../index.html">coreintf.configuration</a><ul>
+      <li>Previous: <a href="../migration/index.html" title="previous chapter">coreintf.configuration.migration</a></li>
+      <li>Next: <a href="../provider/index.html" title="next chapter">coreintf.configuration.provider</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../../../_sources/autoapi/coreintf/configuration/models/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

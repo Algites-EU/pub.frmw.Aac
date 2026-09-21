@@ -1,0 +1,184 @@
+coreimpl.errors
+===============
+
+.. py:module:: coreimpl.errors
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.errors.AIxCoreImplementationError
+   coreimpl.errors.AIxDescriptorValidationError
+   coreimpl.errors.AIxContractAdmissionError
+   coreimpl.errors.AIxContractConflictError
+   coreimpl.errors.AIxContractNegotiationError
+   coreimpl.errors.AIxSchemaValidationError
+   coreimpl.errors.AIxBindingResolutionError
+   coreimpl.errors.AIxBindingCycleError
+   coreimpl.errors.AIxPluginLoadError
+   coreimpl.errors.AIxProvisioningError
+   coreimpl.errors.AIxEntitlementError
+   coreimpl.errors.AIxLifecycleError
+   coreimpl.errors.AIxPersistenceError
+   coreimpl.errors.AIxPersistenceRevisionConflict
+   coreimpl.errors.AIxProcessEndpointError
+   coreimpl.errors.AIxUpgradeError
+   coreimpl.errors.AIxVerificationError
+   coreimpl.errors.AIxSubinterpreterUnavailableError
+   coreimpl.errors.AIxConfigurationError
+   coreimpl.errors.AIxConfigurationConflictError
+   coreimpl.errors.AIxConfigurationPolicyError
+   coreimpl.errors.AIxPersistedPayloadMigrationError
+   coreimpl.errors.AIxConfigurationRevisionConflict
+   coreimpl.errors.AIxAuthenticationError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxCoreImplementationError
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.errors.AIxAACError`
+
+
+.. py:class:: AIxDescriptorValidationError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxContractAdmissionError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxContractConflictError
+
+   Bases: :py:obj:`AIxContractAdmissionError`
+
+
+.. py:class:: AIxContractNegotiationError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxSchemaValidationError(schema_name: str, diagnostics: tuple[str, Ellipsis])
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+   .. py:attribute:: schema_name
+
+
+   .. py:attribute:: diagnostics
+
+
+.. py:class:: AIxBindingResolutionError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxBindingCycleError(cycle: tuple[str, Ellipsis])
+
+   Bases: :py:obj:`AIxBindingResolutionError`
+
+
+   .. py:attribute:: cycle
+
+
+.. py:class:: AIxPluginLoadError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxProvisioningError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxEntitlementError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxLifecycleError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxPersistenceError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxPersistenceRevisionConflict(record_id: str, expected, actual)
+
+   Bases: :py:obj:`AIxPersistenceError`
+
+
+   .. py:attribute:: record_id
+
+
+   .. py:attribute:: expected
+
+
+   .. py:attribute:: actual
+
+
+.. py:class:: AIxProcessEndpointError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxUpgradeError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxVerificationError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxSubinterpreterUnavailableError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxConfigurationError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxConfigurationConflictError
+
+   Bases: :py:obj:`AIxConfigurationError`
+
+
+.. py:class:: AIxConfigurationPolicyError
+
+   Bases: :py:obj:`AIxConfigurationError`
+
+
+.. py:class:: AIxPersistedPayloadMigrationError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+
+.. py:class:: AIxConfigurationRevisionConflict(expected, actual)
+
+   Bases: :py:obj:`AIxConfigurationConflictError`
+
+
+   .. py:attribute:: expected
+
+
+   .. py:attribute:: actual
+
+
+.. py:class:: AIxAuthenticationError
+
+   Bases: :py:obj:`AIxCoreImplementationError`
+
+

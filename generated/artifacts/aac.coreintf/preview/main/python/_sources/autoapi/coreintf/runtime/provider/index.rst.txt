@@ -1,0 +1,95 @@
+coreintf.runtime.provider
+=========================
+
+.. py:module:: coreintf.runtime.provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.runtime.provider.AIcProviderRuntimeContext
+   coreintf.runtime.provider.AIiProviderRuntime
+   coreintf.runtime.provider.AIiProviderRuntimeFactory
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProviderRuntimeContext
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance
+      :type:  coreintf.instances.AIcProviderInstance
+
+
+   .. py:attribute:: entitlement
+      :type:  coreintf.entitlement.AIcEntitlementContext
+
+
+   .. py:attribute:: component_configuration
+      :type:  coreintf.configuration.AIcEffectiveConfiguration
+
+
+   .. py:attribute:: provider_instance_configuration
+      :type:  coreintf.configuration.AIcEffectiveConfiguration
+
+
+.. py:class:: AIiProviderRuntime
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Explicit AAC provider runtime marker with per-instance lifecycle callbacks.
+
+   Capability operations are supplied by concrete provider-specific interfaces/classes.
+   The lifecycle methods have no-op defaults, equivalent to default methods in a Java
+   interface, so a provider overrides only the phases it needs.
+
+
+   .. py:method:: entitlement_changed(entitlement: coreintf.entitlement.AIcEntitlementContext) -> None
+
+      Receive the Core-validated effective permission/constraint context.
+
+
+
+   .. py:method:: wire(bindings: Mapping[str, tuple[coreintf.invocation.AIiCapabilityHandle, Ellipsis]]) -> None
+
+
+   .. py:method:: prepare_activation() -> None
+
+
+   .. py:method:: readiness() -> coreintf.readiness.AIcReadinessResult
+
+      Report dynamic runtime readiness after wiring/activation preparation.
+
+      The default is READY so existing provider runtimes need no changes.
+
+
+
+   .. py:method:: activate() -> None
+
+
+   .. py:method:: suspend(reason: str) -> None
+
+
+   .. py:method:: deactivate(reason: str) -> None
+
+
+.. py:class:: AIiProviderRuntimeFactory
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Optional statically declared factory for providers requiring custom construction.
+
+
+   .. py:method:: create(context: AIcProviderRuntimeContext) -> AIiProviderRuntime
+      :abstractmethod:
+
+
+

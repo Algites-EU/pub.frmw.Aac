@@ -1,0 +1,68 @@
+coreimpl.instances
+==================
+
+.. py:module:: coreimpl.instances
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.instances.AIcProviderInstanceRegistry
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.instances.instance_to_dict
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProviderInstanceRegistry(store: algites.lib.aac.coreintf.persistence.AIiStateStore | None = None)
+
+   .. py:attribute:: store
+
+
+   .. py:method:: reload() -> None
+
+
+   .. py:method:: all() -> tuple[algites.lib.aac.coreintf.instances.AIcProviderInstance, Ellipsis]
+
+
+   .. py:method:: get(instance_id: str) -> algites.lib.aac.coreintf.instances.AIcProviderInstance
+
+
+   .. py:method:: find(*, component_id: str | None = None, provider_definition_id: str | None = None, name: str | None = None, capability_id: str | None = None, states: tuple[algites.lib.aac.coreintf.instances.AInProviderInstanceState, Ellipsis] | None = None) -> tuple[algites.lib.aac.coreintf.instances.AIcProviderInstance, Ellipsis]
+
+
+   .. py:method:: build(component_id: str, provider: algites.lib.aac.coreintf.descriptor.AIcProviderDefinitionDescriptor, *, name: str = 'default', configuration: dict[str, object] | None = None, state: algites.lib.aac.coreintf.instances.AInProviderInstanceState = AInProviderInstanceState.CONFIGURED) -> algites.lib.aac.coreintf.instances.AIcProviderInstance
+
+
+   .. py:method:: commit(instances: tuple[algites.lib.aac.coreintf.instances.AIcProviderInstance, Ellipsis], extra_mutations: tuple[algites.lib.aac.coreintf.persistence.AIcStateMutation, Ellipsis] = ()) -> None
+
+
+   .. py:method:: create(component_id: str, provider: algites.lib.aac.coreintf.descriptor.AIcProviderDefinitionDescriptor, *, name: str = 'default', configuration: dict[str, object] | None = None, state: algites.lib.aac.coreintf.instances.AInProviderInstanceState = AInProviderInstanceState.CONFIGURED) -> algites.lib.aac.coreintf.instances.AIcProviderInstance
+
+
+   .. py:method:: update(instance_id: str, **changes: object) -> algites.lib.aac.coreintf.instances.AIcProviderInstance
+
+
+   .. py:method:: reconcile_descriptor(descriptor: algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor) -> tuple[algites.lib.aac.coreintf.instances.AIcProviderInstance, Ellipsis]
+
+
+   .. py:method:: reconcile_initial_instances(descriptor: algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor) -> tuple[algites.lib.aac.coreintf.instances.AIcProviderInstance, Ellipsis]
+
+
+   .. py:method:: remove_ids(instance_ids: tuple[str, Ellipsis], extra_mutations: tuple[algites.lib.aac.coreintf.persistence.AIcStateMutation, Ellipsis] = ()) -> tuple[algites.lib.aac.coreintf.instances.AIcProviderInstance, Ellipsis]
+
+
+   .. py:method:: remove_component(component_id: str) -> tuple[algites.lib.aac.coreintf.instances.AIcProviderInstance, Ellipsis]
+
+
+.. py:function:: instance_to_dict(instance: algites.lib.aac.coreintf.instances.AIcProviderInstance) -> dict[str, object]
+

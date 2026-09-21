@@ -1,0 +1,17 @@
+coreintf.configuration
+======================
+
+.. py:module:: coreintf.configuration
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/configuration/migration/index
+   /autoapi/coreintf/configuration/models/index
+   /autoapi/coreintf/configuration/provider/index
+
+

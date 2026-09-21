@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>coreimpl.entitlement_providers &#8212; aac.coreimpl  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="coreimpl.entitlement_refresh" href="../entitlement_refresh/index.html" />
+    <link rel="prev" title="coreimpl.entitlement_documents" href="../entitlement_documents/index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-coreimpl.entitlement_providers">
+<span id="coreimpl-entitlement-providers"></span><h1>coreimpl.entitlement_providers<a class="headerlink" href="#module-coreimpl.entitlement_providers" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.entitlement_providers.AIcFileEntitlementProvider" title="coreimpl.entitlement_providers.AIcFileEntitlementProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcFileEntitlementProvider</span></code></a></p></td>
+<td><p>Reference read-only entitlement provider backed by signed entitlement files.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.entitlement_providers.AIcFileEntitlementProvider">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.entitlement_providers.</span></span><span class="sig-name descname"><span class="pre">AIcFileEntitlementProvider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'*.entitlement.yml'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evidence_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SIGNED_FILE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sidecar_suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.sigstore.json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.entitlement_providers.AIcFileEntitlementProvider" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">algites.lib.aac.coreintf.entitlement.AIiEntitlementProvider</span></code></p>
+<p>Reference read-only entitlement provider backed by signed entitlement files.</p>
+<p>Files are discovered by glob; the detached verification sidecar is intentionally not
+interpreted here. Its path is exposed in verification_material so an evidence verifier
+such as the Sigstore plugin can validate the exact entitlement bytes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.entitlement_providers.AIcFileEntitlementProvider.root">
+<span class="sig-name descname"><span class="pre">root</span></span><a class="headerlink" href="#coreimpl.entitlement_providers.AIcFileEntitlementProvider.root" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.entitlement_providers.AIcFileEntitlementProvider.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'*.entitlement.yml'</span></span><a class="headerlink" href="#coreimpl.entitlement_providers.AIcFileEntitlementProvider.pattern" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.entitlement_providers.AIcFileEntitlementProvider.evidence_type">
+<span class="sig-name descname"><span class="pre">evidence_type</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SIGNED_FILE'</span></span><a class="headerlink" href="#coreimpl.entitlement_providers.AIcFileEntitlementProvider.evidence_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.entitlement_providers.AIcFileEntitlementProvider.sidecar_suffix">
+<span class="sig-name descname"><span class="pre">sidecar_suffix</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.sigstore.json'</span></span><a class="headerlink" href="#coreimpl.entitlement_providers.AIcFileEntitlementProvider.sidecar_suffix" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.entitlement_providers.AIcFileEntitlementProvider.evidence">
+<span class="sig-name descname"><span class="pre">evidence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.entitlement.AIcEntitlementProviderRequest</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">algites.lib.aac.coreintf.entitlement.AIcEntitlementEvidence</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreimpl.entitlement_providers.AIcFileEntitlementProvider.evidence" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">aac.coreimpl</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">coreimpl</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">API Reference</a><ul>
+  <li><a href="../index.html">coreimpl</a><ul>
+      <li>Previous: <a href="../entitlement_documents/index.html" title="previous chapter">coreimpl.entitlement_documents</a></li>
+      <li>Next: <a href="../entitlement_refresh/index.html" title="next chapter">coreimpl.entitlement_refresh</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../../_sources/autoapi/coreimpl/entitlement_providers/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

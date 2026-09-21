@@ -1,0 +1,244 @@
+coreintf.authentication.models
+==============================
+
+.. py:module:: coreintf.authentication.models
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   coreintf.authentication.models.WELL_KNOWN_AUTHENTICATION_MECHANISMS
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.authentication.models.AInSecretProviderCapability
+   coreintf.authentication.models.AIcSecretReference
+   coreintf.authentication.models.AIcAuthenticationParameter
+   coreintf.authentication.models.AIcAuthenticationProfile
+   coreintf.authentication.models.AIcAuthenticationRequest
+   coreintf.authentication.models.AIcClientCertificateMaterial
+   coreintf.authentication.models.AIcAuthenticationMaterial
+   coreintf.authentication.models.AIcSecretProviderRegistration
+   coreintf.authentication.models.AIcSecurityBootstrap
+
+
+Module Contents
+---------------
+
+.. py:data:: WELL_KNOWN_AUTHENTICATION_MECHANISMS
+   :value: ('NONE', 'BASIC', 'BEARER', 'CLIENT_CERTIFICATE')
+
+
+.. py:class:: AInSecretProviderCapability
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: READ
+      :value: 'READ'
+
+
+
+   .. py:attribute:: WRITE
+      :value: 'WRITE'
+
+
+
+   .. py:attribute:: DELETE
+      :value: 'DELETE'
+
+
+
+.. py:class:: AIcSecretReference
+
+   .. py:attribute:: secret_provider_id
+      :type:  str
+
+
+   .. py:attribute:: key
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcAuthenticationParameter
+
+   .. py:attribute:: value
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: secret_reference
+      :type:  AIcSecretReference | None
+      :value: None
+
+
+
+.. py:class:: AIcAuthenticationProfile
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: mechanism
+      :type:  str
+
+
+   .. py:attribute:: parameters
+      :type:  Mapping[str, AIcAuthenticationParameter]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcAuthenticationRequest
+
+   .. py:attribute:: profile
+      :type:  AIcAuthenticationProfile
+
+
+   .. py:attribute:: transport_kind
+      :type:  str
+
+
+   .. py:attribute:: endpoint
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: context
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcClientCertificateMaterial
+
+   .. py:attribute:: certificate_path
+      :type:  str
+
+
+   .. py:attribute:: private_key_path
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: private_key_password
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcAuthenticationMaterial
+
+   .. py:attribute:: headers
+      :type:  Mapping[str, str]
+
+
+   .. py:attribute:: client_certificate
+      :type:  AIcClientCertificateMaterial | None
+      :value: None
+
+
+
+   .. py:attribute:: properties
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcSecretProviderRegistration
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: settings
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: bootstrap_safe
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcSecurityBootstrap
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: secret_providers
+      :type:  tuple[AIcSecretProviderRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: authentication_profiles
+      :type:  tuple[AIcAuthenticationProfile, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:method:: authentication_profile(profile_id: str) -> AIcAuthenticationProfile
+
+

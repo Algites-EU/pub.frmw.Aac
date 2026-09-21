@@ -1,0 +1,109 @@
+coreintf.authorization.models
+=============================
+
+.. py:module:: coreintf.authorization.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.authorization.models.AIcAuthorizationPrincipal
+   coreintf.authorization.models.AIcAuthorizationRequest
+   coreintf.authorization.models.AIcAuthorizationDecision
+   coreintf.authorization.models.AIcComponentAuthorizationGrant
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAuthorizationPrincipal
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+      :value: 'USER'
+
+
+
+   .. py:attribute:: attributes
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcAuthorizationRequest
+
+   .. py:attribute:: action
+      :type:  str
+
+
+   .. py:attribute:: resource_type
+      :type:  str
+
+
+   .. py:attribute:: resource_id
+      :type:  str
+
+
+   .. py:attribute:: principal
+      :type:  AIcAuthorizationPrincipal | None
+      :value: None
+
+
+
+   .. py:attribute:: context
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: attributes
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcAuthorizationDecision
+
+   .. py:attribute:: allowed
+      :type:  bool
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcComponentAuthorizationGrant
+
+   Core-owned authorization grant for one consumer requirement.
+
+   The grant is intentionally independent from entitlement. Permission IDs are
+   defined by the consumed canonical capability contract and are meaningful to
+   both Core and the capability provider.
+
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: requirement_id
+      :type:  str
+
+
+   .. py:attribute:: permission_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: approved_by
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>coreintf.lifecycle.models &#8212; aac.coreintf  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="coreintf.migration" href="../../migration/index.html" />
+    <link rel="prev" title="coreintf.lifecycle.hooks" href="../hooks/index.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-coreintf.lifecycle.models">
+<span id="coreintf-lifecycle-models"></span><h1>coreintf.lifecycle.models<a class="headerlink" href="#module-coreintf.lifecycle.models" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.lifecycle.models.AInLifecycleStage" title="coreintf.lifecycle.models.AInLifecycleStage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInLifecycleStage</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.lifecycle.models.AInLifecycleState" title="coreintf.lifecycle.models.AInLifecycleState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInLifecycleState</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.lifecycle.models.AIcLifecycleContext" title="coreintf.lifecycle.models.AIcLifecycleContext"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcLifecycleContext</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.lifecycle.models.AIcValidationResult" title="coreintf.lifecycle.models.AIcValidationResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcValidationResult</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.lifecycle.models.AIcLifecycleStatus" title="coreintf.lifecycle.models.AIcLifecycleStatus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcLifecycleStatus</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.lifecycle.models.</span></span><span class="sig-name descname"><span class="pre">AInLifecycleStage</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.DISCOVER">
+<span class="sig-name descname"><span class="pre">DISCOVER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DISCOVER'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.DISCOVER" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.VERIFY">
+<span class="sig-name descname"><span class="pre">VERIFY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'VERIFY'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.VERIFY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.ADMIT_CONTRACTS">
+<span class="sig-name descname"><span class="pre">ADMIT_CONTRACTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ADMIT_CONTRACTS'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.ADMIT_CONTRACTS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.PROVISION">
+<span class="sig-name descname"><span class="pre">PROVISION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PROVISION'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.PROVISION" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.VALIDATE">
+<span class="sig-name descname"><span class="pre">VALIDATE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'VALIDATE'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.VALIDATE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.EVALUATE_ENTITLEMENT">
+<span class="sig-name descname"><span class="pre">EVALUATE_ENTITLEMENT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'EVALUATE_ENTITLEMENT'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.EVALUATE_ENTITLEMENT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.RESOLVE">
+<span class="sig-name descname"><span class="pre">RESOLVE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'RESOLVE'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.RESOLVE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.INSTANTIATE">
+<span class="sig-name descname"><span class="pre">INSTANTIATE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'INSTANTIATE'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.INSTANTIATE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.WIRE">
+<span class="sig-name descname"><span class="pre">WIRE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'WIRE'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.WIRE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.ACTIVATABLE">
+<span class="sig-name descname"><span class="pre">ACTIVATABLE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ACTIVATABLE'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.ACTIVATABLE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.ACTIVATE">
+<span class="sig-name descname"><span class="pre">ACTIVATE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ACTIVATE'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.ACTIVATE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.SUSPEND">
+<span class="sig-name descname"><span class="pre">SUSPEND</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SUSPEND'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.SUSPEND" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.DEACTIVATE">
+<span class="sig-name descname"><span class="pre">DEACTIVATE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DEACTIVATE'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.DEACTIVATE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleStage.UNPROVISION">
+<span class="sig-name descname"><span class="pre">UNPROVISION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UNPROVISION'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleStage.UNPROVISION" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.lifecycle.models.</span></span><span class="sig-name descname"><span class="pre">AInLifecycleState</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState.INSTALLED">
+<span class="sig-name descname"><span class="pre">INSTALLED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'INSTALLED'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState.INSTALLED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState.VERIFIED">
+<span class="sig-name descname"><span class="pre">VERIFIED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'VERIFIED'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState.VERIFIED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState.PROVISIONED_UNCONFIGURED">
+<span class="sig-name descname"><span class="pre">PROVISIONED_UNCONFIGURED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PROVISIONED_UNCONFIGURED'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState.PROVISIONED_UNCONFIGURED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState.PROVISIONED">
+<span class="sig-name descname"><span class="pre">PROVISIONED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PROVISIONED'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState.PROVISIONED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState.RESOLVED">
+<span class="sig-name descname"><span class="pre">RESOLVED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'RESOLVED'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState.RESOLVED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState.INSTANTIATED">
+<span class="sig-name descname"><span class="pre">INSTANTIATED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'INSTANTIATED'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState.INSTANTIATED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState.WIRED">
+<span class="sig-name descname"><span class="pre">WIRED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'WIRED'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState.WIRED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState.ACTIVATABLE">
+<span class="sig-name descname"><span class="pre">ACTIVATABLE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ACTIVATABLE'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState.ACTIVATABLE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState.ACTIVE">
+<span class="sig-name descname"><span class="pre">ACTIVE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ACTIVE'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState.ACTIVE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState.SUSPENDED">
+<span class="sig-name descname"><span class="pre">SUSPENDED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SUSPENDED'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState.SUSPENDED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState.FAILED">
+<span class="sig-name descname"><span class="pre">FAILED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FAILED'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState.FAILED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AInLifecycleState.DEACTIVATED">
+<span class="sig-name descname"><span class="pre">DEACTIVATED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DEACTIVATED'</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AInLifecycleState.DEACTIVATED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcLifecycleContext">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.lifecycle.models.</span></span><span class="sig-name descname"><span class="pre">AIcLifecycleContext</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcLifecycleContext" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcLifecycleContext.application_scope_id">
+<span class="sig-name descname"><span class="pre">application_scope_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcLifecycleContext.application_scope_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcLifecycleContext.component_id">
+<span class="sig-name descname"><span class="pre">component_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcLifecycleContext.component_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcLifecycleContext.component_version">
+<span class="sig-name descname"><span class="pre">component_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcLifecycleContext.component_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcLifecycleContext.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcLifecycleContext.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcValidationResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.lifecycle.models.</span></span><span class="sig-name descname"><span class="pre">AIcValidationResult</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcValidationResult" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcValidationResult.valid">
+<span class="sig-name descname"><span class="pre">valid</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcValidationResult.valid" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcValidationResult.diagnostics">
+<span class="sig-name descname"><span class="pre">diagnostics</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcValidationResult.diagnostics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcLifecycleStatus">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.lifecycle.models.</span></span><span class="sig-name descname"><span class="pre">AIcLifecycleStatus</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcLifecycleStatus" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcLifecycleStatus.state">
+<span class="sig-name descname"><span class="pre">state</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.lifecycle.models.AInLifecycleState" title="coreintf.lifecycle.models.AInLifecycleState"><span class="pre">AInLifecycleState</span></a></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcLifecycleStatus.state" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcLifecycleStatus.completed_stages">
+<span class="sig-name descname"><span class="pre">completed_stages</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.lifecycle.models.AInLifecycleStage" title="coreintf.lifecycle.models.AInLifecycleStage"><span class="pre">AInLifecycleStage</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcLifecycleStatus.completed_stages" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcLifecycleStatus.last_failure_stage">
+<span class="sig-name descname"><span class="pre">last_failure_stage</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.lifecycle.models.AInLifecycleStage" title="coreintf.lifecycle.models.AInLifecycleStage"><span class="pre">AInLifecycleStage</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcLifecycleStatus.last_failure_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.lifecycle.models.AIcLifecycleStatus.diagnostics">
+<span class="sig-name descname"><span class="pre">diagnostics</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.lifecycle.models.AIcLifecycleStatus.diagnostics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">aac.coreintf</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">coreintf</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">API Reference</a><ul>
+  <li><a href="../../index.html">coreintf</a><ul>
+  <li><a href="../index.html">coreintf.lifecycle</a><ul>
+      <li>Previous: <a href="../hooks/index.html" title="previous chapter">coreintf.lifecycle.hooks</a></li>
+      <li>Next: <a href="../../migration/index.html" title="next chapter">coreintf.migration</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../../../_sources/autoapi/coreintf/lifecycle/models/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

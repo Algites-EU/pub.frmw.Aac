@@ -1,0 +1,15 @@
+coreintf.presentation
+=====================
+
+.. py:module:: coreintf.presentation
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/presentation/models/index
+
+

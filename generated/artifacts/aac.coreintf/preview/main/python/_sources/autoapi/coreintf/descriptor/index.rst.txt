@@ -1,0 +1,15 @@
+coreintf.descriptor
+===================
+
+.. py:module:: coreintf.descriptor
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/descriptor/models/index
+
+

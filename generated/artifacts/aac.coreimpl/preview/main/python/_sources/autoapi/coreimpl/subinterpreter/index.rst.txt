@@ -1,0 +1,48 @@
+coreimpl.subinterpreter
+=======================
+
+.. py:module:: coreimpl.subinterpreter
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.subinterpreter.AIcSubinterpreterCapabilityEndpoint
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.subinterpreter.subinterpreter_available
+
+
+Module Contents
+---------------
+
+.. py:function:: subinterpreter_available() -> bool
+
+.. py:class:: AIcSubinterpreterCapabilityEndpoint(entrypoint: str)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.invocation.AIiCapabilityEndpoint`
+
+
+   CPython 3.14+ capability endpoint using ``concurrent.interpreters``.
+
+   The target is a module-level ``module:function`` entrypoint receiving
+   ``(operation_id, arguments)``. Only normalized/copyable data crosses the interpreter boundary.
+   Subinterpreters are an isolation/dependency profile, not a hostile-code security sandbox.
+
+
+   .. py:attribute:: entrypoint
+
+
+   .. py:method:: invoke(invocation_input: algites.lib.aac.coreintf.invocation.AIcInvocationInput) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
+
+
+   .. py:method:: close() -> None
+
+

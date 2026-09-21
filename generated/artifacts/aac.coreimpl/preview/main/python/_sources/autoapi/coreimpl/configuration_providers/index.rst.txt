@@ -1,0 +1,152 @@
+coreimpl.configuration_providers
+================================
+
+.. py:module:: coreimpl.configuration_providers
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.configuration_providers.AIcConfigurationDocumentCodec
+   coreimpl.configuration_providers.AIcFileSystemConfigurationProvider
+   coreimpl.configuration_providers.AIcHttpConfigurationProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationDocumentCodec
+
+   .. py:attribute:: FORMAT_VERSION
+      :value: 2
+
+
+
+   .. py:method:: encode_snapshot(snapshot: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderSnapshot) -> dict[str, object]
+      :staticmethod:
+
+
+
+   .. py:method:: decode_snapshot(raw: Mapping[str, object]) -> algites.lib.aac.coreintf.configuration.AIcConfigurationProviderSnapshot
+      :staticmethod:
+
+
+
+   .. py:method:: encode_change_set(change_set: algites.lib.aac.coreintf.configuration.AIcConfigurationChangeSet) -> dict[str, object]
+      :staticmethod:
+
+
+
+   .. py:method:: contributions(snapshot: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderSnapshot) -> tuple[algites.lib.aac.coreintf.configuration.AIcConfigurationContribution, Ellipsis]
+      :staticmethod:
+
+
+
+.. py:class:: AIcFileSystemConfigurationProvider(root: str | pathlib.Path, *, read_only: bool = False, allow_policy_write: bool = True)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.configuration.AIiConfigurationProvider`
+
+
+   .. py:property:: revision_kind
+      :type: algites.lib.aac.coreintf.persistence.AInRecordRevisionKind
+
+
+
+   .. py:method:: persistence_capabilities(request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest) -> tuple[algites.lib.aac.coreintf.persistence.AInPersistenceCapability, Ellipsis]
+
+
+   .. py:attribute:: root
+
+
+   .. py:attribute:: read_only
+      :value: False
+
+
+
+   .. py:attribute:: allow_policy_write
+      :value: True
+
+
+
+   .. py:attribute:: mutation_lock_path
+
+
+   .. py:method:: snapshot(request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest) -> algites.lib.aac.coreintf.configuration.AIcConfigurationProviderSnapshot | None
+
+
+   .. py:method:: contributions(request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest) -> tuple[algites.lib.aac.coreintf.configuration.AIcConfigurationContribution, Ellipsis]
+
+
+   .. py:method:: capabilities(request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest)
+
+
+   .. py:method:: apply_changes(change_set: algites.lib.aac.coreintf.configuration.AIcConfigurationChangeSet) -> algites.lib.aac.coreintf.configuration.AIcConfigurationMutationResult
+
+
+   .. py:method:: replace_payload(request, payload, expected_record_revision=None)
+
+
+.. py:class:: AIcHttpConfigurationProvider(base_url: str, *, authentication: coreimpl.authentication.AIcAuthenticationService | None = None, authentication_profile_id: str | None = None, read_only: bool = False, allow_policy_write: bool = True, timeout_seconds: float = 10.0, mutation_method: str = 'PATCH')
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.configuration.AIiConfigurationProvider`
+
+
+   Reference HTTP provider using GET plus PATCH change-set or PUT full-document semantics.
+
+
+   .. py:property:: revision_kind
+      :type: algites.lib.aac.coreintf.persistence.AInRecordRevisionKind
+
+
+
+   .. py:method:: persistence_capabilities(request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest) -> tuple[algites.lib.aac.coreintf.persistence.AInPersistenceCapability, Ellipsis]
+
+
+   .. py:attribute:: base_url
+
+
+   .. py:attribute:: authentication
+      :value: None
+
+
+
+   .. py:attribute:: authentication_profile_id
+      :value: None
+
+
+
+   .. py:attribute:: read_only
+      :value: False
+
+
+
+   .. py:attribute:: allow_policy_write
+      :value: True
+
+
+
+   .. py:attribute:: timeout_seconds
+
+
+   .. py:attribute:: mutation_method
+      :value: ''
+
+
+
+   .. py:method:: snapshot(request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest) -> algites.lib.aac.coreintf.configuration.AIcConfigurationProviderSnapshot | None
+
+
+   .. py:method:: contributions(request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest)
+
+
+   .. py:method:: capabilities(request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest)
+
+
+   .. py:method:: apply_changes(change_set: algites.lib.aac.coreintf.configuration.AIcConfigurationChangeSet) -> algites.lib.aac.coreintf.configuration.AIcConfigurationMutationResult
+
+
+   .. py:method:: replace_payload(request, payload, expected_record_revision=None)
+
+

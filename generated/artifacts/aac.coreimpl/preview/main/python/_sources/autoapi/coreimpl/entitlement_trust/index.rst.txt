@@ -1,0 +1,28 @@
+coreimpl.entitlement_trust
+==========================
+
+.. py:module:: coreimpl.entitlement_trust
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.entitlement_trust.AIcTrustedEntitlementIssuerRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcTrustedEntitlementIssuerRegistry
+
+   .. py:method:: register(rule: algites.lib.aac.coreintf.entitlement.AIcTrustedEntitlementIssuerRule) -> None
+
+
+   .. py:method:: is_trusted(issuer_id: str, component_id: str, evidence_type: str, verification: algites.lib.aac.coreintf.entitlement.AIcEntitlementEvidenceVerification) -> bool
+
+
+   .. py:method:: has_rules() -> bool
+
+

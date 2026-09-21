@@ -1,0 +1,47 @@
+coreimpl.entitlement_documents
+==============================
+
+.. py:module:: coreimpl.entitlement_documents
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.entitlement_documents.AIcEntitlementDocumentLoader
+   coreimpl.entitlement_documents.AIcEntitlementIssuingRequestLoader
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.entitlement_documents.entitlement_request_digest
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementDocumentLoader
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> algites.lib.aac.coreintf.entitlement.AIcEntitlementDocument
+      :staticmethod:
+
+
+
+.. py:class:: AIcEntitlementIssuingRequestLoader
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> algites.lib.aac.coreintf.entitlement.AIcEntitlementIssuingRequest
+      :staticmethod:
+
+
+
+.. py:function:: entitlement_request_digest(request: algites.lib.aac.coreintf.entitlement.AIcEntitlementIssuingRequest) -> str
+
+   Return a stable SHA-256 digest of the technology-neutral request content.
+
+   The embedded request_digest field is excluded from the digest itself.
+
+

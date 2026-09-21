@@ -1,0 +1,78 @@
+coreintf.invocation.models
+==========================
+
+.. py:module:: coreintf.invocation.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.invocation.models.AIcInvocationInput
+   coreintf.invocation.models.AIcInvocationOutput
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcInvocationInput
+
+   .. py:attribute:: invocation_id
+      :type:  str
+
+
+   .. py:attribute:: parent_invocation_id
+      :type:  str | None
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: operation_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str
+
+
+   .. py:attribute:: arguments
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: requirement_id
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcInvocationOutput
+
+   .. py:attribute:: success
+      :type:  bool
+
+
+   .. py:attribute:: result
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: error
+      :type:  Mapping[str, object] | None
+      :value: None
+
+
+

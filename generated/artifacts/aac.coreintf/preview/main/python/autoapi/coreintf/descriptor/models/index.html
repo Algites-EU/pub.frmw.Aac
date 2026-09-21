@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>coreintf.descriptor.models &#8212; aac.coreintf  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="coreintf.entitlement" href="../../entitlement/index.html" />
+    <link rel="prev" title="coreintf.descriptor" href="../index.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-coreintf.descriptor.models">
+<span id="coreintf-descriptor-models"></span><h1>coreintf.descriptor.models<a class="headerlink" href="#module-coreintf.descriptor.models" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AInComponentOrigin" title="coreintf.descriptor.models.AInComponentOrigin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInComponentOrigin</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AInProviderRuntimeProfile" title="coreintf.descriptor.models.AInProviderRuntimeProfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInProviderRuntimeProfile</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AInEntityExtensionDataAccess" title="coreintf.descriptor.models.AInEntityExtensionDataAccess"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInEntityExtensionDataAccess</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AInCoreEntityAccess" title="coreintf.descriptor.models.AInCoreEntityAccess"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInCoreEntityAccess</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor" title="coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcSchemaMigrationStepDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcPersistedSchemaDescriptor" title="coreintf.descriptor.models.AIcPersistedSchemaDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcPersistedSchemaDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcCoreEntitySchemaCompatibilityDescriptor" title="coreintf.descriptor.models.AIcCoreEntitySchemaCompatibilityDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcCoreEntitySchemaCompatibilityDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcProviderRuntimeDescriptor" title="coreintf.descriptor.models.AIcProviderRuntimeDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcProviderRuntimeDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor" title="coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcInitialProviderInstanceDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcConsumerRequirementDescriptor" title="coreintf.descriptor.models.AIcConsumerRequirementDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcConsumerRequirementDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor" title="coreintf.descriptor.models.AIcProviderDefinitionDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcProviderDefinitionDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor" title="coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntitlementLicensingScopeDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcPermissionDescriptor" title="coreintf.descriptor.models.AIcPermissionDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcPermissionDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor" title="coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcCapabilityEntitlementDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcEntityExtensionDataDescriptor" title="coreintf.descriptor.models.AIcEntityExtensionDataDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntityExtensionDataDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcEntityExtensionDescriptor" title="coreintf.descriptor.models.AIcEntityExtensionDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEntityExtensionDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcLifecycleHooksDescriptor" title="coreintf.descriptor.models.AIcLifecycleHooksDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcLifecycleHooksDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.descriptor.models.AIcComponentDescriptor" title="coreintf.descriptor.models.AIcComponentDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcComponentDescriptor</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInComponentOrigin">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AInComponentOrigin</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInComponentOrigin" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInComponentOrigin.BUILTIN">
+<span class="sig-name descname"><span class="pre">BUILTIN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'BUILTIN'</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInComponentOrigin.BUILTIN" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInComponentOrigin.PACKAGE">
+<span class="sig-name descname"><span class="pre">PACKAGE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PACKAGE'</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInComponentOrigin.PACKAGE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInProviderRuntimeProfile">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AInProviderRuntimeProfile</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInProviderRuntimeProfile" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInProviderRuntimeProfile.IN_PROCESS">
+<span class="sig-name descname"><span class="pre">IN_PROCESS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'IN_PROCESS'</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInProviderRuntimeProfile.IN_PROCESS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInProviderRuntimeProfile.PROCESS">
+<span class="sig-name descname"><span class="pre">PROCESS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PROCESS'</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInProviderRuntimeProfile.PROCESS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInProviderRuntimeProfile.SUBINTERPRETER">
+<span class="sig-name descname"><span class="pre">SUBINTERPRETER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SUBINTERPRETER'</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInProviderRuntimeProfile.SUBINTERPRETER" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInEntityExtensionDataAccess">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AInEntityExtensionDataAccess</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInEntityExtensionDataAccess" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInEntityExtensionDataAccess.NONE">
+<span class="sig-name descname"><span class="pre">NONE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NONE'</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInEntityExtensionDataAccess.NONE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInEntityExtensionDataAccess.READ_ONLY">
+<span class="sig-name descname"><span class="pre">READ_ONLY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'READ_ONLY'</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInEntityExtensionDataAccess.READ_ONLY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInEntityExtensionDataAccess.READ_WRITE">
+<span class="sig-name descname"><span class="pre">READ_WRITE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'READ_WRITE'</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInEntityExtensionDataAccess.READ_WRITE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInCoreEntityAccess">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AInCoreEntityAccess</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInCoreEntityAccess" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AInCoreEntityAccess.READ">
+<span class="sig-name descname"><span class="pre">READ</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'READ'</span></span><a class="headerlink" href="#coreintf.descriptor.models.AInCoreEntityAccess.READ" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcSchemaMigrationStepDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor.from_version">
+<span class="sig-name descname"><span class="pre">from_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor.from_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor.to_version">
+<span class="sig-name descname"><span class="pre">to_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor.to_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor.migrator_id">
+<span class="sig-name descname"><span class="pre">migrator_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor.migrator_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPersistedSchemaDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcPersistedSchemaDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPersistedSchemaDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPersistedSchemaDescriptor.schema_id">
+<span class="sig-name descname"><span class="pre">schema_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPersistedSchemaDescriptor.schema_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPersistedSchemaDescriptor.write_version">
+<span class="sig-name descname"><span class="pre">write_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPersistedSchemaDescriptor.write_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPersistedSchemaDescriptor.readable_versions">
+<span class="sig-name descname"><span class="pre">readable_versions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPersistedSchemaDescriptor.readable_versions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPersistedSchemaDescriptor.migrations">
+<span class="sig-name descname"><span class="pre">migrations</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor" title="coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor"><span class="pre">AIcSchemaMigrationStepDescriptor</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPersistedSchemaDescriptor.migrations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPersistedSchemaDescriptor.resource_name">
+<span class="sig-name descname"><span class="pre">resource_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPersistedSchemaDescriptor.resource_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcCoreEntitySchemaCompatibilityDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcCoreEntitySchemaCompatibilityDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcCoreEntitySchemaCompatibilityDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcCoreEntitySchemaCompatibilityDescriptor.schema_id">
+<span class="sig-name descname"><span class="pre">schema_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcCoreEntitySchemaCompatibilityDescriptor.schema_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcCoreEntitySchemaCompatibilityDescriptor.readable_versions">
+<span class="sig-name descname"><span class="pre">readable_versions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcCoreEntitySchemaCompatibilityDescriptor.readable_versions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderRuntimeDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcProviderRuntimeDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderRuntimeDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderRuntimeDescriptor.profile">
+<span class="sig-name descname"><span class="pre">profile</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.descriptor.models.AInProviderRuntimeProfile" title="coreintf.descriptor.models.AInProviderRuntimeProfile"><span class="pre">AInProviderRuntimeProfile</span></a></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderRuntimeDescriptor.profile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderRuntimeDescriptor.command">
+<span class="sig-name descname"><span class="pre">command</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderRuntimeDescriptor.command" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderRuntimeDescriptor.cwd">
+<span class="sig-name descname"><span class="pre">cwd</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderRuntimeDescriptor.cwd" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderRuntimeDescriptor.environment">
+<span class="sig-name descname"><span class="pre">environment</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderRuntimeDescriptor.environment" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderRuntimeDescriptor.timeout_seconds">
+<span class="sig-name descname"><span class="pre">timeout_seconds</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30.0</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderRuntimeDescriptor.timeout_seconds" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcInitialProviderInstanceDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'default'</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor.configuration">
+<span class="sig-name descname"><span class="pre">configuration</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor.configuration" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcConsumerRequirementDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcConsumerRequirementDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcConsumerRequirementDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcConsumerRequirementDescriptor.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcConsumerRequirementDescriptor.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcConsumerRequirementDescriptor.capability_id">
+<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcConsumerRequirementDescriptor.capability_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcConsumerRequirementDescriptor.versions">
+<span class="sig-name descname"><span class="pre">versions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcConsumerRequirementDescriptor.versions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcConsumerRequirementDescriptor.cardinality">
+<span class="sig-name descname"><span class="pre">cardinality</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.contracts.AInConsumerCardinality</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcConsumerRequirementDescriptor.cardinality" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcConsumerRequirementDescriptor.mandatory">
+<span class="sig-name descname"><span class="pre">mandatory</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcConsumerRequirementDescriptor.mandatory" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcConsumerRequirementDescriptor.requested_authorizations">
+<span class="sig-name descname"><span class="pre">requested_authorizations</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcConsumerRequirementDescriptor.requested_authorizations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcConsumerRequirementDescriptor.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcConsumerRequirementDescriptor.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcConsumerRequirementDescriptor.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcConsumerRequirementDescriptor.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcProviderDefinitionDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability_id">
+<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability_versions">
+<span class="sig-name descname"><span class="pre">capability_versions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability_versions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.implementation_class">
+<span class="sig-name descname"><span class="pre">implementation_class</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.implementation_class" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.configuration_schema">
+<span class="sig-name descname"><span class="pre">configuration_schema</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.descriptor.models.AIcPersistedSchemaDescriptor" title="coreintf.descriptor.models.AIcPersistedSchemaDescriptor"><span class="pre">AIcPersistedSchemaDescriptor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.configuration_schema" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.initial_instances">
+<span class="sig-name descname"><span class="pre">initial_instances</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor" title="coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor"><span class="pre">AIcInitialProviderInstanceDescriptor</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.initial_instances" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.requirements">
+<span class="sig-name descname"><span class="pre">requirements</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.descriptor.models.AIcConsumerRequirementDescriptor" title="coreintf.descriptor.models.AIcConsumerRequirementDescriptor"><span class="pre">AIcConsumerRequirementDescriptor</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.requirements" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.readiness_requirements">
+<span class="sig-name descname"><span class="pre">readiness_requirements</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">coreintf.readiness.AIcReadinessRequirementDescriptor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.readiness_requirements" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.runtime_factory_class">
+<span class="sig-name descname"><span class="pre">runtime_factory_class</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.runtime_factory_class" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.runtime">
+<span class="sig-name descname"><span class="pre">runtime</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.descriptor.models.AIcProviderRuntimeDescriptor" title="coreintf.descriptor.models.AIcProviderRuntimeDescriptor"><span class="pre">AIcProviderRuntimeDescriptor</span></a></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.runtime" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability_version">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">capability_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntitlementLicensingScopeDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor.type">
+<span class="sig-name descname"><span class="pre">type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor.type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPermissionDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcPermissionDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPermissionDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPermissionDescriptor.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPermissionDescriptor.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPermissionDescriptor.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPermissionDescriptor.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPermissionDescriptor.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPermissionDescriptor.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPermissionDescriptor.possible_licensing_scope_types">
+<span class="sig-name descname"><span class="pre">possible_licensing_scope_types</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPermissionDescriptor.possible_licensing_scope_types" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPermissionDescriptor.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPermissionDescriptor.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcPermissionDescriptor.implicit">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">implicit</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcPermissionDescriptor.implicit" title="Link to this definition">¶</a></dt>
+<dd><p>Permission is included/scope-free when no external entitlement licensing scope is possible.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcCapabilityEntitlementDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor.capability_id">
+<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor.capability_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor.capability_version">
+<span class="sig-name descname"><span class="pre">capability_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor.capability_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor.permissions">
+<span class="sig-name descname"><span class="pre">permissions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.descriptor.models.AIcPermissionDescriptor" title="coreintf.descriptor.models.AIcPermissionDescriptor"><span class="pre">AIcPermissionDescriptor</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor.permissions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor.permission">
+<span class="sig-name descname"><span class="pre">permission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">permission_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreintf.descriptor.models.AIcPermissionDescriptor" title="coreintf.descriptor.models.AIcPermissionDescriptor"><span class="pre">AIcPermissionDescriptor</span></a></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor.permission" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDataDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntityExtensionDataDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDataDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDataDescriptor.access">
+<span class="sig-name descname"><span class="pre">access</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.descriptor.models.AInEntityExtensionDataAccess" title="coreintf.descriptor.models.AInEntityExtensionDataAccess"><span class="pre">AInEntityExtensionDataAccess</span></a></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDataDescriptor.access" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDataDescriptor.component_extension_schema">
+<span class="sig-name descname"><span class="pre">component_extension_schema</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.descriptor.models.AIcPersistedSchemaDescriptor" title="coreintf.descriptor.models.AIcPersistedSchemaDescriptor"><span class="pre">AIcPersistedSchemaDescriptor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDataDescriptor.component_extension_schema" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDataDescriptor.compatible_core_entity_schemas">
+<span class="sig-name descname"><span class="pre">compatible_core_entity_schemas</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.descriptor.models.AIcCoreEntitySchemaCompatibilityDescriptor" title="coreintf.descriptor.models.AIcCoreEntitySchemaCompatibilityDescriptor"><span class="pre">AIcCoreEntitySchemaCompatibilityDescriptor</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDataDescriptor.compatible_core_entity_schemas" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDataDescriptor.supports_core_entity_schema">
+<span class="sig-name descname"><span class="pre">supports_core_entity_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDataDescriptor.supports_core_entity_schema" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcEntityExtensionDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDescriptor.entity_type_id">
+<span class="sig-name descname"><span class="pre">entity_type_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDescriptor.entity_type_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDescriptor.core_entity_access">
+<span class="sig-name descname"><span class="pre">core_entity_access</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.descriptor.models.AInCoreEntityAccess" title="coreintf.descriptor.models.AInCoreEntityAccess"><span class="pre">AInCoreEntityAccess</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDescriptor.core_entity_access" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDescriptor.extension_data">
+<span class="sig-name descname"><span class="pre">extension_data</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.descriptor.models.AIcEntityExtensionDataDescriptor" title="coreintf.descriptor.models.AIcEntityExtensionDataDescriptor"><span class="pre">AIcEntityExtensionDataDescriptor</span></a></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDescriptor.extension_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDescriptor.ui">
+<span class="sig-name descname"><span class="pre">ui</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDescriptor.ui" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDescriptor.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDescriptor.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDescriptor.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDescriptor.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcEntityExtensionDescriptor.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcEntityExtensionDescriptor.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcLifecycleHooksDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcLifecycleHooksDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcLifecycleHooksDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcLifecycleHooksDescriptor.provision">
+<span class="sig-name descname"><span class="pre">provision</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcLifecycleHooksDescriptor.provision" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcLifecycleHooksDescriptor.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcLifecycleHooksDescriptor.validate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcLifecycleHooksDescriptor.unprovision">
+<span class="sig-name descname"><span class="pre">unprovision</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcLifecycleHooksDescriptor.unprovision" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.descriptor.models.</span></span><span class="sig-name descname"><span class="pre">AIcComponentDescriptor</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.version">
+<span class="sig-name descname"><span class="pre">version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.providers">
+<span class="sig-name descname"><span class="pre">providers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor" title="coreintf.descriptor.models.AIcProviderDefinitionDescriptor"><span class="pre">AIcProviderDefinitionDescriptor</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.providers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.contract_resources">
+<span class="sig-name descname"><span class="pre">contract_resources</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.contract_resources" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.component_configuration_schema">
+<span class="sig-name descname"><span class="pre">component_configuration_schema</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.descriptor.models.AIcPersistedSchemaDescriptor" title="coreintf.descriptor.models.AIcPersistedSchemaDescriptor"><span class="pre">AIcPersistedSchemaDescriptor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.component_configuration_schema" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.entitlement_licensing_scopes">
+<span class="sig-name descname"><span class="pre">entitlement_licensing_scopes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor" title="coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor"><span class="pre">AIcEntitlementLicensingScopeDescriptor</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.entitlement_licensing_scopes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.provided_capability_entitlements">
+<span class="sig-name descname"><span class="pre">provided_capability_entitlements</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor" title="coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor"><span class="pre">AIcCapabilityEntitlementDescriptor</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.provided_capability_entitlements" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.entity_extensions">
+<span class="sig-name descname"><span class="pre">entity_extensions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.descriptor.models.AIcEntityExtensionDescriptor" title="coreintf.descriptor.models.AIcEntityExtensionDescriptor"><span class="pre">AIcEntityExtensionDescriptor</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.entity_extensions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.lifecycle">
+<span class="sig-name descname"><span class="pre">lifecycle</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.descriptor.models.AIcLifecycleHooksDescriptor" title="coreintf.descriptor.models.AIcLifecycleHooksDescriptor"><span class="pre">AIcLifecycleHooksDescriptor</span></a></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.lifecycle" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.provider">
+<span class="sig-name descname"><span class="pre">provider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">provider_definition_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor" title="coreintf.descriptor.models.AIcProviderDefinitionDescriptor"><span class="pre">AIcProviderDefinitionDescriptor</span></a></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.provider" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.capability_entitlement">
+<span class="sig-name descname"><span class="pre">capability_entitlement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capability_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capability_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor" title="coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor"><span class="pre">AIcCapabilityEntitlementDescriptor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.capability_entitlement" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">aac.coreintf</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">coreintf</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">API Reference</a><ul>
+  <li><a href="../../index.html">coreintf</a><ul>
+  <li><a href="../index.html">coreintf.descriptor</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">coreintf.descriptor</a></li>
+      <li>Next: <a href="../../entitlement/index.html" title="next chapter">coreintf.entitlement</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../../../_sources/autoapi/coreintf/descriptor/models/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

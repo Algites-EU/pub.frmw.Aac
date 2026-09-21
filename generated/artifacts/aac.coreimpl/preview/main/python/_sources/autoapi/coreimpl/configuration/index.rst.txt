@@ -1,0 +1,195 @@
+coreimpl.configuration
+======================
+
+.. py:module:: coreimpl.configuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.configuration.AIcConfigurationProviderRegistry
+   coreimpl.configuration.AIcConfigurationScopeResolverRegistry
+   coreimpl.configuration.AIcStaticConfigurationScopeResolver
+   coreimpl.configuration.AIcStaticConfigurationProvider
+   coreimpl.configuration.AIcAllowOwnNamespaceConfigurationMutationAuthorizer
+   coreimpl.configuration.AIcConfigurationMutationService
+   coreimpl.configuration.AIcConfigurationProviderReadResult
+   coreimpl.configuration.AIcConfigurationReadService
+   coreimpl.configuration.AIcConfigurationContextResolver
+   coreimpl.configuration.AIcConfigurationContributionRecord
+   coreimpl.configuration.AIcConfigurationResolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationProviderRegistry
+
+   .. py:method:: register(configuration_provider_id: str, provider: algites.lib.aac.coreintf.configuration.AIiConfigurationProvider) -> None
+
+
+   .. py:method:: contains(configuration_provider_id: str) -> bool
+
+
+   .. py:method:: get(configuration_provider_id: str) -> algites.lib.aac.coreintf.configuration.AIiConfigurationProvider
+
+
+.. py:class:: AIcConfigurationScopeResolverRegistry
+
+   .. py:method:: register(configuration_scope_resolver_id: str, resolver: algites.lib.aac.coreintf.configuration.AIiConfigurationScopeResolver) -> None
+
+
+   .. py:method:: contains(configuration_scope_resolver_id: str) -> bool
+
+
+   .. py:method:: get(configuration_scope_resolver_id: str) -> algites.lib.aac.coreintf.configuration.AIiConfigurationScopeResolver
+
+
+.. py:class:: AIcStaticConfigurationScopeResolver
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.configuration.AIiConfigurationScopeResolver`
+
+
+   Simple bootstrap/test resolver using a type->id mapping from the request context.
+
+   SYSTEM commonly resolves without an id. Other configuration-scope types are present
+   only when the supplied context contains an identity for that type.
+
+
+   .. py:method:: resolve(request: algites.lib.aac.coreintf.configuration.AIcConfigurationScopeResolutionRequest) -> algites.lib.aac.coreintf.context.AIcConfigurationScope | None
+
+
+.. py:class:: AIcStaticConfigurationProvider(contributions: Mapping[object, Iterable[algites.lib.aac.coreintf.configuration.AIcConfigurationContribution]])
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.configuration.AIiConfigurationProvider`
+
+
+   In-memory read-only provider useful for bootstrap defaults/tests.
+
+
+   .. py:method:: contributions(request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest) -> tuple[algites.lib.aac.coreintf.configuration.AIcConfigurationContribution, Ellipsis]
+
+
+.. py:class:: AIcAllowOwnNamespaceConfigurationMutationAuthorizer
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.configuration.AIiConfigurationMutationAuthorizer`
+
+
+   Baseline Core authorizer: caller may mutate only its own component namespace.
+
+   Product profiles can replace this with principal/role-aware authorization.  The actor
+   component id is supplied as ``actor_context['component_id']``; product/UI administrative
+   principals may set ``configuration_admin=True``.
+
+
+   .. py:method:: authorized_capabilities(request, actor_context, provider_capabilities)
+
+
+   .. py:method:: authorize(change_set: algites.lib.aac.coreintf.configuration.AIcConfigurationChangeSet) -> tuple[bool, tuple[str, Ellipsis]]
+
+
+.. py:class:: AIcConfigurationMutationService(providers: AIcConfigurationProviderRegistry, authorizer: algites.lib.aac.coreintf.configuration.AIiConfigurationMutationAuthorizer)
+
+   .. py:attribute:: providers
+
+
+   .. py:attribute:: authorizer
+
+
+   .. py:method:: access(request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest, actor_context: Mapping[str, object] | None = None) -> algites.lib.aac.coreintf.configuration.AIcConfigurationProviderAccess
+
+
+   .. py:method:: access_for(configuration_provider_id: str, request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest, actor_context: Mapping[str, object] | None = None) -> algites.lib.aac.coreintf.configuration.AIcConfigurationProviderAccess
+
+
+   .. py:method:: apply(change_set: algites.lib.aac.coreintf.configuration.AIcConfigurationChangeSet) -> algites.lib.aac.coreintf.configuration.AIcConfigurationMutationResult
+
+
+.. py:class:: AIcConfigurationProviderReadResult
+
+   .. py:attribute:: contributions
+      :type:  tuple[algites.lib.aac.coreintf.configuration.AIcConfigurationContribution, Ellipsis]
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+.. py:class:: AIcConfigurationReadService(providers, migrations, schema_declaration_resolver, schema_registry, *, persist_migrations: bool = True)
+
+   Normalize versioned provider snapshots before they enter configuration resolution.
+
+   Unsupported persisted representations are preserved by their provider and treated as an
+   unavailable contribution.  They do not abort resolution; diagnostics explain why the
+   contribution was omitted.
+
+
+   .. py:attribute:: providers
+
+
+   .. py:attribute:: migrations
+
+
+   .. py:attribute:: schema_declaration_resolver
+
+
+   .. py:attribute:: schema_registry
+
+
+   .. py:attribute:: persist_migrations
+      :value: True
+
+
+
+   .. py:method:: read(configuration_provider_id: str, request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest) -> AIcConfigurationProviderReadResult
+
+
+   .. py:method:: contributions(configuration_provider_id: str, request: algites.lib.aac.coreintf.configuration.AIcConfigurationProviderRequest)
+
+
+.. py:class:: AIcConfigurationContextResolver(resolvers: AIcConfigurationScopeResolverRegistry)
+
+   .. py:attribute:: resolvers
+
+
+   .. py:method:: resolve(profile: algites.lib.aac.coreintf.configuration.AIcConfigurationProfile, context: Mapping[str, object]) -> tuple[algites.lib.aac.coreintf.configuration.AIcResolvedConfigurationScope, Ellipsis]
+
+
+.. py:class:: AIcConfigurationContributionRecord
+
+   .. py:attribute:: contribution
+      :type:  algites.lib.aac.coreintf.configuration.AIcConfigurationContribution
+
+
+   .. py:attribute:: provenance
+      :type:  algites.lib.aac.coreintf.configuration.AIcConfigurationContributionProvenance
+
+
+   .. py:attribute:: policy_authority
+      :type:  bool
+
+
+.. py:class:: AIcConfigurationResolver(providers: AIcConfigurationProviderRegistry, read_service: AIcConfigurationReadService | None = None)
+
+   Resolve provider contributions for a concrete ordered configuration-scope chain.
+
+   This class intentionally owns no persistence. It consumes normalized contributions
+   from registered configuration-providers and implements deterministic policy/value
+   semantics from the generic AAC specification.
+
+
+   .. py:attribute:: providers
+
+
+   .. py:attribute:: read_service
+      :value: None
+
+
+
+   .. py:method:: resolve(*, configuration_target: algites.lib.aac.coreintf.configuration.AIcConfigurationTarget, configuration_scopes: tuple[algites.lib.aac.coreintf.configuration.AIcResolvedConfigurationScope, Ellipsis], property_ids: Iterable[str], accepted_configuration_scope_types: Mapping[str, tuple[str, Ellipsis]] | None = None, schema_defaults: Mapping[str, object] | None = None, context: Mapping[str, object] | None = None) -> algites.lib.aac.coreintf.configuration.AIcEffectiveConfiguration
+
+

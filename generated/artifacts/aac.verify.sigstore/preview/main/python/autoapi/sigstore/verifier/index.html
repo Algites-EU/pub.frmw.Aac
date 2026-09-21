@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>sigstore.verifier &#8212; aac.verify.sigstore  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="sigstore" href="../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-sigstore.verifier">
+<span id="sigstore-verifier"></span><h1>sigstore.verifier<a class="headerlink" href="#module-sigstore.verifier" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sigstore.verifier.AInSigstoreVerificationMode" title="sigstore.verifier.AInSigstoreVerificationMode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInSigstoreVerificationMode</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#sigstore.verifier.AIcSigstoreTrustPolicy" title="sigstore.verifier.AIcSigstoreTrustPolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcSigstoreTrustPolicy</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sigstore.verifier.AIcSigstorePackageVerifier" title="sigstore.verifier.AIcSigstorePackageVerifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcSigstorePackageVerifier</span></code></a></p></td>
+<td><p>Verify an artifact using the official <code class="docutils literal notranslate"><span class="pre">sigstore</span></code> Python CLI module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#sigstore.verifier.AIcSigstoreEntitlementEvidenceVerifier" title="sigstore.verifier.AIcSigstoreEntitlementEvidenceVerifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcSigstoreEntitlementEvidenceVerifier</span></code></a></p></td>
+<td><p>Detached Sigstore verifier for entitlement-document files.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sigstore.verifier.AInSigstoreVerificationMode">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">sigstore.verifier.</span></span><span class="sig-name descname"><span class="pre">AInSigstoreVerificationMode</span></span><a class="headerlink" href="#sigstore.verifier.AInSigstoreVerificationMode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sigstore.verifier.AInSigstoreVerificationMode.IDENTITY">
+<span class="sig-name descname"><span class="pre">IDENTITY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'IDENTITY'</span></span><a class="headerlink" href="#sigstore.verifier.AInSigstoreVerificationMode.IDENTITY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sigstore.verifier.AInSigstoreVerificationMode.GITHUB">
+<span class="sig-name descname"><span class="pre">GITHUB</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'GITHUB'</span></span><a class="headerlink" href="#sigstore.verifier.AInSigstoreVerificationMode.GITHUB" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstoreTrustPolicy">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">sigstore.verifier.</span></span><span class="sig-name descname"><span class="pre">AIcSigstoreTrustPolicy</span></span><a class="headerlink" href="#sigstore.verifier.AIcSigstoreTrustPolicy" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstoreTrustPolicy.mode">
+<span class="sig-name descname"><span class="pre">mode</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#sigstore.verifier.AInSigstoreVerificationMode" title="sigstore.verifier.AInSigstoreVerificationMode"><span class="pre">AInSigstoreVerificationMode</span></a></span><a class="headerlink" href="#sigstore.verifier.AIcSigstoreTrustPolicy.mode" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstoreTrustPolicy.cert_identity">
+<span class="sig-name descname"><span class="pre">cert_identity</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#sigstore.verifier.AIcSigstoreTrustPolicy.cert_identity" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstoreTrustPolicy.oidc_issuer">
+<span class="sig-name descname"><span class="pre">oidc_issuer</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#sigstore.verifier.AIcSigstoreTrustPolicy.oidc_issuer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstoreTrustPolicy.repository">
+<span class="sig-name descname"><span class="pre">repository</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#sigstore.verifier.AIcSigstoreTrustPolicy.repository" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstoreTrustPolicy.offline">
+<span class="sig-name descname"><span class="pre">offline</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#sigstore.verifier.AIcSigstoreTrustPolicy.offline" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstoreTrustPolicy.bundle_suffix">
+<span class="sig-name descname"><span class="pre">bundle_suffix</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.sigstore.json'</span></span><a class="headerlink" href="#sigstore.verifier.AIcSigstoreTrustPolicy.bundle_suffix" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstoreTrustPolicy.trust_config">
+<span class="sig-name descname"><span class="pre">trust_config</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#sigstore.verifier.AIcSigstoreTrustPolicy.trust_config" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstorePackageVerifier">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">sigstore.verifier.</span></span><span class="sig-name descname"><span class="pre">AIcSigstorePackageVerifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#sigstore.verifier.AIcSigstoreTrustPolicy" title="sigstore.verifier.AIcSigstoreTrustPolicy"><span class="pre">AIcSigstoreTrustPolicy</span></a></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">runner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">subprocess.CompletedProcess</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sigstore.verifier.AIcSigstorePackageVerifier" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">algites.lib.aac.coreintf.verification.AIiPackageVerifier</span></code></p>
+<p>Verify an artifact using the official <code class="docutils literal notranslate"><span class="pre">sigstore</span></code> Python CLI module.</p>
+<p>The signature proves artifact integrity; the supplied trust policy determines which
+signer/publisher identity is accepted. The verifier never falls back to “any valid signer”.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstorePackageVerifier.policy">
+<span class="sig-name descname"><span class="pre">policy</span></span><a class="headerlink" href="#sigstore.verifier.AIcSigstorePackageVerifier.policy" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstorePackageVerifier.verify">
+<span class="sig-name descname"><span class="pre">verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verification_input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.verification.AIcVerificationInput</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.verification.AIcVerificationOutput</span></span></span><a class="headerlink" href="#sigstore.verifier.AIcSigstorePackageVerifier.verify" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstoreEntitlementEvidenceVerifier">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">sigstore.verifier.</span></span><span class="sig-name descname"><span class="pre">AIcSigstoreEntitlementEvidenceVerifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#sigstore.verifier.AIcSigstoreTrustPolicy" title="sigstore.verifier.AIcSigstoreTrustPolicy"><span class="pre">AIcSigstoreTrustPolicy</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">runner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">subprocess.CompletedProcess</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sigstore.verifier.AIcSigstoreEntitlementEvidenceVerifier" title="Link to this definition">¶</a></dt>
+<dd><p>Detached Sigstore verifier for entitlement-document files.</p>
+<p>The configured policy is selected by the document issuer id. Core separately applies
+its trusted-issuer/component policy, so a cryptographically valid but unauthorized signer
+does not become a trusted license issuer merely by being validly signed.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstoreEntitlementEvidenceVerifier.policies">
+<span class="sig-name descname"><span class="pre">policies</span></span><a class="headerlink" href="#sigstore.verifier.AIcSigstoreEntitlementEvidenceVerifier.policies" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sigstore.verifier.AIcSigstoreEntitlementEvidenceVerifier.verify">
+<span class="sig-name descname"><span class="pre">verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evidence</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sigstore.verifier.AIcSigstoreEntitlementEvidenceVerifier.verify" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">aac.verify.sigstore</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">sigstore</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">API Reference</a><ul>
+  <li><a href="../index.html">sigstore</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">sigstore</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../../_sources/autoapi/sigstore/verifier/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

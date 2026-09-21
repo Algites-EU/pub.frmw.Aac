@@ -1,0 +1,64 @@
+coreintf.extensions.store
+=========================
+
+.. py:module:: coreintf.extensions.store
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.extensions.store.AIiEntityExtensionDataStore
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiEntityExtensionDataStore
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Persistence-domain contract for component-extension data.
+
+   Component-owned extension payloads remain independent from persistence metadata. The store wraps
+   each payload envelope in a revisioned record and exposes compare-and-swap mutation semantics.
+
+
+   .. py:property:: revision_kind
+      :type: coreintf.persistence.AInRecordRevisionKind
+
+      :abstractmethod:
+
+
+
+   .. py:method:: persistence_capabilities() -> tuple[coreintf.persistence.AInPersistenceCapability, Ellipsis]
+
+
+   .. py:method:: get_record(entity: coreintf.extensions.models.AIcCoreEntityRef, component_id: str) -> coreintf.extensions.models.AIcEntityExtensionDataRecord | None
+      :abstractmethod:
+
+
+
+   .. py:method:: get(entity: coreintf.extensions.models.AIcCoreEntityRef, component_id: str) -> coreintf.extensions.models.AIcEntityExtensionDataEnvelope | None
+
+
+   .. py:method:: put(envelope: coreintf.extensions.models.AIcEntityExtensionDataEnvelope, *, expected_record_revision: int | str | None = None, expect_absent: bool = False) -> coreintf.extensions.models.AIcEntityExtensionDataRecord
+      :abstractmethod:
+
+
+
+   .. py:method:: remove(entity: coreintf.extensions.models.AIcCoreEntityRef, component_id: str, *, expected_record_revision: int | str | None = None) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: enumerate_records(entity: coreintf.extensions.models.AIcCoreEntityRef) -> tuple[coreintf.extensions.models.AIcEntityExtensionDataRecord, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: enumerate(entity: coreintf.extensions.models.AIcCoreEntityRef) -> tuple[coreintf.extensions.models.AIcEntityExtensionDataEnvelope, Ellipsis]
+
+

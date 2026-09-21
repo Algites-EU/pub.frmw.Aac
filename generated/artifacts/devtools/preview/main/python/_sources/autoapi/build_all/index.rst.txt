@@ -1,0 +1,43 @@
+build_all
+=========
+
+.. py:module:: build_all
+
+.. autoapi-nested-parse::
+
+   Build all AAC Python artifacts into each artifact's run/bld directory.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   build_all.ROOT
+   build_all.ARTIFACTS
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   build_all.run
+   build_all.clean_spillover
+   build_all.main
+
+
+Module Contents
+---------------
+
+.. py:data:: ROOT
+
+.. py:data:: ARTIFACTS
+
+.. py:function:: run(command: list[str], cwd: pathlib.Path) -> None
+
+.. py:function:: clean_spillover(artifact: pathlib.Path) -> None
+
+.. py:function:: main() -> int
+

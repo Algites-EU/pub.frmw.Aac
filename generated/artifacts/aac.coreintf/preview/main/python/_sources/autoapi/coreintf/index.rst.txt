@@ -1,0 +1,43 @@
+coreintf
+========
+
+.. py:module:: coreintf
+
+.. autoapi-nested-parse::
+
+   Public Python binding for Algites Application Components (AAC).
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/authentication/index
+   /autoapi/coreintf/authorization/index
+   /autoapi/coreintf/bindings/index
+   /autoapi/coreintf/catalog/index
+   /autoapi/coreintf/configuration/index
+   /autoapi/coreintf/context/index
+   /autoapi/coreintf/contracts/index
+   /autoapi/coreintf/descriptor/index
+   /autoapi/coreintf/entitlement/index
+   /autoapi/coreintf/errors/index
+   /autoapi/coreintf/extensions/index
+   /autoapi/coreintf/instances/index
+   /autoapi/coreintf/invocation/index
+   /autoapi/coreintf/lifecycle/index
+   /autoapi/coreintf/migration/index
+   /autoapi/coreintf/observation/index
+   /autoapi/coreintf/packages/index
+   /autoapi/coreintf/persistence/index
+   /autoapi/coreintf/presentation/index
+   /autoapi/coreintf/provisioning/index
+   /autoapi/coreintf/readiness/index
+   /autoapi/coreintf/runtime/index
+   /autoapi/coreintf/solver/index
+   /autoapi/coreintf/verification/index
+
+

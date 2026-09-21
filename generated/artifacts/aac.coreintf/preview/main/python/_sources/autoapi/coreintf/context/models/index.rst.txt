@@ -1,0 +1,53 @@
+coreintf.context.models
+=======================
+
+.. py:module:: coreintf.context.models
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   coreintf.context.models.WELL_KNOWN_CONFIGURATION_SCOPE_TYPES
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.context.models.AIcConfigurationScope
+
+
+Module Contents
+---------------
+
+.. py:data:: WELL_KNOWN_CONFIGURATION_SCOPE_TYPES
+   :value: ('SYSTEM', 'USER', 'WORKSPACE')
+
+
+.. py:class:: AIcConfigurationScope
+
+   Concrete configuration-scope identity.
+
+   ``type`` is intentionally an extensible string rather than an AAC enum. SYSTEM,
+   USER and WORKSPACE are well-known names; deployments may add CUSTOMER, TEAM,
+   ORGANIZATION, TENANT or domain-specific types without changing AAC.
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: key
+      :type: str
+
+
+

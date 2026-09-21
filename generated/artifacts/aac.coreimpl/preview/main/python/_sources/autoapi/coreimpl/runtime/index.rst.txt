@@ -1,0 +1,22 @@
+coreimpl.runtime
+================
+
+.. py:module:: coreimpl.runtime
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.runtime.instantiate_provider
+
+
+Module Contents
+---------------
+
+.. py:function:: instantiate_provider(application_scope_id: str, instance: algites.lib.aac.coreintf.instances.AIcProviderInstance, provider_definition: algites.lib.aac.coreintf.descriptor.AIcProviderDefinitionDescriptor, entitlement: algites.lib.aac.coreintf.entitlement.AIcEntitlementContext, *, component_configuration: algites.lib.aac.coreintf.configuration.AIcEffectiveConfiguration, provider_instance_configuration: algites.lib.aac.coreintf.configuration.AIcEffectiveConfiguration) -> algites.lib.aac.coreintf.runtime.AIiProviderRuntime
+
+   Instantiate one provider runtime for one Core-managed provider instance.
+
+

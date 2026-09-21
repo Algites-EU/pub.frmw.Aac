@@ -1,0 +1,22 @@
+coreimpl.schema_resources
+=========================
+
+.. py:module:: coreimpl.schema_resources
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.schema_resources.schema_relative_path
+   coreimpl.schema_resources.read_core_schema
+
+
+Module Contents
+---------------
+
+.. py:function:: schema_relative_path(resource_name: str) -> str
+
+.. py:function:: read_core_schema(resource_name: str) -> str
+

@@ -1,0 +1,84 @@
+coreimpl.descriptor
+===================
+
+.. py:module:: coreimpl.descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.descriptor.AIcDiscoveredComponent
+   coreimpl.descriptor.AIcDescriptorLoader
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.descriptor.read_discovered_resource
+   coreimpl.descriptor.iter_discovered_resources
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDiscoveredComponent
+
+   .. py:attribute:: descriptor
+      :type:  algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor
+
+
+   .. py:attribute:: package
+      :type:  str | None
+
+
+   .. py:attribute:: source
+      :type:  str
+
+
+   .. py:attribute:: artifact_path
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcDescriptorLoader
+
+   .. py:method:: load_file(path: str | pathlib.Path) -> algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor
+      :staticmethod:
+
+
+
+   .. py:method:: load_package(package: str, resource_name: str = 'component.yml') -> algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor
+      :staticmethod:
+
+
+
+   .. py:method:: discover_package(package: str, resource_name: str = 'component.yml', *, artifact_path: str | None = None) -> AIcDiscoveredComponent
+      :staticmethod:
+
+
+
+   .. py:method:: discover_wheel(wheel_path: str | pathlib.Path, package: str, resource_name: str = 'component.yml') -> AIcDiscoveredComponent
+      :staticmethod:
+
+
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> algites.lib.aac.coreintf.descriptor.AIcComponentDescriptor
+      :staticmethod:
+
+
+
+.. py:function:: read_discovered_resource(discovered: AIcDiscoveredComponent, resource_name: str) -> tuple[str, str]
+
+   Read a component resource from its exact candidate artifact when available.
+
+
+.. py:function:: iter_discovered_resources(discovered: AIcDiscoveredComponent, directory: str, *, suffix: str | None = None) -> tuple[tuple[str, str, str], Ellipsis]
+
+   Return ``(name, text, source)`` resources from the exact candidate package.
+
+

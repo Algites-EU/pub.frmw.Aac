@@ -1,0 +1,17 @@
+coreintf.extensions
+===================
+
+.. py:module:: coreintf.extensions
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/extensions/migration/index
+   /autoapi/coreintf/extensions/models/index
+   /autoapi/coreintf/extensions/store/index
+
+

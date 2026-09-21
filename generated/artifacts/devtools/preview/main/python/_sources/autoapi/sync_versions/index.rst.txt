@@ -1,0 +1,32 @@
+sync_versions
+=============
+
+.. py:module:: sync_versions
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   sync_versions.ROOT
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   sync_versions.expected_text
+   sync_versions.main
+
+
+Module Contents
+---------------
+
+.. py:data:: ROOT
+
+.. py:function:: expected_text(path: pathlib.Path) -> str
+
+.. py:function:: main()
+

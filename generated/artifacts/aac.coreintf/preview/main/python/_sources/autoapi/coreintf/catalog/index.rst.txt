@@ -1,0 +1,16 @@
+coreintf.catalog
+================
+
+.. py:module:: coreintf.catalog
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/catalog/models/index
+   /autoapi/coreintf/catalog/provider/index
+
+

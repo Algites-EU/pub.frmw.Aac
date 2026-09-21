@@ -1,0 +1,28 @@
+coreintf.bindings.decorators
+============================
+
+.. py:module:: coreintf.bindings.decorators
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreintf.bindings.decorators.aig_operation
+   coreintf.bindings.decorators.aig_authorization
+
+
+Module Contents
+---------------
+
+.. py:function:: aig_operation(operation_id: str)
+
+   Attach generated binding metadata. Canonical contracts remain authoritative.
+
+
+.. py:function:: aig_authorization(*, all_of: tuple[str, Ellipsis] = (), any_of: tuple[str, Ellipsis] = ())
+
+   Attach generated authorization metadata for diagnostics/reflection only.
+
+

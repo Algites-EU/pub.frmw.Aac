@@ -1,0 +1,35 @@
+check_conventions
+=================
+
+.. py:module:: check_conventions
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   check_conventions.ROOT
+   check_conventions.ALLOWED
+   check_conventions.errors
+   check_conventions.paths
+   check_conventions.tree
+
+
+Module Contents
+---------------
+
+.. py:data:: ROOT
+
+.. py:data:: ALLOWED
+   :value: ('AIi', 'AIc', 'AIn', 'AIx', 'AIig', 'AIcg', 'AIigd', 'AIcgd', 'AIr')
+
+
+.. py:data:: errors
+   :value: []
+
+
+.. py:data:: paths
+
+.. py:data:: tree
+

@@ -1,0 +1,15 @@
+simpleaudit
+===========
+
+.. py:module:: simpleaudit
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/simpleaudit/provider/index
+
+

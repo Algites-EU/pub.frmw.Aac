@@ -1,0 +1,581 @@
+coreintf.descriptor.models
+==========================
+
+.. py:module:: coreintf.descriptor.models
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.descriptor.models.AInComponentOrigin
+   coreintf.descriptor.models.AInProviderRuntimeProfile
+   coreintf.descriptor.models.AInEntityExtensionDataAccess
+   coreintf.descriptor.models.AInCoreEntityAccess
+   coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor
+   coreintf.descriptor.models.AIcPersistedSchemaDescriptor
+   coreintf.descriptor.models.AIcCoreEntitySchemaCompatibilityDescriptor
+   coreintf.descriptor.models.AIcProviderRuntimeDescriptor
+   coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor
+   coreintf.descriptor.models.AIcConsumerRequirementDescriptor
+   coreintf.descriptor.models.AIcProviderDefinitionDescriptor
+   coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor
+   coreintf.descriptor.models.AIcPermissionDescriptor
+   coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor
+   coreintf.descriptor.models.AIcEntityExtensionDataDescriptor
+   coreintf.descriptor.models.AIcEntityExtensionDescriptor
+   coreintf.descriptor.models.AIcLifecycleHooksDescriptor
+   coreintf.descriptor.models.AIcComponentDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AInComponentOrigin
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: BUILTIN
+      :value: 'BUILTIN'
+
+
+
+   .. py:attribute:: PACKAGE
+      :value: 'PACKAGE'
+
+
+
+.. py:class:: AInProviderRuntimeProfile
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: IN_PROCESS
+      :value: 'IN_PROCESS'
+
+
+
+   .. py:attribute:: PROCESS
+      :value: 'PROCESS'
+
+
+
+   .. py:attribute:: SUBINTERPRETER
+      :value: 'SUBINTERPRETER'
+
+
+
+.. py:class:: AInEntityExtensionDataAccess
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: NONE
+      :value: 'NONE'
+
+
+
+   .. py:attribute:: READ_ONLY
+      :value: 'READ_ONLY'
+
+
+
+   .. py:attribute:: READ_WRITE
+      :value: 'READ_WRITE'
+
+
+
+.. py:class:: AInCoreEntityAccess
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: READ
+      :value: 'READ'
+
+
+
+.. py:class:: AIcSchemaMigrationStepDescriptor
+
+   .. py:attribute:: from_version
+      :type:  int
+
+
+   .. py:attribute:: to_version
+      :type:  int
+
+
+   .. py:attribute:: migrator_id
+      :type:  str
+
+
+.. py:class:: AIcPersistedSchemaDescriptor
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: write_version
+      :type:  int
+
+
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: migrations
+      :type:  tuple[AIcSchemaMigrationStepDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: resource_name
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcCoreEntitySchemaCompatibilityDescriptor
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
+
+
+.. py:class:: AIcProviderRuntimeDescriptor
+
+   .. py:attribute:: profile
+      :type:  AInProviderRuntimeProfile
+
+
+   .. py:attribute:: command
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: cwd
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: environment
+      :type:  Mapping[str, str]
+
+
+   .. py:attribute:: timeout_seconds
+      :type:  float
+      :value: 30.0
+
+
+
+.. py:class:: AIcInitialProviderInstanceDescriptor
+
+   .. py:attribute:: name
+      :type:  str
+      :value: 'default'
+
+
+
+   .. py:attribute:: configuration
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcConsumerRequirementDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: cardinality
+      :type:  coreintf.contracts.AInConsumerCardinality
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: requested_authorizations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcProviderDefinitionDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: implementation_class
+      :type:  str
+
+
+   .. py:attribute:: configuration_schema
+      :type:  AIcPersistedSchemaDescriptor | str | None
+      :value: None
+
+
+
+   .. py:attribute:: initial_instances
+      :type:  tuple[AIcInitialProviderInstanceDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: requirements
+      :type:  tuple[AIcConsumerRequirementDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: readiness_requirements
+      :type:  tuple[coreintf.readiness.AIcReadinessRequirementDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: runtime_factory_class
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: runtime
+      :type:  AIcProviderRuntimeDescriptor
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:property:: capability_version
+      :type: int
+
+
+
+.. py:class:: AIcEntitlementLicensingScopeDescriptor
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcPermissionDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: possible_licensing_scope_types
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:property:: implicit
+      :type: bool
+
+
+      Permission is included/scope-free when no external entitlement licensing scope is possible.
+
+
+.. py:class:: AIcCapabilityEntitlementDescriptor
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permissions
+      :type:  tuple[AIcPermissionDescriptor, Ellipsis]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:method:: permission(permission_id: str) -> AIcPermissionDescriptor
+
+
+.. py:class:: AIcEntityExtensionDataDescriptor
+
+   .. py:attribute:: access
+      :type:  AInEntityExtensionDataAccess
+
+
+   .. py:attribute:: component_extension_schema
+      :type:  AIcPersistedSchemaDescriptor | None
+      :value: None
+
+
+
+   .. py:attribute:: compatible_core_entity_schemas
+      :type:  tuple[AIcCoreEntitySchemaCompatibilityDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: supports_core_entity_schema(schema_id: str, schema_version: int) -> bool
+
+
+.. py:class:: AIcEntityExtensionDescriptor
+
+   .. py:attribute:: entity_type_id
+      :type:  str
+
+
+   .. py:attribute:: core_entity_access
+      :type:  tuple[AInCoreEntityAccess, Ellipsis]
+
+
+   .. py:attribute:: extension_data
+      :type:  AIcEntityExtensionDataDescriptor
+
+
+   .. py:attribute:: ui
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcLifecycleHooksDescriptor
+
+   .. py:attribute:: provision
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: validate
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: unprovision
+      :type:  str | None
+      :value: None
+
+
+
+.. py:class:: AIcComponentDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: providers
+      :type:  tuple[AIcProviderDefinitionDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: contract_resources
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: component_configuration_schema
+      :type:  AIcPersistedSchemaDescriptor | str | None
+      :value: None
+
+
+
+   .. py:attribute:: entitlement_licensing_scopes
+      :type:  tuple[AIcEntitlementLicensingScopeDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: provided_capability_entitlements
+      :type:  tuple[AIcCapabilityEntitlementDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: entity_extensions
+      :type:  tuple[AIcEntityExtensionDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: lifecycle
+      :type:  AIcLifecycleHooksDescriptor
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:method:: provider(provider_definition_id: str) -> AIcProviderDefinitionDescriptor
+
+
+   .. py:method:: capability_entitlement(capability_id: str, capability_version: int) -> AIcCapabilityEntitlementDescriptor | None
+
+

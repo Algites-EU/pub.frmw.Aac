@@ -1,0 +1,40 @@
+coreimpl.package_documents
+==========================
+
+.. py:module:: coreimpl.package_documents
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.package_documents.AIcPackageBootstrapLoader
+   coreimpl.package_documents.AIcWorkspaceComponentRequirementsLoader
+   coreimpl.package_documents.AIcWorkspaceComponentLockLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageBootstrapLoader
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> algites.lib.aac.coreintf.packages.AIcPackageBootstrap
+      :staticmethod:
+
+
+
+.. py:class:: AIcWorkspaceComponentRequirementsLoader
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> algites.lib.aac.coreintf.packages.AIcWorkspaceComponentRequirements
+      :staticmethod:
+
+
+
+.. py:class:: AIcWorkspaceComponentLockLoader
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> algites.lib.aac.coreintf.packages.AIcWorkspaceComponentLock
+      :staticmethod:
+
+
+

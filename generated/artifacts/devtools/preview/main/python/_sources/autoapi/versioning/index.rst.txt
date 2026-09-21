@@ -1,0 +1,58 @@
+versioning
+==========
+
+.. py:module:: versioning
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   versioning.AIcVersionContext
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   versioning.repository_context
+   versioning.artifact_context
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcVersionContext
+
+   .. py:attribute:: release_line
+      :type:  str
+
+
+   .. py:attribute:: revision
+      :type:  int
+
+
+   .. py:attribute:: qualifier_kind
+      :type:  str
+
+
+   .. py:attribute:: qualifier_label
+      :type:  str
+
+
+   .. py:property:: algites
+      :type: str
+
+
+
+   .. py:property:: pep440
+      :type: str
+
+
+
+.. py:function:: repository_context(root: pathlib.Path) -> AIcVersionContext
+
+.. py:function:: artifact_context(root: pathlib.Path, artifact: pathlib.Path) -> AIcVersionContext
+

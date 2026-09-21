@@ -1,0 +1,56 @@
+coreimpl.readiness
+==================
+
+.. py:module:: coreimpl.readiness
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.readiness.AIcReadinessEvaluator
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreimpl.readiness.worst_readiness
+
+
+Module Contents
+---------------
+
+.. py:function:: worst_readiness(*states: algites.lib.aac.coreintf.readiness.AInReadinessState) -> algites.lib.aac.coreintf.readiness.AInReadinessState
+
+.. py:class:: AIcReadinessEvaluator
+
+   Evaluate static AAC readiness requirements and aggregate runtime reports.
+
+   Activation and readiness are intentionally distinct.  Missing runtime inputs never undo a
+   successful component activation; they produce structured readiness state for the narrowest
+   affected provider/capability instead.
+
+
+   .. py:method:: static_provider_readiness(application_scope_id: str, component_id: str, provider_instance_id: str, provider: algites.lib.aac.coreintf.descriptor.AIcProviderDefinitionDescriptor, component_configuration: algites.lib.aac.coreintf.configuration.AIcEffectiveConfiguration, provider_configuration: algites.lib.aac.coreintf.configuration.AIcEffectiveConfiguration, context: Mapping[str, object], provider_local_configuration: Mapping[str, object] | None = None) -> algites.lib.aac.coreintf.readiness.AIcProviderReadiness
+      :staticmethod:
+
+
+
+   .. py:method:: combine_runtime(static: algites.lib.aac.coreintf.readiness.AIcProviderReadiness, runtime: algites.lib.aac.coreintf.readiness.AIcReadinessResult) -> algites.lib.aac.coreintf.readiness.AIcProviderReadiness
+      :staticmethod:
+
+
+
+   .. py:method:: component(application_scope_id: str, component_id: str, reports: tuple[algites.lib.aac.coreintf.readiness.AIcProviderReadiness, Ellipsis]) -> algites.lib.aac.coreintf.readiness.AIcComponentReadiness
+      :staticmethod:
+
+
+
+   .. py:method:: capabilities(application_scope_id: str, reports: tuple[algites.lib.aac.coreintf.readiness.AIcProviderReadiness, Ellipsis]) -> tuple[algites.lib.aac.coreintf.readiness.AIcCapabilityReadiness, Ellipsis]
+      :staticmethod:
+
+
+

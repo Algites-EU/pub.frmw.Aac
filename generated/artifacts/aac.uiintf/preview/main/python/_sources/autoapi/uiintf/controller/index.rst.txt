@@ -1,0 +1,160 @@
+uiintf.controller
+=================
+
+.. py:module:: uiintf.controller
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   uiintf.controller.AIiAacUiController
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiAacUiController
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Technology-neutral administration surface over Core-owned AAC state.
+
+
+   .. py:method:: components() -> tuple[uiintf.models.AIcUiComponent, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: provider_instances(component_id: str | None = None) -> tuple[uiintf.models.AIcUiProviderInstance, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: create_provider_instance(component_id: str, provider_definition_id: str, name: str = 'default') -> uiintf.models.AIcUiProviderInstance
+      :abstractmethod:
+
+
+
+   .. py:method:: rename_provider_instance(instance_id: str, name: str) -> uiintf.models.AIcUiProviderInstance
+      :abstractmethod:
+
+
+
+   .. py:method:: remove_provider_instance(instance_id: str) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: provider_configuration_form(instance_id: str) -> uiintf.models.AIcUiForm
+      :abstractmethod:
+
+
+
+   .. py:method:: update_provider_scoped_configuration(instance_id: str, configuration_scope_type: str, configuration_scope_id: str | None, configuration_provider_id: str, values: Mapping[str, object], expected_record_revision: str | int | None = None) -> uiintf.models.AIcUiProviderInstance
+      :abstractmethod:
+
+
+
+   .. py:method:: update_provider_configuration(instance_id: str, values: Mapping[str, object]) -> uiintf.models.AIcUiProviderInstance
+      :abstractmethod:
+
+
+
+   .. py:method:: bindings() -> tuple[uiintf.models.AIcUiBinding, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: requirements() -> tuple[uiintf.models.AIcUiRequirement, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: requirement_editor(consumer_instance_id: str, requirement_id: str) -> uiintf.models.AIcUiRequirementEditor
+      :abstractmethod:
+
+
+
+   .. py:method:: set_requirement_providers(consumer_instance_id: str, requirement_id: str, provider_instance_ids: tuple[str, Ellipsis]) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: set_requirement_authorizations(consumer_instance_id: str, requirement_id: str, permission_ids: tuple[str, Ellipsis]) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: entitlement_status(component_id: str) -> uiintf.models.AIcUiEntitlementStatus
+      :abstractmethod:
+
+
+
+   .. py:method:: observation_bindings() -> tuple[uiintf.models.AIcUiObservationBinding, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: put_observation_binding(binding: uiintf.models.AIcUiObservationBinding) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: delete_observation_binding(observer_instance_id: str) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: catalog_defaults() -> tuple[str | None, str | None]
+      :abstractmethod:
+
+
+
+   .. py:method:: catalog_packages(product_id: str, technology_id: str, text: str | None = None) -> tuple[uiintf.models.AIcUiCatalogPackageArtifact, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: solve_catalog_target(application_scope_id: str, identity: tuple[str, str, str, str, int, str]) -> algites.lib.aac.coreintf.solver.AIcTargetStateSolverResult
+      :abstractmethod:
+
+
+
+   .. py:method:: apply_target_state_solution(application_scope_id: str, solution: algites.lib.aac.coreintf.solver.AIcTargetStateSolution) -> algites.lib.aac.coreintf.solver.AIcTargetStateSolution
+      :abstractmethod:
+
+
+
+   .. py:method:: download_catalog_package(identity: tuple[str, str, str, str, int, str]) -> uiintf.models.AIcUiPackageArtifact
+      :abstractmethod:
+
+
+
+   .. py:method:: install_catalog_package(identity: tuple[str, str, str, str, int, str]) -> uiintf.models.AIcUiPackageArtifact
+      :abstractmethod:
+
+
+
+   .. py:method:: restore_obsolete_package(identity: tuple[str, int, str]) -> uiintf.models.AIcUiPackageArtifact
+      :abstractmethod:
+
+
+
+   .. py:method:: package_artifacts() -> tuple[uiintf.models.AIcUiPackageArtifact, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: plan_package_upgrades(application_scope_id: str, package_identities: tuple[tuple[str, int, str], Ellipsis]) -> uiintf.models.AIcUiUpgradePlan
+      :abstractmethod:
+
+
+
+   .. py:method:: apply_package_upgrades(application_scope_id: str, package_identities: tuple[tuple[str, int, str], Ellipsis]) -> uiintf.models.AIcUiUpgradePlan
+      :abstractmethod:
+
+
+

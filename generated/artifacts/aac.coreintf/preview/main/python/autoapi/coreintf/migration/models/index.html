@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>coreintf.migration.models &#8212; aac.coreintf  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="coreintf.observation" href="../../observation/index.html" />
+    <link rel="prev" title="coreintf.migration" href="../index.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-coreintf.migration.models">
+<span id="coreintf-migration-models"></span><h1>coreintf.migration.models<a class="headerlink" href="#module-coreintf.migration.models" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.migration.models.AInSchemaRuntimeInterpretation" title="coreintf.migration.models.AInSchemaRuntimeInterpretation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInSchemaRuntimeInterpretation</span></code></a></p></td>
+<td><p>How an active component can consume one persisted schema representation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.migration.models.AInPersistenceConvergenceStatus" title="coreintf.migration.models.AInPersistenceConvergenceStatus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInPersistenceConvergenceStatus</span></code></a></p></td>
+<td><p>Whether a persisted representation can be safely converged to the target write version.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.migration.models.AInPersistenceConvergenceAttemptStatus" title="coreintf.migration.models.AInPersistenceConvergenceAttemptStatus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInPersistenceConvergenceAttemptStatus</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment" title="coreintf.migration.models.AIcSchemaCompatibilityAssessment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcSchemaCompatibilityAssessment</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.migration.models.AInSchemaRuntimeInterpretation">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.migration.models.</span></span><span class="sig-name descname"><span class="pre">AInSchemaRuntimeInterpretation</span></span><a class="headerlink" href="#coreintf.migration.models.AInSchemaRuntimeInterpretation" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>How an active component can consume one persisted schema representation.</p>
+<p>Runtime interpretation is deliberately independent from whether the stored representation is
+already the component’s preferred write version and from whether a persistence-convergence
+migration happens to exist.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AInSchemaRuntimeInterpretation.DIRECT">
+<span class="sig-name descname"><span class="pre">DIRECT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DIRECT'</span></span><a class="headerlink" href="#coreintf.migration.models.AInSchemaRuntimeInterpretation.DIRECT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AInSchemaRuntimeInterpretation.TRANSFORMED">
+<span class="sig-name descname"><span class="pre">TRANSFORMED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'TRANSFORMED'</span></span><a class="headerlink" href="#coreintf.migration.models.AInSchemaRuntimeInterpretation.TRANSFORMED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AInSchemaRuntimeInterpretation.UNSUPPORTED">
+<span class="sig-name descname"><span class="pre">UNSUPPORTED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UNSUPPORTED'</span></span><a class="headerlink" href="#coreintf.migration.models.AInSchemaRuntimeInterpretation.UNSUPPORTED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.migration.models.AInPersistenceConvergenceStatus">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.migration.models.</span></span><span class="sig-name descname"><span class="pre">AInPersistenceConvergenceStatus</span></span><a class="headerlink" href="#coreintf.migration.models.AInPersistenceConvergenceStatus" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Whether a persisted representation can be safely converged to the target write version.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AInPersistenceConvergenceStatus.NOT_NEEDED">
+<span class="sig-name descname"><span class="pre">NOT_NEEDED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NOT_NEEDED'</span></span><a class="headerlink" href="#coreintf.migration.models.AInPersistenceConvergenceStatus.NOT_NEEDED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AInPersistenceConvergenceStatus.SUPPORTED">
+<span class="sig-name descname"><span class="pre">SUPPORTED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SUPPORTED'</span></span><a class="headerlink" href="#coreintf.migration.models.AInPersistenceConvergenceStatus.SUPPORTED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AInPersistenceConvergenceStatus.NOT_SUPPORTED">
+<span class="sig-name descname"><span class="pre">NOT_SUPPORTED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NOT_SUPPORTED'</span></span><a class="headerlink" href="#coreintf.migration.models.AInPersistenceConvergenceStatus.NOT_SUPPORTED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.migration.models.AInPersistenceConvergenceAttemptStatus">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.migration.models.</span></span><span class="sig-name descname"><span class="pre">AInPersistenceConvergenceAttemptStatus</span></span><a class="headerlink" href="#coreintf.migration.models.AInPersistenceConvergenceAttemptStatus" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AInPersistenceConvergenceAttemptStatus.SUCCEEDED">
+<span class="sig-name descname"><span class="pre">SUCCEEDED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SUCCEEDED'</span></span><a class="headerlink" href="#coreintf.migration.models.AInPersistenceConvergenceAttemptStatus.SUCCEEDED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AInPersistenceConvergenceAttemptStatus.FAILED_RETRYABLE">
+<span class="sig-name descname"><span class="pre">FAILED_RETRYABLE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FAILED_RETRYABLE'</span></span><a class="headerlink" href="#coreintf.migration.models.AInPersistenceConvergenceAttemptStatus.FAILED_RETRYABLE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.migration.models.AIcSchemaCompatibilityAssessment">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.migration.models.</span></span><span class="sig-name descname"><span class="pre">AIcSchemaCompatibilityAssessment</span></span><a class="headerlink" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AIcSchemaCompatibilityAssessment.schema_id">
+<span class="sig-name descname"><span class="pre">schema_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment.schema_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AIcSchemaCompatibilityAssessment.source_version">
+<span class="sig-name descname"><span class="pre">source_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment.source_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AIcSchemaCompatibilityAssessment.target_write_version">
+<span class="sig-name descname"><span class="pre">target_write_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment.target_write_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AIcSchemaCompatibilityAssessment.at_target_write_version">
+<span class="sig-name descname"><span class="pre">at_target_write_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment.at_target_write_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AIcSchemaCompatibilityAssessment.runtime_interpretation">
+<span class="sig-name descname"><span class="pre">runtime_interpretation</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.migration.models.AInSchemaRuntimeInterpretation" title="coreintf.migration.models.AInSchemaRuntimeInterpretation"><span class="pre">AInSchemaRuntimeInterpretation</span></a></span><a class="headerlink" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment.runtime_interpretation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AIcSchemaCompatibilityAssessment.migration_path">
+<span class="sig-name descname"><span class="pre">migration_path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">coreintf.descriptor.AIcSchemaMigrationStepDescriptor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment.migration_path" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.migration.models.AIcSchemaCompatibilityAssessment.diagnostics">
+<span class="sig-name descname"><span class="pre">diagnostics</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment.diagnostics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="coreintf.migration.models.AIcSchemaCompatibilityAssessment.directly_readable">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">directly_readable</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment.directly_readable" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="coreintf.migration.models.AIcSchemaCompatibilityAssessment.requires_runtime_transformation">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">requires_runtime_transformation</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment.requires_runtime_transformation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="coreintf.migration.models.AIcSchemaCompatibilityAssessment.runtime_supported">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">runtime_supported</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment.runtime_supported" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.migration.models.AIcSchemaCompatibilityAssessment.persistence_convergence_status">
+<span class="sig-name descname"><span class="pre">persistence_convergence_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">safe_persistence_available</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreintf.migration.models.AInPersistenceConvergenceStatus" title="coreintf.migration.models.AInPersistenceConvergenceStatus"><span class="pre">AInPersistenceConvergenceStatus</span></a></span></span><a class="headerlink" href="#coreintf.migration.models.AIcSchemaCompatibilityAssessment.persistence_convergence_status" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">aac.coreintf</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">coreintf</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">API Reference</a><ul>
+  <li><a href="../../index.html">coreintf</a><ul>
+  <li><a href="../index.html">coreintf.migration</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">coreintf.migration</a></li>
+      <li>Next: <a href="../../observation/index.html" title="next chapter">coreintf.observation</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../../../_sources/autoapi/coreintf/migration/models/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
