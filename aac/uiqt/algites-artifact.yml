@@ -1,4 +1,4 @@
 artifact:
-  type: python
   name: Algites Application Components Qt UI
-  description: PySide6 administration UI implementation for AAC
+  description: Administration UI implementation for AAC in specified technologies (PySide6 for python)
+  technologyKinds: [python]

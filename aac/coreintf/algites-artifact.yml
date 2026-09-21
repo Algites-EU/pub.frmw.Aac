@@ -1,4 +1,4 @@
 artifact:
-  type: python
   name: Algites Application Components Core Interfaces
-  description: Public Python bindings for Algites Application Components contracts and lifecycle interfaces
+  description: Public bindings for Algites Application Components contracts and lifecycle interfaces in specified technologies
+  technologyKinds: [python]

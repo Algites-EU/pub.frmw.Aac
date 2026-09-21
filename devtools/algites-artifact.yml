@@ -1,4 +1,5 @@
 artifact:
-  type: python
-  name: Algites AAC Development Tools
+  name: AAC Development Tools
   description: Repository development, verification, build and capability-binding generation tools
+  technologyKinds: [python]
+

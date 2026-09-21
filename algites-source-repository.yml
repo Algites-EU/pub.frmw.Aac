@@ -1,7 +1,7 @@
 sourceRepository:
-  id: pub.lib.Python
-  groupId: eu.algites.lib.common
-  name: Algites public Python libraries repository
+  id: pub.frmw.ApplicationComponents
+  groupId: eu.algites.frmw.app
+  name: Algites Appliction COmponents framework public repository
 
 versionContext:
   releaseLine: "1"
