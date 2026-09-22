@@ -40,7 +40,16 @@
 <h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.schemas.DefaultingDraft202012Validator" title="coreimpl.schemas.DefaultingDraft202012Validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DefaultingDraft202012Validator</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.schemas.AAC_SCHEMA_ID_KEY" title="coreimpl.schemas.AAC_SCHEMA_ID_KEY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AAC_SCHEMA_ID_KEY</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.schemas.AAC_SCHEMA_VERSION_KEY" title="coreimpl.schemas.AAC_SCHEMA_VERSION_KEY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AAC_SCHEMA_VERSION_KEY</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.schemas.AAC_DATA_ENTITY_REFERENCE_KEY" title="coreimpl.schemas.AAC_DATA_ENTITY_REFERENCE_KEY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AAC_DATA_ENTITY_REFERENCE_KEY</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.schemas.DefaultingDraft202012Validator" title="coreimpl.schemas.DefaultingDraft202012Validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DefaultingDraft202012Validator</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -63,7 +72,7 @@
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.schemas.split_versioned_schema_name" title="coreimpl.schemas.split_versioned_schema_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_versioned_schema_name</span></code></a>(→ tuple[str, int])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.schemas.schema_identity" title="coreimpl.schemas.schema_identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schema_identity</span></code></a>(→ tuple[str, int])</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -71,9 +80,24 @@
 </section>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="coreimpl.schemas.AAC_SCHEMA_ID_KEY">
+<span class="sig-prename descclassname"><span class="pre">coreimpl.schemas.</span></span><span class="sig-name descname"><span class="pre">AAC_SCHEMA_ID_KEY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'x-aac-schema-id'</span></span><a class="headerlink" href="#coreimpl.schemas.AAC_SCHEMA_ID_KEY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="coreimpl.schemas.AAC_SCHEMA_VERSION_KEY">
+<span class="sig-prename descclassname"><span class="pre">coreimpl.schemas.</span></span><span class="sig-name descname"><span class="pre">AAC_SCHEMA_VERSION_KEY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'x-aac-schema-version'</span></span><a class="headerlink" href="#coreimpl.schemas.AAC_SCHEMA_VERSION_KEY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="coreimpl.schemas.AAC_DATA_ENTITY_REFERENCE_KEY">
+<span class="sig-prename descclassname"><span class="pre">coreimpl.schemas.</span></span><span class="sig-name descname"><span class="pre">AAC_DATA_ENTITY_REFERENCE_KEY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'x-aac-data-entity-reference'</span></span><a class="headerlink" href="#coreimpl.schemas.AAC_DATA_ENTITY_REFERENCE_KEY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py function">
-<dt class="sig sig-object py" id="coreimpl.schemas.split_versioned_schema_name">
-<span class="sig-prename descclassname"><span class="pre">coreimpl.schemas.</span></span><span class="sig-name descname"><span class="pre">split_versioned_schema_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreimpl.schemas.split_versioned_schema_name" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="coreimpl.schemas.schema_identity">
+<span class="sig-prename descclassname"><span class="pre">coreimpl.schemas.</span></span><span class="sig-name descname"><span class="pre">schema_identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreimpl.schemas.schema_identity" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py data">
@@ -150,8 +174,18 @@
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.schemas.AIcSchemaRegistry.contains_identity">
+<span class="sig-name descname"><span class="pre">contains_identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#coreimpl.schemas.AIcSchemaRegistry.contains_identity" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="coreimpl.schemas.AIcSchemaRegistry.versions">
 <span class="sig-name descname"><span class="pre">versions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreimpl.schemas.AIcSchemaRegistry.versions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.schemas.AIcSchemaRegistry.data_entity_references">
+<span class="sig-name descname"><span class="pre">data_entity_references</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.schemas.AIcSchemaRegistry.data_entity_references" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">

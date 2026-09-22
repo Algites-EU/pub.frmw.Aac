@@ -22,10 +22,10 @@ Submodules
    /autoapi/coreintf/configuration/index
    /autoapi/coreintf/context/index
    /autoapi/coreintf/contracts/index
+   /autoapi/coreintf/dataentity/index
    /autoapi/coreintf/descriptor/index
    /autoapi/coreintf/entitlement/index
    /autoapi/coreintf/errors/index
-   /autoapi/coreintf/extensions/index
    /autoapi/coreintf/instances/index
    /autoapi/coreintf/invocation/index
    /autoapi/coreintf/lifecycle/index

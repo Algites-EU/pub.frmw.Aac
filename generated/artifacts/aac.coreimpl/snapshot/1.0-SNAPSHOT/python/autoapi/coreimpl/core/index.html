@@ -172,8 +172,8 @@
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.entity_extension_migrations">
-<span class="sig-name descname"><span class="pre">entity_extension_migrations</span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.entity_extension_migrations" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.data_entity_migrations">
+<span class="sig-name descname"><span class="pre">data_entity_migrations</span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.data_entity_migrations" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -204,11 +204,6 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.application_context">
 <span class="sig-name descname"><span class="pre">application_context</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.application_context" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.entity_extension_store">
-<span class="sig-name descname"><span class="pre">entity_extension_store</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">algites.lib.aac.coreintf.extensions.AIiEntityExtensionDataStore</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.entity_extension_store" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -488,47 +483,31 @@
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.configure_entity_extension_store">
-<span class="sig-name descname"><span class="pre">configure_entity_extension_store</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.extensions.AIiEntityExtensionDataStore</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.configure_entity_extension_store" title="Link to this definition">¶</a></dt>
-<dd><p>Attach the product-owned semantic extension-data store.</p>
-<p>Stored extension payloads may remain at older readable/migratable schema versions. Core
-normalizes them on read; persistence convergence is independent from component cutover.</p>
+<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.data_entity_support">
+<span class="sig-name descname"><span class="pre">data_entity_support</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.data_entity_support" title="Link to this definition">¶</a></dt>
+<dd><p>Return declarative data-entity support exposed by installed components.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.register_entity_context">
-<span class="sig-name descname"><span class="pre">register_entity_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.extensions.AIcCoreEntityContext</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.register_entity_context" title="Link to this definition">¶</a></dt>
-<dd><p>Expose an active Core entity to AAC for extension-data compatibility/migration.</p>
+<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.assess_data_entity">
+<span class="sig-name descname"><span class="pre">assess_data_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envelope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.assess_data_entity" title="Link to this definition">¶</a></dt>
+<dd><p>Assess whether one component can interpret a concrete data-entity representation.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.unregister_entity_context">
-<span class="sig-name descname"><span class="pre">unregister_entity_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity_type_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.unregister_entity_context" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.entity_contexts">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">entity_contexts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">algites.lib.aac.coreintf.extensions.AIcCoreEntityContext</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.entity_contexts" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.read_entity_extension_data">
-<span class="sig-name descname"><span class="pre">read_entity_extension_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity_type_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_migration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.read_entity_extension_data" title="Link to this definition">¶</a></dt>
-<dd><p>Return extension data interpretable by the currently installed component.</p>
-<p>A transformation-required stored envelope is transformed and validated in memory first. If the
-store permits conditional mutation, Core may then try to persist the normalized envelope
-with the snapshot’s <code class="docutils literal notranslate"><span class="pre">record_revision</span></code> as <code class="docutils literal notranslate"><span class="pre">expected_record_revision</span></code>. Persistence
-failure is deliberately ignored: the migrated in-memory representation remains usable and
-a later read can retry convergence.</p>
+<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.normalize_data_entity">
+<span class="sig-name descname"><span class="pre">normalize_data_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envelope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope</span></span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.normalize_data_entity" title="Link to this definition">¶</a></dt>
+<dd><p>Normalize a data entity in memory to the component’s preferred write version.</p>
+<p>Persistence is deliberately outside this operation. A later generic data-storage capability
+will decide whether and where the normalized representation is written.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.converge_persisted_component_data">
 <span class="sig-name descname"><span class="pre">converge_persisted_component_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.converge_persisted_component_data" title="Link to this definition">¶</a></dt>
-<dd><p>Retry best-effort persistence convergence for currently installed components.</p>
-<p>This operation is intentionally outside component replacement transactions. It is safe to
-retry after startup or administrative request because each payload is persisted
-independently with provider/store concurrency checks where available.</p>
+<dd><p>Retry best-effort convergence for configuration persistence.</p>
+<p>Data-entity persistence convergence is intentionally deferred until the generic data-storage
+capability contract is defined; this Core revision only establishes the canonical data model.</p>
 </dd></dl>
 
 <dl class="py method">

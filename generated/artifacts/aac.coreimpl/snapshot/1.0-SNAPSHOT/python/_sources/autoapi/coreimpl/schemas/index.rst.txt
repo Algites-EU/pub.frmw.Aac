@@ -9,6 +9,9 @@ Attributes
 
 .. autoapisummary::
 
+   coreimpl.schemas.AAC_SCHEMA_ID_KEY
+   coreimpl.schemas.AAC_SCHEMA_VERSION_KEY
+   coreimpl.schemas.AAC_DATA_ENTITY_REFERENCE_KEY
    coreimpl.schemas.DefaultingDraft202012Validator
 
 
@@ -26,13 +29,25 @@ Functions
 
 .. autoapisummary::
 
-   coreimpl.schemas.split_versioned_schema_name
+   coreimpl.schemas.schema_identity
 
 
 Module Contents
 ---------------
 
-.. py:function:: split_versioned_schema_name(resource_name: str) -> tuple[str, int]
+.. py:data:: AAC_SCHEMA_ID_KEY
+   :value: 'x-aac-schema-id'
+
+
+.. py:data:: AAC_SCHEMA_VERSION_KEY
+   :value: 'x-aac-schema-version'
+
+
+.. py:data:: AAC_DATA_ENTITY_REFERENCE_KEY
+   :value: 'x-aac-data-entity-reference'
+
+
+.. py:function:: schema_identity(schema: Mapping[str, object]) -> tuple[str, int]
 
 .. py:data:: DefaultingDraft202012Validator
 
@@ -83,7 +98,13 @@ Module Contents
    .. py:method:: get_identity(schema_id: str, version: int) -> AIcRegisteredSchema
 
 
+   .. py:method:: contains_identity(schema_id: str, version: int) -> bool
+
+
    .. py:method:: versions(schema_id: str) -> tuple[int, Ellipsis]
+
+
+   .. py:method:: data_entity_references(schema_id: str, version: int)
 
 
    .. py:method:: normalize(resource_name: str, value: Mapping[str, object] | None, *, apply_defaults: bool = True) -> dict[str, object]

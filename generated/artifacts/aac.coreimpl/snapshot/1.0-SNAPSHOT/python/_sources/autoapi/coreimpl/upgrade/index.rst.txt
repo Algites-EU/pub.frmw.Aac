@@ -11,7 +11,6 @@ Classes
 
    coreimpl.upgrade.AIcTargetStateUpgradeAnalyzer
    coreimpl.upgrade.AIcStagedConfigurationMigration
-   coreimpl.upgrade.AIcStagedEntityExtensionMigration
    coreimpl.upgrade.AIcUpgradeMigrationStage
    coreimpl.upgrade.AIcPersistenceConvergenceOutcome
    coreimpl.upgrade.AIcUpgradeMigrationCoordinator
@@ -66,31 +65,6 @@ Module Contents
       :type:  algites.lib.aac.coreintf.configuration.AIcConfigurationPersistedPayload
 
 
-.. py:class:: AIcStagedEntityExtensionMigration
-
-   Validated in-memory semantic extension-data migration candidate.
-
-
-   .. py:attribute:: component_id
-      :type:  str
-
-
-   .. py:attribute:: entity_context
-      :type:  algites.lib.aac.coreintf.extensions.AIcCoreEntityContext
-
-
-   .. py:attribute:: source_record_revision
-      :type:  int | str
-
-
-   .. py:attribute:: source_envelope
-      :type:  algites.lib.aac.coreintf.extensions.AIcEntityExtensionDataEnvelope
-
-
-   .. py:attribute:: target_envelope
-      :type:  algites.lib.aac.coreintf.extensions.AIcEntityExtensionDataEnvelope
-
-
 .. py:class:: AIcUpgradeMigrationStage
 
    Side-effect-free persisted-data compatibility result for a target component set.
@@ -98,12 +72,6 @@ Module Contents
 
    .. py:attribute:: configuration
       :type:  tuple[AIcStagedConfigurationMigration, Ellipsis]
-      :value: ()
-
-
-
-   .. py:attribute:: entity_extensions
-      :type:  tuple[AIcStagedEntityExtensionMigration, Ellipsis]
       :value: ()
 
 
@@ -136,18 +104,6 @@ Module Contents
 
 
 
-   .. py:attribute:: entity_extensions_persisted
-      :type:  int
-      :value: 0
-
-
-
-   .. py:attribute:: entity_extensions_deferred
-      :type:  int
-      :value: 0
-
-
-
    .. py:attribute:: diagnostics
       :type:  tuple[str, Ellipsis]
       :value: ()
@@ -163,15 +119,12 @@ Module Contents
 
    Validate persisted data for a target state and optionally converge it afterwards.
 
-   ``stage`` is strictly side-effect free.  It proves that every relevant persisted payload
-   can be interpreted by the target component set, either directly or through a validated
-   in-memory migration.  Persistence is intentionally *not* part of the component replacement
-   transaction: configuration providers and product-owned extension stores may be remote,
-   read-only, temporarily unavailable, or unable to participate in one distributed rollback.
+   ``stage`` is strictly side-effect free. It validates configuration persistence and the
+   declarative Data Entity schema model of the target component set. Data Entity persistence
+   itself is intentionally not accessed here; generic data-storage capabilities are defined in a
+   later AAC layer.
 
-   ``converge`` is therefore best-effort and independent per payload.  A failed/deferred write
-   never invalidates an already successful component cutover; normal reads continue using
-   on-the-fly normalization and can retry convergence later.
+   ``converge`` therefore performs only best-effort configuration persistence convergence.
 
 
    .. py:method:: stage(core, replacements: tuple[coreimpl.descriptor.AIcDiscoveredComponent, Ellipsis]) -> AIcUpgradeMigrationStage

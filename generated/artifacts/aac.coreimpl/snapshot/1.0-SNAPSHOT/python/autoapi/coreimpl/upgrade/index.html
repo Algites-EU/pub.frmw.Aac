@@ -46,16 +46,13 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.upgrade.AIcStagedConfigurationMigration" title="coreimpl.upgrade.AIcStagedConfigurationMigration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcStagedConfigurationMigration</span></code></a></p></td>
 <td><p>Validated in-memory migration candidate discovered during target-state preflight.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.upgrade.AIcStagedEntityExtensionMigration" title="coreimpl.upgrade.AIcStagedEntityExtensionMigration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcStagedEntityExtensionMigration</span></code></a></p></td>
-<td><p>Validated in-memory semantic extension-data migration candidate.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.upgrade.AIcUpgradeMigrationStage" title="coreimpl.upgrade.AIcUpgradeMigrationStage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcUpgradeMigrationStage</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.upgrade.AIcUpgradeMigrationStage" title="coreimpl.upgrade.AIcUpgradeMigrationStage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcUpgradeMigrationStage</span></code></a></p></td>
 <td><p>Side-effect-free persisted-data compatibility result for a target component set.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.upgrade.AIcPersistenceConvergenceOutcome" title="coreimpl.upgrade.AIcPersistenceConvergenceOutcome"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcPersistenceConvergenceOutcome</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.upgrade.AIcPersistenceConvergenceOutcome" title="coreimpl.upgrade.AIcPersistenceConvergenceOutcome"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcPersistenceConvergenceOutcome</span></code></a></p></td>
 <td><p>Best-effort persistence convergence performed outside the component transaction.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.upgrade.AIcUpgradeMigrationCoordinator" title="coreimpl.upgrade.AIcUpgradeMigrationCoordinator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcUpgradeMigrationCoordinator</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.upgrade.AIcUpgradeMigrationCoordinator" title="coreimpl.upgrade.AIcUpgradeMigrationCoordinator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcUpgradeMigrationCoordinator</span></code></a></p></td>
 <td><p>Validate persisted data for a target state and optionally converge it afterwards.</p></td>
 </tr>
 </tbody>
@@ -118,48 +115,12 @@ persistence attempt succeeding.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="coreimpl.upgrade.AIcStagedEntityExtensionMigration">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.upgrade.</span></span><span class="sig-name descname"><span class="pre">AIcStagedEntityExtensionMigration</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcStagedEntityExtensionMigration" title="Link to this definition">¶</a></dt>
-<dd><p>Validated in-memory semantic extension-data migration candidate.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreimpl.upgrade.AIcStagedEntityExtensionMigration.component_id">
-<span class="sig-name descname"><span class="pre">component_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcStagedEntityExtensionMigration.component_id" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreimpl.upgrade.AIcStagedEntityExtensionMigration.entity_context">
-<span class="sig-name descname"><span class="pre">entity_context</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">algites.lib.aac.coreintf.extensions.AIcCoreEntityContext</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcStagedEntityExtensionMigration.entity_context" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreimpl.upgrade.AIcStagedEntityExtensionMigration.source_record_revision">
-<span class="sig-name descname"><span class="pre">source_record_revision</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcStagedEntityExtensionMigration.source_record_revision" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreimpl.upgrade.AIcStagedEntityExtensionMigration.source_envelope">
-<span class="sig-name descname"><span class="pre">source_envelope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">algites.lib.aac.coreintf.extensions.AIcEntityExtensionDataEnvelope</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcStagedEntityExtensionMigration.source_envelope" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreimpl.upgrade.AIcStagedEntityExtensionMigration.target_envelope">
-<span class="sig-name descname"><span class="pre">target_envelope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">algites.lib.aac.coreintf.extensions.AIcEntityExtensionDataEnvelope</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcStagedEntityExtensionMigration.target_envelope" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="coreimpl.upgrade.AIcUpgradeMigrationStage">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.upgrade.</span></span><span class="sig-name descname"><span class="pre">AIcUpgradeMigrationStage</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcUpgradeMigrationStage" title="Link to this definition">¶</a></dt>
 <dd><p>Side-effect-free persisted-data compatibility result for a target component set.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreimpl.upgrade.AIcUpgradeMigrationStage.configuration">
 <span class="sig-name descname"><span class="pre">configuration</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreimpl.upgrade.AIcStagedConfigurationMigration" title="coreimpl.upgrade.AIcStagedConfigurationMigration"><span class="pre">AIcStagedConfigurationMigration</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcUpgradeMigrationStage.configuration" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreimpl.upgrade.AIcUpgradeMigrationStage.entity_extensions">
-<span class="sig-name descname"><span class="pre">entity_extensions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreimpl.upgrade.AIcStagedEntityExtensionMigration" title="coreimpl.upgrade.AIcStagedEntityExtensionMigration"><span class="pre">AIcStagedEntityExtensionMigration</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcUpgradeMigrationStage.entity_extensions" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -189,16 +150,6 @@ persistence attempt succeeding.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="coreimpl.upgrade.AIcPersistenceConvergenceOutcome.entity_extensions_persisted">
-<span class="sig-name descname"><span class="pre">entity_extensions_persisted</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcPersistenceConvergenceOutcome.entity_extensions_persisted" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreimpl.upgrade.AIcPersistenceConvergenceOutcome.entity_extensions_deferred">
-<span class="sig-name descname"><span class="pre">entity_extensions_deferred</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcPersistenceConvergenceOutcome.entity_extensions_deferred" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="coreimpl.upgrade.AIcPersistenceConvergenceOutcome.diagnostics">
 <span class="sig-name descname"><span class="pre">diagnostics</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcPersistenceConvergenceOutcome.diagnostics" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -214,14 +165,11 @@ persistence attempt succeeding.</p>
 <dt class="sig sig-object py" id="coreimpl.upgrade.AIcUpgradeMigrationCoordinator">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.upgrade.</span></span><span class="sig-name descname"><span class="pre">AIcUpgradeMigrationCoordinator</span></span><a class="headerlink" href="#coreimpl.upgrade.AIcUpgradeMigrationCoordinator" title="Link to this definition">¶</a></dt>
 <dd><p>Validate persisted data for a target state and optionally converge it afterwards.</p>
-<p><code class="docutils literal notranslate"><span class="pre">stage</span></code> is strictly side-effect free.  It proves that every relevant persisted payload
-can be interpreted by the target component set, either directly or through a validated
-in-memory migration.  Persistence is intentionally <em>not</em> part of the component replacement
-transaction: configuration providers and product-owned extension stores may be remote,
-read-only, temporarily unavailable, or unable to participate in one distributed rollback.</p>
-<p><code class="docutils literal notranslate"><span class="pre">converge</span></code> is therefore best-effort and independent per payload.  A failed/deferred write
-never invalidates an already successful component cutover; normal reads continue using
-on-the-fly normalization and can retry convergence later.</p>
+<p><code class="docutils literal notranslate"><span class="pre">stage</span></code> is strictly side-effect free. It validates configuration persistence and the
+declarative Data Entity schema model of the target component set. Data Entity persistence
+itself is intentionally not accessed here; generic data-storage capabilities are defined in a
+later AAC layer.</p>
+<p><code class="docutils literal notranslate"><span class="pre">converge</span></code> therefore performs only best-effort configuration persistence convergence.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="coreimpl.upgrade.AIcUpgradeMigrationCoordinator.stage">
 <span class="sig-name descname"><span class="pre">stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">core</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../descriptor/index.html#coreimpl.descriptor.AIcDiscoveredComponent" title="coreimpl.descriptor.AIcDiscoveredComponent"><span class="pre">coreimpl.descriptor.AIcDiscoveredComponent</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreimpl.upgrade.AIcUpgradeMigrationStage" title="coreimpl.upgrade.AIcUpgradeMigrationStage"><span class="pre">AIcUpgradeMigrationStage</span></a></span></span><a class="headerlink" href="#coreimpl.upgrade.AIcUpgradeMigrationCoordinator.stage" title="Link to this definition">¶</a></dt>

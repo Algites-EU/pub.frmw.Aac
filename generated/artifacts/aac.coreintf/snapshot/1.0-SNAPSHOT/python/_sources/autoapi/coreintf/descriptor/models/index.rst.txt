@@ -11,11 +11,9 @@ Classes
 
    coreintf.descriptor.models.AInComponentOrigin
    coreintf.descriptor.models.AInProviderRuntimeProfile
-   coreintf.descriptor.models.AInEntityExtensionDataAccess
-   coreintf.descriptor.models.AInCoreEntityAccess
+   coreintf.descriptor.models.AInDataEntityAccess
    coreintf.descriptor.models.AIcSchemaMigrationStepDescriptor
    coreintf.descriptor.models.AIcPersistedSchemaDescriptor
-   coreintf.descriptor.models.AIcCoreEntitySchemaCompatibilityDescriptor
    coreintf.descriptor.models.AIcProviderRuntimeDescriptor
    coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor
    coreintf.descriptor.models.AIcConsumerRequirementDescriptor
@@ -23,8 +21,8 @@ Classes
    coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor
    coreintf.descriptor.models.AIcPermissionDescriptor
    coreintf.descriptor.models.AIcCapabilityEntitlementDescriptor
-   coreintf.descriptor.models.AIcEntityExtensionDataDescriptor
-   coreintf.descriptor.models.AIcEntityExtensionDescriptor
+   coreintf.descriptor.models.AIcDataEntityRequirementDescriptor
+   coreintf.descriptor.models.AIcDataEntitySupportDescriptor
    coreintf.descriptor.models.AIcLifecycleHooksDescriptor
    coreintf.descriptor.models.AIcComponentDescriptor
 
@@ -91,39 +89,7 @@ Module Contents
 
 
 
-.. py:class:: AInEntityExtensionDataAccess
-
-   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
-
-
-   str(object='') -> str
-   str(bytes_or_buffer[, encoding[, errors]]) -> str
-
-   Create a new string object from the given object. If encoding or
-   errors is specified, then the object must expose a data buffer
-   that will be decoded using the given encoding and error handler.
-   Otherwise, returns the result of object.__str__() (if defined)
-   or repr(object).
-   encoding defaults to 'utf-8'.
-   errors defaults to 'strict'.
-
-
-   .. py:attribute:: NONE
-      :value: 'NONE'
-
-
-
-   .. py:attribute:: READ_ONLY
-      :value: 'READ_ONLY'
-
-
-
-   .. py:attribute:: READ_WRITE
-      :value: 'READ_WRITE'
-
-
-
-.. py:class:: AInCoreEntityAccess
+.. py:class:: AInDataEntityAccess
 
    Bases: :py:obj:`str`, :py:obj:`enum.Enum`
 
@@ -142,6 +108,11 @@ Module Contents
 
    .. py:attribute:: READ
       :value: 'READ'
+
+
+
+   .. py:attribute:: WRITE
+      :value: 'WRITE'
 
 
 
@@ -183,16 +154,6 @@ Module Contents
       :type:  str | None
       :value: None
 
-
-
-.. py:class:: AIcCoreEntitySchemaCompatibilityDescriptor
-
-   .. py:attribute:: schema_id
-      :type:  str
-
-
-   .. py:attribute:: readable_versions
-      :type:  tuple[int, Ellipsis]
 
 
 .. py:class:: AIcProviderRuntimeDescriptor
@@ -296,7 +257,7 @@ Module Contents
 
 
    .. py:attribute:: configuration_schema
-      :type:  AIcPersistedSchemaDescriptor | str | None
+      :type:  AIcPersistedSchemaDescriptor | None
       :value: None
 
 
@@ -432,43 +393,68 @@ Module Contents
    .. py:method:: permission(permission_id: str) -> AIcPermissionDescriptor
 
 
-.. py:class:: AIcEntityExtensionDataDescriptor
+.. py:class:: AIcDataEntityRequirementDescriptor
+
+   .. py:attribute:: schema_id
+      :type:  str
+
 
    .. py:attribute:: access
-      :type:  AInEntityExtensionDataAccess
+      :type:  tuple[AInDataEntityAccess, Ellipsis]
 
 
-   .. py:attribute:: component_extension_schema
-      :type:  AIcPersistedSchemaDescriptor | None
-      :value: None
-
-
-
-   .. py:attribute:: compatible_core_entity_schemas
-      :type:  tuple[AIcCoreEntitySchemaCompatibilityDescriptor, Ellipsis]
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
       :value: ()
 
 
 
-   .. py:method:: supports_core_entity_schema(schema_id: str, schema_version: int) -> bool
+   .. py:attribute:: writable_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
 
 
-.. py:class:: AIcEntityExtensionDescriptor
 
-   .. py:attribute:: entity_type_id
+   .. py:attribute:: required
+      :type:  bool
+      :value: True
+
+
+
+.. py:class:: AIcDataEntitySupportDescriptor
+
+   .. py:attribute:: schema_id
       :type:  str
 
 
-   .. py:attribute:: core_entity_access
-      :type:  tuple[AInCoreEntityAccess, Ellipsis]
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
 
 
-   .. py:attribute:: extension_data
-      :type:  AIcEntityExtensionDataDescriptor
+
+   .. py:attribute:: writable_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
 
 
-   .. py:attribute:: ui
-      :type:  Mapping[str, object]
+
+   .. py:attribute:: preferred_write_version
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: migrations
+      :type:  tuple[AIcSchemaMigrationStepDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: data_entity_requirements
+      :type:  tuple[AIcDataEntityRequirementDescriptor, Ellipsis]
+      :value: ()
+
 
 
    .. py:attribute:: metadata
@@ -485,6 +471,12 @@ Module Contents
       :type:  coreintf.presentation.AIcDisplayText | None
       :value: None
 
+
+
+   .. py:method:: can_read(schema_version: int) -> bool
+
+
+   .. py:method:: can_write(schema_version: int) -> bool
 
 
 .. py:class:: AIcLifecycleHooksDescriptor
@@ -530,7 +522,7 @@ Module Contents
 
 
    .. py:attribute:: component_configuration_schema
-      :type:  AIcPersistedSchemaDescriptor | str | None
+      :type:  AIcPersistedSchemaDescriptor | None
       :value: None
 
 
@@ -547,8 +539,8 @@ Module Contents
 
 
 
-   .. py:attribute:: entity_extensions
-      :type:  tuple[AIcEntityExtensionDescriptor, Ellipsis]
+   .. py:attribute:: data_entity_support
+      :type:  tuple[AIcDataEntitySupportDescriptor, Ellipsis]
       :value: ()
 
 

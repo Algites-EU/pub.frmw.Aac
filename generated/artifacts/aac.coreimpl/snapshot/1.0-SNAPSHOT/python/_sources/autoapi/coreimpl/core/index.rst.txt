@@ -98,7 +98,7 @@ Module Contents
    .. py:attribute:: configuration_migrations
 
 
-   .. py:attribute:: entity_extension_migrations
+   .. py:attribute:: data_entity_migrations
 
 
    .. py:attribute:: configuration_reads
@@ -123,12 +123,6 @@ Module Contents
 
    .. py:attribute:: application_context
       :type:  dict[str, object]
-
-
-   .. py:attribute:: entity_extension_store
-      :type:  algites.lib.aac.coreintf.extensions.AIiEntityExtensionDataStore | None
-      :value: None
-
 
 
    .. py:attribute:: entitlement_requests
@@ -324,48 +318,33 @@ Module Contents
    .. py:method:: register_configuration_scope_resolver(configuration_scope_resolver_id: str, resolver: algites.lib.aac.coreintf.configuration.AIiConfigurationScopeResolver) -> None
 
 
-   .. py:method:: configure_entity_extension_store(store: algites.lib.aac.coreintf.extensions.AIiEntityExtensionDataStore | None) -> None
+   .. py:method:: data_entity_support(component_id: str | None = None)
 
-      Attach the product-owned semantic extension-data store.
-
-      Stored extension payloads may remain at older readable/migratable schema versions. Core
-      normalizes them on read; persistence convergence is independent from component cutover.
+      Return declarative data-entity support exposed by installed components.
 
 
 
-   .. py:method:: register_entity_context(context: algites.lib.aac.coreintf.extensions.AIcCoreEntityContext) -> None
+   .. py:method:: assess_data_entity(component_id: str, envelope: algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope)
 
-      Expose an active Core entity to AAC for extension-data compatibility/migration.
-
-
-
-   .. py:method:: unregister_entity_context(entity_type_id: str, entity_id: str) -> None
-
-
-   .. py:property:: entity_contexts
-      :type: tuple[algites.lib.aac.coreintf.extensions.AIcCoreEntityContext, Ellipsis]
+      Assess whether one component can interpret a concrete data-entity representation.
 
 
 
-   .. py:method:: read_entity_extension_data(entity_type_id: str, entity_id: str, component_id: str, *, persist_migration: bool = True)
+   .. py:method:: normalize_data_entity(component_id: str, envelope: algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope) -> algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope
 
-      Return extension data interpretable by the currently installed component.
+      Normalize a data entity in memory to the component's preferred write version.
 
-      A transformation-required stored envelope is transformed and validated in memory first. If the
-      store permits conditional mutation, Core may then try to persist the normalized envelope
-      with the snapshot's ``record_revision`` as ``expected_record_revision``. Persistence
-      failure is deliberately ignored: the migrated in-memory representation remains usable and
-      a later read can retry convergence.
+      Persistence is deliberately outside this operation. A later generic data-storage capability
+      will decide whether and where the normalized representation is written.
 
 
 
    .. py:method:: converge_persisted_component_data(component_ids: tuple[str, Ellipsis] | None = None)
 
-      Retry best-effort persistence convergence for currently installed components.
+      Retry best-effort convergence for configuration persistence.
 
-      This operation is intentionally outside component replacement transactions. It is safe to
-      retry after startup or administrative request because each payload is persisted
-      independently with provider/store concurrency checks where available.
+      Data-entity persistence convergence is intentionally deferred until the generic data-storage
+      capability contract is defined; this Core revision only establishes the canonical data model.
 
 
 

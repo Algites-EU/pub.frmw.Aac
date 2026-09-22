@@ -11,7 +11,7 @@ Classes
 
    coreimpl.migration.AIcSchemaCompatibilityEvaluator
    coreimpl.migration.AIcConfigurationMigrationService
-   coreimpl.migration.AIcEntityExtensionMigrationService
+   coreimpl.migration.AIcDataEntityMigrationService
 
 
 Module Contents
@@ -33,17 +33,14 @@ Module Contents
    .. py:method:: migrate_to_write_version(payload: algites.lib.aac.coreintf.configuration.AIcConfigurationPersistedPayload, declaration: algites.lib.aac.coreintf.descriptor.AIcPersistedSchemaDescriptor, *, written_by_component_version: int) -> algites.lib.aac.coreintf.configuration.AIcConfigurationPersistedPayload
 
 
-.. py:class:: AIcEntityExtensionMigrationService(migrators: Mapping[str, algites.lib.aac.coreintf.extensions.AIiEntityExtensionDataMigrator] | None = None)
+.. py:class:: AIcDataEntityMigrationService(migrators: Mapping[str, algites.lib.aac.coreintf.dataentity.AIiDataEntityMigrator] | None = None)
 
-   .. py:attribute:: compatibility
-
-
-   .. py:method:: register(migrator_id: str, migrator: algites.lib.aac.coreintf.extensions.AIiEntityExtensionDataMigrator) -> None
+   .. py:method:: register(migrator_id: str, migrator: algites.lib.aac.coreintf.dataentity.AIiDataEntityMigrator) -> None
 
 
-   .. py:method:: assess(entity_context: algites.lib.aac.coreintf.extensions.AIcCoreEntityContext, envelope: algites.lib.aac.coreintf.extensions.AIcEntityExtensionDataEnvelope, extension_data: algites.lib.aac.coreintf.descriptor.AIcEntityExtensionDataDescriptor) -> algites.lib.aac.coreintf.migration.AIcSchemaCompatibilityAssessment
+   .. py:method:: assess(envelope: algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope, support: algites.lib.aac.coreintf.descriptor.AIcDataEntitySupportDescriptor) -> algites.lib.aac.coreintf.migration.AIcSchemaCompatibilityAssessment
 
 
-   .. py:method:: migrate_to_write_version(entity_context: algites.lib.aac.coreintf.extensions.AIcCoreEntityContext, envelope: algites.lib.aac.coreintf.extensions.AIcEntityExtensionDataEnvelope, extension_data: algites.lib.aac.coreintf.descriptor.AIcEntityExtensionDataDescriptor, *, written_by_component_version: int) -> algites.lib.aac.coreintf.extensions.AIcEntityExtensionDataEnvelope
+   .. py:method:: migrate_to_preferred_write_version(envelope: algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope, support: algites.lib.aac.coreintf.descriptor.AIcDataEntitySupportDescriptor) -> algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope
 
 

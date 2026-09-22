@@ -166,8 +166,8 @@ Module Contents
 
 
 
-   .. py:attribute:: ENTITY_EXTENSION
-      :value: 'ENTITY_EXTENSION'
+   .. py:attribute:: DATA_ENTITY
+      :value: 'DATA_ENTITY'
 
 
 
@@ -182,7 +182,9 @@ Module Contents
 
 
    .. py:attribute:: write_version
-      :type:  int
+      :type:  int | None
+      :value: None
+
 
 
    .. py:attribute:: provider_id
@@ -191,8 +193,20 @@ Module Contents
 
 
 
-   .. py:attribute:: entity_type_id
-      :type:  str | None
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: writable_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: preferred_write_version
+      :type:  int | None
       :value: None
 
 

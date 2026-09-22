@@ -20,7 +20,7 @@ Module Contents
 .. py:class:: AIcConfigurationDocumentCodec
 
    .. py:attribute:: FORMAT_VERSION
-      :value: 2
+      :value: 1
 
 
 

@@ -1,0 +1,16 @@
+coreintf.dataentity
+===================
+
+.. py:module:: coreintf.dataentity
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/coreintf/dataentity/migration/index
+   /autoapi/coreintf/dataentity/models/index
+
+

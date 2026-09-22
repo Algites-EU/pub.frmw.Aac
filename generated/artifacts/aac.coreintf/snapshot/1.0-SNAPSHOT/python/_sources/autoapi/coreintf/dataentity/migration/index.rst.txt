@@ -1,0 +1,34 @@
+coreintf.dataentity.migration
+=============================
+
+.. py:module:: coreintf.dataentity.migration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.dataentity.migration.AIiDataEntityMigrator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiDataEntityMigrator
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: migrate(request: coreintf.dataentity.models.AIcDataEntityMigrationRequest) -> coreintf.dataentity.models.AIcDataEntityMigrationResult
+      :abstractmethod:
+
+
+      Transform one data entity payload without directly mutating persistence.
+
+
+

@@ -237,8 +237,8 @@ errors defaults to ‘strict’.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="coreintf.catalog.models.AInCatalogPersistentSchemaKind.ENTITY_EXTENSION">
-<span class="sig-name descname"><span class="pre">ENTITY_EXTENSION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ENTITY_EXTENSION'</span></span><a class="headerlink" href="#coreintf.catalog.models.AInCatalogPersistentSchemaKind.ENTITY_EXTENSION" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="coreintf.catalog.models.AInCatalogPersistentSchemaKind.DATA_ENTITY">
+<span class="sig-name descname"><span class="pre">DATA_ENTITY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DATA_ENTITY'</span></span><a class="headerlink" href="#coreintf.catalog.models.AInCatalogPersistentSchemaKind.DATA_ENTITY" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -258,7 +258,7 @@ errors defaults to ‘strict’.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreintf.catalog.models.AIcCatalogPersistentSchema.write_version">
-<span class="sig-name descname"><span class="pre">write_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.catalog.models.AIcCatalogPersistentSchema.write_version" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">write_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.catalog.models.AIcCatalogPersistentSchema.write_version" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -267,8 +267,18 @@ errors defaults to ‘strict’.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="coreintf.catalog.models.AIcCatalogPersistentSchema.entity_type_id">
-<span class="sig-name descname"><span class="pre">entity_type_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.catalog.models.AIcCatalogPersistentSchema.entity_type_id" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="coreintf.catalog.models.AIcCatalogPersistentSchema.readable_versions">
+<span class="sig-name descname"><span class="pre">readable_versions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.catalog.models.AIcCatalogPersistentSchema.readable_versions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.catalog.models.AIcCatalogPersistentSchema.writable_versions">
+<span class="sig-name descname"><span class="pre">writable_versions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.catalog.models.AIcCatalogPersistentSchema.writable_versions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.catalog.models.AIcCatalogPersistentSchema.preferred_write_version">
+<span class="sig-name descname"><span class="pre">preferred_write_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.catalog.models.AIcCatalogPersistentSchema.preferred_write_version" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">

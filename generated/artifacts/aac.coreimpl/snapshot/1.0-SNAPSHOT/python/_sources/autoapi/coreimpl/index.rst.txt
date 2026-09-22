@@ -34,7 +34,6 @@ Submodules
    /autoapi/coreimpl/entitlement_requests/index
    /autoapi/coreimpl/entitlement_trust/index
    /autoapi/coreimpl/errors/index
-   /autoapi/coreimpl/extensions/index
    /autoapi/coreimpl/graph/index
    /autoapi/coreimpl/instances/index
    /autoapi/coreimpl/invocation/index
