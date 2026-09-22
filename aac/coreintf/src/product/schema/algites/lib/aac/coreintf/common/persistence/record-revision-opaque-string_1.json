@@ -3,5 +3,7 @@
   "$id": "_AAC.schema.record-revision.opaque-string/1",
   "title": "AAC Opaque String Record Revision 1",
   "type": "string",
-  "minLength": 1
+  "minLength": 1,
+  "x-aac-schema-id": "_AAC.schema.record-revision.opaque-string",
+  "x-aac-schema-version": 1
 }

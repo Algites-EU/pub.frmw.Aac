@@ -176,39 +176,28 @@ class AIcJsonFileStateStore(AIiStateStore):
             raise AIxPersistenceError(f"cannot read state store {self.path}: {exc}") from exc
         if not isinstance(raw, dict):
             raise AIxPersistenceError(f"state store {self.path} root must be an object")
-        if int(raw.get("format_version", 0)) == 2:
-            raw_records = raw.get("records", {})
-            if not isinstance(raw_records, Mapping):
-                raise AIxPersistenceError(f"state store {self.path} records must be an object")
-            result: dict[str, dict[str, AIcPersistedRecord]] = {}
-            for namespace, values in raw_records.items():
-                if not isinstance(values, Mapping):
-                    raise AIxPersistenceError(f"state store namespace {namespace!r} must be an object")
-                target: dict[str, AIcPersistedRecord] = {}
-                for key, envelope in values.items():
-                    if not isinstance(envelope, Mapping) or not isinstance(envelope.get("payload"), Mapping):
-                        raise AIxPersistenceError(f"state record {namespace}:{key} is invalid")
-                    target[str(key)] = AIcPersistedRecord(
-                        str(namespace), str(key), int(envelope["record_revision"]), _clone(dict(envelope["payload"]))
-                    )
-                result[str(namespace)] = target
-            return result
-
-        # Build <= 19 stored raw payloads without revisions. Treat each legacy record as revision 1;
-        # the next successful mutation rewrites the whole store in the canonical v2 envelope form.
-        result = {}
-        for namespace, values in raw.items():
+        if int(raw.get("format_version", 0)) != 1:
+            raise AIxPersistenceError(f"state store {self.path} requires format_version 1")
+        raw_records = raw.get("records", {})
+        if not isinstance(raw_records, Mapping):
+            raise AIxPersistenceError(f"state store {self.path} records must be an object")
+        result: dict[str, dict[str, AIcPersistedRecord]] = {}
+        for namespace, values in raw_records.items():
             if not isinstance(values, Mapping):
-                raise AIxPersistenceError(f"legacy state store namespace {namespace!r} must be an object")
-            result[str(namespace)] = {
-                str(key): AIcPersistedRecord(str(namespace), str(key), 1, _clone(dict(payload)))
-                for key, payload in values.items() if isinstance(payload, Mapping)
-            }
+                raise AIxPersistenceError(f"state store namespace {namespace!r} must be an object")
+            target: dict[str, AIcPersistedRecord] = {}
+            for key, envelope in values.items():
+                if not isinstance(envelope, Mapping) or not isinstance(envelope.get("payload"), Mapping):
+                    raise AIxPersistenceError(f"state record {namespace}:{key} is invalid")
+                target[str(key)] = AIcPersistedRecord(
+                    str(namespace), str(key), int(envelope["record_revision"]), _clone(dict(envelope["payload"]))
+                )
+            result[str(namespace)] = target
         return result
 
     def _write(self, records: Mapping[str, Mapping[str, AIcPersistedRecord]]) -> None:
         raw = {
-            "format_version": 2,
+            "format_version": 1,
             "revision_kind": AInRecordRevisionKind.MONOTONIC_INTEGER.value,
             "records": {
                 namespace: {

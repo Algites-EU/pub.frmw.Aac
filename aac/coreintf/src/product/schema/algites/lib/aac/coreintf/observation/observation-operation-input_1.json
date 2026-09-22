@@ -70,5 +70,7 @@
   "required": [
     "observation_input"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "x-aac-schema-id": "_AAC.schema.observation-operation-input",
+  "x-aac-schema-version": 1
 }

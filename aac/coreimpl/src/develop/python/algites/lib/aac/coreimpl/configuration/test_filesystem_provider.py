@@ -91,7 +91,7 @@ def test_versioned_snapshot_is_migrated_and_rewritten_atomically(tmp_path):
     registry = AIcConfigurationProviderRegistry(); registry.register("fs", provider)
     migrations = AIcConfigurationMigrationService({"1-to-2": AIcTestMigrator()})
     schemas = AIcSchemaRegistry()
-    schemas.register("foo-config_2.json", {"type": "object", "properties": {"new_name": {"type": "string"}}, "required": ["new_name"]})
+    schemas.register("foo-config_2.json", {"x-aac-schema-id": "foo-config", "x-aac-schema-version": 2, "type": "object", "properties": {"new_name": {"type": "string"}}, "required": ["new_name"]})
     declaration = AIcPersistedSchemaDescriptor(
         "foo-config", 2, (2,), (AIcSchemaMigrationStepDescriptor(1, 2, "1-to-2"),), "foo-config_2.json"
     )
@@ -127,8 +127,8 @@ def test_directly_readable_old_snapshot_is_not_migrated_on_read_even_when_path_e
     registry = AIcConfigurationProviderRegistry(); registry.register("fs", provider)
     migrations = AIcConfigurationMigrationService({"1-to-2": SameShapeMigrator()})
     schemas = AIcSchemaRegistry()
-    schemas.register("foo-config_1.json", {"type": "object", "properties": {"url": {"type": "string"}}})
-    schemas.register("foo-config_2.json", {"type": "object", "properties": {"url": {"type": "string"}}})
+    schemas.register("foo-config_1.json", {"x-aac-schema-id": "foo-config", "x-aac-schema-version": 1, "type": "object", "properties": {"url": {"type": "string"}}})
+    schemas.register("foo-config_2.json", {"x-aac-schema-id": "foo-config", "x-aac-schema-version": 2, "type": "object", "properties": {"url": {"type": "string"}}})
     declaration = AIcPersistedSchemaDescriptor(
         "foo-config", 2, (1, 2), (AIcSchemaMigrationStepDescriptor(1, 2, "1-to-2"),), "foo-config_2.json"
     )

@@ -47,15 +47,15 @@ Neither `A/2 + B/1` nor `A/1 + B/2` is valid, but the transaction `{A:1->2, B:1-
 
 ## I.4 Component cutover and persisted-data convergence are different operations
 
-The replacement transaction controls the active component/runtime state. It MUST NOT require a distributed atomic transaction across independent configuration providers or semantic-data stores.
+The replacement transaction controls the active component/runtime state. It MUST NOT require a distributed atomic transaction across independent configuration providers or Data Entity stores.
 
-Persisted configuration and semantic extension data are **inputs** to target-state evaluation. Their stored schema version does not have to match the target component's preferred write version. A target component may:
+Persisted configuration and Data Entity schema compatibility are **inputs** to target-state evaluation. Their stored schema version does not have to match the target component's preferred write version. A target component may:
 
 - read a stored representation directly;
 - normalize it in memory through an explicit transformation path; or
 - be unable to interpret that contribution.
 
-An uninterpretable contribution is not automatically a fatal component-replacement error. It is treated as **unavailable input** and preserved unchanged. Normal configuration/context resolution may continue through other usable contributions, schema defaults, and ultimately an `UNDEFINED` result. Semantic component-extension data that cannot be interpreted remains opaque and unavailable to the component while being preserved by Core.
+An uninterpretable contribution is not automatically a fatal component-replacement error. It is treated as **unavailable input** and preserved unchanged. Normal configuration/context resolution may continue through other usable contributions, schema defaults, and ultimately an `UNDEFINED` result. Stored Data Entities that cannot be interpreted remain preserved and unavailable to incompatible component functionality; they are not implicitly rewritten or tombstoned.
 
 The architecture therefore distinguishes:
 
@@ -195,19 +195,17 @@ An unsupported contribution therefore does not by itself prevent Core startup or
 
 Preflight MUST NOT persist normalized representations.
 
-## II.7 Semantic component-extension data compatibility
+## II.7 Data Entity compatibility
 
-Core applies the same runtime-interpretation model to semantic component-extension payloads associated with Core-owned entities:
+Target preflight evaluates the target component descriptors' `data_entity_support` against the target canonical schema registry.
 
-- `DIRECT` payloads are consumed as stored;
-- `TRANSFORMED` payloads are normalized and validated in memory;
-- `UNSUPPORTED` payloads are preserved losslessly and exposed to the target component as unavailable semantic extension data.
+For every Data Entity schema/version that a target component claims to read or write, the corresponding canonical schema definition must be available in the target schema environment. Mandatory `data_entity_requirements` must have at least one compatible target version available through the target component/schema set.
 
-Unsupported semantic extension data MUST NOT be implicitly downgraded, truncated, partially interpreted, or overwritten.
+Concrete Data Entity records are not mutated during preflight. Existing stored representations remain a datasource concern. Once Data Entity storage capabilities are defined, preflight may additionally compare actual datasource inventory with the target semantic support graph, but this revision does not invent that persistence interface.
 
-Because baseline AAC permits one semantic extension payload per owner component for a concrete Core entity, there may be no lower-priority fallback payload. In that case the component simply observes that its extension data for that entity is unavailable. Component/runtime readiness may be reduced if the functionality genuinely depends on it, but the unsupported payload alone is not a Core-startup failure.
+Data Entity migration is semantic and side-effect-free: Core may determine whether a representation is `DIRECT`, `TRANSFORMED` or `UNSUPPORTED`, but it does not physically rewrite records as part of tentative target activation.
 
-The product-specific Core entity schema context supplied to an extension transformation MUST represent the current/target Core entity model appropriate for that preflight.
+`TOMBSTONE` is record lifecycle state and is independent from schema compatibility. An unsupported record is not automatically tombstoned.
 
 ## II.8 Failure and remediation ownership
 
@@ -275,7 +273,7 @@ Physical coexistence of old and new artifacts in an installed/staging store does
 
 ## III.2 Persisted data is read-only during tentative target activation
 
-During replacement preflight and tentative target activation, Core MUST suppress automatic schema write-back/convergence. Target runtime construction may consume in-memory normalized configuration/extension data, but it MUST NOT make external persisted-data mutation part of the success/failure boundary of the component transaction.
+During replacement preflight and tentative target activation, Core MUST suppress automatic schema write-back/convergence. Target runtime construction may consume normalized configuration and Data Entity representations, but it MUST NOT make external persisted-data mutation part of the success/failure boundary of the component transaction.
 
 This rule prevents an activation failure from leaving a remote provider in a schema state that the restored old component cannot read.
 
@@ -360,7 +358,7 @@ runtime instances, wiring, and activation
 Python/VM/module/classloader cutover state where applicable
 ```
 
-Configuration-provider and semantic-data payloads SHOULD normally require no rollback because the transaction MUST NOT have rewritten them.
+Configuration-provider contributions and Data Entity records SHOULD normally require no rollback because the transaction MUST NOT have rewritten them.
 
 ## IV.2 Superseded artifacts
 
@@ -437,11 +435,11 @@ A read-only/no-CAS provider normally reports convergence `NOT_SUPPORTED`; this i
 
 If write-back fails because of network loss, authorization change, revision conflict, provider outage, or another transient/permanent condition, runtime reads continue through `DIRECT` or validated in-memory `TRANSFORMED` interpretation where possible.
 
-## V.3 Semantic extension-data stores
+## V.3 Data Entity convergence
 
-Automatic semantic-data convergence SHOULD occur only when the owning Core/product store can provide sufficient conditional-write/concurrency semantics to avoid overwriting a concurrently changed source envelope.
+The current AAC Core Data Entity model intentionally stops before physical Data Entity persistence convergence. It defines schema support, references, envelope/state and pure migrations, but no generic CREATE/REPLACE/DELETE storage capability yet.
 
-If such semantics are unavailable, Core SHOULD leave the stored envelope unchanged and use the validated on-the-fly representation. Product-specific administrative or later write paths may converge it safely.
+Therefore successful component replacement MUST NOT attempt to manipulate Data Entity storage through legacy extension stores or product-specific paths. A later storage specification will define conditional record replacement, transactions, provisioning, inventory and cleanup while preserving the semantic model defined here.
 
 ## V.4 Retry policy
 
@@ -546,7 +544,7 @@ Conformance tests SHOULD cover at least:
 - interrupted journal-phase update immediately after active-set commit being resolved from the authoritative target `record_revision`/transaction identity;
 - successful component replacement followed by configuration write-back failure without component rollback;
 - retry of convergence after provider recovery;
-- semantic extension-data `UNSUPPORTED` preservation;
+- Data Entity `UNSUPPORTED` preservation;
 - ensuring only one component version is active after success;
 - ensuring failed preflight changes no live state;
 - later downgrade using the same resolution rules and succeeding in degraded mode when newer contributions are unsupported but adequate fallback exists;

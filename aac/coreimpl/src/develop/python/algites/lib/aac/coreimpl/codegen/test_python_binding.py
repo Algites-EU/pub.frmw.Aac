@@ -7,12 +7,14 @@ from algites.lib.aac.coreintf.invocation import AIcInvocationInput
 def test_generated_python_binding_contains_dtos_authorization_and_is_invokable():
     catalog = AIcActiveContractCatalog()
     catalog.schema_registry.register("site-edit-input_1.json", {
-        "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "x-aac-schema-id": "_AO.schema.site-edit-input", "x-aac-schema-version": 1, "type": "object",
         "properties": {"site_id": {"type": "string"}, "display_name": {"type": "string"}},
         "required": ["site_id", "display_name"],
     })
     catalog.schema_registry.register("site-edit-output_1.json", {
-        "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "x-aac-schema-id": "_AO.schema.site-edit-output", "x-aac-schema-version": 1, "type": "object",
         "properties": {"changed": {"type": "boolean"}}, "required": ["changed"],
     })
     admitted = catalog.admit_text('''
@@ -40,7 +42,7 @@ operations:
     input_dto = namespace["AIcgdSiteEditInput_1"]
     assert interface.__aac_source_id__ == "_AO.core.siteManagement"
     assert interface.__aac_source_version__ == 1
-    assert input_dto.__aac_source_id__ == "site-edit-input"
+    assert input_dto.__aac_source_id__ == "_AO.schema.site-edit-input"
     assert input_dto.__aac_source_version__ == 1
     assert input_dto.__aac_source_resource__ == "site-edit-input_1.json"
     assert getattr(interface.edit_site, "__aac_authorization_all_of__") == ("EDIT_SITE",)
@@ -62,6 +64,7 @@ def test_generated_python_binding_reuses_one_dto_type_for_one_canonical_schema()
     catalog = AIcActiveContractCatalog()
     catalog.schema_registry.register("repository-identity_1.json", {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "x-aac-schema-id": "_AAC.schema.repository-identity", "x-aac-schema-version": 1,
         "type": "object",
         "properties": {"id": {"type": "string"}},
         "required": ["id"],
@@ -87,6 +90,6 @@ operations:
     interface = namespace["AIigSourceRepositoryIdentification_1"]
     dto = namespace["AIcgdRepositoryIdentity_1"]
     assert interface.__aac_source_resource__ == "source-repository-identification_1.yml"
-    assert dto.__aac_source_id__ == "repository-identity"
+    assert dto.__aac_source_id__ == "_AAC.schema.repository-identity"
     assert dto.__aac_source_version__ == 1
     assert dto.__aac_source_resource__ == "repository-identity_1.json"

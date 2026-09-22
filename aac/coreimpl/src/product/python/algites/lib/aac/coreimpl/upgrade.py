@@ -8,10 +8,6 @@ from algites.lib.aac.coreintf.configuration import (
     AIcConfigurationProviderRequest,
     AIcConfigurationTarget,
 )
-from algites.lib.aac.coreintf.extensions import (
-    AIcCoreEntityContext,
-    AIcEntityExtensionDataEnvelope,
-)
 from algites.lib.aac.coreintf.instances import AIcBinding, AIcProviderInstance, AInProviderInstanceState
 from algites.lib.aac.coreintf.migration import AInSchemaRuntimeInterpretation
 from algites.lib.aac.coreintf.persistence import AInPersistenceCapability
@@ -290,22 +286,10 @@ class AIcStagedConfigurationMigration:
 
 
 @dataclass(frozen=True, slots=True)
-class AIcStagedEntityExtensionMigration:
-    """Validated in-memory semantic extension-data migration candidate."""
-
-    component_id: str
-    entity_context: AIcCoreEntityContext
-    source_record_revision: int | str
-    source_envelope: AIcEntityExtensionDataEnvelope
-    target_envelope: AIcEntityExtensionDataEnvelope
-
-
-@dataclass(frozen=True, slots=True)
 class AIcUpgradeMigrationStage:
     """Side-effect-free persisted-data compatibility result for a target component set."""
 
     configuration: tuple[AIcStagedConfigurationMigration, ...] = ()
-    entity_extensions: tuple[AIcStagedEntityExtensionMigration, ...] = ()
     diagnostics: tuple[AIcUpgradeCompatibilityDiagnostic, ...] = ()
 
     @property
@@ -319,27 +303,22 @@ class AIcPersistenceConvergenceOutcome:
 
     configuration_persisted: int = 0
     configuration_deferred: int = 0
-    entity_extensions_persisted: int = 0
-    entity_extensions_deferred: int = 0
     diagnostics: tuple[str, ...] = ()
 
     @property
     def complete(self) -> bool:
-        return self.configuration_deferred == 0 and self.entity_extensions_deferred == 0
+        return self.configuration_deferred == 0
 
 
 class AIcUpgradeMigrationCoordinator:
     """Validate persisted data for a target state and optionally converge it afterwards.
 
-    ``stage`` is strictly side-effect free.  It proves that every relevant persisted payload
-    can be interpreted by the target component set, either directly or through a validated
-    in-memory migration.  Persistence is intentionally *not* part of the component replacement
-    transaction: configuration providers and product-owned extension stores may be remote,
-    read-only, temporarily unavailable, or unable to participate in one distributed rollback.
+    ``stage`` is strictly side-effect free. It validates configuration persistence and the
+    declarative Data Entity schema model of the target component set. Data Entity persistence
+    itself is intentionally not accessed here; generic data-storage capabilities are defined in a
+    later AAC layer.
 
-    ``converge`` is therefore best-effort and independent per payload.  A failed/deferred write
-    never invalidates an already successful component cutover; normal reads continue using
-    on-the-fly normalization and can retry convergence later.
+    ``converge`` therefore performs only best-effort configuration persistence convergence.
     """
 
     def stage(
@@ -347,7 +326,6 @@ class AIcUpgradeMigrationCoordinator:
     ) -> AIcUpgradeMigrationStage:
         diagnostics: list[AIcUpgradeCompatibilityDiagnostic] = []
         configuration: list[AIcStagedConfigurationMigration] = []
-        entity_extensions: list[AIcStagedEntityExtensionMigration] = []
         target_schemas = self._target_schema_registry(core, replacements, diagnostics)
         if any(item.blocking for item in diagnostics):
             return AIcUpgradeMigrationStage(diagnostics=tuple(diagnostics))
@@ -508,89 +486,32 @@ class AIcUpgradeMigrationCoordinator:
                         f"effective configuration {target.key} is not valid in target state: {exc}",
                     ))
 
-            store = getattr(core, "entity_extension_store", None)
-            if store is None:
-                continue
-            extensions = {item.entity_type_id: item for item in descriptor.entity_extensions}
-            for context in getattr(core, "entity_contexts", ()):
-                try:
-                    extension_record = store.get_record(context.entity, component_id)
-                    envelope = None if extension_record is None else extension_record.envelope
-                except Exception as exc:
-                    diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
-                        component_id,
-                        f"cannot inspect extension data for entity {context.entity.entity_type_id}/"
-                        f"{context.entity.entity_id}: {exc}",
-                    ))
-                    continue
-                if envelope is None:
-                    continue
-                extension = extensions.get(context.entity.entity_type_id)
-                if extension is None or extension.extension_data.component_extension_schema is None:
-                    diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
-                        component_id,
-                        f"persistent extension data for entity {context.entity.entity_type_id}/"
-                        f"{context.entity.entity_id} is not declared by the target and will remain preserved but unavailable",
-                        blocking=False, code="EXTENSION_DATA_UNSUPPORTED",
-                    ))
-                    continue
-                try:
-                    assessment = core.entity_extension_migrations.assess(
-                        context, envelope, extension.extension_data
-                    )
-                except Exception as exc:
-                    diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
-                        component_id,
-                        f"cannot assess extension data for entity {context.entity.entity_type_id}/"
-                        f"{context.entity.entity_id}: {exc}",
-                    ))
-                    continue
-                if assessment.runtime_interpretation is AInSchemaRuntimeInterpretation.UNSUPPORTED:
-                    diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
-                        component_id,
-                        f"extension data for entity {context.entity.entity_type_id}/{context.entity.entity_id} "
-                        f"is unsupported by the target and will remain preserved but unavailable: "
-                        f"{'; '.join(assessment.diagnostics)}",
-                        blocking=False, code="EXTENSION_DATA_UNSUPPORTED",
-                    ))
-                    continue
-
-                migrated = None
-                if assessment.runtime_interpretation is AInSchemaRuntimeInterpretation.TRANSFORMED or assessment.migration_path:
+            for support in descriptor.data_entity_support:
+                for version in sorted(set(support.readable_versions) | set(support.writable_versions)):
                     try:
-                        migrated = core.entity_extension_migrations.migrate_to_write_version(
-                            context, envelope, extension.extension_data,
-                            written_by_component_version=descriptor.version,
-                        )
-                        ext_declaration = extension.extension_data.component_extension_schema
-                        if ext_declaration is not None and ext_declaration.resource_name is not None:
-                            target_schemas.normalize_value(
-                                ext_declaration.resource_name, migrated.payload, apply_defaults=False
-                            )
-                    except Exception as exc:
-                        if assessment.runtime_interpretation is AInSchemaRuntimeInterpretation.TRANSFORMED:
-                            diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
-                                component_id,
-                                f"extension data for entity {context.entity.entity_type_id}/"
-                                f"{context.entity.entity_id} cannot be transformed safely and will be unavailable: {exc}",
-                                blocking=False, code="EXTENSION_DATA_TRANSFORMATION_FAILED",
-                            ))
-                        else:
-                            diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
-                                component_id,
-                                f"optional extension-data convergence for entity {context.entity.entity_type_id}/"
-                                f"{context.entity.entity_id} cannot currently be prepared: {exc}",
-                                blocking=False, code="EXTENSION_DATA_CONVERGENCE_NOT_AVAILABLE",
-                            ))
-                        migrated = None
-                if migrated is not None and not assessment.at_target_write_version:
-                    entity_extensions.append(AIcStagedEntityExtensionMigration(
-                        component_id, context, extension_record.record_revision, envelope, migrated
-                    ))
+                        target_schemas.get_identity(support.schema_id, version)
+                    except KeyError:
+                        diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
+                            component_id,
+                            f"data entity schema {support.schema_id}/{version} declared by the target component "
+                            "is not available in the target canonical schema registry",
+                            code="DATA_ENTITY_SCHEMA_MISSING",
+                        ))
+                for requirement in support.data_entity_requirements:
+                    if not requirement.required:
+                        continue
+                    versions = set(requirement.readable_versions) | set(requirement.writable_versions)
+                    if versions and not any(
+                        target_schemas.contains_identity(requirement.schema_id, version) for version in versions
+                    ):
+                        diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
+                            component_id,
+                            f"required data entity schema {requirement.schema_id} has no declared compatible version "
+                            f"available in the target canonical schema registry",
+                            code="DATA_ENTITY_REQUIREMENT_UNRESOLVED",
+                        ))
 
-        return AIcUpgradeMigrationStage(
-            tuple(configuration), tuple(entity_extensions), tuple(diagnostics)
-        )
+        return AIcUpgradeMigrationStage(tuple(configuration), tuple(diagnostics))
 
     @staticmethod
     def _target_schema_registry(core, replacements, diagnostics) -> AIcSchemaRegistry:
@@ -643,8 +564,6 @@ class AIcUpgradeMigrationCoordinator:
             raise ValueError("cannot converge an incompatible persisted-data stage")
         configuration_persisted = 0
         configuration_deferred = 0
-        entity_extensions_persisted = 0
-        entity_extensions_deferred = 0
         diagnostics: list[str] = []
 
         for item in stage.configuration:
@@ -670,31 +589,9 @@ class AIcUpgradeMigrationCoordinator:
                     f"provider {item.configuration_provider_id!r}: {exc}"
                 )
 
-        store = getattr(core, "entity_extension_store", None)
-        for item in stage.entity_extensions:
-            if store is None:
-                entity_extensions_deferred += 1
-                diagnostics.append(
-                    f"extension-data convergence deferred for {item.entity_context.entity.entity_type_id}/"
-                    f"{item.entity_context.entity.entity_id}: no extension-data persistence store is configured"
-                )
-                continue
-            try:
-                store.put(
-                    item.target_envelope, expected_record_revision=item.source_record_revision
-                )
-                entity_extensions_persisted += 1
-            except Exception as exc:
-                entity_extensions_deferred += 1
-                diagnostics.append(
-                    f"extension-data convergence deferred for {item.entity_context.entity.entity_type_id}/"
-                    f"{item.entity_context.entity.entity_id}: {exc}"
-                )
 
         return AIcPersistenceConvergenceOutcome(
             configuration_persisted,
             configuration_deferred,
-            entity_extensions_persisted,
-            entity_extensions_deferred,
             tuple(diagnostics),
         )

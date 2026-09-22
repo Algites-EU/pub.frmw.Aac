@@ -90,5 +90,7 @@
     "metadata": {
       "type": "object"
     }
-  }
+  },
+  "x-aac-schema-id": "_AAC.schema.persistence-transaction-plan",
+  "x-aac-schema-version": 1
 }

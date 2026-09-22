@@ -26,7 +26,7 @@ def _write_candidate(root: Path, package: str, *, version: int, broken: bool = F
     (pkg / "schemas" / "simpleaudit-config_1.json").write_text(schema_text, encoding="utf-8")
     impl = f"{package}.missing:Nope" if broken else f"{package}.provider:AIcCandidateObserver"
     (pkg / "component.yml").write_text(
-        f'''component:\n  id: _AAC.component.simpleaudit\n  version: {version}\n  providers:\n    - id: observation\n      capability:\n        id: _AAC.capability.observation\n        version: 1\n      implementation_class: {impl}\n      configuration_schema: simpleaudit-config_1.json\n      initial_instances:\n        - name: default\n          configuration: {{}}\n''',
+        f'''component:\n  id: _AAC.component.simpleaudit\n  version: {version}\n  providers:\n    - id: observation\n      capability:\n        id: _AAC.capability.observation\n        version: 1\n      implementation_class: {impl}\n      configuration_schema:\n        id: simpleaudit-config\n        write_version: 1\n        readable_versions: [1]\n        resource: simpleaudit-config_1.json\n      initial_instances:\n        - name: default\n          configuration: {{}}\n''',
         encoding="utf-8",
     )
 
@@ -170,22 +170,30 @@ def _write_migrating_component(root: Path, package: str, *, version: int, broken
     )
     if version == 1:
         (pkg / "schemas" / "upgrade-component-config_1.json").write_text(
-            '{"type":"object","properties":{"old_name":{"type":"string"}},"required":["old_name"]}', encoding="utf-8"
+            '{"x-aac-schema-id":"upgrade-component-config","x-aac-schema-version":1,'
+            '"type":"object","properties":{"old_name":{"type":"string"}},"required":["old_name"]}',
+            encoding="utf-8",
         )
-        (pkg / "schemas" / "upgrade-extension_1.json").write_text(
-            '{"type":"object","properties":{"old_name":{"type":"string"}},"required":["old_name"]}', encoding="utf-8"
+        (pkg / "schemas" / "upgrade-data_1.json").write_text(
+            '{"x-aac-schema-id":"upgrade-data","x-aac-schema-version":1,'
+            '"type":"object","properties":{"old_name":{"type":"string"}},"required":["old_name"]}',
+            encoding="utf-8",
         )
         config = """  component_configuration_schema:\n    id: upgrade-component-config\n    write_version: 1\n    readable_versions: [1]\n    resource: upgrade-component-config_1.json\n"""
-        extension = """  entity_extensions:\n    - entity_type_id: test.entity\n      extension_data:\n        access: READ_WRITE\n        component_extension_schema:\n          id: upgrade-extension\n          write_version: 1\n          readable_versions: [1]\n          resource: upgrade-extension_1.json\n"""
+        data_entity_support = """  data_entity_support:\n    - schema_id: upgrade-data\n      readable_versions: [1]\n      writable_versions: [1]\n      preferred_write_version: 1\n"""
     else:
         (pkg / "schemas" / "upgrade-component-config_2.json").write_text(
-            '{"type":"object","properties":{"new_name":{"type":"string"}},"required":["new_name"]}', encoding="utf-8"
+            '{"x-aac-schema-id":"upgrade-component-config","x-aac-schema-version":2,'
+            '"type":"object","properties":{"new_name":{"type":"string"}},"required":["new_name"]}',
+            encoding="utf-8",
         )
-        (pkg / "schemas" / "upgrade-extension_2.json").write_text(
-            '{"type":"object","properties":{"new_name":{"type":"string"}},"required":["new_name"]}', encoding="utf-8"
+        (pkg / "schemas" / "upgrade-data_2.json").write_text(
+            '{"x-aac-schema-id":"upgrade-data","x-aac-schema-version":2,'
+            '"type":"object","properties":{"new_name":{"type":"string"}},"required":["new_name"]}',
+            encoding="utf-8",
         )
         config = """  component_configuration_schema:\n    id: upgrade-component-config\n    write_version: 2\n    readable_versions: [2]\n    resource: upgrade-component-config_2.json\n    migrations:\n      - from: 1\n        to: 2\n        migrator: cfg-1-to-2\n"""
-        extension = """  entity_extensions:\n    - entity_type_id: test.entity\n      extension_data:\n        access: READ_WRITE\n        component_extension_schema:\n          id: upgrade-extension\n          write_version: 2\n          readable_versions: [2]\n          resource: upgrade-extension_2.json\n          migrations:\n            - from: 1\n              to: 2\n              migrator: ext-1-to-2\n"""
+        data_entity_support = """  data_entity_support:\n    - schema_id: upgrade-data\n      readable_versions: [1, 2]\n      writable_versions: [1, 2]\n      preferred_write_version: 2\n      migrations:\n        - from: 1\n          to: 2\n          migrator: data-1-to-2\n"""
     implementation = f"{package}.missing:Nope" if broken else f"{package}.provider:Provider"
     (pkg / "component.yml").write_text(
         "component:\n"
@@ -201,7 +209,7 @@ def _write_migrating_component(root: Path, package: str, *, version: int, broken
           "      initial_instances:\n"
           "        - name: default\n"
           "          configuration: {}\n"
-        + extension,
+        + data_entity_support,
         encoding="utf-8",
     )
 
@@ -214,23 +222,12 @@ def _prepare_migrating_core(tmp_path: Path):
         AIiConfigurationMigrator,
     )
     from algites.lib.aac.coreintf.context import AIcConfigurationScope
-    from algites.lib.aac.coreintf.extensions import (
-        AIcCoreEntityContext, AIcCoreEntityRef, AIcEntityExtensionDataEnvelope,
-        AIcEntityExtensionMigrationResult, AIiEntityExtensionDataMigrator,
-    )
     from algites.lib.aac.coreimpl.configuration_providers import AIcFileSystemConfigurationProvider
-    from algites.lib.aac.coreimpl.extensions import AIcInMemoryEntityExtensionDataStore
 
     class ConfigMigrator(AIiConfigurationMigrator):
         def migrate(self, request):
             return AIcConfigurationMigrationResult(
                 "upgrade-component-config", 2, {"new_name": request.source.values["old_name"]}
-            )
-
-    class ExtensionMigrator(AIiEntityExtensionDataMigrator):
-        def migrate(self, request):
-            return AIcEntityExtensionMigrationResult(
-                "upgrade-extension", 2, {"new_name": request.source.payload["old_name"]}
             )
 
     core = AIcApplicationComponentCore()
@@ -254,34 +251,25 @@ def _prepare_migrating_core(tmp_path: Path):
         ),
     )
     core.configuration_migrations.register("cfg-1-to-2", ConfigMigrator())
-
-    extension_store = AIcInMemoryEntityExtensionDataStore()
-    core.configure_entity_extension_store(extension_store)
-    entity = AIcCoreEntityRef("test.entity", "e-1")
-    context = AIcCoreEntityContext(entity, "test.entity", 1, {"id": "e-1"})
-    core.register_entity_context(context)
-    extension_store.put(AIcEntityExtensionDataEnvelope(
-        "com.example.migrating", "upgrade-extension", 1, 1, entity, {"old_name": "extension"}
-    ))
-    core.entity_extension_migrations.register("ext-1-to-2", ExtensionMigrator())
-    return core, provider, request, extension_store, entity
+    return core, provider, request
 
 
-def test_upgrade_converges_configuration_and_extension_data_after_cutover(tmp_path: Path):
+def test_upgrade_converges_configuration_and_admits_data_entity_support_after_cutover(tmp_path: Path):
     _write_migrating_component(tmp_path, "migrating_v1", version=1)
     _write_migrating_component(tmp_path, "migrating_v2", version=2)
     sys.path.insert(0, str(tmp_path))
     try:
-        core, provider, request, extension_store, entity = _prepare_migrating_core(tmp_path)
+        core, provider, request = _prepare_migrating_core(tmp_path)
         plan = core.plan_python_package_upgrades("app", ("migrating_v2",))
         assert plan.compatible
         core.upgrade_python_packages("app", ("migrating_v2",), trusted_namespace_prefixes=("_AAC.",))
         config = provider.snapshot(request)
         assert config.payload.configuration_schema_version == 2
         assert config.payload.values == {"new_name": "configuration"}
-        extension = extension_store.get(entity, "com.example.migrating")
-        assert extension.component_extension_schema_version == 2
-        assert extension.payload == {"new_name": "extension"}
+        (support,) = core.installed("com.example.migrating").descriptor.data_entity_support
+        assert support.schema_id == "upgrade-data"
+        assert support.readable_versions == (1, 2)
+        assert support.preferred_write_version == 2
     finally:
         sys.path.remove(str(tmp_path))
         for name in ("migrating_v1", "migrating_v2"):
@@ -289,20 +277,17 @@ def test_upgrade_converges_configuration_and_extension_data_after_cutover(tmp_pa
             sys.modules.pop(name + ".provider", None)
 
 
-def test_failed_upgrade_leaves_persisted_configuration_and_extension_data_untouched(tmp_path: Path):
+def test_failed_upgrade_leaves_persisted_configuration_untouched(tmp_path: Path):
     _write_migrating_component(tmp_path, "migrating_v1", version=1)
     _write_migrating_component(tmp_path, "migrating_bad_v2", version=2, broken=True)
     sys.path.insert(0, str(tmp_path))
     try:
-        core, provider, request, extension_store, entity = _prepare_migrating_core(tmp_path)
+        core, provider, request = _prepare_migrating_core(tmp_path)
         with pytest.raises(AIxUpgradeError, match="rolled back"):
             core.upgrade_python_packages("app", ("migrating_bad_v2",), trusted_namespace_prefixes=("_AAC.",))
         config = provider.snapshot(request)
         assert config.payload.configuration_schema_version == 1
         assert config.payload.values == {"old_name": "configuration"}
-        extension = extension_store.get(entity, "com.example.migrating")
-        assert extension.component_extension_schema_version == 1
-        assert extension.payload == {"old_name": "extension"}
         assert core.installed("com.example.migrating").descriptor.version == 1
     finally:
         sys.path.remove(str(tmp_path))
@@ -487,7 +472,7 @@ def test_read_only_old_configuration_allows_upgrade_and_is_normalized_on_the_fly
     _write_migrating_component(tmp_path, "migrating_v2", version=2)
     sys.path.insert(0, str(tmp_path))
     try:
-        core, provider, request, _extension_store, _entity = _prepare_migrating_core(tmp_path)
+        core, provider, request = _prepare_migrating_core(tmp_path)
         provider.read_only = True
 
         plan = core.plan_python_package_upgrades("app", ("migrating_v2",))
@@ -515,7 +500,7 @@ def test_configuration_writeback_failure_does_not_rollback_upgrade_and_retries_l
     _write_migrating_component(tmp_path, "migrating_v2", version=2)
     sys.path.insert(0, str(tmp_path))
     try:
-        core, provider, request, _extension_store, _entity = _prepare_migrating_core(tmp_path)
+        core, provider, request = _prepare_migrating_core(tmp_path)
         original_replace_payload = provider.replace_payload
 
         def fail_target_schema(request_arg, payload, expected_record_revision=None):
@@ -559,7 +544,7 @@ def test_downgrade_is_a_fresh_replacement_and_unsupported_newer_configuration_is
     _write_migrating_component(tmp_path, "migrating_v2", version=2)
     sys.path.insert(0, str(tmp_path))
     try:
-        core, provider, request, _extension_store, _entity = _prepare_migrating_core(tmp_path)
+        core, provider, request = _prepare_migrating_core(tmp_path)
         core.upgrade_aac_package("app", "migrating_v2")
         stored = provider.snapshot(request)
         assert stored.payload.configuration_schema_version == 2

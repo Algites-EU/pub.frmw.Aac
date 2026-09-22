@@ -190,21 +190,23 @@ A package replacement journal is a specialization of the generic durable transac
 
 The actual replacement may hold the Core mutation lock across the short commit/cutover interval so another process cannot observe or mutate Core-owned state in the middle of a logically atomic multi-record cutover. Download, solver work and preflight remain outside that lock and are revalidated before cutover begins.
 
-## XI. Configuration and semantic extension data
+## XI. Configuration and Data Entities
 
-Configuration providers and semantic extension-data stores use the same revision-token/CAS concepts.
+Configuration providers and future Data Entity stores use the same revision-token/CAS principles, but they remain distinct semantic APIs.
 
-Component-owned configuration/extension payloads remain independent of the persistence envelope. Their schema versions describe payload meaning; `record_revision` describes persistence concurrency. The two MUST NOT be conflated.
+The generic Data Entity envelope carries `uid`, `schema_id`, `schema_version`, `record_revision`, `state` and `payload`. Schema version describes payload meaning; `record_revision` describes storage concurrency. `ACTIVE`/`TOMBSTONE` is logical record state and is likewise independent from revision.
 
-A filesystem provider may use monotonic integer revisions. An HTTP provider may expose an opaque string revision and map it to transport-specific conditional semantics such as ETag/`If-Match` without exposing HTTP concepts to generic AAC callers.
+This persistence specification defines the concurrency primitives that a future Data Entity storage capability can reuse. It does **not** yet standardize Data Entity create/replace/delete/query/provision operations.
 
-Provider convergence after a component replacement remains independently retryable. A transaction across independent configuration providers/stores MUST NOT be advertised as globally atomic unless they genuinely share one `MULTI_RECORD_TRANSACTION` persistence domain.
+A filesystem implementation may use monotonic integer revisions; an HTTP/database implementation may expose opaque tokens. Provider-specific tables, indexes, foreign keys or file layouts MUST NOT become part of the generic Data Entity contract.
 
 ## XII. Schema requirements
 
-Schemas for mutable AAC records MUST declare the representation of `record_revision`. The baseline schema library provides reusable definitions for monotonic-integer and opaque-string revisions.
+Every canonical JSON Schema in AAC MUST explicitly declare `x-aac-schema-id` and `x-aac-schema-version`. Identity is never inferred from a filename.
 
-The representation declaration belongs to the record schema/persistence contract. Individual records contain only the revision value; they do not repeat a `revision_type` discriminator.
+Schemas for mutable persistence envelopes/contracts must define the representation of `record_revision` where that representation is fixed by the persistence domain. Data Entity payload schemas do not own `record_revision`; it belongs to the generic Data Entity envelope.
+
+Field-level Data Entity relationships are declared in payload schemas using `x-aac-data-entity-reference` with the target `schema_id`. Physical referential-integrity enforcement is provider-specific.
 
 Schemas for immutable documents do not acquire `record_revision` merely for uniformity. If such a document is stored inside a mutable cache/index record, the cache/index envelope carries the revision.
 

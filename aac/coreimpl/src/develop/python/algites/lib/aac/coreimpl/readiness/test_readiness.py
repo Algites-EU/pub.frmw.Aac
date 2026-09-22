@@ -29,7 +29,7 @@ def _write_component(root: Path, package: str, *, version: int = 1, dynamic: str
         encoding="utf-8",
     )
     (pkg / "schemas" / "ready-config_1.json").write_text(
-        '{"type":"object","properties":{"endpoint":{"type":"string"}}}', encoding="utf-8"
+        '{"x-aac-schema-id":"ready-config","x-aac-schema-version":1,"type":"object","properties":{"endpoint":{"type":"string"}}}', encoding="utf-8"
     )
     (pkg / "component.yml").write_text(
         "component:\n"

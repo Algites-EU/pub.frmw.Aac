@@ -2,6 +2,7 @@ from algites.lib.aac.coreintf.contracts import AInConsumerCardinality
 from algites.lib.aac.coreintf.descriptor import (
     AIcComponentDescriptor,
     AIcConsumerRequirementDescriptor,
+    AIcPersistedSchemaDescriptor,
     AIcProviderDefinitionDescriptor,
 )
 from algites.lib.aac.coreimpl.core import AIcApplicationComponentCore, AIcInstalledComponent
@@ -73,6 +74,8 @@ def test_create_provider_instance_can_start_unconfigured():
     core = AIcApplicationComponentCore()
     core.schemas.register("required-config_1.json", {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "x-aac-schema-id": "required-config",
+        "x-aac-schema-version": 1,
         "type": "object",
         "properties": {"required_value": {"type": "string"}},
         "required": ["required_value"],
@@ -81,7 +84,9 @@ def test_create_provider_instance_can_start_unconfigured():
         "vendor.configurable", 1,
         providers=(AIcProviderDefinitionDescriptor(
             "p", "vendor.configurable-cap", (1,), "vendor:Provider",
-            configuration_schema="required-config_1.json",
+            configuration_schema=AIcPersistedSchemaDescriptor(
+                "required-config", 1, (1,), resource_name="required-config_1.json"
+            ),
         ),),
     )
     core._installed[descriptor.id] = AIcInstalledComponent(AIcDiscoveredComponent(descriptor, None, "test"))
@@ -196,7 +201,7 @@ def test_catalog_browse_download_install_ui_flow(tmp_path):
     digest = hashlib.sha256(wheel.read_bytes()).hexdigest()
     catalog = tmp_path / "catalog.yml"
     catalog.write_text(f'''catalog:
-  format_version: 4
+  format_version: 1
   product_id: eu.algites.app.orchestrator
   technology_id: PYTHON
   components:

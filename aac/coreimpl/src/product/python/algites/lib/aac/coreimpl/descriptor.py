@@ -19,13 +19,11 @@ from algites.lib.aac.coreintf.descriptor import (
     AIcPermissionDescriptor,
     AIcEntitlementLicensingScopeDescriptor,
     AIcCapabilityEntitlementDescriptor,
-    AIcEntityExtensionDescriptor,
-    AIcEntityExtensionDataDescriptor,
+    AIcDataEntityRequirementDescriptor,
+    AIcDataEntitySupportDescriptor,
     AIcPersistedSchemaDescriptor,
     AIcSchemaMigrationStepDescriptor,
-    AIcCoreEntitySchemaCompatibilityDescriptor,
-    AInEntityExtensionDataAccess,
-    AInCoreEntityAccess,
+    AInDataEntityAccess,
     AIcInitialProviderInstanceDescriptor,
     AIcLifecycleHooksDescriptor,
     AIcProviderDefinitionDescriptor,
@@ -90,53 +88,36 @@ class AIcDescriptorLoader:
             raise AIxDescriptorError(f"invalid YAML in {source}: {exc}") from exc
         if not isinstance(raw, Mapping):
             raise AIxDescriptorError(f"{source}: descriptor root must be a mapping")
-        descriptor_schema_version = _validate_raw_descriptor(raw, source)
+        _validate_raw_descriptor(raw, source)
         try:
-            return _parse_component(raw["component"], descriptor_schema_version=descriptor_schema_version)
+            return _parse_component(raw["component"])
         except (KeyError, TypeError, ValueError) as exc:
             raise AIxDescriptorError(f"{source}: invalid component descriptor: {exc}") from exc
 
 
-def _validate_raw_descriptor(raw: Mapping[str, Any], source: str) -> int:
-    validation_failures = []
-    for schema_version in (5, 4, 3):
-        try:
-            schema_text = read_core_schema(f"component-descriptor_{schema_version}.json")
-            schema = json.loads(schema_text)
-            errors = sorted(Draft202012Validator(schema).iter_errors(raw), key=lambda error: list(error.absolute_path))
-        except Exception as exc:
-            raise AIxDescriptorError(f"cannot validate descriptor schema for {source}: {exc}") from exc
-        if not errors:
-            return schema_version
-        validation_failures.append((schema_version, errors))
+def _validate_raw_descriptor(raw: Mapping[str, Any], source: str) -> None:
+    try:
+        schema_text = read_core_schema("component-descriptor_1.json")
+        schema = json.loads(schema_text)
+        errors = sorted(Draft202012Validator(schema).iter_errors(raw), key=lambda error: list(error.absolute_path))
+    except Exception as exc:
+        raise AIxDescriptorError(f"cannot validate descriptor schema for {source}: {exc}") from exc
+    if not errors:
+        return
     rendered = []
-    schema_version, errors = validation_failures[0]
     for error in errors:
         path = "$" + "".join(f"[{p}]" if isinstance(p, int) else f".{p}" for p in error.absolute_path)
         rendered.append(f"{path}: {error.message}")
     raise AIxDescriptorError(
-        f"{source}: descriptor schema validation failed for current schema {schema_version}: " + "; ".join(rendered)
+        f"{source}: descriptor schema validation failed: " + "; ".join(rendered)
     )
 
 
 def _parse_persisted_schema(raw_schema: Any) -> AIcPersistedSchemaDescriptor | None:
     if raw_schema is None:
         return None
-    if isinstance(raw_schema, str):
-        name = Path(raw_schema).name
-        import re
-        match = re.match(r"^(?P<id>.+)_(?P<version>[1-9][0-9]*)\.json$", name)
-        if match is None:
-            raise ValueError(f"schema resource {raw_schema!r} must end in _<version>.json")
-        version = int(match.group("version"))
-        return AIcPersistedSchemaDescriptor(
-            schema_id=match.group("id"),
-            write_version=version,
-            readable_versions=(version,),
-            resource_name=raw_schema,
-        )
     if not isinstance(raw_schema, Mapping):
-        raise ValueError("persisted schema declaration must be string or mapping")
+        raise ValueError("persisted schema declaration must be a mapping")
     migrations = tuple(
         AIcSchemaMigrationStepDescriptor(
             from_version=int(item["from"]),
@@ -145,14 +126,12 @@ def _parse_persisted_schema(raw_schema: Any) -> AIcPersistedSchemaDescriptor | N
         )
         for item in raw_schema.get("migrations", ())
     )
-    write_version = int(raw_schema["write_version"])
-    readable = tuple(int(v) for v in raw_schema.get("readable_versions", (write_version,)))
     return AIcPersistedSchemaDescriptor(
         schema_id=str(raw_schema["id"]),
-        write_version=write_version,
-        readable_versions=readable,
+        write_version=int(raw_schema["write_version"]),
+        readable_versions=tuple(int(v) for v in raw_schema["readable_versions"]),
         migrations=migrations,
-        resource_name=str(raw_schema["resource"]) if raw_schema.get("resource") is not None else None,
+        resource_name=str(raw_schema["resource"]),
     )
 
 
@@ -169,7 +148,7 @@ def _parse_requirement(raw_requirement: Mapping[str, Any]) -> AIcConsumerRequire
     )
 
 
-def _parse_component(component: Mapping[str, Any], *, descriptor_schema_version: int = 5) -> AIcComponentDescriptor:
+def _parse_component(component: Mapping[str, Any]) -> AIcComponentDescriptor:
     providers = []
     for raw_provider in component.get("providers", ()):
         capability = raw_provider["capability"]
@@ -230,19 +209,14 @@ def _parse_component(component: Mapping[str, Any], *, descriptor_schema_version:
     )
 
     provided_capability_entitlements = []
-    entitlement_key = "provided_capability_entitlements" if descriptor_schema_version >= 5 else "capability_entitlements"
-    for raw_capability in component.get(entitlement_key, ()):
+    for raw_capability in component.get("provided_capability_entitlements", ()):
         permissions = tuple(
             AIcPermissionDescriptor(
                 id=item["id"],
                 name=normalize_display_text(item.get("name")),
                 description=normalize_display_text(item.get("description")),
                 possible_licensing_scope_types=tuple(
-                    str(v) for v in (
-                        item.get("possible_licensing_scopes", ())
-                        if descriptor_schema_version >= 4
-                        else item.get("possible_entitlement_scopes", ())
-                    )
+                    str(v) for v in item.get("possible_licensing_scopes", ())
                 ),
                 metadata=item.get("metadata", {}),
             )
@@ -256,40 +230,40 @@ def _parse_component(component: Mapping[str, Any], *, descriptor_schema_version:
             description=normalize_display_text(raw_capability.get("description")),
         ))
 
-    if descriptor_schema_version < 4 and not entitlement_licensing_scopes:
-        legacy_scope_types = sorted({
-            scope_type
-            for entitlement in provided_capability_entitlements
-            for permission in entitlement.permissions
-            for scope_type in permission.possible_licensing_scope_types
-        })
-        entitlement_licensing_scopes = tuple(
-            AIcEntitlementLicensingScopeDescriptor(type=scope_type) for scope_type in legacy_scope_types
-        )
 
-    entity_extensions = []
-    for raw_extension in component.get("entity_extensions", ()):
-        raw_data = raw_extension.get("extension_data", {}) or {}
-        compatible_core_schemas = tuple(
-            AIcCoreEntitySchemaCompatibilityDescriptor(
-                schema_id=str(item["schema_id"]),
-                readable_versions=tuple(int(v) for v in item.get("readable_versions", ())),
+    data_entity_support = []
+    for raw_support in component.get("data_entity_support", ()):
+        migrations = tuple(
+            AIcSchemaMigrationStepDescriptor(
+                from_version=int(item["from"]),
+                to_version=int(item["to"]),
+                migrator_id=str(item["migrator"]),
             )
-            for item in raw_data.get("compatible_core_entity_schemas", ())
+            for item in raw_support.get("migrations", ())
         )
-        extension_data = AIcEntityExtensionDataDescriptor(
-            access=AInEntityExtensionDataAccess(raw_data.get("access", "NONE")),
-            component_extension_schema=_parse_persisted_schema(raw_data.get("component_extension_schema")),
-            compatible_core_entity_schemas=compatible_core_schemas,
+        requirements = tuple(
+            AIcDataEntityRequirementDescriptor(
+                schema_id=str(item["schema_id"]),
+                access=tuple(AInDataEntityAccess(str(value)) for value in item.get("access", ())),
+                readable_versions=tuple(int(value) for value in item.get("readable_versions", ())),
+                writable_versions=tuple(int(value) for value in item.get("writable_versions", ())),
+                required=bool(item.get("required", True)),
+            )
+            for item in raw_support.get("data_entity_requirements", ())
         )
-        entity_extensions.append(AIcEntityExtensionDescriptor(
-            entity_type_id=raw_extension["entity_type_id"],
-            name=normalize_display_text(raw_extension.get("name")),
-            description=normalize_display_text(raw_extension.get("description")),
-            core_entity_access=tuple(AInCoreEntityAccess(str(v)) for v in raw_extension.get("core_entity_access", ("READ",))),
-            extension_data=extension_data,
-            ui=raw_extension.get("ui", {}),
-            metadata=raw_extension.get("metadata", {}),
+        data_entity_support.append(AIcDataEntitySupportDescriptor(
+            schema_id=str(raw_support["schema_id"]),
+            readable_versions=tuple(int(value) for value in raw_support.get("readable_versions", ())),
+            writable_versions=tuple(int(value) for value in raw_support.get("writable_versions", ())),
+            preferred_write_version=(
+                int(raw_support["preferred_write_version"])
+                if raw_support.get("preferred_write_version") is not None else None
+            ),
+            migrations=migrations,
+            data_entity_requirements=requirements,
+            name=normalize_display_text(raw_support.get("name")),
+            description=normalize_display_text(raw_support.get("description")),
+            metadata=dict(raw_support.get("metadata", {})),
         ))
 
     raw_lifecycle = component.get("lifecycle", {}) or {}
@@ -307,7 +281,7 @@ def _parse_component(component: Mapping[str, Any], *, descriptor_schema_version:
         component_configuration_schema=_parse_persisted_schema(component.get("component_configuration_schema")),
         entitlement_licensing_scopes=entitlement_licensing_scopes,
         provided_capability_entitlements=tuple(provided_capability_entitlements),
-        entity_extensions=tuple(entity_extensions),
+        data_entity_support=tuple(data_entity_support),
         lifecycle=lifecycle,
         metadata=component.get("metadata", {}),
     )

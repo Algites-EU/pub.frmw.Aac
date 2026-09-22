@@ -32,10 +32,10 @@ class AIcEntitlementDocumentLoader:
         raw = _load_yaml(text, source)
         data = _mapping(raw.get("entitlement"))
         format_version = int(data.get("format_version", 0))
-        if format_version not in {1, 2}:
-            raise AIxEntitlementError(f"{source}: unsupported entitlement document format_version {format_version}")
-        _validate(raw, f"entitlement-document_{format_version}.json", source)
-        scope_data = _mapping(data["licensing_scope"] if format_version >= 2 else data["entitlement_scope"])
+        if format_version != 1:
+            raise AIxEntitlementError(f"{source}: unsupported entitlement document format_version {format_version}; expected 1")
+        _validate(raw, "entitlement-document_1.json", source)
+        scope_data = _mapping(data["licensing_scope"])
         subject_data = _mapping(data["subject"])
         subject = AIcEntitlementSubject(
             str(subject_data["id"]),
@@ -87,12 +87,10 @@ class AIcEntitlementIssuingRequestLoader:
         raw = _load_yaml(text, source)
         data = _mapping(raw.get("entitlement_request"))
         format_version = int(data.get("format_version", 0))
-        if format_version not in {1, 2}:
-            raise AIxEntitlementError(f"{source}: unsupported entitlement issuing request format_version {format_version}")
-        _validate(raw, f"entitlement-issuing-request_{format_version}.json", source)
-        scope_data = _mapping(
-            data["requested_licensing_scope"] if format_version >= 2 else data["requested_entitlement_scope"]
-        )
+        if format_version != 1:
+            raise AIxEntitlementError(f"{source}: unsupported entitlement issuing request format_version {format_version}; expected 1")
+        _validate(raw, "entitlement-issuing-request_1.json", source)
+        scope_data = _mapping(data["requested_licensing_scope"])
         subject_data = _mapping(data["subject"])
         subject = AIcEntitlementSubject(
             str(subject_data["id"]),

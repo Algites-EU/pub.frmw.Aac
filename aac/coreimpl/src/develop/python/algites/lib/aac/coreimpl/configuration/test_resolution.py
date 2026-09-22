@@ -176,6 +176,7 @@ def test_unsupported_versioned_provider_contribution_is_unavailable_and_falls_ba
     declaration = AIcPersistedSchemaDescriptor("foo-config", 2, (2,), resource_name="foo-config_2.json")
     schemas = AIcSchemaRegistry()
     schemas.register("foo-config_2.json", {
+        "x-aac-schema-id": "foo-config", "x-aac-schema-version": 2,
         "type": "object",
         "properties": {"timeout": {"type": "integer", "default": 30}},
         "required": ["timeout"],
@@ -220,6 +221,7 @@ def test_unsupported_contribution_without_fallback_resolves_to_undefined():
     providers = AIcConfigurationProviderRegistry(); providers.register("future", VersionedProvider())
     declaration = AIcPersistedSchemaDescriptor("foo-config", 2, (2,), resource_name="foo-config_2.json")
     schemas = AIcSchemaRegistry(); schemas.register("foo-config_2.json", {
+        "x-aac-schema-id": "foo-config", "x-aac-schema-version": 2,
         "type": "object", "properties": {"endpoint": {"type": "string"}}, "required": ["endpoint"]
     })
     read_service = AIcConfigurationReadService(

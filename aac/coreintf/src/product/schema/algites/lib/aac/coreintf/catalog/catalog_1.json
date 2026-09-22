@@ -84,16 +84,16 @@
         "description": {
           "$ref": "#/$defs/displayText"
         },
-        "possible_entitlement_scopes": {
+        "metadata": {
+          "type": "object"
+        },
+        "possible_licensing_scopes": {
           "type": "array",
           "uniqueItems": true,
           "items": {
             "type": "string",
             "minLength": 1
           }
-        },
-        "metadata": {
-          "type": "object"
         }
       }
     },
@@ -369,12 +369,6 @@
             }
           }
         },
-        "capability_entitlements": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/capabilityEntitlement"
-          }
-        },
         "artifacts": {
           "type": "array",
           "minItems": 1,
@@ -384,6 +378,43 @@
         },
         "metadata": {
           "type": "object"
+        },
+        "persistent_schemas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/persistentSchema"
+          }
+        },
+        "entitlement_licensing_scopes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name": {
+                "$ref": "#/$defs/displayText"
+              },
+              "description": {
+                "$ref": "#/$defs/displayText"
+              },
+              "metadata": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "provided_capability_entitlements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/capabilityEntitlement"
+          }
         }
       }
     },
@@ -476,6 +507,205 @@
           "type": "object"
         }
       }
+    },
+    "persistentSchema": {
+      "type": "object",
+      "required": [
+        "kind",
+        "schema_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "COMPONENT_CONFIGURATION",
+            "PROVIDER_CONFIGURATION",
+            "DATA_ENTITY"
+          ]
+        },
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "write_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "provider_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "readable_versions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "writable_versions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "preferred_write_version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "COMPONENT_CONFIGURATION"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "write_version"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "provider_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "readable_versions"
+                  ]
+                },
+                {
+                  "required": [
+                    "writable_versions"
+                  ]
+                },
+                {
+                  "required": [
+                    "preferred_write_version"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "PROVIDER_CONFIGURATION"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "provider_id",
+              "write_version"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "readable_versions"
+                  ]
+                },
+                {
+                  "required": [
+                    "writable_versions"
+                  ]
+                },
+                {
+                  "required": [
+                    "preferred_write_version"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "DATA_ENTITY"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "readable_versions",
+              "writable_versions"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "provider_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "write_version"
+                  ]
+                }
+              ]
+            },
+            "allOf": [
+              {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "readable_versions": {
+                        "minItems": 1
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "writable_versions": {
+                        "minItems": 1
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "if": {
+                  "properties": {
+                    "writable_versions": {
+                      "minItems": 1
+                    }
+                  },
+                  "required": [
+                    "writable_versions"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "preferred_write_version"
+                  ]
+                },
+                "else": {
+                  "not": {
+                    "required": [
+                      "preferred_write_version"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
     }
-  }
+  },
+  "title": "AAC Component Catalog 1",
+  "x-aac-schema-id": "_AAC.schema.catalog",
+  "x-aac-schema-version": 1
 }

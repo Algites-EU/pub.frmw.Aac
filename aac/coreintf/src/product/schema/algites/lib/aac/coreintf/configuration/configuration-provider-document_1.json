@@ -2,42 +2,100 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AAC Configuration Provider Document 1",
   "type": "object",
-  "required": ["format_version", "configuration_scope", "configuration_target", "revision", "payload"],
+  "required": [
+    "format_version",
+    "configuration_scope",
+    "configuration_target",
+    "record_revision",
+    "payload"
+  ],
   "additionalProperties": false,
   "properties": {
-    "format_version": {"const": 1},
+    "format_version": {
+      "const": 1
+    },
     "configuration_scope": {
       "type": "object",
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "additionalProperties": false,
       "properties": {
-        "type": {"type": "string", "minLength": 1},
-        "id": {"type": ["string", "null"]}
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "configuration_target": {
       "type": "object",
-      "required": ["kind", "component_id"],
+      "required": [
+        "kind",
+        "component_id"
+      ],
       "additionalProperties": false,
       "properties": {
-        "kind": {"enum": ["COMPONENT", "PROVIDER_INSTANCE"]},
-        "component_id": {"type": "string", "minLength": 1},
-        "provider_instance_id": {"type": "string", "minLength": 1}
+        "kind": {
+          "enum": [
+            "COMPONENT",
+            "PROVIDER_INSTANCE"
+          ]
+        },
+        "component_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider_instance_id": {
+          "type": "string",
+          "minLength": 1
+        }
       }
     },
-    "revision": {"type": ["string", "integer", "null"]},
     "payload": {
       "type": "object",
-      "required": ["configuration_schema_id", "configuration_schema_version", "written_by_component_version", "values", "policies"],
+      "required": [
+        "configuration_schema_id",
+        "configuration_schema_version",
+        "written_by_component_version",
+        "values",
+        "policies"
+      ],
       "additionalProperties": false,
       "properties": {
-        "configuration_schema_id": {"type": "string", "minLength": 1},
-        "configuration_schema_version": {"type": "integer", "minimum": 1},
-        "written_by_component_version": {"type": "integer", "minimum": 1},
-        "values": {"type": "object"},
-        "policies": {"type": "object"},
-        "metadata": {"type": "object"}
+        "configuration_schema_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "configuration_schema_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "written_by_component_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "values": {
+          "type": "object"
+        },
+        "policies": {
+          "type": "object"
+        },
+        "metadata": {
+          "type": "object"
+        }
       }
+    },
+    "record_revision": {
+      "type": "integer",
+      "minimum": 1
     }
-  }
+  },
+  "x-aac-schema-id": "_AAC.schema.configuration-provider-document",
+  "x-aac-schema-version": 1
 }

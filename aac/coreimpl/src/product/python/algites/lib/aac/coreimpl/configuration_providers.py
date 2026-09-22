@@ -35,13 +35,13 @@ from .errors import AIxAuthenticationError, AIxConfigurationRevisionConflict
 
 
 class AIcConfigurationDocumentCodec:
-    FORMAT_VERSION = 2
+    FORMAT_VERSION = 1
 
     @staticmethod
     def encode_snapshot(snapshot: AIcConfigurationProviderSnapshot) -> dict[str, object]:
         payload = snapshot.payload
         return {
-            "format_version": 2,
+            "format_version": 1,
             "configuration_scope": {"type": snapshot.configuration_scope.type, "id": snapshot.configuration_scope.id},
             "configuration_target": _encode_target(snapshot.configuration_target),
             "record_revision": snapshot.record_revision,
@@ -61,8 +61,8 @@ class AIcConfigurationDocumentCodec:
     @staticmethod
     def decode_snapshot(raw: Mapping[str, object]) -> AIcConfigurationProviderSnapshot:
         format_version = int(raw.get("format_version", 0))
-        if format_version not in {1, 2}:
-            raise ValueError("unsupported configuration provider document format_version")
+        if format_version != 1:
+            raise ValueError("unsupported configuration provider document format_version; expected 1")
         raw_scope = _mapping(raw.get("configuration_scope"), "configuration_scope")
         raw_target = _mapping(raw.get("configuration_target"), "configuration_target")
         raw_payload = _mapping(raw.get("payload"), "payload")
@@ -85,7 +85,7 @@ class AIcConfigurationDocumentCodec:
             policies=policies,
             metadata=dict(_mapping(raw_payload.get("metadata", {}), "payload.metadata")),
         )
-        revision = raw.get("record_revision", raw.get("revision"))
+        revision = raw.get("record_revision")
         return AIcConfigurationProviderSnapshot(scope, target, revision, payload)
 
     @staticmethod

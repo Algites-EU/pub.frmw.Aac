@@ -11,3 +11,33 @@ docs-site/
 # Build outputs (u vás do run/)
 run/*
 **/run/*
+build/*
+
+# Generated/runtime/build output
+**/run/product/**
+**/run/develop/**
+**/run/bld/**
+!**/run/product/.gitkeep
+!**/run/develop/.gitkeep
+!**/run/bld/.gitkeep
+
+# Build-system spillover (authoritative generated output belongs under run/)
+**/build/
+**/*.egg-info/
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# Environments / IDE
+.venv/
+venv/
+.idea/
+.vscode/
+
+
+

@@ -47,7 +47,7 @@ def _wheel(root: Path) -> tuple[Path, str, str]:
     - type: ORGANIZATION
       name: Organization
       description: One organization.
-  capability_entitlements:
+  provided_capability_entitlements:
     - capability:
         id: com.example.cap
         version: 2
@@ -63,7 +63,7 @@ def _wheel(root: Path) -> tuple[Path, str, str]:
 
 def _catalog_text(wheel: Path, descriptor_path: str, digest: str) -> str:
     return f'''catalog:
-  format_version: 3
+  format_version: 1
   product_id: eu.algites.app.orchestrator
   technology_id: PYTHON
   components:
@@ -97,7 +97,7 @@ def _catalog_text(wheel: Path, descriptor_path: str, digest: str) -> str:
             - type: ORGANIZATION
               name: Organization
               description: One organization.
-          capability_entitlements:
+          provided_capability_entitlements:
             - capability:
                 id: com.example.cap
                 version: 2
@@ -144,22 +144,9 @@ def test_catalog_query_is_scoped_by_product_and_technology_and_filters_locally(t
 
 
 
-def test_catalog_v2_exposes_persistent_schema_summary_for_solver(tmp_path):
+def test_catalog_exposes_persistent_schema_summary_for_solver(tmp_path):
     wheel, descriptor_path, digest = _wheel(tmp_path)
     text = _catalog_text(wheel, descriptor_path, digest)
-    text = text.replace("format_version: 3", "format_version: 2", 1)
-    text = text.replace(
-        "          entitlement_licensing_scopes:\n"
-        "            - type: USER\n"
-        "              name: User\n"
-        "              description: One identified user.\n"
-        "            - type: ORGANIZATION\n"
-        "              name: Organization\n"
-        "              description: One organization.\n",
-        "",
-        1,
-    )
-    text = text.replace("possible_licensing_scopes", "possible_entitlement_scopes")
     text = text.replace(
         "          artifacts:\n",
         "          persistent_schemas:\n"
@@ -167,18 +154,28 @@ def test_catalog_v2_exposes_persistent_schema_summary_for_solver(tmp_path):
         "              schema_id: com.example.demo.config\n"
         "              write_version: 2\n"
         "            - kind: PROVIDER_CONFIGURATION\n"
-        "              owner_id: main\n"
+        "              provider_id: main\n"
         "              schema_id: com.example.demo.main.config\n"
         "              write_version: 4\n"
+        "            - kind: DATA_ENTITY\n"
+        "              schema_id: com.example.demo.site-data\n"
+        "              readable_versions: [1, 2]\n"
+        "              writable_versions: [2]\n"
+        "              preferred_write_version: 2\n"
         "          artifacts:\n",
         1,
     )
-    document = AIcCatalogDocumentLoader.load_text(text, source="catalog-v2.yml")
+    document = AIcCatalogDocumentLoader.load_text(text, source="catalog.yml")
     release = document.components[0].releases[0]
     assert [(item.kind, item.identity[1], item.schema_id, item.write_version) for item in release.persistent_schemas] == [
         (AInCatalogPersistentSchemaKind.COMPONENT_CONFIGURATION, None, "com.example.demo.config", 2),
         (AInCatalogPersistentSchemaKind.PROVIDER_CONFIGURATION, "main", "com.example.demo.main.config", 4),
+        (AInCatalogPersistentSchemaKind.DATA_ENTITY, "com.example.demo.site-data", "com.example.demo.site-data", None),
     ]
+    data_entity = release.persistent_schemas[2]
+    assert data_entity.readable_versions == (1, 2)
+    assert data_entity.writable_versions == (2,)
+    assert data_entity.preferred_write_version == 2
 
 def test_catalog_bootstrap_registers_filesystem_provider_and_core_can_download_install_without_entitlement(tmp_path):
     wheel, descriptor_path, digest = _wheel(tmp_path)
@@ -265,10 +262,10 @@ def test_http_catalog_provider_reads_same_document_and_resolves_relative_artifac
         thread.join(timeout=2)
 
 
-def test_catalog_format4_uses_explicit_persistent_schema_discriminators_and_provided_entitlements():
+def test_catalog_uses_explicit_persistent_schema_discriminators_and_provided_entitlements():
     text = """
 catalog:
-  format_version: 4
+  format_version: 1
   product_id: p
   technology_id: python
   components:
@@ -293,14 +290,16 @@ catalog:
               provider_id: repository
               schema_id: foo.repository.configuration
               write_version: 2
-            - kind: ENTITY_EXTENSION
-              entity_type_id: _AO.entity.site
-              schema_id: foo.site-extension
-              write_version: 3
-            - kind: ENTITY_EXTENSION
-              entity_type_id: _AO.entity.service-def
-              schema_id: foo.service-def-extension
-              write_version: 2
+            - kind: DATA_ENTITY
+              schema_id: foo.site-data
+              readable_versions: [2, 3]
+              writable_versions: [3]
+              preferred_write_version: 3
+            - kind: DATA_ENTITY
+              schema_id: foo.service-def-data
+              readable_versions: [1, 2]
+              writable_versions: [2]
+              preferred_write_version: 2
           artifacts:
             - id: py
               locator: {type: URI, uri: file:///tmp/foo.whl}
@@ -315,8 +314,8 @@ catalog:
     assert [item.identity for item in release.persistent_schemas] == [
         ("COMPONENT_CONFIGURATION", None),
         ("PROVIDER_CONFIGURATION", "repository"),
-        ("ENTITY_EXTENSION", "_AO.entity.site"),
-        ("ENTITY_EXTENSION", "_AO.entity.service-def"),
+        ("DATA_ENTITY", "foo.site-data"),
+        ("DATA_ENTITY", "foo.service-def-data"),
     ]
 
 
@@ -326,6 +325,13 @@ def test_catalog_persistent_schema_discriminator_fields_are_strict():
     with pytest.raises(ValueError):
         AIcCatalogPersistentSchema(AInCatalogPersistentSchemaKind.COMPONENT_CONFIGURATION, "x", 1, provider_id="p")
     with pytest.raises(ValueError):
-        AIcCatalogPersistentSchema(AInCatalogPersistentSchemaKind.PROVIDER_CONFIGURATION, "x", 1, entity_type_id="e")
+        AIcCatalogPersistentSchema(AInCatalogPersistentSchemaKind.PROVIDER_CONFIGURATION, "x", 1)
     with pytest.raises(ValueError):
-        AIcCatalogPersistentSchema(AInCatalogPersistentSchemaKind.ENTITY_EXTENSION, "x", 1, provider_id="p")
+        AIcCatalogPersistentSchema(
+            AInCatalogPersistentSchemaKind.DATA_ENTITY, "x", write_version=1, readable_versions=(1,)
+        )
+    with pytest.raises(ValueError):
+        AIcCatalogPersistentSchema(
+            AInCatalogPersistentSchemaKind.DATA_ENTITY, "x", readable_versions=(1,), writable_versions=(2,),
+            preferred_write_version=3,
+        )

@@ -107,9 +107,9 @@ class AIcCatalogDocumentLoader:
         if not isinstance(body_probe, Mapping):
             raise AIxPackageManagementError(f"catalog document {source} requires catalog object")
         format_version = int(body_probe.get("format_version", 0))
-        if format_version not in {1, 2, 3, 4}:
-            raise AIxPackageManagementError(f"catalog document {source} has unsupported format_version {format_version}")
-        schema_text = read_core_schema(f"catalog_{format_version}.json")
+        if format_version != 1:
+            raise AIxPackageManagementError(f"catalog document {source} has unsupported format_version {format_version}; expected 1")
+        schema_text = read_core_schema("catalog_1.json")
         schema = json.loads(schema_text)
         errors = sorted(Draft202012Validator(schema).iter_errors(raw), key=lambda error: list(error.absolute_path))
         if errors:
@@ -141,17 +141,13 @@ class AIcCatalogDocumentLoader:
                     for item in raw_release.get("entitlement_licensing_scopes", ())
                 )
                 entitlements = []
-                for raw_entitlement in raw_release.get("provided_capability_entitlements" if format_version >= 4 else "capability_entitlements", ()):
+                for raw_entitlement in raw_release.get("provided_capability_entitlements", ()):
                     permissions = tuple(AIcPermissionDescriptor(
                         id=str(item["id"]),
                         name=normalize_display_text(item.get("name")),
                         description=normalize_display_text(item.get("description")),
                         possible_licensing_scope_types=tuple(
-                            str(value) for value in (
-                                item.get("possible_licensing_scopes", ())
-                                if format_version >= 3
-                                else item.get("possible_entitlement_scopes", ())
-                            )
+                            str(value) for value in item.get("possible_licensing_scopes", ())
                         ),
                         metadata=dict(item.get("metadata", {})),
                     ) for item in raw_entitlement.get("permissions", ()))
@@ -162,16 +158,6 @@ class AIcCatalogDocumentLoader:
                         name=normalize_display_text(raw_entitlement.get("name")),
                         description=normalize_display_text(raw_entitlement.get("description")),
                     ))
-                if format_version < 3 and not entitlement_licensing_scopes:
-                    legacy_scope_types = sorted({
-                        scope_type
-                        for entitlement in entitlements
-                        for permission in entitlement.permissions
-                        for scope_type in permission.possible_licensing_scope_types
-                    })
-                    entitlement_licensing_scopes = tuple(
-                        AIcEntitlementLicensingScopeDescriptor(type=scope_type) for scope_type in legacy_scope_types
-                    )
                 artifacts = []
                 for raw_artifact in raw_release.get("artifacts", ()):
                     raw_locator = raw_artifact["locator"]
@@ -207,23 +193,17 @@ class AIcCatalogDocumentLoader:
                 persistent_schemas = []
                 for item in raw_release.get("persistent_schemas", ()):
                     kind = AInCatalogPersistentSchemaKind(str(item["kind"]))
-                    provider_id = None
-                    entity_type_id = None
-                    if format_version >= 4:
-                        provider_id = str(item["provider_id"]) if item.get("provider_id") is not None else None
-                        entity_type_id = str(item["entity_type_id"]) if item.get("entity_type_id") is not None else None
-                    elif item.get("owner_id") is not None:
-                        legacy_owner_id = str(item["owner_id"])
-                        if kind is AInCatalogPersistentSchemaKind.PROVIDER_CONFIGURATION:
-                            provider_id = legacy_owner_id
-                        elif kind is AInCatalogPersistentSchemaKind.ENTITY_EXTENSION:
-                            entity_type_id = legacy_owner_id
                     persistent_schemas.append(AIcCatalogPersistentSchema(
                         kind=kind,
-                        provider_id=provider_id,
-                        entity_type_id=entity_type_id,
                         schema_id=str(item["schema_id"]),
-                        write_version=int(item["write_version"]),
+                        write_version=(int(item["write_version"]) if item.get("write_version") is not None else None),
+                        provider_id=(str(item["provider_id"]) if item.get("provider_id") is not None else None),
+                        readable_versions=tuple(int(value) for value in item.get("readable_versions", ())),
+                        writable_versions=tuple(int(value) for value in item.get("writable_versions", ())),
+                        preferred_write_version=(
+                            int(item["preferred_write_version"])
+                            if item.get("preferred_write_version") is not None else None
+                        ),
                     ))
                 persistent_schemas = tuple(persistent_schemas)
                 releases.append(AIcCatalogRelease(

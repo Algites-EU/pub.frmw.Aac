@@ -9,14 +9,13 @@ from algites.lib.aac.coreintf.configuration import (
     AIiConfigurationMigrator,
 )
 from algites.lib.aac.coreintf.descriptor import (
-    AIcEntityExtensionDataDescriptor, AIcPersistedSchemaDescriptor, AIcSchemaMigrationStepDescriptor,
+    AIcDataEntitySupportDescriptor, AIcPersistedSchemaDescriptor, AIcSchemaMigrationStepDescriptor,
 )
 from algites.lib.aac.coreintf.errors import AIxPersistedSchemaIncompatible
-from algites.lib.aac.coreintf.extensions import (
-    AIcCoreEntityContext,
-    AIcEntityExtensionDataEnvelope,
-    AIcEntityExtensionMigrationRequest,
-    AIiEntityExtensionDataMigrator,
+from algites.lib.aac.coreintf.dataentity import (
+    AIcDataEntityEnvelope,
+    AIcDataEntityMigrationRequest,
+    AIiDataEntityMigrator,
 )
 from algites.lib.aac.coreintf.migration import AInSchemaRuntimeInterpretation, AIcSchemaCompatibilityAssessment
 
@@ -139,87 +138,82 @@ class AIcConfigurationMigrationService:
         return current
 
 
-class AIcEntityExtensionMigrationService:
-    def __init__(self, migrators: Mapping[str, AIiEntityExtensionDataMigrator] | None = None) -> None:
+class AIcDataEntityMigrationService:
+    def __init__(self, migrators: Mapping[str, AIiDataEntityMigrator] | None = None) -> None:
         self._migrators = dict(migrators or {})
-        self.compatibility = AIcSchemaCompatibilityEvaluator()
 
-    def register(self, migrator_id: str, migrator: AIiEntityExtensionDataMigrator) -> None:
+    def register(self, migrator_id: str, migrator: AIiDataEntityMigrator) -> None:
         if not migrator_id:
             raise ValueError("migrator_id must not be empty")
         self._migrators[migrator_id] = migrator
 
     def assess(
         self,
-        entity_context: AIcCoreEntityContext,
-        envelope: AIcEntityExtensionDataEnvelope,
-        extension_data: AIcEntityExtensionDataDescriptor,
+        envelope: AIcDataEntityEnvelope,
+        support: AIcDataEntitySupportDescriptor,
     ) -> AIcSchemaCompatibilityAssessment:
-        declaration = extension_data.component_extension_schema
-        if declaration is None:
+        if envelope.schema_id != support.schema_id:
             return AIcSchemaCompatibilityAssessment(
-                envelope.component_extension_schema_id, envelope.component_extension_schema_version,
-                envelope.component_extension_schema_version, False, AInSchemaRuntimeInterpretation.UNSUPPORTED,
-                (), ("entity extension does not declare component-extension data",),
+                envelope.schema_id, envelope.schema_version,
+                support.preferred_write_version or envelope.schema_version, False,
+                AInSchemaRuntimeInterpretation.UNSUPPORTED, (),
+                (f"stored schema id {envelope.schema_id!r} differs from supported {support.schema_id!r}",),
             )
-        if not extension_data.supports_core_entity_schema(
-            entity_context.core_entity_schema_id, entity_context.core_entity_schema_version
-        ):
+        target = support.preferred_write_version or envelope.schema_version
+        at_target = support.preferred_write_version is not None and envelope.schema_version == target
+        path = _migration_path(envelope.schema_version, target, support.migrations) if support.preferred_write_version is not None else ()
+        if envelope.schema_version in support.readable_versions:
             return AIcSchemaCompatibilityAssessment(
-                envelope.component_extension_schema_id, envelope.component_extension_schema_version,
-                declaration.write_version, False, AInSchemaRuntimeInterpretation.UNSUPPORTED,
-                (),
-                (f"current Core entity schema {entity_context.core_entity_schema_id}/{entity_context.core_entity_schema_version} "
-                 "is not declared compatible by the component",),
+                envelope.schema_id, envelope.schema_version, target, at_target,
+                AInSchemaRuntimeInterpretation.DIRECT, path, (),
             )
-        return self.compatibility.assess(
-            envelope.component_extension_schema_id, envelope.component_extension_schema_version, declaration
+        if path:
+            return AIcSchemaCompatibilityAssessment(
+                envelope.schema_id, envelope.schema_version, target, False,
+                AInSchemaRuntimeInterpretation.TRANSFORMED, path, (),
+            )
+        return AIcSchemaCompatibilityAssessment(
+            envelope.schema_id, envelope.schema_version, target, False,
+            AInSchemaRuntimeInterpretation.UNSUPPORTED, (),
+            (f"stored data entity schema version {envelope.schema_version} is not readable and no explicit transformation path exists",),
         )
 
-    def migrate_to_write_version(
+    def migrate_to_preferred_write_version(
         self,
-        entity_context: AIcCoreEntityContext,
-        envelope: AIcEntityExtensionDataEnvelope,
-        extension_data: AIcEntityExtensionDataDescriptor,
-        *,
-        written_by_component_version: int,
-    ) -> AIcEntityExtensionDataEnvelope:
-        declaration = extension_data.component_extension_schema
-        if declaration is None:
+        envelope: AIcDataEntityEnvelope,
+        support: AIcDataEntitySupportDescriptor,
+    ) -> AIcDataEntityEnvelope:
+        target = support.preferred_write_version
+        if target is None:
             raise AIxPersistedSchemaIncompatible(
-                envelope.component_extension_schema_id, envelope.component_extension_schema_version,
-                envelope.component_extension_schema_version, "entity extension does not declare component-extension data"
+                envelope.schema_id, envelope.schema_version, envelope.schema_version,
+                "data entity support is read-only and declares no preferred write version",
             )
-        assessment = self.assess(entity_context, envelope, extension_data)
+        assessment = self.assess(envelope, support)
         if assessment.at_target_write_version:
             return envelope
         if not assessment.migration_path:
             raise AIxPersistedSchemaIncompatible(
-                envelope.component_extension_schema_id,
-                envelope.component_extension_schema_version,
-                declaration.write_version,
+                envelope.schema_id, envelope.schema_version, target,
                 "; ".join(assessment.diagnostics) or None,
             )
         current = envelope
         for step in assessment.migration_path:
             migrator = self._migrators.get(step.migrator_id)
             if migrator is None:
-                raise AIxPersistedPayloadMigrationError(f"component-extension migrator {step.migrator_id!r} is not registered")
-            result = migrator.migrate(AIcEntityExtensionMigrationRequest(entity_context, current, step.to_version))
-            if result.component_extension_schema_id != declaration.schema_id or result.component_extension_schema_version != step.to_version:
+                raise AIxPersistedPayloadMigrationError(f"data entity migrator {step.migrator_id!r} is not registered")
+            result = migrator.migrate(AIcDataEntityMigrationRequest(current, step.to_version))
+            if result.schema_id != support.schema_id or result.schema_version != step.to_version:
                 raise AIxPersistedPayloadMigrationError(
-                    f"component-extension migrator {step.migrator_id!r} returned unexpected schema "
-                    f"{result.component_extension_schema_id}/{result.component_extension_schema_version}; expected "
-                    f"{declaration.schema_id}/{step.to_version}"
+                    f"data entity migrator {step.migrator_id!r} returned unexpected schema "
+                    f"{result.schema_id}/{result.schema_version}; expected {support.schema_id}/{step.to_version}"
                 )
-            current = AIcEntityExtensionDataEnvelope(
-                owner_component_id=current.owner_component_id,
-                component_extension_schema_id=result.component_extension_schema_id,
-                component_extension_schema_version=result.component_extension_schema_version,
-                written_by_component_version=written_by_component_version,
-                core_entity=current.core_entity,
+            current = AIcDataEntityEnvelope(
+                uid=current.uid,
+                schema_id=result.schema_id,
+                schema_version=result.schema_version,
+                record_revision=current.record_revision,
+                state=current.state,
                 payload=result.payload,
-                payload_format=current.payload_format,
-                metadata=dict(current.metadata),
             )
         return current

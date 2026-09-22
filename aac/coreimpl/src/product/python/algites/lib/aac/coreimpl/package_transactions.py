@@ -51,7 +51,7 @@ def _selection_from_raw(raw: Mapping[str, object]) -> AIcPackageSelection:
 
 def manifest_to_raw(manifest: AIcPackageSelectionManifest) -> dict[str, object]:
     return {
-        "format_version": 2,
+        "format_version": 1,
         "record_revision": manifest.record_revision,
         "last_transaction_id": manifest.last_transaction_id,
         "selections": [_selection_to_raw(item) for item in manifest.selections],
@@ -60,12 +60,12 @@ def manifest_to_raw(manifest: AIcPackageSelectionManifest) -> dict[str, object]:
 
 def manifest_from_raw(raw: Mapping[str, object]) -> AIcPackageSelectionManifest:
     format_version = int(raw.get("format_version", 0))
-    if format_version not in {1, 2}:
-        raise AIxPersistenceError("active package set requires format_version 1 or 2")
+    if format_version != 1:
+        raise AIxPersistenceError("active package set requires format_version 1")
     values = raw.get("selections", ())
     if not isinstance(values, list):
         raise AIxPersistenceError("active package set selections must be an array")
-    revision = raw.get("record_revision", raw.get("generation", 0))
+    revision = raw.get("record_revision", 0)
     return AIcPackageSelectionManifest(
         int(revision),
         tuple(_selection_from_raw(item) for item in values if isinstance(item, Mapping)),

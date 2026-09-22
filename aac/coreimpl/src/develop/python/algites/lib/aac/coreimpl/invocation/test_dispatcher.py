@@ -45,8 +45,8 @@ def test_operation_input_and_output_schema_are_core_validated():
     from algites.lib.aac.coreimpl.schemas import AIcSchemaRegistry
 
     schemas = AIcSchemaRegistry()
-    schemas.register("echo-input_1.json", {"type": "object", "required": ["value"], "properties": {"value": {"type": "string"}}, "additionalProperties": False})
-    schemas.register("echo-output_1.json", {"type": "object", "required": ["value"], "properties": {"value": {"type": "string"}}, "additionalProperties": False})
+    schemas.register("echo-input_1.json", {"x-aac-schema-id": "test.echo-input", "x-aac-schema-version": 1, "type": "object", "required": ["value"], "properties": {"value": {"type": "string"}}, "additionalProperties": False})
+    schemas.register("echo-output_1.json", {"x-aac-schema-id": "test.echo-output", "x-aac-schema-version": 1, "type": "object", "required": ["value"], "properties": {"value": {"type": "string"}}, "additionalProperties": False})
     catalog = AIcActiveContractCatalog(schemas)
     catalog.admit(AIcCapabilityContract(AIcCapabilityRef("test.schema", 1), (
         AIcCapabilityOperation("run", "Input", "Output", input_schema="echo-input_1.json", output_schema="echo-output_1.json"),

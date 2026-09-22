@@ -31,7 +31,7 @@
             "required": [
               "id",
               "version",
-              "entitlement_scopes"
+              "licensing_scopes"
             ],
             "additionalProperties": false,
             "properties": {
@@ -43,7 +43,13 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "entitlement_scopes": {
+              "name": {
+                "$ref": "#/$defs/displayText"
+              },
+              "description": {
+                "$ref": "#/$defs/displayText"
+              },
+              "licensing_scopes": {
                 "type": "array",
                 "items": {
                   "type": "object",
@@ -93,47 +99,11 @@
                     }
                   }
                 }
-              },
-              "name": {
-                "$ref": "#/$defs/displayText"
-              },
-              "description": {
-                "$ref": "#/$defs/displayText"
               }
             }
           }
         },
         "entitlement_providers": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": [
-              "id",
-              "type"
-            ],
-            "additionalProperties": false,
-            "properties": {
-              "id": {
-                "type": "string",
-                "minLength": 1
-              },
-              "type": {
-                "type": "string",
-                "minLength": 1
-              },
-              "settings": {
-                "type": "object"
-              },
-              "name": {
-                "$ref": "#/$defs/displayText"
-              },
-              "description": {
-                "$ref": "#/$defs/displayText"
-              }
-            }
-          }
-        },
-        "entitlement_scope_resolvers": {
           "type": "array",
           "items": {
             "type": "object",
@@ -205,6 +175,36 @@
               }
             }
           }
+        },
+        "licensing_scope_resolvers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "settings": {
+                "type": "object"
+              },
+              "name": {
+                "$ref": "#/$defs/displayText"
+              },
+              "description": {
+                "$ref": "#/$defs/displayText"
+              }
+            }
+          }
         }
       }
     }
@@ -244,5 +244,7 @@
         }
       ]
     }
-  }
+  },
+  "x-aac-schema-id": "_AAC.schema.entitlement-bootstrap",
+  "x-aac-schema-version": 1
 }

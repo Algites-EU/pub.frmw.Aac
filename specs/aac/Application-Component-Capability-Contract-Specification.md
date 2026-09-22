@@ -498,7 +498,7 @@ Authorization failure MUST be rejected by Core before provider business logic is
 
 A host product SHOULD expose reusable Core/domain/UI services as normal capabilities of one or more built-in product components. External and built-in consumers call them through the same Core bridge.
 
-For example, an Orchestrator map component may consume `_AO.core.siteManagement/1` to read/update Site data and a UI capability to invoke the standard Site editor. Its map coordinates remain component-extension data, while changes to `display_name` remain Core-owned Site mutations mediated by the Core capability.
+For example, an Orchestrator map component may consume `_AO.core.siteManagement/1` to read/update Site data and a UI capability to invoke the standard Site editor. Its map coordinates may be modeled as a separate component-supported Data Entity referencing the Site UID, while changes to `display_name` remain Site mutations mediated by the appropriate capability.
 
 Built-in components may be pre-authorized by product trust policy, but they SHOULD NOT bypass the capability bridge merely because their implementation ships with the product.
 
@@ -997,7 +997,7 @@ Correlation/causal metadata such as invocation and parent-invocation identity MU
 
 ## VIII.4 User-visible metadata
 
-Definitions that may be presented to users or administrators SHOULD carry `name` and `description` presentation metadata in addition to their stable technical IDs. This applies at least to components, provider definitions, consumer requirements, capabilities, operations, authorization permissions, entitlement permissions, configuration profiles/scopes/providers, authentication profiles, and entity-extension contributions when those definitions appear in product UI.
+Definitions that may be presented to users or administrators SHOULD carry `name` and `description` presentation metadata in addition to their stable technical IDs. This applies at least to components, provider definitions, consumer requirements, capabilities, operations, authorization permissions, entitlement permissions, configuration profiles/scopes/providers, authentication profiles, and Data Entity support declarations when those definitions appear in product UI.
 
 The common display-text shape permits:
 
@@ -1122,7 +1122,7 @@ A product may expose additional privileged diagnostic fields, but such fields sh
 
 ## XI.5 Persistence-migration failures remain Core-mediated
 
-Configuration and component-extension migrations are not ordinary direct component-to-storage calls. Technology bindings MUST preserve the general AAC rule that component-owned persisted payload transformations are invoked under Core control; components do not bypass Core persistence merely because migration code runs in-process. Detailed schema/migration semantics are defined by `Application-Component-Context-Configuration-and-Entitlement-Specification.md` and `Application-Component-Lifecycle-and-Provisioning-Specification.md`.
+Configuration and Data Entity migrations are not ordinary direct component-to-storage calls. Technology bindings MUST preserve the general AAC rule that component-owned persisted payload transformations are invoked under Core control; components do not bypass Core persistence merely because migration code runs in-process. Detailed schema/migration semantics are defined by `Application-Component-Context-Configuration-and-Entitlement-Specification.md` and `Application-Component-Lifecycle-and-Provisioning-Specification.md`.
 
 ## XI.6 External-service authentication is not capability entitlement
 

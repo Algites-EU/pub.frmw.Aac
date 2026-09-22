@@ -15,5 +15,7 @@
         "null"
       ]
     }
-  }
+  },
+  "x-aac-schema-id": "_AAC.schema.observation-output",
+  "x-aac-schema-version": 1
 }

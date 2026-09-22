@@ -51,15 +51,23 @@ def test_multi_record_read_set_conflict_aborts_entire_write_set(tmp_path):
     assert first.get("n", "b") == {"value": 2}
 
 
-def test_legacy_state_store_is_upgraded_to_revisioned_envelopes(tmp_path):
+def test_legacy_state_store_without_current_format_is_rejected(tmp_path):
+    from algites.lib.aac.coreimpl.errors import AIxPersistenceError
+
     path = tmp_path / "state.json"
     path.write_text('{"n":{"a":{"value":1}}}', encoding="utf-8")
     store = AIcJsonFileStateStore(path)
 
-    record = store.get_record("n", "a")
-    assert record.record_revision == 1
+    with pytest.raises(AIxPersistenceError, match="format_version 1"):
+        store.get_record("n", "a")
+
+
+def test_current_state_store_writes_format_version_one(tmp_path):
+    path = tmp_path / "state.json"
+    store = AIcJsonFileStateStore(path)
+    store.put("n", "a", {"value": 1})
     store.put("n", "a", {"value": 2})
 
     raw = path.read_text(encoding="utf-8")
-    assert '"format_version": 2' in raw
+    assert '"format_version": 1' in raw
     assert '"record_revision": 2' in raw

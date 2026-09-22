@@ -171,5 +171,7 @@
         }
       ]
     }
-  }
+  },
+  "x-aac-schema-id": "_AAC.schema.security-bootstrap",
+  "x-aac-schema-version": 1
 }

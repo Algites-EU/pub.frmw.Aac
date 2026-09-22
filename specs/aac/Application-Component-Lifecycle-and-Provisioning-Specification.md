@@ -109,7 +109,7 @@ A product may combine implementation steps internally, but diagnostics and confo
 
 ## III.2 Discovery
 
-Core reads static descriptors without executing arbitrary component business logic. Discovery identifies component identity, provider definitions, consumed/provided capabilities, contract bundles, component/provider-instance configuration schemas, semantic extension declarations/data schemas, provisioning declarations, per-provided-capability-version permission vocabulary/possible entitlement licensing scope types, runtime profile, and package provenance metadata when present.
+Core reads static descriptors without executing arbitrary component business logic. Discovery identifies component identity, provider definitions, consumed/provided capabilities, contract bundles, component/provider-instance configuration schemas, Data Entity support declarations/canonical schemas, provisioning declarations, per-provided-capability-version permission vocabulary/possible entitlement licensing scope types, runtime profile, and package provenance metadata when present.
 
 ## III.3 Verification
 
@@ -134,7 +134,7 @@ Provisioning creates or reconciles Core-owned persistent state required for the 
 
 ## III.6 Validation
 
-Core validates interpretable configuration contributions, normalized effective values, persistent semantic-data compatibility, and component-specific readiness conditions. Unsupported provider contributions are treated as unavailable inputs rather than automatically invalidating the component.
+Core validates interpretable configuration contributions, normalized effective values, persistent Data Entity compatibility, and component-specific readiness conditions. Unsupported provider contributions are treated as unavailable inputs rather than automatically invalidating the component.
 
 A missing/`UNDEFINED` contextual value does not by itself invalidate an entire component/provider instance. The component/lifecycle contract determines whether that value is optional, whether only one operation/capability becomes `NOT_READY`, or whether the provider instance genuinely cannot become usable.
 
@@ -185,7 +185,7 @@ The baseline stages map to technology-neutral hooks as follows:
 | Lifecycle stage | Component hook | Meaning |
 | --- | --- | --- |
 | `PACKAGE PRESENT / INSTALLED` | none | The component distribution is physically available to the application. Installation is package/distribution management, not runtime activation. |
-| `DISCOVER` | none | Core reads static descriptors, schemas, capability declarations, provider definitions, provisioning declarations, semantic extension declarations, per-provided-capability-version permission vocabulary/possible entitlement licensing scope types, and entitlement metadata without running arbitrary component business code. |
+| `DISCOVER` | none | Core reads static descriptors, schemas, capability declarations, provider definitions, provisioning declarations, Data Entity support declarations, per-provided-capability-version permission vocabulary/possible entitlement licensing scope types, and entitlement metadata without running arbitrary component business code. |
 | `VERIFY` | none | Core verifies descriptor validity, integrity/trust policy, runtime-profile compatibility, signatures where applicable, and other package-level prerequisites. |
 | `ADMIT CONTRACTS` | none | Core validates and admits canonical capability contracts into the active Core-owned contract catalog. This stage establishes contract identity; it does not instantiate providers. |
 | `PROVISION` | optional `provision(context)` | Core creates or reconciles persistent Core-owned component/provider state. Declarative provisioning is preferred; a hook is used only when additional component-specific initialization is required. |
@@ -199,7 +199,7 @@ The baseline stages map to technology-neutral hooks as follows:
 | `RUNNING` | none | Stable operational state after successful activation. Normal capability invocations occur here. |
 | `SUSPEND` | optional `suspend(reason)` | The runtime is asked to quiesce or temporarily stop accepting new work while preserving provisioned persistent state and, where practical, enough runtime state for controlled recovery/resume policy. |
 | `DEACTIVATE` | optional `deactivate(reason)` | Normal operational behavior stops and transient runtime resources are released. Deactivation does not by itself remove Core-owned persistent provisioning state or semantic data. |
-| `UNPROVISION` | optional `unprovision(context)` | Core removes or reconciles provisioned persistent component/provider state after reference and data-safety checks. Unprovisioning is distinct from package uninstall and from explicit semantic-data purge. |
+| `UNPROVISION` | optional `unprovision(context)` | Core removes or reconciles provisioned persistent component/provider state after reference and data-safety checks. Unprovisioning is distinct from package uninstall and from explicit Data Entity purge. |
 | `UNINSTALL` | none | The component distribution/package is removed from the application installation. Uninstall MUST NOT silently imply destructive deletion of preserved configuration or semantic data unless a separate explicit policy/action authorizes it. |
 
 The mapping above defines **logical responsibilities**, not a mandatory concrete method ABI. A technology profile MAY implement a stage entirely inside Core, by declarative metadata, by generated adapters, or by explicit callbacks, provided the ordering, ownership, and failure semantics remain equivalent.
@@ -373,7 +373,7 @@ Deactivation is not unprovisioning: Core-owned persistent configuration, provide
 
 `unprovision(context)` participates in `UNPROVISION`. It is the controlled inverse of provisioning for a particular application scope: Core removes or reconciles persistent state that existed because the component/provider was provisioned.
 
-Before destructive changes, Core MUST check bindings, references, semantic-data ownership, and product retention policy. Unprovisioning MUST NOT silently purge authoritative semantic/project data merely because a package or provider instance is being removed. Package uninstall is a separate operation that may occur before or after preserved data is explicitly handled according to policy.
+Before destructive changes, Core MUST check bindings, references, Data Entity references/support, and product retention policy. Unprovisioning MUST NOT silently purge authoritative Data Entity/project data merely because a package or provider instance is being removed. Package uninstall is a separate operation that may occur before or after preserved data is explicitly handled according to policy.
 
 ## IV.3 Core-mediated provisioning context
 
@@ -660,9 +660,11 @@ This is essential for actionable diagnostics.
 
 # IX. Upgrade, Downgrade, and Migration
 
-## IX.1 Versioned component-owned persisted payloads
+## IX.1 Versioned persisted data
 
-Component configuration and component-extension data use schema identities/versions independent of component package version. Writer component version is provenance, not the persisted-format identity.
+Configuration and Data Entities use canonical schema identities/versions that are independent from component package versions. Every canonical JSON Schema self-identifies; filenames are only resource locations.
+
+Configuration retains one declared current write version. Data Entity support declares `readable_versions`, `writable_versions` and `preferred_write_version`, allowing a newer component to continue writing an older common representation during rolling rollout.
 
 ## IX.2 Complete target-state replacement flow
 
@@ -676,83 +678,99 @@ rebuild target active contract catalog from that target set
 validate canonical contract conflicts/admission
 resolve all mandatory target provider/consumer requirements
 validate target provider-instance reconciliation
-classify persisted contributions as DIRECT / TRANSFORMED / UNSUPPORTED
+evaluate target data_entity_support and mandatory data_entity_requirements
+classify affected persisted inputs as DIRECT / TRANSFORMED / UNSUPPORTED
 resolve target configuration/context using usable contributions
 assess target readiness/degradation
 ```
 
-Persisted schema version, runtime interpretation, migration-path availability, and persistence convergence are independent facts. A contribution that is not at the target write schema can still be read `DIRECT`; a migration path may exist without being required for runtime use.
+Persisted schema version, runtime interpretation, migration-path availability, and persistence convergence are independent facts. A persisted representation that is not at the target/preferred write schema may still be read `DIRECT`; a migration path may exist without being required for runtime use.
 
-For `TRANSFORMED` contributions, Core invokes component-supplied transformations **in memory** and validates the normalized representation before the commit boundary. This preflight MUST NOT require provider/store write capability and MUST NOT rewrite authoritative persisted data.
+For `TRANSFORMED` inputs, Core invokes component-supplied transformations **in memory** and validates the normalized representation before the commit boundary. This preflight MUST NOT require provider/store write capability and MUST NOT rewrite authoritative persisted data.
 
-`UNSUPPORTED` contributions are preserved unchanged and treated as unavailable input. They do not automatically fail preflight. Configuration resolution continues through other usable contributions/defaults and may yield `UNDEFINED`; semantic extension data may simply be unavailable to the component. The target may therefore be valid with degraded readiness.
+`UNSUPPORTED` inputs are preserved unchanged and treated as unavailable semantic input. They do not automatically fail preflight. Configuration resolution continues through other usable contributions/defaults and may yield `UNDEFINED`; Data Entity functionality may be degraded/unavailable while the stored record remains intact.
 
-If preflight is structurally invalid or violates an explicitly required target readiness policy, the current active state remains unchanged. Diagnostics SHOULD identify blockers and degradation so an administrator can add further replacements or repair/upgrade external configuration where useful.
+If preflight is structurally invalid or violates an explicitly required target readiness policy, the current active state remains unchanged. Diagnostics SHOULD identify blockers and degradation so an administrator can add further replacements or repair/upgrade external configuration/data support where useful.
 
 After successful preflight, Core MAY execute implementation steps sequentially, but activation is one logical cutover to the complete target state. The target becomes authoritative only when commit succeeds. Persistent implementations SHOULD journal the source/target transaction plan before cutover and atomically replace one authoritative complete active-set manifest at commit. A restart before that durable marker restores source Core-owned state; a restart after it keeps the target and finishes cleanup forward. Detailed replacement semantics are specified by `Application-Component-Upgrade-Transaction-Specification.md`.
 
-## IX.3 Core-domain migration and component-extension migration are distinct
+## IX.3 Runtime interpretation is independent from persistence convergence
 
-The concrete Core application owns migration of its own entities/storage and decides how component-extension collections are carried through application-specific transformations. AAC does not parameterize arbitrary entity split/merge/replacement/new-ID migrations.
+For both configuration and Data Entities, Core classifies a stored representation as `DIRECT`, `TRANSFORMED`, or `UNSUPPORTED`.
 
-The generic requirement is preservation: unknown component-extension data MUST NOT be silently lost merely because the owning component is absent.
+`DIRECT` includes readable older versions. `TRANSFORMED` requires an explicit side-effect-free migration path. `UNSUPPORTED` data are not guessed at, truncated, implicitly downgraded, or rewritten.
 
-A later component-extension migration operates only on the component-owned payload as attached to the current Core entity. Core supplies the current Core entity type/id, schema ID/version, and normalized snapshot when required.
+A migration path may exist even when direct reading is possible; this makes later persistence convergence optional rather than a prerequisite for activation.
 
-## IX.3.1 Configuration interpretation and persistence convergence
+For configuration, `UNSUPPORTED` contributions are omitted from value/policy resolution and fallback continues through other providers/defaults/`UNDEFINED`. For Data Entities, the record is preserved but semantic functionality that cannot interpret it observes it as unavailable. `UNSUPPORTED` does not change the record's `ACTIVE`/`TOMBSTONE` state.
 
-For each persisted configuration contribution Core determines runtime interpretation independently from persistence convergence:
+## IX.4 Data Entity compatibility graph
 
-```text
-DIRECT
-    stored representation is directly readable
+Target preflight evaluates each component's `data_entity_support` and mandatory `data_entity_requirements` against the target canonical schema registry/component set. A component that requires a Data Entity schema/version that the target system cannot support must receive a blocking compatibility diagnostic for the affected target state/functionality when the requirement is mandatory.
 
-TRANSFORMED
-    explicit in-memory transformation is required and succeeds
+Concrete Data Entity references are not descriptor dependencies. They are declared on payload fields through `x-aac-data-entity-reference` and are resolved against concrete datasource content at runtime.
 
-UNSUPPORTED
-    no safe interpretation is available; preserve and omit from resolution
-```
+## IX.5 Migration execution and persistence convergence
 
-If the stored representation differs from the active component's target write schema, Core MAY later converge it only when an explicit transformation to that write representation exists and the owning provider exposes safe conditional/atomic replacement.
+Semantic migration code transforms normalized data and returns normalized output. It MUST NOT mutate persistence directly.
 
-Provider persistence is not performed by component migration code directly and is **not part of the component replacement transaction**.
+For configuration, Core may later converge a writable provider through its established revision/CAS contract. A read-only/no-CAS provider may remain indefinitely at an older/non-target representation. Convergence failure is independently retryable and MUST NOT roll back an already committed component set or another provider's successful convergence.
 
-A writable provider may therefore receive a later compare-and-swap convergence write. A read-only/no-CAS provider may remain indefinitely at a non-target representation. Convergence failure is retryable and MUST NOT roll back the committed component set or another provider's successful convergence.
+For Data Entities, Core migration preserves logical UID, persistence revision as source concurrency context, and `ACTIVE`/`TOMBSTONE` state while producing the target semantic payload. Physical Data Entity replacement, bulk migration, storage provisioning and transactional split/merge are delegated to the generic Data Entity storage capability contract once defined. This lifecycle specification MUST NOT invent a filesystem- or SQL-specific mutation path.
 
-## IX.4 Unsupported newer schemas
+During replacement preflight and tentative activation automatic persistence convergence is suppressed, so a failed tentative cutover can restore the previous runtime without requiring distributed rollback of independent configuration/data stores.
 
-If persisted configuration or component-extension data use a schema version the installed component cannot safely interpret, Core MUST preserve the payload and prevent incompatible rewriting. No implicit downgrade, partial interpretation, truncation, normalization, or guessed policy/value semantics are permitted.
+## IX.6 Configuration migration
 
-The contribution is classified `UNSUPPORTED` and treated as unavailable to that component. For configuration, resolution continues through other providers/defaults and may produce `UNDEFINED`. For semantic extension data, the component observes that its extension data for the affected entity is unavailable.
+Configuration transformation MUST preserve both ordinary values and policy modes when a transformation is actually performed. If the active component reads a representation `DIRECT`, no runtime migration is required. If interpretation is `TRANSFORMED`, Core supplies the validated in-memory representation. If interpretation is `UNSUPPORTED`, that contribution is excluded from effective resolution.
 
-Unsupported newer data therefore MAY cause degraded or `NOT_READY` functionality, but MUST NOT by itself force Core startup failure or automatic deactivation of the entire component.
+The effective configuration then continues through other providers/defaults/schema defaults and may yield `UNDEFINED`. Components MUST define safe behavior for unavailable/undefined values and SHOULD reduce readiness as narrowly as possible rather than treating every missing contextual value as fatal.
 
-## IX.5 Downgrade and component-transaction rollback
+## IX.7 Data Entity migration and structural domain migration
 
-Immediate rollback of a failed tentative cutover restores the previous component/runtime state. During tentative activation automatic persistence convergence is suppressed, so independent configuration/semantic-data providers normally require no rollback. After abrupt process/host termination, startup recovery uses the durable complete active-set commit marker rather than guessing from partially completed filesystem/runtime steps.
+A simple Data Entity migration transforms one schema version/payload into another while preserving logical `(schema_id, uid)`. More complex product/domain migrations may split one entity into several, merge several into one, generate new UIDs, or reorganize relationships.
+
+AAC does not infer such structural transformations from schema differences. They require explicit domain migration logic and, once storage mutation is standardized, an appropriate transactional record changeset.
+
+Unknown/unsupported Data Entities MUST NOT be silently lost merely because the current component set cannot interpret them.
+
+## IX.8 Rolling rollout
+
+A target fleet may temporarily constrain the effective Data Entity write version below a component's `preferred_write_version` when older required clients remain. Once all required participants support the newer representation—or an administrator explicitly retires incompatible participants—the effective policy may cut over and migration may proceed lazily or explicitly.
+
+This specification defines semantic support metadata but not the fleet-participant registry or storage mutation APIs used by that future coordination.
+
+## IX.9 Unsupported newer data
+
+If persisted configuration or Data Entities use a schema version the installed component cannot safely interpret, Core MUST preserve the persisted input and prevent incompatible rewriting. No implicit downgrade, partial interpretation, truncation, normalization, or guessed semantics are permitted.
+
+Unsupported newer data MAY cause degraded or `NOT_READY` functionality, but MUST NOT by itself force Core startup failure or automatic deactivation of the entire component unless a declared mandatory readiness invariant depends on that data.
+
+## IX.10 Downgrade and component-transaction rollback
+
+Immediate rollback of a failed tentative cutover restores the previous component/runtime state. During tentative activation automatic persistence convergence is suppressed, so independent configuration/Data Entity providers normally require no rollback. After abrupt process/host termination, startup recovery uses the durable complete active-set commit marker rather than guessing from partially completed filesystem/runtime steps.
 
 A later downgrade after a successful cutover is a **new replacement transaction**. The earlier transaction is closed after commit rather than remaining as a long-lived rollback state.
 
 The downgrade target evaluates current persisted data using the same rules as any other activation:
 
 ```text
-DIRECT       -> use contribution
-TRANSFORMED  -> normalize in memory and use contribution
-UNSUPPORTED  -> preserve contribution, treat as unavailable, continue fallback
+DIRECT       -> use semantic input
+TRANSFORMED  -> normalize in memory and use it
+UNSUPPORTED  -> preserve input, treat it as unavailable, continue fallback/degradation
 ```
 
-Newer stored schemas therefore do not automatically make downgrade impossible. The downgrade is rejected only for a genuine target graph/cutover/readiness incompatibility. Retained old package bytes in `obsolete` make the artifact available for consideration; they do not recreate the historical effective configuration.
+Newer stored schemas therefore do not automatically make downgrade impossible. The downgrade is rejected only for a genuine target graph/cutover/readiness incompatibility. Retained old package bytes in `obsolete` make the artifact available for consideration; they do not recreate the historical effective configuration or historical Data Entity state.
 
-## IX.6 Entitlement changes are not migrations
+## IX.11 Entitlement changes are not migrations
 
-Losing entitlement does not authorize destructive configuration or semantic component-extension migration/deletion. Persistent state remains preserved unless a separate explicit lifecycle operation requires modification.
+Losing entitlement does not authorize destructive configuration or Data Entity migration, tombstoning, deletion, or purge. Persistent state remains preserved unless a separate explicit lifecycle operation requires modification.
 
 # X. Uninstall and Data Preservation
 
 ## X.1 Uninstall is not purge
 
-Removing a component package may leave Core-owned configuration and semantic component-extension data preserved so that:
+Removing a component package may leave configuration and component-related Data Entities preserved so that:
 
 - VCS/project meaning is not silently lost;
 - reinstalling a compatible component can restore functionality;
@@ -811,10 +829,10 @@ Conformance suites SHOULD cover at least:
 - target active contract-catalog rebuild when a replaced component supplied contract bundles;
 - target-state rejection without live-state mutation;
 - rollback of package/component selection, admitted metadata, provider topology/bindings, and runtime after failed tentative activation;
-- successful component replacement followed by configuration/extension-data convergence failure without component rollback;
+- successful component replacement followed by configuration convergence failure without component rollback;
 - read-only and temporarily unavailable providers remaining on older schemas while runtime uses validated on-the-fly normalization;
 - upgrade/downgrade migration;
-- uninstall without semantic-data purge;
+- uninstall without Data Entity purge;
 - explicit purge/reference protection;
 - ACTIVE provider with NOT_READY functionality remaining activated while independent functionality can continue;
 - declarative configuration/context readiness satisfied by explicit/default values and reduced by UNDEFINED;

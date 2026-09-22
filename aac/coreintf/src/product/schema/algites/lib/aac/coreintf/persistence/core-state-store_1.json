@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "_AAC.schema.core-state-store/2",
-  "title": "AAC Core State Store 2",
+  "$id": "_AAC.schema.core-state-store/1",
+  "title": "AAC Core State Store 1",
   "type": "object",
   "required": [
     "format_version",
@@ -11,7 +11,7 @@
   "additionalProperties": false,
   "properties": {
     "format_version": {
-      "const": 2
+      "const": 1
     },
     "revision_kind": {
       "const": "MONOTONIC_INTEGER"
@@ -38,5 +38,7 @@
         }
       }
     }
-  }
+  },
+  "x-aac-schema-id": "_AAC.schema.core-state-store",
+  "x-aac-schema-version": 1
 }

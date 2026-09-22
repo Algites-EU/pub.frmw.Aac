@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import copy
 import json
-import re
 from dataclasses import dataclass
 from importlib import resources
 from pathlib import Path
@@ -12,15 +11,45 @@ from jsonschema import Draft202012Validator, validators
 
 from .errors import AIxSchemaValidationError
 
-_VERSIONED_RESOURCE = re.compile(r"^(?P<name>.+)_(?P<version>[1-9][0-9]*)\.json$")
+AAC_SCHEMA_ID_KEY = "x-aac-schema-id"
+AAC_SCHEMA_VERSION_KEY = "x-aac-schema-version"
+AAC_DATA_ENTITY_REFERENCE_KEY = "x-aac-data-entity-reference"
 
 
-def split_versioned_schema_name(resource_name: str) -> tuple[str, int]:
-    name = Path(resource_name).name
-    match = _VERSIONED_RESOURCE.match(name)
-    if not match:
-        raise ValueError(f"schema resource {resource_name!r} must end in _<version>.json")
-    return match.group("name"), int(match.group("version"))
+def schema_identity(schema: Mapping[str, object]) -> tuple[str, int]:
+    schema_id = schema.get(AAC_SCHEMA_ID_KEY)
+    schema_version = schema.get(AAC_SCHEMA_VERSION_KEY)
+    if not isinstance(schema_id, str) or not schema_id.strip():
+        raise ValueError(f"JSON schema must declare non-empty {AAC_SCHEMA_ID_KEY!r}")
+    if not isinstance(schema_version, int) or isinstance(schema_version, bool) or schema_version < 1:
+        raise ValueError(f"JSON schema must declare integer {AAC_SCHEMA_VERSION_KEY!r} >= 1")
+    return schema_id.strip(), schema_version
+
+
+def _data_entity_reference_targets(schema: object, path: tuple[str, ...] = ()):
+    if isinstance(schema, Mapping):
+        annotation = schema.get(AAC_DATA_ENTITY_REFERENCE_KEY)
+        if annotation is not None:
+            if not isinstance(annotation, Mapping):
+                raise ValueError(f"{AAC_DATA_ENTITY_REFERENCE_KEY!r} at {'.'.join(path) or '$'} must be an object")
+            unknown = set(annotation) - {"schema_id"}
+            if unknown:
+                raise ValueError(
+                    f"{AAC_DATA_ENTITY_REFERENCE_KEY!r} at {'.'.join(path) or '$'} contains unsupported keys {sorted(unknown)!r}"
+                )
+            target = annotation.get("schema_id")
+            if not isinstance(target, str) or not target.strip():
+                raise ValueError(
+                    f"{AAC_DATA_ENTITY_REFERENCE_KEY!r} at {'.'.join(path) or '$'} requires non-empty schema_id"
+                )
+            yield path, target.strip()
+        for key, value in schema.items():
+            if key == AAC_DATA_ENTITY_REFERENCE_KEY:
+                continue
+            yield from _data_entity_reference_targets(value, path + (str(key),))
+    elif isinstance(schema, list):
+        for index, value in enumerate(schema):
+            yield from _data_entity_reference_targets(value, path + (str(index),))
 
 
 def _extend_with_default(validator_class):
@@ -58,20 +87,29 @@ class AIcSchemaRegistry:
         self._by_identity: dict[tuple[str, int], AIcRegisteredSchema] = {}
 
     def register(self, resource_name: str, schema: Mapping[str, object], *, source: str = "<memory>") -> AIcRegisteredSchema:
-        schema_id, version = split_versioned_schema_name(resource_name)
-        registered = AIcRegisteredSchema(schema_id, version, Path(resource_name).name, copy.deepcopy(dict(schema)), source)
+        schema_id, version = schema_identity(schema)
+        resource_key = Path(resource_name).name
+        registered = AIcRegisteredSchema(schema_id, version, resource_key, copy.deepcopy(dict(schema)), source)
         existing = self._by_identity.get((schema_id, version))
         if existing is not None and dict(existing.schema) != dict(registered.schema):
-            raise ValueError(f"conflicting schema definition for {schema_id}_{version}")
-        self._by_identity[(schema_id, version)] = existing or registered
-        self._by_resource[Path(resource_name).name] = existing or registered
-        return existing or registered
+            raise ValueError(f"conflicting schema definition for {schema_id}/{version}")
+        resource_existing = self._by_resource.get(resource_key)
+        if resource_existing is not None and (resource_existing.id, resource_existing.version) != (schema_id, version):
+            raise ValueError(
+                f"schema resource {resource_key!r} is already registered as "
+                f"{resource_existing.id}/{resource_existing.version}"
+            )
+        canonical = existing or registered
+        self._by_identity[(schema_id, version)] = canonical
+        self._by_resource[resource_key] = canonical
+        return canonical
 
     def register_text(self, resource_name: str, text: str, *, source: str = "<memory>") -> AIcRegisteredSchema:
         raw = json.loads(text)
         if not isinstance(raw, Mapping):
             raise ValueError("JSON schema root must be an object")
         Draft202012Validator.check_schema(raw)
+        tuple(_data_entity_reference_targets(raw))
         return self.register(resource_name, raw, source=source)
 
     def register_file(self, path: str | Path) -> AIcRegisteredSchema:
@@ -91,8 +129,20 @@ class AIcSchemaRegistry:
     def get_identity(self, schema_id: str, version: int) -> AIcRegisteredSchema:
         return self._by_identity[(schema_id, version)]
 
+    def contains_identity(self, schema_id: str, version: int) -> bool:
+        return (schema_id, version) in self._by_identity
+
     def versions(self, schema_id: str) -> tuple[int, ...]:
         return tuple(sorted(version for (candidate_id, version) in self._by_identity if candidate_id == schema_id))
+
+    def data_entity_references(self, schema_id: str, version: int):
+        from algites.lib.aac.coreintf.dataentity import AIcDataEntityReferenceDefinition
+
+        registered = self.get_identity(schema_id, version)
+        return tuple(
+            AIcDataEntityReferenceDefinition(schema_id, version, path, target_schema_id)
+            for path, target_schema_id in _data_entity_reference_targets(registered.schema)
+        )
 
     def normalize(self, resource_name: str, value: Mapping[str, object] | None, *, apply_defaults: bool = True) -> dict[str, object]:
         registered = self.get(resource_name)

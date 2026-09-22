@@ -4,17 +4,34 @@
   "$defs": {
     "displayText": {
       "oneOf": [
-        {"type": "string", "minLength": 1},
+        {
+          "type": "string",
+          "minLength": 1
+        },
         {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "text": {"type": "string", "minLength": 1},
-            "resource_key": {"type": "string", "minLength": 1}
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "resource_key": {
+              "type": "string",
+              "minLength": 1
+            }
           },
           "anyOf": [
-            {"required": ["text"]},
-            {"required": ["resource_key"]}
+            {
+              "required": [
+                "text"
+              ]
+            },
+            {
+              "required": [
+                "resource_key"
+              ]
+            }
           ]
         }
       ]
@@ -26,46 +43,87 @@
         "all_of": {
           "type": "array",
           "uniqueItems": true,
-          "items": {"type": "string", "minLength": 1}
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         },
         "any_of": {
           "type": "array",
           "uniqueItems": true,
-          "items": {"type": "string", "minLength": 1}
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       },
       "anyOf": [
-        {"required": ["all_of"]},
-        {"required": ["any_of"]}
+        {
+          "required": [
+            "all_of"
+          ]
+        },
+        {
+          "required": [
+            "any_of"
+          ]
+        }
       ]
     }
   },
   "type": "object",
-  "required": ["capability", "operations"],
+  "required": [
+    "capability",
+    "operations"
+  ],
   "additionalProperties": false,
   "properties": {
     "capability": {
       "type": "object",
-      "required": ["id", "version"],
+      "required": [
+        "id",
+        "version"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": {"type": "string", "minLength": 1},
-        "version": {"type": "integer", "minimum": 1},
-        "name": {"$ref": "#/$defs/displayText"},
-        "description": {"$ref": "#/$defs/displayText"}
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "name": {
+          "$ref": "#/$defs/displayText"
+        },
+        "description": {
+          "$ref": "#/$defs/displayText"
+        }
       }
     },
     "authorization_permissions": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "additionalProperties": false,
         "properties": {
-          "id": {"type": "string", "minLength": 1},
-          "name": {"$ref": "#/$defs/displayText"},
-          "description": {"$ref": "#/$defs/displayText"},
-          "metadata": {"type": "object"}
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "$ref": "#/$defs/displayText"
+          },
+          "description": {
+            "$ref": "#/$defs/displayText"
+          },
+          "metadata": {
+            "type": "object"
+          }
         }
       }
     },
@@ -74,23 +132,64 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "additionalProperties": false,
         "properties": {
-          "id": {"type": "string", "minLength": 1},
-          "name": {"$ref": "#/$defs/displayText"},
-          "description": {"$ref": "#/$defs/displayText"},
-          "input": {"type": "string", "minLength": 1},
-          "output": {"type": "string", "minLength": 1},
-          "input_schema": {"type": "string", "pattern": ".+_[1-9][0-9]*\\.json$"},
-          "output_schema": {"type": "string", "pattern": ".+_[1-9][0-9]*\\.json$"},
-          "authorization": {"$ref": "#/$defs/authorizationRequirement"},
-          "sensitive_input_paths": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
-          "sensitive_output_paths": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
-          "metadata": {"type": "object"}
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "$ref": "#/$defs/displayText"
+          },
+          "description": {
+            "$ref": "#/$defs/displayText"
+          },
+          "input": {
+            "type": "string",
+            "minLength": 1
+          },
+          "output": {
+            "type": "string",
+            "minLength": 1
+          },
+          "input_schema": {
+            "type": "string",
+            "pattern": ".+_[1-9][0-9]*\\.json$"
+          },
+          "output_schema": {
+            "type": "string",
+            "pattern": ".+_[1-9][0-9]*\\.json$"
+          },
+          "authorization": {
+            "$ref": "#/$defs/authorizationRequirement"
+          },
+          "sensitive_input_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "sensitive_output_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "metadata": {
+            "type": "object"
+          }
         }
       }
     },
-    "metadata": {"type": "object"}
-  }
+    "metadata": {
+      "type": "object"
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.capability-contract",
+  "x-aac-schema-version": 1
 }

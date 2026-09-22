@@ -1,7 +1,7 @@
 # Application Component Context, Configuration, and Entitlement Specification
 
-**Status:** Generic, technology-neutral Application Component specification  
-**Scope:** Context identities, configuration-scopes, configuration-providers, semantic extension data, entitlement licensing scopes, entitlement-providers, permission grants, runtime entitlement context, and package-management integration with component replacement  
+**Status:** Generic, technology-neutral Application Component specification
+**Scope:** Context identities, configuration scopes/providers, generic Data Entity support and references, entitlement licensing scopes/providers, permission grants, runtime entitlement context, and package-management integration with component replacement
 **Audience:** Core implementers, component authors, product architects, UI authors, entitlement/configuration-provider authors, and technology-profile authors
 
 ---
@@ -20,7 +20,7 @@ The same context model is shared by configuration and entitlement evaluation, bu
 
 ## I.3 Physical storage is product-owned
 
-AAC defines logical configuration-scopes, entitlement licensing scopes, normalized values, provenance, policies, and extension-data envelopes. It does **not** prescribe that system configuration lives under `/etc`, user configuration under a particular home directory, workspace data in YAML, or semantic extension data under a `.aac` folder.
+AAC defines logical configuration scopes, entitlement licensing scopes, normalized values, provenance, policies, and the generic Data Entity envelope. It does **not** prescribe that system configuration lives under `/etc`, user configuration under a particular home directory, or Data Entities in a particular filesystem/database layout.
 
 The Core application/product profile owns the physical mapping. A product may persist the same logical model in files, a relational database, a document database, a remote configuration service, or a combination of these.
 
@@ -46,7 +46,7 @@ provider-instance identity (when applicable)
 Core-domain entity identity (when applicable)
 ```
 
-A workspace/project MAY expose a stable logical identity when needed by configuration or extension-data semantics. Entitlement does not require every workspace to have one universal AAC workspace identifier: each entitlement licensing scope defines its own identity-continuity semantics through its registered licensing-scope resolver.
+A workspace/project MAY expose a stable logical identity when needed by configuration or Data Entity semantics. Entitlement does not require every workspace to have one universal AAC workspace identifier: each entitlement licensing scope defines its own identity-continuity semantics through its registered licensing-scope resolver.
 
 ## II.2 Configuration-scope types are extensible
 
@@ -634,185 +634,146 @@ A startup argument or URI is only a locator. It does not become a trusted author
 
 If a local administrator fully controls the executable, startup arguments, and machine trust roots, AAC cannot cryptographically force that administrator to use a particular bootstrap. Enterprise enforcement may additionally rely on protected installation state and/or remote services that refuse untrusted contexts.
 
-# IV. Project/Workspace Semantic Component-Extension Data
+# IV. Data Entity Context and Compatibility
 
-## IV.1 Logical ownership
+## IV.1 General model
 
-A component may own persistent semantic data associated with a Core-managed workspace/project or Core-domain entity. AAC defines this as **component-extension data**, not as ordinary component configuration and not as runtime cache.
+AAC components interact with persistent/domain data through the generic **Data Entity** model. The model does not distinguish "Core entities" from "plugin entities" for compatibility purposes. Any component may support canonical schemas and may require schemas understood or produced elsewhere in the target system.
 
-For one concrete Core entity, any number of different components MAY own component-extension data. Baseline AAC deliberately permits at most **one component-extension payload per `(Core entity, owner component)` pair**. If one component needs several logical subsections, it SHOULD model them inside one top-level component-extension schema, which may itself be modular and reference subordinate schemas.
-
-This baseline avoids multiple independent migration/versioning transactions for one component on one Core entity while still allowing a Core entity to carry data for arbitrarily many components.
-
-## IV.2 Entity-extension declarations
-
-A component that contributes semantics or UI for Core-managed entity types SHOULD declare those contributions statically so Core can discover them without invoking arbitrary plugin code.
-
-A declaration identifies at least:
+A Data Entity is identified logically by:
 
 ```text
-Core entity type ID
-required Core-entity access (baseline: READ)
-whether component-extension data is NONE / READ_ONLY / READ_WRITE
-component-extension schema ID
-current writable component-extension schema version
-readable component-extension schema versions
-compatible Core entity schema ID/version declarations when the component constrains them
-logical UI contribution metadata when the product supports generic extension UI
+(schema_id, uid)
 ```
 
-Conceptually:
+Its concrete representation is carried in a Data Entity envelope with `schema_version`, `record_revision`, `state` and `payload`.
+
+Data Entities are distinct from component/provider configuration and from runtime cache/state. Configuration participates in configuration scopes, providers and policy modes; Data Entities represent persistent domain/system semantics and explicit inter-entity relationships.
+
+## IV.2 Data Entity support declarations
+
+A component descriptor may declare:
 
 ```yaml
-entity_extensions:
-  - entity_type_id: _AO.NodeDefinition
-    core_entity_access: [READ]
-    extension_data:
-      access: READ_WRITE
-      component_extension_schema:
-        id: com.vendor.foo.node-extension
-        write_version: 3
-        readable_versions: [2, 3]
-      compatible_core_entity_schemas:
-        - schema_id: _AO.NodeDefinition
-          readable_versions: [4, 5]
-    ui:
-      contribution: true
+data_entity_support:
+  - schema_id: eu.algites.monitoring.site-data
+    readable_versions: [2, 3]
+    writable_versions: [2, 3]
+    preferred_write_version: 3
+    migrations:
+      - from: 2
+        to: 3
+        migrator: eu.algites.monitoring:migrate_site_data_2_to_3
+    data_entity_requirements:
+      - schema_id: _AO.entity.site
+        access: [READ]
+        readable_versions: [4, 5]
+        required: true
+      - schema_id: eu.algites.inventory.asset
+        access: [READ]
+        readable_versions: [1, 2]
+        required: false
 ```
 
-Declaring component-extension data does not grant authority to mutate the Core entity itself. Core-entity mutation, if supported, requires a separate explicit product/Core capability or authorization contract.
+The declaration describes semantic capability of the component, not physical storage placement and not ownership of the canonical schema.
 
-A product UI can use these declarations to discover which admitted components have something to display or edit for a concrete entity type, for example as generic extension sections or actions.
+`readable_versions` and `writable_versions` are independent sets. Multiple writable versions support coordinated rolling rollout. `preferred_write_version` is required whenever writing is supported and indicates the component's preferred representation, not an unconditional global write policy.
 
-## IV.3 Core owns persistence placement and multiplicity
+A component may support a schema read-only, write-only where explicitly allowed by the schema/profile, or read/write. Multiple components may support the same `(schema_id, schema_version)` when the canonical definition is identical.
 
-AAC deliberately does not prescribe `.aac/extensions/...` or any other filesystem path. The Core application decides how component-extension data is physically associated with its entity/project model.
+## IV.3 Data Entity requirements are type-level dependencies
 
-Examples include:
+`data_entity_requirements` declares what other Data Entity schemas/versions are needed for the surrounding supported entity functionality. A required dependency that cannot be resolved in the target component/schema environment makes that functionality unavailable/incompatible according to product policy.
+
+Requirements are intentionally named specifically because components may have other kinds of requirements as well.
+
+A requirement does not identify one concrete target record. Concrete record relationships are schema-level references.
+
+## IV.4 Data Entity references are canonical-schema annotations
+
+A field that stores the UID of another Data Entity declares that relation directly in the canonical JSON Schema:
+
+```json
+{
+  "properties": {
+    "site_uid": {
+      "type": "string",
+      "x-aac-data-entity-reference": {
+        "schema_id": "_AO.entity.site"
+      }
+    }
+  }
+}
+```
+
+The schema annotation is the single source of truth for the structural relationship. It is not repeated in `data_entity_support`.
+
+The reference targets `(schema_id, uid)` rather than a target schema version. This allows the referenced entity to migrate from one schema version to another without rewriting every incoming reference. The active component compatibility graph determines which target versions are semantically usable.
+
+AAC Core's schema registry can inspect these annotations for validation, indexing metadata and storage-provider provisioning. Referential existence/state checks require access to the concrete Data Entity datasource and are therefore performed by the data-access/storage layer rather than by JSON Schema syntax alone.
+
+## IV.5 Canonical schema identity and duplicate definitions
+
+Every canonical JSON Schema MUST explicitly contain non-empty `x-aac-schema-id` and integer `x-aac-schema-version >= 1` metadata.
+
+The resource filename is not an identity mechanism. Core registers schemas by `(schema_id, schema_version)` and rejects conflicting canonical definitions for the same identity. Identical copies supplied by multiple artifacts/components may be deduplicated; no schema-owner field is required merely to arbitrate identical definitions.
+
+A configuration descriptor that names a concrete resource must agree with the identity declared by that resource.
+
+## IV.6 Data Entity envelope and states
+
+The normalized envelope is conceptually:
+
+```yaml
+uid: ...
+schema_id: _AO.entity.site
+schema_version: 4
+record_revision: ...
+state: ACTIVE
+payload:
+  ...
+```
+
+`record_revision` is persistence concurrency metadata and may be an integer or opaque provider token. `schema_version` describes payload semantics.
+
+`state` is:
 
 ```text
-an opaque component-extension collection embedded inside the serialized Core entity
-related rows/tables/documents in a database
-product-specific side structures colocated with project data
+ACTIVE
+TOMBSTONE
 ```
 
-Whatever the physical representation, Core MUST be able to associate zero or more component-extension entries with one Core entity and MUST distinguish entries by owner component ID. A file-oriented Core may intentionally embed the collection directly in entity serialization so Core structural migrations naturally carry opaque component-owned payloads even when components are absent.
+A tombstone is logically removed but retained. Existing references may remain resolvable; new references SHOULD by default target only ACTIVE entities. `TOMBSTONE` does not mean that the current component set lacks support for the schema. Runtime support is calculated independently.
 
-## IV.4 Logical component-extension envelope
+Physical deletion is distinct from tombstoning.
 
-A normalized component-extension envelope SHOULD identify at least:
+## IV.7 Runtime interpretation and migration
 
-```text
-owner component ID
-component-extension schema ID
-component-extension schema version
-written-by component version (provenance)
-Core entity type ID
-Core entity stable ID
-normalized/opaque payload
-```
-
-Owner component version is provenance, not component-extension-data identity. Compatibility is governed by the component-extension schema identity/version and by any declared compatibility with the current Core entity schema.
-
-The baseline logical uniqueness rule is:
-
-```text
-(Core entity type ID, Core entity ID, owner component ID) -> at most one component-extension payload
-```
-
-Core MAY expose abstract exchange operations equivalent to:
-
-```text
-get component-extension data(entity-ref, component-id)
-put component-extension data(envelope)
-remove component-extension data(entity-ref, component-id)
-enumerate component-extension data(entity-ref)
-```
-
-Components access this data through Core APIs/bridges rather than by discovering the product's physical YAML/database representation.
-
-## IV.5 Core entity schema context
-
-When Core presents a Core entity to a component for component-extension interpretation, validation, editing, or migration, the normalized context MUST identify at least:
-
-```text
-Core entity type ID
-Core entity stable ID
-Core entity schema ID
-Core entity schema version
-normalized current Core entity snapshot, when the operation needs entity content
-```
-
-A component therefore never has to infer the Core entity schema version from product release numbers or from payload shape.
-
-## IV.6 Opaque preservation during Core migrations
-
-AAC does **not** define a universal model for Core-domain migrations such as entity split, merge, replacement, ID generation, directory restructuring, or database normalization. Those transformations belong to the concrete Core application and its migration subsystem.
-
-AAC requires only the following invariant:
-
-> A Core/application migration MUST preserve unknown component-extension data unless that concrete application migration explicitly knows how the data are to be transformed or explicitly removed.
-
-How a concrete application carries a component-extension collection through `A -> B`, `A -> B + C`, merge operations, generated new IDs, or other domain-specific transformations is therefore product-specific. AAC does not define lineage graphs, successor roles, migration-candidate states, or generic split/merge semantics.
-
-The owning component does not need to be installed for opaque preservation by the Core application.
-
-## IV.7 Component-extension schema compatibility and migration
-
-Component-extension schema versioning is independent of component package versioning. A component declaration SHOULD identify:
-
-```text
-component-extension schema ID
-readable schema versions
-current writable schema version
-available explicit migration steps
-```
-
-For an extension payload already associated by Core with the **current** Core entity, a compatible component-specific migrator operates only on component-owned semantics. Core orchestrates the migration and supplies the current Core entity context together with the stored component-extension envelope.
-
-Conceptually, migration input contains:
-
-```text
-current Core entity type/id
-current Core entity schema ID/version
-current normalized Core entity snapshot when needed
-stored component-extension schema ID/version
-stored component-extension payload
-```
-
-The component may return a new normalized component-extension payload/schema version. The component MUST NOT directly mutate the Core application's physical persistence representation.
-
-A component-extension migrator does not need generic knowledge of how the Core entity reached its current identity or shape. Core-domain migration history is outside AAC's component-extension migration contract.
-
-## IV.8 Older, newer, and downgrade cases
-
-For any stored component-extension payload, runtime interpretation and persistence convergence are separate concerns.
-
-The active component may:
+For stored configuration contributions and Data Entities, runtime interpretation is classified independently from persistence convergence:
 
 ```text
 DIRECT
-    consume the stored extension representation as-is
+    the active component consumes the stored representation directly
 
 TRANSFORMED
-    normalize it in memory through an explicit transformation path
+    an explicit side-effect-free transformation produces a valid
+    in-memory representation
 
 UNSUPPORTED
-    preserve it unchanged and treat extension data for that entity
-    as unavailable to this component
+    no safe interpretation is available to the active component
 ```
 
-If the stored schema is older and directly readable, no migration is required for runtime use even when a path to the current writable schema exists. If direct reading is not supported but an explicit transformation succeeds, Core may use the transformed in-memory representation.
+A component may declare explicit Data Entity migration steps. The Core migration service may normalize an older representation in memory while preserving logical UID, persistence revision as concurrency context, and `ACTIVE`/`TOMBSTONE` state.
 
-If the stored schema is newer than the installed component understands, Core MUST preserve the payload without loss, prevent incompatible interpretation/editing, and report a compatibility diagnostic. The payload does **not** by itself make Core or the whole component invalid; component functionality that depends on this extension data may instead be degraded/not ready.
+If a stored schema is older and directly readable, no migration is required for runtime use even when a path to the preferred write version exists. If direct reading is not supported but an explicit transformation succeeds, Core may use the transformed in-memory representation.
 
-Physical write-back toward the active component's target write schema is optional persistence convergence and is attempted only when an explicit transformation and safe conditional write are available.
+If a stored schema is newer than the installed component understands, or otherwise unsupported, Core/storage MUST preserve the record without loss, prevent incompatible semantic interpretation/editing, and report a compatibility diagnostic. The record does not thereby become a tombstone.
 
-A later downgrade to an older component uses exactly the same rules. Newer extension data may be `DIRECT`, `TRANSFORMED`, or `UNSUPPORTED`. `UNSUPPORTED` data is preserved and unavailable; it does not automatically forbid the downgrade.
+Physical write-back is separate convergence and is attempted only when the relevant provider/storage contract can perform it safely. Semantic migration code MUST NOT directly manipulate product files, SQL tables, remote documents, or other physical storage.
 
-## IV.9 Relationship to configuration migration
+## IV.8 Relationship to configuration migration
 
-Component configuration and component-extension data are two specializations of the same architectural principle: **versioned component-owned persisted payloads under Core-controlled persistence**.
+Configuration and Data Entities are two specializations of the same architectural principle: versioned persisted semantics under Core-controlled interpretation and compatibility rules.
 
 They share these rules:
 
@@ -821,27 +782,47 @@ schema identity/version is separate from component version
 Core owns interpretation/migration invocation and validation
 stored data may remain at any version that is directly readable or safely transformable in memory
 runtime interpretation is DIRECT / TRANSFORMED / UNSUPPORTED
-physical migration write-back is independent best-effort convergence
-newer unsupported data are preserved, unavailable to the component, and never guessed at or downgraded implicitly
-writer component version is provenance only
+physical migration write-back is independent convergence
+newer unsupported data are preserved, unavailable to incompatible semantics, and never guessed at or downgraded implicitly
 ```
 
-They retain separate migration SPIs because configuration migration operates on configuration values/policy-modes and configuration targets, while component-extension migration additionally receives the current Core entity schema context.
+They remain distinct models. Configuration transformation operates on configuration values, policy modes and configuration targets/scopes. Data Entity transformation operates on Data Entity payload semantics and preserves Data Entity identity/state. A configuration transformation MUST preserve policy modes as well as ordinary values.
 
-## IV.10 Component absent or unavailable
+When a configuration contribution is `UNSUPPORTED`, its values and policy modes are excluded from effective resolution. Resolution continues through other usable contributions/defaults/schema defaults and may yield `UNDEFINED`.
 
-A workspace may contain component-extension data for a component that is:
+## IV.9 Component absence, incompatibility, entitlement, and downgrade
+
+A datasource/workspace may contain Data Entities for which a relevant component is:
 
 ```text
 not installed
 not currently entitled
 installed at an incompatible component version
-unable to read the stored component-extension schema
-unable to work with the current Core entity schema
+unable to read/transform the stored schema version
 temporarily unavailable
 ```
 
-Core MUST preserve that data. Generic UI may expose unavailable/incompatible-extension diagnostics, but MUST NOT rewrite/drop opaque payload merely because its owning component is absent or incompatible.
+Core/storage MUST preserve those records. Generic UI may expose unavailable/incompatible diagnostics, but MUST NOT rewrite, tombstone, truncate or delete a record merely because a component is absent or incompatible.
+
+Unsupported data by itself does not make Core or the whole component invalid. Functionality that genuinely depends on that semantic data may be degraded or `NOT_READY`; product policy decides whether a particular operation remains editable, read-only, or unavailable.
+
+A later downgrade uses the same `DIRECT` / `TRANSFORMED` / `UNSUPPORTED` rules as any other target-state replacement. Newer stored data therefore do not automatically make downgrade impossible. They may instead become unavailable to the older component while remaining preserved.
+
+Loss of entitlement is not a data migration and does not authorize destructive data modification or purge.
+
+## IV.10 Product/domain migration and preservation
+
+AAC does not define a universal transformation language for arbitrary domain restructuring such as entity split, merge, replacement, generated IDs or storage reorganization. Those transformations belong to the concrete product/domain migration subsystem.
+
+The generic invariant is preservation: unknown or unsupported Data Entities MUST NOT be silently lost merely because the current component set cannot interpret them. Complex migrations that intentionally transform or remove records must do so explicitly and, once the generic Data Entity storage capability exists, through its transactional mutation contract rather than through component-private physical storage access.
+
+## IV.11 Portability and UI implications
+
+Data Entities that belong to workspace/project meaning SHOULD travel with that logical project/workspace through VCS or equivalent replication when the selected storage provider supports such portability. Preservation of unsupported records does not require every interpreting component to be installed on the receiving system.
+
+A product UI may derive Data Entity sections/actions from component support and canonical schema metadata, but baseline AAC does not permit arbitrary component-owned toolkit widgets merely because a component supports a Data Entity. Product UI governance remains authoritative.
+
+Unsupported records MUST be preserved and exposed as unavailable/read-only where relevant rather than offered for unsafe semantic editing. A `TOMBSTONE` may be displayed as historical/removed data according to product policy.
 
 # V. Entitlement as Capability-Version Permission Grants
 
@@ -966,7 +947,7 @@ Conceptually:
 
 ```yaml
 entitlement_request:
-  format_version: 2
+  format_version: 1
   request_id: ...
 
   requested_licensing_scope:
@@ -1001,7 +982,7 @@ A normalized signed entitlement document may conceptually contain:
 
 ```yaml
 entitlement:
-  format_version: 2
+  format_version: 1
   entitlement_id: ...
 
   issuer:
@@ -1325,9 +1306,13 @@ available Core-managed remediation/upgrade actions
 
 The UI does not become the authority for entitlement validity.
 
-## VII.4 Core-entity extension UI
+## VII.4 Data Entity UI
 
-A product MAY allow a component to contribute normalized logical UI sections for extension data attached to Core-managed entities. The component receives stable Core entity/context identity and normalized extension data; the renderer remains product-owned and the component does not inject arbitrary toolkit widgets in the baseline model.
+A product MAY render normalized sections/actions for Data Entities supported by admitted components. Applicability is derived from `data_entity_support`, canonical schema metadata and concrete Data Entity references rather than from a special Core-entity extension mechanism.
+
+The product remains responsible for authorization, readiness, reference/state checks and physical persistence mediation. Baseline AAC does not grant a component arbitrary toolkit-level UI injection or direct storage access merely because it supports a Data Entity.
+
+If a stored Data Entity schema is unsupported, UI MUST preserve the record and expose an appropriate unavailable/read-only diagnostic rather than offering an unsafe edit. A `TOMBSTONE` may be displayed as historical/removed data according to product policy.
 
 # VIII. Package-Management Integration Principles
 
@@ -1463,8 +1448,8 @@ A later return to an older package is simply a new replacement transaction. The 
 17. Permission denial is a runtime invocation outcome and does not by itself invalidate the capability binding.
 18. All cross-component invocations pass through a Core-owned capability bridge/handle, including in-process invocations.
 19. Core may remediate `PERMISSION_DENIED` centrally, but transparent retry requires explicit retry safety.
-20. AAC does not dictate physical storage of semantic extension data; the Core product owns the mapping.
-21. Unknown extension payloads are preserved opaquely across Core storage/entity migrations whenever their subject can be preserved.
+20. AAC does not dictate physical storage of Data Entities; concrete storage providers own the mapping while Core owns generic semantics.
+21. Unknown or unsupported Data Entity records are preserved across product/domain migrations unless an explicit migration deliberately transforms or removes them.
 22. Every externally licensed entitlement licensing scope requires a registered resolver capable of deriving a trusted concrete subject from current state; identity-continuity semantics are resolver-specific, so `WORKSPACE`, `SOURCE_REPOSITORY`, and custom scopes may use different evidence mechanisms.
 23. Package source/provenance is distinct from artifact trust and entitlement-to-use.
 24. Authentication, secret storage, and application authorization are separate typed layers; successful authentication never implies Core authorization.
@@ -1483,4 +1468,3 @@ A later return to an older package is simply a new replacement transaction. The 
 37. Schema `default` is an AAC runtime fallback annotation and is not automatically persisted merely because it supplies an effective value.
 38. Components MUST define safe behavior for unavailable/`UNDEFINED` context-dependent values; operational requiredness/readiness is distinct from JSON Schema `required` inside a concrete contribution.
 39. A later downgrade is a new replacement transaction; the prior replacement does not remain open as a long-lived rollback state after successful commit.
-

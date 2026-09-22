@@ -9,23 +9,22 @@ from algites.lib.aac.coreintf.configuration import (
     AIcConfigurationTarget,
     AIiConfigurationMigrator,
 )
+from algites.lib.aac.coreintf.dataentity import (
+    AInDataEntityState,
+    AIcDataEntityEnvelope,
+    AIcDataEntityMigrationResult,
+    AIiDataEntityMigrator,
+)
 from algites.lib.aac.coreintf.descriptor import (
-    AInEntityExtensionDataAccess, AIcCoreEntitySchemaCompatibilityDescriptor,
-    AIcEntityExtensionDataDescriptor, AIcPersistedSchemaDescriptor, AIcSchemaMigrationStepDescriptor,
+    AIcDataEntitySupportDescriptor,
+    AIcPersistedSchemaDescriptor,
+    AIcSchemaMigrationStepDescriptor,
 )
 from algites.lib.aac.coreintf.errors import AIxPersistedSchemaIncompatible
-from algites.lib.aac.coreintf.extensions import (
-    AIcCoreEntityContext,
-    AIcCoreEntityRef,
-    AIcEntityExtensionDataEnvelope,
-    AIcEntityExtensionMigrationResult,
-    AIiEntityExtensionDataMigrator,
-)
 from algites.lib.aac.coreintf.migration import AInPersistenceConvergenceStatus, AInSchemaRuntimeInterpretation
 from algites.lib.aac.coreimpl import (
     AIcConfigurationMigrationService,
-    AIcEntityExtensionMigrationService,
-    AIcInMemoryEntityExtensionDataStore,
+    AIcDataEntityMigrationService,
     AIcSchemaCompatibilityEvaluator,
 )
 
@@ -46,28 +45,27 @@ class TestConfigMigrator(AIiConfigurationMigrator):
         )
 
 
-class TestExtensionMigrator(AIiEntityExtensionDataMigrator):
+class TestDataEntityMigrator(AIiDataEntityMigrator):
     __test__ = False
 
-    def __init__(self):
-        self.seen_core_schema = None
-
     def migrate(self, request):
-        self.seen_core_schema = (
-            request.entity_context.core_entity_schema_id,
-            request.entity_context.core_entity_schema_version,
-        )
         payload = dict(request.source.payload)
-        payload["node_schema_version_seen"] = request.entity_context.core_entity_schema_version
-        return AIcEntityExtensionMigrationResult(
-            request.source.component_extension_schema_id,
-            request.target_component_extension_schema_version,
+        payload["migrated_to"] = request.target_schema_version
+        return AIcDataEntityMigrationResult(
+            request.source.schema_id,
+            request.target_schema_version,
             payload,
         )
 
 
 def schema_decl(*, write=2, readable=(1, 2), steps=()):
     return AIcPersistedSchemaDescriptor("vendor.foo.schema", write, readable, tuple(steps))
+
+
+def data_entity_support(*, readable=(1, 2), writable=(1, 2), preferred=2, steps=()):
+    return AIcDataEntitySupportDescriptor(
+        "vendor.foo.data", tuple(readable), tuple(writable), preferred, tuple(steps)
+    )
 
 
 def test_runtime_interpretation_is_independent_from_write_version_and_migration_path():
@@ -135,57 +133,47 @@ def test_unsupported_newer_configuration_is_preserved_by_contract_as_incompatibl
     assert payload.values == {"future": True}
 
 
-def test_component_extension_migration_receives_current_core_entity_schema_context():
-    entity = AIcCoreEntityRef("_AO.NodeDefinition", "node-1")
-    entity_context = AIcCoreEntityContext(entity, "_AO.NodeDefinition", 5, {"id": "node-1"})
-    envelope = AIcEntityExtensionDataEnvelope(
-        "vendor.foo", "vendor.foo.schema", 1, 1, entity, {"setting": "x"}
+def test_data_entity_migration_preserves_identity_revision_and_tombstone_state():
+    envelope = AIcDataEntityEnvelope(
+        "node-1", "vendor.foo.data", 1, "rev-7", AInDataEntityState.TOMBSTONE, {"setting": "x"}
     )
-    declaration = schema_decl(
-        write=2,
+    support = data_entity_support(
         readable=(1, 2),
-        steps=(AIcSchemaMigrationStepDescriptor(1, 2, "ext"),),
+        writable=(1, 2),
+        preferred=2,
+        steps=(AIcSchemaMigrationStepDescriptor(1, 2, "entity"),),
     )
-    extension_data = AIcEntityExtensionDataDescriptor(
-        AInEntityExtensionDataAccess.READ_WRITE, declaration,
-        (AIcCoreEntitySchemaCompatibilityDescriptor("_AO.NodeDefinition", (4, 5)),),
-    )
-    migrator = TestExtensionMigrator()
-    service = AIcEntityExtensionMigrationService({"ext": migrator})
-    migrated = service.migrate_to_write_version(
-        entity_context, envelope, extension_data, written_by_component_version=2
-    )
-    assert migrator.seen_core_schema == ("_AO.NodeDefinition", 5)
-    assert migrated.component_extension_schema_version == 2
-    assert migrated.payload["node_schema_version_seen"] == 5
-    assert migrated.core_entity == entity
+    service = AIcDataEntityMigrationService({"entity": TestDataEntityMigrator()})
+    migrated = service.migrate_to_preferred_write_version(envelope, support)
+    assert migrated.uid == "node-1"
+    assert migrated.schema_id == "vendor.foo.data"
+    assert migrated.schema_version == 2
+    assert migrated.record_revision == "rev-7"
+    assert migrated.state is AInDataEntityState.TOMBSTONE
+    assert migrated.payload == {"setting": "x", "migrated_to": 2}
 
 
-def test_one_core_entity_can_store_many_components_but_only_one_payload_per_component():
-    store = AIcInMemoryEntityExtensionDataStore()
-    entity = AIcCoreEntityRef("_AO.NodeDefinition", "node-1")
-    store.put(AIcEntityExtensionDataEnvelope("vendor.foo", "foo.ext", 1, 1, entity, {"v": 1}))
-    store.put(AIcEntityExtensionDataEnvelope("vendor.bar", "bar.ext", 1, 1, entity, {"v": 2}))
-    assert {item.owner_component_id for item in store.enumerate(entity)} == {"vendor.foo", "vendor.bar"}
-    current = store.get_record(entity, "vendor.foo")
-    store.put(
-        AIcEntityExtensionDataEnvelope("vendor.foo", "foo.ext", 2, 2, entity, {"v": 3}),
-        expected_record_revision=current.record_revision,
+def test_directly_readable_data_entity_can_have_optional_migration_path():
+    envelope = AIcDataEntityEnvelope(
+        "node-1", "vendor.foo.data", 1, 1, AInDataEntityState.ACTIVE, {"x": 1}
     )
-    assert len(store.enumerate(entity)) == 2
-    assert store.get(entity, "vendor.foo").payload == {"v": 3}
+    support = data_entity_support(
+        steps=(AIcSchemaMigrationStepDescriptor(1, 2, "entity"),),
+    )
+    service = AIcDataEntityMigrationService({"entity": TestDataEntityMigrator()})
+    assessment = service.assess(envelope, support)
+    assert assessment.runtime_interpretation is AInSchemaRuntimeInterpretation.DIRECT
+    assert [step.migrator_id for step in assessment.migration_path] == ["entity"]
 
 
-def test_component_extension_is_incompatible_when_current_core_entity_schema_is_unsupported():
-    entity = AIcCoreEntityRef("_AO.NodeDefinition", "node-1")
-    entity_context = AIcCoreEntityContext(entity, "_AO.NodeDefinition", 6, {"id": "node-1"})
-    envelope = AIcEntityExtensionDataEnvelope("vendor.foo", "vendor.foo.schema", 2, 2, entity, {"x": 1})
-    extension_data = AIcEntityExtensionDataDescriptor(
-        AInEntityExtensionDataAccess.READ_WRITE, schema_decl(write=2, readable=(2,)),
-        (AIcCoreEntitySchemaCompatibilityDescriptor("_AO.NodeDefinition", (4, 5)),),
+def test_unsupported_data_entity_schema_is_rejected_without_mutating_payload():
+    envelope = AIcDataEntityEnvelope(
+        "node-1", "vendor.foo.data", 3, 9, AInDataEntityState.ACTIVE, {"future": True}
     )
-    service = AIcEntityExtensionMigrationService()
-    assessment = service.assess(entity_context, envelope, extension_data)
+    support = data_entity_support(readable=(1, 2), writable=(2,), preferred=2)
+    service = AIcDataEntityMigrationService()
+    assessment = service.assess(envelope, support)
     assert assessment.runtime_interpretation is AInSchemaRuntimeInterpretation.UNSUPPORTED
     with pytest.raises(AIxPersistedSchemaIncompatible):
-        service.migrate_to_write_version(entity_context, envelope, extension_data, written_by_component_version=2)
+        service.migrate_to_preferred_write_version(envelope, support)
+    assert envelope.payload == {"future": True}

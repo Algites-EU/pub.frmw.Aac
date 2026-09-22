@@ -20,9 +20,9 @@ from algites.lib.aac.coreintf.entitlement import (
     AIiEntitlementRemediator, AIiEntitlementLicensingScopeResolver,
 )
 from algites.lib.aac.coreintf.entitlement import AIcEntitlementLicensingScope
-from algites.lib.aac.coreintf.extensions import AIcCoreEntityContext, AIiEntityExtensionDataStore
+from algites.lib.aac.coreintf.dataentity import AIcDataEntityEnvelope
 from algites.lib.aac.coreintf.migration import AInSchemaRuntimeInterpretation
-from algites.lib.aac.coreintf.errors import AIxPersistedSchemaIncompatible, AIxPersistedPayloadMigrationError
+from algites.lib.aac.coreintf.errors import AIxPersistedSchemaIncompatible
 from algites.lib.aac.coreintf.instances import AIcBindingPreference, AIcProviderInstance, AInProviderInstanceState
 from algites.lib.aac.coreintf.observation import AIcObservationBinding
 from algites.lib.aac.coreintf.persistence import AIiStateStore
@@ -65,7 +65,7 @@ from .graph import AIcApplicationGraphOrchestrator, AIcResolvedApplicationGraph
 from .instances import AIcProviderInstanceRegistry
 from .invocation import AIcCapabilityHandleFactory, AIcEndpointRegistry, AIcInvocationDispatcher, authorization_principal_context
 from .lifecycle import AIcLifecycleEngine
-from .migration import AIcConfigurationMigrationService, AIcEntityExtensionMigrationService
+from .migration import AIcConfigurationMigrationService, AIcDataEntityMigrationService
 from .namespace import AIcNamespacePolicy
 from .observation import AIcObservationDispatcher, AIcObservationTopologyStore
 from .packages import AIcManifestPackageSource, AIcPackageManager
@@ -129,7 +129,7 @@ class AIcApplicationComponentCore:
         self.configuration_scope_resolvers.register("_AAC.context.mapping", AIcStaticConfigurationScopeResolver())
         self.configuration_context_resolver = AIcConfigurationContextResolver(self.configuration_scope_resolvers)
         self.configuration_migrations = AIcConfigurationMigrationService()
-        self.entity_extension_migrations = AIcEntityExtensionMigrationService()
+        self.data_entity_migrations = AIcDataEntityMigrationService()
         self.configuration_reads = AIcConfigurationReadService(
             self.configuration_providers, self.configuration_migrations, self._configuration_schema_for_target, self.schemas
         )
@@ -140,8 +140,6 @@ class AIcApplicationComponentCore:
         self.configuration_bootstrap: AIcConfigurationBootstrap | None = None
         self.active_configuration_scopes = ()
         self.application_context: dict[str, object] = {}
-        self.entity_extension_store: AIiEntityExtensionDataStore | None = None
-        self._entity_contexts: dict[tuple[str, str], AIcCoreEntityContext] = {}
 
         self.entitlement_requests = AIcEntitlementIssuingRequestService()
         self.entitlement_providers = AIcEntitlementProviderRegistry()
@@ -342,20 +340,30 @@ class AIcApplicationComponentCore:
             descriptor_schemas = []
             if descriptor.component_configuration_schema is not None:
                 schema = descriptor.component_configuration_schema
-                descriptor_schemas.append((AInCatalogPersistentSchemaKind.COMPONENT_CONFIGURATION.value, None, schema.schema_id, schema.write_version))
+                descriptor_schemas.append((
+                    AInCatalogPersistentSchemaKind.COMPONENT_CONFIGURATION.value, None, schema.schema_id,
+                    schema.write_version, (), (), None,
+                ))
             for provider in descriptor.providers:
                 if provider.configuration_schema is not None:
                     schema = provider.configuration_schema
-                    descriptor_schemas.append((AInCatalogPersistentSchemaKind.PROVIDER_CONFIGURATION.value, provider.id, schema.schema_id, schema.write_version))
-            for extension in descriptor.entity_extensions:
-                schema = extension.extension_data.component_extension_schema
-                if schema is not None:
-                    descriptor_schemas.append((AInCatalogPersistentSchemaKind.ENTITY_EXTENSION.value, extension.entity_type_id, schema.schema_id, schema.write_version))
+                    descriptor_schemas.append((
+                        AInCatalogPersistentSchemaKind.PROVIDER_CONFIGURATION.value, provider.id, schema.schema_id,
+                        schema.write_version, (), (), None,
+                    ))
+            for support in descriptor.data_entity_support:
+                descriptor_schemas.append((
+                    AInCatalogPersistentSchemaKind.DATA_ENTITY.value, support.schema_id, support.schema_id, None,
+                    tuple(support.readable_versions), tuple(support.writable_versions), support.preferred_write_version,
+                ))
             catalog_schemas = [
-                (*item.identity, item.schema_id, item.write_version)
+                (
+                    item.identity[0], item.identity[1], item.schema_id, item.write_version,
+                    tuple(item.readable_versions), tuple(item.writable_versions), item.preferred_write_version,
+                )
                 for item in entry.release.persistent_schemas
             ]
-            if sorted(catalog_schemas) != sorted(descriptor_schemas):
+            if sorted(catalog_schemas, key=repr) != sorted(descriptor_schemas, key=repr):
                 raise ValueError("catalog persistent-schema metadata does not match component descriptor")
 
     def catalog_package_candidate(
@@ -700,87 +708,76 @@ class AIcApplicationComponentCore:
     def register_configuration_scope_resolver(self, configuration_scope_resolver_id: str, resolver: AIiConfigurationScopeResolver) -> None:
         self.configuration_scope_resolvers.register(configuration_scope_resolver_id, resolver)
 
-    def configure_entity_extension_store(self, store: AIiEntityExtensionDataStore | None) -> None:
-        """Attach the product-owned semantic extension-data store.
+    def data_entity_support(self, component_id: str | None = None):
+        """Return declarative data-entity support exposed by installed components."""
+        if component_id is not None:
+            installed = self._installed.get(component_id)
+            if installed is None:
+                raise KeyError(f"component {component_id!r} is not installed")
+            return installed.descriptor.data_entity_support
+        return tuple(
+            (installed.descriptor.id, support)
+            for installed in self._installed.values()
+            for support in installed.descriptor.data_entity_support
+        )
 
-        Stored extension payloads may remain at older readable/migratable schema versions. Core
-        normalizes them on read; persistence convergence is independent from component cutover.
-        """
-        self.entity_extension_store = store
-
-    def register_entity_context(self, context: AIcCoreEntityContext) -> None:
-        """Expose an active Core entity to AAC for extension-data compatibility/migration."""
-        self._entity_contexts[(context.entity.entity_type_id, context.entity.entity_id)] = context
-
-    def unregister_entity_context(self, entity_type_id: str, entity_id: str) -> None:
-        self._entity_contexts.pop((entity_type_id, entity_id), None)
-
-    @property
-    def entity_contexts(self) -> tuple[AIcCoreEntityContext, ...]:
-        return tuple(self._entity_contexts[key] for key in sorted(self._entity_contexts))
-
-    def read_entity_extension_data(
-        self, entity_type_id: str, entity_id: str, component_id: str, *, persist_migration: bool = True
-    ):
-        """Return extension data interpretable by the currently installed component.
-
-        A transformation-required stored envelope is transformed and validated in memory first. If the
-        store permits conditional mutation, Core may then try to persist the normalized envelope
-        with the snapshot's ``record_revision`` as ``expected_record_revision``. Persistence
-        failure is deliberately ignored: the migrated in-memory representation remains usable and
-        a later read can retry convergence.
-        """
-        if self.entity_extension_store is None:
-            return None
-        context = self._entity_contexts.get((entity_type_id, entity_id))
-        if context is None:
-            raise KeyError(f"unknown Core entity context {entity_type_id!r}/{entity_id!r}")
-        extension_record = self.entity_extension_store.get_record(context.entity, component_id)
-        if extension_record is None:
-            return None
-        envelope = extension_record.envelope
+    def assess_data_entity(self, component_id: str, envelope: AIcDataEntityEnvelope):
+        """Assess whether one component can interpret a concrete data-entity representation."""
         installed = self._installed.get(component_id)
         if installed is None:
             raise KeyError(f"component {component_id!r} is not installed")
-        extension = next(
-            (item for item in installed.descriptor.entity_extensions if item.entity_type_id == entity_type_id),
+        support = next(
+            (item for item in installed.descriptor.data_entity_support if item.schema_id == envelope.schema_id),
             None,
         )
-        declaration = extension.extension_data.component_extension_schema if extension is not None else None
-        if declaration is None:
-            raise AIxPersistedPayloadMigrationError(
-                f"component {component_id!r} does not declare extension data for {entity_type_id!r}"
+        if support is None:
+            raise KeyError(
+                f"component {component_id!r} does not declare data entity support for {envelope.schema_id!r}"
             )
-        assessment = self.entity_extension_migrations.assess(context, envelope, extension.extension_data)
-        if assessment.runtime_interpretation is AInSchemaRuntimeInterpretation.UNSUPPORTED:
-            # Unsupported semantic extension data remains owned/preserved by the store but is
-            # unavailable to this component version.  This is a forward-compatibility condition,
-            # not a Core failure.
-            return None
-        if assessment.runtime_interpretation is AInSchemaRuntimeInterpretation.DIRECT:
-            return envelope
+        return self.data_entity_migrations.assess(envelope, support)
 
-        migrated = self.entity_extension_migrations.migrate_to_write_version(
-            context, envelope, extension.extension_data,
-            written_by_component_version=installed.descriptor.version,
+    def normalize_data_entity(
+        self, component_id: str, envelope: AIcDataEntityEnvelope
+    ) -> AIcDataEntityEnvelope:
+        """Normalize a data entity in memory to the component's preferred write version.
+
+        Persistence is deliberately outside this operation. A later generic data-storage capability
+        will decide whether and where the normalized representation is written.
+        """
+        installed = self._installed.get(component_id)
+        if installed is None:
+            raise KeyError(f"component {component_id!r} is not installed")
+        support = next(
+            (item for item in installed.descriptor.data_entity_support if item.schema_id == envelope.schema_id),
+            None,
         )
-        if declaration.resource_name is not None:
-            self.schemas.normalize_value(declaration.resource_name, migrated.payload, apply_defaults=False)
-        if persist_migration and self.configuration_reads.persist_migrations:
-            try:
-                self.entity_extension_store.put(
-                    migrated, expected_record_revision=extension_record.record_revision
-                )
-            except Exception:
-                pass
-        return migrated
+        if support is None:
+            raise AIxPersistedSchemaIncompatible(
+                envelope.schema_id, envelope.schema_version, envelope.schema_version,
+                f"component {component_id!r} does not declare data entity support",
+            )
+        assessment = self.data_entity_migrations.assess(envelope, support)
+        if assessment.runtime_interpretation is AInSchemaRuntimeInterpretation.UNSUPPORTED:
+            raise AIxPersistedSchemaIncompatible(
+                envelope.schema_id, envelope.schema_version, assessment.target_write_version,
+                "; ".join(assessment.diagnostics) or None,
+            )
+        if support.preferred_write_version is None or assessment.at_target_write_version:
+            normalized = envelope
+        else:
+            normalized = self.data_entity_migrations.migrate_to_preferred_write_version(envelope, support)
+        self.schemas.normalize_value(
+            self.schemas.get_identity(normalized.schema_id, normalized.schema_version).resource_name,
+            normalized.payload,
+            apply_defaults=False,
+        )
+        return normalized
 
     def converge_persisted_component_data(self, component_ids: tuple[str, ...] | None = None):
-        """Retry best-effort persistence convergence for currently installed components.
+        """Retry best-effort convergence for configuration persistence.
 
-        This operation is intentionally outside component replacement transactions. It is safe to
-        retry after startup or administrative request because each payload is persisted
-        independently with provider/store concurrency checks where available.
+        Data-entity persistence convergence is intentionally deferred until the generic data-storage
+        capability contract is defined; this Core revision only establishes the canonical data model.
         """
         selected = tuple(component_ids) if component_ids is not None else tuple(sorted(self._installed))
         candidates = tuple(self._installed[component_id].discovered for component_id in selected)
@@ -1036,11 +1033,24 @@ class AIcApplicationComponentCore:
         for resource_name, text, source in iter_discovered_resources(discovered, "schemas", suffix=".json"):
             self.schemas.register_text(resource_name, text, source=source)
 
+        def validate_declared_schema(declaration, owner: str) -> None:
+            registered = self.schemas.get(declaration.resource_name)
+            expected = (declaration.schema_id, declaration.write_version)
+            actual = (registered.id, registered.version)
+            if actual != expected:
+                raise ValueError(
+                    f"{owner} declares schema {expected[0]}/{expected[1]} but resource "
+                    f"{declaration.resource_name!r} identifies itself as {actual[0]}/{actual[1]}"
+                )
+
         if descriptor.component_configuration_schema is not None:
-            self.schemas.get(descriptor.component_configuration_schema.resource_name)
+            validate_declared_schema(descriptor.component_configuration_schema, f"component {descriptor.id!r}")
         for provider in descriptor.providers:
             if provider.configuration_schema is not None:
-                self.schemas.get(provider.configuration_schema.resource_name)
+                validate_declared_schema(
+                    provider.configuration_schema,
+                    f"provider {descriptor.id!r}:{provider.id!r}",
+                )
         for contract_resource in descriptor.contract_resources:
             text, source = read_discovered_resource(discovered, contract_resource)
             self.contracts.admit_text(text, source=source)
@@ -1423,8 +1433,7 @@ class AIcApplicationComponentCore:
         notes = [f"activated {len(plan.replacements)} component replacement(s)"]
         notes.append(
             f"post-upgrade persistence convergence: configuration {convergence.configuration_persisted} persisted/"
-            f"{convergence.configuration_deferred} deferred; extension data "
-            f"{convergence.entity_extensions_persisted} persisted/{convergence.entity_extensions_deferred} deferred"
+            f"{convergence.configuration_deferred} deferred"
         )
         notes.extend(convergence.diagnostics)
         return AIcComponentUpgradeTransactionOutcome(
@@ -1601,8 +1610,7 @@ class AIcApplicationComponentCore:
             convergence = migration_coordinator.converge(self, migration_stage)
             convergence_note = (
                 f"post-upgrade persistence convergence: configuration {convergence.configuration_persisted} persisted/"
-                f"{convergence.configuration_deferred} deferred; extension data "
-                f"{convergence.entity_extensions_persisted} persisted/{convergence.entity_extensions_deferred} deferred"
+                f"{convergence.configuration_deferred} deferred"
             )
             convergence_diagnostics = convergence.diagnostics
         except Exception as exc:

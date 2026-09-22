@@ -1,4 +1,4 @@
 from .models import *
-from .migration import AIiEntityExtensionDataMigrator
-from .store import AIiEntityExtensionDataStore
+from .migration import AIiDataEntityMigrator
+
 __all__ = [name for name in globals() if name.startswith(("AIi", "AIc", "AIn"))]

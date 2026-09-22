@@ -36,11 +36,10 @@ from .entitlement import (
     AIcStaticEntitlementLicensingScopeResolver,
     AIcTrustedBootstrapEntitlementEvidenceVerifier,
 )
-from .extensions import AIcInMemoryEntityExtensionDataStore
 from .instances import AIcProviderInstanceRegistry
 from .invocation import AIcInvocationDispatcher, AIcObjectCapabilityEndpoint
 from .lifecycle import AIcActivationOutcome, AIcLifecycleEngine
-from .migration import AIcConfigurationMigrationService, AIcEntityExtensionMigrationService, AIcSchemaCompatibilityEvaluator
+from .migration import AIcConfigurationMigrationService, AIcDataEntityMigrationService, AIcSchemaCompatibilityEvaluator
 from .observation import AIcObservationBinding, AIcObservationDelivery, AIcObservationDispatcher, AIcObservationSelector
 from .package_documents import AIcPackageBootstrapLoader, AIcWorkspaceComponentLockLoader, AIcWorkspaceComponentRequirementsLoader
 from .packages import (

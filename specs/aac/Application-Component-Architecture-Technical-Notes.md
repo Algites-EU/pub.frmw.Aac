@@ -370,81 +370,88 @@ Resolution continues through remaining usable providers, policy/default candidat
 
 The relation to the preferred write schema is a separate fact. A directly readable older representation may remain stored indefinitely. A later persistence-convergence write is attempted only when an explicit transformation to the target write representation and safe provider concurrency semantics are available.
 
-# IV. Persistent Semantic Component-Extension Data
+# IV. Data Entity Model
 
-## IV.1 Configuration versus component-extension data
+## IV.1 Why the old extension-only model is insufficient
 
-Configuration expresses intent used to configure a component/provider. Component-extension data is component-owned project/domain meaning associated with a Core-managed entity. Runtime cache is neither.
+A model centered on "component data attached to a Core entity" creates an artificial distinction between Core data and component data. In a general AAC system one component may read data produced by another component, and a Data Entity may relate to several other entity types. AAC therefore uses one generic Data Entity model.
 
-One Core entity may carry component-extension data from arbitrarily many components, but baseline AAC permits only one component-extension payload per owner component for that concrete Core entity. Internal component subdomains should normally be modeled inside one modular top-level component-extension schema.
+Logical identity is `(schema_id, uid)`. Physical layout is a storage-provider concern.
 
-## IV.2 Static entity-extension declarations
+Configuration, Data Entities, runtime cache/state, and secrets remain distinct categories even when several are persisted and schema-versioned.
 
-A component should statically declare which Core entity type IDs it extends, whether it only reads the Core entity, whether it stores component-extension data, the component-extension schema ID, readable versions, current writable version, optional Core-entity-schema compatibility, and whether it contributes logical UI. Core can then expose generic extension sections/actions for matching entity types without loading arbitrary plugin implementation code. Component-extension write access does not imply Core-entity write access.
+## IV.2 Data Entity support graph
 
-## IV.3 Physical storage belongs to the Core product
+`data_entity_support` describes the schema versions a component can read/write and the other Data Entity schemas it requires. This creates a type-level compatibility graph independent from concrete record references.
 
-AAC should not require `.aac/extensions` or any fixed path. Embedding an opaque collection of component-extension envelopes directly in a Core entity serialization can be excellent for a file-oriented product because Core entity migrations naturally carry the opaque payloads. A database-oriented product may instead keep related rows/documents.
-
-The component should never need to know which representation was chosen.
-
-## IV.4 Core migrations remain product-specific
-
-AAC deliberately does not try to parameterize arbitrary Core entity migrations. Split/merge/replacement/new-ID behavior belongs to the Core application's own migration system.
-
-The generic invariant is only that unknown component-extension data must not be silently lost. The Core application decides how to carry the extension collection through each concrete domain migration. AAC defines no generic lineage graph, migration-candidate state, successor relation, or split/merge protocol.
-
-## IV.5 Current Core entity schema context
-
-When a component interprets or migrates its component-extension payload, Core should provide the current entity type/id, Core entity schema ID/version, and normalized entity snapshot when required. This lets the component decide whether its stored extension schema is meaningful for the current Core entity representation without knowing the Core migration history.
-
-## IV.6 Component absence and VCS
-
-A workspace checkout may contain component-extension data for a component that is not installed, not currently entitled, or incompatible. Core preserves it and reports compatibility state. Component-specific interpretation stays disabled until a suitable component is available.
-
-This is why semantic component-extension data can safely be VCS-portable without making the workspace dependent on the plugin being present during every Core migration.
-
-The normative model is in `Application-Component-Context-Configuration-and-Entitlement-Specification.md`.
-
-# V. Configuration and Component-Owned Data Migration
-
-## V.1 Separate schema version from component version
-
-Do not use component version as the only persisted-format identity. Persisted component-owned data use explicit schema identity/version plus writer-component provenance.
-
-Examples:
+Example:
 
 ```text
-configuration schema ID/version
-component-extension schema ID/version
-written-by component version
+DeploymentPolicy/5
+    requires Site/5
+    requires MonitoringSiteData/3
+
+MonitoringSiteData/3
+    requires Site/4|5
+    optionally requires InventoryAsset/1|2
 ```
+
+The graph can be evaluated during target-state planning without pretending that every dependency is a capability invocation.
+
+## IV.3 Field-level references
+
+Concrete instance relationships belong to canonical JSON Schema fields via `x-aac-data-entity-reference`. This lets Core/storage implementations discover references mechanically without duplicating relationship declarations in component descriptors.
+
+A reference carries the target schema ID; the field value carries the target UID. Target schema version is deliberately absent because the referenced logical entity may migrate while retaining identity.
+
+## IV.4 Envelope and tombstones
+
+The generic envelope carries UID, schema identity/version, record revision, state and payload. `ACTIVE`/`TOMBSTONE` belongs to the generic record/entity lifecycle, not to domain payload shape.
+
+A tombstone retains identity and representation so incoming references/history can remain meaningful. It is different from a physically deleted record and different from an unsupported schema.
+
+## IV.5 Physical storage remains provider-specific
+
+AAC does not prescribe a `.aac/...` hierarchy, SQL table layout, document collection, or remote-service representation. A relational implementation may use a per-entity identity table such as `SITE__PK` plus version-specific payload tables. A filesystem implementation may use rebuildable indexes containing schema/version/UID/path/reference metadata. These are useful implementation strategies but are not AAC contract requirements.
+
+The component should never need to know which representation was chosen. Generic Data Entity semantics and canonical schemas are above the storage implementation.
+
+## IV.6 Canonical schema registry
+
+Every canonical JSON Schema self-identifies through `x-aac-schema-id` and `x-aac-schema-version`. Core registers canonical schemas by `(schema_id, schema_version)` rather than inferring identity from filenames.
+
+Multiple components/artifacts may carry the same canonical definition. This is not ownership conflict when the definitions are identical. Different canonical content under the same `(schema_id, schema_version)` is a hard identity conflict and must be rejected.
+
+## IV.7 Component absence, portability, and runtime cache
+
+A workspace/datasource may contain Data Entities for which no currently active component can provide semantic support. Core/storage preserves them and reports compatibility state; component-specific interpretation remains disabled until a suitable component is available.
+
+When Data Entities belong to project/workspace meaning and the selected storage representation is VCS-portable, unsupported records may travel with the project without requiring every interpreting component to be installed during each checkout or product migration.
+
+Rebuildable cache, process state, temporary discovery results and similar operational state are not Data Entities merely because they are structured or persisted locally. They should remain outside portable project semantics unless the product explicitly defines otherwise.
+
+# V. Data Entity and Configuration Migration
+
+## V.1 Schema version is separate from component version
+
+Do not use component version as persisted-format identity. Both configuration and Data Entities carry canonical schema identity/version independent of component package version.
 
 A component release may leave schemas unchanged or migrate several schema generations.
 
-## V.2 Compatibility declarations
+## V.2 Readability, writability, and migration-path availability are separate
 
-A component should be able to declare, separately for component configuration, provider-instance configuration, and each entity extension:
+For configuration, AAC declares directly readable versions and a current write version. Data Entity support declares readable and writable version sets plus a preferred write version so rolling clients may intentionally continue writing an older common representation.
 
-```text
-schema ID
-directly readable versions
-target/current writable version
-explicit transformation steps
-```
-
-Entity-extension declarations may additionally constrain compatible Core entity schema IDs/versions.
-
-Core derives independent runtime/persistence facts from these declarations rather than one combined compatibility enum:
+Core derives independent runtime/persistence facts rather than one combined compatibility enum:
 
 ```text
-at target write version: yes/no
 runtime interpretation: DIRECT / TRANSFORMED / UNSUPPORTED
-migration path: present/absent
-persistence convergence: NOT_NEEDED / SUPPORTED / NOT_SUPPORTED
+migration path: present / absent
+at preferred/current write representation: yes / no
+persistence convergence: not needed / possible / not currently possible
 ```
 
-A readable old version can therefore be `DIRECT` even when a migration path to the current write version exists.
+A readable old version can therefore be `DIRECT` even when a migration path to the preferred/current write version exists.
 
 ## V.3 Complete target-state replacement sequence
 
@@ -457,10 +464,11 @@ Core reads target static descriptors/contracts/schemas/transformation metadata
 Core constructs the complete hypothetical target component set
 Core rebuilds the target active contract catalog from that set
 Core resolves the complete target provider/consumer graph
-Core classifies affected stored contributions:
+Core evaluates target data_entity_support and mandatory data_entity_requirements
+Core classifies affected persisted inputs:
     DIRECT / TRANSFORMED / UNSUPPORTED
 
-for every TRANSFORMED contribution:
+for every TRANSFORMED contribution/record needed for preflight:
     transform only in memory
     validate the normalized representation
 
@@ -470,15 +478,16 @@ for configuration:
     allow UNDEFINED where no usable value exists
     assess target readiness/degradation
 
-for semantic extension data:
-    preserve UNSUPPORTED payloads
-    expose affected extension data as unavailable
+for Data Entities:
+    preserve UNSUPPORTED records unchanged
+    expose affected semantic functionality as unavailable/degraded
+    do not reinterpret unsupported records as TOMBSTONE
 
 if target graph/cutover/readiness policy is invalid:
     leave current live state unchanged
 else:
     enter one component commit boundary
-    suppress automatic persistence write-back
+    suppress automatic persistence write-back/convergence
     deactivate affected runtime
     reconcile provider instances
     switch package selections and admitted target metadata
@@ -490,14 +499,14 @@ on component success:
     optionally converge non-target persisted representations independently
 on component failure after boundary:
     restore previous complete package/contract/topology/runtime state
-    no distributed configuration-store rollback is required
+    no distributed configuration/data-store rollback is required
 ```
 
 This is deliberately not a loop of `upgrade one plugin, resolve, then upgrade the next`. Such a loop can make a valid joint transition impossible when A/2 and B/2 are mutually compatible but neither is compatible with the other's old version.
 
-Unsupported persisted input is not itself a reason to reject the target. It becomes unavailable input and may produce fallback/default/`UNDEFINED` or reduced readiness.
+Unsupported persisted input is not itself a reason to reject the target. It becomes unavailable input and may produce fallback/default/`UNDEFINED` or reduced readiness. Rejection occurs when a genuine mandatory target invariant cannot be satisfied.
 
-## V.4 Migration execution and convergence
+## V.4 Migration execution and persistence convergence
 
 Transformation code may be supplied by the component package, but Core owns:
 
@@ -507,32 +516,20 @@ transformation invocation
 in-memory normalization
 schema validation
 diagnostics
-optional provider/store convergence
+optional persistence convergence through the relevant storage/provider contract
 ```
 
-The component must not mutate persistent files/database rows directly during transformation. Component replacement uses transformations only when runtime interpretation requires them; it does not make distributed provider writes part of the component transaction.
+The component must not mutate persistent files/database rows directly during semantic transformation. Component replacement uses transformations only when runtime interpretation requires them; it does not make distributed provider writes part of the component transaction.
 
-Persistence convergence is independently derived:
+Configuration convergence continues to use the established provider revision/CAS model. Data Entity physical convergence will use the generic Data Entity storage capabilities once defined. Until that contract exists, no legacy extension-store path is authoritative.
 
-```text
-NOT_NEEDED
-    stored representation already equals target write representation
+After successful cutover, Core may attempt safe convergence independently. One convergence failure leaves that provider/record unchanged and does not undo the component replacement or another provider's successful convergence.
 
-SUPPORTED
-    explicit transform to target write representation exists
-    and provider/store supports safe conditional replacement
-
-NOT_SUPPORTED
-    no safe transform/write combination is available
-```
-
-After successful cutover, Core may attempt `SUPPORTED` convergence through ordinary revision/CAS controls. One convergence failure leaves that provider unchanged and does not undo the component replacement or another provider's successful convergence.
-
-A `DIRECT` old representation need not be migrated merely because convergence is technically supported.
+A `DIRECT` old representation need not be migrated merely because convergence is technically possible.
 
 ## V.5 Configuration migration
 
-Configuration transformation must preserve both ordinary values and policy-modes when a transformation is actually performed. A property rename or structural transformation must not accidentally retain a value while dropping an administrative policy.
+Configuration transformation must preserve both ordinary values and policy modes when a transformation is actually performed. A property rename or structural transformation must not accidentally retain a value while dropping an administrative policy.
 
 If the active component reads a representation `DIRECT`, no runtime migration is needed. If interpretation is `TRANSFORMED`, Core supplies the validated in-memory representation. If interpretation is `UNSUPPORTED`, the entire contribution is unavailable: its ordinary values and policy modes are not applied.
 
@@ -540,23 +537,33 @@ The effective configuration then continues through other providers/defaults/sche
 
 Writable providers may converge later; read-only/no-CAS providers may remain at an older or otherwise non-target representation indefinitely.
 
-## V.6 Component-extension migration
+## V.6 Data Entity migration
 
-Core-domain migration and component-extension-schema migration are separate operations. The Core application first performs its own product-specific entity migration while preserving unknown component-extension payloads according to product rules. When the component is available, it may normalize only its own payload against the **current** Core entity schema context. Physical write-back of that normalized payload is an independent convergence operation rather than part of component cutover.
+A simple Data Entity schema migration preserves logical `(schema_id, uid)` while changing `schema_version` and payload. Semantic migration code receives a normalized source payload and returns a normalized target payload; it does not directly mutate physical persistence.
 
-The component-extension migrator does not receive or require a generic AAC split/merge lineage model.
+In-memory migration preserves `uid`, record state (`ACTIVE` or `TOMBSTONE`) and the source persistence revision as concurrency context. A later physical replacement advances `record_revision` according to the storage provider's rules.
 
-## V.7 Newer persisted schemas
+When a component lacks a safe path for an existing schema version, the record is `UNSUPPORTED`, preserved unchanged, and unavailable to that component's semantic functionality.
 
-If persisted configuration or component-extension schema is newer than the installed component understands and no safe in-memory transformation exists, the component must not partially interpret, normalize, truncate, or overwrite it. Core preserves the payload and classifies it `UNSUPPORTED`.
+## V.7 Cross-entity and structural migration
+
+Some migrations are not one-record-to-one-record transformations. A product/domain migration may split one Data Entity into several, merge several into one, generate new UIDs, or reorganize relationships.
+
+AAC does not attempt to infer or parameterize such transformations from schema structure. They require explicit domain migration logic and, once the storage API is defined, may require one mixed transactional record changeset.
+
+The generic invariant is preservation: unknown/unsupported records must not be silently lost merely because the active component set cannot currently interpret them.
+
+## V.8 Newer or unsupported persisted schemas
+
+If persisted configuration or a Data Entity schema is newer than the installed component understands and no safe in-memory transformation exists, the component must not partially interpret, normalize, truncate, or overwrite it. Core preserves the persisted input and classifies it `UNSUPPORTED` for that component.
 
 For configuration, an unsupported provider contribution is excluded from value/policy resolution and the resolver continues with other usable contributions/defaults/`UNDEFINED`.
 
-For semantic extension data, the payload remains opaque and unavailable to the component for that entity.
+For Data Entities, the record remains stored and semantically unavailable to incompatible functionality. `UNSUPPORTED` is not a persistent entity state and does not change `ACTIVE`/`TOMBSTONE`.
 
-This forward-incompatibility is expected in systems with shared/central configuration and older clients. It is a degradation/diagnostic condition, not automatically a Core-startup or whole-plugin failure.
+This forward-incompatibility is expected in systems with shared/central data and older clients. It is a degradation/diagnostic condition, not automatically a Core-startup or whole-plugin failure.
 
-## V.8 Downgrade and rollback
+## V.9 Downgrade and rollback
 
 A failed **tentative component cutover** can restore the previous component/runtime state without distributed persistence rollback because automatic convergence was suppressed during the transaction.
 
@@ -567,10 +574,16 @@ The older target evaluates current persisted data in the same way as any other t
 ```text
 DIRECT       -> use it
 TRANSFORMED  -> normalize in memory
-UNSUPPORTED  -> preserve/ignore contribution and continue fallback
+UNSUPPORTED  -> preserve/ignore semantic input and continue fallback/degradation
 ```
 
-Therefore newer stored schemas do not automatically make downgrade impossible. They may instead produce fallback, `UNDEFINED`, or degraded readiness. Downgrade is rejected only for a genuine target graph/cutover/readiness incompatibility. Retaining the old package in `obsolete` only makes its bytes available; it does not recreate historical configuration.
+Therefore newer stored schemas do not automatically make downgrade impossible. Configuration may fall back or resolve to `UNDEFINED`; Data Entity functionality may become unavailable/degraded while records remain preserved. Downgrade is rejected only for a genuine target graph/cutover/readiness incompatibility. Retaining the old package in `obsolete` only makes its bytes available; it does not recreate historical configuration or historical Data Entity contents.
+
+## V.10 Rolling Data Entity migration
+
+A component may support several writable Data Entity schema versions while preferring one newer version. Fleet policy may temporarily constrain the effective write version to an older common version until all required clients/components can read the newer representation or an administrator explicitly retires incompatible participants.
+
+After cutover, existing records may converge lazily when they are modified or through an explicit migration process. Such convergence may be interruptible and may use small storage transactions rather than one global database migration. The semantic migration remains independent from the provider-specific physical representation.
 
 # VI. Provider Resolution
 
@@ -1522,7 +1535,7 @@ This avoids a parallel special-case configuration/licensing system for the host 
 
 ## XI.A.2 Product data and UI capabilities
 
-Product modules should expose stable Core services as capabilities. For example an Orchestrator Site visualization can consume a Core Site-management capability to query/update Core-owned Site values and a Site-UI capability to open the product's standard editor. Component-owned placement coordinates remain extension data and never become direct Core persistence writes.
+Product modules should expose stable Core services as capabilities. For example an Orchestrator Site visualization can consume a Core Site-management capability to query/update Core-owned Site values and a Site-UI capability to open the product's standard editor. Component-owned placement coordinates can be a separate Data Entity referencing the Site and never become direct Core persistence writes.
 
 ## XI.A.3 Authorization grant storage
 
@@ -1789,7 +1802,7 @@ The architecture would benefit from separate specifications for:
 - configuration-scope/configuration-provider/bootstrap-profile/policy representation (formalized in `Application-Component-Context-Configuration-and-Entitlement-Specification.md`);
 - provider-instance schema;
 - binding schema;
-- semantic extension-data envelope and Core persistence adapter contract (partially formalized in `Application-Component-Context-Configuration-and-Entitlement-Specification.md`);
+- generic Data Entity envelope/support/reference model (formalized in `Application-Component-Context-Configuration-and-Entitlement-Specification.md`);
 - component replacement/upgrade transaction protocol (formalized in `Application-Component-Upgrade-Transaction-Specification.md`);
 - detailed migration transformation/profile protocol beyond the transaction boundary;
 - Python runtime profile;
@@ -1834,7 +1847,7 @@ Artifacts are stored under component/version/SHA-256 identity. Downloaded and in
 
 `AIcManifestPackageSource` is a legacy/direct package-source manifest adapter and is distinct from the AAC Catalog SPI. The catalog reference profile uses query-oriented filesystem/HTTP catalog providers over the common versioned catalog document, while artifact locators may still be resolved by direct URI retrieval or technology-specific repository adapters (for example Python Simple Index or Maven adapters). Catalog and artifact transports can reuse AAC authentication profiles independently.
 
-`AIcWorkspaceComponentRequirements` expresses acceptable versions, while `AIcWorkspaceComponentLock` records exact version/digest/source/artifact resolution. Core selection metadata identifies one active artifact per component identity in the managed runtime/package-selection domain. A replacement transaction may stage several candidates, validate the complete target state, and switch them together. During tentative activation persistence write-back is suppressed. After successful replacement the superseded artifact is normally retained under `obsolete`; post-cutover configuration/semantic-data convergence is independent and retryable. Returning later to the obsolete artifact is a new replacement transaction evaluated against current graph and resolved inputs; unsupported newer contributions may be ignored/fallback rather than automatically blocking the downgrade.
+`AIcWorkspaceComponentRequirements` expresses acceptable versions, while `AIcWorkspaceComponentLock` records exact version/digest/source/artifact resolution. Core selection metadata identifies one active artifact per component identity in the managed runtime/package-selection domain. A replacement transaction may stage several candidates, validate the complete target state, and switch them together. During tentative activation persistence write-back is suppressed. After successful replacement the superseded artifact is normally retained under `obsolete`; post-cutover configuration/Data Entity convergence is independent and retryable. Returning later to the obsolete artifact is a new replacement transaction evaluated against current graph and resolved inputs; unsupported newer contributions may be ignored/fallback rather than automatically blocking the downgrade.
 
 The Python crash-recovery profile stores package bytes and transaction metadata separately. The default product-root layout is conceptually:
 
@@ -1879,6 +1892,6 @@ A practical baseline solver can use bounded backtracking over catalog/package ca
 
 The search should first form the mandatory capability closure of explicitly requested components. Within that closure it can prefer the newest compatible no-downgrade branch, then reject any non-requested change that can be reverted to the current release without breaking compatibility. This avoids both pathological "fewest changes at any cost" behavior and unrelated global updating.
 
-Catalog format v2 exposes component/provider configuration and entity-extension `schema_id` + `write_version` summaries. These are sufficient for conservative pre-download downgrade filtering; after retrieval they must be checked against the actual descriptor. A downgrade with missing/asymmetric schema metadata should not be automatically proposed.
+Catalog format version 1 exposes component/provider configuration summaries and generic Data Entity support summaries. These permit conservative pre-download downgrade filtering; after retrieval they are checked against the actual descriptor. A downgrade with missing/asymmetric persistence metadata should not be automatically proposed.
 
 Solver explanation records should remain structured (machine code, component/cause/capability identifiers, message) so UI can render causal chains without parsing prose. Entitlement and readiness are attached as nonblocking diagnostics.

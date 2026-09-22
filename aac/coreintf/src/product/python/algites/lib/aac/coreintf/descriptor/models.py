@@ -5,8 +5,6 @@ from enum import Enum
 from typing import Mapping
 
 from ..presentation import AIcDisplayText
-import re
-from pathlib import Path
 
 from ..contracts import AInConsumerCardinality
 from ..readiness import AIcReadinessRequirementDescriptor
@@ -23,14 +21,9 @@ class AInProviderRuntimeProfile(str, Enum):
     SUBINTERPRETER = "SUBINTERPRETER"
 
 
-class AInEntityExtensionDataAccess(str, Enum):
-    NONE = "NONE"
-    READ_ONLY = "READ_ONLY"
-    READ_WRITE = "READ_WRITE"
-
-
-class AInCoreEntityAccess(str, Enum):
+class AInDataEntityAccess(str, Enum):
     READ = "READ"
+    WRITE = "WRITE"
 
 
 @dataclass(frozen=True, slots=True)
@@ -71,34 +64,6 @@ class AIcPersistedSchemaDescriptor:
         if len(identities) != len(set(identities)):
             raise ValueError("persisted schema migration from/to pairs must be unique")
 
-
-
-
-def _persisted_schema_from_resource(resource_name: str) -> AIcPersistedSchemaDescriptor:
-    name = Path(resource_name).name
-    match = re.match(r"^(?P<id>.+)_(?P<version>[1-9][0-9]*)\.json$", name)
-    if match is None:
-        raise ValueError(f"schema resource {resource_name!r} must end in _<version>.json")
-    version = int(match.group("version"))
-    return AIcPersistedSchemaDescriptor(
-        schema_id=match.group("id"),
-        write_version=version,
-        readable_versions=(version,),
-        resource_name=resource_name,
-    )
-
-@dataclass(frozen=True, slots=True)
-class AIcCoreEntitySchemaCompatibilityDescriptor:
-    schema_id: str
-    readable_versions: tuple[int, ...]
-
-    def __post_init__(self) -> None:
-        if not self.schema_id:
-            raise ValueError("Core entity schema compatibility schema_id must not be empty")
-        if not self.readable_versions or any(v < 1 for v in self.readable_versions):
-            raise ValueError("Core entity schema compatibility requires readable_versions >= 1")
-        if len(self.readable_versions) != len(set(self.readable_versions)):
-            raise ValueError("Core entity schema compatibility readable_versions must be unique")
 
 
 @dataclass(frozen=True, slots=True)
@@ -150,7 +115,7 @@ class AIcProviderDefinitionDescriptor:
     capability_id: str
     capability_versions: tuple[int, ...]
     implementation_class: str
-    configuration_schema: AIcPersistedSchemaDescriptor | str | None = None
+    configuration_schema: AIcPersistedSchemaDescriptor | None = None
     initial_instances: tuple[AIcInitialProviderInstanceDescriptor, ...] = ()
     requirements: tuple[AIcConsumerRequirementDescriptor, ...] = ()
     readiness_requirements: tuple[AIcReadinessRequirementDescriptor, ...] = ()
@@ -160,8 +125,6 @@ class AIcProviderDefinitionDescriptor:
     description: AIcDisplayText | None = None
 
     def __post_init__(self) -> None:
-        if isinstance(self.configuration_schema, str):
-            object.__setattr__(self, "configuration_schema", _persisted_schema_from_resource(self.configuration_schema))
         if self.configuration_schema is not None and self.configuration_schema.resource_name is None:
             raise ValueError("provider configuration schema requires a resource_name for validation")
         if not self.id or not self.capability_id:
@@ -239,45 +202,72 @@ class AIcCapabilityEntitlementDescriptor:
 
 
 @dataclass(frozen=True, slots=True)
-class AIcEntityExtensionDataDescriptor:
-    access: AInEntityExtensionDataAccess = AInEntityExtensionDataAccess.NONE
-    component_extension_schema: AIcPersistedSchemaDescriptor | None = None
-    compatible_core_entity_schemas: tuple[AIcCoreEntitySchemaCompatibilityDescriptor, ...] = ()
+class AIcDataEntityRequirementDescriptor:
+    schema_id: str
+    access: tuple[AInDataEntityAccess, ...] = (AInDataEntityAccess.READ,)
+    readable_versions: tuple[int, ...] = ()
+    writable_versions: tuple[int, ...] = ()
+    required: bool = True
 
     def __post_init__(self) -> None:
-        if self.access is AInEntityExtensionDataAccess.NONE:
-            if self.component_extension_schema is not None or self.compatible_core_entity_schemas:
-                raise ValueError("NONE component-extension data must not declare schemas")
-        elif self.component_extension_schema is None:
-            raise ValueError("component-extension data access requires component_extension_schema")
-        ids = [item.schema_id for item in self.compatible_core_entity_schemas]
-        if len(ids) != len(set(ids)):
-            raise ValueError("compatible Core entity schema ids must be unique")
-
-    def supports_core_entity_schema(self, schema_id: str, schema_version: int) -> bool:
-        if not self.compatible_core_entity_schemas:
-            return True
-        return any(
-            item.schema_id == schema_id and schema_version in item.readable_versions
-            for item in self.compatible_core_entity_schemas
-        )
+        if not self.schema_id:
+            raise ValueError("data entity requirement schema_id must not be empty")
+        if not self.access or len(self.access) != len(set(self.access)):
+            raise ValueError("data entity requirement access entries must be non-empty and unique")
+        if any(version < 1 for version in self.readable_versions + self.writable_versions):
+            raise ValueError("data entity requirement versions must be >= 1")
+        if len(self.readable_versions) != len(set(self.readable_versions)):
+            raise ValueError("data entity requirement readable_versions must be unique")
+        if len(self.writable_versions) != len(set(self.writable_versions)):
+            raise ValueError("data entity requirement writable_versions must be unique")
+        if AInDataEntityAccess.READ in self.access and not self.readable_versions:
+            raise ValueError("READ data entity requirement requires readable_versions")
+        if AInDataEntityAccess.WRITE in self.access and not self.writable_versions:
+            raise ValueError("WRITE data entity requirement requires writable_versions")
 
 
 @dataclass(frozen=True, slots=True)
-class AIcEntityExtensionDescriptor:
-    entity_type_id: str
-    core_entity_access: tuple[AInCoreEntityAccess, ...] = (AInCoreEntityAccess.READ,)
-    extension_data: AIcEntityExtensionDataDescriptor = AIcEntityExtensionDataDescriptor()
-    ui: Mapping[str, object] = field(default_factory=dict)
+class AIcDataEntitySupportDescriptor:
+    schema_id: str
+    readable_versions: tuple[int, ...] = ()
+    writable_versions: tuple[int, ...] = ()
+    preferred_write_version: int | None = None
+    migrations: tuple[AIcSchemaMigrationStepDescriptor, ...] = ()
+    data_entity_requirements: tuple[AIcDataEntityRequirementDescriptor, ...] = ()
     metadata: Mapping[str, object] = field(default_factory=dict)
     name: AIcDisplayText | None = None
     description: AIcDisplayText | None = None
 
     def __post_init__(self) -> None:
-        if not self.entity_type_id:
-            raise ValueError("entity extension entity_type_id must not be empty")
-        if len(self.core_entity_access) != len(set(self.core_entity_access)):
-            raise ValueError("core entity access entries must be unique")
+        if not self.schema_id:
+            raise ValueError("data entity support schema_id must not be empty")
+        if not self.readable_versions and not self.writable_versions:
+            raise ValueError("data entity support must declare at least one readable or writable version")
+        if any(version < 1 for version in self.readable_versions + self.writable_versions):
+            raise ValueError("data entity support versions must be >= 1")
+        if len(self.readable_versions) != len(set(self.readable_versions)):
+            raise ValueError("data entity support readable_versions must be unique")
+        if len(self.writable_versions) != len(set(self.writable_versions)):
+            raise ValueError("data entity support writable_versions must be unique")
+        if self.writable_versions:
+            if self.preferred_write_version is None:
+                raise ValueError("data entity support with writable_versions requires preferred_write_version")
+            if self.preferred_write_version not in self.writable_versions:
+                raise ValueError("preferred_write_version must be one of writable_versions")
+        elif self.preferred_write_version is not None:
+            raise ValueError("read-only data entity support must not declare preferred_write_version")
+        migration_pairs = [(item.from_version, item.to_version) for item in self.migrations]
+        if len(migration_pairs) != len(set(migration_pairs)):
+            raise ValueError("data entity migration from/to pairs must be unique")
+        requirement_ids = [item.schema_id for item in self.data_entity_requirements]
+        if len(requirement_ids) != len(set(requirement_ids)):
+            raise ValueError("data entity requirements must be unique by schema_id")
+
+    def can_read(self, schema_version: int) -> bool:
+        return schema_version in self.readable_versions
+
+    def can_write(self, schema_version: int) -> bool:
+        return schema_version in self.writable_versions
 
 
 @dataclass(frozen=True, slots=True)
@@ -293,18 +283,16 @@ class AIcComponentDescriptor:
     version: int
     providers: tuple[AIcProviderDefinitionDescriptor, ...] = ()
     contract_resources: tuple[str, ...] = ()
-    component_configuration_schema: AIcPersistedSchemaDescriptor | str | None = None
+    component_configuration_schema: AIcPersistedSchemaDescriptor | None = None
     entitlement_licensing_scopes: tuple[AIcEntitlementLicensingScopeDescriptor, ...] = ()
     provided_capability_entitlements: tuple[AIcCapabilityEntitlementDescriptor, ...] = ()
-    entity_extensions: tuple[AIcEntityExtensionDescriptor, ...] = ()
+    data_entity_support: tuple[AIcDataEntitySupportDescriptor, ...] = ()
     lifecycle: AIcLifecycleHooksDescriptor = AIcLifecycleHooksDescriptor()
     metadata: Mapping[str, object] = field(default_factory=dict)
     name: AIcDisplayText | None = None
     description: AIcDisplayText | None = None
 
     def __post_init__(self) -> None:
-        if isinstance(self.component_configuration_schema, str):
-            object.__setattr__(self, "component_configuration_schema", _persisted_schema_from_resource(self.component_configuration_schema))
         if self.component_configuration_schema is not None and self.component_configuration_schema.resource_name is None:
             raise ValueError("component configuration schema requires a resource_name for validation")
         if not self.id or self.version < 1:
@@ -335,9 +323,9 @@ class AIcComponentDescriptor:
         unknown = [key for key in entitlement_keys if key not in provided]
         if unknown:
             raise ValueError(f"capability entitlement declarations reference capabilities not provided by component: {unknown!r}")
-        entity_types = [item.entity_type_id for item in self.entity_extensions]
-        if len(entity_types) != len(set(entity_types)):
-            raise ValueError("entity extension declarations must be unique by entity_type_id")
+        data_entity_schema_ids = [item.schema_id for item in self.data_entity_support]
+        if len(data_entity_schema_ids) != len(set(data_entity_schema_ids)):
+            raise ValueError("data entity support declarations must be unique by schema_id")
 
     def provider(self, provider_definition_id: str) -> AIcProviderDefinitionDescriptor:
         for provider in self.providers:

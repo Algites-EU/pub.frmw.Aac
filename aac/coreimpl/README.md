@@ -16,7 +16,7 @@ The artifact implements:
 - normalized invocation, contract input/output validation and PRE/POST observation dispatch;
 - in-process, persistent PROCESS and CPython 3.14+ subinterpreter runtime profiles;
 - filesystem/HTTP configuration providers, authentication/secret infrastructure and optimistic concurrency;
-- explicit configuration and semantic extension-data compatibility, on-the-fly normalization and independent persistence-convergence services;
+- explicit configuration and generic Data Entity compatibility, on-the-fly normalization, canonical schema registry and field-level Data Entity reference discovery;
 - entitlement persistence, trusted issuer/evidence validation, temporal refresh and remediation/retry orchestration;
 - filesystem package store, direct/manifest sources, query-oriented filesystem/HTTP catalog providers, authenticated catalog/artifact access, catalog-vs-descriptor verification, provenance, mandatory pre-promotion verification, workspace requirements/locks and package reconciliation;
 - first-class provider/capability/component readiness evaluation, combining effective configuration/context requirements with optional runtime-reported readiness while remaining independent from activation state;

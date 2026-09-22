@@ -272,9 +272,9 @@ class AIcEntitlementBootstrapLoader:
         if not isinstance(body_probe, Mapping):
             raise AIxDescriptorError(f"{source}: entitlement bootstrap requires entitlement_bootstrap object")
         schema_version = int(body_probe.get("schema_version", 0))
-        if schema_version not in {1, 2}:
-            raise AIxDescriptorError(f"{source}: unsupported entitlement bootstrap schema_version {schema_version}")
-        schema_text = read_core_schema(f"entitlement-bootstrap_{schema_version}.json")
+        if schema_version != 1:
+            raise AIxDescriptorError(f"{source}: unsupported entitlement bootstrap schema_version {schema_version}; expected 1")
+        schema_text = read_core_schema("entitlement-bootstrap_1.json")
         schema = json.loads(schema_text)
         errors = sorted(Draft202012Validator(schema).iter_errors(raw), key=lambda error: list(error.absolute_path))
         if errors:
@@ -288,11 +288,7 @@ class AIcEntitlementBootstrapLoader:
             profiles = []
             for raw_profile in body.get("entitlement_profiles", ()):
                 definitions = []
-                raw_scope_definitions = (
-                    raw_profile.get("licensing_scopes", ())
-                    if schema_version >= 2
-                    else raw_profile.get("entitlement_scopes", ())
-                )
+                raw_scope_definitions = raw_profile.get("licensing_scopes", ())
                 for item in raw_scope_definitions:
                     definitions.append(AIcEntitlementLicensingScopeDefinition(
                         id=str(item["id"]),
@@ -315,11 +311,7 @@ class AIcEntitlementBootstrapLoader:
                         description=normalize_display_text(v.get("description")),
                         settings=dict(v.get("settings", {})),
                     )
-                    for v in (
-                        body.get("licensing_scope_resolvers", ())
-                        if schema_version >= 2
-                        else body.get("entitlement_scope_resolvers", ())
-                    )
+                    for v in body.get("licensing_scope_resolvers", ())
                 ),
                 trusted_issuers=tuple(AIcTrustedEntitlementIssuerRule(
                     issuer_id=str(v["issuer_id"]), component_ids=tuple(str(x) for x in v.get("component_ids", ())),

@@ -37,5 +37,7 @@
         "type": "string"
       }
     }
-  }
+  },
+  "x-aac-schema-id": "_AAC.schema.persistence-transaction-state",
+  "x-aac-schema-version": 1
 }

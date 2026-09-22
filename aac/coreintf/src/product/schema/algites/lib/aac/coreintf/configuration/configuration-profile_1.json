@@ -126,5 +126,7 @@
         }
       ]
     }
-  }
+  },
+  "x-aac-schema-id": "_AAC.schema.configuration-profile",
+  "x-aac-schema-version": 1
 }

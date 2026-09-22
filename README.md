@@ -149,12 +149,12 @@ Generated types expose canonical-source ID/version metadata and, where available
 Versioned Algites-controlled schema/resource files use the `<name>_<version>` form, for example:
 
 ```text
-component-descriptor_5.json
+component-descriptor_1.json
 configuration-persisted-payload_1.json
 capability-contract_1.json
 ```
 
-A schema version is independent of a component release version. Persisted configuration and extension data explicitly declare their own schema identity, readable versions, write version and migration paths.
+A schema version is independent of a component release version. Persisted configuration and Data Entities use explicit canonical schema identity/version metadata. Data Entity support separately declares readable versions, writable versions, a preferred write version and migration paths.
 
 Canonical AAC JSON schemas are technology-neutral source resources under `aac/coreintf/src/product/schema/algites/lib/aac/coreintf/<functional-area>/`. Functional areas mirror the Python API where practical (`catalog`, `descriptor`, `contracts`, `configuration`, `entitlement`, `packages`, and so on); truly cross-cutting schemas belong under `common`. The Python build packages these same canonical files into the `coreintf` wheel as importable resources. This layout prepares later Java/MPS bindings to consume the same schema sources without making Python the owner of the definitions.
 
@@ -170,7 +170,7 @@ Component descriptors are packaged YAML resources loaded without executing arbit
 - component and provider-instance configuration schemas;
 - capability-contract resources;
 - first-class entitlement licensing-scope declarations with display name/description/resource keys, plus `provided_capability_entitlements` capability-version permission declarations using `possible_licensing_scopes` (an empty set means no external entitlement evidence is required);
-- semantic Core-entity extension declarations and migration metadata;
+- generic `data_entity_support`, Data Entity requirements and migration metadata;
 - runtime/lifecycle metadata and presentation metadata;
 - declarative provider readiness requirements over effective component configuration, provider configuration and application context.
 
@@ -228,33 +228,19 @@ Authentication, secret storage and authorization are separate contracts:
 
 Schema-driven configuration reads validate persisted payloads before their values enter ordinary configuration resolution.
 
-### VII. Persisted schema interpretation, migration and semantic extension data
+### VII. Data Entities, schema identity and migration
 
-`AIcSchemaCompatibilityEvaluator` models persisted compatibility as independent facts rather than one combined state.  The public runtime interpretation is:
+Data Entities are a first-class AAC Core concept rather than a special "Core-entity extension" mechanism. Logical identity is `(schema_id, uid)` and the normalized `AIcDataEntityEnvelope` carries `schema_version`, `record_revision`, `state` (`ACTIVE` or `TOMBSTONE`) and payload.
 
-```text
-DIRECT
-    the active component can consume the stored representation as-is
+Every canonical JSON Schema explicitly declares `x-aac-schema-id` and `x-aac-schema-version`; Core never derives identity from a filename. `AIcSchemaRegistry` indexes canonical definitions by `(schema_id, version)` while retaining the technical resource location.
 
-TRANSFORMED
-    the representation is not directly readable, but an explicit side-effect-free
-    migration path can normalize it in memory
+Components declare `data_entity_support` with readable/writable version sets, `preferred_write_version`, migration steps and `data_entity_requirements`. This creates a type-level compatibility graph that works equally for Core-owned and component-owned data.
 
-UNSUPPORTED
-    no safe interpretation is available to this component version
-```
+Concrete record relationships are declared only in the canonical schema at the referencing field through `x-aac-data-entity-reference`. The annotation identifies the target schema ID; the field value supplies the target UID. References therefore survive target schema-version migration.
 
-The assessment separately exposes whether the stored representation already equals the component's target write version and whether a migration path to that write version exists. A directly readable old representation can therefore remain `DIRECT` even when an optional migration path is available for persistence convergence.
+Data Entity migration is semantic and side-effect-free. `AIcDataEntityMigrationService` classifies representations as `DIRECT`, `TRANSFORMED` or `UNSUPPORTED` and can normalize toward the preferred write version in memory while preserving UID, record revision and ACTIVE/TOMBSTONE state. Physical Data Entity storage operations/provisioning are intentionally deferred to a later generic storage capability revision.
 
-Configuration migration and semantic component-extension migration use separate SPIs but the same explicit versioning principles. Component-supplied migrators transform normalized data; they do not directly own persistence.
-
-An `UNSUPPORTED` configuration snapshot is preserved by its provider but contributes neither values nor policy modes to effective resolution. `AIcConfigurationReadService` reports the omitted input in diagnostics and resolution continues through other usable providers, schema defaults and finally `UNDEFINED`. Schema `default` values are runtime fallback annotations; they are not persisted merely because they supplied the effective value. Top-level JSON Schema `required` is not treated as a guarantee of runtime availability after multi-provider resolution; nested structures that are present remain normally validated.
-
-Semantic extension data is represented by a Core-owned envelope keyed by Core entity and owner component. `AIiEntityExtensionDataStore` is the logical host-product storage contract; `AIcInMemoryEntityExtensionDataStore` is the reference implementation. Unsupported extension data remains preserved in the store and `AIcCore.read_entity_extension_data(...)` exposes it as unavailable to the active component rather than failing Core.
-
-Persistence convergence is deliberately separated from runtime interpretation and component cutover. `TRANSFORMED` reads may normalize data in memory and best-effort persist the normalized representation when the provider/store exposes safe replacement semantics. A `DIRECT` old representation is not rewritten merely because a migration path exists. Explicit convergence can still prepare and persist such a migration through `AIcCore.converge_persisted_component_data(...)`. Read-only/no-CAS providers legitimately remain on their existing representation.
-
-Unknown, unsupported or temporarily unconverged semantic data is preserved rather than silently reinterpreted, truncated or deleted.
+Configuration retains its separate scoped/provider semantics but shares the same separation between semantic schema version and persistence `record_revision`.
 
 ### VIII. Entitlements and trusted evidence
 
@@ -287,7 +273,7 @@ The Python implementation provides:
 <product-root>/aac-state/transactions/<transaction-uuid>/...
 ```
 
-`plugins`, its three lifecycle subdirectories, `aac-state`, the transaction-journal subdirectory, and the Core mutation-lock filename are product-overridable. The state area is not part of the plugin artifact store: it contains Core-owned mutable state and recovery metadata and therefore should live on durable product/user/service state storage. Package-bootstrap schema version `3` exposes these state/journal/lock overrides; older schema versions remain readable with their historical defaults.
+`plugins`, its three lifecycle subdirectories, `aac-state`, the transaction-journal subdirectory, and the Core mutation-lock filename are product-overridable. The state area is not part of the plugin artifact store: it contains Core-owned mutable state and recovery metadata and therefore should live on durable product/user/service state storage. The sole current package-bootstrap schema, version `1`, exposes these state/journal/lock overrides. Development-time historical package-bootstrap schema revisions are not retained as compatibility formats.
 
 The authoritative active package set is one atomically replaced mutable record. It uses the same monotonic-integer `record_revision` contract as other Core-owned persisted state; package selection no longer has a separate `generation` concurrency concept. A short-lived inter-process `core.lock` serializes only the actual revalidation/commit or cutover interval. Download, solver search and preflight run outside the lock and the complete read set is revalidated after the lock is acquired.
 
@@ -299,7 +285,7 @@ Stored package identity is immutable:
 
 Package records retain source/artifact provenance, verification metadata and signer identity where available. A source URI is provenance, not trust.
 
-The package pipeline supports direct/static sources plus the AAC Catalog discovery layer. Catalog queries are scoped by mandatory `product_id` and `technology_id`; the reference filesystem and HTTP providers load versioned catalog documents and filter through the query-oriented Catalog SPI. Catalog format v2 introduced persistent configuration/provider-configuration/entity-extension schema summaries used by the automatic target-state solver to conservatively screen downgrade alternatives. Catalog format v3 additionally carries first-class entitlement licensing-scope declarations alongside permission `possible_licensing_scopes`, so browsing UI can explain licensing before download. Catalog entries also carry component presentation metadata, release `provides`/`requires`, and artifact locators. The catalog is discovery metadata rather than trust authority: after download, Core verifies the artifact and compares its actual descriptor metadata with the catalog release before installation.
+The package pipeline supports direct/static sources plus the AAC Catalog discovery layer. Catalog queries are scoped by mandatory `product_id` and `technology_id`; the reference filesystem and HTTP providers load the current catalog format (`format_version: 1`) and filter through the query-oriented Catalog SPI. Release metadata includes persistent component/provider configuration summaries and generic Data Entity support summaries used by the automatic target-state solver, plus entitlement licensing-scope declarations, `provided_capability_entitlements`, presentation metadata, release `provides`/`requires`, and artifact locators. The catalog is discovery metadata rather than trust authority: after download, Core verifies the artifact and compares its actual descriptor metadata with the catalog release before installation.
 
 Artifact retrieval can use authenticated file/HTTP(S) locations independently from catalog authentication. Missing runtime entitlement does not prevent storage/installation; permissions with no `possible_licensing_scopes` need no external entitlement, while externally grantable permissions are resolved later by the ordinary entitlement subsystem. Downloaded bytes are digested; installation copies the artifact and detached sidecars into a temporary installed-tree destination, re-verifies those exact bytes, rechecks the digest and atomically promotes the directory.
 
@@ -317,7 +303,7 @@ Before runtime deactivation, Core constructs the hypothetical target state by re
 2. projects current provider instances onto target descriptors and includes target initial instances;
 3. resolves every mandatory consumer requirement against the target providers;
 4. validates explicit provider-instance preferences and the resulting provider-instance DAG;
-5. classifies relevant persisted configuration and semantic extension data as `DIRECT`, `TRANSFORMED` or `UNSUPPORTED`;
+5. classifies relevant persisted configuration and Data Entity schemas as `DIRECT`, `TRANSFORMED` or `UNSUPPORTED`;
 6. executes only required `TRANSFORMED` paths in memory, without provider writes;
 7. resolves effective target configuration using usable contributions while preserving unsupported contributions as unavailable input;
 8. validates the resulting available values without treating missing top-level context-dependent values as an automatic Core failure;
@@ -325,7 +311,7 @@ Before runtime deactivation, Core constructs the hypothetical target state by re
 
 Intermediate component combinations are intentionally irrelevant. For example, `A/2 + B/1` and `A/1 + B/2` may both be invalid while the atomic target `A/2 + B/2` is valid.
 
-During tentative commit Core sets `AIcConfigurationReadService.persist_migrations = False`, writes a durable replacement journal, deactivates the affected runtime, admits all target descriptors/contracts/schemas, reconciles provider instances and activates the complete target graph. No configuration or semantic extension provider is rewritten while transaction rollback may still be required.
+During tentative commit Core sets `AIcConfigurationReadService.persist_migrations = False`, writes a durable replacement journal, deactivates the affected runtime, admits all target descriptors/contracts/schemas, reconciles provider instances and activates the complete target graph. No configuration provider or Data Entity storage is rewritten while transaction rollback may still be required.
 
 Package replacement binds to the generic durable AAC transaction journal. The journal UUID is solely a transaction identity/correlation value; its descriptor carries a revisioned read set, a write set, the source/target package-set plan and recovery material. Generic recovery phases are `PREPARED`, `COMMIT_STARTED`, `COMMITTED`, `CLEANUP_COMPLETED` and `ABORTED`. Atomic replacement of `active-package-set.json` is the durable commit boundary. Therefore a process/host crash yields only two authoritative cases on next startup:
 
@@ -336,7 +322,7 @@ A crash after the active-set commit never causes Core to guess a partial compone
 
 If activation fails normally before the manifest commit, Core performs the same rollback in-process. If journal cleanup cannot finish after the manifest commit, the replacement remains committed and startup recovery completes cleanup later.
 
-After successful cutover, persistence convergence is independent. `AIcUpgradeMigrationCoordinator.converge(...)` performs conditional writes using the common persistence revision contract; failures and read-only/non-writable providers are reported rather than undoing the component replacement. Configuration and semantic extension data use the same `expected_record_revision` compare-and-swap semantics, while each provider declares the persistence strength it actually guarantees.
+After successful cutover, configuration persistence convergence is independent and retryable. Data Entity physical convergence is deliberately not performed until the generic Data Entity storage capability is specified; the Core model already defines semantic compatibility and pure migrations without leaking a concrete storage implementation.
 
 A newer persisted representation does not automatically block a later downgrade. If the older target component cannot interpret a provider contribution, that contribution becomes unavailable; resolution may fall back to other providers/defaults/`UNDEFINED`. The replacement plan remains compatible when these are degradation warnings rather than true target-graph or activation blockers.
 
@@ -346,7 +332,7 @@ A newer persisted representation does not automatically block a later downgrade.
 
 The solver forms the mandatory capability dependency closure caused by requested changes. Inside that actual closure it prefers the freshest compatible no-downgrade branch, while rejecting non-requested component changes that can be reverted to the current version without breaking compatibility. It therefore does not turn one requested upgrade into an unrelated global update.
 
-Downgrades are intentionally never recommended. They may be returned only as explicit alternatives when the current and target releases have exactly the same persistent component-configuration, provider-configuration and entity-extension schema identities/write versions. Catalog format v4 uses explicit `provider_id` / `entity_type_id` discriminators for this pre-download schema summary and Core verifies it against the authoritative descriptor after download.
+Downgrades are intentionally never recommended. They may be returned only as explicit alternatives when the relevant persistent component/provider configuration and Data Entity support summaries satisfy the conservative downgrade-safety policy. Configuration uses its schema/write identity; Data Entities compare schema identity together with readable/writable/preferred-write support. Core verifies catalog summaries against the authoritative descriptor after download.
 
 Solver results carry structured causal explanations, package download/install preparation flags, entitlement diagnostics and currently predictable readiness diagnostics. Missing entitlement remains a nonblocking licensing/remediation diagnostic. Applying a selected solution prepares required artifacts and delegates the actual active-set change to the existing crash-safe multi-component replacement transaction.
 

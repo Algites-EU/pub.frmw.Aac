@@ -46,9 +46,9 @@ class AIcPackageBootstrapLoader:
         if not isinstance(initial, Mapping) or not isinstance(initial.get("package_bootstrap"), Mapping):
             raise ValueError(f"{source}: package bootstrap document root is invalid")
         schema_version = int(initial["package_bootstrap"].get("schema_version", 0))
-        if schema_version not in {1, 2, 3}:
-            raise ValueError(f"{source}: unsupported package bootstrap schema_version {schema_version}")
-        raw = _load_yaml(text, f"package-bootstrap_{schema_version}.json", source)
+        if schema_version != 1:
+            raise ValueError(f"{source}: unsupported package bootstrap schema_version {schema_version}; expected 1")
+        raw = _load_yaml(text, "package-bootstrap_1.json", source)
         root = raw["package_bootstrap"]
         layout_raw = root["layout"]
         policy_raw = root.get("automation_policy", {})

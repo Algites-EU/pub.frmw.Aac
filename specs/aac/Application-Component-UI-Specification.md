@@ -155,15 +155,11 @@ A component may remain active in free/degraded mode with an empty/minimal permis
 
 When the Core invocation bridge reports `PERMISSION_DENIED`, a product UI may offer login, purchase, refresh, grant acceptance, or other entitlement remediation through Core/entitlement-provider APIs. Component code does not directly own product purchase/account UI in the baseline model.
 
-### IV.5 Core-entity component-extension sections
+### IV.5 Data Entity sections
 
-A product MAY render component-owned semantic component-extension data as normalized sections/actions attached to a Core-managed entity detail. Core discovers applicable components from static entity-extension declarations keyed by Core entity type ID.
+A product MAY render component-contributed logical sections/actions for Data Entities. Core discovers semantic support from `data_entity_support` and discovers concrete relationships from `x-aac-data-entity-reference` annotations in canonical schemas.
 
-One Core entity may expose extension sections for any number of components, but baseline AAC defines at most one component-extension payload per owner component for that entity. A component may structure that payload internally into multiple logical subsections through its component-extension schema.
-
-Core supplies current Core entity identity plus Core entity schema ID/version to component extension logic. The component supplies logical form/view metadata and normalized component-extension data; Core owns authorization and physical persistence mapping, and the renderer remains toolkit/product-owned.
-
-If the stored component-extension schema or current Core entity schema is not safely interpretable by the installed component, UI MUST preserve the payload and present it as unavailable/read-only with diagnostics rather than offering an unsafe edit. This unavailable extension data does not by itself imply that Core or the whole component failed to activate. Component-extension-data editability MUST NOT be interpreted as authority to mutate the Core entity itself.
+The renderer remains product/toolkit-owned. The component receives only normalized Data Entity/context inputs for which it has declared compatible schema support and appropriate authorization. Unsupported records remain preserved and are presented as unavailable/read-only rather than being guessed at or rewritten. `TOMBSTONE` is an explicit logical state that UI may represent separately from ACTIVE data.
 
 ## V. Python AAC artifacts
 

@@ -13,7 +13,7 @@
         "format_version",
         "entitlement_id",
         "issuer",
-        "entitlement_scope",
+        "licensing_scope",
         "subject",
         "components"
       ],
@@ -34,19 +34,6 @@
           "additionalProperties": true,
           "properties": {
             "id": {
-              "type": "string",
-              "minLength": 1
-            }
-          }
-        },
-        "entitlement_scope": {
-          "type": "object",
-          "required": [
-            "type"
-          ],
-          "additionalProperties": false,
-          "properties": {
-            "type": {
               "type": "string",
               "minLength": 1
             }
@@ -176,8 +163,23 @@
               "minLength": 1
             }
           }
+        },
+        "licensing_scope": {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
         }
       }
     }
-  }
+  },
+  "x-aac-schema-id": "_AAC.schema.entitlement-document",
+  "x-aac-schema-version": 1
 }

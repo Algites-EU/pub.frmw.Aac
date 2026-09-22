@@ -464,9 +464,9 @@ def test_interrupted_postcommit_transaction_recovers_forward_and_finishes_cleanu
     assert not recovered.transactions.active_pointer.exists()
 
 
-def test_package_bootstrap_v2_can_override_core_transaction_state_folders(tmp_path):
+def test_package_bootstrap_can_override_core_transaction_state_folders(tmp_path):
     text = f"""package_bootstrap:
-  schema_version: 2
+  schema_version: 1
   layout:
     product_root: {tmp_path / 'product'}
     core_state_subdirectory: durable-aac

@@ -13,7 +13,7 @@ It defines the public models and SPIs for:
 - Core-owned binding preferences and lifecycle/runtime interfaces;
 - exact `COMPONENT` / `PROVIDER_INSTANCE` configuration targets, scopes, providers and atomic mutation contracts;
 - persisted configuration schemas, versioned payloads and configuration migrators;
-- Core-entity semantic extension envelopes, entity contexts, stores and extension-data migrators;
+- generic Data Entity identity/envelopes, ACTIVE/TOMBSTONE state, field-level reference metadata and Data Entity migrator contracts;
 - authentication profiles, secret references and authorization contracts;
 - first-class entitlement licensing-scope declarations (`AIcEntitlementLicensingScopeDescriptor`) with localized display metadata, provided-capability-version permissions with `possible_licensing_scopes`, resolver/evidence/trusted-subject contracts, remediation and refresh semantics;
 - platform-neutral catalog query/models/provider SPI, catalog bootstrap metadata, package sources, package-store/Core-state layout, immutable provenance, workspace requirements/locks, unified mutable-record revisions, persistence capabilities/read-set/write-set contracts, active package-set revisions, generic crash-recovery transaction phases and transactional component-replacement plans/results with blocking vs. degradation diagnostics;
@@ -21,7 +21,7 @@ It defines the public models and SPIs for:
 - target-state solver request/result models, structured causal explanations, bounded alternatives, entitlement/readiness diagnostics, and package-preparation selections;
 - presentation metadata (`AIcDisplayText`) and generated-binding metadata.
 
-Canonical versioned schemas now live in the technology-neutral `src/product/schema/algites/lib/aac/coreintf/<functional-area>/` source tree and are packaged into technology distributions during build. Current definitions include `component-descriptor_5.json`, `catalog_4.json`, `entitlement-document_2.json`, `entitlement-issuing-request_2.json`, `entitlement-bootstrap_2.json`, and `catalog-bootstrap_1.json`; older schema versions remain historical definitions and continue to be readable where compatibility is defined.
+Canonical schemas live in the technology-neutral `src/product/schema/algites/lib/aac/coreintf/<functional-area>/` source tree and are packaged into technology distributions during build. Because AAC is not yet deployed, internal AAC document formats currently have one authoritative revision, version `1` (for example `component-descriptor_1.json`, `catalog_1.json`, `entitlement-document_1.json`, and `catalog-bootstrap_1.json`); development-time historical variants are not retained as compatibility layers. Every JSON Schema self-identifies through `x-aac-schema-id` and `x-aac-schema-version`.
 
 Component version is release provenance; persisted-data compatibility is governed by explicit schema identities/versions, direct-readable declarations and migration paths; runtime interpretation is independent from optional persistence convergence.
 

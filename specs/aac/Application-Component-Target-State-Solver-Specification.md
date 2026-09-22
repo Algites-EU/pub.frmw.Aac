@@ -90,10 +90,10 @@ A downgrade MAY be offered only as an explicitly selected alternative when persi
 ```text
 component configuration
 provider-instance configuration for every declared provider definition
-semantic Core-entity component-extension data
+generic Data Entity support
 ```
 
-For provider configuration and entity-extension schemas, the provider/entity-type selector is part of the schema identity comparison. The selector is kind-specific: `provider_id` for `PROVIDER_CONFIGURATION`, `entity_type_id` for `ENTITY_EXTENSION`, and neither field for `COMPONENT_CONFIGURATION`. Multiple entity-extension entries are valid when they refer to different entity types.
+For provider configuration, `provider_id` is part of the persistent-schema identity. For `DATA_ENTITY`, `schema_id` is the identity and the summary additionally compares readable versions, writable versions and preferred write version. `COMPONENT_CONFIGURATION` has no provider selector.
 
 If either side lacks sufficient persistent-schema metadata while the other declares such metadata, the automatic solver MUST treat the downgrade as unsafe and MUST NOT offer it.
 

@@ -1,8 +1,10 @@
-from algites.lib.aac.coreintf.descriptor import AInEntityExtensionDataAccess
+import pytest
+
+from algites.lib.aac.coreintf.descriptor import AInDataEntityAccess
 from algites.lib.aac.coreimpl.descriptor import AIcDescriptorLoader
 
 
-def test_descriptor_declares_versioned_configuration_entitlement_and_entity_extension():
+def test_descriptor_declares_versioned_configuration_entitlement_and_data_entity_support():
     descriptor = AIcDescriptorLoader.load_text('''
 component:
   id: vendor.foo
@@ -50,37 +52,53 @@ component:
         - id: view
         - id: edit
           possible_licensing_scopes: [USER, WORKSPACE]
-  entity_extensions:
-    - entity_type_id: _AO.NodeDefinition
-      core_entity_access: [READ]
-      extension_data:
-        access: READ_WRITE
-        component_extension_schema:
-          id: vendor.foo.node-extension
-          write_version: 3
-          readable_versions: [2, 3]
-          migrations:
-            - from: 2
-              to: 3
-              migrator: vendor.foo:migrate_node_extension_2_to_3
-        compatible_core_entity_schemas:
-          - schema_id: _AO.NodeDefinition
-            readable_versions: [4, 5]
-      ui:
-        contribution: true
+  data_entity_support:
+    - schema_id: vendor.foo.node-data
+      readable_versions: [2, 3]
+      writable_versions: [2, 3]
+      preferred_write_version: 3
+      migrations:
+        - from: 2
+          to: 3
+          migrator: vendor.foo:migrate_node_data_2_to_3
+      data_entity_requirements:
+        - schema_id: _AO.NodeDefinition
+          access: [READ]
+          readable_versions: [4, 5]
+          required: true
+        - schema_id: vendor.inventory.Asset
+          access: [READ, WRITE]
+          readable_versions: [1, 2]
+          writable_versions: [2]
+          required: false
 ''')
     assert descriptor.component_configuration_schema.schema_id == "foo-component-config"
     assert descriptor.component_configuration_schema.write_version == 2
     assert descriptor.component_configuration_schema.resource_name == "foo-component-config_2.json"
     assert [item.type for item in descriptor.entitlement_licensing_scopes] == ["USER", "WORKSPACE"]
-    assert descriptor.entitlement_licensing_scopes[1].name.resource_key == "vendor.foo.licensing_scope.workspace.name"
-    assert descriptor.entitlement_licensing_scopes[1].description.resource_key == "vendor.foo.licensing_scope.workspace.description"
     entitlement = descriptor.capability_entitlement("vendor.foo.document", 1)
     assert entitlement.permission("edit").possible_licensing_scope_types == ("USER", "WORKSPACE")
-    extension = descriptor.entity_extensions[0]
-    assert extension.entity_type_id == "_AO.NodeDefinition"
-    assert extension.extension_data.access is AInEntityExtensionDataAccess.READ_WRITE
-    assert extension.extension_data.component_extension_schema.schema_id == "vendor.foo.node-extension"
-    assert extension.extension_data.component_extension_schema.write_version == 3
-    assert extension.extension_data.supports_core_entity_schema("_AO.NodeDefinition", 5)
-    assert not extension.extension_data.supports_core_entity_schema("_AO.NodeDefinition", 6)
+
+    support = descriptor.data_entity_support[0]
+    assert support.schema_id == "vendor.foo.node-data"
+    assert support.readable_versions == (2, 3)
+    assert support.writable_versions == (2, 3)
+    assert support.preferred_write_version == 3
+    assert support.migrations[0].migrator_id == "vendor.foo:migrate_node_data_2_to_3"
+    requirement = support.data_entity_requirements[0]
+    assert requirement.schema_id == "_AO.NodeDefinition"
+    assert requirement.access == (AInDataEntityAccess.READ,)
+    assert requirement.readable_versions == (4, 5)
+    assert requirement.required
+
+
+def test_old_entity_extensions_descriptor_shape_is_rejected():
+    with pytest.raises(Exception):
+        AIcDescriptorLoader.load_text('''
+component:
+  id: vendor.foo
+  version: 1
+  entity_extensions:
+    - entity_type_id: _AO.NodeDefinition
+      core_entity_access: [READ]
+''')

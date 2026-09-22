@@ -134,7 +134,7 @@ class AIcPythonCapabilityBindingGenerator:
                 if resource is None:
                     continue
                 registered = self.schemas.get(resource)
-                class_name = f"AIcgd{_pascal(registered.id)}_{registered.version}"
+                class_name = f"AIcgd{_pascal(registered.id.split('.')[-1])}_{registered.version}"
                 dto_names[(operation.id, direction)] = class_name
                 schema_identity = (registered.id, registered.version)
                 if schema_identity not in emitted_schema_types:

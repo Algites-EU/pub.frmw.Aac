@@ -313,12 +313,14 @@ class AIcCompatibleTargetStateSolver:
                 schemas.append(AIcCatalogPersistentSchema(
                     AInCatalogPersistentSchemaKind.PROVIDER_CONFIGURATION, item.schema_id, item.write_version, provider_id=provider.id
                 ))
-        for extension in descriptor.entity_extensions:
-            item = extension.extension_data.component_extension_schema
-            if item is not None:
-                schemas.append(AIcCatalogPersistentSchema(
-                    AInCatalogPersistentSchemaKind.ENTITY_EXTENSION, item.schema_id, item.write_version, entity_type_id=extension.entity_type_id
-                ))
+        for support in descriptor.data_entity_support:
+            schemas.append(AIcCatalogPersistentSchema(
+                AInCatalogPersistentSchemaKind.DATA_ENTITY,
+                support.schema_id,
+                readable_versions=tuple(support.readable_versions),
+                writable_versions=tuple(support.writable_versions),
+                preferred_write_version=support.preferred_write_version,
+            ))
         return AIcSolverCandidate(
             descriptor.id, descriptor.version, provides, requires, tuple(schemas),
             tuple(descriptor.provided_capability_entitlements), tuple(descriptor.entitlement_licensing_scopes),
@@ -429,8 +431,8 @@ class AIcCompatibleTargetStateSolver:
     def _downgrade_schema_safe(current: AIcSolverCandidate, target: AIcSolverCandidate) -> bool:
         if not current.persistent_schemas or not target.persistent_schemas:
             return not current.persistent_schemas and not target.persistent_schemas
-        current_map = {item.identity: (item.schema_id, item.write_version) for item in current.persistent_schemas}
-        target_map = {item.identity: (item.schema_id, item.write_version) for item in target.persistent_schemas}
+        current_map = {item.identity: item for item in current.persistent_schemas}
+        target_map = {item.identity: item for item in target.persistent_schemas}
         return current_map == target_map
 
     def _solution(

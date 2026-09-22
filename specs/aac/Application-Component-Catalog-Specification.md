@@ -57,7 +57,7 @@ A baseline catalog document repeats its query scope in the document header:
 
 ```yaml
 catalog:
-  format_version: 4
+  format_version: 1
   product_id: eu.algites.app.orchestrator
   technology_id: PYTHON
 ```
@@ -140,7 +140,9 @@ Catalog requirements do not replace the actual component descriptor. Target-stat
 
 ### V.3 Persistent schema summary
 
-Catalog format version 2 introduced a release-level `persistent_schemas` summary used by the automatic target-state solver to decide whether a downgrade is safe enough to offer as an explicit alternative before downloading every candidate artifact. Catalog format version 4 makes the discriminator-specific identity fields explicit rather than overloading one generic `owner_id`.
+The sole current catalog format is `format_version: 1`. Because AAC is not yet deployed, historical development-time catalog revisions are not retained as compatibility formats.
+
+A release may publish a `persistent_schemas` summary so the target-state solver can reason about configuration and Data Entity compatibility before downloading every artifact.
 
 Example:
 
@@ -149,37 +151,40 @@ persistent_schemas:
   - kind: COMPONENT_CONFIGURATION
     schema_id: eu.algites.foo.configuration
     write_version: 4
+
   - kind: PROVIDER_CONFIGURATION
     provider_id: repository
     schema_id: eu.algites.foo.repository.configuration
     write_version: 2
-  - kind: ENTITY_EXTENSION
-    entity_type_id: _AO.entity.site
-    schema_id: eu.algites.foo.site-extension
-    write_version: 3
-  - kind: ENTITY_EXTENSION
-    entity_type_id: _AO.entity.service-def
-    schema_id: eu.algites.foo.service-def-extension
-    write_version: 2
+
+  - kind: DATA_ENTITY
+    schema_id: eu.algites.foo.site-data
+    readable_versions: [2, 3]
+    writable_versions: [2, 3]
+    preferred_write_version: 3
 ```
 
-`kind` is one of `COMPONENT_CONFIGURATION`, `PROVIDER_CONFIGURATION`, or `ENTITY_EXTENSION`. The identity selector is strict and depends on `kind`:
+`kind` is exactly one of:
 
-- `COMPONENT_CONFIGURATION` MUST NOT declare `provider_id` or `entity_type_id`;
-- `PROVIDER_CONFIGURATION` MUST declare exactly `provider_id` and MUST NOT declare `entity_type_id`;
-- `ENTITY_EXTENSION` MUST declare exactly `entity_type_id` and MUST NOT declare `provider_id`.
+```text
+COMPONENT_CONFIGURATION
+PROVIDER_CONFIGURATION
+DATA_ENTITY
+```
 
-The same `kind` may occur more than once when its discriminator-specific identity differs. In particular, one component may extend multiple Core entity types, so multiple `ENTITY_EXTENSION` records with different `entity_type_id` values are valid. A release MUST NOT repeat the same `(kind, provider_id/entity_type_id)` identity.
+The discriminator fields are strict:
 
-Catalog formats 2 and 3 used the legacy field `owner_id` for both provider and entity-extension selectors. Readers may normalize those historical documents, but format 4 uses the semantic fields above.
+- `COMPONENT_CONFIGURATION` uses `schema_id + write_version` and has no provider/Data-Entity fields;
+- `PROVIDER_CONFIGURATION` additionally requires `provider_id`;
+- `DATA_ENTITY` uses `schema_id`, `readable_versions`, `writable_versions` and, when writable, `preferred_write_version`; it does not use configuration `write_version` or `provider_id`.
 
-The summary is not a migration instruction and does not make catalog metadata authoritative. After download, Core MUST derive the same summary from the component descriptor and reject the candidate when catalog and artifact metadata disagree.
+A release MUST NOT repeat the same persistent-schema identity. For Data Entities the identity is the `schema_id`, so one component may advertise support for any number of independent Data Entity schemas.
 
-Catalog format version 1 remains a valid discovery format but lacks the persistent-schema information needed for safe automatic downgrade alternatives. A solver MAY still use v1 releases for upgrade-only solutions.
+Catalog metadata is an optimization, not the source of truth. After artifact download Core derives the same information from the authoritative component descriptor and rejects a material mismatch.
 
 ## VI. Entitlement discovery metadata
 
-Catalog format v3 introduced both the component's entitlement licensing-scope declarations and its capability-version permission declarations so browsing/package UI can explain licensing before the artifact is downloaded. Catalog format v4 names the latter `provided_capability_entitlements` to make explicit that the declarations apply to capabilities provided by this component.
+Catalog format version 1 exposes both the component's entitlement licensing-scope declarations and its `provided_capability_entitlements` capability-version permission declarations so browsing/package UI can explain licensing before the artifact is downloaded.
 
 Example:
 
@@ -213,7 +218,7 @@ A permission with no `possible_licensing_scopes` is available without external e
 
 After download, the component descriptor is authoritative. Core MUST compare catalog licensing-scope declarations and provided-capability-entitlement declarations with the artifact descriptor and reject material disagreement rather than silently rewriting either side.
 
-Catalog format 3 used the earlier field name `capability_entitlements`; format 4 readers/writers use `provided_capability_entitlements`. The semantic identity remains component + provided capability id + provided capability version + permission id.
+`provided_capability_entitlements` is the sole current field name. Its semantic identity remains component + provided capability id + provided capability version + permission id.
 
 The catalog MUST NOT embed user/customer-specific grants or bind a component to one licensing-service implementation. `entitlement_info_url` remains sufficient baseline discovery information for licensing instructions.
 
@@ -380,7 +385,7 @@ Install MUST NOT be presented as equivalent to activation. Entitlement acquisiti
 
 ## XIV. Solver relationship
 
-The AAC automatic target-state solver consumes catalog release metadata inside one `(product_id, technology_id)` scope. It uses `provides`, `requires`, available versions, artifact availability and (in catalog format v2) persistent-schema summaries to find compatible upgrade sets before downloading all candidates. The normative solver policy is defined by `Application-Component-Target-State-Solver-Specification.md`.
+The AAC automatic target-state solver consumes catalog release metadata inside one `(product_id, technology_id)` scope. It uses `provides`, `requires`, available versions, artifact availability and persistent-schema summaries to find compatible upgrade sets before downloading all candidates. The normative solver policy is defined by `Application-Component-Target-State-Solver-Specification.md`.
 
 Entitlement availability is not the same as technical compatibility. A technically compatible solution may be reported together with entitlement/remediation diagnostics rather than being discarded as "no compatible solution" solely because a commercial permission is not currently granted.
 
@@ -395,7 +400,7 @@ After artifacts are downloaded, normal artifact verification, descriptor compari
 3. Catalog documents repeat product/technology scope in their header.
 4. Catalog is discovery metadata, not artifact repository, entitlement service, or runtime contract catalog.
 5. Component releases declare capability provides/requires sufficiently for discovery/solver use.
-6. Catalog format v3 carries entitlement licensing-scope declarations plus permission `possible_licensing_scopes`; permissions with an empty list need no external entitlement evidence.
+6. Catalog format version 1 carries entitlement licensing-scope declarations plus permission `possible_licensing_scopes`; permissions with an empty list need no external entitlement evidence.
 7. Licensing-service/provider details are outside catalog baseline; `entitlement_info_url` is informational discovery metadata.
 8. Technology-specific artifact variants may differ by platform/architecture/format but not by technology scope.
 9. Catalog provider SPI is query-oriented; simple filesystem/HTTP providers may filter a whole document locally.
@@ -403,4 +408,4 @@ After artifacts are downloaded, normal artifact verification, descriptor compari
 11. Downloaded artifact descriptor and verification policy are authoritative over catalog metadata.
 12. Missing entitlement does not generally prevent package download/installation.
 13. Package browsing/install UI and the target-state solver use the same catalog contract.
-14. Catalog format v2 introduced persistent-schema summaries for solver downgrade safety; format v3 additionally carries first-class entitlement licensing-scope declarations, and all repeated metadata is verified against the downloaded descriptor.
+14. Catalog format version 1 carries persistent-schema summaries and first-class entitlement licensing-scope declarations; all repeated metadata is verified against the downloaded descriptor.
