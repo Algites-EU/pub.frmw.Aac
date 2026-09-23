@@ -1,6 +1,6 @@
 import pytest
 
-from algites.lib.aac.coreintf.contracts import AIcCapabilityContract, AIcCapabilityOperation, AIcCapabilityRef
+from algites.lib.aac.coreintf.contracts import AIcProvidedCapability, AIcCapabilityContract, AIcCapabilityOperation, AIcCapabilityRef
 from algites.lib.aac.coreintf.descriptor import AIcComponentDescriptor, AIcConsumerRequirementDescriptor, AIcProviderDefinitionDescriptor
 from algites.lib.aac.coreintf.instances import AIcBindingPreference
 from algites.lib.aac.coreimpl.bindings import AIcBindingPreferenceStore, AIcBindingStore
@@ -12,16 +12,17 @@ from algites.lib.aac.coreimpl.resolution import AIcBindingResolver
 
 
 def contract(catalog, capability):
-    catalog.admit(AIcCapabilityContract(AIcCapabilityRef(capability, 1), (AIcCapabilityOperation("run", "In", "Out"),)))
+    catalog.admit(AIcCapabilityContract(AIcCapabilityRef(capability, 1), "_AAC.runtime", (AIcCapabilityOperation("run", "In", "Out"),)))
 
 
 def test_provider_scoped_requirement_resolves_and_persists():
     catalog = AIcActiveContractCatalog()
+    catalog.admit_builtin_contracts()
     contract(catalog, "cap.x")
     registry = AIcProviderInstanceRegistry()
-    provider_x = AIcProviderDefinitionDescriptor("px", "cap.x", (1,), "x:PX")
+    provider_x = AIcProviderDefinitionDescriptor("px", (AIcProvidedCapability("cap.x", (1,)),), "x:PX")
     consumer = AIcProviderDefinitionDescriptor(
-        "pc", "cap.consumer", (1,), "x:PC",
+        "pc", (AIcProvidedCapability("cap.consumer", (1,)),), "x:PC",
         requirements=(AIcConsumerRequirementDescriptor("x", "cap.x", (1,)),),
     )
     x = registry.create("provider", provider_x)
@@ -36,11 +37,12 @@ def test_provider_scoped_requirement_resolves_and_persists():
 
 def test_explicit_preferences_can_make_declarative_component_cycle_instance_acyclic():
     catalog = AIcActiveContractCatalog()
+    catalog.admit_builtin_contracts()
     contract(catalog, "cap.x"); contract(catalog, "cap.y")
     rx = AIcConsumerRequirementDescriptor("needs-y", "cap.y", (1,), mandatory=False)
     ry = AIcConsumerRequirementDescriptor("needs-x", "cap.x", (1,), mandatory=False)
-    pa = AIcProviderDefinitionDescriptor("pa", "cap.x", (1,), "x:A", requirements=(rx,))
-    pb = AIcProviderDefinitionDescriptor("pb", "cap.y", (1,), "x:B", requirements=(ry,))
+    pa = AIcProviderDefinitionDescriptor("pa", (AIcProvidedCapability("cap.x", (1,)),), "x:A", requirements=(rx,))
+    pb = AIcProviderDefinitionDescriptor("pb", (AIcProvidedCapability("cap.y", (1,)),), "x:B", requirements=(ry,))
     registry = AIcProviderInstanceRegistry()
     a1 = registry.create("A", pa, name="a1"); a2 = registry.create("A", pa, name="a2")
     b1 = registry.create("B", pb, name="b1"); b2 = registry.create("B", pb, name="b2")
@@ -54,9 +56,9 @@ def test_explicit_preferences_can_make_declarative_component_cycle_instance_acyc
 
 
 def test_instance_cycle_is_rejected_even_with_two_distinct_instances():
-    catalog = AIcActiveContractCatalog(); contract(catalog, "cap.x"); contract(catalog, "cap.y")
-    pa = AIcProviderDefinitionDescriptor("pa", "cap.x", (1,), "x:A", requirements=(AIcConsumerRequirementDescriptor("needs-y", "cap.y", (1,)),))
-    pb = AIcProviderDefinitionDescriptor("pb", "cap.y", (1,), "x:B", requirements=(AIcConsumerRequirementDescriptor("needs-x", "cap.x", (1,)),))
+    catalog = AIcActiveContractCatalog(); catalog.admit_builtin_contracts(); contract(catalog, "cap.x"); contract(catalog, "cap.y")
+    pa = AIcProviderDefinitionDescriptor("pa", (AIcProvidedCapability("cap.x", (1,)),), "x:A", requirements=(AIcConsumerRequirementDescriptor("needs-y", "cap.y", (1,)),))
+    pb = AIcProviderDefinitionDescriptor("pb", (AIcProvidedCapability("cap.y", (1,)),), "x:B", requirements=(AIcConsumerRequirementDescriptor("needs-x", "cap.x", (1,)),))
     registry = AIcProviderInstanceRegistry(); a = registry.create("A", pa); b = registry.create("B", pb)
     preferences = AIcBindingPreferenceStore(registry.store)
     preferences.put(AIcBindingPreference(a.id, "needs-y", (b.id,))); preferences.put(AIcBindingPreference(b.id, "needs-x", (a.id,)))

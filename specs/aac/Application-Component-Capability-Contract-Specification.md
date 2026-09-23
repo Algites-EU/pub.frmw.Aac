@@ -65,13 +65,69 @@ Conceptually:
 capability:
   id: "algites.object-store"
   version: 3
+  group_id: "algites.storage"
 ```
 
 Product profiles may reserve their own namespaces.
 
 Third-party components SHOULD use identifiers from namespaces they control and MUST NOT claim a product-reserved namespace.
 
-## II.2 Contract version
+
+## II.2 Capability groups
+
+Every capability contract MUST identify exactly one **capability group** through `capability.group_id`. Capability groups are organizational and presentation metadata only; they MUST NOT affect provider discovery, binding, version negotiation, authorization, invocation routing, lifecycle state, or runtime compatibility.
+
+A capability group has:
+
+```text
+id
+optional parent_group_id
+name: AIcDisplayText
+optional description: AIcDisplayText
+optional metadata
+```
+
+Groups may form an arbitrary nested hierarchy. A group without `parent_group_id` is a root group. The same group may contain capabilities from many components and capability versions. A capability contract references only the stable group ID; it does not duplicate the group's display definition.
+
+Group IDs are globally meaningful within the active AAC environment and follow the same namespace ownership rules as other framework/component identities. Group display text uses the normal `AIcDisplayText` representation (`text` plus optional `resource_key`) and therefore does not introduce parallel localization fields.
+
+Components that introduce their own groups declare static `capability_groups` resources in their component descriptor. Core admits those group definitions before the component's `contracts` resources. Repeated identical group definitions may be deduplicated; conflicting canonical definitions for the same group ID MUST be rejected. A child group MUST reference a parent that has already been admitted from built-ins or the target component set.
+
+Framework groups currently include:
+
+```text
+_AAC.data-entity
+    _AAC.data-entity.loading
+    _AAC.data-entity.storing
+    _AAC.data-entity.storage-management
+
+_AAC.runtime
+    _AAC.runtime.observation
+```
+
+The grouping hierarchy is intentionally not a capability taxonomy with behavioral inheritance. Parent/child relations exist only for navigation, display, filtering, and administration UI.
+
+The following diagram separates canonical capability metadata from the component implementation and from configured runtime instances:
+
+```mermaid
+flowchart LR
+    GROUP["Capability Group"] -->|organizes| CONTRACT["Capability Contract<br/>id + version"]
+    CONTRACT --> OPS["Operation(s)<br/>input/output schemas"]
+
+    COMPONENT["Component Descriptor"] --> PDEF["Capability Provider Definition"]
+    PDEF --> IMPL["Implementation Class"]
+    PDEF -->|provides exact version(s)| CONTRACT
+    PDEF --> PINST["Provider Instance(s)"]
+    PINST -. "runs implementation" .-> IMPL
+
+    REQ["Consumer Requirement"] -->|accepts version(s)| CONTRACT
+    CORE["Core Resolver / Invocation Bridge"] --> REQ
+    CORE --> PINST
+```
+
+The capability contract remains independently canonical even when several components provide it. A component descriptor declares which contracts a capability provider definition implements; Core later creates/configures concrete provider instances and binds consumers to those instances.
+
+## II.3 Contract version
 
 Each capability is versioned independently.
 
@@ -79,7 +135,11 @@ A version denotes a specific behavioral contract, including its operation set an
 
 A component advertises only finite, explicitly known versions that it intentionally supports.
 
-## II.3 Capability operations
+Technology bindings MUST make coexisting contract versions unambiguous. For generated behavioral interfaces, the canonical capability version is therefore part of both the generated interface name and every generated operation method name. Contract version `N` maps to an interface such as `AIigExample_N`, and canonical operation `run` maps to a binding method such as `run_N(...)`. The suffix is binding-level disambiguation; the canonical operation ID remains `run` and its canonical identity remains `(capability id, capability version, operation id)`.
+
+One runtime provider object MAY implement several versions of the same capability and several different capabilities at once. The Core bridge MUST dispatch against the exact `(capability id, capability version)` interface rather than relying on language method-resolution order.
+
+## II.4 Capability operations
 
 A capability contract contains one or more **operations**.
 
@@ -89,6 +149,7 @@ Conceptually:
 capability:
   id: "algites.secrets.store"
   version: 2
+  group_id: "algites.security"
 
 operations:
   - id: get
@@ -108,7 +169,7 @@ A capability MAY contain only one operation when that is the natural contract bo
 
 A capability MUST NOT be forced to one operation merely to make operation identity globally unique.
 
-## II.4 Operation identity is scoped to the capability contract
+## II.5 Operation identity is scoped to the capability contract
 
 Operation identifiers are **not global identifiers**.
 
@@ -129,7 +190,7 @@ No global `AllKnownOperations` enum or equivalent registry is required or recomm
 
 The authoritative operation list belongs to each canonical capability contract definition.
 
-## II.5 Operation IDs are stable within a contract version
+## II.6 Operation IDs are stable within a contract version
 
 An operation `id` is machine identity, not display text.
 
@@ -141,15 +202,15 @@ For example:
 id: commit
 ```
 
-A Java binding might expose:
+A Java binding for capability contract version 4 might expose:
 
 ```java
-CommitResult commit(CommitRequest request);
+CommitResult commit_4(CommitRequest request);
 ```
 
 but the Java method name is a technology binding of the canonical operation `id`; reflection-visible method identity is not the architecture's source of truth.
 
-## II.6 Operation schema
+## II.7 Operation schema
 
 Each operation SHOULD define, where applicable:
 
@@ -169,7 +230,7 @@ Each operation SHOULD define, where applicable:
 
 A contract MAY use shared DTO/schema definitions across several operations.
 
-## II.7 Operation-set changes and capability versions
+## II.8 Operation-set changes and capability versions
 
 Adding, removing, renaming, or behaviorally changing an operation may require a new capability contract version.
 
@@ -177,7 +238,7 @@ A change is breaking whenever an existing consumer that correctly implements the
 
 The same `(capability id, version, operation id)` MUST NOT silently acquire incompatible semantics.
 
-## II.8 Canonical contract definition
+## II.9 Canonical contract definition
 
 The canonical contract bundle for a capability version MUST provide enough information for Core to know its operation surface before runtime binding.
 
@@ -192,6 +253,27 @@ technology binding metadata required by the active runtime profile
 ```
 
 Where generic invocation/observation is supported, Core MUST also have normalized input/output schema information sufficient to produce the normalized invocation representation defined in this specification.
+
+---
+
+## II.10 Capability provider definitions and multi-capability implementations
+
+A capability provider definition is an implementation role, not a synonym for one capability. One capability provider definition and each of its concrete provider instances MAY provide any finite set of capability/version pairs. For example, one filesystem Data Entity provider instance may implement loading, storing and storage-management capabilities on the same runtime object.
+
+In the component descriptor, these definitions are declared under the explicit `capability_providers` field. The name distinguishes general capability-provider definitions from domain-specific data, configuration, catalog, entitlement or other provider concepts. `capability_providers` describes implementation definitions; concrete configured provider instances remain separate Core-managed runtime state.
+
+Conceptually:
+
+```text
+provider instance P
+    provides capability A / versions 1,2
+    provides capability B / version 1
+    provides capability C / versions 2,3
+```
+
+Invocation is still addressed to one explicit provider instance and one explicit capability/version. Core MUST NOT reinterpret a multi-capability provider as several provider identities. Conversely, support for capability A does not imply support for B merely because both belong to the same capability provider definition.
+
+A concrete provider instance MAY additionally be configured with an access policy such as `READ_ONLY` or `READ_WRITE` when the relevant domain defines such a policy. That policy constrains which of the provider's technically implemented operations Core may use; it does not change the canonical set of interfaces implemented by the provider class.
 
 ---
 
@@ -650,6 +732,8 @@ The observation provider exposes an operation conceptually equivalent to:
 observe(ObservationInput) -> ObservationOutput
 ```
 
+The operation input schema is the `ObservationInput` object itself. The invocation payload MUST NOT add a second transport-only wrapper such as `{ "observation_input": ... }`; the normalized fields of `ObservationInput` are the operation arguments validated by the canonical observation input schema.
+
 `ObservationOutput` confirms delivery/processing status only.
 
 It MUST NOT contain:
@@ -959,11 +1043,11 @@ Java language bindings SHOULD be generated from the canonical capability contrac
 public interface AIigSiteManagement_1 {
     @AIaOperation("get_site")
     @AIaAuthorization(allOf = {"VIEW_SITE"})
-    AIcgdGetSiteOutput_1 getSite(AIcgdGetSiteInput_1 input);
+    AIcgdGetSiteOutput_1 getSite_1(AIcgdGetSiteInput_1 input);
 
     @AIaOperation("update_site")
     @AIaAuthorization(allOf = {"EDIT_SITE"})
-    AIcgdUpdateSiteOutput_1 updateSite(AIcgdUpdateSiteInput_1 input);
+    AIcgdUpdateSiteOutput_1 updateSite_1(AIcgdUpdateSiteInput_1 input);
 }
 ```
 
@@ -979,7 +1063,7 @@ Python bindings SHOULD likewise be generated from the canonical capability contr
 
 Generated types MUST expose the canonical source ID and source version as machine-readable provenance. They SHOULD additionally expose the canonical resource path. The same provenance MUST be visibly stated in generated Javadoc/docstrings together with a do-not-edit indication. Source kind is not required: canonical source identity is `(source id, source version)`, while the resource path is provenance/location rather than identity.
 
-A generated method SHOULD accept one normalized/generated input DTO and return one output DTO rather than expanding schema properties into a fragile variable method signature. Generated decorators/metadata map the method to the canonical operation ID and authorization requirement. The canonical contract remains authoritative; generated Python metadata is only the binding representation.
+A generated method SHOULD accept one normalized/generated input DTO and return one output DTO rather than expanding schema properties into a fragile variable method signature. Its Python name carries the capability-contract suffix as well, for example `get_site_1(...)` for canonical operation `get_site` in capability version 1. Generated decorators/metadata map that versioned binding method back to the unsuffixed canonical operation ID and authorization requirement. The canonical contract remains authoritative; generated Python metadata is only the binding representation.
 
 This approach preserves identical contract identity across in-process, subinterpreter and process/RPC profiles and allows the same input/output schemas to drive validation and, where appropriate, generic UI forms.
 
@@ -997,7 +1081,7 @@ Correlation/causal metadata such as invocation and parent-invocation identity MU
 
 ## VIII.4 User-visible metadata
 
-Definitions that may be presented to users or administrators SHOULD carry `name` and `description` presentation metadata in addition to their stable technical IDs. This applies at least to components, provider definitions, consumer requirements, capabilities, operations, authorization permissions, entitlement permissions, configuration profiles/scopes/providers, authentication profiles, and Data Entity support declarations when those definitions appear in product UI.
+Definitions that may be presented to users or administrators SHOULD carry `name` and `description` presentation metadata in addition to their stable technical IDs. This applies at least to components, capability provider definitions, consumer requirements, capabilities, operations, authorization permissions, entitlement permissions, configuration profiles/scopes/providers, authentication profiles, and Data Entity support declarations when those definitions appear in product UI.
 
 The common display-text shape permits:
 
@@ -1026,7 +1110,8 @@ When an extension component introduces a capability contract unknown to the orig
 The flow is:
 
 ```text
-plugin package contains contract bundle
+plugin package contains capability-group/contract resources
+    -> Core admits referenced capability groups
     -> Core discovers contract
     -> Core validates/adopts canonical capability version
     -> operation set becomes known to active contract catalog
@@ -1035,7 +1120,7 @@ plugin package contains contract bundle
 
 This permits third-party components to communicate through new capability contracts without requiring a global Core release containing every future operation name.
 
-During a component replacement transaction, contract admission is evaluated against the complete target component set. Core MUST rebuild the target active contract catalog from built-in contracts plus canonical bundles supplied by the target set; it MUST NOT merely union new candidate bundles into the current catalog. A contract supplied only by a replaced/removed component therefore disappears from the target catalog unless another target source supplies the same canonical definition.
+During a component replacement transaction, capability-group and contract admission is evaluated against the complete target component set. Core MUST rebuild the target active group/contract catalogs from built-in definitions plus canonical resources supplied by the target set; it MUST NOT merely union new candidate resources into the current catalog. A contract or group supplied only by a replaced/removed component therefore disappears from the target catalog unless another target source supplies the same canonical definition. Contract admission MUST reject a `group_id` that is not present in that target capability-group catalog.
 
 ## IX.3 Unknown-at-build-time does not mean unknown-at-binding-time
 
@@ -1061,7 +1146,7 @@ for stable framework-owned cross-language contracts and identities. Products usi
 
 ## X.2 `_AAC.capability.observation/v1`
 
-The framework generic observation contract is:
+The framework generic observation contract is grouped under `_AAC.runtime.observation` and is:
 
 ```text
 _AAC.capability.observation / 1
@@ -1071,7 +1156,7 @@ with a provider operation conceptually named `observe` and Core-owned observatio
 
 ## X.3 Generic tracing plugin example
 
-A diagnostic component may declare an observer provider definition with several Core-managed instances:
+A diagnostic component may declare an observer capability provider definition with several Core-managed instances:
 
 ```text
 instance GUID A
@@ -1138,6 +1223,8 @@ Conformance tooling SHOULD test:
 
 - unique operation IDs within each capability/version;
 - stable capability/version identity;
+- exactly one admitted `group_id` per capability contract;
+- canonical capability-group identity, parent linkage and duplicate/conflict handling;
 - valid request/result schemas;
 - declared error semantics;
 - sensitive-field metadata;
@@ -1200,27 +1287,27 @@ No global Core operation enum should need modification.
 
 # XIII. Architectural Invariants
 
-1. **A capability version defines one or more canonical operations.**
-2. **Operation IDs are scoped to capability/version, not globally.**
-3. **The canonical operation identity is `(capability id, version, operation id)`.**
-4. **Operation schemas belong to the capability contract.**
-5. **Core can admit new capability contracts and operation sets supplied by extension components.**
-6. **Generic observation is a normal independently versioned capability.**
-7. **Observation bindings are Core-owned topology, separate from observer-instance configuration.**
-8. **Observation selectors may filter by capability, version, operation, and PRE/POST phase.**
-9. **Operation selectors are interpreted through the selected capability contract, never a global operation enum.**
-10. **Observers are read-only and do not alter the authoritative invocation result.**
-11. **Observer failure is isolated from observed-provider success/failure by default.**
-12. **The observation capability never observes itself.**
-13. **Sensitive contract values are redacted before generic observer dispatch unless explicitly authorized.**
-14. **Generic observation uses canonical normalized contract data, not private implementation objects.**
-15. **Product-specific capability namespaces, such as Orchestrator `_AO.*`, are profiles of the general model rather than changes to the general architecture.**
-16. **Every cross-component invocation passes through a Core-owned capability handle/proxy and invocation bridge, including in-process profiles.**
-17. **A consumer binds to capability/version rather than another provider's commercial permission tier.**
-18. **`PERMISSION_DENIED` is a standardized runtime invocation outcome; permission identifiers are capability-version-owned diagnostic/provider semantics and are not consumer dependency requirements.**
-19. **Core may remediate a permission failure centrally, but transparent retry requires explicit retry safety.**
-20. **Component replacement rebuilds the active contract catalog from the complete target component set before target binding resolution; removed suppliers do not leave stale target contract definitions behind.**
-
+1. **Every capability belongs to exactly one admitted capability group, and grouping has no binding/runtime semantics.**
+2. **A capability version defines one or more canonical operations.**
+3. **Operation IDs are scoped to capability/version, not globally.**
+4. **The canonical operation identity is `(capability id, version, operation id)`.**
+5. **Operation schemas belong to the capability contract.**
+6. **Core can admit new capability contracts and operation sets supplied by extension components.**
+7. **Generic observation is a normal independently versioned capability.**
+8. **Observation bindings are Core-owned topology, separate from observer-instance configuration.**
+9. **Observation selectors may filter by capability, version, operation, and PRE/POST phase.**
+10. **Operation selectors are interpreted through the selected capability contract, never a global operation enum.**
+11. **Observers are read-only and do not alter the authoritative invocation result.**
+12. **Observer failure is isolated from observed-provider success/failure by default.**
+13. **The observation capability never observes itself.**
+14. **Sensitive contract values are redacted before generic observer dispatch unless explicitly authorized.**
+15. **Generic observation uses canonical normalized contract data, not private implementation objects.**
+16. **Product-specific capability namespaces, such as Orchestrator `_AO.*`, are profiles of the general model rather than changes to the general architecture.**
+17. **Every cross-component invocation passes through a Core-owned capability handle/proxy and invocation bridge, including in-process profiles.**
+18. **A consumer binds to capability/version rather than another provider's commercial permission tier.**
+19. **`PERMISSION_DENIED` is a standardized runtime invocation outcome; permission identifiers are capability-version-owned diagnostic/provider semantics and are not consumer dependency requirements.**
+20. **Core may remediate a permission failure centrally, but transparent retry requires explicit retry safety.**
+21. **Component replacement rebuilds the active contract catalog from the complete target component set before target binding resolution; removed suppliers do not leave stale target contract definitions behind.**
 
 # Package identity versus capability identity
 

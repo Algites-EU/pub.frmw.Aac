@@ -14,7 +14,7 @@ def sample():
 
 def test_stdout_json(capsys):
     provider = AIcSimpleAuditObserver({"output": {"type": "STDOUT"}, "format": "JSON"})
-    assert provider.observe(sample()).accepted
+    assert provider.observe_1(sample()).accepted
     payload = json.loads(capsys.readouterr().out)
     assert payload["operation_id"] == "commit"
     assert payload["phase"] == "PRE"
@@ -23,7 +23,7 @@ def test_stdout_json(capsys):
 def test_file_output(tmp_path):
     path = tmp_path / "audit.log"
     provider = AIcSimpleAuditObserver({"output": {"type": "FILE", "path": str(path)}, "format": "TEXT"})
-    provider.observe(sample())
+    provider.observe_1(sample())
     text = path.read_text()
     assert "_AO.vcs.repository/1 commit" in text
     assert "invocation=inv-1" in text

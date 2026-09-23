@@ -57,16 +57,17 @@ class AIcBindingResolver:
         self.contract_catalog = contract_catalog
 
     def _negotiated_version(self, requirement: AIcConsumerRequirementDescriptor, candidate: AIcProviderInstance) -> int:
-        consumer_versions = requirement.versions or candidate.capability_versions
+        offered = candidate.capability(requirement.capability_id).versions
+        consumer_versions = requirement.versions or offered
         if self.contract_catalog is None:
-            valid = set(consumer_versions) & set(candidate.capability_versions)
+            valid = set(consumer_versions) & set(offered)
             if not valid:
                 raise AIxContractNegotiationError(f"no common version for {requirement.capability_id}")
             return max(valid)
         return self.contract_catalog.negotiate(
             requirement.capability_id,
             tuple(consumer_versions),
-            candidate.capability_versions,
+            offered,
         )
 
     def compatible_candidates(
@@ -80,7 +81,7 @@ class AIcBindingResolver:
         for candidate in candidates:
             if candidate.id == consumer_instance_id:
                 continue
-            if candidate.capability_id != requirement.capability_id:
+            if not candidate.supports_capability(requirement.capability_id):
                 continue
             if candidate.state not in ELIGIBLE_STATES:
                 continue
@@ -97,7 +98,7 @@ class AIcBindingResolver:
                 consumer_instance_id=consumer_instance_id,
                 requirement_id=requirement.id,
                 provider_instance_id=candidate.id,
-                capability_id=candidate.capability_id,
+                capability_id=requirement.capability_id,
                 capability_version=version,
             )
             # Candidate compatibility/selection is intentionally independent from DAG validation.

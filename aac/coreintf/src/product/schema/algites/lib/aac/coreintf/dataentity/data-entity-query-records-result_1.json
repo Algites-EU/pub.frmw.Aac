@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.data-entity-query-records-result",
+  "x-aac-schema-version": 1,
+  "title": "Data Entity Query Records Result 1",
+  "type": "object",
+  "required": [
+    "records",
+    "continuation_token"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "uid",
+          "schema_id",
+          "schema_version",
+          "record_revision",
+          "state",
+          "payload"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "uid": {
+            "type": "string",
+            "minLength": 1
+          },
+          "schema_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "schema_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "record_revision": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ]
+          },
+          "state": {
+            "enum": [
+              "ACTIVE",
+              "TOMBSTONE"
+            ]
+          },
+          "payload": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "continuation_token": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

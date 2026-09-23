@@ -1,6 +1,7 @@
 capability:
   id: _AAC.capability.observation
   version: 1
+  group_id: _AAC.runtime.observation
   name:
     text: Capability invocation observation
     resource_key: aac.capability.observation.name
@@ -17,5 +18,5 @@ operations:
       resource_key: aac.capability.observation.operation.observe.description
     input: AIcObservationInput
     output: AIcObservationOutput
-    input_schema: observation-operation-input_1.json
+    input_schema: observation-input_1.json
     output_schema: observation-output_1.json

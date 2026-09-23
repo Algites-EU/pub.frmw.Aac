@@ -31,7 +31,7 @@ class AIcEndpointObservationProvider(AIiObservationProvider):
         self.endpoint = endpoint
         self.invocation_dispatcher = invocation_dispatcher
 
-    def observe(self, observation_input: AIcObservationInput) -> AIcObservationOutput:
+    def observe_1(self, observation_input: AIcObservationInput) -> AIcObservationOutput:
         invocation = AIcInvocationInput(
             invocation_id=str(uuid4()),
             parent_invocation_id=observation_input.invocation_id,
@@ -39,7 +39,7 @@ class AIcEndpointObservationProvider(AIiObservationProvider):
             capability_version=1,
             operation_id="observe",
             provider_instance_id=self.instance_id,
-            arguments={"observation_input": asdict(observation_input)},
+            arguments=asdict(observation_input),
         )
         output = self.invocation_dispatcher.invoke(self.endpoint, invocation)
         if not output.success:
@@ -140,7 +140,7 @@ class AIcObservationDispatcher:
                 continue
             token = _ACTIVE_OBSERVERS.set(active | {binding.observer_instance_id})
             try:
-                output = provider.observe(observation_input)
+                output = provider.observe_1(observation_input)
                 if not isinstance(output, AIcObservationOutput):
                     raise TypeError("observer returned a non-AIcObservationOutput value")
                 deliveries.append(AIcObservationDelivery(binding.observer_instance_id, output))

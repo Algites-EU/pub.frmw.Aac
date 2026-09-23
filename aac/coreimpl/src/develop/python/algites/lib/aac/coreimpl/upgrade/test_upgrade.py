@@ -19,14 +19,14 @@ def _write_candidate(root: Path, package: str, *, version: int, broken: bool = F
         "from algites.lib.aac.coreintf.observation import AIiObservationProvider, AIcObservationOutput\n"
         "class AIcCandidateObserver(AIiProviderRuntime, AIiObservationProvider):\n"
         "    def __init__(self, configuration): self.configuration = configuration\n"
-        "    def observe(self, observation_input): return AIcObservationOutput(accepted=True)\n",
+        "    def observe_1(self, observation_input): return AIcObservationOutput(accepted=True)\n",
         encoding="utf-8",
     )
     schema_text = resources.files("algites.lib.aac.simpleaudit").joinpath("schemas/simpleaudit-config_1.json").read_text(encoding="utf-8")
     (pkg / "schemas" / "simpleaudit-config_1.json").write_text(schema_text, encoding="utf-8")
     impl = f"{package}.missing:Nope" if broken else f"{package}.provider:AIcCandidateObserver"
     (pkg / "component.yml").write_text(
-        f'''component:\n  id: _AAC.component.simpleaudit\n  version: {version}\n  providers:\n    - id: observation\n      capability:\n        id: _AAC.capability.observation\n        version: 1\n      implementation_class: {impl}\n      configuration_schema:\n        id: simpleaudit-config\n        write_version: 1\n        readable_versions: [1]\n        resource: simpleaudit-config_1.json\n      initial_instances:\n        - name: default\n          configuration: {{}}\n''',
+        f'''component:\n  id: _AAC.component.simpleaudit\n  version: {version}\n  capability_providers:\n    - id: observation\n      capabilities:\n        - id: _AAC.capability.observation\n          versions: [1]\n      implementation_class: {impl}\n      configuration_schema:\n        id: simpleaudit-config\n        write_version: 1\n        readable_versions: [1]\n        resource: simpleaudit-config_1.json\n      initial_instances:\n        - name: default\n          configuration: {{}}\n''',
         encoding="utf-8",
     )
 
@@ -86,7 +86,7 @@ def _write_graph_component(root: Path, package: str, *, component_id: str, versi
     contracts = ""
     if contract_version is not None:
         (pkg / "contracts" / f"x_{contract_version}.yml").write_text(
-            f"capability:\n  id: com.example.x\n  version: {contract_version}\n"
+            f"capability:\n  id: com.example.x\n  version: {contract_version}\n  group_id: _AAC.runtime\n"
             "operations:\n  - id: ping\n    input: Object\n    output: Object\n",
             encoding="utf-8",
         )
@@ -103,9 +103,9 @@ def _write_graph_component(root: Path, package: str, *, component_id: str, versi
     (pkg / "component.yml").write_text(
         f"component:\n  id: {component_id}\n  version: {version}\n"
         + contracts
-        + "  providers:\n"
+        + "  capability_providers:\n"
           "    - id: main\n"
-        + f"      capability:\n        id: {provided_capability}\n        version: {provided_version}\n"
+        + f"      capabilities:\n        - id: {provided_capability}\n          versions: [{provided_version}]\n"
           f"      implementation_class: {package}.provider:Provider\n"
         + requirement
         + "      initial_instances:\n        - name: default\n          configuration: {}\n",
@@ -165,7 +165,7 @@ def _write_migrating_component(root: Path, package: str, *, version: int, broken
         "from algites.lib.aac.coreintf.observation import AIiObservationProvider, AIcObservationOutput\n"
         "class Provider(AIiProviderRuntime, AIiObservationProvider):\n"
         "    def __init__(self, configuration): pass\n"
-        "    def observe(self, observation_input): return AIcObservationOutput(accepted=True)\n",
+        "    def observe_1(self, observation_input): return AIcObservationOutput(accepted=True)\n",
         encoding="utf-8",
     )
     if version == 1:
@@ -200,11 +200,11 @@ def _write_migrating_component(root: Path, package: str, *, version: int, broken
         "  id: com.example.migrating\n"
         f"  version: {version}\n"
         + config
-        + "  providers:\n"
+        + "  capability_providers:\n"
           "    - id: main\n"
-          "      capability:\n"
-          "        id: _AAC.capability.observation\n"
-          "        version: 1\n"
+          "      capabilities:\n"
+          "        - id: _AAC.capability.observation\n"
+          "          versions: [1]\n"
         + f"      implementation_class: {implementation}\n"
           "      initial_instances:\n"
           "        - name: default\n"
@@ -304,11 +304,11 @@ def _write_same_namespace_wheel(path: Path, *, version: int, broken: bool = Fals
   version: {version}
   contracts:
     - contracts/same_1.yml
-  providers:
+  capability_providers:
     - id: main
-      capability:
-        id: com.example.same.capability
-        version: 1
+      capabilities:
+        - id: com.example.same.capability
+          versions: [1]
       implementation_class: sameupgrade.{"missing" if broken else "provider"}:{"Nope" if broken else "Provider"}
       initial_instances:
         - name: default
@@ -317,6 +317,7 @@ def _write_same_namespace_wheel(path: Path, *, version: int, broken: bool = Fals
     contract = '''capability:
   id: com.example.same.capability
   version: 1
+  group_id: _AAC.runtime
 operations:
   - id: ping
     input: Object

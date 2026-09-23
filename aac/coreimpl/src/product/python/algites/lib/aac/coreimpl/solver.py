@@ -10,7 +10,7 @@ from algites.lib.aac.coreintf.catalog import (
     AIcCatalogQuery,
     AInCatalogPersistentSchemaKind,
 )
-from algites.lib.aac.coreintf.contracts import AInConsumerCardinality
+from algites.lib.aac.coreintf.contracts import AIcProvidedCapability, AInConsumerCardinality
 from algites.lib.aac.coreintf.descriptor import (
     AIcCapabilityEntitlementDescriptor,
     AIcComponentDescriptor,
@@ -294,12 +294,13 @@ class AIcCompatibleTargetStateSolver:
     @staticmethod
     def _from_descriptor(descriptor: AIcComponentDescriptor, *, stored_package: AIcStoredPackage | None = None) -> AIcSolverCandidate:
         provides = tuple(
-            (provider.capability_id, tuple(provider.capability_versions))
-            for provider in descriptor.providers
+            (capability.id, tuple(capability.versions))
+            for provider in descriptor.capability_providers
+            for capability in provider.capabilities
         )
         requires = tuple(
             AIcSolverRequirement(req.id, req.capability_id, tuple(req.versions), req.cardinality, req.mandatory)
-            for provider in descriptor.providers for req in provider.requirements
+            for provider in descriptor.capability_providers for req in provider.requirements
         )
         schemas: list[AIcCatalogPersistentSchema] = []
         if descriptor.component_configuration_schema is not None:
@@ -307,7 +308,7 @@ class AIcCompatibleTargetStateSolver:
             schemas.append(AIcCatalogPersistentSchema(
                 AInCatalogPersistentSchemaKind.COMPONENT_CONFIGURATION, item.schema_id, item.write_version
             ))
-        for provider in descriptor.providers:
+        for provider in descriptor.capability_providers:
             if provider.configuration_schema is not None:
                 item = provider.configuration_schema
                 schemas.append(AIcCatalogPersistentSchema(
@@ -544,13 +545,13 @@ class AIcCompatibleTargetStateSolver:
     def _entitlement_descriptor(candidate: AIcSolverCandidate) -> AIcComponentDescriptor:
         providers = tuple(
             AIcProviderDefinitionDescriptor(
-                id=f"_solver_{index}", capability_id=capability_id, capability_versions=versions,
+                id=f"_solver_{index}", capabilities=(AIcProvidedCapability(capability_id, versions),),
                 implementation_class="_AAC.solver.placeholder",
             )
             for index, (capability_id, versions) in enumerate(candidate.provides)
         )
         return AIcComponentDescriptor(
-            candidate.component_id, candidate.version, providers=providers,
+            candidate.component_id, candidate.version, capability_providers=providers,
             provided_capability_entitlements=candidate.entitlements,
             entitlement_licensing_scopes=candidate.entitlement_licensing_scopes,
         )

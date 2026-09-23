@@ -1,15 +1,18 @@
+import pytest
+
 from algites.lib.aac.coreintf.descriptor import AInProviderRuntimeProfile
+from algites.lib.aac.coreintf.errors import AIxDescriptorError
 from algites.lib.aac.coreimpl.descriptor import AIcDescriptorLoader
 
 
 def test_loads_simpleaudit_descriptor_from_package():
     descriptor = AIcDescriptorLoader.load_package("algites.lib.aac.simpleaudit")
     assert descriptor.id == "_AAC.component.simpleaudit"
-    assert descriptor.providers[0].capability_id == "_AAC.capability.observation"
-    assert descriptor.providers[0].configuration_schema.resource_name == "simpleaudit-config_1.json"
-    assert descriptor.providers[0].configuration_schema.schema_id == "simpleaudit-config"
-    assert descriptor.providers[0].configuration_schema.write_version == 1
-    assert descriptor.providers[0].runtime.profile is AInProviderRuntimeProfile.PROCESS
+    assert descriptor.capability_providers[0].capabilities[0].id == "_AAC.capability.observation"
+    assert descriptor.capability_providers[0].configuration_schema.resource_name == "simpleaudit-config_1.json"
+    assert descriptor.capability_providers[0].configuration_schema.schema_id == "simpleaudit-config"
+    assert descriptor.capability_providers[0].configuration_schema.write_version == 1
+    assert descriptor.capability_providers[0].runtime.profile is AInProviderRuntimeProfile.PROCESS
 
 
 def test_provider_can_declare_multiple_supported_contract_versions():
@@ -17,14 +20,14 @@ def test_provider_can_declare_multiple_supported_contract_versions():
 component:
   id: x
   version: 1
-  providers:
+  capability_providers:
     - id: p
-      capability:
-        id: x.cap
-        versions: [1, 3, 2]
+      capabilities:
+        - id: x.cap
+          versions: [1, 3, 2]
       implementation_class: example:Provider
 ''')
-    assert descriptor.providers[0].capability_versions == (1, 2, 3)
+    assert descriptor.capability_providers[0].capability("x.cap").versions == (1, 2, 3)
 
 
 def test_provider_readiness_requirements_are_loaded():
@@ -34,11 +37,11 @@ def test_provider_readiness_requirements_are_loaded():
 component:
   id: x.ready
   version: 1
-  providers:
+  capability_providers:
     - id: p
-      capability:
-        id: x.cap
-        version: 1
+      capabilities:
+        - id: x.cap
+          versions: [1]
       implementation_class: example:Provider
       readiness_requirements:
         - id: endpoint
@@ -47,7 +50,61 @@ component:
           missing_state: DEGRADED
           message: endpoint is optional but recommended
 ''')
-    requirement = descriptor.providers[0].readiness_requirements[0]
+    requirement = descriptor.capability_providers[0].readiness_requirements[0]
     assert requirement.source is AInReadinessRequirementSource.COMPONENT_CONFIGURATION
     assert requirement.missing_state is AInReadinessState.DEGRADED
     assert requirement.key == "endpoint"
+
+
+def test_component_can_declare_capability_group_resources():
+    descriptor = AIcDescriptorLoader.load_text("""
+component:
+  id: x.groups
+  version: 1
+  capability_groups:
+    - groups/storage.yml
+  contracts:
+    - contracts/storage.yml
+""")
+    assert descriptor.capability_group_resources == ("groups/storage.yml",)
+    assert descriptor.contract_resources == ("contracts/storage.yml",)
+
+
+def test_provider_definition_declares_multiple_capabilities_and_instance_access_mode():
+    from algites.lib.aac.coreintf.instances import AInProviderAccessMode
+
+    descriptor = AIcDescriptorLoader.load_text('''
+component:
+  id: x.multi
+  version: 1
+  capability_providers:
+    - id: store
+      capabilities:
+        - id: x.read
+          versions: [1, 2]
+        - id: x.write
+          versions: [1]
+      implementation_class: example:Store
+      initial_instances:
+        - name: external
+          access_mode: READ_ONLY
+''')
+    provider = descriptor.capability_providers[0]
+    assert tuple(item.id for item in provider.capabilities) == ("x.read", "x.write")
+    assert provider.capability("x.read").versions == (1, 2)
+    assert provider.initial_instances[0].access_mode is AInProviderAccessMode.READ_ONLY
+
+
+def test_legacy_providers_key_is_rejected():
+    with pytest.raises(AIxDescriptorError):
+        AIcDescriptorLoader.load_text('''
+component:
+  id: x.legacy
+  version: 1
+  providers:
+    - id: p
+      capabilities:
+        - id: x.cap
+          versions: [1]
+      implementation_class: example:Provider
+''')

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.data-entity-inspect-storage-support-request",
+  "x-aac-schema-version": 1,
+  "title": "Data Entity Inspect Storage Support Request 1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

@@ -1,0 +1,9 @@
+group:
+  id: _AAC.data-entity.storage-management
+  parent_group_id: _AAC.data-entity
+  name:
+    text: Data Entity Storage Management
+    resource_key: aac.data.entity.storage.management.name
+  description:
+    text: Capabilities that inspect and reconcile physical storage support for canonical Data Entity schemas.
+    resource_key: aac.data.entity.storage.management.description

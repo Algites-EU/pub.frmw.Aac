@@ -22,6 +22,23 @@ Entitlement infrastructure
 
 Catalog metadata is sufficient for browsing and for the compatible target-state solver, but the downloaded artifact remains authoritative. Core MUST verify package identity/integrity and compare catalog-declared component contract metadata with the actual component descriptor before installation/admission.
 
+The discovery-to-admission relationship is:
+
+```mermaid
+flowchart LR
+    QUERY["Catalog Query<br/>product_id + technology_id"] --> CATALOG["Catalog Provider(s)"]
+    CATALOG --> RELEASE["Release Metadata"]
+    RELEASE --> ARTIFACT["Artifact Variant + Locator"]
+    ARTIFACT --> REPOSITORY["Artifact Repository / Storage"]
+    REPOSITORY --> PACKAGE["Downloaded Package"]
+    PACKAGE --> VERIFY["Identity / Integrity Verification"]
+    VERIFY --> DESCRIPTOR["Authoritative Component Descriptor"]
+    DESCRIPTOR --> PREFLIGHT["Target-State Preflight / Admission"]
+    RELEASE -. "planning metadata" .-> PREFLIGHT
+```
+
+Catalog data can drive search and planning before download, while the verified package descriptor remains the authority used for activation decisions.
+
 ## II. Mandatory catalog scope
 
 Every catalog query MUST specify:

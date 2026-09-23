@@ -45,7 +45,9 @@ Installing a package MUST NOT imply that it is configured, entitled, resolved, o
 
 ## II.2 Component state and provider-instance state
 
-A component package may declare one or more provider definitions. Concrete capability bindings target provider instances, not provider definitions. Provider-instance lifecycle is therefore independently diagnosable even when all instances originate from one component package.
+A component package may declare one or more capability provider definitions. Concrete capability bindings target provider instances, not capability provider definitions. Provider-instance lifecycle is therefore independently diagnosable even when all instances originate from one component package.
+
+A capability provider definition may advertise multiple capability/version sets. Provisioning one provider instance creates one configured runtime identity that exposes that whole declared set; Core MUST NOT provision a synthetic provider instance per capability. A concrete instance may also carry an access mode such as `READ_ONLY` or `READ_WRITE`. Access mode is persistent instance configuration and may restrict usable mutation operations without changing the implementation's declared capability interfaces.
 
 ## II.3 Core is authoritative
 
@@ -109,7 +111,7 @@ A product may combine implementation steps internally, but diagnostics and confo
 
 ## III.2 Discovery
 
-Core reads static descriptors without executing arbitrary component business logic. Discovery identifies component identity, provider definitions, consumed/provided capabilities, contract bundles, component/provider-instance configuration schemas, Data Entity support declarations/canonical schemas, provisioning declarations, per-provided-capability-version permission vocabulary/possible entitlement licensing scope types, runtime profile, and package provenance metadata when present.
+Core reads static descriptors without executing arbitrary component business logic. Discovery identifies component identity, capability provider definitions, consumed/provided capabilities, contract bundles, component/provider-instance configuration schemas, Data Entity support declarations/canonical schemas, provisioning declarations, per-provided-capability-version permission vocabulary/possible entitlement licensing scope types, runtime profile, and package provenance metadata when present.
 
 ## III.3 Verification
 
@@ -130,7 +132,7 @@ Any canonical capability contract used across component boundaries MUST be admit
 
 ## III.5 Provisioning
 
-Provisioning creates or reconciles Core-owned persistent state required for the component/provider definitions to participate in the system. Provisioning does not require a non-empty commercial permission set unless the product/component explicitly declares a hard provisioning prerequisite.
+Provisioning creates or reconciles Core-owned persistent state required for the component and its capability provider definitions to participate in the system. Provisioning does not require a non-empty commercial permission set unless the product/component explicitly declares a hard provisioning prerequisite.
 
 ## III.6 Validation
 
@@ -185,7 +187,7 @@ The baseline stages map to technology-neutral hooks as follows:
 | Lifecycle stage | Component hook | Meaning |
 | --- | --- | --- |
 | `PACKAGE PRESENT / INSTALLED` | none | The component distribution is physically available to the application. Installation is package/distribution management, not runtime activation. |
-| `DISCOVER` | none | Core reads static descriptors, schemas, capability declarations, provider definitions, provisioning declarations, Data Entity support declarations, per-provided-capability-version permission vocabulary/possible entitlement licensing scope types, and entitlement metadata without running arbitrary component business code. |
+| `DISCOVER` | none | Core reads static descriptors, schemas, capability declarations, capability provider definitions, provisioning declarations, Data Entity support declarations, per-provided-capability-version permission vocabulary/possible entitlement licensing scope types, and entitlement metadata without running arbitrary component business code. |
 | `VERIFY` | none | Core verifies descriptor validity, integrity/trust policy, runtime-profile compatibility, signatures where applicable, and other package-level prerequisites. |
 | `ADMIT CONTRACTS` | none | Core validates and admits canonical capability contracts into the active Core-owned contract catalog. This stage establishes contract identity; it does not instantiate providers. |
 | `PROVISION` | optional `provision(context)` | Core creates or reconciles persistent Core-owned component/provider state. Declarative provisioning is preferred; a hook is used only when additional component-specific initialization is required. |
@@ -206,7 +208,7 @@ The mapping above defines **logical responsibilities**, not a mandatory concrete
 
 ### IV.2.2 `provision(context)`
 
-`provision(context)` participates in the `PROVISION` stage. Provisioning is the Core-controlled creation or reconciliation of persistent state required for a component/provider definition to participate in an application scope. Typical results include Core-owned configuration records, initial provider-instance records with immutable generated IDs, schema/version state, defaults, or migration markers.
+`provision(context)` participates in the `PROVISION` stage. Provisioning is the Core-controlled creation or reconciliation of persistent state required for a component or capability provider definition to participate in an application scope. Typical results include Core-owned configuration records, initial provider-instance records with immutable generated IDs, schema/version state, defaults, or migration markers.
 
 Provisioning is distinct from package installation and normally happens much less frequently than runtime startup. A component may be installed but not provisioned, or provisioned but not yet configured, entitled, resolved, or active. The hook SHOULD be omitted when the same result can be expressed declaratively.
 
@@ -214,7 +216,7 @@ Provisioning is distinct from package installation and normally happens much les
 
 The `PROVISION` **stage** and the optional `provision(context)` **component callback** are different concepts. Core may execute the `PROVISION` stage even when no component code is called.
 
-Static component metadata SHOULD describe everything that can be provisioned declaratively, including configuration schemas, schema defaults, provider definitions, and whether an initial provider instance is required by the component/product profile. Core derives a provisioning plan from that metadata and remains the authority that creates stable provider-instance IDs and commits persistent state.
+Static component metadata SHOULD describe everything that can be provisioned declaratively, including configuration schemas, schema defaults, capability provider definitions, and whether an initial provider instance is required by the component/product profile. Core derives a provisioning plan from that metadata and remains the authority that creates stable provider-instance IDs and commits persistent state.
 
 A component callback is used only when additional component-specific initialization cannot reasonably be expressed by static metadata and generic Core behavior. The component descriptor MUST explicitly declare the presence of such a lifecycle callback using the mechanism defined by the active technology profile. Core MUST NOT discover lifecycle callbacks by executing component code, probing for methods, or assuming that a method named `provision` exists.
 
@@ -223,7 +225,7 @@ Conceptually:
 ```text
 Core reads static component descriptor
         |
-        +-- provider definitions
+        +-- capability provider definitions
         +-- configuration schemas/defaults
         +-- declarative provisioning requirements
         +-- optional lifecycle-hook declarations
@@ -333,7 +335,7 @@ Entitlement is deliberately evaluated in the separate `EVALUATE ENTITLEMENT` sta
 
 Instantiation MUST NOT be treated as activation. The resulting runtime may exist before bindings are injected and before normal capability calls are permitted. Constructors/factories SHOULD avoid mandatory peer business calls.
 
-For the baseline `PROCESS` runtime profile, `INSTANTIATE` starts and bootstraps one persistent child process for the provider instance. Core owns the process handle and IPC channel. The runtime receives the normalized effective `COMPONENT` configuration for its component (when declared) and the normalized effective `PROVIDER_INSTANCE` configuration for that concrete immutable instance as separate configuration objects. Core does not merge one target into the other. A second provider instance, even of the same provider definition, receives a different process and independent provider-instance configuration/lifecycle while observing the same applicable component-target configuration for that application context.
+For the baseline `PROCESS` runtime profile, `INSTANTIATE` starts and bootstraps one persistent child process for the provider instance. Core owns the process handle and IPC channel. The runtime receives the normalized effective `COMPONENT` configuration for its component (when declared) and the normalized effective `PROVIDER_INSTANCE` configuration for that concrete immutable instance as separate configuration objects. Core does not merge one target into the other. A second provider instance, even of the same capability provider definition, receives a different process and independent provider-instance configuration/lifecycle while observing the same applicable component-target configuration for that application context.
 
 ### IV.2.5 `wire(bindings)`
 
@@ -424,7 +426,7 @@ A component MUST NOT create hidden persistent provider instances outside Core.
 
 ## V.2 Initial provider instance
 
-When an enabled provider definition has no explicit instance and its component descriptor or the active product profile requires an initial instance, Core creates one using a Core-generated globally unique immutable ID.
+When an enabled capability provider definition has no explicit instance and its component descriptor or the active product profile requires an initial instance, Core creates one using a Core-generated globally unique immutable ID.
 
 The initial display name MAY be:
 
@@ -628,6 +630,28 @@ DEACTIVATED
 
 A single opaque `enabled/disabled` flag is insufficient as the sole lifecycle model.
 
+The normal forward runtime path and the principal side states are conceptually:
+
+```mermaid
+flowchart LR
+    INSTALLED --> VERIFIED --> PROVISIONED["PROVISIONED /<br/>PROVISIONED_UNCONFIGURED"]
+    PROVISIONED --> RESOLVED --> INSTANTIATED --> WIRED --> ACTIVATABLE --> ACTIVE
+    ACTIVE --> SUSPENDED
+    SUSPENDED --> ACTIVE
+    ACTIVE --> DEACTIVATED
+    SUSPENDED --> DEACTIVATED
+
+    VERIFIED -. "stage failure" .-> FAILED
+    PROVISIONED -. "stage failure" .-> FAILED
+    RESOLVED -. "stage failure" .-> FAILED
+    INSTANTIATED -. "stage failure" .-> FAILED
+    WIRED -. "stage failure" .-> FAILED
+    ACTIVATABLE -. "stage failure" .-> FAILED
+    ACTIVE -. "runtime failure" .-> FAILED
+```
+
+The diagram is diagnostic rather than a mandate for one serialized state machine; products may refine transitions while preserving the lifecycle distinctions defined by this specification.
+
 ## VIII.2 Suspension
 
 Suspension means a previously activatable/active scope is temporarily unavailable because of entitlement, policy, dependency, health, or administrative state while persistent identity/configuration is retained.
@@ -716,7 +740,7 @@ Semantic migration code transforms normalized data and returns normalized output
 
 For configuration, Core may later converge a writable provider through its established revision/CAS contract. A read-only/no-CAS provider may remain indefinitely at an older/non-target representation. Convergence failure is independently retryable and MUST NOT roll back an already committed component set or another provider's successful convergence.
 
-For Data Entities, Core migration preserves logical UID, persistence revision as source concurrency context, and `ACTIVE`/`TOMBSTONE` state while producing the target semantic payload. Physical Data Entity replacement, bulk migration, storage provisioning and transactional split/merge are delegated to the generic Data Entity storage capability contract once defined. This lifecycle specification MUST NOT invent a filesystem- or SQL-specific mutation path.
+For Data Entities, Core migration preserves logical UID, persistence revision as source concurrency context, and `ACTIVE`/`TOMBSTONE` state while producing the target semantic payload. Physical Data Entity reads and direct mutations are delegated to the framework Data Entity storage capabilities (`get-record`, `query-records`, `apply-direct-record-changes`); physical support reconciliation uses `inspect-storage-support`, `ensure-storage-support`, and `retire-storage-support`. Complex indirect split/merge mutation remains deferred to a future explicit capability. This lifecycle specification MUST NOT invent a filesystem- or SQL-specific mutation path.
 
 During replacement preflight and tentative activation automatic persistence convergence is suppressed, so a failed tentative cutover can restore the previous runtime without requiring distributed rollback of independent configuration/data stores.
 

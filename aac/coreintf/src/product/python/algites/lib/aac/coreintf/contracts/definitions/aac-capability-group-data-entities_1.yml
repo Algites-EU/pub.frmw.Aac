@@ -1,0 +1,8 @@
+group:
+  id: _AAC.data-entity
+  name:
+    text: Data Entities
+    resource_key: aac.data.entity.name
+  description:
+    text: Persistent domain and system Data Entity capabilities.
+    resource_key: aac.data.entity.description

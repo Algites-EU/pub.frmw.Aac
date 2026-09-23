@@ -120,12 +120,22 @@ class AIcUiProviderInstance:
     component_id: str
     provider_definition_id: str
     name: str
-    capability_id: str
-    capability_versions: tuple[int, ...]
+    capabilities: tuple[tuple[str, tuple[int, ...]], ...]
+    access_mode: str
     state: str
     configuration_schema: str | None
     readiness_state: str | None = None
     readiness_reasons: tuple[str, ...] = ()
+
+    def supports_capability(self, capability_id: str) -> bool:
+        return any(value[0] == capability_id for value in self.capabilities)
+
+    @property
+    def capabilities_text(self) -> str:
+        return ", ".join(
+            f"{capability_id} [{', '.join(str(version) for version in versions)}]"
+            for capability_id, versions in self.capabilities
+        )
 
 
 @dataclass(frozen=True, slots=True)

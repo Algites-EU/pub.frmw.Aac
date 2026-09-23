@@ -25,7 +25,7 @@ def _write_component(root: Path, package: str, *, version: int = 1, dynamic: str
         encoding="utf-8",
     )
     (pkg / "contracts" / "ready_1.yml").write_text(
-        "capability:\n  id: com.example.ready\n  version: 1\noperations:\n  - id: ping\n    input: Object\n    output: Object\n",
+        "capability:\n  id: com.example.ready\n  version: 1\n  group_id: _AAC.runtime\noperations:\n  - id: ping\n    input: Object\n    output: Object\n",
         encoding="utf-8",
     )
     (pkg / "schemas" / "ready-config_1.json").write_text(
@@ -42,11 +42,11 @@ def _write_component(root: Path, package: str, *, version: int = 1, dynamic: str
         "    resource: ready-config_1.json\n"
         "  contracts:\n"
         "    - contracts/ready_1.yml\n"
-        "  providers:\n"
+        "  capability_providers:\n"
         "    - id: main\n"
-        "      capability:\n"
-        "        id: com.example.ready\n"
-        "        version: 1\n"
+        "      capabilities:\n"
+        "        - id: com.example.ready\n"
+        "          versions: [1]\n"
         f"      implementation_class: {package}.provider:Provider\n"
         "      readiness_requirements:\n"
         "        - id: endpoint\n"

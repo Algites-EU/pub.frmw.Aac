@@ -1,9 +1,11 @@
 from .models import (
     AIcAuthorizationPermissionDescriptor,
     AIcCapabilityContract,
+    AIcCapabilityGroup,
     AIcCapabilityOperation,
     AIcCapabilityRef,
     AIcOperationAuthorizationRequirement,
+    AIcProvidedCapability,
     AInConsumerCardinality,
 )
 

@@ -39,7 +39,7 @@ The main distinctions are:
 
 ```text
 consumer
-provider definition
+capability provider definition
 provider instance
 capability contract
 Core coordinator
@@ -416,13 +416,73 @@ AAC does not prescribe a `.aac/...` hierarchy, SQL table layout, document collec
 
 The component should never need to know which representation was chosen. Generic Data Entity semantics and canonical schemas are above the storage implementation.
 
-## IV.6 Canonical schema registry
+## IV.6 Generic storage capability split
+
+AAC now gives Data Entity storage a capability-level boundary rather than an implied internal API. The framework contracts are deliberately separated so a consumer may depend only on the surface it needs:
+
+```text
+Data Entity Loading
+    _AAC.data-entity.get-record
+    _AAC.data-entity.query-records
+
+Data Entity Storing
+    _AAC.data-entity.apply-direct-record-changes
+
+Data Entity Storage Management
+    _AAC.data-entity.inspect-storage-support
+    _AAC.data-entity.ensure-storage-support
+    _AAC.data-entity.retire-storage-support
+```
+
+This separation avoids turning one large store interface into an accidental privilege bundle. A read-only component need not bind the direct mutation or physical provisioning surface. The physical backend still decides whether the representation is SQL, filesystem, remote service, embedded KV/document store, or something else.
+
+The v1 query surface remains intentionally technical and portable: schema/state/UID/reference selectors, optional `stored_schema_version_filter`, UID ordering, limit and opaque continuation. The stored-version filter describes physical inventory and is especially useful for migration/convergence tooling; it is not a requested consumer view version. Arbitrary payload-query languages are not smuggled into the supposedly generic contract.
+
+The direct changeset is the atomic unit. Core supplies UIDs and expected revisions; the provider owns CAS enforcement and emits new revisions. Tombstoning is a replacement to `state=TOMBSTONE`; `DELETE_RECORD` is explicit physical deletion. Storage `retire` is non-destructive and therefore safe to use during component/schema lifecycle convergence without silently purging retained records.
+
+`EXECUTE_READ_COMPUTATION` and `EXECUTE_INDIRECT_RECORD_CHANGES` remain reserved design topics rather than empty capability contracts.
+
+## IV.7 Canonical schema registry
 
 Every canonical JSON Schema self-identifies through `x-aac-schema-id` and `x-aac-schema-version`. Core registers canonical schemas by `(schema_id, schema_version)` rather than inferring identity from filenames.
 
 Multiple components/artifacts may carry the same canonical definition. This is not ownership conflict when the definitions are identical. Different canonical content under the same `(schema_id, schema_version)` is a hard identity conflict and must be rejected.
 
-## IV.7 Component absence, portability, and runtime cache
+## IV.8 Runtime polymorphic views and codecs
+
+A storage provider returns raw Data Entity envelopes and never chooses a consumer's language-level view. Core distinguishes the stored schema version, the current canonical implementation/storage version, and the consumer view version.
+
+For each version, code generation may emit a versioned view interface plus a codec. Field operations are version-qualified (`get_name_2`, `set_name_2`, and Java equivalents such as `getName_2`) so a single current implementation class can implement several historical contracts without signature collision. The implementation is deliberately allowed to contain hand-written compatibility semantics; only the interface and version codec need to be fully generated.
+
+The codec is the serialization authority for its version. It reads/writes exactly that view's methods rather than reflecting all bean properties from the polymorphic implementation. On load, the stored version chooses the decoder; on save, the current implementation binding chooses the canonical encoder. A consumer's requested interface therefore does not determine the physical write format.
+
+The implementation registry is keyed by logical `schema_id`, while view/codec bindings are keyed by `(schema_id, schema_version)`. Generated view types must have shared runtime identity, particularly in Java where plugin-private classloader copies are not type-compatible.
+
+The three version dimensions therefore meet at one current polymorphic object rather than at three independent persisted copies:
+
+```mermaid
+flowchart LR
+    STORED["Stored envelope<br/>E1 / v1"] --> DECODER["Codec E1 / v1"]
+    DECODER --> IMPL["Current polymorphic implementation<br/>canonical E1 / v4"]
+
+    V1["View interface<br/>E1 / v1"] -. "implemented by" .-> IMPL
+    V2["View interface<br/>E1 / v2"] -. "implemented by" .-> IMPL
+    V4["View interface<br/>E1 / v4"] -. "implemented by" .-> IMPL
+
+    IMPL -->|"returned as requested view"| CONSUMER["Consumer<br/>typed as E1 / v2"]
+    IMPL --> ENCODER["Canonical codec<br/>E1 / v4"]
+    ENCODER --> SAVED["Stored envelope<br/>E1 / v4"]
+```
+
+The left-hand version selects unmarshalling, the consumer view controls only the API visible to the caller, and the canonical implementation binding selects the representation written back to storage.
+
+## IV.9 Provider-bound storage facades
+
+One capability provider definition/instance can implement several Data Entity capability interfaces on one runtime object. Facades are bound to one explicit provider instance and never merge or route operations across instances. `READ_ONLY` versus `READ_WRITE` is an instance configuration constraint, not an inferred property of the implementation class.
+
+This also defines the transaction boundary: one `apply-direct-record-changes` call targets one provider instance and all records in the changeset must belong to a storage domain that provider can atomically mutate. Cross-provider distributed transactions are intentionally outside the baseline.
+
+## IV.10 Component absence, portability, and runtime cache
 
 A workspace/datasource may contain Data Entities for which no currently active component can provide semantic support. Core/storage preserves them and reports compatibility state; component-specific interpretation remains disabled until a suitable component is available.
 
@@ -521,7 +581,7 @@ optional persistence convergence through the relevant storage/provider contract
 
 The component must not mutate persistent files/database rows directly during semantic transformation. Component replacement uses transformations only when runtime interpretation requires them; it does not make distributed provider writes part of the component transaction.
 
-Configuration convergence continues to use the established provider revision/CAS model. Data Entity physical convergence will use the generic Data Entity storage capabilities once defined. Until that contract exists, no legacy extension-store path is authoritative.
+Configuration convergence continues to use the established provider revision/CAS model. Data Entity physical convergence uses the generic framework Data Entity storage capabilities. No legacy extension-store path is authoritative.
 
 After successful cutover, Core may attempt safe convergence independently. One convergence failure leaves that provider/record unchanged and does not undo the component replacement or another provider's successful convergence.
 
@@ -539,7 +599,9 @@ Writable providers may converge later; read-only/no-CAS providers may remain at 
 
 ## V.6 Data Entity migration
 
-A simple Data Entity schema migration preserves logical `(schema_id, uid)` while changing `schema_version` and payload. Semantic migration code receives a normalized source payload and returns a normalized target payload; it does not directly mutate physical persistence.
+A simple Data Entity schema migration preserves logical `(schema_id, uid)` while changing `schema_version` and payload. The baseline may express this as a normalized value transformation or through the registered versioned codecs/current implementation where that is sufficient; it does not require repeated JSON text round-trips between every in-memory step. Semantic migration code does not directly mutate physical persistence.
+
+For ordinary same-identity evolution, the preferred runtime compatibility mechanism is the polymorphic current implementation supporting several versioned view interfaces. Explicit migration still matters for physical convergence, for stored versions whose runtime view support is being retired, and for structural/breaking transformations.
 
 In-memory migration preserves `uid`, record state (`ACTIVE` or `TOMBSTONE`) and the source persistence revision as concurrency context. A later physical replacement advances `record_revision` according to the storage provider's rules.
 
@@ -549,7 +611,7 @@ When a component lacks a safe path for an existing schema version, the record is
 
 Some migrations are not one-record-to-one-record transformations. A product/domain migration may split one Data Entity into several, merge several into one, generate new UIDs, or reorganize relationships.
 
-AAC does not attempt to infer or parameterize such transformations from schema structure. They require explicit domain migration logic and, once the storage API is defined, may require one mixed transactional record changeset.
+AAC does not attempt to infer or parameterize such transformations from schema structure. They require explicit domain migration logic. Direct create/replace/delete portions use `_AAC.data-entity.apply-direct-record-changes`; transformations that require provider-side computation or indirect mutation remain outside v1 until `EXECUTE_INDIRECT_RECORD_CHANGES` receives a real contract.
 
 The generic invariant is preservation: unknown/unsupported records must not be silently lost merely because the active component set cannot currently interpret them.
 
@@ -641,7 +703,7 @@ Core selects provider first, then contract.
 
 ## VI.5 Provider-instance multiplicity is not consumer cardinality
 
-A provider definition may always have several instances. That does not mean a consumer call is automatically broadcast to all of them.
+A capability provider definition may always have several instances. That does not mean a consumer call is automatically broadcast to all of them.
 
 `SINGLE` and `MULTIPLE` describe the **consumer requirement/binding**:
 
@@ -691,6 +753,26 @@ runtime timing/correlation metadata
 ```
 
 This avoids creating one parallel `...observation` interface for every business capability.
+
+The generic invocation path is therefore:
+
+```mermaid
+sequenceDiagram
+    participant C as Consumer
+    participant Core as Core Invocation Bridge
+    participant O as Matching Observer(s)
+    participant P as Provider Instance
+
+    C->>Core: invoke capability/version/operation
+    Core->>Core: normalize + authorize + redact observation data
+    Core->>O: PRE ObservationInput
+    Core->>P: operation_N(request)
+    P-->>Core: result or error
+    Core->>O: POST ObservationInput
+    Core-->>C: normalized result or error
+```
+
+Observer delivery is side-channel visibility over the same normalized invocation; it is not an alternate routing path and does not replace the provider result.
 
 ## VI.8 Why operations must be contract metadata
 
@@ -897,10 +979,10 @@ SUBINTERPRETER
 
 ## IX.2 Provider-instance runtime ownership
 
-Runtime isolation is realized per **provider instance**, not merely per provider definition. If one provider definition has instances `A1` and `A2`, their configuration/lifecycle state is independent. Under `PROCESS`, Core therefore owns two persistent process handles:
+Runtime isolation is realized per **provider instance**, not merely per capability provider definition. If one capability provider definition has instances `A1` and `A2`, their configuration/lifecycle state is independent. Under `PROCESS`, Core therefore owns two persistent process handles:
 
 ```text
-Provider definition A
+capability provider definition A
     A1 -> child process P1
     A2 -> child process P2
 ```
@@ -933,14 +1015,14 @@ Core                                      Provider process
 
 The reference Python profile uses a persistent JSON-lines control protocol. Requests carry correlation IDs. Normalized `InvocationInput` / `InvocationOutput` values cross the boundary; arbitrary Python implementation objects do not. A non-Python executable may implement the same wire protocol.
 
-A provider definition may select the profile declaratively, for example:
+A capability provider definition may select the profile declaratively, for example:
 
 ```yaml
-providers:
+capability_providers:
   - id: audit
-    capability:
-      id: _AAC.capability.observation
-      version: 1
+    capabilities:
+      - id: _AAC.capability.observation
+        versions: [1]
     implementation_class: example.audit:AIcAuditProvider
     runtime:
       profile: PROCESS
@@ -1394,7 +1476,7 @@ The consumer does not choose a provider by scanning component class loaders.
 
 ## X.17 Java provider instances
 
-Every Java provider definition is used through Core-managed provider instances. Several instances may expose separate runtime objects implementing the same shared contract:
+Every Java capability provider definition is used through Core-managed provider instances. Several instances may expose separate runtime objects implementing the same shared contract:
 
 ```text
 S3Provider(instance-id-A, prod-config)   implements ObjectStoreV4
@@ -1574,7 +1656,7 @@ Consumes:
     binding-preference scope/source
 
 Provides:
-    provider definitions
+    capability provider definitions
     provider instances
     stable instance ids/names
     active instance state
@@ -1724,7 +1806,7 @@ Test:
 
 - Core bridge/proxy mediation even for in-process providers;
 - persistent process per provider instance for the PROCESS profile;
-- two instances of one provider definition receive independent runtime state;
+- two instances of one capability provider definition receive independent runtime state;
 - reverse process-to-Core consumed-capability invocation;
 - parent-invocation propagation across process boundaries;
 - conflicting private dependencies;

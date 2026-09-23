@@ -17,7 +17,8 @@ import types
 from enum import Enum
 from typing import Any, Mapping, Union, get_args, get_origin, get_type_hints
 
-from ..instances import AIcBinding, AIcProviderInstance, AInProviderInstanceState
+from ..contracts import AIcProvidedCapability
+from ..instances import AIcBinding, AIcProviderInstance, AInProviderAccessMode, AInProviderInstanceState
 from ..errors import AIxPermissionDenied
 from ..entitlement import AIcEntitlementLicensingScope
 from ..entitlement import (
@@ -201,21 +202,50 @@ def _build_handles(raw_bindings: object, channel: AIcHostChannel) -> dict[str, t
     return result
 
 
+def _generated_capability_invoker(runtime: object, capability_id: str, capability_version: int):
+    """Return the generated invoker owned by the exact capability interface in the runtime MRO."""
+    for candidate in type(runtime).__mro__:
+        namespace = candidate.__dict__
+        if (
+            namespace.get("__aac_capability_id__") == capability_id
+            and namespace.get("__aac_capability_version__") == capability_version
+        ):
+            invoker = namespace.get("__aac_invoke__")
+            if invoker is not None:
+                return invoker
+    return None
+
+
 def _invoke_runtime(runtime: AIiProviderRuntime, invocation: AIcInvocationInput) -> AIcInvocationOutput:
     try:
-        generated_invoke = getattr(runtime, "__aac_invoke__", None)
+        generated_invoke = _generated_capability_invoker(
+            runtime, invocation.capability_id, invocation.capability_version
+        )
         token = _CURRENT_PROCESS_INVOCATION_ID.set(invocation.invocation_id)
         try:
             if generated_invoke is not None:
-                result = generated_invoke(invocation.operation_id, dict(invocation.arguments))
+                result = generated_invoke(runtime, invocation.operation_id, dict(invocation.arguments))
             else:
-                method = getattr(runtime, invocation.operation_id)
+                method = getattr(runtime, f"{invocation.operation_id}_{invocation.capability_version}")
                 hints = get_type_hints(method)
-                kwargs = {
-                    name: _coerce_value(hints.get(name), value)
-                    for name, value in invocation.arguments.items()
-                }
-                result = method(**kwargs)
+                parameters = tuple(inspect.signature(method).parameters.values())
+                if len(parameters) == 1 and parameters[0].name not in invocation.arguments:
+                    parameter = parameters[0]
+                    annotation = hints.get(parameter.name)
+                    if parameter.name == "request" or (inspect.isclass(annotation) and dataclasses.is_dataclass(annotation)):
+                        result = method(_coerce_value(annotation, dict(invocation.arguments)))
+                    else:
+                        kwargs = {
+                            name: _coerce_value(hints.get(name), value)
+                            for name, value in invocation.arguments.items()
+                        }
+                        result = method(**kwargs)
+                else:
+                    kwargs = {
+                        name: _coerce_value(hints.get(name), value)
+                        for name, value in invocation.arguments.items()
+                    }
+                    result = method(**kwargs)
         finally:
             _CURRENT_PROCESS_INVOCATION_ID.reset(token)
         return AIcInvocationOutput(True, result=_jsonable(result))
@@ -281,9 +311,13 @@ def _provider_instance_from_dict(raw: Mapping[str, object]) -> AIcProviderInstan
         component_id=str(raw["component_id"]),
         provider_definition_id=str(raw["provider_definition_id"]),
         name=str(raw["name"]),
-        capability_id=str(raw["capability_id"]),
-        capability_versions=tuple(int(v) for v in raw.get("capability_versions", ())),
+        capabilities=tuple(
+            AIcProvidedCapability(str(item["id"]), tuple(int(version) for version in item.get("versions", ())))
+            for item in raw.get("capabilities", ())
+            if isinstance(item, Mapping)
+        ),
         implementation_class=str(raw["implementation_class"]),
+        access_mode=AInProviderAccessMode(str(raw.get("access_mode", AInProviderAccessMode.READ_WRITE.value))),
         configuration=dict(_as_mapping(raw.get("configuration", {}))),
         configuration_schema=str(raw["configuration_schema"]) if raw.get("configuration_schema") is not None else None,
         state=AInProviderInstanceState(str(raw.get("state", AInProviderInstanceState.CONFIGURED.value))),

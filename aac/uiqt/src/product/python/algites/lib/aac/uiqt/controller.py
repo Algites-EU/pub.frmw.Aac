@@ -68,7 +68,7 @@ class AIcCoreUiController(AIiAacUiController):
             values.append(AIcUiComponent(
                 descriptor.id,
                 descriptor.version,
-                tuple(provider.id for provider in descriptor.providers),
+                tuple(provider.id for provider in descriptor.capability_providers),
                 sum(len(item.permissions) for item in descriptor.provided_capability_entitlements),
                 name=_display_text(descriptor.name),
                 description=_display_text(descriptor.description),
@@ -227,7 +227,7 @@ class AIcCoreUiController(AIiAacUiController):
         for candidate in self.core.instances.find(capability_id=requirement.capability_id):
             if candidate.id == consumer_instance_id:
                 continue
-            if not set(candidate.capability_versions).intersection(requirement.versions):
+            if not set(candidate.capability(requirement.capability_id).versions).intersection(requirement.versions):
                 continue
             choices.append(AIcUiChoice(candidate.id, f"{candidate.name} — {candidate.component_id} [{candidate.id}]"))
         grant = self.core.component_authorization_grant(consumer_instance_id, requirement_id)
@@ -490,7 +490,8 @@ class AIcCoreUiController(AIiAacUiController):
                 readiness = self.core.provider_readiness(scope_id, value.id)
         return AIcUiProviderInstance(
             value.id, value.component_id, value.provider_definition_id, value.name,
-            value.capability_id, value.capability_versions, value.state.value, value.configuration_schema,
+            tuple((item.id, item.versions) for item in value.capabilities), value.access_mode.value,
+            value.state.value, value.configuration_schema,
             readiness_state=(readiness.state.value if readiness is not None else None),
             readiness_reasons=tuple(reason.message for reason in readiness.reasons) if readiness is not None else (),
         )

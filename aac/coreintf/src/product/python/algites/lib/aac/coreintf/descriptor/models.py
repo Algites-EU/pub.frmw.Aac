@@ -6,7 +6,8 @@ from typing import Mapping
 
 from ..presentation import AIcDisplayText
 
-from ..contracts import AInConsumerCardinality
+from ..contracts import AIcProvidedCapability, AInConsumerCardinality
+from ..instances import AInProviderAccessMode
 from ..readiness import AIcReadinessRequirementDescriptor
 
 
@@ -85,6 +86,7 @@ class AIcProviderRuntimeDescriptor:
 class AIcInitialProviderInstanceDescriptor:
     name: str = "default"
     configuration: Mapping[str, object] = field(default_factory=dict)
+    access_mode: AInProviderAccessMode = AInProviderAccessMode.READ_WRITE
 
 
 @dataclass(frozen=True, slots=True)
@@ -112,8 +114,7 @@ class AIcConsumerRequirementDescriptor:
 @dataclass(frozen=True, slots=True)
 class AIcProviderDefinitionDescriptor:
     id: str
-    capability_id: str
-    capability_versions: tuple[int, ...]
+    capabilities: tuple[AIcProvidedCapability, ...]
     implementation_class: str
     configuration_schema: AIcPersistedSchemaDescriptor | None = None
     initial_instances: tuple[AIcInitialProviderInstanceDescriptor, ...] = ()
@@ -127,22 +128,28 @@ class AIcProviderDefinitionDescriptor:
     def __post_init__(self) -> None:
         if self.configuration_schema is not None and self.configuration_schema.resource_name is None:
             raise ValueError("provider configuration schema requires a resource_name for validation")
-        if not self.id or not self.capability_id:
-            raise ValueError("provider definition id/capability must not be empty")
-        if not self.capability_versions or any(v < 1 for v in self.capability_versions):
-            raise ValueError("provider must support at least one capability version >= 1")
-        if len(self.capability_versions) != len(set(self.capability_versions)):
-            raise ValueError("provider capability versions must be unique")
+        if not self.id:
+            raise ValueError("provider definition id must not be empty")
+        if not self.capabilities:
+            raise ValueError("provider must provide at least one capability")
+        capability_ids = [capability.id for capability in self.capabilities]
+        if len(capability_ids) != len(set(capability_ids)):
+            raise ValueError("provider capability ids must be unique")
         requirement_ids = [requirement.id for requirement in self.requirements]
         if len(requirement_ids) != len(set(requirement_ids)):
-            raise ValueError("consumer requirement ids must be unique inside a provider definition")
+            raise ValueError("consumer requirement ids must be unique inside a capability provider definition")
         readiness_ids = [requirement.id for requirement in self.readiness_requirements]
         if len(readiness_ids) != len(set(readiness_ids)):
-            raise ValueError("readiness requirement ids must be unique inside a provider definition")
+            raise ValueError("readiness requirement ids must be unique inside a capability provider definition")
 
-    @property
-    def capability_version(self) -> int:
-        return max(self.capability_versions)
+    def capability(self, capability_id: str) -> AIcProvidedCapability:
+        for capability in self.capabilities:
+            if capability.id == capability_id:
+                return capability
+        raise KeyError(capability_id)
+
+    def supports_capability(self, capability_id: str) -> bool:
+        return any(capability.id == capability_id for capability in self.capabilities)
 
 
 @dataclass(frozen=True, slots=True)
@@ -281,7 +288,8 @@ class AIcLifecycleHooksDescriptor:
 class AIcComponentDescriptor:
     id: str
     version: int
-    providers: tuple[AIcProviderDefinitionDescriptor, ...] = ()
+    capability_providers: tuple[AIcProviderDefinitionDescriptor, ...] = ()
+    capability_group_resources: tuple[str, ...] = ()
     contract_resources: tuple[str, ...] = ()
     component_configuration_schema: AIcPersistedSchemaDescriptor | None = None
     entitlement_licensing_scopes: tuple[AIcEntitlementLicensingScopeDescriptor, ...] = ()
@@ -297,9 +305,9 @@ class AIcComponentDescriptor:
             raise ValueError("component configuration schema requires a resource_name for validation")
         if not self.id or self.version < 1:
             raise ValueError("component id must not be empty and version must be >= 1")
-        provider_ids = [provider.id for provider in self.providers]
+        provider_ids = [provider.id for provider in self.capability_providers]
         if len(provider_ids) != len(set(provider_ids)):
-            raise ValueError("provider definition ids must be unique inside a component descriptor")
+            raise ValueError("capability provider definition ids must be unique inside a component descriptor")
         licensing_scope_types = [item.type for item in self.entitlement_licensing_scopes]
         if len(licensing_scope_types) != len(set(licensing_scope_types)):
             raise ValueError("entitlement licensing scope declarations must be unique by type")
@@ -319,7 +327,12 @@ class AIcComponentDescriptor:
         entitlement_keys = [(item.capability_id, item.capability_version) for item in self.provided_capability_entitlements]
         if len(entitlement_keys) != len(set(entitlement_keys)):
             raise ValueError("capability entitlement declarations must be unique by capability id/version")
-        provided = {(provider.capability_id, version) for provider in self.providers for version in provider.capability_versions}
+        provided = {
+            (capability.id, version)
+            for provider in self.capability_providers
+            for capability in provider.capabilities
+            for version in capability.versions
+        }
         unknown = [key for key in entitlement_keys if key not in provided]
         if unknown:
             raise ValueError(f"capability entitlement declarations reference capabilities not provided by component: {unknown!r}")
@@ -328,7 +341,7 @@ class AIcComponentDescriptor:
             raise ValueError("data entity support declarations must be unique by schema_id")
 
     def provider(self, provider_definition_id: str) -> AIcProviderDefinitionDescriptor:
-        for provider in self.providers:
+        for provider in self.capability_providers:
             if provider.id == provider_definition_id:
                 return provider
         raise KeyError(provider_definition_id)

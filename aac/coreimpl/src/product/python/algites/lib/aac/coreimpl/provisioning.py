@@ -52,7 +52,7 @@ class AIcProvisioningEngine:
         staged = []
         diagnostics: list[str] = []
 
-        for provider in descriptor.providers:
+        for provider in descriptor.capability_providers:
             for declared in provider.initial_instances:
                 existing = self.registry.find(
                     component_id=descriptor.id,
@@ -121,7 +121,7 @@ class AIcProvisioningEngine:
 
     def validate_instances(self, descriptor: AIcComponentDescriptor) -> tuple[str, ...]:
         diagnostics: list[str] = []
-        providers = {provider.id: provider for provider in descriptor.providers}
+        providers = {provider.id: provider for provider in descriptor.capability_providers}
         for instance in self.registry.find(component_id=descriptor.id):
             provider = providers[instance.provider_definition_id]
             if provider.configuration_schema is None:

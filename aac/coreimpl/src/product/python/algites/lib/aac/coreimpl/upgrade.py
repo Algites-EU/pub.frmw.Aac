@@ -102,8 +102,15 @@ class AIcTargetStateUpgradeAnalyzer:
                 except AIxBindingResolutionError as exc:
                     if not requirement.mandatory:
                         continue
-                    matching = tuple(item for item in instances if item.capability_id == requirement.capability_id and item.id != consumer.id)
-                    provider_versions = tuple(sorted({version for item in matching for version in item.capability_versions}))
+                    matching = tuple(
+                        item for item in instances
+                        if item.id != consumer.id and item.supports_capability(requirement.capability_id)
+                    )
+                    provider_versions = tuple(sorted({
+                        version
+                        for item in matching
+                        for version in item.capability(requirement.capability_id).versions
+                    }))
                     provider_components = tuple(sorted({item.component_id for item in matching}))
                     diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
                         consumer.component_id,
@@ -189,7 +196,7 @@ class AIcTargetStateUpgradeAnalyzer:
                 diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
                     descriptor.id,
                     f"target readiness could not be evaluated for provider instance {instance.id!r}: {exc}",
-                    consumer_instance_id=instance.id, capability_id=provider.capability_id,
+                    consumer_instance_id=instance.id, capability_id=None,
                     blocking=False, code="READINESS_EVALUATION_WARNING",
                 ))
                 continue
@@ -199,7 +206,7 @@ class AIcTargetStateUpgradeAnalyzer:
             diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
                 descriptor.id,
                 f"target provider {instance.name!r} readiness is {report.state.value}: {detail}",
-                consumer_instance_id=instance.id, capability_id=provider.capability_id,
+                consumer_instance_id=instance.id, capability_id=None,
                 blocking=False, code=f"READINESS_{report.state.value}",
             ))
         return tuple(diagnostics)
@@ -209,8 +216,13 @@ class AIcTargetStateUpgradeAnalyzer:
         catalog = AIcActiveContractCatalog(AIcSchemaRegistry())
         catalog.admit_builtin_contracts()
         for discovered in components:
-            if discovered.descriptor.contract_resources and discovered.package is None:
-                raise ValueError(f"component {discovered.descriptor.id!r} has contract resources but no package identity")
+            if (discovered.descriptor.capability_group_resources or discovered.descriptor.contract_resources) and discovered.package is None:
+                raise ValueError(
+                    f"component {discovered.descriptor.id!r} has capability-group/contract resources but no package identity"
+                )
+            for resource_name in discovered.descriptor.capability_group_resources:
+                text, source = read_discovered_resource(discovered, resource_name)
+                catalog.groups.admit_text(text, source=source)
             for resource_name in discovered.descriptor.contract_resources:
                 text, source = read_discovered_resource(discovered, resource_name)
                 catalog.admit_text(text, source=source)
@@ -230,14 +242,13 @@ class AIcTargetStateUpgradeAnalyzer:
             except KeyError:
                 diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
                     instance.component_id,
-                    f"target component removes provider definition {instance.provider_definition_id!r} while provider instance {instance.id!r} still exists",
+                    f"target component removes capability provider definition {instance.provider_definition_id!r} while provider instance {instance.id!r} still exists",
                     consumer_instance_id=instance.id,
                 ))
                 continue
             projected = replace(
                 instance,
-                capability_id=provider.capability_id,
-                capability_versions=provider.capability_versions,
+                capabilities=provider.capabilities,
                 implementation_class=provider.implementation_class,
                 configuration_schema=provider.configuration_schema.resource_name if provider.configuration_schema is not None else None,
                 state=AInProviderInstanceState.INACTIVE,
@@ -247,7 +258,7 @@ class AIcTargetStateUpgradeAnalyzer:
 
         # Initial instances newly introduced by a target descriptor must participate in preflight.
         for component_id, descriptor in descriptors.items():
-            for provider in descriptor.providers:
+            for provider in descriptor.capability_providers:
                 for index, declared in enumerate(provider.initial_instances):
                     key = (component_id, provider.id, declared.name)
                     if key in existing_keys:
@@ -257,9 +268,9 @@ class AIcTargetStateUpgradeAnalyzer:
                         component_id=component_id,
                         provider_definition_id=provider.id,
                         name=declared.name,
-                        capability_id=provider.capability_id,
-                        capability_versions=provider.capability_versions,
+                        capabilities=provider.capabilities,
                         implementation_class=provider.implementation_class,
+                        access_mode=declared.access_mode,
                         configuration=dict(declared.configuration),
                         configuration_schema=provider.configuration_schema.resource_name if provider.configuration_schema is not None else None,
                         state=AInProviderInstanceState.CONFIGURED,

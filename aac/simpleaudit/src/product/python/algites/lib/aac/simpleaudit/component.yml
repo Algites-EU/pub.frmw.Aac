@@ -7,7 +7,7 @@ component:
   description:
     text: Reference AAC observer that writes normalized capability invocation records to standard output or a file.
     resource_key: aac.simpleaudit.component.description
-  providers:
+  capability_providers:
     - id: observation
       name:
         text: Simple audit observation provider
@@ -15,9 +15,9 @@ component:
       description:
         text: Observes capability invocations and emits JSON or text audit records.
         resource_key: aac.simpleaudit.provider.observation.description
-      capability:
-        id: _AAC.capability.observation
-        version: 1
+      capabilities:
+        - id: _AAC.capability.observation
+          versions: [1]
       implementation_class: algites.lib.aac.simpleaudit.provider:AIcSimpleAuditObserver
       runtime:
         profile: PROCESS

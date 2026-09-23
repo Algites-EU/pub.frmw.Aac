@@ -64,6 +64,24 @@ The solver is a planning layer. Before cutover Core MUST still:
 
 A solver result MUST NOT create a second activation mechanism.
 
+The solver is a planning layer around, not a replacement for, ordinary AAC validation:
+
+```mermaid
+flowchart LR
+    REQUEST["Requested Component Changes"] --> CLOSURE["Causal Capability Closure"]
+    CATALOG["Catalog / Installed Candidate Releases"] --> UNIVERSE["Candidate Universe"]
+    CLOSURE --> SEARCH["Constraint + Compatibility Search"]
+    UNIVERSE --> SEARCH
+    HARD["Workspace / Product Hard Constraints"] --> SEARCH
+    SEARCH --> RANK["Preferred-Solution Policy"]
+    RANK --> PLAN["Explained Target State + Alternatives"]
+    PLAN --> ACQUIRE["Acquire / Verify Missing Artifacts"]
+    ACQUIRE --> PREFLIGHT["Authoritative Complete Target Preflight"]
+    PREFLIGHT --> TX["Standard Replacement Transaction"]
+```
+
+The search may use catalog summaries, but the downloaded artifacts and the normal replacement preflight remain authoritative before cutover.
+
 # V. Preferred solution policy
 
 The baseline preference policy is designed to keep the causally affected branch current without turning every request into a global update operation.
@@ -89,7 +107,7 @@ A downgrade MAY be offered only as an explicitly selected alternative when persi
 
 ```text
 component configuration
-provider-instance configuration for every declared provider definition
+provider-instance configuration for every declared capability provider definition
 generic Data Entity support
 ```
 

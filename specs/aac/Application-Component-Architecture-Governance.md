@@ -176,7 +176,7 @@ An extension component MAY:
 
 - consume capabilities;
 - provide capabilities;
-- declare one or more provider definitions;
+- declare one or more capability provider definitions;
 - declare component-level configuration;
 - declare provider-instance configuration;
 - declare supported Data Entity schemas and dependencies;
@@ -197,9 +197,9 @@ component:
 
 The identifier MUST remain stable across releases of the same logical component.
 
-## II.4 Provider definition
+## II.4 Capability provider definition
 
-A **provider definition** is a component-declared implementation role capable of exposing one or more capability contracts.
+A **capability provider definition** is a component-declared implementation role capable of exposing one or more capability contracts.
 
 Example:
 
@@ -207,7 +207,7 @@ Example:
 Component:
     S3 Integration
 
-Provider definition:
+Capability provider definition:
     s3-object-store
 
 Provides:
@@ -215,26 +215,26 @@ Provides:
     algites.object-store.health
 ```
 
-Every provider definition is used through one or more **provider instances**.
+Every capability provider definition is used through one or more **provider instances**.
 
-The architecture does not distinguish `SINGLETON` and `MULTI_INSTANCE` provider-definition types. A provider definition is an implementation template; a provider instance is the concrete Core-managed, configured runtime entity that participates in bindings.
+The architecture does not distinguish `SINGLETON` and `MULTI_INSTANCE` provider-definition types. A capability provider definition is an implementation template; a provider instance is the concrete Core-managed, configured runtime entity that participates in bindings.
 
 Conceptually:
 
 ```text
-Provider definition / implementation
+Capability provider definition / implementation
     -> provider instance A
     -> provider instance B
     -> ...
 ```
 
-A provider definition MAY have one or more configured instances. Instance creation, initial/default-instance provisioning, readiness states, deletion, and unprovisioning are governed by `Application-Component-Lifecycle-and-Provisioning-Specification.md`.
+A capability provider definition MAY have one or more configured instances. Instance creation, initial/default-instance provisioning, readiness states, deletion, and unprovisioning are governed by `Application-Component-Lifecycle-and-Provisioning-Specification.md`.
 
 `default`, when used as the initial instance name by a product, is not a reserved identity and has no binding semantics. It is only a user-visible name and MAY be changed.
 
 ## II.5 Provider instance
 
-A **provider instance** is a Core-created configured instance of a provider definition and is the concrete provider identity used by the resolver and bindings.
+A **provider instance** is a Core-created configured instance of a capability provider definition and is the concrete provider identity used by the resolver and bindings.
 
 Every persistent provider instance MUST have at least:
 
@@ -244,6 +244,8 @@ name
 description
 component id
 provider-definition id
+provided capability/version set
+access mode where defined by the provider domain
 configuration
 configuration-schema version
 ```
@@ -253,6 +255,10 @@ The instance `id` MUST be a Core-generated, globally unique GUID/UUID-style iden
 `name` and `description` SHOULD be user-editable. They are descriptive values only and MUST NOT be used as persistent identity.
 
 Core is responsible for assigning and persisting instance identity. All persistent references to a provider instance, including capability bindings, MUST reference the stable instance `id`, never the instance `name`.
+
+A provider instance may expose several capability interfaces and several versions of the same capability on one runtime implementation object. The instance remains one identity. Capability invocation is always addressed to that concrete instance plus one exact capability/version; Core MUST NOT split one instance into synthetic per-capability providers or silently route one operation to another provider instance.
+
+When a provider domain uses `READ_ONLY` / `READ_WRITE` access modes, the mode is configured on the concrete provider instance. It expresses how Core is allowed to use that instance, independently from what its implementation class is technically capable of executing.
 
 A component MUST NOT invent independent persistent instance identifiers outside the Core lifecycle.
 
@@ -280,7 +286,7 @@ The descriptor SHOULD be able to declare:
 - operating-system and architecture restrictions;
 - consumed capabilities;
 - provided capabilities;
-- provider definitions;
+- capability provider definitions;
 - capability contract versions;
 - mandatory/optional consumption;
 - component-target configuration schemas;
@@ -317,7 +323,7 @@ A component MUST NOT require arbitrary business logic to run merely to determine
 - which contract versions it provides;
 - whether it consumes a mandatory capability;
 - which contract versions it consumes;
-- which provider definitions and capability versions are statically available.
+- which capability provider definitions and capability versions are statically available.
 
 A descriptor MAY contain declarative conditions evaluable by Core, for example:
 
@@ -565,7 +571,7 @@ consumes:
 
 A provided capability declaration means:
 
-> This provider definition can implement this capability using one of the explicitly listed versions.
+> This capability provider definition can implement this capability using one of the explicitly listed versions.
 
 Example:
 
@@ -619,9 +625,9 @@ The framework observation capability `_AAC.capability.observation` MUST be exclu
 For each consumed capability, Core discovers candidate **provider instances** from:
 
 - instances of Core-provided implementations;
-- instances of extension-component provider definitions.
+- instances of extension-component capability provider definitions.
 
-Provider definitions themselves are not binding targets. A binding always resolves to one or more concrete provider instance IDs.
+Capability provider definitions themselves are not binding targets. A binding always resolves to one or more concrete provider instance IDs.
 
 A candidate is usable only when it has a contract-version intersection allowed by IV.8.
 
@@ -651,7 +657,7 @@ Baseline cardinalities are:
 
 The consumer receives exactly one selected provider-instance binding.
 
-`SINGLE` constrains the **consumer requirement/binding**, not the number of instances that the provider definition may have. Any number of compatible provider instances may exist in the system; Core selects or resolves exactly one for this requirement.
+`SINGLE` constrains the **consumer requirement/binding**, not the number of instances that the capability provider definition may have. Any number of compatible provider instances may exist in the system; Core selects or resolves exactly one for this requirement.
 
 This is the normal model for operations that require one authoritative result or transactional outcome.
 
@@ -663,7 +669,7 @@ This is appropriate for capabilities whose contract intentionally defines fan-ou
 
 The capability contract MUST define invocation, ordering, result aggregation, and failure semantics when `MULTIPLE` is allowed.
 
-Provider-instance multiplicity and consumer cardinality are orthogonal: every provider definition supports multiple instances, while each consumer requirement independently declares whether it binds `SINGLE` or `MULTIPLE`.
+Provider-instance multiplicity and consumer cardinality are orthogonal: every capability provider definition supports multiple instances, while each consumer requirement independently declares whether it binds `SINGLE` or `MULTIPLE`.
 
 ## V.4 Resolved provider-instance graph must be acyclic
 
@@ -832,7 +838,7 @@ Component B
     consumes X mandatory
 ```
 
-This declaration does not itself imply a runtime cycle because provider definitions are not binding targets. Core resolves requirements to concrete provider instances.
+This declaration does not itself imply a runtime cycle because capability provider definitions are not binding targets. Core resolves requirements to concrete provider instances.
 
 For example:
 
@@ -967,7 +973,7 @@ The architecture-level invariants retained here are:
 
 ## VIII.2 Uniform instance model
 
-There is no singleton-provider lifecycle. A provider definition with one instance and a provider definition with many instances use the same model.
+There is no singleton-provider lifecycle. A capability provider definition with one instance and a capability provider definition with many instances use the same model.
 
 The lifecycle specification defines how an initial instance may be provisioned and how an incomplete instance remains unavailable until its configuration and entitlement conditions permit use.
 
@@ -1026,7 +1032,7 @@ TOMBSTONE
 
 `ACTIVE` is an ordinary live Data Entity. `TOMBSTONE` means that the entity has been logically removed but its logical identity and stored representation are retained, for example because existing references or historical context still require it. A tombstone is still a record. Physical deletion is a different storage operation and is not implied by `TOMBSTONE`.
 
-The payload is validated by the canonical schema identified by `(schema_id, schema_version)`. Envelope metadata is AAC-owned and MUST NOT be redundantly redefined as domain payload fields unless the domain has an independent semantic reason to do so.
+The payload is a JSON object and is validated by the canonical schema identified by `(schema_id, schema_version)`. The generic envelope constrains it to an object but does not duplicate the domain-specific property definition. Envelope metadata is AAC-owned and MUST NOT be redundantly redefined as domain payload fields unless the domain has an independent semantic reason to do so.
 
 ## IX.4 Canonical schema identity and registry
 
@@ -1180,19 +1186,56 @@ Rebuildable cache, process state, temporary discovery results, local telemetry b
 
 ## IX.12 Rolling compatibility
 
-`writable_versions` is a set rather than one write version so a fleet can coordinate schema rollout. A newer client may understand versions `[3, 4]` and still write version `3` while older required clients remain. A higher-level rollout policy may later switch the effective write version to `4`, after which old records may converge lazily or by an explicit migration process.
+`writable_versions` remains a set because a component or migration facility may intentionally be capable of producing several physical representations. Generic Data Entity storage capabilities expose the actually stored `schema_version`, and query may filter physical inventory by `stored_schema_version_filter` for migration/convergence tooling.
 
-AAC Core therefore distinguishes:
+For ordinary in-process component use, AAC additionally separates persisted representation from the consumer's runtime view. A current implementation may expose several historical schema views polymorphically while persisting one canonical current representation. An older consumer therefore does not force Core to rewrite the record in the consumer's view version merely because that is the interface through which the consumer accesses the object.
+
+AAC Core therefore distinguishes at least:
 
 ```text
+stored schema version
+current canonical implementation/storage version
+consumer runtime view version
 component semantic support
-active-fleet effective policy
 physical storage support/inventory
 ```
 
-This revision defines the first category. Generic storage capabilities and fleet-rollout coordination are specified separately/later.
+These axes MUST NOT be inferred from one another. Fleet/product policy may still constrain physical convergence, but the generic storage capabilities and runtime view model no longer require every consumer to share the physically stored version.
 
-## IX.13 Relationship to configuration
+## IX.13 Polymorphic Data Entity runtime views
+
+For one logical Data Entity schema identity, each schema version MAY have a generated versioned runtime view interface. Binding names are version-disjoint; a field `name` in schema version 2 may generate accessors such as `getName_2()` / `setName_2(...)` in Java and `get_name_2()` / `set_name_2(...)` in Python. The method suffix is deliberate so one current implementation object can implement several historical views even when field types or semantics changed between versions.
+
+A current implementation is allowed to be hand-maintained rather than fully generated. It may implement, for example, views 2, 3 and 4 simultaneously and translate historical operations into one current internal state. Calling `setPrice_2(...)` through an old view therefore mutates the same current object that a newer consumer sees through view 4; it does not create a lossy copy of a version-2 record.
+
+Compatibility is explicit. A newer implementation does not automatically implement every older view merely because its schema version is numerically greater. When support for a historical view is removed, its interface methods may be removed only after active consumers no longer require that view and persisted records that still require its persistence decoder have converged or another explicit decoder/migration path remains.
+
+Polymorphic views solve ordinary evolution of one logical entity identity. Structural changes such as split/merge/replacement of one entity by several current entities remain explicit domain compatibility facades or migrations; AAC does not infer them from schema shape.
+
+## IX.14 Data Entity codecs, registries, and provider-bound facades
+
+AAC keeps three runtime concerns separate:
+
+```text
+Schema Registry
+    (schema_id, schema_version) -> canonical JSON Schema
+
+View/Codec Registry
+    (schema_id, schema_version) -> versioned view interface + version-specific codec
+
+Implementation Registry
+    schema_id -> current implementation factory/type + canonical version + supported views
+```
+
+A version-specific codec serializes/deserializes only the operations belonging to its versioned view. Framework code MUST NOT serialize a polymorphic implementation by blindly reflecting every getter/setter on the class. This avoids ambiguity when the same logical field has `*_1`, `*_2`, `*_3`, ... accessors.
+
+Storage providers remain technology-neutral. `get-record` and `query-records` return raw envelopes in the physically stored version. Core selects that stored version's codec, creates the current implementation object, and applies the stored payload through the corresponding view. A consumer then receives the same object typed through its requested supported view. On save, Core chooses the implementation's canonical codec and persists the canonical representation regardless of the consumer view used to mutate the object.
+
+Data Entity capability facades are bound to one explicit provider instance. `get`, `query`, `apply`, and storage-support operations do not implicitly merge, search, or route across provider instances. A product may designate one configured `READ_WRITE` instance as its canonical store and use other instances explicitly for import/cache/source workflows, but that is product topology rather than hidden AAC routing.
+
+Cross-provider atomic changes are not part of the baseline. One `apply-direct-record-changes` call is atomic only inside the selected provider's transaction domain, and every record in that changeset must be supported by that provider.
+
+## IX.15 Relationship to configuration
 
 Configuration remains its own Core model because it has configuration targets, scopes, provider contribution semantics and policy modes. Data Entities and configuration share the principles that schema identity/version is independent from component version, migrations are explicit, unsupported newer data are not guessed at, and persistence revision is independent from schema version.
 
@@ -1295,9 +1338,9 @@ The platform MUST NOT silently weaken isolation to make the component load.
 
 ## XII.5 Runtime profiles are realized per provider instance
 
-A runtime/isolation profile is selected by a provider definition but is **realized for each concrete Core-managed provider instance**. Provider instances remain the unit of configuration, lifecycle, binding identity and runtime ownership.
+A runtime/isolation profile is selected by a capability provider definition but is **realized for each concrete Core-managed provider instance**. Provider instances remain the unit of configuration, lifecycle, binding identity and runtime ownership.
 
-For the baseline `PROCESS` profile, Core MUST create and own one persistent child process per active provider instance. Two instances of the same provider definition therefore have independent processes, configuration state and lifecycle even when they execute the same implementation code. A future profile MAY explicitly define safe process sharing, but such sharing is not part of the baseline `PROCESS` semantics.
+For the baseline `PROCESS` profile, Core MUST create and own one persistent child process per active provider instance. Two instances of the same capability provider definition therefore have independent processes, configuration state and lifecycle even when they execute the same implementation code. A future profile MAY explicitly define safe process sharing, but such sharing is not part of the baseline `PROCESS` semantics.
 
 Core MUST retain the runtime handle required to control each instance and MUST be able to terminate/restart that runtime independently. A process-hosted provider MAY consume already-resolved capabilities only through Core-provided handles/proxies; it MUST NOT bypass the resolved binding graph by discovering or directly addressing peer processes.
 
@@ -1363,7 +1406,7 @@ For a component it should be possible to display:
 
 ```text
 component configuration
-provided provider definitions
+capability provider definitions
 provider instances
 instance configuration
 consumed capabilities
@@ -1624,7 +1667,7 @@ Different providers of the same capability version SHOULD be testable against th
 SDK tooling SHOULD test:
 
 - static descriptor validity;
-- provider definitions;
+- capability provider definitions;
 - universal provider-instance rules and stable instance identity;
 - configuration schemas;
 - configuration migrations;
@@ -1689,7 +1732,7 @@ id:
 name:
     Corporate Vault
 
-provider definition:
+Capability provider definition:
     hashicorp-vault
 
 instance configuration:
@@ -1716,12 +1759,12 @@ The Git component's own configuration does not persist the provider selection as
 
 Core persists the binding.
 
-## XVIII.2 Multiple instances of one provider definition
+## XVIII.2 Multiple instances of one capability provider definition
 
 S3 component descriptor:
 
 ```text
-provider definition:
+Capability provider definition:
     s3-object-store
 ```
 
@@ -1873,8 +1916,8 @@ No silent downgrade or destructive rewrite occurs.
 19. **A provider-instance-scoped consumer requirement must never resolve to that same provider instance.**
 20. **Binding preferences may use product-defined binding-preference scopes and consumer-instance-specific overrides; AAC does not hard-code a contextual scope enum or universal precedence chain.**
 21. **The resolved provider should be visible in administration/configuration UI.**
-22. **Every provider definition is used through Core-managed provider instances; there is no singleton/multi-instance provider-definition type split.**
-23. **A provider definition may have multiple instances; when enabled, it participates through Core-created provider instances rather than a singleton special case.**
+22. **Every capability provider definition is used through Core-managed provider instances; there is no singleton/multi-instance provider-definition type split.**
+23. **A capability provider definition may have multiple instances; when enabled, it participates through Core-created provider instances rather than a singleton special case.**
 24. **Persistent provider-instance identity uses immutable Core-generated GUID/UUID-style IDs; names, including the initial name `default`, are mutable display values only.**
 25. **Persistent configuration is Core-managed for explicit `COMPONENT` or `PROVIDER_INSTANCE` targets through configuration-scopes/configuration-providers, bootstrap-selected configuration profiles, monotonic policy resolution, authorized normalized mutation, and effective delivery with provenance. There is no implicit component-to-instance configuration inheritance.**
 26. **Provider-instance configuration and consumer binding configuration are separate.**

@@ -19,6 +19,27 @@ The baseline reusable implementation is Algites Application Components (AAC). AA
 9. Entitlement UI represents Core-validated permission context and remediation actions; it MUST NOT manufacture entitlement state locally.
  It SHOULD expose effective permissions grouped by component/capability version, entitlement licensing scope subject, issuer/evidence provenance, effective expiry, next known transition, and verification/issuer-trust diagnostics where available.
 
+The administration UI is therefore a renderer/controller over Core-owned models rather than an alternate authority:
+
+```mermaid
+flowchart LR
+    RENDERER["Desktop / Web / Other Renderer"] -->|reads normalized state| API["Core Administration API"]
+    RENDERER -->|submits requested edits/actions| API
+
+    API --> COMPONENTS["Components / Lifecycle"]
+    API --> INSTANCES["Provider Instances"]
+    API --> BINDINGS["Requirements / Bindings"]
+    API --> CONFIG["Configuration + Provenance"]
+    API --> ENT["Entitlement / Authorization"]
+    API --> OBS["Observation Topology"]
+    API --> READY["Readiness"]
+
+    RENDERER -. "no direct mutation" .-> INSTANCES
+    RENDERER -. "no direct mutation" .-> BINDINGS
+```
+
+All mutation arrows terminate at Core administration APIs, which revalidate and persist the authoritative state.
+
 ## III. Baseline administration model
 
 A generic AAC administration surface SHOULD expose at least:
@@ -32,7 +53,7 @@ Observation Topology
 
 ### III.1 Components
 
-For each admitted component the UI can show component identity/version, provider definitions, permission metadata/possible entitlement licensing scope types grouped by provided capability/version, effective entitlement state made available by Core, and diagnostic/lifecycle information.
+For each admitted component the UI can show component identity/version, capability provider definitions, permission metadata/possible entitlement licensing scope types grouped by provided capability/version, effective entitlement state made available by Core, and diagnostic/lifecycle information.
 
 ### III.2 Provider instances
 

@@ -6,7 +6,7 @@ from algites.lib.aac.coreintf.contracts import AIcCapabilityContract, AIcCapabil
 def test_contract_operation_ids_are_unique():
     op = AIcCapabilityOperation("run", "RunInput", "RunOutput")
     with pytest.raises(ValueError):
-        AIcCapabilityContract(AIcCapabilityRef("x", 1), (op, op))
+        AIcCapabilityContract(AIcCapabilityRef("x", 1), "test.group", (op, op))
 
 
 def test_capability_version_starts_at_one():
@@ -22,6 +22,7 @@ from algites.lib.aac.coreintf.presentation import AIcDisplayText
 def test_operation_authorization_references_declared_permission_vocabulary():
     contract = AIcCapabilityContract(
         AIcCapabilityRef("x.secured", 1),
+        "_AAC.runtime",
         (AIcCapabilityOperation("edit", authorization=AIcOperationAuthorizationRequirement(all_of=("EDIT",))),),
         authorization_permissions=(AIcAuthorizationPermissionDescriptor("EDIT", AIcDisplayText(text="Edit")),),
     )
@@ -29,7 +30,8 @@ def test_operation_authorization_references_declared_permission_vocabulary():
     with pytest.raises(ValueError):
         AIcCapabilityContract(
             AIcCapabilityRef("x.bad", 1),
-            (AIcCapabilityOperation("edit", authorization=AIcOperationAuthorizationRequirement(any_of=("UNKNOWN",))),),
+            "_AAC.runtime",
+        (AIcCapabilityOperation("edit", authorization=AIcOperationAuthorizationRequirement(any_of=("UNKNOWN",))),),
         )
 
 

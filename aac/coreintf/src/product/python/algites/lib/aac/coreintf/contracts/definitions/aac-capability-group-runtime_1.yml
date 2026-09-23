@@ -1,0 +1,8 @@
+group:
+  id: _AAC.runtime
+  name:
+    text: Runtime
+    resource_key: aac.runtime.name
+  description:
+    text: Framework runtime and cross-cutting execution capabilities.
+    resource_key: aac.runtime.description

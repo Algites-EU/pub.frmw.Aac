@@ -5,7 +5,7 @@ from algites.lib.aac.coreintf.catalog import (
     AIcCatalogCapabilityRequirement, AIcCatalogComponent, AIcCatalogDocument,
     AIcCatalogPersistentSchema, AIcCatalogRelease, AInCatalogPersistentSchemaKind,
 )
-from algites.lib.aac.coreintf.contracts import AInConsumerCardinality
+from algites.lib.aac.coreintf.contracts import AIcProvidedCapability, AInConsumerCardinality
 from algites.lib.aac.coreintf.descriptor import (
     AIcComponentDescriptor, AIcConsumerRequirementDescriptor, AIcPersistedSchemaDescriptor,
     AIcProviderDefinitionDescriptor,
@@ -29,10 +29,10 @@ def _descriptor(component_id: str, version: int, *, capability: str, capability_
             f"{component_id}.config", schema_version, (schema_version,), resource_name=f"config_{schema_version}.json"
         )
     provider = AIcProviderDefinitionDescriptor(
-        "main", capability, (capability_version,), "example.Provider",
+        "main", (AIcProvidedCapability(capability, (capability_version,)),), "example.Provider",
         requirements=requirements,
     )
-    return AIcComponentDescriptor(component_id, version, providers=(provider,), component_configuration_schema=schema)
+    return AIcComponentDescriptor(component_id, version, capability_providers=(provider,), component_configuration_schema=schema)
 
 
 def _release(version: int, *, capability: str, capability_version: int,

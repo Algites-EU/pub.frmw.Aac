@@ -6,6 +6,7 @@ from algites.lib.aac.coreintf.invocation import AIcInvocationInput
 
 def test_generated_python_binding_contains_dtos_authorization_and_is_invokable():
     catalog = AIcActiveContractCatalog()
+    catalog.admit_builtin_contracts()
     catalog.schema_registry.register("site-edit-input_1.json", {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "x-aac-schema-id": "_AO.schema.site-edit-input", "x-aac-schema-version": 1, "type": "object",
@@ -21,6 +22,7 @@ def test_generated_python_binding_contains_dtos_authorization_and_is_invokable()
 capability:
   id: _AO.core.siteManagement
   version: 1
+  group_id: _AAC.runtime
   name: Site management
 authorization_permissions:
   - id: EDIT_SITE
@@ -45,12 +47,12 @@ operations:
     assert input_dto.__aac_source_id__ == "_AO.schema.site-edit-input"
     assert input_dto.__aac_source_version__ == 1
     assert input_dto.__aac_source_resource__ == "site-edit-input_1.json"
-    assert getattr(interface.edit_site, "__aac_authorization_all_of__") == ("EDIT_SITE",)
-    assert getattr(interface.edit_site, "__aac_authorization_any_of__") == ("STANDARD_EDITOR", "ADVANCED_EDITOR")
+    assert getattr(interface.edit_site_1, "__aac_authorization_all_of__") == ("EDIT_SITE",)
+    assert getattr(interface.edit_site_1, "__aac_authorization_any_of__") == ("STANDARD_EDITOR", "ADVANCED_EDITOR")
 
     output_dto = namespace["AIcgdSiteEditOutput_1"]
     class Impl(interface):
-        def edit_site(self, request):
+        def edit_site_1(self, request):
             assert isinstance(request, input_dto)
             return output_dto(changed=True)
 
@@ -62,6 +64,7 @@ operations:
 
 def test_generated_python_binding_reuses_one_dto_type_for_one_canonical_schema():
     catalog = AIcActiveContractCatalog()
+    catalog.admit_builtin_contracts()
     catalog.schema_registry.register("repository-identity_1.json", {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "x-aac-schema-id": "_AAC.schema.repository-identity", "x-aac-schema-version": 1,
@@ -73,6 +76,7 @@ def test_generated_python_binding_reuses_one_dto_type_for_one_canonical_schema()
 capability:
   id: _AAC.sourceRepositoryIdentification
   version: 1
+  group_id: _AAC.runtime
 operations:
   - id: identify
     input_schema: repository-identity_1.json
@@ -93,3 +97,26 @@ operations:
     assert dto.__aac_source_id__ == "_AAC.schema.repository-identity"
     assert dto.__aac_source_version__ == 1
     assert dto.__aac_source_resource__ == "repository-identity_1.json"
+
+
+def test_data_entity_binding_generator_uses_versioned_view_methods_and_codec():
+    from algites.lib.aac.coreimpl.schemas import AIcSchemaRegistry
+
+    schemas = AIcSchemaRegistry()
+    schemas.register("site_2.json", {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "x-aac-schema-id": "_AO.entity.site",
+        "x-aac-schema-version": 2,
+        "type": "object",
+        "required": ["name"],
+        "properties": {"name": {"type": "string"}},
+        "additionalProperties": False,
+    })
+    from algites.lib.aac.coreimpl.codegen import AIcPythonDataEntityBindingGenerator
+
+    source = AIcPythonDataEntityBindingGenerator(schemas).generate("_AO.entity.site", 2)
+    assert "class AIigSite_2" in source
+    assert "def get_name_2" in source
+    assert "def set_name_2" in source
+    assert "class AIcgSiteCodec_2" in source
+    assert "__aac_source_id__ = '_AO.entity.site'" in source

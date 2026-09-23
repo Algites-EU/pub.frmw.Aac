@@ -8,12 +8,12 @@ This artifact is the dependency boundary for Python AAC components. It does not 
 
 It defines the public models and SPIs for:
 
-- component descriptors, provider definitions and provider instances;
-- capability contracts, finite version sets, invocation and observation;
+- component descriptors, multi-capability provider definitions/instances, and per-instance READ_ONLY/READ_WRITE access mode;
+- capability contracts, mandatory nested capability groups, finite version sets, invocation and observation;
 - Core-owned binding preferences and lifecycle/runtime interfaces;
 - exact `COMPONENT` / `PROVIDER_INSTANCE` configuration targets, scopes, providers and atomic mutation contracts;
 - persisted configuration schemas, versioned payloads and configuration migrators;
-- generic Data Entity identity/envelopes, ACTIVE/TOMBSTONE state, field-level reference metadata and Data Entity migrator contracts;
+- generic Data Entity identity/envelopes, ACTIVE/TOMBSTONE state, typed polymorphic view/codec binding contracts, field-level reference metadata, Data Entity migrator contracts, and canonical direct storage capability schemas;
 - authentication profiles, secret references and authorization contracts;
 - first-class entitlement licensing-scope declarations (`AIcEntitlementLicensingScopeDescriptor`) with localized display metadata, provided-capability-version permissions with `possible_licensing_scopes`, resolver/evidence/trusted-subject contracts, remediation and refresh semantics;
 - platform-neutral catalog query/models/provider SPI, catalog bootstrap metadata, package sources, package-store/Core-state layout, immutable provenance, workspace requirements/locks, unified mutable-record revisions, persistence capabilities/read-set/write-set contracts, active package-set revisions, generic crash-recovery transaction phases and transactional component-replacement plans/results with blocking vs. degradation diagnostics;

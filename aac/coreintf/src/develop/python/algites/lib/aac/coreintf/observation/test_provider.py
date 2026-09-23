@@ -8,7 +8,7 @@ class BrokenObserver(AIiObservationProvider):
 
 
 class GoodObserver(AIiObservationProvider):
-    def observe(self, observation_input: AIcObservationInput) -> AIcObservationOutput:
+    def observe_1(self, observation_input: AIcObservationInput) -> AIcObservationOutput:
         return AIcObservationOutput()
 
 
@@ -19,7 +19,7 @@ def test_observation_provider_is_abstract():
 
 def test_observation_provider_can_be_implemented():
     provider = GoodObserver()
-    value = provider.observe(AIcObservationInput(
+    value = provider.observe_1(AIcObservationInput(
         invocation_id="i", parent_invocation_id=None, phase=AInObservationPhase.PRE,
         capability_id="x", capability_version=1, operation_id="op", provider_instance_id="p",
     ))

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.data-entity-get-record-request",
+  "x-aac-schema-version": 1,
+  "title": "Data Entity Get Record Request 1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "uid"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "uid": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

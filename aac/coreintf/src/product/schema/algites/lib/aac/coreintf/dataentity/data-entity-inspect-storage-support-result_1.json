@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.data-entity-inspect-storage-support-result",
+  "x-aac-schema-version": 1,
+  "title": "Data Entity Inspect Storage Support Result 1",
+  "type": "object",
+  "required": [
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "enum": [
+        "NOT_PROVISIONED",
+        "READY",
+        "RETIRED",
+        "INCOMPATIBLE"
+      ]
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "metadata": {
+      "type": "object"
+    }
+  }
+}

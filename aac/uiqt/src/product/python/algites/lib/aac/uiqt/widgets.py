@@ -271,7 +271,7 @@ class AIcAacAdministrationWidget(QWidget):
         self.package_result = QTextEdit()
         self.package_result.setReadOnly(True)
         self.package_result.setPlaceholderText("Select one or more installed target packages and validate the complete target state.")
-        self.instances_table = self._table(("Name", "Component", "Provider", "Capability", "State", "Readiness", "Readiness detail", "ID"))
+        self.instances_table = self._table(("Name", "Component", "Provider", "Capabilities", "Access", "State", "Readiness", "Readiness detail", "ID"))
         self.bindings_table = self._table(("Consumer", "Requirement", "Capability", "Cardinality", "Selected provider IDs"))
         self.observation_table = self._table(("Observer", "Selectors"))
         self.entitlement_table = self._table(("Component", "Capability", "Permission", "Scope", "Issuer", "Effective until"))
@@ -398,7 +398,7 @@ class AIcAacAdministrationWidget(QWidget):
         self.instances_table.setRowCount(len(instances))
         for row, item in enumerate(instances):
             self._set_row(self.instances_table, row, (
-                item.name, item.component_id, item.provider_definition_id, item.capability_id, item.state,
+                item.name, item.component_id, item.provider_definition_id, item.capabilities_text, item.access_mode, item.state,
                 item.readiness_state or "-", "; ".join(item.readiness_reasons), item.id,
             ), user_data=item.id)
 
@@ -456,7 +456,7 @@ class AIcAacAdministrationWidget(QWidget):
             )),
         ))
         if not choices:
-            QMessageBox.information(self, "Provider instances", "No provider definitions are installed."); return
+            QMessageBox.information(self, "Provider instances", "No capability provider definitions are installed."); return
         dialog = AIcQtFormDialog(form, self)
         if dialog.exec() == QDialog.DialogCode.Accepted:
             values = dialog.values(); component_id, provider_id = str(values["provider"]).split("\n", 1)
@@ -796,7 +796,7 @@ class AIcAacAdministrationWidget(QWidget):
             QMessageBox.critical(self, "Package upgrade", f"{type(exc).__name__}: {exc}")
 
     def _create_observation(self) -> None:
-        observers = [item for item in self.controller.provider_instances() if item.capability_id == "_AAC.capability.observation"]
+        observers = [item for item in self.controller.provider_instances() if item.supports_capability("_AAC.capability.observation")]
         configured = {item.observer_instance_id for item in self.controller.observation_bindings()}
         available = [item for item in observers if item.id not in configured]
         if not available:

@@ -12,7 +12,7 @@ from typing import Any, Mapping
 import yaml
 from jsonschema import Draft202012Validator
 
-from algites.lib.aac.coreintf.contracts import AInConsumerCardinality
+from algites.lib.aac.coreintf.contracts import AIcProvidedCapability, AInConsumerCardinality
 from algites.lib.aac.coreintf.descriptor import (
     AIcComponentDescriptor,
     AIcConsumerRequirementDescriptor,
@@ -31,6 +31,7 @@ from algites.lib.aac.coreintf.descriptor import (
     AInProviderRuntimeProfile,
 )
 from algites.lib.aac.coreintf.errors import AIxDescriptorError
+from algites.lib.aac.coreintf.instances import AInProviderAccessMode
 from algites.lib.aac.coreintf.presentation import normalize_display_text
 from algites.lib.aac.coreintf.readiness import AInReadinessRequirementSource, AInReadinessState, AIcReadinessRequirementDescriptor
 
@@ -149,18 +150,20 @@ def _parse_requirement(raw_requirement: Mapping[str, Any]) -> AIcConsumerRequire
 
 
 def _parse_component(component: Mapping[str, Any]) -> AIcComponentDescriptor:
-    providers = []
-    for raw_provider in component.get("providers", ()):
-        capability = raw_provider["capability"]
-        versions = capability.get("versions")
-        if versions is None:
-            versions = (int(capability["version"]),)
-        else:
-            versions = tuple(sorted({int(v) for v in versions}))
+    capability_providers = []
+    for raw_provider in component.get("capability_providers", ()):
+        capabilities = tuple(
+            AIcProvidedCapability(
+                id=str(item["id"]),
+                versions=tuple(sorted({int(version) for version in item["versions"]})),
+            )
+            for item in raw_provider["capabilities"]
+        )
         initial_instances = tuple(
             AIcInitialProviderInstanceDescriptor(
                 name=item.get("name", "default"),
                 configuration=item.get("configuration", {}),
+                access_mode=AInProviderAccessMode(str(item.get("access_mode", "READ_WRITE"))),
             )
             for item in raw_provider.get("initial_instances", ())
         )
@@ -183,10 +186,9 @@ def _parse_component(component: Mapping[str, Any]) -> AIcComponentDescriptor:
             )
             for item in raw_provider.get("readiness_requirements", ())
         )
-        providers.append(AIcProviderDefinitionDescriptor(
+        capability_providers.append(AIcProviderDefinitionDescriptor(
             id=raw_provider["id"],
-            capability_id=capability["id"],
-            capability_versions=tuple(versions),
+            capabilities=capabilities,
             implementation_class=raw_provider["implementation_class"],
             name=normalize_display_text(raw_provider.get("name")),
             description=normalize_display_text(raw_provider.get("description")),
@@ -276,7 +278,8 @@ def _parse_component(component: Mapping[str, Any]) -> AIcComponentDescriptor:
         version=int(component["version"]),
         name=normalize_display_text(component.get("name")),
         description=normalize_display_text(component.get("description")),
-        providers=tuple(providers),
+        capability_providers=tuple(capability_providers),
+        capability_group_resources=tuple(str(v) for v in component.get("capability_groups", ())),
         contract_resources=tuple(str(v) for v in component.get("contracts", ())),
         component_configuration_schema=_parse_persisted_schema(component.get("component_configuration_schema")),
         entitlement_licensing_scopes=entitlement_licensing_scopes,

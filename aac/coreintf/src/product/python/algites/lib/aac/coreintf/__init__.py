@@ -12,7 +12,6 @@ from .errors import (
     AIxAuthorizationDenied, AIxPermissionDenied, AIxPersistedPayloadMigrationError, AIxPersistedSchemaIncompatible,
     AIxPackageManagementError, AIxPackageDigestMismatch, AIxPackageRevisionConflict,
 )
-from .extensions import *
 from .instances import AIcBinding, AIcBindingPreference, AIcProviderInstance, AInProviderInstanceState
 from .invocation import AIiCapabilityHandle
 from .migration import *

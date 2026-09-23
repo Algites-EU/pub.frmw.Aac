@@ -20,7 +20,7 @@ from algites.lib.aac.coreintf.entitlement import (
     AIiEntitlementRemediator, AIiEntitlementLicensingScopeResolver,
 )
 from algites.lib.aac.coreintf.entitlement import AIcEntitlementLicensingScope
-from algites.lib.aac.coreintf.dataentity import AIcDataEntityEnvelope
+from algites.lib.aac.coreintf.dataentity import AIcDataEntityEnvelope, AIcDataEntityImplementationBinding, AIcDataEntityViewBinding
 from algites.lib.aac.coreintf.migration import AInSchemaRuntimeInterpretation
 from algites.lib.aac.coreintf.errors import AIxPersistedSchemaIncompatible
 from algites.lib.aac.coreintf.instances import AIcBindingPreference, AIcProviderInstance, AInProviderInstanceState
@@ -43,6 +43,10 @@ from .bootstrap import AIcBootstrapResourceLoader, AIcConfigurationProfileLoader
 from .bindings import AIcBindingPreferenceStore, AIcBindingStore
 from .contracts import AIcActiveContractCatalog
 from .descriptor import AIcDescriptorLoader, AIcDiscoveredComponent, iter_discovered_resources, read_discovered_resource
+from .dataentity import (
+    AIcDataEntityImplementationRegistry, AIcDataEntityMarshaller, AIcDataEntityProviderFacade,
+    AIcDataEntityViewRegistry,
+)
 from .catalog import AIcCatalogProviderRegistry, AIcFilesystemCatalogProvider, AIcHttpCatalogProvider
 from .configuration import (
     AIcAllowOwnNamespaceConfigurationMutationAuthorizer, AIcConfigurationContextResolver,
@@ -118,6 +122,11 @@ class AIcApplicationComponentCore:
     ) -> None:
         self.store = store or AIcInMemoryStateStore()
         self.schemas = AIcSchemaRegistry()
+        self.data_entity_views = AIcDataEntityViewRegistry()
+        self.data_entity_implementations = AIcDataEntityImplementationRegistry()
+        self.data_entity_marshaller = AIcDataEntityMarshaller(
+            self.schemas, self.data_entity_views, self.data_entity_implementations
+        )
         self.contracts = AIcActiveContractCatalog(self.schemas)
         self.contracts.admit_builtin_contracts()
         self.authentication = AIcAuthenticationService()
@@ -310,7 +319,10 @@ class AIcApplicationComponentCore:
             (offer.capability_id, version) for offer in entry.release.provides for version in offer.versions
         }
         descriptor_provides = {
-            (provider.capability_id, version) for provider in descriptor.providers for version in provider.capability_versions
+            (capability.id, version)
+            for provider in descriptor.capability_providers
+            for capability in provider.capabilities
+            for version in capability.versions
         }
         if catalog_provides != descriptor_provides:
             raise ValueError("catalog provides metadata does not match component descriptor")
@@ -320,7 +332,7 @@ class AIcApplicationComponentCore:
         }
         descriptor_requires = {
             (item.capability_id, tuple(item.versions), item.cardinality.value, item.mandatory)
-            for provider in descriptor.providers for item in provider.requirements
+            for provider in descriptor.capability_providers for item in provider.requirements
         }
         if catalog_requires != descriptor_requires:
             raise ValueError("catalog requires metadata does not match component descriptor")
@@ -344,7 +356,7 @@ class AIcApplicationComponentCore:
                     AInCatalogPersistentSchemaKind.COMPONENT_CONFIGURATION.value, None, schema.schema_id,
                     schema.write_version, (), (), None,
                 ))
-            for provider in descriptor.providers:
+            for provider in descriptor.capability_providers:
                 if provider.configuration_schema is not None:
                     schema = provider.configuration_schema
                     descriptor_schemas.append((
@@ -702,6 +714,18 @@ class AIcApplicationComponentCore:
             for parameter in profile.parameters.values()
         )
 
+    def register_data_entity_view(self, binding: AIcDataEntityViewBinding[object]) -> None:
+        self.data_entity_views.register(binding)
+
+    def register_data_entity_implementation(self, binding: AIcDataEntityImplementationBinding) -> None:
+        self.data_entity_implementations.register(binding)
+        self.data_entity_marshaller.validate_registrations(binding.schema_id)
+
+    def data_entity_provider(self, provider_instance_id: str) -> AIcDataEntityProviderFacade:
+        return AIcDataEntityProviderFacade(
+            self.instances.get(provider_instance_id), self.endpoints, self.invocations, self.data_entity_marshaller
+        )
+
     def register_configuration_provider(self, configuration_provider_id: str, provider: AIiConfigurationProvider) -> None:
         self.configuration_providers.register(configuration_provider_id, provider)
 
@@ -741,8 +765,9 @@ class AIcApplicationComponentCore:
     ) -> AIcDataEntityEnvelope:
         """Normalize a data entity in memory to the component's preferred write version.
 
-        Persistence is deliberately outside this operation. A later generic data-storage capability
-        will decide whether and where the normalized representation is written.
+        Persistence is deliberately outside this legacy normalization helper. Generic Data Entity
+        storage is provided by provider-bound Data Entity facades; polymorphic view/codecs are the
+        preferred runtime representation for compatible schema evolution.
         """
         installed = self._installed.get(component_id)
         if installed is None:
@@ -1045,17 +1070,20 @@ class AIcApplicationComponentCore:
 
         if descriptor.component_configuration_schema is not None:
             validate_declared_schema(descriptor.component_configuration_schema, f"component {descriptor.id!r}")
-        for provider in descriptor.providers:
+        for provider in descriptor.capability_providers:
             if provider.configuration_schema is not None:
                 validate_declared_schema(
                     provider.configuration_schema,
                     f"provider {descriptor.id!r}:{provider.id!r}",
                 )
+        for group_resource in descriptor.capability_group_resources:
+            text, source = read_discovered_resource(discovered, group_resource)
+            self.contracts.groups.admit_text(text, source=source)
         for contract_resource in descriptor.contract_resources:
             text, source = read_discovered_resource(discovered, contract_resource)
             self.contracts.admit_text(text, source=source)
 
-        for provider in descriptor.providers:
+        for provider in descriptor.capability_providers:
             for requirement in provider.requirements:
                 for version in requirement.versions:
                     if not self.contracts.contains(requirement.capability_id, version):

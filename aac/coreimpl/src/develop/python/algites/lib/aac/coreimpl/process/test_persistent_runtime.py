@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass
 
-from algites.lib.aac.coreintf.contracts import AInConsumerCardinality
+from algites.lib.aac.coreintf.contracts import AIcProvidedCapability, AInConsumerCardinality
 from algites.lib.aac.coreintf.descriptor import (
     AIcConsumerRequirementDescriptor,
     AIcProviderDefinitionDescriptor,
@@ -44,7 +44,7 @@ class AIcProcessFixtureProvider(AIiProviderRuntime):
         self.dep = None
     def wire(self, bindings):
         self.dep = bindings['dep'][0]
-    def use_dependency(self, value):
+    def use_dependency_1(self, value):
         result = self.dep.invoke('echo', {'value': value})
         if not result.success:
             raise RuntimeError(str(result.error))
@@ -56,8 +56,7 @@ class AIcProcessFixtureProvider(AIiProviderRuntime):
     pythonpath = str(tmp_path) + (os.pathsep + existing if existing else "")
     provider = AIcProviderDefinitionDescriptor(
         id="consumer",
-        capability_id="example.consumer",
-        capability_versions=(1,),
+        capabilities=(AIcProvidedCapability("example.consumer", (1,)),),
         implementation_class="aac_process_fixture:AIcProcessFixtureProvider",
         requirements=(AIcConsumerRequirementDescriptor("dep", "example.echo", (1,), AInConsumerCardinality.SINGLE, True),),
         runtime=AIcProviderRuntimeDescriptor(
@@ -70,8 +69,7 @@ class AIcProcessFixtureProvider(AIiProviderRuntime):
         component_id="example.component",
         provider_definition_id="consumer",
         name="default",
-        capability_id="example.consumer",
-        capability_versions=(1,),
+        capabilities=(AIcProvidedCapability("example.consumer", (1,)),),
         implementation_class=provider.implementation_class,
     )
     runtime = AIcProcessProviderRuntime("app", instance, provider)

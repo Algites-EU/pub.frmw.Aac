@@ -93,8 +93,10 @@ class AIcLifecycleEngine:
         diagnostics.extend(verification.diagnostics)
         self._advance(application_scope_id, descriptor.id, AInLifecycleState.VERIFIED, AInLifecycleStage.VERIFY, tuple(diagnostics))
 
-        if component.package is None and descriptor.contract_resources:
-            raise AIxLifecycleError("contract resources require a package-backed discovered component")
+        if component.package is None and (descriptor.capability_group_resources or descriptor.contract_resources):
+            raise AIxLifecycleError("capability-group and contract resources require a package-backed discovered component")
+        for resource_name in descriptor.capability_group_resources:
+            self.contract_catalog.groups.admit_package_resource(component.package, resource_name)  # type: ignore[arg-type]
         for resource_name in descriptor.contract_resources:
             self.contract_catalog.admit_package_resource(component.package, resource_name)  # type: ignore[arg-type]
         self._advance(application_scope_id, descriptor.id, AInLifecycleState.VERIFIED, AInLifecycleStage.ADMIT_CONTRACTS, tuple(diagnostics))
@@ -187,7 +189,7 @@ class AIcLifecycleEngine:
         self.provisioning.registry.update(instance.id, state=AInProviderInstanceState.ACTIVATABLE)
         self._advance(application_scope_id, descriptor.id, AInLifecycleState.ACTIVATABLE, AInLifecycleStage.ACTIVATABLE)
 
-        if self.observations is not None and provider.capability_id == OBSERVATION_CAPABILITY_ID:
+        if self.observations is not None and provider.supports_capability(OBSERVATION_CAPABILITY_ID):
             if isinstance(runtime, AIiObservationProvider):
                 self.observations.register_provider(instance.id, runtime)
             elif isinstance(runtime, AIiCapabilityEndpoint) and self.handles is not None:

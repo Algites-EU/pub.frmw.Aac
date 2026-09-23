@@ -5,13 +5,14 @@ from algites.lib.aac.coreimpl.invocation import AIcCapabilityHandleFactory, AIcE
 
 
 class Echo:
-    def ping(self, value):
+    def ping_1(self, value):
         return {"value": value}
 
 
 def test_core_capability_handle_invokes_bound_provider_instance():
     catalog = AIcActiveContractCatalog()
-    catalog.admit(AIcCapabilityContract(AIcCapabilityRef("test.echo", 1), (AIcCapabilityOperation("ping", "Input", "Output"),)))
+    catalog.admit_builtin_contracts()
+    catalog.admit(AIcCapabilityContract(AIcCapabilityRef("test.echo", 1), "_AAC.runtime", (AIcCapabilityOperation("ping", "Input", "Output"),)))
     endpoints = AIcEndpointRegistry(); endpoints.register_object("provider", Echo())
     handles = AIcCapabilityHandleFactory(endpoints, AIcInvocationDispatcher(catalog)).for_consumer(
         "consumer", (AIcBinding("consumer", "echo", "provider", "test.echo", 1),)

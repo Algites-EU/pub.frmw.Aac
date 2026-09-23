@@ -7,22 +7,24 @@ from algites.lib.aac.coreimpl.observation import AIcObservationDispatcher, AIcOb
 
 
 class Echo:
-    def run(self, token, value):
+    def run_1(self, token, value):
         return {"token": token, "value": value}
 
 
 class Collector(AIiObservationProvider):
     def __init__(self):
         self.values = []
-    def observe(self, observation_input):
+    def observe_1(self, observation_input):
         self.values.append(observation_input)
         return AIcObservationOutput()
 
 
 def test_invocation_generates_pre_post_and_redacts_contract_sensitive_paths():
     catalog = AIcActiveContractCatalog()
+    catalog.admit_builtin_contracts()
     catalog.admit(AIcCapabilityContract(
         AIcCapabilityRef("x.cap", 1),
+        "_AAC.runtime",
         (AIcCapabilityOperation("run", "In", "Out", sensitive_input_paths=("token",), sensitive_output_paths=("token",)),),
     ))
     collector = Collector()
@@ -48,12 +50,13 @@ def test_operation_input_and_output_schema_are_core_validated():
     schemas.register("echo-input_1.json", {"x-aac-schema-id": "test.echo-input", "x-aac-schema-version": 1, "type": "object", "required": ["value"], "properties": {"value": {"type": "string"}}, "additionalProperties": False})
     schemas.register("echo-output_1.json", {"x-aac-schema-id": "test.echo-output", "x-aac-schema-version": 1, "type": "object", "required": ["value"], "properties": {"value": {"type": "string"}}, "additionalProperties": False})
     catalog = AIcActiveContractCatalog(schemas)
-    catalog.admit(AIcCapabilityContract(AIcCapabilityRef("test.schema", 1), (
+    catalog.admit_builtin_contracts()
+    catalog.admit(AIcCapabilityContract(AIcCapabilityRef("test.schema", 1), "_AAC.runtime", (
         AIcCapabilityOperation("run", "Input", "Output", input_schema="echo-input_1.json", output_schema="echo-output_1.json"),
     )))
 
     class Provider:
-        def run(self, value):
+        def run_1(self, value):
             return {"value": value}
 
     dispatcher = AIcInvocationDispatcher(catalog)
@@ -68,13 +71,15 @@ def test_permission_denied_is_normalized_for_core_bridge():
     from algites.lib.aac.coreintf.errors import AIxPermissionDenied
 
     catalog = AIcActiveContractCatalog()
+    catalog.admit_builtin_contracts()
     catalog.admit(AIcCapabilityContract(
         AIcCapabilityRef("x.secured", 1),
+        "_AAC.runtime",
         (AIcCapabilityOperation("write", "In", "Out"),),
     ))
 
     class Provider:
-        def write(self):
+        def write_1(self):
             raise AIxPermissionDenied(
                 "upgrade required",
                 permission_id="WRITE",
@@ -99,15 +104,17 @@ def test_safe_permission_denial_can_remediate_refresh_and_retry_once():
     from algites.lib.aac.coreintf.errors import AIxPermissionDenied
 
     catalog = AIcActiveContractCatalog()
+    catalog.admit_builtin_contracts()
     catalog.admit(AIcCapabilityContract(
         AIcCapabilityRef("x.remediate", 1),
+        "_AAC.runtime",
         (AIcCapabilityOperation("write", "In", "Out"),),
     ))
 
     class Provider:
         def __init__(self):
             self.calls = 0
-        def write(self):
+        def write_1(self):
             self.calls += 1
             if self.calls == 1:
                 raise AIxPermissionDenied(
@@ -134,3 +141,52 @@ def test_safe_permission_denial_can_remediate_refresh_and_retry_once():
     )
     assert output.success and output.result == {"ok": True}
     assert provider.calls == 2 and remediator.calls == 1 and refreshed == [True]
+
+
+def test_observation_contract_uses_direct_input_object_without_transport_wrapper():
+    from dataclasses import asdict
+    from algites.lib.aac.coreintf.observation import AIcObservationInput, AInObservationPhase
+
+    catalog = AIcActiveContractCatalog()
+    catalog.admit_builtin_contracts()
+
+    class EndpointObserver:
+        def __init__(self):
+            self.received = None
+
+        def observe_1(self, observation_input: AIcObservationInput):
+            self.received = observation_input
+            return {"accepted": True}
+
+    event = AIcObservationInput(
+        invocation_id="observed",
+        parent_invocation_id=None,
+        phase=AInObservationPhase.PRE,
+        capability_id="x.cap",
+        capability_version=1,
+        operation_id="run",
+        provider_instance_id="provider",
+        arguments={"value": 7},
+    )
+    provider = EndpointObserver()
+    output = AIcInvocationDispatcher(catalog).invoke(
+        AIcObjectCapabilityEndpoint(provider),
+        AIcInvocationInput(
+            "delivery", None, "_AAC.capability.observation", 1, "observe", "observer", asdict(event)
+        ),
+    )
+
+    assert output.success and output.result["accepted"] is True
+    assert isinstance(provider.received, AIcObservationInput)
+    assert provider.received.invocation_id == "observed"
+    assert provider.received.arguments == {"value": 7}
+
+    wrapped = AIcInvocationDispatcher(catalog).invoke(
+        AIcObjectCapabilityEndpoint(provider),
+        AIcInvocationInput(
+            "legacy", None, "_AAC.capability.observation", 1, "observe", "observer",
+            {"observation_input": asdict(event)},
+        ),
+    )
+    assert not wrapped.success
+    assert wrapped.error["type"] == "AIxSchemaValidationError"

@@ -1,0 +1,20 @@
+capability:
+  id: _AAC.data-entity.inspect-storage-support
+  version: 1
+  group_id: _AAC.data-entity.storage-management
+  name:
+    text: Inspect Data Entity storage support
+    resource_key: aac.data.entity.inspect.storage.support.name
+  description:
+    text: Inspects physical storage support for one canonical Data Entity schema version.
+    resource_key: aac.data.entity.inspect.storage.support.description
+operations:
+  - id: inspect
+    name:
+      text: Inspect storage support
+      resource_key: aac.data.entity.inspect.storage.support.operation.inspect.name
+    description:
+      text: Inspects physical storage support for one canonical Data Entity schema version.
+      resource_key: aac.data.entity.inspect.storage.support.operation.inspect.description
+    input_schema: data-entity-inspect-storage-support-request_1.json
+    output_schema: data-entity-inspect-storage-support-result_1.json

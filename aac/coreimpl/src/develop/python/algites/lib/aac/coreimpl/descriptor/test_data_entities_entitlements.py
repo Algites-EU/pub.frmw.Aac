@@ -18,11 +18,11 @@ component:
       - from: 1
         to: 2
         migrator: vendor.foo:migrate_component_config_1_to_2
-  providers:
+  capability_providers:
     - id: main
-      capability:
-        id: vendor.foo.document
-        version: 1
+      capabilities:
+        - id: vendor.foo.document
+          versions: [1]
       implementation_class: vendor.foo:Provider
       configuration_schema:
         id: foo-instance-config

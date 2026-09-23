@@ -7,15 +7,16 @@ from algites.lib.aac.coreimpl.invocation import AIcInvocationDispatcher, AIcObje
 
 class Provider:
     calls = 0
-    def edit(self):
+    def edit_1(self):
         self.calls += 1
         return {"ok": True}
 
 
 def _catalog():
     catalog = AIcActiveContractCatalog()
+    catalog.admit_builtin_contracts()
     catalog.admit_text('''
-capability: {id: x.secured, version: 1}
+capability: {id: x.secured, version: 1, group_id: _AAC.runtime}
 authorization_permissions:
   - {id: EDIT, name: Edit}
   - {id: ADMIN, name: Admin}

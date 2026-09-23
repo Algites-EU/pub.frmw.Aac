@@ -82,7 +82,8 @@
       "type": "object",
       "required": [
         "id",
-        "version"
+        "version",
+        "group_id"
       ],
       "additionalProperties": false,
       "properties": {
@@ -99,6 +100,10 @@
         },
         "description": {
           "$ref": "#/$defs/displayText"
+        },
+        "group_id": {
+          "type": "string",
+          "minLength": 1
         }
       }
     },

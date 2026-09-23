@@ -13,6 +13,25 @@ class AInConsumerCardinality(str, Enum):
 
 
 @dataclass(frozen=True, slots=True)
+class AIcCapabilityGroup:
+    id: str
+    parent_group_id: str | None = None
+    name: AIcDisplayText | None = None
+    description: AIcDisplayText | None = None
+    metadata: Mapping[str, object] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        if not self.id:
+            raise ValueError("capability group id must not be empty")
+        if self.parent_group_id is not None and not self.parent_group_id:
+            raise ValueError("parent capability group id must not be empty")
+        if self.parent_group_id == self.id:
+            raise ValueError("capability group cannot be its own parent")
+        if self.name is None:
+            raise ValueError("capability group requires display name")
+
+
+@dataclass(frozen=True, slots=True)
 class AIcCapabilityRef:
     id: str
     version: int
@@ -22,6 +41,26 @@ class AIcCapabilityRef:
             raise ValueError("capability id must not be empty")
         if self.version < 1:
             raise ValueError("capability version must be >= 1")
+
+
+
+
+@dataclass(frozen=True, slots=True)
+class AIcProvidedCapability:
+    id: str
+    versions: tuple[int, ...]
+
+    def __post_init__(self) -> None:
+        if not self.id:
+            raise ValueError("provided capability id must not be empty")
+        if not self.versions or any(version < 1 for version in self.versions):
+            raise ValueError("provided capability must declare at least one version >= 1")
+        if len(self.versions) != len(set(self.versions)):
+            raise ValueError("provided capability versions must be unique")
+
+    @property
+    def latest_version(self) -> int:
+        return max(self.versions)
 
 
 @dataclass(frozen=True, slots=True)
@@ -82,6 +121,7 @@ class AIcCapabilityOperation:
 @dataclass(frozen=True, slots=True)
 class AIcCapabilityContract:
     capability: AIcCapabilityRef
+    group_id: str
     operations: tuple[AIcCapabilityOperation, ...]
     authorization_permissions: tuple[AIcAuthorizationPermissionDescriptor, ...] = ()
     name: AIcDisplayText | None = None
@@ -89,6 +129,8 @@ class AIcCapabilityContract:
     metadata: Mapping[str, object] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
+        if not self.group_id:
+            raise ValueError("capability group id must not be empty")
         operation_ids = [operation.id for operation in self.operations]
         if not operation_ids:
             raise ValueError("a capability contract must define at least one operation")

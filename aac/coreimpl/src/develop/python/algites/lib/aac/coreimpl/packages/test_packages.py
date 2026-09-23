@@ -6,6 +6,7 @@ from zipfile import ZipFile
 
 import pytest
 
+from algites.lib.aac.coreintf.contracts import AIcProvidedCapability
 from algites.lib.aac.coreintf.descriptor import AIcCapabilityEntitlementDescriptor, AIcComponentDescriptor, AIcEntitlementLicensingScopeDescriptor, AIcPermissionDescriptor, AIcProviderDefinitionDescriptor
 from algites.lib.aac.coreintf.packages import (
     AInPackageUpdatePolicy,
@@ -180,8 +181,8 @@ def test_workspace_lock_selects_exact_digest(tmp_path):
 def test_paid_component_without_implicit_or_effective_permission_blocks_only_automatic_install():
     descriptor = AIcComponentDescriptor(
         "com.example.paid", 1,
-        providers=(AIcProviderDefinitionDescriptor(
-            "provider", "com.example.cap", (1,), "com.example:Provider"
+        capability_providers=(AIcProviderDefinitionDescriptor(
+            "provider", (AIcProvidedCapability("com.example.cap", (1,)),), "com.example:Provider"
         ),),
         entitlement_licensing_scopes=(AIcEntitlementLicensingScopeDescriptor("USER"),),
         provided_capability_entitlements=(AIcCapabilityEntitlementDescriptor(
@@ -194,8 +195,8 @@ def test_paid_component_without_implicit_or_effective_permission_blocks_only_aut
 
     free_descriptor = AIcComponentDescriptor(
         "com.example.free", 1,
-        providers=(AIcProviderDefinitionDescriptor(
-            "provider", "com.example.cap", (1,), "com.example:Provider"
+        capability_providers=(AIcProviderDefinitionDescriptor(
+            "provider", (AIcProvidedCapability("com.example.cap", (1,)),), "com.example:Provider"
         ),),
         provided_capability_entitlements=(AIcCapabilityEntitlementDescriptor(
             "com.example.cap", 1,

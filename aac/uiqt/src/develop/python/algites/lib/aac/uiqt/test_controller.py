@@ -1,4 +1,4 @@
-from algites.lib.aac.coreintf.contracts import AInConsumerCardinality
+from algites.lib.aac.coreintf.contracts import AIcProvidedCapability, AInConsumerCardinality
 from algites.lib.aac.coreintf.descriptor import (
     AIcComponentDescriptor,
     AIcConsumerRequirementDescriptor,
@@ -30,12 +30,12 @@ def test_requirements_include_unresolved_and_preference_uses_instance_ids():
     core = AIcApplicationComponentCore()
     provider_descriptor = AIcComponentDescriptor(
         "vendor.provider", 1,
-        providers=(AIcProviderDefinitionDescriptor("p", "vendor.cap", (1,), "vendor:Provider"),),
+        capability_providers=(AIcProviderDefinitionDescriptor("p", (AIcProvidedCapability("vendor.cap", (1,)),), "vendor:Provider"),),
     )
     consumer_descriptor = AIcComponentDescriptor(
         "vendor.consumer", 1,
-        providers=(AIcProviderDefinitionDescriptor(
-            "c", "vendor.consumer-cap", (1,), "vendor:Consumer",
+        capability_providers=(AIcProviderDefinitionDescriptor(
+            "c", (AIcProvidedCapability("vendor.consumer-cap", (1,)),), "vendor:Consumer",
             requirements=(AIcConsumerRequirementDescriptor(
                 "target", "vendor.cap", (1,), AInConsumerCardinality.SINGLE, True,
             ),),
@@ -43,8 +43,8 @@ def test_requirements_include_unresolved_and_preference_uses_instance_ids():
     )
     core._installed[provider_descriptor.id] = AIcInstalledComponent(AIcDiscoveredComponent(provider_descriptor, None, "test"))
     core._installed[consumer_descriptor.id] = AIcInstalledComponent(AIcDiscoveredComponent(consumer_descriptor, None, "test"))
-    p = core.instances.create(provider_descriptor.id, provider_descriptor.providers[0], name="provider")
-    c = core.instances.create(consumer_descriptor.id, consumer_descriptor.providers[0], name="consumer")
+    p = core.instances.create(provider_descriptor.id, provider_descriptor.capability_providers[0], name="provider")
+    c = core.instances.create(consumer_descriptor.id, consumer_descriptor.capability_providers[0], name="consumer")
     controller = AIcCoreUiController(core)
 
     requirements = controller.requirements()
@@ -82,8 +82,8 @@ def test_create_provider_instance_can_start_unconfigured():
     })
     descriptor = AIcComponentDescriptor(
         "vendor.configurable", 1,
-        providers=(AIcProviderDefinitionDescriptor(
-            "p", "vendor.configurable-cap", (1,), "vendor:Provider",
+        capability_providers=(AIcProviderDefinitionDescriptor(
+            "p", (AIcProvidedCapability("vendor.configurable-cap", (1,)),), "vendor:Provider",
             configuration_schema=AIcPersistedSchemaDescriptor(
                 "required-config", 1, (1,), resource_name="required-config_1.json"
             ),
@@ -147,7 +147,7 @@ def test_entitlement_status_exposes_effective_permission_metadata():
     core = AIcApplicationComponentCore()
     descriptor = AIcComponentDescriptor(
         "vendor.entitled", 1,
-        providers=(AIcProviderDefinitionDescriptor("p", "vendor.entitled.cap", (1,), "vendor:Provider"),),
+        capability_providers=(AIcProviderDefinitionDescriptor("p", (AIcProvidedCapability("vendor.entitled.cap", (1,)),), "vendor:Provider"),),
         provided_capability_entitlements=(AIcCapabilityEntitlementDescriptor(
             "vendor.entitled.cap", 1,
             (AIcPermissionDescriptor("BASIC"),),
@@ -177,11 +177,11 @@ def test_catalog_browse_download_install_ui_flow(tmp_path):
     descriptor = '''component:
   id: com.example.ui-demo
   version: 2
-  providers:
+  capability_providers:
     - id: main
-      capability:
-        id: com.example.ui-cap
-        versions: [1]
+      capabilities:
+        - id: com.example.ui-cap
+          versions: [1]
       implementation_class: demo:Provider
   entitlement_licensing_scopes:
     - type: USER
@@ -253,7 +253,7 @@ def test_catalog_browse_download_install_ui_flow(tmp_path):
 '''))
     current_descriptor = AIcComponentDescriptor(
         "com.example.ui-demo", 1,
-        providers=(AIcProviderDefinitionDescriptor("main", "com.example.ui-cap", (1,), "demo:Provider"),),
+        capability_providers=(AIcProviderDefinitionDescriptor("main", (AIcProvidedCapability("com.example.ui-cap", (1,)),), "demo:Provider"),),
     )
     core._installed[current_descriptor.id] = AIcInstalledComponent(
         AIcDiscoveredComponent(current_descriptor, None, "test")

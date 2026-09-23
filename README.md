@@ -160,10 +160,10 @@ Canonical AAC JSON schemas are technology-neutral source resources under `aac/co
 
 ### III. Component descriptors and capability contracts
 
-Component descriptors are packaged YAML resources loaded without executing arbitrary component business logic. A descriptor can declare:
+Component descriptors are packaged YAML resources loaded without executing arbitrary component business logic. The descriptor field for component-declared capability implementation roles is explicitly named `capability_providers`; it does not represent data-source instances. Each entry is a capability provider definition from which Core may create configured provider instances. A descriptor can declare:
 
 - stable component identity and component version;
-- provider definitions and initial provider instances;
+- capability provider definitions and initial provider instances;
 - provided capability IDs and finite supported contract versions;
 - consumer requirements, cardinality and mandatory/optional semantics;
 - requested capability authorizations;
@@ -182,9 +182,9 @@ The normalized invocation layer validates contract-declared inputs and outputs a
 
 ### IV. Provider instances, graph resolution and lifecycle
 
-Provider definitions are implementation templates. Concrete providers in the runtime graph are **Core-managed provider instances** with immutable generated IDs, editable display names, configuration and lifecycle state.
+Capability provider definitions are implementation templates. Concrete providers in the runtime graph are **Core-managed provider instances** with immutable generated IDs, editable display names, configuration and lifecycle state. One capability provider definition/instance may expose multiple capability/version sets on the same runtime object; a provider instance is not duplicated per capability. Instances also carry `READ_ONLY`/`READ_WRITE` access mode for domains that enforce mutating versus non-mutating use.
 
-Consumer requirements belong to the provider definition that consumes the capability. Core resolves requirements against concrete provider instances and persists explicit binding preferences by provider-instance ID.
+Consumer requirements belong to the capability provider definition that consumes the capability. Core resolves requirements against concrete provider instances and persists explicit binding preferences by provider-instance ID.
 
 The resolved runtime graph is a provider-instance DAG. Declarative component relationships may be cyclic, but the concrete resolved provider-instance graph must not contain invocation cycles; direct self-binding is the length-one case of the same rule.
 
@@ -238,7 +238,9 @@ Components declare `data_entity_support` with readable/writable version sets, `p
 
 Concrete record relationships are declared only in the canonical schema at the referencing field through `x-aac-data-entity-reference`. The annotation identifies the target schema ID; the field value supplies the target UID. References therefore survive target schema-version migration.
 
-Data Entity migration is semantic and side-effect-free. `AIcDataEntityMigrationService` classifies representations as `DIRECT`, `TRANSFORMED` or `UNSUPPORTED` and can normalize toward the preferred write version in memory while preserving UID, record revision and ACTIVE/TOMBSTONE state. Physical Data Entity storage operations/provisioning are intentionally deferred to a later generic storage capability revision.
+Data Entity migration is semantic and side-effect-free. `AIcDataEntityMigrationService` classifies representations as `DIRECT`, `TRANSFORMED` or `UNSUPPORTED` and can normalize toward the preferred write version in memory while preserving UID, record revision and ACTIVE/TOMBSTONE state. Physical Data Entity access is now standardized through six built-in storage capabilities (`get-record`, `query-records`, `apply-direct-record-changes`, `inspect-storage-support`, `ensure-storage-support`, `retire-storage-support`).
+
+The Python runtime also contains the first typed Data Entity facade layer. A provider instance may expose several storage capabilities at once and is always selected explicitly; `READ_ONLY`/`READ_WRITE` is stored per instance. `(schema_id, schema_version)` may register a generated versioned view interface plus codec, while `schema_id` registers the current implementation/factory and canonical storage version. A stored older payload is decoded through its stored-version codec into the current polymorphic implementation, and consumers may receive that same object through another explicitly supported versioned view. Saving always uses the current canonical codec rather than the consumer view.
 
 Configuration retains its separate scoped/provider semantics but shares the same separation between semantic schema version and persistence `record_revision`.
 
@@ -322,7 +324,7 @@ A crash after the active-set commit never causes Core to guess a partial compone
 
 If activation fails normally before the manifest commit, Core performs the same rollback in-process. If journal cleanup cannot finish after the manifest commit, the replacement remains committed and startup recovery completes cleanup later.
 
-After successful cutover, configuration persistence convergence is independent and retryable. Data Entity physical convergence is deliberately not performed until the generic Data Entity storage capability is specified; the Core model already defines semantic compatibility and pure migrations without leaking a concrete storage implementation.
+After successful cutover, configuration and Data Entity persistence convergence are independent and retryable. Data Entity convergence uses the generic storage capabilities and remains outside the tentative component-cutover rollback boundary; Core owns semantic validation/migration policy while the explicitly selected provider instance owns physical representation and atomic changesets.
 
 A newer persisted representation does not automatically block a later downgrade. If the older target component cannot interpret a provider contribution, that contribution becomes unavailable; resolution may fall back to other providers/defaults/`UNDEFINED`. The replacement plan remains compatible when these are degradation warnings rather than true target-graph or activation blockers.
 
@@ -360,7 +362,7 @@ The host product owns the `QApplication` and event loop. AAC supplies reusable w
 
 ### XIII. Generated bindings and presentation metadata
 
-Canonical capability contracts may define operation request/result schemas and authorization requirements. `AIcPythonCapabilityBindingGenerator` and `devtools/src/product/python/generate_capability_bindings.py` generate Python interfaces/DTOs from those contracts, including operation IDs and authorization metadata.
+Canonical capability contracts may define operation request/result schemas and authorization requirements. `AIcPythonCapabilityBindingGenerator` and `devtools/src/product/python/generate_capability_bindings.py` generate Python interfaces/DTOs from those contracts, including operation IDs and authorization metadata. Generated behavioral interfaces and their methods are capability-version-qualified (`AIig..._N`, `operation_N(...)`) so one provider object can safely implement several versions/capabilities at once. `AIcPythonDataEntityBindingGenerator` similarly generates versioned Data Entity view interfaces with version-suffixed field accessors plus version-specific codecs.
 
 `AIcDisplayText` provides localization-ready presentation metadata with fallback text, opaque resource key, or both. JSON Schema-driven fields can use AAC presentation extensions with standard JSON Schema title/description as fallback.
 

@@ -44,6 +44,8 @@
         "TOMBSTONE"
       ]
     },
-    "payload": {}
+    "payload": {
+      "type": "object"
+    }
   }
 }

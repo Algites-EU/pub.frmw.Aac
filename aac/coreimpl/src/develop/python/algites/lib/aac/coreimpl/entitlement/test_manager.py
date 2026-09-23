@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 
 from algites.lib.aac.coreintf.entitlement import AIcEntitlementLicensingScope
+from algites.lib.aac.coreintf.contracts import AIcProvidedCapability
 from algites.lib.aac.coreintf.descriptor import (
     AIcCapabilityEntitlementDescriptor, AIcComponentDescriptor, AIcEntitlementLicensingScopeDescriptor, AIcPermissionDescriptor, AIcProviderDefinitionDescriptor,
 )
@@ -14,7 +15,7 @@ from algites.lib.aac.coreimpl.entitlement import AIcEntitlementManager, AIcEntit
 def _descriptor():
     return AIcComponentDescriptor(
         "vendor.foo", 1,
-        providers=(AIcProviderDefinitionDescriptor("main", "vendor.foo.document", (1,), "x:Provider"),),
+        capability_providers=(AIcProviderDefinitionDescriptor("main", (AIcProvidedCapability("vendor.foo.document", (1,)),), "x:Provider"),),
         entitlement_licensing_scopes=(
             AIcEntitlementLicensingScopeDescriptor("USER"),
             AIcEntitlementLicensingScopeDescriptor("WORKSPACE"),

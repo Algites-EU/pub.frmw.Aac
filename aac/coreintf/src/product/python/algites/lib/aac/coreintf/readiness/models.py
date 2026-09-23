@@ -63,7 +63,7 @@ class AIcProviderReadiness:
     application_scope_id: str
     component_id: str
     provider_instance_id: str
-    capability_id: str
+    capability_ids: tuple[str, ...]
     state: AInReadinessState
     reasons: tuple[AIcReadinessReason, ...] = ()
 

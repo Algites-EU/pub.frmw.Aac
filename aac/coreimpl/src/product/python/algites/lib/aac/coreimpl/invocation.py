@@ -1,9 +1,13 @@
 from __future__ import annotations
 
 import copy
+import dataclasses
+import inspect
+import types
 from contextvars import ContextVar
 from contextlib import contextmanager
-from typing import Callable, Mapping
+from enum import Enum
+from typing import Any, Callable, Mapping, Union, get_args, get_origin, get_type_hints
 from uuid import uuid4
 
 from algites.lib.aac.coreintf.instances import AIcBinding
@@ -33,6 +37,66 @@ def authorization_principal_context(principal: AIcAuthorizationPrincipal | None)
         _CURRENT_AUTHORIZATION_PRINCIPAL.reset(token)
 
 
+
+
+def _generated_capability_invoker(provider: object, capability_id: str, capability_version: int):
+    """Return the generated invoker owned by the exact capability interface in the provider MRO."""
+    for candidate in type(provider).__mro__:
+        namespace = candidate.__dict__
+        if (
+            namespace.get("__aac_capability_id__") == capability_id
+            and namespace.get("__aac_capability_version__") == capability_version
+        ):
+            invoker = namespace.get("__aac_invoke__")
+            if invoker is not None:
+                return invoker
+    return None
+
+def _coerce_invocation_value(annotation: object | None, value: object) -> object:
+    if annotation is None or annotation is inspect._empty or annotation is Any:
+        return value
+    origin = get_origin(annotation)
+    args = get_args(annotation)
+    if origin in (Union, types.UnionType):
+        if value is None and type(None) in args:
+            return None
+        for candidate in args:
+            if candidate is type(None):
+                continue
+            try:
+                return _coerce_invocation_value(candidate, value)
+            except (TypeError, ValueError, KeyError):
+                pass
+        return value
+    if inspect.isclass(annotation) and issubclass(annotation, Enum):
+        return annotation(value)
+    if inspect.isclass(annotation) and dataclasses.is_dataclass(annotation):
+        if not isinstance(value, Mapping):
+            raise TypeError(f"cannot coerce {type(value).__name__} to dataclass {annotation.__name__}")
+        hints = get_type_hints(annotation)
+        return annotation(**{
+            field.name: _coerce_invocation_value(hints.get(field.name), value.get(field.name))
+            for field in dataclasses.fields(annotation)
+        })
+    if origin in (tuple, list) and isinstance(value, (tuple, list)):
+        item_type = args[0] if args else None
+        converted = [_coerce_invocation_value(item_type, item) for item in value]
+        return tuple(converted) if origin is tuple else converted
+    return value
+
+
+def _invoke_versioned_method(method, arguments: Mapping[str, object]):
+    """Invoke a hand-written versioned SPI method using request-object or keyword style."""
+    parameters = tuple(inspect.signature(method).parameters.values())
+    hints = get_type_hints(method)
+    if len(parameters) == 1 and parameters[0].name not in arguments:
+        parameter = parameters[0]
+        annotation = hints.get(parameter.name)
+        if parameter.name == "request" or (inspect.isclass(annotation) and dataclasses.is_dataclass(annotation)):
+            return method(_coerce_invocation_value(annotation, dict(arguments)))
+    return method(**dict(arguments))
+
+
 class AIcObjectCapabilityEndpoint(AIiCapabilityEndpoint):
     """In-process Python profile adapter using operation id -> method name mapping."""
 
@@ -41,12 +105,17 @@ class AIcObjectCapabilityEndpoint(AIiCapabilityEndpoint):
 
     def invoke(self, invocation_input: AIcInvocationInput) -> AIcInvocationOutput:
         try:
-            generated_invoke = getattr(self.provider, "__aac_invoke__", None)
+            generated_invoke = _generated_capability_invoker(
+                self.provider, invocation_input.capability_id, invocation_input.capability_version
+            )
             if generated_invoke is not None:
-                result = generated_invoke(invocation_input.operation_id, dict(invocation_input.arguments))
+                result = generated_invoke(self.provider, invocation_input.operation_id, dict(invocation_input.arguments))
             else:
-                method = getattr(self.provider, invocation_input.operation_id)
-                result = method(**dict(invocation_input.arguments))
+                method = getattr(
+                    self.provider,
+                    f"{invocation_input.operation_id}_{invocation_input.capability_version}",
+                )
+                result = _invoke_versioned_method(method, dict(invocation_input.arguments))
             return AIcInvocationOutput(True, result=result)
         except AttributeError as exc:
             return AIcInvocationOutput(False, error={"type": "AttributeError", "message": str(exc)})

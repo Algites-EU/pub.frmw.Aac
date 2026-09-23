@@ -1,0 +1,20 @@
+capability:
+  id: _AAC.data-entity.get-record
+  version: 1
+  group_id: _AAC.data-entity.loading
+  name:
+    text: Get Data Entity record
+    resource_key: aac.data.entity.get.record.name
+  description:
+    text: Loads one stored Data Entity record by logical identity.
+    resource_key: aac.data.entity.get.record.description
+operations:
+  - id: get
+    name:
+      text: Get record
+      resource_key: aac.data.entity.get.record.operation.get.name
+    description:
+      text: Loads one stored Data Entity record by logical identity.
+      resource_key: aac.data.entity.get.record.operation.get.description
+    input_schema: data-entity-get-record-request_1.json
+    output_schema: data-entity-get-record-result_1.json

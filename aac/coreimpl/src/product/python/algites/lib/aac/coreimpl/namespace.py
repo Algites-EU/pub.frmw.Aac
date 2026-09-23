@@ -27,8 +27,10 @@ class AIcNamespacePolicy:
 
     def validate(self, descriptor: AIcComponentDescriptor, trusted_prefixes: tuple[str, ...] = ()) -> None:
         identities = [descriptor.id]
-        identities.extend(provider.capability_id for provider in descriptor.providers)
-        for provider in descriptor.providers:
+        identities.extend(
+            capability.id for provider in descriptor.capability_providers for capability in provider.capabilities
+        )
+        for provider in descriptor.capability_providers:
             identities.extend(requirement.capability_id for requirement in provider.requirements)
         for identity in identities:
             for prefix in self._reserved:

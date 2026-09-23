@@ -1,0 +1,20 @@
+capability:
+  id: _AAC.data-entity.retire-storage-support
+  version: 1
+  group_id: _AAC.data-entity.storage-management
+  name:
+    text: Retire Data Entity storage support
+    resource_key: aac.data.entity.retire.storage.support.name
+  description:
+    text: Marks physical storage support as no longer required for future writes without implying destructive purge.
+    resource_key: aac.data.entity.retire.storage.support.description
+operations:
+  - id: retire
+    name:
+      text: Retire storage support
+      resource_key: aac.data.entity.retire.storage.support.operation.retire.name
+    description:
+      text: Marks physical storage support as no longer required for future writes without implying destructive purge.
+      resource_key: aac.data.entity.retire.storage.support.operation.retire.description
+    input_schema: data-entity-retire-storage-support-request_1.json
+    output_schema: data-entity-retire-storage-support-result_1.json

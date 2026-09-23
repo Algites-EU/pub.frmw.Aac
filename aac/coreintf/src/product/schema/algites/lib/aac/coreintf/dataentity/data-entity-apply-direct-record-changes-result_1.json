@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.data-entity-apply-direct-record-changes-result",
+  "x-aac-schema-version": 1,
+  "title": "Data Entity Apply Direct Record Changes Result 1",
+  "type": "object",
+  "required": [
+    "changes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "changes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "change_id",
+              "type",
+              "schema_id",
+              "uid",
+              "record_revision"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "change_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "schema_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uid": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "const": "CREATE_RECORD"
+              },
+              "record_revision": {
+                "oneOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "change_id",
+              "type",
+              "schema_id",
+              "uid",
+              "record_revision"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "change_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "schema_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uid": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "const": "REPLACE_RECORD"
+              },
+              "record_revision": {
+                "oneOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "change_id",
+              "type",
+              "schema_id",
+              "uid"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "change_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "schema_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uid": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "const": "DELETE_RECORD"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

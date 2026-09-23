@@ -76,6 +76,26 @@ PERSISTENCE CONVERGENCE
 
 A failed persistence-convergence write MUST NOT retroactively invalidate or roll back an already successful component replacement.
 
+The phase boundary is easier to see as one cutover transaction followed by independent convergence:
+
+```mermaid
+flowchart LR
+    CURRENT["Current Active State"] --> PREFLIGHT["Side-Effect-Free<br/>Target Preflight"]
+    PREFLIGHT --> STAGE["Acquire / Verify / Stage"]
+    STAGE --> CUTOVER["Runtime Cutover<br/>+ Core Topology Changes"]
+    CUTOVER --> COMMIT["Durable Component-State Commit"]
+    COMMIT --> TARGET["Target Active State"]
+    TARGET --> CONVERGE["Independent Persistence Convergence"]
+
+    PREFLIGHT -. "reject" .-> CURRENT
+    STAGE -. "failure" .-> CURRENT
+    CUTOVER -. "before durable commit" .-> ROLLBACK["Transaction Rollback"]
+    ROLLBACK --> CURRENT
+    CONVERGE -. "retryable failure" .-> TARGET
+```
+
+Persistence convergence starts only after the target component state is authoritative; its later failure is diagnosed/retried independently rather than undoing a successful component transaction.
+
 # II. Side-Effect-Free Target Preflight
 
 ## II.1 Target component set
@@ -110,7 +130,7 @@ Mandatory requirements MUST resolve. Explicit provider-instance selections, qual
 
 ## II.4 Provider-instance reconciliation
 
-Core MUST determine whether existing persistent provider instances remain valid under the target provider definitions. If a target removes or incompatibly changes a provider definition referenced by persistent instances/bindings, the transaction MUST either include an explicit supported provider-instance reconciliation/removal path or be rejected.
+Core MUST determine whether existing persistent provider instances remain valid under the target capability provider definitions. If a target removes or incompatibly changes a capability provider definition referenced by persistent instances/bindings, the transaction MUST either include an explicit supported provider-instance reconciliation/removal path or be rejected.
 
 Provider-instance reconciliation that changes Core-owned topology is part of the component replacement transaction. External component configuration persistence is not.
 
@@ -201,7 +221,11 @@ Target preflight evaluates the target component descriptors' `data_entity_suppor
 
 For every Data Entity schema/version that a target component claims to read or write, the corresponding canonical schema definition must be available in the target schema environment. Mandatory `data_entity_requirements` must have at least one compatible target version available through the target component/schema set.
 
-Concrete Data Entity records are not mutated during preflight. Existing stored representations remain a datasource concern. Once Data Entity storage capabilities are defined, preflight may additionally compare actual datasource inventory with the target semantic support graph, but this revision does not invent that persistence interface.
+Concrete Data Entity records are not mutated during preflight. Existing stored representations remain a datasource concern. When a Data Entity storage provider is available, preflight MAY use `inspect-storage-support` to compare the provider's physical support state with the target semantic support graph. Inspection is read-only; any required `ensure-storage-support`, `retire-storage-support`, or record mutation remains part of the explicit lifecycle/upgrade execution plan rather than tentative target activation.
+
+Target-state compatibility SHOULD account for the runtime Data Entity view model separately from physical storage versions. A current implementation may explicitly implement several versioned view interfaces over one internal state, so a consumer requiring view 2 can remain compatible with a canonical implementation/storage version 4 without forcing the record to be persisted as version 2. Conversely, numeric schema ordering does not imply view compatibility; only registered/supported view interfaces count.
+
+Preflight therefore distinguishes at least stored schema inventory, current implementation canonical version, and required consumer view versions. Physical `stored_schema_version_filter` queries may be used to identify records that still require convergence before a historical decoder/view can safely be retired.
 
 Data Entity migration is semantic and side-effect-free: Core may determine whether a representation is `DIRECT`, `TRANSFORMED` or `UNSUPPORTED`, but it does not physically rewrite records as part of tentative target activation.
 
@@ -437,9 +461,11 @@ If write-back fails because of network loss, authorization change, revision conf
 
 ## V.3 Data Entity convergence
 
-The current AAC Core Data Entity model intentionally stops before physical Data Entity persistence convergence. It defines schema support, references, envelope/state and pure migrations, but no generic CREATE/REPLACE/DELETE storage capability yet.
+AAC defines generic capability boundaries for physical Data Entity convergence. Reads use `get-record` / `query-records`; direct atomic record changes use `apply-direct-record-changes`; physical schema-support inventory and reconciliation use `inspect-storage-support`, `ensure-storage-support` and `retire-storage-support`. Core remains responsible for schema compatibility, validation, pure migration planning and policy, while the selected storage provider remains responsible for physical representation, atomic mutation and revision/CAS enforcement.
 
-Therefore successful component replacement MUST NOT attempt to manipulate Data Entity storage through legacy extension stores or product-specific paths. A later storage specification will define conditional record replacement, transactions, provisioning, inventory and cleanup while preserving the semantic model defined here.
+Each convergence operation is directed at one concrete provider instance. A provider may implement several of these capability interfaces on the same runtime object. AAC does not split one direct changeset across providers and does not define a distributed transaction coordinator in the baseline; all records in one atomic changeset must be supported by the selected provider instance.
+
+Successful component replacement MUST NOT manipulate Data Entity storage through legacy extension stores or product-specific persistence paths. When the upgrade plan requires physical convergence, it MUST use the generic storage capabilities and re-read/revalidate provider state at the applicable mutation boundary. `CREATE_RECORD`, `REPLACE_RECORD` and `DELETE_RECORD` may be grouped in one atomic direct changeset; replace/delete use the expected storage revision. Logical tombstoning is represented by replacing a record with state `TOMBSTONE`, while `DELETE_RECORD` is physical deletion. Physical support retirement is deliberately non-destructive: `retire-storage-support` MUST NOT be treated as an implicit schema/table/file purge. Complex indirect split/merge mutation remains reserved for a future explicit capability.
 
 ## V.4 Retry policy
 

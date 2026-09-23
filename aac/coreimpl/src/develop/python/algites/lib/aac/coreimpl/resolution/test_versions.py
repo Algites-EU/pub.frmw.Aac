@@ -1,6 +1,6 @@
 import pytest
 
-from algites.lib.aac.coreintf.contracts import AIcCapabilityContract, AIcCapabilityOperation, AIcCapabilityRef, AInConsumerCardinality
+from algites.lib.aac.coreintf.contracts import AIcCapabilityContract, AIcCapabilityOperation, AIcCapabilityRef, AIcProvidedCapability, AInConsumerCardinality
 from algites.lib.aac.coreintf.descriptor import AIcConsumerRequirementDescriptor
 from algites.lib.aac.coreintf.instances import AIcProviderInstance, AInProviderInstanceState
 from algites.lib.aac.coreimpl.contracts import AIcActiveContractCatalog
@@ -9,13 +9,14 @@ from algites.lib.aac.coreimpl.resolution import AIcBindingResolver
 
 
 def candidate(instance_id, versions=(1, 2)):
-    return AIcProviderInstance(instance_id, "c", "p", instance_id, "x.cap", versions, "m:C", state=AInProviderInstanceState.CONFIGURED)
+    return AIcProviderInstance(instance_id, "c", "p", instance_id, (AIcProvidedCapability("x.cap", versions),), "m:C", state=AInProviderInstanceState.CONFIGURED)
 
 
 def catalog():
     result = AIcActiveContractCatalog()
+    result.admit_builtin_contracts()
     for version in (1, 2):
-        result.admit(AIcCapabilityContract(AIcCapabilityRef("x.cap", version), (AIcCapabilityOperation("run", "In", "Out"),)))
+        result.admit(AIcCapabilityContract(AIcCapabilityRef("x.cap", version), "_AAC.runtime", (AIcCapabilityOperation("run", "In", "Out"),)))
     return result
 
 

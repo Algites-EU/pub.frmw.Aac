@@ -75,7 +75,7 @@ class AIcReadinessEvaluator:
             application_scope_id,
             component_id,
             provider_instance_id,
-            provider.capability_id,
+            tuple(capability.id for capability in provider.capabilities),
             state,
             tuple(reasons),
         )
@@ -86,7 +86,7 @@ class AIcReadinessEvaluator:
             static.application_scope_id,
             static.component_id,
             static.provider_instance_id,
-            static.capability_id,
+            static.capability_ids,
             worst_readiness(static.state, runtime.state),
             static.reasons + runtime.reasons,
         )
@@ -112,7 +112,8 @@ class AIcReadinessEvaluator:
     def capabilities(application_scope_id: str, reports: tuple[AIcProviderReadiness, ...]) -> tuple[AIcCapabilityReadiness, ...]:
         grouped: dict[str, list[AIcProviderReadiness]] = defaultdict(list)
         for report in reports:
-            grouped[report.capability_id].append(report)
+            for capability_id in report.capability_ids:
+                grouped[capability_id].append(report)
         result = []
         for capability_id, values in sorted(grouped.items()):
             states = tuple(item.state for item in values)

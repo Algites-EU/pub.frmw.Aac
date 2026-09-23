@@ -17,10 +17,16 @@ from .configuration import (
     AIcStaticConfigurationScopeResolver,
 )
 from .configuration_providers import AIcConfigurationDocumentCodec, AIcFileSystemConfigurationProvider, AIcHttpConfigurationProvider
-from .contracts import AIcActiveContractCatalog, AIcAdmittedContract
-from .codegen import AIcPythonCapabilityBindingGenerator
+from .contracts import AIcActiveContractCatalog, AIcAdmittedContract, AIcCapabilityGroupCatalog, AIcAdmittedCapabilityGroup
+from .codegen import AIcPythonCapabilityBindingGenerator, AIcPythonDataEntityBindingGenerator
 from .core import AIcApplicationComponentCore, AIcInstalledComponent, AIcUpgradeOutcome
 from .descriptor import AIcDescriptorLoader, AIcDiscoveredComponent
+from .dataentity import (
+    AIcApplyDirectRecordChangesFacade, AIcDataEntityImplementationRegistry, AIcDataEntityMarshaller,
+    AIcDataEntityProviderFacade, AIcDataEntityQueryPage, AIcDataEntityViewRegistry, AIcEnsureStorageSupportFacade,
+    AIcGetRecordFacade, AIcInspectStorageSupportFacade, AIcProviderCapabilityInvoker, AIcQueryRecordsFacade,
+    AIcRetireStorageSupportFacade,
+)
 from .entitlement_documents import AIcEntitlementDocumentLoader, AIcEntitlementIssuingRequestLoader, entitlement_request_digest
 from .entitlement_providers import AIcFileEntitlementProvider
 from .entitlement_requests import AIcEntitlementIssuingRequestService

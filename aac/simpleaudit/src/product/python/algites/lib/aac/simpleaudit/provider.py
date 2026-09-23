@@ -29,7 +29,7 @@ class AIcSimpleAuditObserver(AIiProviderRuntime, AIiObservationProvider):
         if self._output_type == "FILE" and not self._path:
             raise ValueError("output.path is required for FILE output")
 
-    def observe(self, observation_input: AIcObservationInput) -> AIcObservationOutput:
+    def observe_1(self, observation_input: AIcObservationInput) -> AIcObservationOutput:
         line = self._serialize(observation_input)
         if self._output_type == "STDOUT":
             print(line, file=sys.stdout, flush=True)

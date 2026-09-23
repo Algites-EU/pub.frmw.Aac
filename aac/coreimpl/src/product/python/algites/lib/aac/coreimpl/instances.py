@@ -4,7 +4,8 @@ from dataclasses import replace
 from uuid import uuid4
 
 from algites.lib.aac.coreintf.descriptor import AIcComponentDescriptor, AIcProviderDefinitionDescriptor
-from algites.lib.aac.coreintf.instances import AIcProviderInstance, AInProviderInstanceState
+from algites.lib.aac.coreintf.contracts import AIcProvidedCapability
+from algites.lib.aac.coreintf.instances import AIcProviderInstance, AInProviderAccessMode, AInProviderInstanceState
 from algites.lib.aac.coreintf.persistence import AIcStateMutation, AIiStateStore
 
 from .persistence import AIcInMemoryStateStore, state_delete_mutation, state_put_mutation
@@ -50,7 +51,7 @@ class AIcProviderInstanceRegistry:
                 continue
             if name is not None and instance.name != name:
                 continue
-            if capability_id is not None and instance.capability_id != capability_id:
+            if capability_id is not None and not instance.supports_capability(capability_id):
                 continue
             if states is not None and instance.state not in states:
                 continue
@@ -64,6 +65,7 @@ class AIcProviderInstanceRegistry:
         *,
         name: str = "default",
         configuration: dict[str, object] | None = None,
+        access_mode: AInProviderAccessMode = AInProviderAccessMode.READ_WRITE,
         state: AInProviderInstanceState = AInProviderInstanceState.CONFIGURED,
     ) -> AIcProviderInstance:
         return AIcProviderInstance(
@@ -71,9 +73,9 @@ class AIcProviderInstanceRegistry:
             component_id=component_id,
             provider_definition_id=provider.id,
             name=name,
-            capability_id=provider.capability_id,
-            capability_versions=provider.capability_versions,
+            capabilities=provider.capabilities,
             implementation_class=provider.implementation_class,
+            access_mode=access_mode,
             configuration=dict(configuration or {}),
             configuration_schema=provider.configuration_schema.resource_name if provider.configuration_schema is not None else None,
             state=state,
@@ -95,10 +97,11 @@ class AIcProviderInstanceRegistry:
         *,
         name: str = "default",
         configuration: dict[str, object] | None = None,
+        access_mode: AInProviderAccessMode = AInProviderAccessMode.READ_WRITE,
         state: AInProviderInstanceState = AInProviderInstanceState.CONFIGURED,
     ) -> AIcProviderInstance:
         instance = self.build(
-            component_id, provider, name=name, configuration=configuration, state=state
+            component_id, provider, name=name, configuration=configuration, access_mode=access_mode, state=state
         )
         self.commit((instance,))
         return instance
@@ -110,16 +113,15 @@ class AIcProviderInstanceRegistry:
         return instance
 
     def reconcile_descriptor(self, descriptor: AIcComponentDescriptor) -> tuple[AIcProviderInstance, ...]:
-        providers = {provider.id: provider for provider in descriptor.providers}
+        providers = {provider.id: provider for provider in descriptor.capability_providers}
         updated = []
         for instance in self.find(component_id=descriptor.id):
             provider = providers.get(instance.provider_definition_id)
             if provider is None:
-                raise ValueError(f"upgrade removed provider definition {instance.provider_definition_id!r} while instances still exist")
+                raise ValueError(f"upgrade removed capability provider definition {instance.provider_definition_id!r} while instances still exist")
             updated.append(replace(
                 instance,
-                capability_id=provider.capability_id,
-                capability_versions=provider.capability_versions,
+                capabilities=provider.capabilities,
                 implementation_class=provider.implementation_class,
                 configuration_schema=provider.configuration_schema.resource_name if provider.configuration_schema is not None else None,
                 state=AInProviderInstanceState.INACTIVE,
@@ -130,12 +132,15 @@ class AIcProviderInstanceRegistry:
 
     def reconcile_initial_instances(self, descriptor: AIcComponentDescriptor) -> tuple[AIcProviderInstance, ...]:
         staged: list[AIcProviderInstance] = []
-        for provider in descriptor.providers:
+        for provider in descriptor.capability_providers:
             for declared in provider.initial_instances:
                 existing = self.find(component_id=descriptor.id, provider_definition_id=provider.id, name=declared.name)
                 if existing:
                     continue
-                staged.append(self.build(descriptor.id, provider, name=declared.name, configuration=dict(declared.configuration)))
+                staged.append(self.build(
+                    descriptor.id, provider, name=declared.name, configuration=dict(declared.configuration),
+                    access_mode=declared.access_mode,
+                ))
         if staged:
             self.commit(tuple(staged))
         return tuple(staged)
@@ -162,9 +167,12 @@ def _instance_to_dict(instance: AIcProviderInstance) -> dict[str, object]:
         "component_id": instance.component_id,
         "provider_definition_id": instance.provider_definition_id,
         "name": instance.name,
-        "capability_id": instance.capability_id,
-        "capability_versions": list(instance.capability_versions),
+        "capabilities": [
+            {"id": capability.id, "versions": list(capability.versions)}
+            for capability in instance.capabilities
+        ],
         "implementation_class": instance.implementation_class,
+        "access_mode": instance.access_mode.value,
         "configuration": dict(instance.configuration),
         "configuration_schema": instance.configuration_schema,
         "state": instance.state.value,
@@ -179,9 +187,12 @@ def _instance_from_dict(raw: dict[str, object] | object) -> AIcProviderInstance:
         component_id=str(raw["component_id"]),
         provider_definition_id=str(raw["provider_definition_id"]),
         name=str(raw["name"]),
-        capability_id=str(raw["capability_id"]),
-        capability_versions=tuple(int(v) for v in raw["capability_versions"]),
+        capabilities=tuple(
+            AIcProvidedCapability(str(item["id"]), tuple(int(version) for version in item["versions"]))
+            for item in raw["capabilities"]
+        ),
         implementation_class=str(raw["implementation_class"]),
+        access_mode=AInProviderAccessMode(str(raw.get("access_mode", AInProviderAccessMode.READ_WRITE.value))),
         configuration=dict(raw.get("configuration", {})),
         configuration_schema=str(raw["configuration_schema"]) if raw.get("configuration_schema") is not None else None,
         state=AInProviderInstanceState(str(raw.get("state", AInProviderInstanceState.CONFIGURED.value))),

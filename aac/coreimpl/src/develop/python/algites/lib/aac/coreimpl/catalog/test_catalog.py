@@ -29,11 +29,11 @@ def _wheel(root: Path) -> tuple[Path, str, str]:
     descriptor = '''component:
   id: com.example.demo
   version: 2
-  providers:
+  capability_providers:
     - id: main
-      capability:
-        id: com.example.cap
-        versions: [1, 2]
+      capabilities:
+        - id: com.example.cap
+          versions: [1, 2]
       implementation_class: demo:Provider
       requirements:
         - id: storage

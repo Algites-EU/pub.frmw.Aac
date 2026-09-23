@@ -76,7 +76,7 @@ Reason codes are stable machine-oriented identifiers. Human-readable text is pre
 
 ## VI. Declarative readiness requirements
 
-A provider definition MAY declare static readiness requirements for values whose absence can be determined by Core without invoking component business logic.
+A capability provider definition MAY declare static readiness requirements for values whose absence can be determined by Core without invoking component business logic.
 
 Baseline sources are:
 
@@ -148,6 +148,28 @@ DEGRADED    otherwise
 A component with no provider instances is `READY` unless a product profile defines another component-level readiness source.
 
 Consumers SHOULD use capability/provider readiness rather than only component aggregate readiness when deciding whether a specific operation can proceed.
+
+Readiness flows from narrow scopes upward; higher aggregates do not erase the detailed reasons below them:
+
+```mermaid
+flowchart TB
+    DECL["Declarative Requirements"] --> P1["Provider Instance Readiness"]
+    RUNTIME["Runtime Report"] --> P1
+    CONFIG["Effective Configuration / Context"] --> P1
+
+    P1 --> CAP["Capability Aggregate Readiness"]
+    P2["Other Provider Instance Readiness"] --> CAP
+
+    P1 --> COMPONENT["Component Aggregate Readiness"]
+    P2 --> COMPONENT
+
+    P1 --> REASONS["Structured Reasons"]
+    P2 --> REASONS
+    CAP --> UI["Consumer / UI Decision"]
+    REASONS --> UI
+```
+
+A consumer interested in one operation or capability should therefore inspect the corresponding provider/capability readiness rather than treating component aggregate readiness as a universal gate.
 
 ## IX. Configuration, `UNDEFINED`, and unsupported contributions
 

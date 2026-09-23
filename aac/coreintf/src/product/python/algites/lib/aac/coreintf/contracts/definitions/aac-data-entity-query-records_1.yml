@@ -1,0 +1,20 @@
+capability:
+  id: _AAC.data-entity.query-records
+  version: 1
+  group_id: _AAC.data-entity.loading
+  name:
+    text: Query Data Entity records
+    resource_key: aac.data.entity.query.records.name
+  description:
+    text: Queries stored Data Entity records through provider-independent technical selectors.
+    resource_key: aac.data.entity.query.records.description
+operations:
+  - id: query
+    name:
+      text: Query records
+      resource_key: aac.data.entity.query.records.operation.query.name
+    description:
+      text: Queries stored Data Entity records through provider-independent technical selectors.
+      resource_key: aac.data.entity.query.records.operation.query.description
+    input_schema: data-entity-query-records-request_1.json
+    output_schema: data-entity-query-records-result_1.json

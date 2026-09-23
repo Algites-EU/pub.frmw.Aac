@@ -168,6 +168,29 @@ The journal records intent and recovery material. It does not by itself define t
 
 Recovery MUST prefer that authoritative marker over a possibly stale journal phase when a crash occurred between durability points.
 
+The journal and authoritative commit marker play different roles in a crash-safe transaction:
+
+```mermaid
+sequenceDiagram
+    participant T as Transaction Coordinator
+    participant J as Durable Journal
+    participant D as Persistence Domain
+    participant M as Authoritative Commit Marker
+
+    T->>J: write PREPARED + recovery material
+    T->>D: validate read set under mutation boundary
+    T->>J: write COMMIT_STARTED
+    T->>D: apply complete write set
+    T->>M: persist target commit identity/revision
+    T->>J: write COMMITTED
+    T->>J: cleanup recovery material
+    T->>J: write CLEANUP_COMPLETED
+
+    Note over J,M: After a crash, recovery trusts M to decide source-vs-target convergence.
+```
+
+The journal explains intent and recovery progress; the authoritative marker determines whether recovery proceeds backward or completes forward.
+
 ## IX. Startup recovery
 
 An unfinished Core-owned transaction MUST be recovered before conflicting mutation of the same persistence domain proceeds.
@@ -192,15 +215,25 @@ The actual replacement may hold the Core mutation lock across the short commit/c
 
 ## XI. Configuration and Data Entities
 
-Configuration providers and future Data Entity stores use the same revision-token/CAS principles, but they remain distinct semantic APIs.
+Configuration providers and Data Entity storage providers use the same revision-token/CAS principles, but they remain distinct semantic APIs.
 
 The generic Data Entity envelope carries `uid`, `schema_id`, `schema_version`, `record_revision`, `state` and `payload`. Schema version describes payload meaning; `record_revision` describes storage concurrency. `ACTIVE`/`TOMBSTONE` is logical record state and is likewise independent from revision.
 
-This persistence specification defines the concurrency primitives that a future Data Entity storage capability can reuse. It does **not** yet standardize Data Entity create/replace/delete/query/provision operations.
+AAC standardizes physical Data Entity access through the framework capabilities `get-record`, `query-records`, `apply-direct-record-changes`, `inspect-storage-support`, `ensure-storage-support` and `retire-storage-support`. Their request/result contracts are defined by the canonical capability/schema resources; this persistence specification supplies the concurrency and transaction principles those operations MUST preserve rather than defining a second persistence API. One concrete provider instance may implement several or all of these capabilities; it is not split into one provider per capability. In particular, `apply-direct-record-changes` is an atomic provider mutation boundary and replace/delete changes use the caller's expected `record_revision` as their optimistic-concurrency precondition.
 
-A filesystem implementation may use monotonic integer revisions; an HTTP/database implementation may expose opaque tokens. Provider-specific tables, indexes, foreign keys or file layouts MUST NOT become part of the generic Data Entity contract.
+Every Data Entity operation is explicitly bound to one provider instance. A provider-instance `READ_ONLY` access mode forbids Core from invoking mutation/provisioning operations through that instance even if the implementation class technically implements them. `READ_WRITE` allows mutation only where the concrete capability is present.
 
-## XII. Schema requirements
+One direct changeset MUST be executable wholly inside the selected provider instance's atomic persistence domain. Core MUST NOT split one `apply-direct-record-changes` invocation across provider instances, and the baseline defines no distributed transaction coordinator. If a compatibility/migration operation needs to update several logical Data Entities atomically, those records must be supported by the same target provider instance or the operation is not representable as one baseline atomic changeset.
+
+A filesystem implementation may use monotonic integer revisions; an HTTP/database implementation may expose opaque tokens. Provider-specific tables, indexes, foreign keys or file layouts MUST NOT become part of the generic Data Entity contract. `retire-storage-support` marks physical support as no longer required for future writes and MUST NOT be interpreted as an implicit destructive drop/purge operation.
+
+### XI.1 Stored representation versus runtime view
+
+The schema version in a raw Data Entity envelope is the physically stored representation. It is independent from the consumer runtime view and from the current implementation's canonical write version. `get-record` therefore has no requested schema-version parameter. `query-records` may optionally constrain physical inventory through `stored_schema_version_filter`, primarily for migration and diagnostics.
+
+Core may materialize an older stored envelope into a current polymorphic implementation through that stored version's codec, expose the object through another supported historical/current view, and later persist it through the implementation's canonical codec. Persistence providers see only raw canonical envelopes and do not participate in language-level view negotiation.
+
+# XII. Schema requirements
 
 Every canonical JSON Schema in AAC MUST explicitly declare `x-aac-schema-id` and `x-aac-schema-version`. Identity is never inferred from a filename.
 

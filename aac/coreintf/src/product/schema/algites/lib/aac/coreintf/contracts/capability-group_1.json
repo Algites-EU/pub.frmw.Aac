@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AAC Capability Group 1",
+  "$defs": {
+    "displayText": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "resource_key": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "anyOf": [
+            {
+              "required": [
+                "text"
+              ]
+            },
+            {
+              "required": [
+                "resource_key"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "required": [
+    "group"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "group": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parent_group_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "$ref": "#/$defs/displayText"
+        },
+        "description": {
+          "$ref": "#/$defs/displayText"
+        },
+        "metadata": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.capability-group",
+  "x-aac-schema-version": 1
+}

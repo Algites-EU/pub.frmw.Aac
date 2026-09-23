@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Generic, Mapping, TypeVar
+
+T = TypeVar("T")
 from enum import Enum
 
 
@@ -26,7 +29,7 @@ class AIcDataEntityEnvelope:
     schema_version: int
     record_revision: int | str
     state: AInDataEntityState
-    payload: object
+    payload: Mapping[str, object]
 
     def __post_init__(self) -> None:
         if not self.uid or not self.schema_id:
@@ -41,6 +44,8 @@ class AIcDataEntityEnvelope:
                 raise ValueError("string data entity record_revision must not be empty")
         else:
             raise TypeError("data entity record_revision must be an integer or opaque string")
+        if not isinstance(self.payload, Mapping):
+            raise TypeError("data entity payload must be a JSON object mapping")
 
     @property
     def identity(self) -> AIcDataEntityIdentity:
@@ -61,7 +66,7 @@ class AIcDataEntityMigrationRequest:
 class AIcDataEntityMigrationResult:
     schema_id: str
     schema_version: int
-    payload: object
+    payload: Mapping[str, object]
     diagnostics: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
@@ -81,3 +86,24 @@ class AIcDataEntityReferenceDefinition:
             raise ValueError("data entity reference definition requires source and target schema ids")
         if self.source_schema_version < 1:
             raise ValueError("data entity reference source schema version must be >= 1")
+
+
+@dataclass(frozen=True, slots=True)
+class AIcTypedDataEntityEnvelope(Generic[T]):
+    uid: str
+    schema_id: str
+    stored_schema_version: int
+    canonical_schema_version: int
+    record_revision: int | str
+    state: AInDataEntityState
+    entity: T
+
+    def __post_init__(self) -> None:
+        if not self.uid or not self.schema_id:
+            raise ValueError("typed data entity envelope requires non-empty uid and schema_id")
+        if self.stored_schema_version < 1 or self.canonical_schema_version < 1:
+            raise ValueError("typed data entity schema versions must be >= 1")
+
+    @property
+    def identity(self) -> AIcDataEntityIdentity:
+        return AIcDataEntityIdentity(self.schema_id, self.uid)

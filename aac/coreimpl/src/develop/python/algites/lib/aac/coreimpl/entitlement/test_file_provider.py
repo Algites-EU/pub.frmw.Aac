@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from algites.lib.aac.coreintf.entitlement import AIcEntitlementLicensingScope
+from algites.lib.aac.coreintf.contracts import AIcProvidedCapability
 from algites.lib.aac.coreintf.descriptor import (
     AIcCapabilityEntitlementDescriptor, AIcComponentDescriptor, AIcEntitlementLicensingScopeDescriptor, AIcPermissionDescriptor, AIcProviderDefinitionDescriptor,
 )
@@ -21,7 +22,7 @@ class _Verifier(AIiEntitlementEvidenceVerifier):
 def _descriptor():
     return AIcComponentDescriptor(
         "vendor.foo", 1,
-        providers=(AIcProviderDefinitionDescriptor("main", "vendor.foo.document", (1,), "x:Provider"),),
+        capability_providers=(AIcProviderDefinitionDescriptor("main", (AIcProvidedCapability("vendor.foo.document", (1,)),), "x:Provider"),),
         entitlement_licensing_scopes=(AIcEntitlementLicensingScopeDescriptor("WORKSPACE"),),
         provided_capability_entitlements=(AIcCapabilityEntitlementDescriptor(
             "vendor.foo.document", 1,
@@ -34,7 +35,7 @@ def test_file_entitlement_provider_requires_trusted_issuer(tmp_path: Path):
     path = tmp_path / "bundle.entitlement.yml"
     path.write_text('''
 entitlement:
-  format_version: 2
+  format_version: 1
   entitlement_id: bundle-1
   issuer: {id: vendor.example}
   licensing_scope: {type: WORKSPACE}

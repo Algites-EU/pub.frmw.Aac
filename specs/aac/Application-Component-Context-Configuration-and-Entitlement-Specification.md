@@ -151,6 +151,27 @@ SOURCE_REPOSITORY(<repository-lineage-subject>) entitlement licensing scope
 
 A renderer, component, or Core subsystem MUST NOT infer physical location, transport, or identity algorithm merely from a configuration-scope or licensing-scope type.
 
+The separation of these concepts can be summarized as follows:
+
+```mermaid
+flowchart TB
+    CONTEXT["Current Product / Runtime Context"]
+    CONTEXT --> CSCOPE["Configuration-Scope Identities"]
+    CONTEXT --> LRES["Entitlement Licensing-Scope Resolvers"]
+
+    CSCOPE --> CPROV["Configuration Providers"]
+    CPROV --> CONFIG["Effective Configuration + Provenance"]
+
+    LRES --> SUBJECT["Trusted Entitlement Subject Identity"]
+    SUBJECT --> EPROV["Entitlement Providers / Evidence"]
+    EPROV --> ENT["Effective Capability Permissions"]
+
+    TRANSPORT["Filesystem / HTTP / Database / Git / ..."] -. "storage or transport" .-> CPROV
+    TRANSPORT -. "storage or transport" .-> EPROV
+```
+
+The same contextual facts may participate in both branches, but provider technology is not a scope identity and configuration precedence does not define entitlement precedence.
+
 # III. Scoped Configuration
 
 ## III.1 Product-defined bootstrap schema
@@ -734,7 +755,7 @@ payload:
   ...
 ```
 
-`record_revision` is persistence concurrency metadata and may be an integer or opaque provider token. `schema_version` describes payload semantics.
+`record_revision` is persistence concurrency metadata and may be an integer or opaque provider token. `schema_version` describes the physically stored payload semantics. The generic `payload` itself is always a JSON object; its actual properties are defined by the canonical schema identified by `(schema_id, schema_version)`.
 
 `state` is:
 
@@ -814,7 +835,7 @@ Loss of entitlement is not a data migration and does not authorize destructive d
 
 AAC does not define a universal transformation language for arbitrary domain restructuring such as entity split, merge, replacement, generated IDs or storage reorganization. Those transformations belong to the concrete product/domain migration subsystem.
 
-The generic invariant is preservation: unknown or unsupported Data Entities MUST NOT be silently lost merely because the current component set cannot interpret them. Complex migrations that intentionally transform or remove records must do so explicitly and, once the generic Data Entity storage capability exists, through its transactional mutation contract rather than through component-private physical storage access.
+The generic invariant is preservation: unknown or unsupported Data Entities MUST NOT be silently lost merely because the current component set cannot interpret them. Complex migrations that intentionally transform or remove records must do so explicitly through `_AAC.data-entity.apply-direct-record-changes` (or a future explicitly defined indirect mutation capability) rather than through component-private physical storage access.
 
 ## IV.11 Portability and UI implications
 
@@ -823,6 +844,127 @@ Data Entities that belong to workspace/project meaning SHOULD travel with that l
 A product UI may derive Data Entity sections/actions from component support and canonical schema metadata, but baseline AAC does not permit arbitrary component-owned toolkit widgets merely because a component supports a Data Entity. Product UI governance remains authoritative.
 
 Unsupported records MUST be preserved and exposed as unavailable/read-only where relevant rather than offered for unsafe semantic editing. A `TOMBSTONE` may be displayed as historical/removed data according to product policy.
+
+## IV.12 Generic Data Entity storage capabilities
+
+Physical Data Entity access is expressed through framework capability contracts rather than through product-specific filesystem, SQL, ORM, or document-store APIs. Version 1 defines six direct capabilities:
+
+| Capability | Operation | Group | Semantics |
+| --- | --- | --- | --- |
+| `_AAC.data-entity.get-record/1` | `get` | `_AAC.data-entity.loading` | Load one record by `(schema_id, uid)`; a missing record yields `record: null`. |
+| `_AAC.data-entity.query-records/1` | `query` | `_AAC.data-entity.loading` | Query records using portable technical selectors. |
+| `_AAC.data-entity.apply-direct-record-changes/1` | `apply` | `_AAC.data-entity.storing` | Atomically apply a direct record changeset. |
+| `_AAC.data-entity.inspect-storage-support/1` | `inspect` | `_AAC.data-entity.storage-management` | Inspect physical support for one canonical schema/version. |
+| `_AAC.data-entity.ensure-storage-support/1` | `ensure` | `_AAC.data-entity.storage-management` | Idempotently provision/reconcile physical support. |
+| `_AAC.data-entity.retire-storage-support/1` | `retire` | `_AAC.data-entity.storage-management` | Retire support for future writes without implying destructive purge. |
+
+Core owns semantic validation, schema-version compatibility, migration selection/invocation, authorization/policy and construction of valid storage requests. The selected storage provider owns physical representation, record-revision generation, compare-and-swap enforcement, atomic application of the direct changeset, query execution, and schema-support provisioning.
+
+No component migration or business capability may bypass this split by writing the provider's physical files/tables/documents directly.
+
+### IV.12.1 Get and query
+
+`get` uses logical Data Entity identity only. It returns the stored envelope exactly at its stored schema version/state; Core may then interpret or transform it according to the compatibility rules above.
+
+`query` v1 intentionally exposes a small provider-independent selector surface rather than a general query language. The request selects one `schema_id` and may further constrain:
+
+- optional finite `stored_schema_version_filter` values, which filter the physical schema versions actually stored by that provider;
+- entity `states` (`ACTIVE` by default);
+- explicit `uids`;
+- one or more canonical Data Entity reference targets, optionally restricted to a canonical schema path;
+- `ALL`/`ANY` matching for several reference selectors.
+
+Results are ordered by logical UID (`UID_ASC` by default, with `UID_DESC` available), use a bounded `limit`, and may return an opaque `continuation_token`. The continuation token is provider-owned pagination state and MUST NOT be interpreted by consumers. AAC v1 deliberately does not define arbitrary payload predicates, joins, aggregation, or provider-specific SQL/document query syntax.
+
+### IV.12.2 Atomic direct record changes
+
+`apply` accepts one non-empty ordered changeset and is atomic at the provider boundary: either every direct change is committed or none is committed. The supported change types are:
+
+```text
+CREATE_RECORD
+REPLACE_RECORD
+DELETE_RECORD
+```
+
+`CREATE_RECORD` receives the logical UID from caller/Core; the storage provider does not generate Data Entity identity. Successful create returns the provider-generated `record_revision`. Creating an already existing `(schema_id, uid)` is a conflict.
+
+`REPLACE_RECORD` carries `expected_record_revision` and the complete replacement semantic representation (`schema_version`, `state`, `payload`). A stale expected revision is a conflict and MUST NOT overwrite newer data. Replacing an `ACTIVE` record with a `TOMBSTONE` envelope is the normal logical-tombstoning path.
+
+`DELETE_RECORD` also requires `expected_record_revision` and physically removes the stored record. Physical deletion is therefore explicit and remains distinct from the logical `TOMBSTONE` state.
+
+The result contains one entry per input `change_id`. Successful create/replace entries return the new provider `record_revision`; delete has no resulting record revision. If any precondition/conflict prevents the complete changeset, the invocation fails rather than returning a partially committed result.
+
+### IV.12.3 Storage-support lifecycle
+
+Storage support is tracked per canonical `(schema_id, schema_version)`. `inspect` reports one of:
+
+```text
+NOT_PROVISIONED
+READY
+RETIRED
+INCOMPATIBLE
+```
+
+`ensure` receives the canonical JSON Schema and normalized Data Entity reference definitions known to Core. It is idempotent: repeated application to already compatible support returns `READY` without requiring a physical change. A provider may create/reconcile tables, collections, indexes, directories or equivalent backend-specific structures, but those structures are outside the AAC contract.
+
+`retire` means that support is no longer required for future writes. It MAY mark or de-prioritize physical structures for later provider/product cleanup, but MUST NOT by itself physically delete stored Data Entities, drop authoritative tables/collections, or otherwise purge data. Destructive purge remains a separate explicit product/domain lifecycle action with its own safety policy.
+
+## IV.13 Provider-bound Data Entity facades and access mode
+
+A Data Entity provider instance is one concrete configured datasource/runtime identity. One instance may implement any subset of the six Data Entity capability interfaces and may implement multiple capability-contract versions on the same runtime object. A provider instance is not created once per capability.
+
+Every Data Entity facade invocation is bound to one explicit provider instance. Core does not automatically search, merge, fan out, or route `get`, `query`, `apply`, `inspect`, `ensure`, or `retire` between provider instances. This keeps provider identity and transaction domain explicit.
+
+A provider instance may be configured with:
+
+```text
+READ_ONLY
+READ_WRITE
+```
+
+The access mode constrains Core usage of the instance independently from the capabilities technically implemented by the provider class. `READ_ONLY` permits non-mutating access such as `get`, `query`, and `inspect`, but Core MUST reject mutating Data Entity operations such as `apply`, `ensure`, or `retire` through that instance. `READ_WRITE` permits those operations when the corresponding capability is implemented.
+
+A product may designate a particular `READ_WRITE` provider instance as its canonical/authoritative store. Additional provider instances may be used explicitly for imports, external libraries, caches, or other product workflows. This designation does not change invocation routing: an operation is still made against one concrete instance selected by the caller/Core facade.
+
+AAC v1 does not define distributed atomic transactions across provider instances. An `apply-direct-record-changes` invocation is one atomic changeset inside exactly one selected provider's transaction domain.
+
+## IV.14 Runtime Data Entity views, codecs, and typed envelopes
+
+The schema version requested by a consumer is not a storage query parameter. `get` takes only `(schema_id, uid)`. The provider returns the record's actual stored `schema_version`; Core uses that version to choose the persistence codec. `query` likewise returns whatever stored versions match its selectors. `stored_schema_version_filter` exists specifically as an optional physical-inventory selector for migration, diagnostics, and convergence tooling.
+
+For runtime use, AAC distinguishes three independent versions:
+
+```text
+stored schema version
+    selects the codec used to decode the returned physical payload
+
+canonical implementation/storage version
+    selects the codec used when the current implementation is saved
+
+consumer view version
+    selects the interface through which the consumer is allowed to access the current object
+```
+
+For one `(schema_id, version)`, code generation may produce a versioned Data Entity view interface and a version-specific codec. Versioned field-access methods carry the schema-version suffix, for example `getName_2()` / `setName_2(...)` in Java or `get_name_2()` / `set_name_2(...)` in Python. One current implementation object may explicitly implement several historical view interfaces and translate each view's semantics into one current internal state.
+
+Core maintains separate schema, view/codec, and current-implementation registries. A storage envelope is validated against its stored canonical schema, then its stored-version codec applies the payload to a newly created current implementation object. Core may return that same object through any explicitly supported consumer view interface. On save, Core serializes the current object with its canonical codec rather than with the consumer's historical view codec.
+
+Typed technology APIs SHOULD preserve this distinction. For Java, a facade may return an `Envelope<T>`/equivalent where `T` is the requested view interface, eliminating consumer casts while leaving physical/canonical version metadata independent. The runtime `T` does not choose the persistence representation.
+
+Generated/shared Data Entity view interfaces and codecs are contract types and require shared runtime identity. In Java they MUST follow the shared class-loader rules; plugin-private duplicate copies of the same generated interface are not interchangeable classes. Python runtimes likewise use the shared registered model package rather than dynamically importing an arbitrary class name derived from stored data.
+
+Normal same-identity evolution SHOULD prefer polymorphic view compatibility. Existing explicit migration mechanisms remain valid for physical convergence and for breaking structural changes such as entity split/merge, which cannot in general be represented by one polymorphic object.
+
+### IV.12.4 Reserved future computation capabilities
+
+The following capability roles are reserved conceptually but have no v1 capability contracts or empty placeholder definitions:
+
+```text
+EXECUTE_READ_COMPUTATION
+EXECUTE_INDIRECT_RECORD_CHANGES
+```
+
+Their semantics are intentionally deferred because stored procedures, provider-defined computations and indirect mutations need a separate model for computation identity, input/output typing, side effects, authorization, determinism and transaction participation. AAC capability contracts require at least one real operation, so future-only empty contracts MUST NOT be created merely to reserve a name.
 
 # V. Entitlement as Capability-Version Permission Grants
 
