@@ -10,6 +10,7 @@ Classes
 .. autoapisummary::
 
    coreimpl.codegen.AIcPythonCapabilityBindingGenerator
+   coreimpl.codegen.AIcPythonDataEntityBindingGenerator
 
 
 Module Contents
@@ -27,5 +28,19 @@ Module Contents
 
 
    .. py:method:: generate(contract: algites.lib.aac.coreintf.contracts.AIcCapabilityContract, *, canonical_resource: str | None = None) -> str
+
+
+.. py:class:: AIcPythonDataEntityBindingGenerator(schemas: coreimpl.schemas.AIcSchemaRegistry)
+
+   Generate one versioned Python Data Entity view interface and codec from canonical JSON Schema.
+
+   Version suffixes are part of the generated method names so one current implementation object
+   can implement several historical schema views without method-signature collisions.
+
+
+   .. py:attribute:: schemas
+
+
+   .. py:method:: generate(schema_id: str, version: int) -> str
 
 

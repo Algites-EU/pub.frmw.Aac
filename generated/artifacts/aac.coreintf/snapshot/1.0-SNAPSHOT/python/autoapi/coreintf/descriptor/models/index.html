@@ -266,6 +266,11 @@ errors defaults to ‘strict’.</p>
 <span class="sig-name descname"><span class="pre">configuration</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor.configuration" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor.access_mode">
+<span class="sig-name descname"><span class="pre">access_mode</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.instances.AInProviderAccessMode</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor.access_mode" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -322,13 +327,8 @@ errors defaults to ‘strict’.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability_id">
-<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability_id" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability_versions">
-<span class="sig-name descname"><span class="pre">capability_versions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability_versions" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capabilities">
+<span class="sig-name descname"><span class="pre">capabilities</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">coreintf.contracts.AIcProvidedCapability</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capabilities" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -376,9 +376,14 @@ errors defaults to ‘strict’.</p>
 <span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.description" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability_version">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">capability_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability_version" title="Link to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability">
+<span class="sig-name descname"><span class="pre">capability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capability_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">coreintf.contracts.AIcProvidedCapability</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.capability" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcProviderDefinitionDescriptor.supports_capability">
+<span class="sig-name descname"><span class="pre">supports_capability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capability_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor.supports_capability" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -603,8 +608,13 @@ errors defaults to ‘strict’.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.providers">
-<span class="sig-name descname"><span class="pre">providers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor" title="coreintf.descriptor.models.AIcProviderDefinitionDescriptor"><span class="pre">AIcProviderDefinitionDescriptor</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.providers" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.capability_providers">
+<span class="sig-name descname"><span class="pre">capability_providers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.descriptor.models.AIcProviderDefinitionDescriptor" title="coreintf.descriptor.models.AIcProviderDefinitionDescriptor"><span class="pre">AIcProviderDefinitionDescriptor</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.capability_providers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.descriptor.models.AIcComponentDescriptor.capability_group_resources">
+<span class="sig-name descname"><span class="pre">capability_group_resources</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.descriptor.models.AIcComponentDescriptor.capability_group_resources" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

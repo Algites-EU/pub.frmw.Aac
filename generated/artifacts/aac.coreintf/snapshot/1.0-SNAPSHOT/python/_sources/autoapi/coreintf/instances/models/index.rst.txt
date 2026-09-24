@@ -9,6 +9,7 @@ Classes
 
 .. autoapisummary::
 
+   coreintf.instances.models.AInProviderAccessMode
    coreintf.instances.models.AInProviderInstanceState
    coreintf.instances.models.AIcProviderInstance
    coreintf.instances.models.AIcBinding
@@ -17,6 +18,33 @@ Classes
 
 Module Contents
 ---------------
+
+.. py:class:: AInProviderAccessMode
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: READ_ONLY
+      :value: 'READ_ONLY'
+
+
+
+   .. py:attribute:: READ_WRITE
+      :value: 'READ_WRITE'
+
+
 
 .. py:class:: AInProviderInstanceState
 
@@ -88,16 +116,16 @@ Module Contents
       :type:  str
 
 
-   .. py:attribute:: capability_id
-      :type:  str
-
-
-   .. py:attribute:: capability_versions
-      :type:  tuple[int, Ellipsis]
+   .. py:attribute:: capabilities
+      :type:  tuple[coreintf.contracts.AIcProvidedCapability, Ellipsis]
 
 
    .. py:attribute:: implementation_class
       :type:  str
+
+
+   .. py:attribute:: access_mode
+      :type:  AInProviderAccessMode
 
 
    .. py:attribute:: configuration
@@ -114,9 +142,10 @@ Module Contents
       :type:  AInProviderInstanceState
 
 
-   .. py:property:: capability_version
-      :type: int
+   .. py:method:: capability(capability_id: str) -> coreintf.contracts.AIcProvidedCapability
 
+
+   .. py:method:: supports_capability(capability_id: str) -> bool
 
 
 .. py:class:: AIcBinding

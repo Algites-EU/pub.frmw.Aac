@@ -25,6 +25,7 @@ Submodules
    /autoapi/coreimpl/configuration_providers/index
    /autoapi/coreimpl/contracts/index
    /autoapi/coreimpl/core/index
+   /autoapi/coreimpl/dataentity/index
    /autoapi/coreimpl/descriptor/index
    /autoapi/coreimpl/durable/index
    /autoapi/coreimpl/entitlement/index

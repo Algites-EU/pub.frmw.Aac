@@ -422,12 +422,12 @@ Module Contents
       :type:  str
 
 
-   .. py:attribute:: capability_id
+   .. py:attribute:: capabilities
+      :type:  tuple[tuple[str, tuple[int, Ellipsis]], Ellipsis]
+
+
+   .. py:attribute:: access_mode
       :type:  str
-
-
-   .. py:attribute:: capability_versions
-      :type:  tuple[int, Ellipsis]
 
 
    .. py:attribute:: state
@@ -447,6 +447,14 @@ Module Contents
    .. py:attribute:: readiness_reasons
       :type:  tuple[str, Ellipsis]
       :value: ()
+
+
+
+   .. py:method:: supports_capability(capability_id: str) -> bool
+
+
+   .. py:property:: capabilities_text
+      :type: str
 
 
 

@@ -15,7 +15,7 @@
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="coreimpl.descriptor" href="../descriptor/index.html" />
+    <link rel="next" title="coreimpl.dataentity" href="../dataentity/index.html" />
     <link rel="prev" title="coreimpl.contracts" href="../contracts/index.html" />
    
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
@@ -134,6 +134,21 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.schemas">
 <span class="sig-name descname"><span class="pre">schemas</span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.schemas" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.data_entity_views">
+<span class="sig-name descname"><span class="pre">data_entity_views</span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.data_entity_views" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.data_entity_implementations">
+<span class="sig-name descname"><span class="pre">data_entity_implementations</span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.data_entity_implementations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.data_entity_marshaller">
+<span class="sig-name descname"><span class="pre">data_entity_marshaller</span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.data_entity_marshaller" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -473,6 +488,21 @@
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.register_data_entity_view">
+<span class="sig-name descname"><span class="pre">register_data_entity_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.dataentity.AIcDataEntityViewBinding</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.register_data_entity_view" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.register_data_entity_implementation">
+<span class="sig-name descname"><span class="pre">register_data_entity_implementation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.dataentity.AIcDataEntityImplementationBinding</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.register_data_entity_implementation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.data_entity_provider">
+<span class="sig-name descname"><span class="pre">data_entity_provider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">provider_instance_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../dataentity/index.html#coreimpl.dataentity.AIcDataEntityProviderFacade" title="coreimpl.dataentity.AIcDataEntityProviderFacade"><span class="pre">coreimpl.dataentity.AIcDataEntityProviderFacade</span></a></span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.data_entity_provider" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.register_configuration_provider">
 <span class="sig-name descname"><span class="pre">register_configuration_provider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration_provider_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.configuration.AIiConfigurationProvider</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.register_configuration_provider" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -498,8 +528,9 @@
 <dt class="sig sig-object py" id="coreimpl.core.AIcApplicationComponentCore.normalize_data_entity">
 <span class="sig-name descname"><span class="pre">normalize_data_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envelope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope</span></span></span><a class="headerlink" href="#coreimpl.core.AIcApplicationComponentCore.normalize_data_entity" title="Link to this definition">¶</a></dt>
 <dd><p>Normalize a data entity in memory to the component’s preferred write version.</p>
-<p>Persistence is deliberately outside this operation. A later generic data-storage capability
-will decide whether and where the normalized representation is written.</p>
+<p>Persistence is deliberately outside this legacy normalization helper. Generic Data Entity
+storage is provided by provider-bound Data Entity facades; polymorphic view/codecs are the
+preferred runtime representation for compatible schema evolution.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -755,7 +786,7 @@ The atomic active-package-set manifest replacement is the durable commit boundar
   <li><a href="../../index.html">API Reference</a><ul>
   <li><a href="../index.html">coreimpl</a><ul>
       <li>Previous: <a href="../contracts/index.html" title="previous chapter">coreimpl.contracts</a></li>
-      <li>Next: <a href="../descriptor/index.html" title="next chapter">coreimpl.descriptor</a></li>
+      <li>Next: <a href="../dataentity/index.html" title="next chapter">coreimpl.dataentity</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

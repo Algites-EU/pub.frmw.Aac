@@ -1,0 +1,127 @@
+coreintf.dataentity.binding
+===========================
+
+.. py:module:: coreintf.dataentity.binding
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   coreintf.dataentity.binding.T
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.dataentity.binding.AIiDataEntityView
+   coreintf.dataentity.binding.AIcDataEntityType
+   coreintf.dataentity.binding.AIiDataEntityCodec
+   coreintf.dataentity.binding.AIcDataEntityViewBinding
+   coreintf.dataentity.binding.AIcDataEntityImplementationBinding
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:class:: AIiDataEntityView
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Marker base for generated versioned Data Entity view interfaces.
+
+
+.. py:class:: AIcDataEntityType
+
+   Bases: :py:obj:`Generic`\ [\ :py:obj:`T`\ ]
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: view_version
+      :type:  int
+
+
+   .. py:attribute:: interface_type
+      :type:  type[T]
+
+
+.. py:class:: AIiDataEntityCodec
+
+   Bases: :py:obj:`abc.ABC`, :py:obj:`Generic`\ [\ :py:obj:`T`\ ]
+
+
+   Version-specific codec between one schema view and the canonical JSON object representation.
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: view_type
+      :type:  type[T]
+
+
+   .. py:method:: serialize(value: T) -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Serialize exactly this codec's versioned view.
+
+
+
+   .. py:method:: deserialize_into(payload: Mapping[str, object], target: T) -> None
+      :abstractmethod:
+
+
+      Apply one stored schema-version payload through this view onto a current implementation object.
+
+
+
+.. py:class:: AIcDataEntityViewBinding
+
+   Bases: :py:obj:`Generic`\ [\ :py:obj:`T`\ ]
+
+
+   .. py:attribute:: data_type
+      :type:  AIcDataEntityType[T]
+
+
+   .. py:attribute:: codec
+      :type:  AIiDataEntityCodec[T]
+
+
+.. py:class:: AIcDataEntityImplementationBinding
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: canonical_schema_version
+      :type:  int
+
+
+   .. py:attribute:: implementation_type
+      :type:  type[object]
+
+
+   .. py:attribute:: factory
+      :type:  Callable[[], object]
+
+
+   .. py:attribute:: supported_view_versions
+      :type:  tuple[int, Ellipsis]
+
+

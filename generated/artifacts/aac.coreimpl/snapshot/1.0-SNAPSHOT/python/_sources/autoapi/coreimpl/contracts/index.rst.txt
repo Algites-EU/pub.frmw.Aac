@@ -9,12 +9,60 @@ Classes
 
 .. autoapisummary::
 
+   coreimpl.contracts.AIcAdmittedCapabilityGroup
+   coreimpl.contracts.AIcCapabilityGroupCatalog
    coreimpl.contracts.AIcAdmittedContract
    coreimpl.contracts.AIcActiveContractCatalog
 
 
 Module Contents
 ---------------
+
+.. py:class:: AIcAdmittedCapabilityGroup
+
+   .. py:attribute:: group
+      :type:  algites.lib.aac.coreintf.contracts.AIcCapabilityGroup
+
+
+   .. py:attribute:: source
+      :type:  str
+
+
+   .. py:attribute:: fingerprint
+      :type:  str
+
+
+.. py:class:: AIcCapabilityGroupCatalog(schema_registry: coreimpl.schemas.AIcSchemaRegistry | None = None)
+
+   .. py:attribute:: schema_registry
+
+
+   .. py:method:: admit(group: algites.lib.aac.coreintf.contracts.AIcCapabilityGroup, *, source: str = '<memory>') -> AIcAdmittedCapabilityGroup
+
+
+   .. py:method:: admit_text(text: str, *, source: str = '<memory>') -> AIcAdmittedCapabilityGroup
+
+
+   .. py:method:: admit_package_resource(package: str, resource_name: str) -> AIcAdmittedCapabilityGroup
+
+
+   .. py:method:: admit_builtin_groups() -> tuple[AIcAdmittedCapabilityGroup, Ellipsis]
+
+
+   .. py:method:: get(group_id: str) -> algites.lib.aac.coreintf.contracts.AIcCapabilityGroup
+
+
+   .. py:method:: contains(group_id: str) -> bool
+
+
+   .. py:method:: all() -> tuple[algites.lib.aac.coreintf.contracts.AIcCapabilityGroup, Ellipsis]
+
+
+   .. py:method:: snapshot()
+
+
+   .. py:method:: restore(snapshot) -> None
+
 
 .. py:class:: AIcAdmittedContract
 
@@ -33,6 +81,9 @@ Module Contents
 .. py:class:: AIcActiveContractCatalog(schema_registry: coreimpl.schemas.AIcSchemaRegistry | None = None)
 
    .. py:attribute:: schema_registry
+
+
+   .. py:attribute:: groups
 
 
    .. py:method:: admit(contract: algites.lib.aac.coreintf.contracts.AIcCapabilityContract, *, source: str = '<memory>') -> AIcAdmittedContract

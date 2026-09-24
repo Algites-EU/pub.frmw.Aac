@@ -23,6 +23,6 @@ Module Contents
    Reference observer that writes one record per received observation input.
 
 
-   .. py:method:: observe(observation_input: algites.lib.aac.coreintf.observation.AIcObservationInput) -> algites.lib.aac.coreintf.observation.AIcObservationOutput
+   .. py:method:: observe_1(observation_input: algites.lib.aac.coreintf.observation.AIcObservationInput) -> algites.lib.aac.coreintf.observation.AIcObservationOutput
 
 

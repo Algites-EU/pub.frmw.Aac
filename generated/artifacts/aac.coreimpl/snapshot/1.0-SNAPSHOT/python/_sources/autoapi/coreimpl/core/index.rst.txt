@@ -74,6 +74,15 @@ Module Contents
    .. py:attribute:: schemas
 
 
+   .. py:attribute:: data_entity_views
+
+
+   .. py:attribute:: data_entity_implementations
+
+
+   .. py:attribute:: data_entity_marshaller
+
+
    .. py:attribute:: contracts
 
 
@@ -312,6 +321,15 @@ Module Contents
    .. py:method:: apply_security_bootstrap(bootstrap: algites.lib.aac.coreintf.authentication.AIcSecurityBootstrap) -> None
 
 
+   .. py:method:: register_data_entity_view(binding: algites.lib.aac.coreintf.dataentity.AIcDataEntityViewBinding[object]) -> None
+
+
+   .. py:method:: register_data_entity_implementation(binding: algites.lib.aac.coreintf.dataentity.AIcDataEntityImplementationBinding) -> None
+
+
+   .. py:method:: data_entity_provider(provider_instance_id: str) -> coreimpl.dataentity.AIcDataEntityProviderFacade
+
+
    .. py:method:: register_configuration_provider(configuration_provider_id: str, provider: algites.lib.aac.coreintf.configuration.AIiConfigurationProvider) -> None
 
 
@@ -334,8 +352,9 @@ Module Contents
 
       Normalize a data entity in memory to the component's preferred write version.
 
-      Persistence is deliberately outside this operation. A later generic data-storage capability
-      will decide whether and where the normalized representation is written.
+      Persistence is deliberately outside this legacy normalization helper. Generic Data Entity
+      storage is provided by provider-bound Data Entity facades; polymorphic view/codecs are the
+      preferred runtime representation for compatible schema evolution.
 
 
 

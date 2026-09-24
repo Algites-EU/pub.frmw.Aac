@@ -10,7 +10,9 @@ Classes
 .. autoapisummary::
 
    coreintf.contracts.models.AInConsumerCardinality
+   coreintf.contracts.models.AIcCapabilityGroup
    coreintf.contracts.models.AIcCapabilityRef
+   coreintf.contracts.models.AIcProvidedCapability
    coreintf.contracts.models.AIcAuthorizationPermissionDescriptor
    coreintf.contracts.models.AIcOperationAuthorizationRequirement
    coreintf.contracts.models.AIcCapabilityOperation
@@ -47,6 +49,34 @@ Module Contents
 
 
 
+.. py:class:: AIcCapabilityGroup
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: parent_group_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
 .. py:class:: AIcCapabilityRef
 
    .. py:attribute:: id
@@ -55,6 +85,21 @@ Module Contents
 
    .. py:attribute:: version
       :type:  int
+
+
+.. py:class:: AIcProvidedCapability
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:property:: latest_version
+      :type: int
+
 
 
 .. py:class:: AIcAuthorizationPermissionDescriptor
@@ -169,6 +214,10 @@ Module Contents
 
    .. py:attribute:: capability
       :type:  AIcCapabilityRef
+
+
+   .. py:attribute:: group_id
+      :type:  str
 
 
    .. py:attribute:: operations

@@ -40,16 +40,19 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.instances.models.AInProviderInstanceState" title="coreintf.instances.models.AInProviderInstanceState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInProviderInstanceState</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.instances.models.AInProviderAccessMode" title="coreintf.instances.models.AInProviderAccessMode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInProviderAccessMode</span></code></a></p></td>
 <td><p>str(object='') -&gt; str</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.instances.models.AIcProviderInstance" title="coreintf.instances.models.AIcProviderInstance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcProviderInstance</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.instances.models.AInProviderInstanceState" title="coreintf.instances.models.AInProviderInstanceState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInProviderInstanceState</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.instances.models.AIcProviderInstance" title="coreintf.instances.models.AIcProviderInstance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcProviderInstance</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.instances.models.AIcBinding" title="coreintf.instances.models.AIcBinding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBinding</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.instances.models.AIcBinding" title="coreintf.instances.models.AIcBinding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBinding</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.instances.models.AIcBindingPreference" title="coreintf.instances.models.AIcBindingPreference"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBindingPreference</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.instances.models.AIcBindingPreference" title="coreintf.instances.models.AIcBindingPreference"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBindingPreference</span></code></a></p></td>
 <td><p>Core-owned topology preference; references stable instance IDs, never names.</p></td>
 </tr>
 </tbody>
@@ -57,6 +60,31 @@
 </section>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.instances.models.AInProviderAccessMode">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.instances.models.</span></span><span class="sig-name descname"><span class="pre">AInProviderAccessMode</span></span><a class="headerlink" href="#coreintf.instances.models.AInProviderAccessMode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.instances.models.AInProviderAccessMode.READ_ONLY">
+<span class="sig-name descname"><span class="pre">READ_ONLY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'READ_ONLY'</span></span><a class="headerlink" href="#coreintf.instances.models.AInProviderAccessMode.READ_ONLY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.instances.models.AInProviderAccessMode.READ_WRITE">
+<span class="sig-name descname"><span class="pre">READ_WRITE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'READ_WRITE'</span></span><a class="headerlink" href="#coreintf.instances.models.AInProviderAccessMode.READ_WRITE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="coreintf.instances.models.AInProviderInstanceState">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.instances.models.</span></span><span class="sig-name descname"><span class="pre">AInProviderInstanceState</span></span><a class="headerlink" href="#coreintf.instances.models.AInProviderInstanceState" title="Link to this definition">¶</a></dt>
@@ -131,18 +159,18 @@ errors defaults to ‘strict’.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="coreintf.instances.models.AIcProviderInstance.capability_id">
-<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.instances.models.AIcProviderInstance.capability_id" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreintf.instances.models.AIcProviderInstance.capability_versions">
-<span class="sig-name descname"><span class="pre">capability_versions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.instances.models.AIcProviderInstance.capability_versions" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="coreintf.instances.models.AIcProviderInstance.capabilities">
+<span class="sig-name descname"><span class="pre">capabilities</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">coreintf.contracts.AIcProvidedCapability</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.instances.models.AIcProviderInstance.capabilities" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreintf.instances.models.AIcProviderInstance.implementation_class">
 <span class="sig-name descname"><span class="pre">implementation_class</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.instances.models.AIcProviderInstance.implementation_class" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.instances.models.AIcProviderInstance.access_mode">
+<span class="sig-name descname"><span class="pre">access_mode</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.instances.models.AInProviderAccessMode" title="coreintf.instances.models.AInProviderAccessMode"><span class="pre">AInProviderAccessMode</span></a></span><a class="headerlink" href="#coreintf.instances.models.AIcProviderInstance.access_mode" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -160,9 +188,14 @@ errors defaults to ‘strict’.</p>
 <span class="sig-name descname"><span class="pre">state</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.instances.models.AInProviderInstanceState" title="coreintf.instances.models.AInProviderInstanceState"><span class="pre">AInProviderInstanceState</span></a></span><a class="headerlink" href="#coreintf.instances.models.AIcProviderInstance.state" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="coreintf.instances.models.AIcProviderInstance.capability_version">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">capability_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.instances.models.AIcProviderInstance.capability_version" title="Link to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.instances.models.AIcProviderInstance.capability">
+<span class="sig-name descname"><span class="pre">capability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capability_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">coreintf.contracts.AIcProvidedCapability</span></span></span><a class="headerlink" href="#coreintf.instances.models.AIcProviderInstance.capability" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.instances.models.AIcProviderInstance.supports_capability">
+<span class="sig-name descname"><span class="pre">supports_capability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capability_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#coreintf.instances.models.AIcProviderInstance.supports_capability" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

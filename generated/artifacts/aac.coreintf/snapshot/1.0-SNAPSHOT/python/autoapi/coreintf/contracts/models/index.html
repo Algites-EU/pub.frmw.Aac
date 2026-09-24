@@ -43,7 +43,13 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.contracts.models.AInConsumerCardinality" title="coreintf.contracts.models.AInConsumerCardinality"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInConsumerCardinality</span></code></a></p></td>
 <td><p>str(object='') -&gt; str</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.contracts.models.AIcCapabilityRef" title="coreintf.contracts.models.AIcCapabilityRef"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcCapabilityRef</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.contracts.models.AIcCapabilityGroup" title="coreintf.contracts.models.AIcCapabilityGroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcCapabilityGroup</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.contracts.models.AIcCapabilityRef" title="coreintf.contracts.models.AIcCapabilityRef"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcCapabilityRef</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.contracts.models.AIcProvidedCapability" title="coreintf.contracts.models.AIcProvidedCapability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcProvidedCapability</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.contracts.models.AIcAuthorizationPermissionDescriptor" title="coreintf.contracts.models.AIcAuthorizationPermissionDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcAuthorizationPermissionDescriptor</span></code></a></p></td>
@@ -89,6 +95,36 @@ errors defaults to ‘strict’.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityGroup">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.contracts.models.</span></span><span class="sig-name descname"><span class="pre">AIcCapabilityGroup</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityGroup" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityGroup.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityGroup.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityGroup.parent_group_id">
+<span class="sig-name descname"><span class="pre">parent_group_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityGroup.parent_group_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityGroup.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityGroup.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityGroup.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">coreintf.presentation.AIcDisplayText</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityGroup.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityGroup.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityGroup.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityRef">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.contracts.models.</span></span><span class="sig-name descname"><span class="pre">AIcCapabilityRef</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityRef" title="Link to this definition">¶</a></dt>
 <dd><dl class="py attribute">
@@ -99,6 +135,26 @@ errors defaults to ‘strict’.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityRef.version">
 <span class="sig-name descname"><span class="pre">version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityRef.version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcProvidedCapability">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.contracts.models.</span></span><span class="sig-name descname"><span class="pre">AIcProvidedCapability</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcProvidedCapability" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcProvidedCapability.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcProvidedCapability.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcProvidedCapability.versions">
+<span class="sig-name descname"><span class="pre">versions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.contracts.models.AIcProvidedCapability.versions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcProvidedCapability.latest_version">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">latest_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcProvidedCapability.latest_version" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -219,6 +275,11 @@ errors defaults to ‘strict’.</p>
 <dd><dl class="py attribute">
 <dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityContract.capability">
 <span class="sig-name descname"><span class="pre">capability</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.contracts.models.AIcCapabilityRef" title="coreintf.contracts.models.AIcCapabilityRef"><span class="pre">AIcCapabilityRef</span></a></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityContract.capability" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityContract.group_id">
+<span class="sig-name descname"><span class="pre">group_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityContract.group_id" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

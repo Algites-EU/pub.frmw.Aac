@@ -1,0 +1,286 @@
+coreimpl.dataentity
+===================
+
+.. py:module:: coreimpl.dataentity
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   coreimpl.dataentity.T
+   coreimpl.dataentity.GET_RECORD_CAPABILITY_ID
+   coreimpl.dataentity.QUERY_RECORDS_CAPABILITY_ID
+   coreimpl.dataentity.APPLY_DIRECT_RECORD_CHANGES_CAPABILITY_ID
+   coreimpl.dataentity.INSPECT_STORAGE_SUPPORT_CAPABILITY_ID
+   coreimpl.dataentity.ENSURE_STORAGE_SUPPORT_CAPABILITY_ID
+   coreimpl.dataentity.RETIRE_STORAGE_SUPPORT_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.dataentity.AIcDataEntityViewRegistry
+   coreimpl.dataentity.AIcDataEntityImplementationRegistry
+   coreimpl.dataentity.AIcDataEntityMarshaller
+   coreimpl.dataentity.AIcProviderCapabilityInvoker
+   coreimpl.dataentity.AIcGetRecordFacade
+   coreimpl.dataentity.AIcDataEntityQueryPage
+   coreimpl.dataentity.AIcQueryRecordsFacade
+   coreimpl.dataentity.AIcApplyDirectRecordChangesFacade
+   coreimpl.dataentity.AIcInspectStorageSupportFacade
+   coreimpl.dataentity.AIcEnsureStorageSupportFacade
+   coreimpl.dataentity.AIcRetireStorageSupportFacade
+   coreimpl.dataentity.AIcDataEntityProviderFacade
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:data:: GET_RECORD_CAPABILITY_ID
+   :value: '_AAC.data-entity.get-record'
+
+
+.. py:data:: QUERY_RECORDS_CAPABILITY_ID
+   :value: '_AAC.data-entity.query-records'
+
+
+.. py:data:: APPLY_DIRECT_RECORD_CHANGES_CAPABILITY_ID
+   :value: '_AAC.data-entity.apply-direct-record-changes'
+
+
+.. py:data:: INSPECT_STORAGE_SUPPORT_CAPABILITY_ID
+   :value: '_AAC.data-entity.inspect-storage-support'
+
+
+.. py:data:: ENSURE_STORAGE_SUPPORT_CAPABILITY_ID
+   :value: '_AAC.data-entity.ensure-storage-support'
+
+
+.. py:data:: RETIRE_STORAGE_SUPPORT_CAPABILITY_ID
+   :value: '_AAC.data-entity.retire-storage-support'
+
+
+.. py:class:: AIcDataEntityViewRegistry
+
+   .. py:method:: register(binding: algites.lib.aac.coreintf.dataentity.AIcDataEntityViewBinding[object]) -> None
+
+
+   .. py:method:: get(schema_id: str, version: int) -> algites.lib.aac.coreintf.dataentity.AIcDataEntityViewBinding[object]
+
+
+   .. py:method:: for_type(data_type: algites.lib.aac.coreintf.dataentity.AIcDataEntityType[T]) -> algites.lib.aac.coreintf.dataentity.AIcDataEntityViewBinding[T]
+
+
+.. py:class:: AIcDataEntityImplementationRegistry
+
+   .. py:method:: register(binding: algites.lib.aac.coreintf.dataentity.AIcDataEntityImplementationBinding) -> None
+
+
+   .. py:method:: get(schema_id: str) -> algites.lib.aac.coreintf.dataentity.AIcDataEntityImplementationBinding
+
+
+   .. py:method:: for_object(value: object) -> algites.lib.aac.coreintf.dataentity.AIcDataEntityImplementationBinding
+
+
+.. py:class:: AIcDataEntityMarshaller(schemas: coreimpl.schemas.AIcSchemaRegistry, views: AIcDataEntityViewRegistry | None = None, implementations: AIcDataEntityImplementationRegistry | None = None)
+
+   Bridge canonical JSON envelopes and current polymorphic implementation objects.
+
+
+   .. py:attribute:: schemas
+
+
+   .. py:attribute:: views
+
+
+   .. py:attribute:: implementations
+
+
+   .. py:method:: validate_registrations(schema_id: str) -> None
+
+
+   .. py:method:: materialize(envelope: algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope, requested_type: algites.lib.aac.coreintf.dataentity.AIcDataEntityType[T]) -> algites.lib.aac.coreintf.dataentity.AIcTypedDataEntityEnvelope[T]
+
+
+   .. py:method:: marshal(envelope: algites.lib.aac.coreintf.dataentity.AIcTypedDataEntityEnvelope[object]) -> algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope
+
+
+.. py:class:: AIcProviderCapabilityInvoker(provider: algites.lib.aac.coreintf.instances.AIcProviderInstance, endpoints: coreimpl.invocation.AIcEndpointRegistry, dispatcher: coreimpl.invocation.AIcInvocationDispatcher)
+
+   Invoke one capability on one explicitly selected provider instance.
+
+
+   .. py:attribute:: provider
+
+
+   .. py:attribute:: endpoints
+
+
+   .. py:attribute:: dispatcher
+
+
+   .. py:method:: invoke(capability_id: str, version: int, operation_id: str, arguments: Mapping[str, object]) -> Mapping[str, object]
+
+
+.. py:class:: AIcGetRecordFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
+
+   Bases: :py:obj:`_AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.get-record'
+
+
+
+   .. py:method:: get_raw(schema_id: str, uid: str) -> algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope | None
+
+
+   .. py:method:: get(data_type: algites.lib.aac.coreintf.dataentity.AIcDataEntityType[T], uid: str) -> algites.lib.aac.coreintf.dataentity.AIcTypedDataEntityEnvelope[T] | None
+
+
+.. py:class:: AIcDataEntityQueryPage
+
+   Bases: :py:obj:`Generic`\ [\ :py:obj:`T`\ ]
+
+
+   .. py:attribute:: records
+      :type:  tuple[algites.lib.aac.coreintf.dataentity.AIcTypedDataEntityEnvelope[T], Ellipsis]
+
+
+   .. py:attribute:: continuation_token
+      :type:  str | None
+
+
+.. py:class:: AIcQueryRecordsFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
+
+   Bases: :py:obj:`_AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.query-records'
+
+
+
+   .. py:method:: query_raw(request: Mapping[str, object]) -> tuple[tuple[algites.lib.aac.coreintf.dataentity.AIcDataEntityEnvelope, Ellipsis], str | None]
+
+
+   .. py:method:: query(data_type: algites.lib.aac.coreintf.dataentity.AIcDataEntityType[T], *, stored_schema_version_filter: tuple[int, Ellipsis] = (), states: tuple[algites.lib.aac.coreintf.dataentity.AInDataEntityState, Ellipsis] = (AInDataEntityState.ACTIVE, ), uids: tuple[str, Ellipsis] = (), limit: int = 100, continuation_token: str | None = None) -> AIcDataEntityQueryPage[T]
+
+
+.. py:class:: AIcApplyDirectRecordChangesFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
+
+   Bases: :py:obj:`_AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.apply-direct-record-changes'
+
+
+
+   .. py:attribute:: write_operation
+      :value: True
+
+
+
+   .. py:method:: apply_raw(changes: tuple[Mapping[str, object], Ellipsis]) -> Mapping[str, object]
+
+
+   .. py:method:: save(envelope: algites.lib.aac.coreintf.dataentity.AIcTypedDataEntityEnvelope[object]) -> Mapping[str, object]
+
+
+   .. py:method:: create(schema_id: str, uid: str, entity: object, *, state: algites.lib.aac.coreintf.dataentity.AInDataEntityState = AInDataEntityState.ACTIVE) -> Mapping[str, object]
+
+
+   .. py:method:: delete(schema_id: str, uid: str, expected_record_revision: int | str) -> Mapping[str, object]
+
+
+.. py:class:: AIcInspectStorageSupportFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
+
+   Bases: :py:obj:`_AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.inspect-storage-support'
+
+
+
+   .. py:method:: inspect(schema_id: str, schema_version: int) -> Mapping[str, object]
+
+
+.. py:class:: AIcEnsureStorageSupportFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
+
+   Bases: :py:obj:`_AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.ensure-storage-support'
+
+
+
+   .. py:attribute:: write_operation
+      :value: True
+
+
+
+   .. py:method:: ensure(schema_id: str, schema_version: int, canonical_schema: Mapping[str, object], references=()) -> Mapping[str, object]
+
+
+.. py:class:: AIcRetireStorageSupportFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
+
+   Bases: :py:obj:`_AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.retire-storage-support'
+
+
+
+   .. py:attribute:: write_operation
+      :value: True
+
+
+
+   .. py:method:: retire(schema_id: str, schema_version: int) -> Mapping[str, object]
+
+
+.. py:class:: AIcDataEntityProviderFacade(provider: algites.lib.aac.coreintf.instances.AIcProviderInstance, endpoints: coreimpl.invocation.AIcEndpointRegistry, dispatcher: coreimpl.invocation.AIcInvocationDispatcher, marshaller: AIcDataEntityMarshaller)
+
+   Typed Data Entity API bound to exactly one provider instance.
+
+   No operation is routed across provider instances.  The instance's access mode constrains
+   mutating facades while its declared capability set determines which subfacades are available.
+
+
+   .. py:attribute:: provider
+
+
+   .. py:attribute:: marshaller
+
+
+   .. py:attribute:: invoker
+
+
+   .. py:attribute:: get_record
+
+
+   .. py:attribute:: query_records
+
+
+   .. py:attribute:: apply_changes
+
+
+   .. py:attribute:: inspect_storage_support
+
+
+   .. py:attribute:: ensure_storage_support
+
+
+   .. py:attribute:: retire_storage_support
+
+

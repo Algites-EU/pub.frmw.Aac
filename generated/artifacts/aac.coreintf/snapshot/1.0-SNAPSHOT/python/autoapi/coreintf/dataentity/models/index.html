@@ -15,7 +15,7 @@
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="coreintf.descriptor" href="../../descriptor/index.html" />
+    <link rel="next" title="coreintf.dataentity.provider" href="../provider/index.html" />
     <link rel="prev" title="coreintf.dataentity.migration" href="../migration/index.html" />
    
   <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
@@ -36,6 +36,16 @@
             
   <section id="module-coreintf.dataentity.models">
 <span id="coreintf-dataentity-models"></span><h1>coreintf.dataentity.models<a class="headerlink" href="#module-coreintf.dataentity.models" title="Link to this heading">¶</a></h1>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.dataentity.models.T" title="coreintf.dataentity.models.T"><code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
 <table class="autosummary longtable docutils align-default">
@@ -58,11 +68,19 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#coreintf.dataentity.models.AIcDataEntityReferenceDefinition" title="coreintf.dataentity.models.AIcDataEntityReferenceDefinition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcDataEntityReferenceDefinition</span></code></a></p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.dataentity.models.AIcTypedDataEntityEnvelope" title="coreintf.dataentity.models.AIcTypedDataEntityEnvelope"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcTypedDataEntityEnvelope</span></code></a></p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
 </section>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="coreintf.dataentity.models.T">
+<span class="sig-prename descclassname"><span class="pre">coreintf.dataentity.models.</span></span><span class="sig-name descname"><span class="pre">T</span></span><a class="headerlink" href="#coreintf.dataentity.models.T" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="coreintf.dataentity.models.AInDataEntityState">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.dataentity.models.</span></span><span class="sig-name descname"><span class="pre">AInDataEntityState</span></span><a class="headerlink" href="#coreintf.dataentity.models.AInDataEntityState" title="Link to this definition">¶</a></dt>
@@ -133,7 +151,7 @@ errors defaults to ‘strict’.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreintf.dataentity.models.AIcDataEntityEnvelope.payload">
-<span class="sig-name descname"><span class="pre">payload</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span></span><a class="headerlink" href="#coreintf.dataentity.models.AIcDataEntityEnvelope.payload" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">payload</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.dataentity.models.AIcDataEntityEnvelope.payload" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -173,7 +191,7 @@ errors defaults to ‘strict’.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreintf.dataentity.models.AIcDataEntityMigrationResult.payload">
-<span class="sig-name descname"><span class="pre">payload</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span></span><a class="headerlink" href="#coreintf.dataentity.models.AIcDataEntityMigrationResult.payload" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">payload</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.dataentity.models.AIcDataEntityMigrationResult.payload" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -204,6 +222,52 @@ errors defaults to ‘strict’.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreintf.dataentity.models.AIcDataEntityReferenceDefinition.target_schema_id">
 <span class="sig-name descname"><span class="pre">target_schema_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.dataentity.models.AIcDataEntityReferenceDefinition.target_schema_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.dataentity.models.AIcTypedDataEntityEnvelope">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.dataentity.models.</span></span><span class="sig-name descname"><span class="pre">AIcTypedDataEntityEnvelope</span></span><a class="headerlink" href="#coreintf.dataentity.models.AIcTypedDataEntityEnvelope" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Generic</span></code>[<a class="reference internal" href="#coreintf.dataentity.models.T" title="coreintf.dataentity.models.T"><code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code></a>]</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.dataentity.models.AIcTypedDataEntityEnvelope.uid">
+<span class="sig-name descname"><span class="pre">uid</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.dataentity.models.AIcTypedDataEntityEnvelope.uid" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.dataentity.models.AIcTypedDataEntityEnvelope.schema_id">
+<span class="sig-name descname"><span class="pre">schema_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.dataentity.models.AIcTypedDataEntityEnvelope.schema_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.dataentity.models.AIcTypedDataEntityEnvelope.stored_schema_version">
+<span class="sig-name descname"><span class="pre">stored_schema_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.dataentity.models.AIcTypedDataEntityEnvelope.stored_schema_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.dataentity.models.AIcTypedDataEntityEnvelope.canonical_schema_version">
+<span class="sig-name descname"><span class="pre">canonical_schema_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.dataentity.models.AIcTypedDataEntityEnvelope.canonical_schema_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.dataentity.models.AIcTypedDataEntityEnvelope.record_revision">
+<span class="sig-name descname"><span class="pre">record_revision</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.dataentity.models.AIcTypedDataEntityEnvelope.record_revision" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.dataentity.models.AIcTypedDataEntityEnvelope.state">
+<span class="sig-name descname"><span class="pre">state</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.dataentity.models.AInDataEntityState" title="coreintf.dataentity.models.AInDataEntityState"><span class="pre">AInDataEntityState</span></a></span><a class="headerlink" href="#coreintf.dataentity.models.AIcTypedDataEntityEnvelope.state" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.dataentity.models.AIcTypedDataEntityEnvelope.entity">
+<span class="sig-name descname"><span class="pre">entity</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.dataentity.models.T" title="coreintf.dataentity.models.T"><span class="pre">T</span></a></span><a class="headerlink" href="#coreintf.dataentity.models.AIcTypedDataEntityEnvelope.entity" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="coreintf.dataentity.models.AIcTypedDataEntityEnvelope.identity">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">identity</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.dataentity.models.AIcDataEntityIdentity" title="coreintf.dataentity.models.AIcDataEntityIdentity"><span class="pre">AIcDataEntityIdentity</span></a></span><a class="headerlink" href="#coreintf.dataentity.models.AIcTypedDataEntityEnvelope.identity" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -253,7 +317,7 @@ errors defaults to ‘strict’.</p>
   <li><a href="../../index.html">coreintf</a><ul>
   <li><a href="../index.html">coreintf.dataentity</a><ul>
       <li>Previous: <a href="../migration/index.html" title="previous chapter">coreintf.dataentity.migration</a></li>
-      <li>Next: <a href="../../descriptor/index.html" title="next chapter">coreintf.descriptor</a></li>
+      <li>Next: <a href="../provider/index.html" title="next chapter">coreintf.dataentity.provider</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

@@ -196,6 +196,10 @@ Module Contents
       :type:  Mapping[str, object]
 
 
+   .. py:attribute:: access_mode
+      :type:  coreintf.instances.AInProviderAccessMode
+
+
 .. py:class:: AIcConsumerRequirementDescriptor
 
    .. py:attribute:: id
@@ -244,12 +248,8 @@ Module Contents
       :type:  str
 
 
-   .. py:attribute:: capability_id
-      :type:  str
-
-
-   .. py:attribute:: capability_versions
-      :type:  tuple[int, Ellipsis]
+   .. py:attribute:: capabilities
+      :type:  tuple[coreintf.contracts.AIcProvidedCapability, Ellipsis]
 
 
    .. py:attribute:: implementation_class
@@ -302,9 +302,10 @@ Module Contents
 
 
 
-   .. py:property:: capability_version
-      :type: int
+   .. py:method:: capability(capability_id: str) -> coreintf.contracts.AIcProvidedCapability
 
+
+   .. py:method:: supports_capability(capability_id: str) -> bool
 
 
 .. py:class:: AIcEntitlementLicensingScopeDescriptor
@@ -509,8 +510,14 @@ Module Contents
       :type:  int
 
 
-   .. py:attribute:: providers
+   .. py:attribute:: capability_providers
       :type:  tuple[AIcProviderDefinitionDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: capability_group_resources
+      :type:  tuple[str, Ellipsis]
       :value: ()
 
 

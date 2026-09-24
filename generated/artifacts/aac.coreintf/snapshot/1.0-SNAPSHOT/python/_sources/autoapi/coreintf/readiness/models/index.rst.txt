@@ -162,8 +162,8 @@ Module Contents
       :type:  str
 
 
-   .. py:attribute:: capability_id
-      :type:  str
+   .. py:attribute:: capability_ids
+      :type:  tuple[str, Ellipsis]
 
 
    .. py:attribute:: state

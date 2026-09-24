@@ -10,7 +10,9 @@ Submodules
 .. toctree::
    :maxdepth: 1
 
+   /autoapi/coreintf/dataentity/binding/index
    /autoapi/coreintf/dataentity/migration/index
    /autoapi/coreintf/dataentity/models/index
+   /autoapi/coreintf/dataentity/provider/index
 
 

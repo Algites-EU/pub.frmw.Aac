@@ -1,0 +1,106 @@
+coreintf.dataentity.provider
+============================
+
+.. py:module:: coreintf.dataentity.provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.dataentity.provider.AIiDataEntityGetRecord_1
+   coreintf.dataentity.provider.AIiDataEntityQueryRecords_1
+   coreintf.dataentity.provider.AIiDataEntityApplyDirectRecordChanges_1
+   coreintf.dataentity.provider.AIiDataEntityInspectStorageSupport_1
+   coreintf.dataentity.provider.AIiDataEntityEnsureStorageSupport_1
+   coreintf.dataentity.provider.AIiDataEntityRetireStorageSupport_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiDataEntityGetRecord_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: get_1(request: Mapping[str, object]) -> Mapping[str, object]
+      :abstractmethod:
+
+
+
+.. py:class:: AIiDataEntityQueryRecords_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: query_1(request: Mapping[str, object]) -> Mapping[str, object]
+      :abstractmethod:
+
+
+
+.. py:class:: AIiDataEntityApplyDirectRecordChanges_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: apply_1(request: Mapping[str, object]) -> Mapping[str, object]
+      :abstractmethod:
+
+
+
+.. py:class:: AIiDataEntityInspectStorageSupport_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: inspect_1(request: Mapping[str, object]) -> Mapping[str, object]
+      :abstractmethod:
+
+
+
+.. py:class:: AIiDataEntityEnsureStorageSupport_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: ensure_1(request: Mapping[str, object]) -> Mapping[str, object]
+      :abstractmethod:
+
+
+
+.. py:class:: AIiDataEntityRetireStorageSupport_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: retire_1(request: Mapping[str, object]) -> Mapping[str, object]
+      :abstractmethod:
+
+
+

@@ -4,6 +4,14 @@ coreintf.dataentity.models
 .. py:module:: coreintf.dataentity.models
 
 
+Attributes
+----------
+
+.. autoapisummary::
+
+   coreintf.dataentity.models.T
+
+
 Classes
 -------
 
@@ -15,10 +23,13 @@ Classes
    coreintf.dataentity.models.AIcDataEntityMigrationRequest
    coreintf.dataentity.models.AIcDataEntityMigrationResult
    coreintf.dataentity.models.AIcDataEntityReferenceDefinition
+   coreintf.dataentity.models.AIcTypedDataEntityEnvelope
 
 
 Module Contents
 ---------------
+
+.. py:data:: T
 
 .. py:class:: AInDataEntityState
 
@@ -80,7 +91,7 @@ Module Contents
 
 
    .. py:attribute:: payload
-      :type:  object
+      :type:  Mapping[str, object]
 
 
    .. py:property:: identity
@@ -109,7 +120,7 @@ Module Contents
 
 
    .. py:attribute:: payload
-      :type:  object
+      :type:  Mapping[str, object]
 
 
    .. py:attribute:: diagnostics
@@ -134,5 +145,43 @@ Module Contents
 
    .. py:attribute:: target_schema_id
       :type:  str
+
+
+.. py:class:: AIcTypedDataEntityEnvelope
+
+   Bases: :py:obj:`Generic`\ [\ :py:obj:`T`\ ]
+
+
+   .. py:attribute:: uid
+      :type:  str
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: stored_schema_version
+      :type:  int
+
+
+   .. py:attribute:: canonical_schema_version
+      :type:  int
+
+
+   .. py:attribute:: record_revision
+      :type:  int | str
+
+
+   .. py:attribute:: state
+      :type:  AInDataEntityState
+
+
+   .. py:attribute:: entity
+      :type:  T
+
+
+   .. py:property:: identity
+      :type: AIcDataEntityIdentity
+
 
 

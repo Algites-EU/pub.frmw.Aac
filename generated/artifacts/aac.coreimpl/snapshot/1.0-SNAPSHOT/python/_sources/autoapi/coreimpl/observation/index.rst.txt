@@ -47,7 +47,7 @@ Module Contents
    .. py:attribute:: invocation_dispatcher
 
 
-   .. py:method:: observe(observation_input: algites.lib.aac.coreintf.observation.AIcObservationInput) -> algites.lib.aac.coreintf.observation.AIcObservationOutput
+   .. py:method:: observe_1(observation_input: algites.lib.aac.coreintf.observation.AIcObservationInput) -> algites.lib.aac.coreintf.observation.AIcObservationOutput
 
 
 .. py:class:: AIcObservationDelivery

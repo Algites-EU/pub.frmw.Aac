@@ -40,13 +40,13 @@ Module Contents
    .. py:method:: find(*, component_id: str | None = None, provider_definition_id: str | None = None, name: str | None = None, capability_id: str | None = None, states: tuple[algites.lib.aac.coreintf.instances.AInProviderInstanceState, Ellipsis] | None = None) -> tuple[algites.lib.aac.coreintf.instances.AIcProviderInstance, Ellipsis]
 
 
-   .. py:method:: build(component_id: str, provider: algites.lib.aac.coreintf.descriptor.AIcProviderDefinitionDescriptor, *, name: str = 'default', configuration: dict[str, object] | None = None, state: algites.lib.aac.coreintf.instances.AInProviderInstanceState = AInProviderInstanceState.CONFIGURED) -> algites.lib.aac.coreintf.instances.AIcProviderInstance
+   .. py:method:: build(component_id: str, provider: algites.lib.aac.coreintf.descriptor.AIcProviderDefinitionDescriptor, *, name: str = 'default', configuration: dict[str, object] | None = None, access_mode: algites.lib.aac.coreintf.instances.AInProviderAccessMode = AInProviderAccessMode.READ_WRITE, state: algites.lib.aac.coreintf.instances.AInProviderInstanceState = AInProviderInstanceState.CONFIGURED) -> algites.lib.aac.coreintf.instances.AIcProviderInstance
 
 
    .. py:method:: commit(instances: tuple[algites.lib.aac.coreintf.instances.AIcProviderInstance, Ellipsis], extra_mutations: tuple[algites.lib.aac.coreintf.persistence.AIcStateMutation, Ellipsis] = ()) -> None
 
 
-   .. py:method:: create(component_id: str, provider: algites.lib.aac.coreintf.descriptor.AIcProviderDefinitionDescriptor, *, name: str = 'default', configuration: dict[str, object] | None = None, state: algites.lib.aac.coreintf.instances.AInProviderInstanceState = AInProviderInstanceState.CONFIGURED) -> algites.lib.aac.coreintf.instances.AIcProviderInstance
+   .. py:method:: create(component_id: str, provider: algites.lib.aac.coreintf.descriptor.AIcProviderDefinitionDescriptor, *, name: str = 'default', configuration: dict[str, object] | None = None, access_mode: algites.lib.aac.coreintf.instances.AInProviderAccessMode = AInProviderAccessMode.READ_WRITE, state: algites.lib.aac.coreintf.instances.AInProviderInstanceState = AInProviderInstanceState.CONFIGURED) -> algites.lib.aac.coreintf.instances.AIcProviderInstance
 
 
    .. py:method:: update(instance_id: str, **changes: object) -> algites.lib.aac.coreintf.instances.AIcProviderInstance

@@ -23,7 +23,7 @@ Module Contents
    Python binding of `_AAC.capability.observation` version 1.
 
 
-   .. py:method:: observe(observation_input: coreintf.observation.models.AIcObservationInput) -> coreintf.observation.models.AIcObservationOutput
+   .. py:method:: observe_1(observation_input: coreintf.observation.models.AIcObservationInput) -> coreintf.observation.models.AIcObservationOutput
       :abstractmethod:
 
 
