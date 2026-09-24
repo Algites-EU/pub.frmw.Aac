@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.operation-interaction-event",
+  "x-aac-schema-version": 1,
+  "title": "Operation Interaction Event 1",
+  "type": "object",
+  "required": ["event_type"],
+  "additionalProperties": false,
+  "$defs": {
+    "display_text": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "resource_key": {"type": "string", "minLength": 1}
+      },
+      "anyOf": [{"required": ["text"]}, {"required": ["resource_key"]}]
+    }
+  },
+  "properties": {
+    "event_type": {"enum": ["STATUS", "PROGRESS", "DETAIL", "DIAGNOSTIC"]},
+    "progress_id": {"type": ["string", "null"], "minLength": 1},
+    "parent_progress_id": {"type": ["string", "null"], "minLength": 1},
+    "phase_id": {"type": ["string", "null"], "minLength": 1},
+    "name": {"anyOf": [{"$ref": "#/$defs/display_text"}, {"type": "null"}]},
+    "description": {"anyOf": [{"$ref": "#/$defs/display_text"}, {"type": "null"}]},
+    "current": {"type": ["number", "null"], "minimum": 0},
+    "total": {"type": ["number", "null"], "minimum": 0},
+    "unit": {"type": ["string", "null"], "minLength": 1},
+    "severity": {"enum": ["INFO", "WARNING", "ERROR"]},
+    "code": {"type": ["string", "null"], "minLength": 1},
+    "details": {"type": "object"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"event_type": {"const": "PROGRESS"}}, "required": ["event_type"]},
+      "then": {"required": ["progress_id"]}
+    }
+  ]
+}

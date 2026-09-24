@@ -114,17 +114,20 @@ This repository contains the realization of the language-neutral AAC rules and i
 
 ### I. Repository and artifacts
 
-The repository currently publishes seven AAC artifacts:
+The repository currently publishes eight AAC artifacts:
 
 - `aac/coreintf` — public Python contracts, ABCs, DTOs, enums and technology-profile types. It must not depend on `coreimpl` or concrete providers.
 - `aac/coreimpl` — reusable Core implementation. Its production dependency is `coreintf`; reference components are development/conformance dependencies only.
 - `aac/simpleaudit` — minimal `_AAC.capability.observation/1` provider used as a real component and conformance fixture.
+- `components/dataentity/yamlfsdes` — YAML File-System Data Entity Storage component implementing the generic Data Entity storage, storage-support, and backup/restore capabilities over a durable data/schema tree with revision/CAS enforcement and recoverable journals.
 - `aac/verify/sigstore` — optional Sigstore implementation of package and entitlement-evidence verification SPIs. Core does not depend on Sigstore.
 - `aac/uiintf` — technology-neutral administration controller contract and normalized UI models.
 - `aac/uiqt` — PySide6 administration widget and Core-backed controller.
 - `devtools` — first-class development-tool artifact; its Python sources live under `devtools/src/product/python`.
 
 Authoritative source lives below each artifact's `src/` tree. Generated/runtime/build output lives below `run/` and is not authoritative source.
+
+Reusable concrete components live under `components/<functional-area>/<artifact>`, while AAC framework/runtime artifacts remain under `aac/`. Each component directory is still a normal Algites artifact and follows the same source conventions.
 
 The source layout is intentionally multi-technology capable. An artifact may carry one or more technology trees such as `src/product/python`, `src/product/java`, or technology-neutral `src/product/schema`, with corresponding development trees under `src/develop/<technology>`. A build may target all supported technologies or a selected subset; technology-specific publication destinations remain independently configurable. The `devtools` artifact follows the same layout instead of using a repository-special top-level `tools/` source exception.
 
@@ -178,7 +181,7 @@ The active capability-contract catalog is Core-owned. Built-in contracts and val
 
 Provider selection and contract-version negotiation are separate. A binding is valid only for versions in the finite intersection of consumer support, provider support, the Core active catalog and lifecycle policy.
 
-The normalized invocation layer validates contract-declared inputs and outputs and carries invocation correlation metadata. PRE/POST observation is dispatched by Core; observation delivery cannot recursively observe itself.
+The normalized invocation layer validates contract-declared inputs and outputs and carries invocation correlation metadata. Every operation also declares its supported Operation Interaction state-result delivery modes. Simple synchronous calls use an invocation-local `ON_DEMAND_COMPLETE` no-op interaction; interactive/non-blocking calls may exchange directional provider-to-caller and caller-to-provider messages carrying lifecycle state, revisions, partial/complete operation-specific results, progress/diagnostic events, cancellation and foreground/background preferences. Core routes the protocol and owns `PENDING -> RUNNING -> COMPLETED|FAILED|CANCELLED`, but does not interpret complete/delta result semantics, replay policy or provider buffering. PRE/POST observation is dispatched by Core; observation delivery cannot recursively observe itself.
 
 ### IV. Provider instances, graph resolution and lifecycle
 
@@ -205,7 +208,7 @@ The baseline in-process profile constructs the statically declared Python provid
 AAC also contains two isolation profiles:
 
 - **PROCESS** — one persistent child process and JSON-lines IPC channel per provider instance. Core owns lifecycle, invocation and reverse `core_invoke` calls to already-resolved consumed capabilities. A component may use a private Python environment or a non-Python executable implementing the protocol.
-- **SUBINTERPRETER** — CPython 3.14+ endpoint based on `concurrent.interpreters`, transferring normalized/copyable invocation data across interpreter boundaries.
+- **SUBINTERPRETER** — CPython 3.14+ endpoint based on `concurrent.interpreters`, transferring normalized/copyable invocation data across interpreter boundaries and bridging live Operation Interaction through cross-interpreter queues while execution runs on a separate thread.
 
 Neither profile is presented as a hostile-code security sandbox. Native Python extensions used with subinterpreters require explicit compatibility validation.
 
@@ -238,7 +241,7 @@ Components declare `data_entity_support` with readable/writable version sets, `p
 
 Concrete record relationships are declared only in the canonical schema at the referencing field through `x-aac-data-entity-reference`. The annotation identifies the target schema ID; the field value supplies the target UID. References therefore survive target schema-version migration.
 
-Data Entity migration is semantic and side-effect-free. `AIcDataEntityMigrationService` classifies representations as `DIRECT`, `TRANSFORMED` or `UNSUPPORTED` and can normalize toward the preferred write version in memory while preserving UID, record revision and ACTIVE/TOMBSTONE state. Physical Data Entity access is now standardized through six built-in storage capabilities (`get-record`, `query-records`, `apply-direct-record-changes`, `inspect-storage-support`, `ensure-storage-support`, `retire-storage-support`).
+Data Entity migration is semantic and side-effect-free. `AIcDataEntityMigrationService` classifies representations as `DIRECT`, `TRANSFORMED` or `UNSUPPORTED` and can normalize toward the preferred write version in memory while preserving UID, record revision and ACTIVE/TOMBSTONE state. Physical Data Entity access is standardized through built-in loading, storing, storage-management, and storage-backup/restore capability groups. Backup/restore is provider-specific physical disaster recovery and is intentionally distinct from logical Data Entity export/import.
 
 The Python runtime also contains the first typed Data Entity facade layer. A provider instance may expose several storage capabilities at once and is always selected explicitly; `READ_ONLY`/`READ_WRITE` is stored per instance. `(schema_id, schema_version)` may register a generated versioned view interface plus codec, while `schema_id` registers the current implementation/factory and canonical storage version. A stored older payload is decoded through its stored-version codec into the current polymorphic implementation, and consumers may receive that same object through another explicitly supported versioned view. Saving always uses the current canonical codec rather than the consumer view.
 

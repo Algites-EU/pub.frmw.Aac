@@ -44,6 +44,7 @@ from .entitlement import (
 )
 from .instances import AIcProviderInstanceRegistry
 from .invocation import AIcInvocationDispatcher, AIcObjectCapabilityEndpoint
+from .operation_interaction import AIcOperationInteractionController
 from .lifecycle import AIcActivationOutcome, AIcLifecycleEngine
 from .migration import AIcConfigurationMigrationService, AIcDataEntityMigrationService, AIcSchemaCompatibilityEvaluator
 from .observation import AIcObservationBinding, AIcObservationDelivery, AIcObservationDispatcher, AIcObservationSelector

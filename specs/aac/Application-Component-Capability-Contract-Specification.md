@@ -153,21 +153,43 @@ capability:
 
 operations:
   - id: get
-    input_schema: "algites.secrets.store.get.request/v2"
-    output_schema: "algites.secrets.store.get.result/v2"
+    interactions:
+      - kind: INPUT
+        schema: {id: algites.secrets.store.get.request, version: 2}
+      - kind: FINAL_SUCCESS_STATE_RESULT
+        schema: {id: algites.secrets.store.get.result, version: 2}
 
   - id: put
-    input_schema: "algites.secrets.store.put.request/v2"
-    output_schema: "algites.secrets.store.put.result/v2"
+    interactions:
+      - kind: INPUT
+        schema: {id: algites.secrets.store.put.request, version: 2}
+      - kind: FINAL_SUCCESS_STATE_RESULT
+        schema: {id: algites.secrets.store.put.result, version: 2}
 
   - id: delete
-    input_schema: "algites.secrets.store.delete.request/v2"
-    output_schema: "algites.secrets.store.delete.result/v2"
+    interactions:
+      - kind: INPUT
+        schema: {id: algites.secrets.store.delete.request, version: 2}
 ```
 
 A capability MAY contain only one operation when that is the natural contract boundary.
 
 A capability MUST NOT be forced to one operation merely to make operation identity globally unique.
+
+Each operation defines zero or more normalized `interactions[]`. Every interaction has a fixed `kind` from `CapabilityOperationInteractionKind` and a portable schema reference `{id, version}`. Each kind may occur at most once per operation. The baseline kinds are:
+
+```text
+INPUT
+RUNNING_COMPLETE_STATE_RESULT
+RUNNING_DELTA_STATE_RESULT
+FINAL_SUCCESS_STATE_RESULT
+FINAL_CANCELLED_STATE_RESULT
+FINAL_FAILED_STATE_RESULT_EXTENSION
+```
+
+All interaction kinds are optional. Absence of `INPUT` means the operation accepts no portable input. Absence of `FINAL_SUCCESS_STATE_RESULT` means a successful operation returns no operation-specific terminal value. `FINAL_FAILED_STATE_RESULT_EXTENSION` extends the common AAC failure envelope rather than replacing it.
+
+The interaction schema identity, not a physical schema filename, is part of the portable operation contract. If the operation changes any referenced interaction schema or its semantics incompatibly, the owning capability contract MUST move to a new capability version. An unchanged schema version may be reused by a later capability version.
 
 ## II.5 Operation identity is scoped to the capability contract
 
@@ -277,6 +299,97 @@ A concrete provider instance MAY additionally be configured with an access polic
 
 ---
 
+
+## II.11 Capability-provider operation metadata and parameters
+
+A canonical capability operation defines the **portable** interaction payload contracts and behavior shared by every provider of that capability version. A concrete capability provider MUST declare provider-operation metadata for each implemented `(capability id, capability version, operation id)`. That metadata declares the concrete provider's Operation Interaction support and MAY additionally declare **operation parameters** when its implementation has meaningful choices that are not portable properties of the canonical capability contract.
+
+Provider-operation `interaction.supported_state_result_delivery_modes` is implementation capability metadata. It MUST NOT be placed in the canonical capability operation because different providers of the same capability may support different delivery modes. The canonical operation merely defines which portable `RUNNING_*` result schemas exist; the provider chooses the subset of delivery modes it can actually realize.
+
+Operation parameters are provider-specific implementation controls, not additional canonical operation arguments. They MUST NOT redefine the portable outcome of the capability operation or be used to hide a separate capability behind an implementation-specific switch.
+
+A provider-operation descriptor therefore has the conceptual shape:
+
+```yaml
+operations:
+  - capability: <capability-id>
+    capability_version: <version>
+    operation: <operation-id>
+    interaction:
+      supported_state_result_delivery_modes: [...]
+      progress_reporting: false
+      cancellation: false
+      detail_level: false
+      reporting_interval: false
+    parameters: [...]
+```
+
+A capability-provider operation-parameter definition contains:
+
+- stable parameter `id`;
+- `name` as `AIcDisplayText`;
+- `description` as `AIcDisplayText`;
+- an inline JSON Schema `value_schema` defining the parameter value;
+- optional display metadata for enum values, with enum `name` and optional `description` also represented as `AIcDisplayText`;
+- `required` and optional definition `default`;
+- `component_configurable`;
+- `instance_configurable`;
+- `invocation_overridable`.
+
+Example:
+
+```yaml
+operations:
+  - capability: _AAC.vcs.distributed-repository-synchronization
+    capability_version: 1
+    operation: pull
+    interaction:
+      supported_state_result_delivery_modes: [ON_DEMAND_COMPLETE]
+    parameters:
+      - id: integration_strategy
+        name:
+          text: Integration strategy
+          resource_key: vcs.pull.integrationStrategy.name
+        description:
+          text: Determines how retrieved revisions are integrated.
+          resource_key: vcs.pull.integrationStrategy.description
+        value_schema:
+          type: string
+          enum: [MERGE, REBASE, FAST_FORWARD_ONLY]
+        enum_values:
+          - value: MERGE
+            name:
+              text: Merge
+            description:
+              text: Merge the histories.
+          - value: REBASE
+            name:
+              text: Rebase
+            description:
+              text: Reapply local revisions on top of the retrieved history.
+        default: MERGE
+        component_configurable: true
+        instance_configurable: true
+        invocation_overridable: true
+```
+
+The effective value precedence is:
+
+```text
+definition default
+    < component-configured value
+        < provider-instance-configured value
+            < invocation override
+```
+
+A more specific level may provide a value only when the corresponding configurability flag permits it. `required: true` means that an effective value MUST exist after this resolution. Every effective value MUST validate against `value_schema`.
+
+Operation parameters do **not** have their own version axis. Operations are versioned by the owning capability contract; provider-specific operation parameters evolve with the capability provider/component implementation. Adding or changing an operation parameter therefore does not by itself create a new canonical capability version when the portable capability contract is unchanged.
+
+An incompatible change to an operation-parameter definition MUST, however, be delivered as a newer component version. If persisted component-level or provider-instance-level values may no longer be valid or retain the same meaning, that component version MUST migrate its own operation-parameter configuration during upgrade before the new provider implementation becomes active. A component MUST NOT silently reinterpret persisted values written for an older parameter definition.
+
+Provider implementations receive the **effective operation-parameter map** through Core invocation context separately from the canonical operation input. Consequently a technology binding MUST NOT add provider-specific parameters to the generated canonical capability method signature.
+
 # III. Invocation Model
 
 ## III.1 Invocation identity
@@ -368,6 +481,169 @@ parent_invocation_id: "..."
 ```
 
 This is useful for tracing a logical call graph without exposing implementation-private stack frames.
+
+## III.6 Operation Interaction
+
+Every capability invocation has a Core-mediated **Operation Interaction** context in addition to its portable operation input and effective provider operation parameters. Operation Interaction is generic invocation infrastructure; it MUST NOT be added separately to individual portable operation input schemas or generated capability method signatures.
+
+The baseline execution lifecycle is Core-owned:
+
+```text
+PENDING
+   ↓
+RUNNING
+   ├──────────→ COMPLETED
+   ├──────────→ FAILED
+   └──────────→ CANCELLED
+```
+
+The provider does not directly declare a terminal execution state. Core derives terminal state from the actual invocation outcome. A provider that supports cooperative cancellation observes the caller-side cancellation request at safe checkpoints and aborts through the standardized cancellation path; Core then performs the `RUNNING -> CANCELLED` transition.
+
+Operation Interaction is one logical bidirectional protocol with two explicitly directional message models:
+
+```text
+provider operation ── OperationInteractionProviderToCallerMessage ──> caller
+provider operation <── OperationInteractionCallerToProviderMessage ── caller
+```
+
+The provider-to-caller direction carries execution/result observations and telemetry. The caller-to-provider direction carries user/host interaction choices and result-consumption information. Core routes these messages and owns the execution lifecycle, but it MUST NOT interpret operation-specific state-result payload semantics.
+
+### III.6.1 Provider-to-caller state and revisions
+
+Each provider-to-caller publication carries at least:
+
+```text
+interaction_revision
+execution_state
+state_result_revision
+optional state_result_payload_revision + state_result
+events[]
+interaction features
+```
+
+`interaction_revision` starts at `0` before any provider-to-caller publication. The first published interaction message has revision `1`; each subsequent atomic provider-to-caller publication increments it monotonically.
+
+`state_result_revision` also starts at `0`. Value `0` means that no logical state result has yet been published. The first logical state-result change has revision `1`; every subsequent logical state-result change increments it monotonically. A message can therefore advertise that a newer state result exists even when its payload is intentionally omitted by the selected delivery mode.
+
+When a message carries a state-result payload, `state_result_payload_revision` identifies the result revision represented by that payload. It MAY be lower than the latest `state_result_revision`, for example when a provider re-delivers a buffered operation-specific result revision. Core MUST NOT infer dependency, merge, replay or error semantics from gaps between result revisions.
+
+Revision gaps are observable, not inherently erroneous. A video/live-preview operation may legitimately accept revision 17 even when revision 16 was not consumed; another operation may define sequential deltas that cannot be applied across a gap. Such semantics belong exclusively to the capability operation contract and its consumer/provider implementations.
+
+### III.6.2 Immutable state-result publication
+
+A state-result payload is an immutable publication snapshot. After a provider publishes an object through Operation Interaction it MUST NOT mutate that published object. Any logical change MUST be represented by a new state-result revision. Technology bindings SHOULD defensively snapshot/canonicalize mutable in-process values at the publication boundary where practical, so `IN_PROCESS` behavior does not accidentally differ from isolated runtimes.
+
+Changing execution state and the associated state result MUST be atomic. Conceptually Core provides a transition equivalent to:
+
+```text
+transition(state=COMPLETED, state_result=final_result)
+```
+
+A provider may publish a new intermediate result without changing execution state through an operation equivalent to:
+
+```text
+update_state_result(partial_result)
+```
+
+For `ON_CHANGE_COMPLETE`, `ON_CHANGE_DELTA`, and `ALWAYS_COMPLETE`, a logical result change MUST be published together with its payload. A payload-less result-revision advance is meaningful only for on-demand delivery modes, where the provider may retain or reconstruct the corresponding payload itself.
+
+The caller MUST NOT observe a new execution state paired with an obsolete state result solely because the transition was applied in several local assignments.
+
+### III.6.3 State-result delivery modes
+
+State-result delivery modes are **provider-operation capabilities**, not mandatory properties of the portable capability operation. A canonical capability operation defines the portable interaction payload kinds/schemas that may exist; each concrete capability provider operation declares which delivery modes it actually supports. The baseline modes are:
+
+```text
+ON_DEMAND_COMPLETE
+ON_DEMAND_DELTA
+ON_CHANGE_COMPLETE
+ON_CHANGE_DELTA
+ALWAYS_COMPLETE
+```
+
+Their semantics are:
+
+- `ON_DEMAND_COMPLETE`: intermediate state-result payloads are not automatically attached. The caller may request a complete current representation when the operation provides one. A simple synchronous invocation without an explicit interaction callback/controller runs internally in this mode; its final normal operation output is returned when execution completes.
+- `ON_DEMAND_DELTA`: operation-defined result fragments/deltas are retained or otherwise made available by the provider according to its own policy and are delivered when requested by the caller. The provider need not materialize an aggregate complete running result.
+- `ON_CHANGE_COMPLETE`: whenever the logical running state result changes, the provider publishes a complete representation of the new state result.
+- `ON_CHANGE_DELTA`: whenever the logical running state result changes, the provider publishes an operation-defined delta/fragment representation. AAC defines no generic delta language and Core MUST NOT interpret, merge or reconstruct such payloads.
+- `ALWAYS_COMPLETE`: every provider-to-caller interaction publication includes the current complete result representation when one exists. This mode may intentionally trade bandwidth/serialization cost for a simpler caller that does not retain the previously received complete state result.
+
+Every capability-provider operation MUST support `ON_DEMAND_COMPLETE` so the ordinary synchronous invocation remains available without requiring an interaction callback. This does not imply that the provider can produce a meaningful complete **intermediate RUNNING** snapshot. If the canonical capability operation defines no `RUNNING_COMPLETE_STATE_RESULT` interaction, a complete result may first exist at `FINAL_SUCCESS_STATE_RESULT`, or the operation may complete successfully without any result when that interaction kind is absent as well.
+
+A capability provider may declare `ON_DEMAND_DELTA` or `ON_CHANGE_DELTA` only when the canonical capability operation defines `RUNNING_DELTA_STATE_RESULT`. A provider may declare complete delivery modes without a running-complete interaction; in that case it simply cannot publish a portable complete running result before a defined terminal result exists. Delta semantics, including whether revisions depend on earlier revisions, what the initial/no-result state means, and whether missing revisions are tolerable, remain operation-specific contract semantics.
+
+The selected delivery mode changes transport/publication behavior only. It does not change the portable operation input or business meaning of the terminal output.
+
+### III.6.4 Caller acceptance and provider buffering
+
+Caller-to-provider interaction state contains `last_accepted_state_result_revision`. It starts at `0` and identifies the latest state-result revision that the caller has successfully received and incorporated into its own operation-specific usable state.
+
+This field is deliberately **not** defined as a cumulative network-style acknowledgement. It does not assert that every lower revision was consumed. Whether a caller may accept a later revision after missing an earlier one is operation-specific. Core MUST NOT reject gaps, request replay, merge deltas, implement result buffering policy or otherwise mediate those semantics.
+
+A provider MAY use `last_accepted_state_result_revision` to release buffered result data, retain/replay unaccepted data, spill it to external storage, throttle its own computation or apply another operation-specific policy. Such memory/backpressure/replay policy belongs to the provider/caller or reusable libraries above/below Core, not to AAC Core itself. Provider-specific tuning MAY be exposed through the normal provider operation-parameter mechanism where useful.
+
+`last_accepted_state_result_revision` is useful for all delivery modes, including complete and on-demand delivery. For example, an on-demand complete result may be transported successfully but fail during caller-side deserialization or incorporation; the accepted revision then remains unchanged and provides useful diagnostic state.
+
+### III.6.5 On-demand requests
+
+Caller-to-provider interaction state includes a monotonic `state_result_request_id`, initially `0`. Incrementing it requests another state-result delivery under the selected on-demand mode. A provider can compare the current request ID with the last request it handled; repeated requests therefore remain distinguishable without Core understanding the requested payload.
+
+### III.6.6 Events and hierarchical progress
+
+State results are operation-domain data. Interaction events are telemetry describing what the running operation is doing. The baseline event families are `STATUS`, `PROGRESS`, `DETAIL`, and `DIAGNOSTIC`.
+
+One provider-to-caller publication carries `events[]`, not a single event, so related telemetry changes can be emitted atomically. A progress event has a stable `progress_id` and MAY have `parent_progress_id`, permitting independent and hierarchical progress such as:
+
+```text
+Overall migration
+└── Database 3/12
+    └── Table 18/50
+        └── Records 43,211/120,000
+```
+
+Human-facing event names/descriptions use `AIcDisplayText`. Intermediate telemetry may be throttled/coalesced according to host/provider policy because it is not itself the operation-specific state result. Listener/rendering failure MUST NOT by itself fail the provider operation.
+
+### III.6.7 Caller-to-provider interaction controls
+
+Caller-to-provider state includes at least:
+
+```text
+last_accepted_state_result_revision
+interaction_mode
+cancellation_requested
+detail_level
+reporting_interval_ms
+failure_detail_level
+state_result_delivery_mode
+state_result_request_id
+```
+
+`interaction_mode` has baseline values `FOREGROUND` and `BACKGROUND`. It is owned by the caller/host and describes the user's interaction/attention mode, not provider execution placement. `FOREGROUND -> BACKGROUND` does not change execution state, create a new process/thread or detach reporting. A host may keep the same running invocation visible in a task/status area while permitting unrelated work and later restore a foreground presentation.
+
+Cancellation is cooperative. A provider that declares cancellation support MUST observe `cancellation_requested` at safe interruption points and preserve its own transaction/consistency guarantees. Cancellation MUST NOT imply rollback across an irreversible commit boundary.
+
+`reporting_interval_ms` and `detail_level` are interaction preferences, not portable business parameters. A provider may use them to avoid expensive detail/progress production. A host may independently reduce its own rendering frequency.
+
+### III.6.8 Locale and failure state
+
+The invocation context carries an optional locale (normally a BCP-47 language tag such as `cs-CZ` or `en-US`). It allows an in-process, isolated or remote provider to prepare user-facing text in the caller's requested language when it has appropriate resources. AAC Core does not assume that it owns the provider's localization resources.
+
+A standardized FAILED state result contains at least technical `system_message` and `exception_type`; it may additionally contain user-facing `AIcDisplayText user_message`, `error_code`, `stack_trace`, and an operation-specific extension. `system_message` is suitable for technical diagnostics/logging and need not be localized. `user_message.text`, when supplied, SHOULD be directly displayable without requiring the caller to resolve the optional `resource_key`.
+
+The caller's `failure_detail_level` controls whether expensive/sensitive failure detail such as a formatted stack trace should be materialized and transported where the runtime can avoid doing so. It does not guarantee that the originating language runtime avoided all stack-capture cost internally.
+
+`FINAL_SUCCESS_STATE_RESULT`, when present, is the `COMPLETED` terminal result schema. `FAILED` always has the generic AAC failure base and MAY define `FINAL_FAILED_STATE_RESULT_EXTENSION`. `CANCELLED` MAY define `FINAL_CANCELLED_STATE_RESULT`. A cooperative provider that has such a cancellation result returns it through the standardized cancellation path; Core performs one atomic `RUNNING -> CANCELLED` transition with that optional result rather than requiring the provider to publish a separate terminal state.
+
+### III.6.9 Runtime boundaries and synchronous/asynchronous use
+
+A caller that only needs the final result may use the ordinary synchronous capability invocation without creating an explicit interaction controller. Core supplies a fresh invocation-local no-op/default interaction context using `ON_DEMAND_COMPLETE` and returns the normal terminal output. Even this no-op context starts its result revision at `0` for each invocation; it is not shared as mutable execution state between unrelated calls.
+
+A caller that needs live progress, partial results, cancellation, foreground/background interaction, diagnostics or non-blocking execution attaches/receives an Operation Interaction controller. Asynchronous start and `FOREGROUND/BACKGROUND` are orthogonal: an invocation may execute asynchronously while still presented as foreground, then switch to background without changing execution semantics.
+
+Isolation/RPC profiles MUST bridge the same directional Operation Interaction protocol rather than attempting to pass toolkit callbacks or process-local mutable objects across the boundary. The reference Python `PROCESS` profile bridges the protocol over its Core/runtime channel. The Python 3.14+ `SUBINTERPRETER` profile uses cross-interpreter queues plus a separate execution thread to bridge live messages while preserving interpreter isolation. Nested Core-mediated invocations SHOULD inherit the current interaction context unless the caller explicitly supplies another one.
+
+The canonical interaction models are `_AAC.schema.operation-interaction-provider-to-caller-message/1`, `_AAC.schema.operation-interaction-caller-to-provider-message/1`, `_AAC.schema.operation-interaction-event/1`, and `_AAC.schema.operation-failure/1`.
 
 ---
 
@@ -1037,27 +1313,44 @@ Other observer instances may still receive those nested invocations according to
 
 ## VIII.1 Java
 
-Java language bindings SHOULD be generated from the canonical capability contract rather than manually duplicating operation/security metadata. A generated interface uses the Algites generated-interface prefix and generated DTOs, for example:
+Java language bindings SHOULD be generated from the canonical capability contract rather than manually duplicating operation/security/interaction metadata. Portable data types are generated deterministically from interaction schema identity `(schema id, schema version)`. Operation-specific failure exception types and their default factories are generated deterministically from `(capability id, capability version, operation id)`.
+
+A generated provider interface receives the provider-facing interaction view only. Conceptually:
 
 ```java
-public interface AIigSiteManagement_1 {
-    @AIaOperation("get_site")
-    @AIaAuthorization(allOf = {"VIEW_SITE"})
-    AIcgdGetSiteOutput_1 getSite_1(AIcgdGetSiteInput_1 input);
-
-    @AIaOperation("update_site")
-    @AIaAuthorization(allOf = {"EDIT_SITE"})
-    AIcgdUpdateSiteOutput_1 updateSite_1(AIcgdUpdateSiteInput_1 input);
+public interface AIigRestoreStorageBackup_1 {
+    AIcgdRestoreStorageBackupResult_1 restoreBackup_1(
+        AIcgdRestoreStorageBackupRequest_1 input,
+        AIiOperationInteractionProviderToCaller interaction
+    );
 }
 ```
 
-Java annotations use the `AIa` prefix. They are generated language-binding metadata, not an independent source of authorization truth. The implementation implements the generated interface and MUST NOT redefine a conflicting operation/authorization mapping.
+The generated caller-facing binding uses `AIiOperationInteractionCallerToProvider<E>` where `E` is the generated operation-specific failure exception base. Its completion result distinguishes `SUCCESS` and `CANCELLED`; `FAILED` is materialized as an exception. Conceptually:
 
-Shared generated interfaces and DTOs follow the Core-owned class-loader identity rules defined in the Java runtime profile.
+```java
+AIcOperationCompletion<
+    AIcgdRestoreStorageBackupResult_1,
+    AIcgdRestoreStorageBackupCancelledResult_1
+> restoreBackup_1(
+    AIcgdRestoreStorageBackupRequest_1 input,
+    AIiOperationInteractionCallerToProvider<AIxgRestoreStorageBackupFailed_1> interaction
+) throws AIxgRestoreStorageBackupFailed_1;
+```
+
+Java permits a bounded type variable in a `throws` clause, but generated operation bindings SHOULD normally expose the concrete generated operation exception because a capability may contain several operations with independent failure contracts. A caller MAY install a caller-local exception factory on `AIiOperationInteractionCallerToProvider<E>`; every exception produced by that factory MUST be `E` or a subclass of `E`. This permits application code to derive several local exception subclasses from the generated operation exception and select among them according to portable failure data.
+
+The factory is caller-local technology binding state. It is never serialized or sent to the provider. If the caller does not install a custom factory, the generated typed binding installs the generated default factory. A typed generated binding MUST NOT silently fall back to the more general `AIxCapabilityOperationFailed`, because that would violate the generated `throws` contract. Absence of the required typed binding/factory is a framework/binding error. The generic `AIxCapabilityOperationFailed` fallback is reserved for dynamic/untyped invocation APIs.
+
+`FINAL_FAILED_STATE_RESULT_EXTENSION` is first normalized/materialized from its declared schema identity. The generated/default exception factory then combines the common AAC failure envelope with that typed additional data to instantiate the generated operation exception.
+
+Java annotations use the `AIa` prefix. They are generated language-binding metadata, not an independent source of authorization truth. The implementation implements the generated interface and MUST NOT redefine a conflicting operation/authorization mapping. Shared generated interfaces and DTOs follow the Core-owned class-loader identity rules defined in the Java runtime profile.
 
 ## VIII.2 Python
 
 Python bindings SHOULD likewise be generated from the canonical capability contract. Generated interfaces use `AIig..._N`; generated non-data classes use `AIcg..._N`; generated DTO/data-object classes use `AIcgd..._N`. The `g` marker denotes generated source. The optional `d` marker is used only for a type that is explicitly a data object/DTO and MUST NOT be added to a generated behavioral class merely because it is generated. Equivalent generated enum/interface forms follow the same type-letter + `g` rule (for example `AIng..._N` and `AIig..._N`).
+
+The generated Python provider method receives `AIiOperationInteractionProviderToCaller`. The generated caller facade accepts `AIiOperationInteractionCallerToProvider[GeneratedOperationFailure]`, installs the generated default failure factory when the caller has not supplied one, materializes `SUCCESS`/`CANCELLED` payloads into their generated schema types, and raises the generated operation-specific exception for `FAILED`. Python has no checked-exception declaration analogous to Java `throws`, but the runtime exception class and typed `additional_data` follow the same portable contract. A custom caller factory must return the generated operation exception or one of its subclasses.
 
 `_N` is the version of the canonical definition that directly defines the generated program type, not automatically the containing component or capability version. A DTO generated from schema version 1 therefore remains `..._1` even when capability version 2 reuses that unchanged schema. Multiple versions such as `AIcgdRepositoryIdentity_1` and `AIcgdRepositoryIdentity_2` MUST be able to coexist in one runtime.
 

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.operation-interaction-provider-to-caller-message",
+  "x-aac-schema-version": 1,
+  "title": "Operation Interaction Provider To Caller Message 1",
+  "type": "object",
+  "required": ["interaction_revision", "execution_state", "state_result_revision", "events", "features"],
+  "additionalProperties": false,
+  "properties": {
+    "interaction_revision": {"type": "integer", "minimum": 0},
+    "execution_state": {"enum": ["PENDING", "RUNNING", "COMPLETED", "FAILED", "CANCELLED"]},
+    "state_result_revision": {"type": "integer", "minimum": 0},
+    "state_result_payload_revision": {"type": ["integer", "null"], "minimum": 1},
+    "state_result": {},
+    "events": {
+      "type": "array",
+      "items": {"$ref": "operation-interaction-event_1.json"}
+    },
+    "features": {
+      "type": "object",
+      "required": ["progress_reporting", "cancellation", "detail_level", "reporting_interval", "supported_state_result_delivery_modes"],
+      "additionalProperties": false,
+      "properties": {
+        "progress_reporting": {"type": "boolean"},
+        "cancellation": {"type": "boolean"},
+        "detail_level": {"type": "boolean"},
+        "reporting_interval": {"type": "boolean"},
+        "supported_state_result_delivery_modes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["ON_DEMAND_COMPLETE", "ON_DEMAND_DELTA", "ON_CHANGE_COMPLETE", "ON_CHANGE_DELTA", "ALWAYS_COMPLETE"]}
+        }
+      }
+    }
+  }
+}

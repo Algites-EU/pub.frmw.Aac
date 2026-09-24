@@ -99,13 +99,37 @@ class AIcOperationAuthorizationRequirement:
         )
 
 
+class AInCapabilityOperationInteractionKind(str, Enum):
+    INPUT = "INPUT"
+    RUNNING_COMPLETE_STATE_RESULT = "RUNNING_COMPLETE_STATE_RESULT"
+    RUNNING_DELTA_STATE_RESULT = "RUNNING_DELTA_STATE_RESULT"
+    FINAL_SUCCESS_STATE_RESULT = "FINAL_SUCCESS_STATE_RESULT"
+    FINAL_CANCELLED_STATE_RESULT = "FINAL_CANCELLED_STATE_RESULT"
+    FINAL_FAILED_STATE_RESULT_EXTENSION = "FINAL_FAILED_STATE_RESULT_EXTENSION"
+
+
+@dataclass(frozen=True, slots=True)
+class AIcSchemaRef:
+    id: str
+    version: int
+
+    def __post_init__(self) -> None:
+        if not self.id:
+            raise ValueError("schema id must not be empty")
+        if self.version < 1:
+            raise ValueError("schema version must be >= 1")
+
+
+@dataclass(frozen=True, slots=True)
+class AIcCapabilityOperationInteraction:
+    kind: AInCapabilityOperationInteractionKind
+    schema: AIcSchemaRef
+
+
 @dataclass(frozen=True, slots=True)
 class AIcCapabilityOperation:
     id: str
-    input_type: str = "Object"
-    output_type: str = "Object"
-    input_schema: str | None = None
-    output_schema: str | None = None
+    interactions: tuple[AIcCapabilityOperationInteraction, ...] = ()
     name: AIcDisplayText | None = None
     description: AIcDisplayText | None = None
     authorization: AIcOperationAuthorizationRequirement | None = None
@@ -116,6 +140,19 @@ class AIcCapabilityOperation:
     def __post_init__(self) -> None:
         if not self.id:
             raise ValueError("operation id must not be empty")
+        kinds = [item.kind for item in self.interactions]
+        if len(kinds) != len(set(kinds)):
+            raise ValueError("operation interaction kinds must be unique")
+
+    def interaction(self, kind: AInCapabilityOperationInteractionKind) -> AIcCapabilityOperationInteraction | None:
+        for item in self.interactions:
+            if item.kind is kind:
+                return item
+        return None
+
+    def schema_ref(self, kind: AInCapabilityOperationInteractionKind) -> AIcSchemaRef | None:
+        item = self.interaction(kind)
+        return None if item is None else item.schema
 
 
 @dataclass(frozen=True, slots=True)

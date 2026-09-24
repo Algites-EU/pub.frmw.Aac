@@ -36,11 +36,22 @@ _SCHEMA_AREAS = {
     "data-entity-ensure-storage-support-result_1.json": "dataentity",
     "data-entity-retire-storage-support-request_1.json": "dataentity",
     "data-entity-retire-storage-support-result_1.json": "dataentity",
+    "data-entity-create-storage-backup-request_1.json": "dataentity",
+    "data-entity-create-storage-backup-result_1.json": "dataentity",
+    "data-entity-inspect-storage-backup-request_1.json": "dataentity",
+    "data-entity-inspect-storage-backup-result_1.json": "dataentity",
+    "data-entity-restore-storage-backup-request_1.json": "dataentity",
+    "data-entity-restore-storage-backup-result_1.json": "dataentity",
     "provider-instance_1.json": "instances",
     "security-bootstrap_1.json": "authentication",
     "core-state-store_1.json": "persistence",
     "transaction-plan_1.json": "persistence",
     "transaction-state_1.json": "persistence",
+    "operation-interaction-event_1.json": "invocation",
+    "operation-interaction-provider-to-caller-message_1.json": "invocation",
+    "operation-interaction-caller-to-provider-message_1.json": "invocation",
+    "operation-failure_1.json": "invocation",
+    "display-content_1.json": "presentation",
 }
 
 

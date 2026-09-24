@@ -9,14 +9,20 @@ capability:
     text: Observes normalized capability invocations before and after provider execution.
     resource_key: aac.capability.observation.description
 operations:
-  - id: observe
-    name:
-      text: Observe invocation
-      resource_key: aac.capability.observation.operation.observe.name
-    description:
-      text: Delivers one normalized PRE or POST capability invocation observation to the observer.
-      resource_key: aac.capability.observation.operation.observe.description
-    input: AIcObservationInput
-    output: AIcObservationOutput
-    input_schema: observation-input_1.json
-    output_schema: observation-output_1.json
+- id: observe
+  name:
+    text: Observe invocation
+    resource_key: aac.capability.observation.operation.observe.name
+  description:
+    text: Delivers one normalized PRE or POST capability invocation observation to
+      the observer.
+    resource_key: aac.capability.observation.operation.observe.description
+  interactions:
+  - kind: INPUT
+    schema:
+      id: _AAC.schema.observation-input
+      version: 1
+  - kind: FINAL_SUCCESS_STATE_RESULT
+    schema:
+      id: _AAC.schema.observation-output
+      version: 1

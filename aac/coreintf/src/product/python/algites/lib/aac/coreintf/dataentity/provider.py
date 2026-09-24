@@ -32,3 +32,18 @@ class AIiDataEntityEnsureStorageSupport_1(ABC):
 class AIiDataEntityRetireStorageSupport_1(ABC):
     @abstractmethod
     def retire_1(self, request: Mapping[str, object]) -> Mapping[str, object]: ...
+
+
+class AIiDataEntityCreateStorageBackup_1(ABC):
+    @abstractmethod
+    def create_backup_1(self, request: Mapping[str, object]) -> Mapping[str, object]: ...
+
+
+class AIiDataEntityInspectStorageBackup_1(ABC):
+    @abstractmethod
+    def inspect_backup_1(self, request: Mapping[str, object]) -> Mapping[str, object]: ...
+
+
+class AIiDataEntityRestoreStorageBackup_1(ABC):
+    @abstractmethod
+    def restore_backup_1(self, request: Mapping[str, object]) -> Mapping[str, object]: ...

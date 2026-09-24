@@ -4,7 +4,7 @@ from algites.lib.aac.coreintf.contracts import AIcCapabilityContract, AIcCapabil
 
 
 def test_contract_operation_ids_are_unique():
-    op = AIcCapabilityOperation("run", "RunInput", "RunOutput")
+    op = AIcCapabilityOperation("run")
     with pytest.raises(ValueError):
         AIcCapabilityContract(AIcCapabilityRef("x", 1), "test.group", (op, op))
 

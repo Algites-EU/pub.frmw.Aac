@@ -292,6 +292,13 @@ AAC baseline configuration targets are `COMPONENT` and `PROVIDER_INSTANCE`. Comp
 
 Configuration mutations travel through Core as normalized change sets, not storage-format YAML/JSON. A change set targets one configuration-scope, configuration-provider, and configuration target and may contain multiple value/policy changes. Writable providers expose technical capabilities such as `WRITE_VALUE` or `WRITE_POLICY`; Core authorization separately decides whether the current principal may use them. Optimistic concurrency prevents accidental overwrite of newer provider state.
 
+
+## III.4.1 Operation parameters are resolved outside portable capability DTOs
+
+Capability-provider operation parameters are intentionally not fields of the canonical operation request DTO. Core resolves them from provider-definition defaults plus permitted component/provider-instance settings and a possible invocation override, validates the effective values, and exposes them to the provider runtime through the invocation context. The same normalized mechanism is transported across in-process and process-isolated provider boundaries.
+
+This keeps generated capability interfaces stable and provider-neutral: a Git-specific pull strategy, for example, does not appear in a generic distributed-VCS capability method signature merely because one provider supports it.
+
 ## III.5 Configuration-providers are ordered within a configuration-scope
 
 A configuration profile may bind one or more configuration-providers to one concrete configuration-scope. Their priority/merge behavior must be deterministic. Equal-priority conflicting scalar values should be diagnosed rather than resolved by incidental load order.
@@ -415,6 +422,8 @@ A tombstone retains identity and representation so incoming references/history c
 AAC does not prescribe a `.aac/...` hierarchy, SQL table layout, document collection, or remote-service representation. A relational implementation may use a per-entity identity table such as `SITE__PK` plus version-specific payload tables. A filesystem implementation may use rebuildable indexes containing schema/version/UID/path/reference metadata. These are useful implementation strategies but are not AAC contract requirements.
 
 The component should never need to know which representation was chosen. Generic Data Entity semantics and canonical schemas are above the storage implementation.
+
+The framework repository contains `components/dataentity/yamlfsdes` as the first concrete reference implementation of this boundary. Its root separates authoritative `data/` (including durable `.schema.yml` beside each schema/version), crash-critical `journal/`, and rebuildable `.yamlfsdes/` runtime state. Records live as `data/<schema-id>/<stored-schema-version>/<uid>.yml`. The component also implements provider-specific physical ZIP backup/restore through the generic backup/restore contracts; the archive preserves the `data/` hierarchy while excluding transient/rebuildable state. This layout is an implementation example, not an AAC portability requirement.
 
 ## IV.6 Generic storage capability split
 
@@ -878,6 +887,25 @@ Transparent retry is allowed only if the failure is explicitly marked safe after
 Changing a provider permission set should not normally rebuild the capability graph. The binding still points to the same provider implementing the same contract; runtime authorization determines whether the current invocation is allowed.
 
 ---
+
+## VI.A.5 Operation Interaction is invocation infrastructure
+
+Progress, live/partial results, failure detail, cancellation and foreground/background behavior are invocation infrastructure, not capability-specific toolkit callbacks. A canonical operation expresses its portable payload contracts through normalized `interactions[]` (`INPUT`, running result forms and terminal result forms). Technology bindings expose the provider-facing and caller-facing Operation Interaction views around the same dispatch.
+
+The interaction protocol is explicitly directional. Provider-side code publishes `OperationInteractionProviderToCallerMessage` state/telemetry and reads the latest `OperationInteractionCallerToProviderMessage` preferences. The caller does the opposite. Core owns the execution lifecycle (`PENDING -> RUNNING -> COMPLETED|FAILED|CANCELLED`) and routes messages, but deliberately does not understand operation-specific complete/delta result semantics.
+
+Two monotonic counters serve different diagnostic/transport purposes. `interaction_revision` numbers atomic provider-to-caller publications. `state_result_revision` numbers logical result changes and starts at zero until any result exists. A caller reports `last_accepted_state_result_revision`, but that value is not a TCP-style cumulative ACK: operation semantics decide whether skipped result revisions matter. Core therefore does not infer a replay requirement from revision gaps.
+
+State-result delivery can be `ON_DEMAND_COMPLETE`, `ON_DEMAND_DELTA`, `ON_CHANGE_COMPLETE`, `ON_CHANGE_DELTA`, or `ALWAYS_COMPLETE`. Delta payloads are opaque to Core. Providers that stream very large results may retain only operation-specific unaccepted fragments and may never materialize a complete running snapshot. Buffering, replay and backpressure policy remain outside Core; reusable helper libraries may implement such policies without changing the invocation protocol.
+
+Published state-result payloads are immutable snapshots. A provider wishing to change a result publishes another logical revision rather than mutating an in-process object. This rule prevents accidental semantic differences between `IN_PROCESS` and isolated runtimes.
+
+The reference Python in-process profile uses a context-local interface. The persistent `PROCESS` profile bridges the directional messages over the runtime protocol. Python 3.14+ `SUBINTERPRETER` uses `concurrent.interpreters` cross-interpreter queues and a separate execution thread, so live interaction does not require sharing mutable Python/UI objects between interpreters. Runtime profiles expose the same provider-facing interaction interface.
+
+Foreground/background is caller-owned presentation/attention state; it is not an instruction to migrate the provider operation to another thread/process. Asynchronous execution is a separate concern. A simple synchronous invocation uses a fresh invocation-local no-op interaction in `ON_DEMAND_COMPLETE` mode and returns only its normal final output. Cooperative cancellation may optionally carry an operation-specific cancellation result, which Core commits atomically with the `CANCELLED` lifecycle transition.
+
+Interaction events remain failure-isolated telemetry. Multiple events can be published atomically, and progress events carry stable IDs plus optional parent IDs for hierarchical progress. Cancellation is cooperative. Locale is immutable invocation context so providers, including remote providers, can localize user-facing failure/status text when they own the relevant resources.
+
 
 # VII. Resolution, Wiring, and Cycles
 
@@ -1631,7 +1659,7 @@ Products may additionally configure a principal-authorization provider. Core inv
 
 ## XI.A.5 Contract-driven source generation
 
-The recommended toolchain treats the canonical capability contract plus referenced input/output schemas as generation input. A Python generator can emit version-qualified `AIig..._N` interfaces and `AIcgd..._N` DTOs. A Java generator can emit the corresponding shared interface/DTO artifact with `AIaOperation`/`AIaAuthorization` annotations. Generated non-data classes use `AIcg..._N`; the optional `d` marker is reserved for explicit data objects.
+The recommended toolchain treats the canonical capability contract plus all referenced interaction schemas as generation input. A Python generator can emit version-qualified `AIig..._N` interfaces, schema-derived `AIcgd..._N` DTOs, operation-specific `AIxg...Failed_N` exceptions and generated failure factories. A Java generator can emit the corresponding shared interface/DTO/exception binding artifact with `AIaOperation`/`AIaAuthorization` annotations. Generated non-data classes use `AIcg..._N`; the optional `d` marker is reserved for explicit data objects. Schema identity determines generated data-type identity; capability/version/operation identity determines the generated operation failure exception/factory identity.
 
 The generated type's `_N` suffix follows the version of its direct canonical source. Generated types retain canonical source ID/version as machine-readable provenance and SHOULD retain a canonical resource path; Javadoc/docstrings display the same provenance. This allows old and new generated contract/schema types to coexist during multi-version contract support.
 

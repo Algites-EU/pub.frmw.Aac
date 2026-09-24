@@ -38,6 +38,8 @@ from algites.lib.aac.coreintf.solver import (
 )
 from algites.lib.aac.coreintf.verification import AIiPackageVerifier, AIcVerificationInput
 from algites.lib.aac.coreintf.descriptor import AInComponentOrigin
+from algites.lib.aac.coreintf.contracts import AInCapabilityOperationInteractionKind
+from algites.lib.aac.coreintf.interaction_types import AInStateResultDeliveryMode
 
 from .bootstrap import AIcBootstrapResourceLoader, AIcConfigurationProfileLoader
 from .bindings import AIcBindingPreferenceStore, AIcBindingStore
@@ -72,6 +74,7 @@ from .lifecycle import AIcLifecycleEngine
 from .migration import AIcConfigurationMigrationService, AIcDataEntityMigrationService
 from .namespace import AIcNamespacePolicy
 from .observation import AIcObservationDispatcher, AIcObservationTopologyStore
+from .operation_parameters import AIcOperationParameterConfigurationStore, AIcOperationParameterResolver
 from .packages import AIcManifestPackageSource, AIcPackageManager
 from .persistence import AIcInMemoryStateStore
 from .provisioning import AIcProvisioningEngine
@@ -201,10 +204,14 @@ class AIcApplicationComponentCore:
         self.observation_topology = AIcObservationTopologyStore(self.store, self.contracts)
         self.observations = AIcObservationDispatcher(self.observation_topology)
         self.component_authorizations = AIcComponentAuthorizationGrantStore(self.store)
+        self.operation_parameter_configurations = AIcOperationParameterConfigurationStore(self.store)
+        self.operation_parameter_resolver = AIcOperationParameterResolver(self.operation_parameter_configurations)
         self.endpoints = AIcEndpointRegistry()
         self.invocations = AIcInvocationDispatcher(
             self.contracts, self.observations, self.component_authorizations, self.authorization_provider,
             entitlement_remediator=self.entitlement_remediator, entitlement_refresh_callback=self._refresh_entitlements_after_remediation,
+            operation_parameter_resolver=self._resolve_invocation_operation_parameters,
+            provider_operation_resolver=self._resolve_invocation_provider_operation,
         )
         self.handles = AIcCapabilityHandleFactory(self.endpoints, self.invocations)
         self.lifecycle = AIcLifecycleEngine(
@@ -1084,6 +1091,49 @@ class AIcApplicationComponentCore:
             self.contracts.admit_text(text, source=source)
 
         for provider in descriptor.capability_providers:
+            self.operation_parameter_resolver.validate_provider_definition(provider)
+            declared_operation_keys = {
+                (item.capability_id, item.capability_version, item.operation_id) for item in provider.operations
+            }
+            expected_operation_keys: set[tuple[str, int, str]] = set()
+            for provided_capability in provider.capabilities:
+                for version in provided_capability.versions:
+                    if not self.contracts.contains(provided_capability.id, version):
+                        continue
+                    contract = self.contracts.get(provided_capability.id, version)
+                    expected_operation_keys.update(
+                        (provided_capability.id, version, operation.id) for operation in contract.operations
+                    )
+            missing_operation_keys = expected_operation_keys - declared_operation_keys
+            if missing_operation_keys:
+                raise ValueError(
+                    f"provider {provider.id!r} must declare operation metadata for every provided operation: "
+                    f"{sorted(missing_operation_keys)!r}"
+                )
+            for provider_operation in provider.operations:
+                if not self.contracts.contains(provider_operation.capability_id, provider_operation.capability_version):
+                    raise ValueError(
+                        f"provider {provider.id!r} operation descriptor references unknown capability "
+                        f"{provider_operation.capability_id}/{provider_operation.capability_version}"
+                    )
+                contract = self.contracts.get(provider_operation.capability_id, provider_operation.capability_version)
+                try:
+                    contract_operation = contract.operation(provider_operation.operation_id)
+                except KeyError as exc:
+                    raise ValueError(
+                        f"provider {provider.id!r} operation descriptor references unknown operation "
+                        f"{provider_operation.operation_id!r} in {provider_operation.capability_id}/{provider_operation.capability_version}"
+                    ) from exc
+                interaction_kinds = {item.kind for item in contract_operation.interactions}
+                modes = set(provider_operation.interaction.supported_state_result_delivery_modes)
+                if modes.intersection({
+                    AInStateResultDeliveryMode.ON_DEMAND_DELTA,
+                    AInStateResultDeliveryMode.ON_CHANGE_DELTA,
+                }) and AInCapabilityOperationInteractionKind.RUNNING_DELTA_STATE_RESULT not in interaction_kinds:
+                    raise ValueError(
+                        f"provider {provider.id!r} operation {provider_operation.operation_id!r} declares delta delivery "
+                        "but the capability operation defines no RUNNING_DELTA_STATE_RESULT interaction"
+                    )
             for requirement in provider.requirements:
                 for version in requirement.versions:
                     if not self.contracts.contains(requirement.capability_id, version):
@@ -1178,6 +1228,74 @@ class AIcApplicationComponentCore:
         )
         self._builtin_component_ids.add(installed.descriptor.id)
         return installed
+
+    def _operation_parameter_definition(
+        self, provider, capability_id: str, capability_version: int, operation_id: str, parameter_id: str
+    ):
+        operation = provider.operation_parameter_definition(capability_id, capability_version, operation_id)
+        if operation is None:
+            raise KeyError(f"operation {capability_id}/{capability_version}:{operation_id} has no provider-specific parameters")
+        return operation.parameter(parameter_id)
+
+    def configure_component_operation_parameter(
+        self, component_id: str, provider_definition_id: str, capability_id: str, capability_version: int,
+        operation_id: str, parameter_id: str, value: object,
+    ) -> None:
+        installed = self.installed(component_id)
+        provider = installed.descriptor.provider(provider_definition_id)
+        parameter = self._operation_parameter_definition(
+            provider, capability_id, capability_version, operation_id, parameter_id
+        )
+        self.operation_parameter_resolver.validate_configured_value(parameter, value, scope="COMPONENT")
+        self.operation_parameter_configurations.set_component_value(
+            component_id, provider_definition_id, capability_id, capability_version, operation_id, parameter_id, value,
+            component_version=installed.descriptor.version,
+        )
+
+    def configure_provider_instance_operation_parameter(
+        self, instance_id: str, capability_id: str, capability_version: int, operation_id: str,
+        parameter_id: str, value: object,
+    ) -> None:
+        instance = self.instances.get(instance_id)
+        installed = self.installed(instance.component_id)
+        provider = installed.descriptor.provider(instance.provider_definition_id)
+        parameter = self._operation_parameter_definition(
+            provider, capability_id, capability_version, operation_id, parameter_id
+        )
+        self.operation_parameter_resolver.validate_configured_value(parameter, value, scope="PROVIDER_INSTANCE")
+        self.operation_parameter_configurations.set_instance_value(
+            instance.component_id, provider.id, instance.id, capability_id, capability_version, operation_id,
+            parameter_id, value, component_version=installed.descriptor.version,
+        )
+
+    def _resolve_invocation_operation_parameters(self, invocation_input):
+        instance = self.instances.get(invocation_input.provider_instance_id)
+        installed = self.installed(instance.component_id)
+        provider = installed.descriptor.provider(instance.provider_definition_id)
+        return self.operation_parameter_resolver.resolve(
+            provider,
+            component_id=instance.component_id,
+            component_version=installed.descriptor.version,
+            provider_instance_id=instance.id,
+            capability_id=invocation_input.capability_id,
+            capability_version=invocation_input.capability_version,
+            operation_id=invocation_input.operation_id,
+            invocation_overrides=invocation_input.operation_parameter_overrides,
+        )
+
+    def _resolve_invocation_provider_operation(self, invocation_input):
+        instance = self.instances.get(invocation_input.provider_instance_id)
+        installed = self.installed(instance.component_id)
+        provider = installed.descriptor.provider(instance.provider_definition_id)
+        operation = provider.operation_definition(
+            invocation_input.capability_id, invocation_input.capability_version, invocation_input.operation_id
+        )
+        if operation is None:
+            raise ValueError(
+                f"provider {provider.id!r} does not declare operation metadata for "
+                f"{invocation_input.capability_id}/{invocation_input.capability_version}/{invocation_input.operation_id}"
+            )
+        return operation
 
     def authorization_context(self, principal: AIcAuthorizationPrincipal | None):
         return authorization_principal_context(principal)

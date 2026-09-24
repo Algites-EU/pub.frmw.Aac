@@ -13,12 +13,15 @@ import importlib
 import inspect
 import json
 import sys
+import threading
+import traceback
 import types
 from enum import Enum
 from typing import Any, Mapping, Union, get_args, get_origin, get_type_hints
 
 from ..contracts import AIcProvidedCapability
 from ..instances import AIcBinding, AIcProviderInstance, AInProviderAccessMode, AInProviderInstanceState
+from ..presentation import AIcDisplayText
 from ..errors import AIxPermissionDenied
 from ..entitlement import AIcEntitlementLicensingScope
 from ..entitlement import (
@@ -30,7 +33,14 @@ from ..configuration import (
     AIcConfigurationPolicy, AIcConfigurationTarget, AIcEffectiveConfiguration, AIcEffectiveConfigurationPolicy,
     AIcEffectiveConfigurationValue,
 )
-from ..invocation import AIiCapabilityHandle, AIcInvocationInput, AIcInvocationOutput
+from ..invocation import (
+    AInOperationInteractionDetailLevel, AInOperationInteractionEventType, AInOperationInteractionFailureDetailLevel,
+    AInOperationInteractionMode, AInOperationInteractionSeverity, AInStateResultDeliveryMode,
+    AIiCapabilityHandle, AIiOperationInteractionProviderToCaller, AIiOperationInteractionCallerToProvider, AIcInvocationInput,
+    AIcInvocationOutput, AIcOperationInteractionCallerToProviderMessage, AIcOperationInteractionEvent,
+    AIcOperationInteractionFeatures, AIxCapabilityOperationFailed, AIxOperationCancelled, current_invocation_locale,
+    current_operation_interaction, invocation_locale_context, operation_interaction_context, operation_parameter_context,
+)
 from .provider import AIcProviderRuntimeContext, AIiProviderRuntime, AIiProviderRuntimeFactory
 
 _CURRENT_PROCESS_INVOCATION_ID: ContextVar[str | None] = ContextVar("aac_process_invocation_id", default=None)
@@ -49,19 +59,49 @@ class AIcProcessCapabilityHandle(AIiCapabilityHandle):
     def binding(self) -> AIcBinding:
         return self._binding
 
-    def invoke(self, operation_id: str, arguments: Mapping[str, object] | None = None) -> AIcInvocationOutput:
+    def invoke(
+        self, operation_id: str, arguments: Mapping[str, object] | None = None, *,
+        operation_parameters: Mapping[str, object] | None = None,
+        operation_interaction: AIiOperationInteractionProviderToCaller | None = None,
+        locale: str | None = None,
+    ) -> AIcInvocationOutput:
         response = self._channel.core_invoke(
             self._requirement_id,
             self._handle_index,
             operation_id,
             dict(arguments or {}),
+            dict(operation_parameters or {}),
             _CURRENT_PROCESS_INVOCATION_ID.get(),
+            locale if locale is not None else current_invocation_locale(),
         )
         return AIcInvocationOutput(
             success=bool(response.get("success", False)),
             result=response.get("result"),
             error=response.get("error") if isinstance(response.get("error"), Mapping) else None,
         )
+
+    def start(
+        self, operation_id: str, arguments: Mapping[str, object] | None = None, *,
+        operation_parameters: Mapping[str, object] | None = None,
+        operation_interaction: AIiOperationInteractionCallerToProvider | None = None,
+        locale: str | None = None,
+    ) -> AIiOperationInteractionCallerToProvider:
+        if operation_interaction is None:
+            raise ValueError("process-local asynchronous invocation requires an explicit operation interaction controller")
+        thread = threading.Thread(
+            target=self.invoke,
+            kwargs={
+                "operation_id": operation_id,
+                "arguments": arguments,
+                "operation_parameters": operation_parameters,
+                "operation_interaction": operation_interaction,
+                "locale": locale,
+            },
+            name=f"aac-process-nested-operation-{operation_id}",
+            daemon=True,
+        )
+        thread.start()
+        return operation_interaction
 
 
 class AIcHostChannel:
@@ -88,7 +128,10 @@ class AIcHostChannel:
     def respond(self, request_id: str, *, success: bool, result: object | None = None, error: Mapping[str, object] | None = None) -> None:
         self.write({"kind": "response", "request_id": request_id, "success": success, "result": result, "error": error})
 
-    def core_invoke(self, requirement_id: str, handle_index: int, operation_id: str, arguments: Mapping[str, object], parent_invocation_id: str | None) -> Mapping[str, object]:
+    def core_invoke(
+        self, requirement_id: str, handle_index: int, operation_id: str, arguments: Mapping[str, object],
+        operation_parameters: Mapping[str, object], parent_invocation_id: str | None, locale: str | None,
+    ) -> Mapping[str, object]:
         self._next_id += 1
         request_id = f"child-{self._next_id}"
         self.write({
@@ -98,7 +141,9 @@ class AIcHostChannel:
             "handle_index": handle_index,
             "operation_id": operation_id,
             "arguments": dict(arguments),
+            "operation_parameters": dict(operation_parameters),
             "parent_invocation_id": parent_invocation_id,
+            "locale": locale,
         })
         while True:
             frame = self.read()
@@ -107,6 +152,77 @@ class AIcHostChannel:
             if frame.get("kind") == "core_response" and frame.get("request_id") == request_id:
                 return frame
             raise RuntimeError(f"unexpected AAC frame while waiting for core response: {frame.get('kind')!r}")
+
+
+    def _operation_interaction_request(
+        self, invocation_id: str, kind: str, payload: Mapping[str, object] | None = None
+    ) -> Mapping[str, object]:
+        self._next_id += 1
+        request_id = f"interaction-{self._next_id}"
+        frame = {"kind": kind, "request_id": request_id, "invocation_id": invocation_id}
+        if payload:
+            frame.update(dict(payload))
+        self.write(frame)
+        while True:
+            response = self.read()
+            if response is None:
+                raise RuntimeError("Core process channel closed while waiting for operation interaction response")
+            if response.get("kind") == "operation_interaction_response" and response.get("request_id") == request_id:
+                if not bool(response.get("success", False)):
+                    raise RuntimeError(str(response.get("error") or "operation interaction request failed"))
+                result = response.get("result", {})
+                return _as_mapping(result) if isinstance(result, Mapping) else {}
+            raise RuntimeError(f"unexpected AAC frame while waiting for operation interaction response: {response.get('kind')!r}")
+
+    def operation_interaction_caller_snapshot(
+        self, invocation_id: str
+    ) -> AIcOperationInteractionCallerToProviderMessage:
+        result = self._operation_interaction_request(invocation_id, "operation_interaction_caller_snapshot")
+        return _operation_interaction_caller_message_from_dict(_as_mapping(result.get("caller", {})))
+
+
+class AIcProcessOperationInteraction(AIiOperationInteractionProviderToCaller):
+    def __init__(self, invocation_id: str, channel: AIcHostChannel) -> None:
+        self._invocation_id = invocation_id
+        self._channel = channel
+
+    def declare_features(self, features: AIcOperationInteractionFeatures) -> None:
+        self._channel.write({
+            "kind": "operation_interaction_features",
+            "invocation_id": self._invocation_id,
+            "features": _jsonable(features),
+        })
+
+    def report_events(self, events: tuple[AIcOperationInteractionEvent, ...]) -> None:
+        if not events:
+            return
+        self._channel.write({
+            "kind": "operation_interaction_events",
+            "invocation_id": self._invocation_id,
+            "events": _jsonable(events),
+        })
+
+    def state_result_changed(self) -> int:
+        result = self._channel._operation_interaction_request(
+            self._invocation_id, "operation_interaction_state_result_changed"
+        )
+        return int(result["revision"])
+
+    def update_state_result(self, state_result: object) -> int:
+        result = self._channel._operation_interaction_request(
+            self._invocation_id, "operation_interaction_update_state_result",
+            {"state_result": _jsonable(state_result)},
+        )
+        return int(result["revision"])
+
+    def deliver_state_result(self, state_result: object, *, revision: int | None = None) -> None:
+        self._channel._operation_interaction_request(
+            self._invocation_id, "operation_interaction_deliver_state_result",
+            {"state_result": _jsonable(state_result), "revision": revision},
+        )
+
+    def caller_snapshot(self) -> AIcOperationInteractionCallerToProviderMessage:
+        return self._channel.operation_interaction_caller_snapshot(self._invocation_id)
 
 
 def main() -> int:
@@ -131,7 +247,7 @@ def main() -> int:
                 if runtime is None:
                     raise RuntimeError("provider runtime has not been bootstrapped")
                 invocation = _invocation_from_dict(_as_mapping(frame.get("payload")))
-                output = _invoke_runtime(runtime, invocation)
+                output = _invoke_runtime(runtime, invocation, channel)
                 channel.respond(request_id, success=True, result=_jsonable(output))
             elif kind == "shutdown":
                 channel.respond(request_id, success=True)
@@ -216,39 +332,72 @@ def _generated_capability_invoker(runtime: object, capability_id: str, capabilit
     return None
 
 
-def _invoke_runtime(runtime: AIiProviderRuntime, invocation: AIcInvocationInput) -> AIcInvocationOutput:
+def _invoke_runtime(
+    runtime: AIiProviderRuntime, invocation: AIcInvocationInput, channel: AIcHostChannel | None = None
+) -> AIcInvocationOutput:
     try:
         generated_invoke = _generated_capability_invoker(
             runtime, invocation.capability_id, invocation.capability_version
         )
         token = _CURRENT_PROCESS_INVOCATION_ID.set(invocation.invocation_id)
         try:
-            if generated_invoke is not None:
-                result = generated_invoke(runtime, invocation.operation_id, dict(invocation.arguments))
-            else:
-                method = getattr(runtime, f"{invocation.operation_id}_{invocation.capability_version}")
-                hints = get_type_hints(method)
-                parameters = tuple(inspect.signature(method).parameters.values())
-                if len(parameters) == 1 and parameters[0].name not in invocation.arguments:
-                    parameter = parameters[0]
-                    annotation = hints.get(parameter.name)
-                    if parameter.name == "request" or (inspect.isclass(annotation) and dataclasses.is_dataclass(annotation)):
-                        result = method(_coerce_value(annotation, dict(invocation.arguments)))
+            interaction = (
+                AIcProcessOperationInteraction(invocation.invocation_id, channel)
+                if channel is not None else current_operation_interaction()
+            )
+            with operation_interaction_context(interaction), operation_parameter_context(
+                invocation.effective_operation_parameters
+            ), invocation_locale_context(invocation.locale):
+                if generated_invoke is not None:
+                    result = generated_invoke(runtime, invocation.operation_id, dict(invocation.arguments))
+                else:
+                    method = getattr(runtime, f"{invocation.operation_id}_{invocation.capability_version}")
+                    hints = get_type_hints(method)
+                    parameters = tuple(inspect.signature(method).parameters.values())
+                    if len(parameters) == 1 and parameters[0].name not in invocation.arguments:
+                        parameter = parameters[0]
+                        annotation = hints.get(parameter.name)
+                        if parameter.name == "request" or (inspect.isclass(annotation) and dataclasses.is_dataclass(annotation)):
+                            result = method(_coerce_value(annotation, dict(invocation.arguments)))
+                        else:
+                            kwargs = {
+                                name: _coerce_value(hints.get(name), value)
+                                for name, value in invocation.arguments.items()
+                            }
+                            result = method(**kwargs)
                     else:
                         kwargs = {
                             name: _coerce_value(hints.get(name), value)
                             for name, value in invocation.arguments.items()
                         }
                         result = method(**kwargs)
-                else:
-                    kwargs = {
-                        name: _coerce_value(hints.get(name), value)
-                        for name, value in invocation.arguments.items()
-                    }
-                    result = method(**kwargs)
         finally:
             _CURRENT_PROCESS_INVOCATION_ID.reset(token)
         return AIcInvocationOutput(True, result=_jsonable(result))
+    except AIxOperationCancelled as exc:
+        return AIcInvocationOutput(False, error={
+            "type": "OPERATION_CANCELLED",
+            "message": str(exc) or "operation cancelled",
+            "has_state_result": exc.has_state_result,
+            "state_result": exc.state_result if exc.has_state_result else None,
+        })
+    except AIxCapabilityOperationFailed as exc:
+        failure = exc.failure
+        error: dict[str, object] = {
+            "type": failure.exception_type,
+            "message": failure.system_message,
+        }
+        if failure.user_message is not None:
+            error["user_message"] = dataclasses.asdict(failure.user_message)
+        if failure.error_code is not None:
+            error["error_code"] = failure.error_code
+        if failure.stack_trace is not None:
+            error["stack_trace"] = failure.stack_trace
+        if failure.details:
+            error["details"] = dict(failure.details)
+        if failure.extension is not None:
+            error["extension"] = _jsonable(failure.extension)
+        return AIcInvocationOutput(False, error=error)
     except AIxPermissionDenied as exc:
         return AIcInvocationOutput(False, error={
             "type": "PERMISSION_DENIED",
@@ -260,7 +409,17 @@ def _invoke_runtime(runtime: AIiProviderRuntime, invocation: AIcInvocationInput)
             "remediation_hint": exc.remediation_hint,
         })
     except Exception as exc:
-        return AIcInvocationOutput(False, error={"type": type(exc).__name__, "message": str(exc)})
+        error: dict[str, object] = {
+            "type": f"{type(exc).__module__}.{type(exc).__qualname__}",
+            "message": str(exc) or type(exc).__name__,
+        }
+        try:
+            caller = current_operation_interaction().caller_snapshot()
+            if caller.failure_detail_level is AInOperationInteractionFailureDetailLevel.STACK_TRACE:
+                error["stack_trace"] = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
+        except Exception:
+            pass
+        return AIcInvocationOutput(False, error=error)
 
 
 def _coerce_value(annotation: object | None, value: object) -> object:
@@ -425,8 +584,37 @@ def _invocation_from_dict(raw: Mapping[str, object]) -> AIcInvocationInput:
         operation_id=str(raw["operation_id"]),
         provider_instance_id=str(raw["provider_instance_id"]),
         arguments=dict(_as_mapping(raw.get("arguments", {}))),
+        operation_parameter_overrides=dict(_as_mapping(raw.get("operation_parameter_overrides", {}))),
+        effective_operation_parameters=dict(_as_mapping(raw.get("effective_operation_parameters", {}))),
         consumer_instance_id=str(raw["consumer_instance_id"]) if raw.get("consumer_instance_id") is not None else None,
         requirement_id=str(raw["requirement_id"]) if raw.get("requirement_id") is not None else None,
+        locale=str(raw["locale"]) if raw.get("locale") is not None else None,
+    )
+
+
+
+def _display_text_from_dict(raw: object) -> AIcDisplayText | None:
+    if raw is None:
+        return None
+    value = _as_mapping(raw)
+    return AIcDisplayText(
+        text=str(value["text"]) if value.get("text") is not None else None,
+        resource_key=str(value["resource_key"]) if value.get("resource_key") is not None else None,
+    )
+
+
+def _operation_interaction_caller_message_from_dict(
+    raw: Mapping[str, object]
+) -> AIcOperationInteractionCallerToProviderMessage:
+    return AIcOperationInteractionCallerToProviderMessage(
+        last_accepted_state_result_revision=int(raw.get("last_accepted_state_result_revision", 0)),
+        interaction_mode=AInOperationInteractionMode(str(raw.get("interaction_mode", "FOREGROUND"))),
+        cancellation_requested=bool(raw.get("cancellation_requested", False)),
+        detail_level=AInOperationInteractionDetailLevel(str(raw.get("detail_level", "SUMMARY"))),
+        reporting_interval_ms=(int(raw["reporting_interval_ms"]) if raw.get("reporting_interval_ms") is not None else None),
+        failure_detail_level=AInOperationInteractionFailureDetailLevel(str(raw.get("failure_detail_level", "BASIC"))),
+        state_result_delivery_mode=AInStateResultDeliveryMode(str(raw.get("state_result_delivery_mode", "ON_DEMAND_COMPLETE"))),
+        state_result_request_id=int(raw.get("state_result_request_id", 0)),
     )
 
 

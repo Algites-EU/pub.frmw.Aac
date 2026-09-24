@@ -29,9 +29,14 @@ from algites.lib.aac.coreintf.descriptor import (
     AIcProviderDefinitionDescriptor,
     AIcProviderRuntimeDescriptor,
     AInProviderRuntimeProfile,
+    AIcCapabilityProviderOperationDescriptor,
+    AIcCapabilityProviderOperationInteractionDescriptor,
+    AIcOperationParameterDefinitionDescriptor,
+    AIcOperationParameterEnumValueDescriptor,
 )
 from algites.lib.aac.coreintf.errors import AIxDescriptorError
 from algites.lib.aac.coreintf.instances import AInProviderAccessMode
+from algites.lib.aac.coreintf.interaction_types import AInStateResultDeliveryMode
 from algites.lib.aac.coreintf.presentation import normalize_display_text
 from algites.lib.aac.coreintf.readiness import AInReadinessRequirementSource, AInReadinessState, AIcReadinessRequirementDescriptor
 
@@ -168,6 +173,47 @@ def _parse_component(component: Mapping[str, Any]) -> AIcComponentDescriptor:
             for item in raw_provider.get("initial_instances", ())
         )
         requirements = tuple(_parse_requirement(item) for item in raw_provider.get("requirements", ()))
+        provider_operations = tuple(
+            AIcCapabilityProviderOperationDescriptor(
+                capability_id=str(item["capability"]),
+                capability_version=int(item["capability_version"]),
+                operation_id=str(item["operation"]),
+                interaction=AIcCapabilityProviderOperationInteractionDescriptor(
+                    supported_state_result_delivery_modes=tuple(
+                        AInStateResultDeliveryMode(str(value))
+                        for value in item["interaction"]["supported_state_result_delivery_modes"]
+                    ),
+                    progress_reporting=bool(item["interaction"].get("progress_reporting", False)),
+                    cancellation=bool(item["interaction"].get("cancellation", False)),
+                    detail_level=bool(item["interaction"].get("detail_level", False)),
+                    reporting_interval=bool(item["interaction"].get("reporting_interval", False)),
+                ),
+                parameters=tuple(
+                    AIcOperationParameterDefinitionDescriptor(
+                        id=str(parameter["id"]),
+                        name=normalize_display_text(parameter["name"]),
+                        description=normalize_display_text(parameter["description"]),
+                        value_schema=dict(parameter["value_schema"]),
+                        enum_values=tuple(
+                            AIcOperationParameterEnumValueDescriptor(
+                                value=enum_item.get("value"),
+                                name=normalize_display_text(enum_item["name"]),
+                                description=normalize_display_text(enum_item.get("description")),
+                            )
+                            for enum_item in parameter.get("enum_values", ())
+                        ),
+                        required=bool(parameter.get("required", False)),
+                        default=parameter.get("default"),
+                        has_default="default" in parameter,
+                        component_configurable=bool(parameter.get("component_configurable", False)),
+                        instance_configurable=bool(parameter.get("instance_configurable", False)),
+                        invocation_overridable=bool(parameter.get("invocation_overridable", False)),
+                    )
+                    for parameter in item.get("parameters", ())
+                ),
+            )
+            for item in raw_provider.get("operations", ())
+        )
         raw_runtime = raw_provider.get("runtime", {}) or {}
         runtime = AIcProviderRuntimeDescriptor(
             profile=AInProviderRuntimeProfile(raw_runtime.get("profile", "IN_PROCESS")),
@@ -195,6 +241,7 @@ def _parse_component(component: Mapping[str, Any]) -> AIcComponentDescriptor:
             configuration_schema=_parse_persisted_schema(raw_provider.get("configuration_schema")),
             initial_instances=initial_instances,
             requirements=requirements,
+            operations=provider_operations,
             readiness_requirements=readiness_requirements,
             runtime_factory_class=raw_provider.get("runtime_factory_class"),
             runtime=runtime,

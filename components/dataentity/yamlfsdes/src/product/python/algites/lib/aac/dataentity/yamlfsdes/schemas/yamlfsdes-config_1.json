@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.yamlfsdes-config",
+  "x-aac-schema-version": 1,
+  "title": "YAML File-System Data Entity Storage Configuration 1",
+  "type": "object",
+  "required": [
+    "root_directory"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "root_directory": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Root directory containing schema/version/UID YAML Data Entity records."
+    }
+  }
+}

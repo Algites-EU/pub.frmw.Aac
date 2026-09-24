@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.data-entity-restore-storage-backup-result",
+  "x-aac-schema-version": 1,
+  "title": "Data Entity Restore Storage Backup Result 1",
+  "type": "object",
+  "required": [
+    "restored",
+    "backup_file",
+    "mode",
+    "schema_version_count",
+    "record_count"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "restored": {
+      "type": "boolean"
+    },
+    "backup_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "enum": [
+        "EMPTY_ONLY",
+        "REPLACE_ALL"
+      ]
+    },
+    "schema_version_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "record_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "metadata": {
+      "type": "object"
+    }
+  }
+}

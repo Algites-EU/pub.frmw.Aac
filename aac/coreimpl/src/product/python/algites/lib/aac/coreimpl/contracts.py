@@ -13,6 +13,9 @@ import yaml
 from algites.lib.aac.coreintf.contracts import (
     AIcAuthorizationPermissionDescriptor,
     AIcCapabilityContract,
+    AInCapabilityOperationInteractionKind,
+    AIcCapabilityOperationInteraction,
+    AIcSchemaRef,
     AIcCapabilityGroup,
     AIcCapabilityOperation,
     AIcCapabilityRef,
@@ -98,6 +101,7 @@ class AIcCapabilityGroupCatalog:
             "definitions/aac-capability-group-data-entity-loading_1.yml",
             "definitions/aac-capability-group-data-entity-storing_1.yml",
             "definitions/aac-capability-group-data-entity-storage-management_1.yml",
+            "definitions/aac-capability-group-data-entity-storage-backup-restore_1.yml",
             "definitions/aac-capability-group-runtime_1.yml",
             "definitions/aac-capability-group-runtime-observation_1.yml",
         )
@@ -143,6 +147,16 @@ class AIcActiveContractCatalog:
             raise AIxContractAdmissionError(
                 f"capability {contract.capability.id!r}/{contract.capability.version} references unknown group {contract.group_id!r}"
             )
+        for operation in contract.operations:
+            for interaction in operation.interactions:
+                try:
+                    self.schema_registry.get_identity(interaction.schema.id, interaction.schema.version)
+                except KeyError as exc:
+                    raise AIxContractAdmissionError(
+                        f"capability {contract.capability.id!r}/{contract.capability.version} operation "
+                        f"{operation.id!r} interaction {interaction.kind.value} references unknown schema "
+                        f"{interaction.schema.id}/{interaction.schema.version}"
+                    ) from exc
         canonical = _canonical_contract(contract)
         fingerprint = hashlib.sha256(canonical).hexdigest()
         key = (contract.capability.id, contract.capability.version)
@@ -195,6 +209,12 @@ class AIcActiveContractCatalog:
             "data-entity-ensure-storage-support-result_1.json",
             "data-entity-retire-storage-support-request_1.json",
             "data-entity-retire-storage-support-result_1.json",
+            "data-entity-create-storage-backup-request_1.json",
+            "data-entity-create-storage-backup-result_1.json",
+            "data-entity-inspect-storage-backup-request_1.json",
+            "data-entity-inspect-storage-backup-result_1.json",
+            "data-entity-restore-storage-backup-request_1.json",
+            "data-entity-restore-storage-backup-result_1.json",
         )
         for resource_name in schema_resources:
             try:
@@ -209,6 +229,9 @@ class AIcActiveContractCatalog:
             "definitions/aac-data-entity-inspect-storage-support_1.yml",
             "definitions/aac-data-entity-ensure-storage-support_1.yml",
             "definitions/aac-data-entity-retire-storage-support_1.yml",
+            "definitions/aac-data-entity-create-storage-backup_1.yml",
+            "definitions/aac-data-entity-inspect-storage-backup_1.yml",
+            "definitions/aac-data-entity-restore-storage-backup_1.yml",
         )
         return tuple(
             self.admit_package_resource("algites.lib.aac.coreintf.contracts", resource_name)
@@ -283,12 +306,23 @@ def _parse_contract(raw: Mapping[str, Any], source: str) -> AIcCapabilityContrac
                     all_of=tuple(str(v) for v in raw_authorization.get("all_of", ())),
                     any_of=tuple(str(v) for v in raw_authorization.get("any_of", ())),
                 )
+            raw_interactions = item.get("interactions", [])
+            if not isinstance(raw_interactions, list):
+                raise TypeError("operation interactions must be a list")
+            interactions = []
+            for raw_interaction in raw_interactions:
+                if not isinstance(raw_interaction, Mapping):
+                    raise TypeError("operation interaction must be a mapping")
+                raw_schema = raw_interaction.get("schema")
+                if not isinstance(raw_schema, Mapping):
+                    raise TypeError("operation interaction schema must be a mapping")
+                interactions.append(AIcCapabilityOperationInteraction(
+                    kind=AInCapabilityOperationInteractionKind(str(raw_interaction["kind"])),
+                    schema=AIcSchemaRef(str(raw_schema["id"]), int(raw_schema["version"])),
+                ))
             parsed_ops.append(AIcCapabilityOperation(
                 id=str(item["id"]),
-                input_type=str(item.get("input", "Object")),
-                output_type=str(item.get("output", "Object")),
-                input_schema=str(item["input_schema"]) if item.get("input_schema") is not None else None,
-                output_schema=str(item["output_schema"]) if item.get("output_schema") is not None else None,
+                interactions=tuple(interactions),
                 name=normalize_display_text(item.get("name")),
                 description=normalize_display_text(item.get("description")),
                 authorization=authorization,

@@ -26,10 +26,23 @@ class AIcFakeHandle(AIiCapabilityHandle):
     def binding(self) -> AIcBinding:
         return self._binding
 
-    def invoke(self, operation_id: str, arguments=None) -> AIcInvocationOutput:
+    def invoke(
+        self, operation_id: str, arguments=None, *, operation_parameters=None, operation_interaction=None, locale=None
+    ) -> AIcInvocationOutput:
         SEEN_PARENTS.append(_CURRENT_INVOCATION_ID.get())
         assert operation_id == "echo"
         return AIcInvocationOutput(True, result={"echo": dict(arguments or {}).get("value")})
+
+    def start(
+        self, operation_id: str, arguments=None, *, operation_parameters=None, operation_interaction=None, locale=None
+    ):
+        if operation_interaction is None:
+            raise ValueError("test fake asynchronous invocation requires an explicit interaction")
+        self.invoke(
+            operation_id, arguments, operation_parameters=operation_parameters,
+            operation_interaction=operation_interaction, locale=locale,
+        )
+        return operation_interaction
 
 
 def test_persistent_process_supports_nested_core_capability_calls(tmp_path, monkeypatch):
@@ -90,3 +103,130 @@ class AIcProcessFixtureProvider(AIiProviderRuntime):
         runtime.deactivate("test complete")
         runtime.close()
     assert not runtime.is_running
+
+
+def test_persistent_process_receives_effective_operation_parameters(tmp_path):
+    module = tmp_path / "aac_process_operation_parameters_fixture.py"
+    module.write_text(
+        """
+from algites.lib.aac.coreintf.invocation import current_operation_parameters
+from algites.lib.aac.coreintf.runtime import AIiProviderRuntime
+
+class AIcProcessOperationParametersProvider(AIiProviderRuntime):
+    def __init__(self, configuration=None):
+        pass
+    def run_1(self, value):
+        return {"value": value, "parameters": dict(current_operation_parameters())}
+""",
+        encoding="utf-8",
+    )
+    existing = os.environ.get("PYTHONPATH", "")
+    pythonpath = str(tmp_path) + (os.pathsep + existing if existing else "")
+    provider = AIcProviderDefinitionDescriptor(
+        id="parameters",
+        capabilities=(AIcProvidedCapability("example.parameters", (1,)),),
+        implementation_class="aac_process_operation_parameters_fixture:AIcProcessOperationParametersProvider",
+        runtime=AIcProviderRuntimeDescriptor(
+            profile=AInProviderRuntimeProfile.PROCESS,
+            environment={"PYTHONPATH": pythonpath},
+        ),
+    )
+    instance = AIcProviderInstance(
+        id="parameters-1",
+        component_id="example.component",
+        provider_definition_id="parameters",
+        name="default",
+        capabilities=(AIcProvidedCapability("example.parameters", (1,)),),
+        implementation_class=provider.implementation_class,
+    )
+    runtime = AIcProcessProviderRuntime("app", instance, provider)
+    try:
+        output = runtime.invoke(AIcInvocationInput(
+            "i", None, "example.parameters", 1, "run", "parameters-1", {"value": "x"},
+            effective_operation_parameters={"strategy": "REBASE"},
+        ))
+        assert output.success
+        assert output.result == {"value": "x", "parameters": {"strategy": "REBASE"}}
+    finally:
+        runtime.close()
+
+
+def test_persistent_process_bridges_live_operation_interaction(tmp_path):
+    from algites.lib.aac.coreintf.invocation import (
+        AInOperationInteractionDetailLevel,
+        AInOperationInteractionMode,
+        AIcOperationInteractionFeatures,
+        operation_interaction_context,
+    )
+    from algites.lib.aac.coreimpl.operation_interaction import AIcOperationInteractionController
+
+    module = tmp_path / "aac_process_interaction_fixture.py"
+    module.write_text(
+        """
+from algites.lib.aac.coreintf.invocation import (
+    AInOperationInteractionEventType, AIcOperationInteractionEvent, AIcOperationInteractionFeatures,
+    current_operation_interaction,
+)
+from algites.lib.aac.coreintf.presentation import AIcDisplayText
+from algites.lib.aac.coreintf.runtime import AIiProviderRuntime
+
+class AIcProcessInteractionProvider(AIiProviderRuntime):
+    def __init__(self, configuration=None):
+        pass
+    def run_1(self, value):
+        interaction = current_operation_interaction()
+        interaction.declare_features(AIcOperationInteractionFeatures(
+            progress_reporting=True, cancellation=True, detail_level=True, reporting_interval=True,
+        ))
+        interaction.report(AIcOperationInteractionEvent(
+            AInOperationInteractionEventType.PROGRESS, progress_id="process-work", phase_id="process-work",
+            name=AIcDisplayText(text="Process work"), current=1, total=3, unit="ITEMS",
+        ))
+        state = interaction.caller_snapshot()
+        return {
+            "value": value,
+            "mode": state.interaction_mode.value,
+            "detail": state.detail_level.value,
+            "interval": state.reporting_interval_ms,
+        }
+""",
+        encoding="utf-8",
+    )
+    existing = os.environ.get("PYTHONPATH", "")
+    pythonpath = str(tmp_path) + (os.pathsep + existing if existing else "")
+    provider = AIcProviderDefinitionDescriptor(
+        id="interaction",
+        capabilities=(AIcProvidedCapability("example.interaction", (1,)),),
+        implementation_class="aac_process_interaction_fixture:AIcProcessInteractionProvider",
+        runtime=AIcProviderRuntimeDescriptor(
+            profile=AInProviderRuntimeProfile.PROCESS,
+            environment={"PYTHONPATH": pythonpath},
+        ),
+    )
+    instance = AIcProviderInstance(
+        id="interaction-1", component_id="example.component", provider_definition_id="interaction",
+        name="default", capabilities=(AIcProvidedCapability("example.interaction", (1,)),),
+        implementation_class=provider.implementation_class,
+    )
+    messages = []
+    interaction = AIcOperationInteractionController(messages.append)
+    interaction.declare_features(AIcOperationInteractionFeatures(
+        progress_reporting=True, cancellation=True, detail_level=True, reporting_interval=True,
+    ))
+    interaction.set_interaction_mode(AInOperationInteractionMode.BACKGROUND)
+    interaction.set_detail_level(AInOperationInteractionDetailLevel.DETAILED)
+    interaction.set_reporting_interval_ms(250)
+    messages.clear()
+    runtime = AIcProcessProviderRuntime("app", instance, provider)
+    try:
+        with operation_interaction_context(interaction):
+            output = runtime.invoke(AIcInvocationInput(
+                "interaction-invocation", None, "example.interaction", 1, "run", "interaction-1", {"value": "x"}
+            ))
+        assert output.success
+        assert output.result == {"value": "x", "mode": "BACKGROUND", "detail": "DETAILED", "interval": 250}
+        progress_events = [event for message in messages for event in message.events]
+        assert len(progress_events) == 1 and progress_events[0].phase_id == "process-work"
+        assert interaction.provider_snapshot().features.cancellation is True
+    finally:
+        runtime.close()

@@ -14,7 +14,12 @@ from algites.lib.aac.coreintf.descriptor import AIcProviderDefinitionDescriptor
 from algites.lib.aac.coreintf.instances import AIcBinding, AIcProviderInstance
 from algites.lib.aac.coreintf.entitlement import AIcEntitlementContext
 from algites.lib.aac.coreintf.configuration import AInConfigurationTargetKind, AIcConfigurationTarget, AIcEffectiveConfiguration
-from algites.lib.aac.coreintf.invocation import AIiCapabilityEndpoint, AIiCapabilityHandle, AIcInvocationInput, AIcInvocationOutput
+from algites.lib.aac.coreintf.invocation import (
+    AInOperationInteractionEventType, AInOperationInteractionSeverity, AInStateResultDeliveryMode,
+    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCaller, AIcInvocationInput, AIcInvocationOutput,
+    AIcOperationInteractionEvent, AIcOperationInteractionFeatures, current_operation_interaction,
+)
+from algites.lib.aac.coreintf.presentation import AIcDisplayText
 from algites.lib.aac.coreintf.runtime import AIiProviderRuntime
 from algites.lib.aac.coreintf.readiness import AInReadinessState, AIcReadinessReason, AIcReadinessResult
 
@@ -124,6 +129,8 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
         self._handles: dict[str, tuple[AIiCapabilityHandle, ...]] = {}
         self._pending: dict[str, queue.Queue[dict[str, object]]] = {}
         self._pending_lock = threading.Lock()
+        self._interaction_lock = threading.Lock()
+        self._active_interactions: dict[str, AIiOperationInteractionProviderToCaller] = {}
         self._write_lock = threading.Lock()
         self._request_lock = threading.RLock()
         self._closed = False
@@ -173,10 +180,16 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
         return tuple(self._stderr_lines[-100:])
 
     def invoke(self, invocation_input: AIcInvocationInput) -> AIcInvocationOutput:
+        interaction = current_operation_interaction()
+        with self._interaction_lock:
+            self._active_interactions[invocation_input.invocation_id] = interaction
         try:
             result = self._request("invoke", payload=asdict(invocation_input))
         except Exception as exc:
             return AIcInvocationOutput(False, error={"type": type(exc).__name__, "message": str(exc)})
+        finally:
+            with self._interaction_lock:
+                self._active_interactions.pop(invocation_input.invocation_id, None)
         return _output_from_raw(result)
 
     def entitlement_changed(self, entitlement: AIcEntitlementContext) -> None:
@@ -304,6 +317,18 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
                             waiter.put(frame)
                     elif kind == "core_invoke":
                         self._handle_core_invoke(frame)
+                    elif kind == "operation_interaction_features":
+                        self._handle_operation_interaction_features(frame)
+                    elif kind == "operation_interaction_events":
+                        self._handle_operation_interaction_events(frame)
+                    elif kind == "operation_interaction_state_result_changed":
+                        self._handle_operation_interaction_state_result_changed(frame)
+                    elif kind == "operation_interaction_update_state_result":
+                        self._handle_operation_interaction_update_state_result(frame)
+                    elif kind == "operation_interaction_deliver_state_result":
+                        self._handle_operation_interaction_deliver_state_result(frame)
+                    elif kind == "operation_interaction_caller_snapshot":
+                        self._handle_operation_interaction_caller_snapshot(frame)
                 except Exception as exc:
                     self._stderr_lines.append(f"protocol reader error: {type(exc).__name__}: {exc}")
         finally:
@@ -335,11 +360,16 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
             arguments = frame.get("arguments", {})
             if not isinstance(arguments, Mapping):
                 raise TypeError("nested invocation arguments must be an object")
+            operation_parameters = frame.get("operation_parameters", {})
+            if not isinstance(operation_parameters, Mapping):
+                raise TypeError("nested invocation operation_parameters must be an object")
+            parent_invocation_id = str(frame["parent_invocation_id"]) if frame.get("parent_invocation_id") is not None else None
+            locale = str(frame["locale"]) if frame.get("locale") is not None else None
+            with self._interaction_lock:
+                interaction = self._active_interactions.get(parent_invocation_id or "")
             output = invoke_handle_with_parent_context(
-                handle,
-                str(frame["parent_invocation_id"]) if frame.get("parent_invocation_id") is not None else None,
-                str(frame["operation_id"]),
-                dict(arguments),
+                handle, parent_invocation_id, str(frame["operation_id"]), dict(arguments), dict(operation_parameters),
+                interaction, locale,
             )
             response = {
                 "kind": "core_response",
@@ -357,6 +387,92 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
             }
         self._write(response)
 
+
+    def _interaction_for_frame(self, frame: Mapping[str, object]) -> AIiOperationInteractionProviderToCaller | None:
+        invocation_id = str(frame.get("invocation_id", ""))
+        with self._interaction_lock:
+            return self._active_interactions.get(invocation_id)
+
+    def _interaction_response(
+        self, frame: Mapping[str, object], *, result: object | None = None, error: Mapping[str, object] | None = None
+    ) -> None:
+        request_id = str(frame.get("request_id", ""))
+        if not request_id:
+            return
+        self._write({
+            "kind": "operation_interaction_response",
+            "request_id": request_id,
+            "success": error is None,
+            "result": result,
+            "error": error,
+        })
+
+    def _handle_operation_interaction_features(self, frame: Mapping[str, object]) -> None:
+        interaction = self._interaction_for_frame(frame)
+        raw = frame.get("features", {})
+        if interaction is None or not isinstance(raw, Mapping):
+            return
+        interaction.declare_features(AIcOperationInteractionFeatures(
+            progress_reporting=bool(raw.get("progress_reporting", False)),
+            cancellation=bool(raw.get("cancellation", False)),
+            detail_level=bool(raw.get("detail_level", False)),
+            reporting_interval=bool(raw.get("reporting_interval", False)),
+            supported_state_result_delivery_modes=tuple(
+                AInStateResultDeliveryMode(str(value))
+                for value in raw.get("supported_state_result_delivery_modes", ("ON_DEMAND_COMPLETE",))
+            ),
+        ))
+
+    def _handle_operation_interaction_events(self, frame: Mapping[str, object]) -> None:
+        interaction = self._interaction_for_frame(frame)
+        raw_events = frame.get("events", ())
+        if interaction is None or not isinstance(raw_events, (list, tuple)):
+            return
+        events = tuple(
+            _operation_interaction_event_from_dict(raw)
+            for raw in raw_events if isinstance(raw, Mapping)
+        )
+        interaction.report_events(events)
+
+    def _handle_operation_interaction_state_result_changed(self, frame: Mapping[str, object]) -> None:
+        interaction = self._interaction_for_frame(frame)
+        if interaction is None:
+            self._interaction_response(frame, error={"type": "UnknownInvocation", "message": "operation interaction is no longer active"})
+            return
+        try:
+            self._interaction_response(frame, result={"revision": interaction.state_result_changed()})
+        except Exception as exc:
+            self._interaction_response(frame, error={"type": type(exc).__name__, "message": str(exc)})
+
+    def _handle_operation_interaction_update_state_result(self, frame: Mapping[str, object]) -> None:
+        interaction = self._interaction_for_frame(frame)
+        if interaction is None:
+            self._interaction_response(frame, error={"type": "UnknownInvocation", "message": "operation interaction is no longer active"})
+            return
+        try:
+            self._interaction_response(frame, result={"revision": interaction.update_state_result(frame.get("state_result"))})
+        except Exception as exc:
+            self._interaction_response(frame, error={"type": type(exc).__name__, "message": str(exc)})
+
+    def _handle_operation_interaction_deliver_state_result(self, frame: Mapping[str, object]) -> None:
+        interaction = self._interaction_for_frame(frame)
+        if interaction is None:
+            self._interaction_response(frame, error={"type": "UnknownInvocation", "message": "operation interaction is no longer active"})
+            return
+        try:
+            revision = int(frame["revision"]) if frame.get("revision") is not None else None
+            interaction.deliver_state_result(frame.get("state_result"), revision=revision)
+            self._interaction_response(frame, result={})
+        except Exception as exc:
+            self._interaction_response(frame, error={"type": type(exc).__name__, "message": str(exc)})
+
+    def _handle_operation_interaction_caller_snapshot(self, frame: Mapping[str, object]) -> None:
+        interaction = self._interaction_for_frame(frame)
+        if interaction is None:
+            self._interaction_response(frame, error={"type": "UnknownInvocation", "message": "operation interaction is no longer active"})
+            return
+        self._interaction_response(frame, result={"caller": asdict(interaction.caller_snapshot())})
+
     def _process_failure_message(self) -> str:
         code = self._process.poll()
         tail = " | ".join(self._stderr_lines[-10:])
@@ -367,6 +483,36 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
             self.close()
         except Exception:
             pass
+
+
+
+def _display_text_from_raw(raw: object) -> AIcDisplayText | None:
+    if raw is None:
+        return None
+    if not isinstance(raw, Mapping):
+        raise TypeError("operation interaction display text must be an object")
+    return AIcDisplayText(
+        text=str(raw["text"]) if raw.get("text") is not None else None,
+        resource_key=str(raw["resource_key"]) if raw.get("resource_key") is not None else None,
+    )
+
+
+def _operation_interaction_event_from_dict(raw: Mapping[str, object]) -> AIcOperationInteractionEvent:
+    details = raw.get("details", {})
+    return AIcOperationInteractionEvent(
+        event_type=AInOperationInteractionEventType(str(raw["event_type"])),
+        progress_id=str(raw["progress_id"]) if raw.get("progress_id") is not None else None,
+        parent_progress_id=str(raw["parent_progress_id"]) if raw.get("parent_progress_id") is not None else None,
+        phase_id=str(raw["phase_id"]) if raw.get("phase_id") is not None else None,
+        name=_display_text_from_raw(raw.get("name")),
+        description=_display_text_from_raw(raw.get("description")),
+        current=raw.get("current") if isinstance(raw.get("current"), (int, float)) else None,
+        total=raw.get("total") if isinstance(raw.get("total"), (int, float)) else None,
+        unit=str(raw["unit"]) if raw.get("unit") is not None else None,
+        severity=AInOperationInteractionSeverity(str(raw.get("severity", "INFO"))),
+        code=str(raw["code"]) if raw.get("code") is not None else None,
+        details=dict(details) if isinstance(details, Mapping) else {},
+    )
 
 
 def _output_from_raw(raw: object) -> AIcInvocationOutput:

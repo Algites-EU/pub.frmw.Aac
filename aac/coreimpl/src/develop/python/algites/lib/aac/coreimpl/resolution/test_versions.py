@@ -16,7 +16,7 @@ def catalog():
     result = AIcActiveContractCatalog()
     result.admit_builtin_contracts()
     for version in (1, 2):
-        result.admit(AIcCapabilityContract(AIcCapabilityRef("x.cap", version), "_AAC.runtime", (AIcCapabilityOperation("run", "In", "Out"),)))
+        result.admit(AIcCapabilityContract(AIcCapabilityRef("x.cap", version), "_AAC.runtime", (AIcCapabilityOperation("run"),)))
     return result
 
 

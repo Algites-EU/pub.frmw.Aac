@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.data-entity-restore-storage-backup-request",
+  "x-aac-schema-version": 1,
+  "title": "Data Entity Restore Storage Backup Request 1",
+  "type": "object",
+  "required": [
+    "backup_file"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "backup_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "enum": [
+        "EMPTY_ONLY",
+        "REPLACE_ALL"
+      ]
+    }
+  }
+}

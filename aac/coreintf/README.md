@@ -9,7 +9,7 @@ This artifact is the dependency boundary for Python AAC components. It does not 
 It defines the public models and SPIs for:
 
 - component descriptors, multi-capability provider definitions/instances, and per-instance READ_ONLY/READ_WRITE access mode;
-- capability contracts, mandatory nested capability groups, finite version sets, invocation and observation;
+- capability contracts, mandatory nested capability groups, finite version sets, invocation, and generic directional Operation Interaction with Core-owned execution lifecycle, `interaction_revision` / `state_result_revision`, operation-declared complete/delta delivery modes, caller acceptance tracking, progress/status/detail/diagnostic events, cooperative cancellation and foreground/background interaction mode;
 - Core-owned binding preferences and lifecycle/runtime interfaces;
 - exact `COMPONENT` / `PROVIDER_INSTANCE` configuration targets, scopes, providers and atomic mutation contracts;
 - persisted configuration schemas, versioned payloads and configuration migrators;

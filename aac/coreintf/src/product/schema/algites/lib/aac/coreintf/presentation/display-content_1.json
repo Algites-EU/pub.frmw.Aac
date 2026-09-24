@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.display-content",
+  "x-aac-schema-version": 1,
+  "title": "Display Content 1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "content": {"type": "string", "minLength": 1},
+    "resource_key": {"type": "string", "minLength": 1},
+    "format": {"enum": ["PLAIN_TEXT", "MARKDOWN", "HTML"], "default": "PLAIN_TEXT"}
+  },
+  "anyOf": [{"required": ["content"]}, {"required": ["resource_key"]}]
+}

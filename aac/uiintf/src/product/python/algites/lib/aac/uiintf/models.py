@@ -4,6 +4,13 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Mapping
 
+from algites.lib.aac.coreintf.presentation import (
+    AIcDisplayContent,
+    AIcDisplayText,
+    normalize_display_content,
+    normalize_display_text,
+)
+
 
 class AInUiFieldType(str, Enum):
     STRING = "STRING"
@@ -18,6 +25,26 @@ class AInUiFieldType(str, Enum):
     DIRECTORY = "DIRECTORY"
     INSTANCE_REFERENCE = "INSTANCE_REFERENCE"
     CAPABILITY_REFERENCE = "CAPABILITY_REFERENCE"
+
+
+def _required_display_text(value: AIcDisplayText | str) -> AIcDisplayText:
+    normalized = normalize_display_text(value)
+    if normalized is None:
+        raise ValueError("required display text is missing")
+    return normalized
+
+
+def _optional_display_text(value: AIcDisplayText | str | None) -> AIcDisplayText | None:
+    if value == "":
+        return None
+    return normalize_display_text(value)
+
+
+def _required_display_content(value: AIcDisplayContent | str) -> AIcDisplayContent:
+    normalized = normalize_display_content(value)
+    if normalized is None:
+        raise ValueError("required display content is missing")
+    return normalized
 
 
 @dataclass(frozen=True, slots=True)
@@ -54,19 +81,23 @@ class AIcUiConfigurationProviderOption:
 @dataclass(frozen=True, slots=True)
 class AIcUiChoice:
     value: object
-    label: str
-    description: str | None = None
+    label: AIcDisplayText
+    description: AIcDisplayText | None = None
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "label", _required_display_text(self.label))
+        object.__setattr__(self, "description", _optional_display_text(self.description))
 
 
 @dataclass(frozen=True, slots=True)
 class AIcUiField:
     id: str
-    label: str
+    label: AIcDisplayText
     field_type: AInUiFieldType
     value: object | None = None
     required: bool = False
     read_only: bool = False
-    description: str | None = None
+    description: AIcDisplayText | None = None
     choices: tuple[AIcUiChoice, ...] = ()
     multiple: bool = False
     secret: bool = False
@@ -77,28 +108,66 @@ class AIcUiField:
     value_source_kind: str | None = None
     policy_modes: tuple[Mapping[str, object], ...] = ()
 
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "label", _required_display_text(self.label))
+        object.__setattr__(self, "description", _optional_display_text(self.description))
+
 
 @dataclass(frozen=True, slots=True)
 class AIcUiFieldGroup:
     id: str
-    label: str
+    label: AIcDisplayText | None
     fields: tuple[AIcUiField, ...]
-    description: str | None = None
+    description: AIcDisplayText | None = None
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "label", _optional_display_text(self.label))
+        object.__setattr__(self, "description", _optional_display_text(self.description))
 
 
 @dataclass(frozen=True, slots=True)
 class AIcUiForm:
     id: str
-    title: str
+    title: AIcDisplayText
     groups: tuple[AIcUiFieldGroup, ...]
     configuration_scopes: tuple[AIcUiConfigurationScope, ...] = ()
     active_configuration_profile_id: str | None = None
     configuration_provider_options: tuple[AIcUiConfigurationProviderOption, ...] = ()
-    description: str | None = None
+    description: AIcDisplayText | None = None
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "title", _required_display_text(self.title))
+        object.__setattr__(self, "description", _optional_display_text(self.description))
 
     @property
     def fields(self) -> tuple[AIcUiField, ...]:
         return tuple(field for group in self.groups for field in group.fields)
+
+
+@dataclass(frozen=True, slots=True)
+class AIcUiDisplay:
+    id: str
+    content: AIcDisplayContent
+    title: AIcDisplayText | None = None
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "content", _required_display_content(self.content))
+        object.__setattr__(self, "title", _optional_display_text(self.title))
+
+
+@dataclass(frozen=True, slots=True)
+class AIcUiPanel:
+    id: str
+    title: AIcDisplayText | None = None
+    description: AIcDisplayText | None = None
+    displays: tuple[AIcUiDisplay, ...] = ()
+    forms: tuple[AIcUiForm, ...] = ()
+    panels: tuple["AIcUiPanel", ...] = ()
+    metadata: Mapping[str, object] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "title", _optional_display_text(self.title))
+        object.__setattr__(self, "description", _optional_display_text(self.description))
 
 
 @dataclass(frozen=True, slots=True)
@@ -107,11 +176,15 @@ class AIcUiComponent:
     version: int
     provider_definition_ids: tuple[str, ...]
     permission_count: int = 0
-    name: str | None = None
-    description: str | None = None
+    name: AIcDisplayText | None = None
+    description: AIcDisplayText | None = None
     origin: str | None = None
     readiness_state: str | None = None
     readiness_reasons: tuple[str, ...] = ()
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "name", _optional_display_text(self.name))
+        object.__setattr__(self, "description", _optional_display_text(self.description))
 
 
 @dataclass(frozen=True, slots=True)
@@ -119,13 +192,16 @@ class AIcUiProviderInstance:
     id: str
     component_id: str
     provider_definition_id: str
-    name: str
+    name: AIcDisplayText
     capabilities: tuple[tuple[str, tuple[int, ...]], ...]
     access_mode: str
     state: str
     configuration_schema: str | None
     readiness_state: str | None = None
     readiness_reasons: tuple[str, ...] = ()
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "name", _required_display_text(self.name))
 
     def supports_capability(self, capability_id: str) -> bool:
         return any(value[0] == capability_id for value in self.capabilities)
@@ -150,7 +226,7 @@ class AIcUiBinding:
 @dataclass(frozen=True, slots=True)
 class AIcUiRequirement:
     consumer_instance_id: str
-    consumer_instance_name: str
+    consumer_instance_name: AIcDisplayText
     requirement_id: str
     capability_id: str
     versions: tuple[int, ...]
@@ -159,8 +235,13 @@ class AIcUiRequirement:
     selected_provider_instance_ids: tuple[str, ...] = ()
     requested_authorizations: tuple[str, ...] = ()
     granted_authorizations: tuple[str, ...] = ()
-    name: str | None = None
-    description: str | None = None
+    name: AIcDisplayText | None = None
+    description: AIcDisplayText | None = None
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "consumer_instance_name", _required_display_text(self.consumer_instance_name))
+        object.__setattr__(self, "name", _optional_display_text(self.name))
+        object.__setattr__(self, "description", _optional_display_text(self.description))
 
 
 @dataclass(frozen=True, slots=True)
@@ -203,9 +284,13 @@ class AIcUiEntitlementPermission:
     licensing_scope: str | None = None
     entitlement_id: str | None = None
     issuer_id: str | None = None
-    name: str | None = None
-    description: str | None = None
+    name: AIcDisplayText | None = None
+    description: AIcDisplayText | None = None
     implicit: bool = False
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "name", _optional_display_text(self.name))
+        object.__setattr__(self, "description", _optional_display_text(self.description))
 
 
 @dataclass(frozen=True, slots=True)
@@ -224,8 +309,8 @@ class AIcUiCatalogPackageArtifact:
     component_id: str
     component_version: int
     artifact_id: str
-    name: str | None = None
-    description: str | None = None
+    name: AIcDisplayText | None = None
+    description: AIcDisplayText | None = None
     publisher: str | None = None
     package_format: str | None = None
     artifact_uri: str | None = None
@@ -239,6 +324,10 @@ class AIcUiCatalogPackageArtifact:
     icon_url: str | None = None
     downloaded: bool = False
     installed: bool = False
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "name", _optional_display_text(self.name))
+        object.__setattr__(self, "description", _optional_display_text(self.description))
 
     @property
     def identity(self) -> tuple[str, str, str, str, int, str]:
@@ -279,7 +368,7 @@ class AIcUiUpgradeReplacement:
 @dataclass(frozen=True, slots=True)
 class AIcUiUpgradeDiagnostic:
     component_id: str
-    message: str
+    message: AIcDisplayText
     consumer_instance_id: str | None = None
     requirement_id: str | None = None
     capability_id: str | None = None
@@ -288,6 +377,9 @@ class AIcUiUpgradeDiagnostic:
     available_provider_component_ids: tuple[str, ...] = ()
     blocking: bool = True
     code: str | None = None
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "message", _required_display_text(self.message))
 
 
 @dataclass(frozen=True, slots=True)

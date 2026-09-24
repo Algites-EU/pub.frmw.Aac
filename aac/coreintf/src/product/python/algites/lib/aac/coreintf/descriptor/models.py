@@ -8,6 +8,7 @@ from ..presentation import AIcDisplayText
 
 from ..contracts import AIcProvidedCapability, AInConsumerCardinality
 from ..instances import AInProviderAccessMode
+from ..interaction_types import AInStateResultDeliveryMode
 from ..readiness import AIcReadinessRequirementDescriptor
 
 
@@ -111,6 +112,80 @@ class AIcConsumerRequirementDescriptor:
             raise ValueError("requested authorization permissions must be unique")
 
 
+
+
+@dataclass(frozen=True, slots=True)
+class AIcOperationParameterEnumValueDescriptor:
+    value: object
+    name: AIcDisplayText
+    description: AIcDisplayText | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class AIcOperationParameterDefinitionDescriptor:
+    id: str
+    name: AIcDisplayText
+    description: AIcDisplayText
+    value_schema: Mapping[str, object]
+    enum_values: tuple[AIcOperationParameterEnumValueDescriptor, ...] = ()
+    required: bool = False
+    default: object | None = None
+    has_default: bool = False
+    component_configurable: bool = False
+    instance_configurable: bool = False
+    invocation_overridable: bool = False
+
+    def __post_init__(self) -> None:
+        if not self.id:
+            raise ValueError("operation parameter id must not be empty")
+        if not self.value_schema:
+            raise ValueError("operation parameter value_schema must not be empty")
+        enum_values = [item.value for item in self.enum_values]
+        if len(enum_values) != len({repr(value) for value in enum_values}):
+            raise ValueError("operation parameter enum values must be unique")
+
+
+@dataclass(frozen=True, slots=True)
+class AIcCapabilityProviderOperationInteractionDescriptor:
+    supported_state_result_delivery_modes: tuple[AInStateResultDeliveryMode, ...] = (
+        AInStateResultDeliveryMode.ON_DEMAND_COMPLETE,
+    )
+    progress_reporting: bool = False
+    cancellation: bool = False
+    detail_level: bool = False
+    reporting_interval: bool = False
+
+    def __post_init__(self) -> None:
+        if not self.supported_state_result_delivery_modes:
+            raise ValueError("provider operation interaction must declare at least one state-result delivery mode")
+        if len(self.supported_state_result_delivery_modes) != len(set(self.supported_state_result_delivery_modes)):
+            raise ValueError("provider operation interaction state-result delivery modes must be unique")
+        if AInStateResultDeliveryMode.ON_DEMAND_COMPLETE not in self.supported_state_result_delivery_modes:
+            raise ValueError("provider operation interaction must support ON_DEMAND_COMPLETE")
+
+
+@dataclass(frozen=True, slots=True)
+class AIcCapabilityProviderOperationDescriptor:
+    capability_id: str
+    capability_version: int
+    operation_id: str
+    interaction: AIcCapabilityProviderOperationInteractionDescriptor
+    parameters: tuple[AIcOperationParameterDefinitionDescriptor, ...] = ()
+
+    def __post_init__(self) -> None:
+        if not self.capability_id or self.capability_version < 1 or not self.operation_id:
+            raise ValueError("provider operation requires capability id/version and operation id")
+        ids = [item.id for item in self.parameters]
+        if len(ids) != len(set(ids)):
+            raise ValueError("operation parameter ids must be unique inside one provider operation")
+
+    def parameter(self, parameter_id: str) -> AIcOperationParameterDefinitionDescriptor:
+        for item in self.parameters:
+            if item.id == parameter_id:
+                return item
+        raise KeyError(parameter_id)
+
+
 @dataclass(frozen=True, slots=True)
 class AIcProviderDefinitionDescriptor:
     id: str
@@ -119,6 +194,7 @@ class AIcProviderDefinitionDescriptor:
     configuration_schema: AIcPersistedSchemaDescriptor | None = None
     initial_instances: tuple[AIcInitialProviderInstanceDescriptor, ...] = ()
     requirements: tuple[AIcConsumerRequirementDescriptor, ...] = ()
+    operations: tuple[AIcCapabilityProviderOperationDescriptor, ...] = ()
     readiness_requirements: tuple[AIcReadinessRequirementDescriptor, ...] = ()
     runtime_factory_class: str | None = None
     runtime: AIcProviderRuntimeDescriptor = AIcProviderRuntimeDescriptor()
@@ -135,6 +211,13 @@ class AIcProviderDefinitionDescriptor:
         capability_ids = [capability.id for capability in self.capabilities]
         if len(capability_ids) != len(set(capability_ids)):
             raise ValueError("provider capability ids must be unique")
+        operation_keys = [(item.capability_id, item.capability_version, item.operation_id) for item in self.operations]
+        if len(operation_keys) != len(set(operation_keys)):
+            raise ValueError("provider operation descriptors must be unique by capability/version/operation")
+        for item in self.operations:
+            capability = self.capability(item.capability_id)
+            if item.capability_version not in capability.versions:
+                raise ValueError("provider operation descriptor references an unprovided capability version")
         requirement_ids = [requirement.id for requirement in self.requirements]
         if len(requirement_ids) != len(set(requirement_ids)):
             raise ValueError("consumer requirement ids must be unique inside a capability provider definition")
@@ -150,6 +233,19 @@ class AIcProviderDefinitionDescriptor:
 
     def supports_capability(self, capability_id: str) -> bool:
         return any(capability.id == capability_id for capability in self.capabilities)
+
+    def operation_definition(
+        self, capability_id: str, capability_version: int, operation_id: str
+    ) -> AIcCapabilityProviderOperationDescriptor | None:
+        for item in self.operations:
+            if (item.capability_id, item.capability_version, item.operation_id) == (capability_id, capability_version, operation_id):
+                return item
+        return None
+
+    def operation_parameter_definition(
+        self, capability_id: str, capability_version: int, operation_id: str
+    ) -> AIcCapabilityProviderOperationDescriptor | None:
+        return self.operation_definition(capability_id, capability_version, operation_id)
 
 
 @dataclass(frozen=True, slots=True)

@@ -1,0 +1,29 @@
+capability:
+  id: _AAC.data-entity.inspect-storage-backup
+  version: 1
+  group_id: _AAC.data-entity.storage-backup-restore
+  name:
+    text: Inspect Data Entity storage backup
+    resource_key: aac.data.entity.inspect.storage.backup.name
+  description:
+    text: Inspects and validates one provider-specific physical backup file without
+      modifying provider data.
+    resource_key: aac.data.entity.inspect.storage.backup.description
+operations:
+- id: inspect_backup
+  name:
+    text: Inspect storage backup
+    resource_key: aac.data.entity.inspect.storage.backup.operation.inspect.backup.name
+  description:
+    text: Inspects and validates one provider-specific physical backup file without
+      modifying provider data.
+    resource_key: aac.data.entity.inspect.storage.backup.operation.inspect.backup.description
+  interactions:
+  - kind: INPUT
+    schema:
+      id: _AAC.schema.data-entity-inspect-storage-backup-request
+      version: 1
+  - kind: FINAL_SUCCESS_STATE_RESULT
+    schema:
+      id: _AAC.schema.data-entity-inspect-storage-backup-result
+      version: 1

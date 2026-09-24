@@ -9,12 +9,19 @@ capability:
     text: Atomically applies a direct Data Entity record changeset.
     resource_key: aac.data.entity.apply.direct.record.changes.description
 operations:
-  - id: apply
-    name:
-      text: Apply direct record changes
-      resource_key: aac.data.entity.apply.direct.record.changes.operation.apply.name
-    description:
-      text: Atomically applies a direct Data Entity record changeset.
-      resource_key: aac.data.entity.apply.direct.record.changes.operation.apply.description
-    input_schema: data-entity-apply-direct-record-changes-request_1.json
-    output_schema: data-entity-apply-direct-record-changes-result_1.json
+- id: apply
+  name:
+    text: Apply direct record changes
+    resource_key: aac.data.entity.apply.direct.record.changes.operation.apply.name
+  description:
+    text: Atomically applies a direct Data Entity record changeset.
+    resource_key: aac.data.entity.apply.direct.record.changes.operation.apply.description
+  interactions:
+  - kind: INPUT
+    schema:
+      id: _AAC.schema.data-entity-apply-direct-record-changes-request
+      version: 1
+  - kind: FINAL_SUCCESS_STATE_RESULT
+    schema:
+      id: _AAC.schema.data-entity-apply-direct-record-changes-result
+      version: 1

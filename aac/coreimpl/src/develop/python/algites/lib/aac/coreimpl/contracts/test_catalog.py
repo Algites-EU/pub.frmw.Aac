@@ -1,12 +1,15 @@
 import pytest
 
-from algites.lib.aac.coreintf.contracts import AIcCapabilityContract, AIcCapabilityOperation, AIcCapabilityRef
+from algites.lib.aac.coreintf.contracts import AInCapabilityOperationInteractionKind, AIcCapabilityContract, AIcCapabilityOperation, AIcCapabilityRef
 from algites.lib.aac.coreimpl.contracts import AIcActiveContractCatalog
 from algites.lib.aac.coreimpl.errors import AIxContractConflictError, AIxContractNegotiationError
 
 
 def contract(version, output="Out"):
-    return AIcCapabilityContract(AIcCapabilityRef("x.cap", version), "_AAC.runtime", (AIcCapabilityOperation("run", "In", output),))
+    return AIcCapabilityContract(
+        AIcCapabilityRef("x.cap", version), "_AAC.runtime",
+        (AIcCapabilityOperation("run", metadata={"test_output_marker": output}),),
+    )
 
 
 def test_builtin_observation_contract_is_admitted():
@@ -14,7 +17,10 @@ def test_builtin_observation_contract_is_admitted():
     catalog.admit_builtin_contracts()
     catalog.admit_builtin_contracts()
     assert catalog.versions("_AAC.capability.observation") == (1,)
-    assert catalog.operation("_AAC.capability.observation", 1, "observe").input_type == "AIcObservationInput"
+    operation = catalog.operation("_AAC.capability.observation", 1, "observe")
+    interaction = operation.interaction(AInCapabilityOperationInteractionKind.INPUT)
+    assert interaction is not None
+    assert interaction.schema.id == "_AAC.schema.observation-input"
 
 
 def test_identical_contract_is_deduplicated_but_conflict_is_rejected():

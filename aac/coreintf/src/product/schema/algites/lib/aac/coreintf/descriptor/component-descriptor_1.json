@@ -541,6 +541,143 @@
                     }
                   }
                 }
+              },
+              "operations": {
+                "type": "array",
+                "description": "Provider-specific metadata for concrete capability operations implemented by this provider definition.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "capability",
+                    "capability_version",
+                    "operation",
+                    "interaction"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "capability": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "capability_version": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "operation": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "interaction": {
+                      "type": "object",
+                      "required": [
+                        "supported_state_result_delivery_modes"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "supported_state_result_delivery_modes": {
+                          "type": "array",
+                          "minItems": 1,
+                          "uniqueItems": true,
+                          "contains": {
+                            "const": "ON_DEMAND_COMPLETE"
+                          },
+                          "items": {
+                            "enum": [
+                              "ON_DEMAND_COMPLETE",
+                              "ON_DEMAND_DELTA",
+                              "ON_CHANGE_COMPLETE",
+                              "ON_CHANGE_DELTA",
+                              "ALWAYS_COMPLETE"
+                            ]
+                          }
+                        },
+                        "progress_reporting": {
+                          "type": "boolean",
+                          "default": false
+                        },
+                        "cancellation": {
+                          "type": "boolean",
+                          "default": false
+                        },
+                        "detail_level": {
+                          "type": "boolean",
+                          "default": false
+                        },
+                        "reporting_interval": {
+                          "type": "boolean",
+                          "default": false
+                        }
+                      }
+                    },
+                    "parameters": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "description",
+                          "value_schema"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "name": {
+                            "$ref": "#/$defs/displayText"
+                          },
+                          "description": {
+                            "$ref": "#/$defs/displayText"
+                          },
+                          "value_schema": {
+                            "type": "object"
+                          },
+                          "enum_values": {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "value",
+                                "name"
+                              ],
+                              "additionalProperties": false,
+                              "properties": {
+                                "value": {},
+                                "name": {
+                                  "$ref": "#/$defs/displayText"
+                                },
+                                "description": {
+                                  "$ref": "#/$defs/displayText"
+                                }
+                              }
+                            }
+                          },
+                          "required": {
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "default": {},
+                          "component_configurable": {
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "instance_configurable": {
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "invocation_overridable": {
+                            "type": "boolean",
+                            "default": false
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           },

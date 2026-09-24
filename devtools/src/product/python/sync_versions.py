@@ -16,7 +16,7 @@ def expected_text(path: Path) -> str:
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--check',action='store_true'); a=ap.parse_args()
     bad=[]
-    for p in sorted([*(ROOT/'aac').rglob('pyproject.toml'), ROOT/'devtools/pyproject.toml']):
+    for p in sorted([*(ROOT/'aac').rglob('pyproject.toml'), *(ROOT/'components').rglob('pyproject.toml'), ROOT/'devtools/pyproject.toml']):
         exp=expected_text(p); cur=p.read_text(encoding='utf-8')
         if exp!=cur:
             if a.check: bad.append(str(p.relative_to(ROOT)))

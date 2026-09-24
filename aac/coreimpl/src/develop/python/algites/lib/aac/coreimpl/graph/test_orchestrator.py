@@ -12,7 +12,7 @@ from algites.lib.aac.coreimpl.resolution import AIcBindingResolver
 
 
 def contract(catalog, capability):
-    catalog.admit(AIcCapabilityContract(AIcCapabilityRef(capability, 1), "_AAC.runtime", (AIcCapabilityOperation("run", "In", "Out"),)))
+    catalog.admit(AIcCapabilityContract(AIcCapabilityRef(capability, 1), "_AAC.runtime", (AIcCapabilityOperation("run"),)))
 
 
 def test_provider_scoped_requirement_resolves_and_persists():

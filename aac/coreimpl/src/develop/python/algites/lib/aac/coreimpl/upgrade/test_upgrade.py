@@ -26,7 +26,7 @@ def _write_candidate(root: Path, package: str, *, version: int, broken: bool = F
     (pkg / "schemas" / "simpleaudit-config_1.json").write_text(schema_text, encoding="utf-8")
     impl = f"{package}.missing:Nope" if broken else f"{package}.provider:AIcCandidateObserver"
     (pkg / "component.yml").write_text(
-        f'''component:\n  id: _AAC.component.simpleaudit\n  version: {version}\n  capability_providers:\n    - id: observation\n      capabilities:\n        - id: _AAC.capability.observation\n          versions: [1]\n      implementation_class: {impl}\n      configuration_schema:\n        id: simpleaudit-config\n        write_version: 1\n        readable_versions: [1]\n        resource: simpleaudit-config_1.json\n      initial_instances:\n        - name: default\n          configuration: {{}}\n''',
+        f'''component:\n  id: _AAC.component.simpleaudit\n  version: {version}\n  capability_providers:\n    - id: observation\n      capabilities:\n        - id: _AAC.capability.observation\n          versions: [1]\n      implementation_class: {impl}\n      operations:\n        - capability: _AAC.capability.observation\n          capability_version: 1\n          operation: observe\n          interaction:\n            supported_state_result_delivery_modes: [ON_DEMAND_COMPLETE]\n      configuration_schema:\n        id: simpleaudit-config\n        write_version: 1\n        readable_versions: [1]\n        resource: simpleaudit-config_1.json\n      initial_instances:\n        - name: default\n          configuration: {{}}\n''',
         encoding="utf-8",
     )
 
@@ -87,7 +87,7 @@ def _write_graph_component(root: Path, package: str, *, component_id: str, versi
     if contract_version is not None:
         (pkg / "contracts" / f"x_{contract_version}.yml").write_text(
             f"capability:\n  id: com.example.x\n  version: {contract_version}\n  group_id: _AAC.runtime\n"
-            "operations:\n  - id: ping\n    input: Object\n    output: Object\n",
+            "operations:\n  - id: ping\n",
             encoding="utf-8",
         )
         contracts = f"  contracts:\n    - contracts/x_{contract_version}.yml\n"
@@ -107,6 +107,15 @@ def _write_graph_component(root: Path, package: str, *, component_id: str, versi
           "    - id: main\n"
         + f"      capabilities:\n        - id: {provided_capability}\n          versions: [{provided_version}]\n"
           f"      implementation_class: {package}.provider:Provider\n"
+        + (
+            "      operations:\n"
+            "        - capability: com.example.x\n"
+            f"          capability_version: {provided_version}\n"
+            "          operation: ping\n"
+            "          interaction:\n"
+            "            supported_state_result_delivery_modes: [ON_DEMAND_COMPLETE]\n"
+            if provided_capability == "com.example.x" else ""
+          )
         + requirement
         + "      initial_instances:\n        - name: default\n          configuration: {}\n",
         encoding="utf-8",
@@ -206,6 +215,12 @@ def _write_migrating_component(root: Path, package: str, *, version: int, broken
           "        - id: _AAC.capability.observation\n"
           "          versions: [1]\n"
         + f"      implementation_class: {implementation}\n"
+          "      operations:\n"
+          "        - capability: _AAC.capability.observation\n"
+          "          capability_version: 1\n"
+          "          operation: observe\n"
+          "          interaction:\n"
+          "            supported_state_result_delivery_modes: [ON_DEMAND_COMPLETE]\n"
           "      initial_instances:\n"
           "        - name: default\n"
           "          configuration: {}\n"
@@ -310,6 +325,12 @@ def _write_same_namespace_wheel(path: Path, *, version: int, broken: bool = Fals
         - id: com.example.same.capability
           versions: [1]
       implementation_class: sameupgrade.{"missing" if broken else "provider"}:{"Nope" if broken else "Provider"}
+      operations:
+        - capability: com.example.same.capability
+          capability_version: 1
+          operation: ping
+          interaction:
+            supported_state_result_delivery_modes: [ON_DEMAND_COMPLETE]
       initial_instances:
         - name: default
           configuration: {{}}
@@ -320,8 +341,6 @@ def _write_same_namespace_wheel(path: Path, *, version: int, broken: bool = Fals
   group_id: _AAC.runtime
 operations:
   - id: ping
-    input: Object
-    output: Object
 '''
     provider = (
         "from algites.lib.aac.coreintf.runtime import AIiProviderRuntime\n"

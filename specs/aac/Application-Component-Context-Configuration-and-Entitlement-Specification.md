@@ -557,6 +557,17 @@ A component target may independently obtain presentation or diagnostics settings
 
 Core computes effective configuration separately for each target. It MUST NOT silently copy component-target values into provider-instance-target values.
 
+
+## III.10.1 Provider operation-parameter configuration levels
+
+Provider-specific operation parameters are a dedicated Core-owned configuration surface attached to a capability-provider operation. They are separate from the operation's portable input and may be permitted at component, provider-instance, and/or one-invocation scope by the parameter definition.
+
+Component-level values apply to every instance of that capability provider definition unless a more specific permitted value overrides them. Provider-instance values apply only to one immutable provider-instance identity. Invocation overrides are transient and are never persisted as configuration merely because they were supplied for one call.
+
+Core resolves the effective value in this order: definition default, component configuration, provider-instance configuration, invocation override. The operation-parameter definition controls which of the last three levels are legal and validates the resulting value with its JSON Schema.
+
+Persisted component/instance operation-parameter values carry the component version that wrote them. When a later component version changes a parameter definition incompatibly, the component is responsible for migrating those persisted values as part of its configuration/data upgrade. The absence of a separate parameter version is intentional: parameter-definition evolution belongs to component evolution, while the canonical operation remains versioned only by its capability version.
+
 ## III.11 Secrets
 
 Secret values SHOULD be represented by secret references rather than ordinary configuration values when a secret-store facility exists. Configuration-scope/provenance applies to the reference; access to the referenced secret remains governed by the secret facility.
@@ -847,7 +858,7 @@ Unsupported records MUST be preserved and exposed as unavailable/read-only where
 
 ## IV.12 Generic Data Entity storage capabilities
 
-Physical Data Entity access is expressed through framework capability contracts rather than through product-specific filesystem, SQL, ORM, or document-store APIs. Version 1 defines six direct capabilities:
+Physical Data Entity access is expressed through framework capability contracts rather than through product-specific filesystem, SQL, ORM, or document-store APIs. Version 1 defines six direct storage/storage-support capabilities and three provider-specific physical backup/restore capabilities:
 
 | Capability | Operation | Group | Semantics |
 | --- | --- | --- | --- |
@@ -857,6 +868,9 @@ Physical Data Entity access is expressed through framework capability contracts 
 | `_AAC.data-entity.inspect-storage-support/1` | `inspect` | `_AAC.data-entity.storage-management` | Inspect physical support for one canonical schema/version. |
 | `_AAC.data-entity.ensure-storage-support/1` | `ensure` | `_AAC.data-entity.storage-management` | Idempotently provision/reconcile physical support. |
 | `_AAC.data-entity.retire-storage-support/1` | `retire` | `_AAC.data-entity.storage-management` | Retire support for future writes without implying destructive purge. |
+| `_AAC.data-entity.create-storage-backup/1` | `create_backup` | `_AAC.data-entity.storage-backup-restore` | Create one provider-consistent physical backup at a caller-selected backup file. |
+| `_AAC.data-entity.inspect-storage-backup/1` | `inspect_backup` | `_AAC.data-entity.storage-backup-restore` | Validate/inspect one provider-specific backup file without modifying storage. |
+| `_AAC.data-entity.restore-storage-backup/1` | `restore_backup` | `_AAC.data-entity.storage-backup-restore` | Restore a provider-specific physical backup into the selected provider instance. |
 
 Core owns semantic validation, schema-version compatibility, migration selection/invocation, authorization/policy and construction of valid storage requests. The selected storage provider owns physical representation, record-revision generation, compare-and-swap enforcement, atomic application of the direct changeset, query execution, and schema-support provisioning.
 
@@ -909,9 +923,18 @@ INCOMPATIBLE
 
 `retire` means that support is no longer required for future writes. It MAY mark or de-prioritize physical structures for later provider/product cleanup, but MUST NOT by itself physically delete stored Data Entities, drop authoritative tables/collections, or otherwise purge data. Destructive purge remains a separate explicit product/domain lifecycle action with its own safety policy.
 
+
+### IV.12.4 Physical backup and restore
+
+Backup/restore is provider-specific physical disaster recovery, not logical Data Entity export/import. `create-storage-backup` receives an explicit `backup_file` selected by the caller and MUST produce a provider-consistent completed backup; implementations may use native database/filesystem snapshots or hold an appropriate provider mutation boundary while capturing state. `inspect-storage-backup` is read-only.
+
+`restore-storage-backup` accepts the same explicit backup file and a restore mode. `EMPTY_ONLY` is the safe default and refuses a target that already contains persistent provider data. `REPLACE_ALL` explicitly replaces the complete provider data state; it MUST NOT silently merge restored and existing records. A provider that cannot make replacement recoverable/atomic within its own persistence domain MUST reject the operation rather than expose a partially restored normal state.
+
+A completed physical backup does not need to contain a live transaction journal: it represents a committed snapshot. Provider-specific backup formats SHOULD preserve sufficient schema/format metadata to interpret the stored data independently of transient caches.
+
 ## IV.13 Provider-bound Data Entity facades and access mode
 
-A Data Entity provider instance is one concrete configured datasource/runtime identity. One instance may implement any subset of the six Data Entity capability interfaces and may implement multiple capability-contract versions on the same runtime object. A provider instance is not created once per capability.
+A Data Entity provider instance is one concrete configured datasource/runtime identity. One instance may implement any subset of the Data Entity capability interfaces and may implement multiple capability-contract versions on the same runtime object. A provider instance is not created once per capability.
 
 Every Data Entity facade invocation is bound to one explicit provider instance. Core does not automatically search, merge, fan out, or route `get`, `query`, `apply`, `inspect`, `ensure`, or `retire` between provider instances. This keeps provider identity and transaction domain explicit.
 
@@ -922,7 +945,7 @@ READ_ONLY
 READ_WRITE
 ```
 
-The access mode constrains Core usage of the instance independently from the capabilities technically implemented by the provider class. `READ_ONLY` permits non-mutating access such as `get`, `query`, and `inspect`, but Core MUST reject mutating Data Entity operations such as `apply`, `ensure`, or `retire` through that instance. `READ_WRITE` permits those operations when the corresponding capability is implemented.
+The access mode constrains Core usage of the instance independently from the capabilities technically implemented by the provider class. `READ_ONLY` permits non-mutating access such as `get`, `query`, `inspect`, `create_backup`, and `inspect_backup`, but Core MUST reject mutating Data Entity operations such as `apply`, `ensure`, `retire`, or `restore_backup` through that instance. `READ_WRITE` permits those operations when the corresponding capability is implemented.
 
 A product may designate a particular `READ_WRITE` provider instance as its canonical/authoritative store. Additional provider instances may be used explicitly for imports, external libraries, caches, or other product workflows. This designation does not change invocation routing: an operation is still made against one concrete instance selected by the caller/Core facade.
 

@@ -28,6 +28,9 @@ APPLY_DIRECT_RECORD_CHANGES_CAPABILITY_ID = "_AAC.data-entity.apply-direct-recor
 INSPECT_STORAGE_SUPPORT_CAPABILITY_ID = "_AAC.data-entity.inspect-storage-support"
 ENSURE_STORAGE_SUPPORT_CAPABILITY_ID = "_AAC.data-entity.ensure-storage-support"
 RETIRE_STORAGE_SUPPORT_CAPABILITY_ID = "_AAC.data-entity.retire-storage-support"
+CREATE_STORAGE_BACKUP_CAPABILITY_ID = "_AAC.data-entity.create-storage-backup"
+INSPECT_STORAGE_BACKUP_CAPABILITY_ID = "_AAC.data-entity.inspect-storage-backup"
+RESTORE_STORAGE_BACKUP_CAPABILITY_ID = "_AAC.data-entity.restore-storage-backup"
 
 
 class AIcDataEntityViewRegistry:
@@ -211,7 +214,7 @@ class AIcProviderCapabilityInvoker:
         return dict(output.result)
 
 
-class _AIcBoundDataEntityCapabilityFacade:
+class AIcBoundDataEntityCapabilityFacade:
     capability_id: str
     capability_version = 1
     write_operation = False
@@ -228,7 +231,7 @@ class _AIcBoundDataEntityCapabilityFacade:
         return self.invoker.invoke(self.capability_id, self.capability_version, operation_id, arguments)
 
 
-class AIcGetRecordFacade(_AIcBoundDataEntityCapabilityFacade):
+class AIcGetRecordFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = GET_RECORD_CAPABILITY_ID
 
     def get_raw(self, schema_id: str, uid: str) -> AIcDataEntityEnvelope | None:
@@ -249,7 +252,7 @@ class AIcDataEntityQueryPage(Generic[T]):
     continuation_token: str | None
 
 
-class AIcQueryRecordsFacade(_AIcBoundDataEntityCapabilityFacade):
+class AIcQueryRecordsFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = QUERY_RECORDS_CAPABILITY_ID
 
     def query_raw(self, request: Mapping[str, object]) -> tuple[tuple[AIcDataEntityEnvelope, ...], str | None]:
@@ -287,7 +290,7 @@ class AIcQueryRecordsFacade(_AIcBoundDataEntityCapabilityFacade):
         )
 
 
-class AIcApplyDirectRecordChangesFacade(_AIcBoundDataEntityCapabilityFacade):
+class AIcApplyDirectRecordChangesFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = APPLY_DIRECT_RECORD_CHANGES_CAPABILITY_ID
     write_operation = True
 
@@ -353,14 +356,14 @@ class AIcApplyDirectRecordChangesFacade(_AIcBoundDataEntityCapabilityFacade):
         },))
 
 
-class AIcInspectStorageSupportFacade(_AIcBoundDataEntityCapabilityFacade):
+class AIcInspectStorageSupportFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = INSPECT_STORAGE_SUPPORT_CAPABILITY_ID
 
     def inspect(self, schema_id: str, schema_version: int) -> Mapping[str, object]:
         return self._invoke("inspect", {"schema_id": schema_id, "schema_version": schema_version})
 
 
-class AIcEnsureStorageSupportFacade(_AIcBoundDataEntityCapabilityFacade):
+class AIcEnsureStorageSupportFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = ENSURE_STORAGE_SUPPORT_CAPABILITY_ID
     write_operation = True
 
@@ -373,12 +376,37 @@ class AIcEnsureStorageSupportFacade(_AIcBoundDataEntityCapabilityFacade):
         })
 
 
-class AIcRetireStorageSupportFacade(_AIcBoundDataEntityCapabilityFacade):
+class AIcRetireStorageSupportFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = RETIRE_STORAGE_SUPPORT_CAPABILITY_ID
     write_operation = True
 
     def retire(self, schema_id: str, schema_version: int) -> Mapping[str, object]:
         return self._invoke("retire", {"schema_id": schema_id, "schema_version": schema_version})
+
+
+class AIcCreateStorageBackupFacade(AIcBoundDataEntityCapabilityFacade):
+    capability_id = CREATE_STORAGE_BACKUP_CAPABILITY_ID
+
+    def create_backup(self, backup_file: str, *, overwrite: bool = False) -> Mapping[str, object]:
+        arguments: dict[str, object] = {"backup_file": backup_file}
+        if overwrite:
+            arguments["overwrite"] = True
+        return self._invoke("create_backup", arguments)
+
+
+class AIcInspectStorageBackupFacade(AIcBoundDataEntityCapabilityFacade):
+    capability_id = INSPECT_STORAGE_BACKUP_CAPABILITY_ID
+
+    def inspect_backup(self, backup_file: str) -> Mapping[str, object]:
+        return self._invoke("inspect_backup", {"backup_file": backup_file})
+
+
+class AIcRestoreStorageBackupFacade(AIcBoundDataEntityCapabilityFacade):
+    capability_id = RESTORE_STORAGE_BACKUP_CAPABILITY_ID
+    write_operation = True
+
+    def restore_backup(self, backup_file: str, *, mode: str = "EMPTY_ONLY") -> Mapping[str, object]:
+        return self._invoke("restore_backup", {"backup_file": backup_file, "mode": mode})
 
 
 class AIcDataEntityProviderFacade:
@@ -404,6 +432,9 @@ class AIcDataEntityProviderFacade:
         self.inspect_storage_support = AIcInspectStorageSupportFacade(self.invoker) if provider.supports_capability(INSPECT_STORAGE_SUPPORT_CAPABILITY_ID) else None
         self.ensure_storage_support = AIcEnsureStorageSupportFacade(self.invoker) if provider.supports_capability(ENSURE_STORAGE_SUPPORT_CAPABILITY_ID) else None
         self.retire_storage_support = AIcRetireStorageSupportFacade(self.invoker) if provider.supports_capability(RETIRE_STORAGE_SUPPORT_CAPABILITY_ID) else None
+        self.create_storage_backup = AIcCreateStorageBackupFacade(self.invoker) if provider.supports_capability(CREATE_STORAGE_BACKUP_CAPABILITY_ID) else None
+        self.inspect_storage_backup = AIcInspectStorageBackupFacade(self.invoker) if provider.supports_capability(INSPECT_STORAGE_BACKUP_CAPABILITY_ID) else None
+        self.restore_storage_backup = AIcRestoreStorageBackupFacade(self.invoker) if provider.supports_capability(RESTORE_STORAGE_BACKUP_CAPABILITY_ID) else None
 
 
 def _raw_envelope(raw: object) -> AIcDataEntityEnvelope:

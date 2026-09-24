@@ -9,6 +9,8 @@ from .models import (
     AIcUiField,
     AIcUiFieldGroup,
     AIcUiForm,
+    AIcUiDisplay,
+    AIcUiPanel,
     AIcUiObservationBinding,
     AIcUiObservationSelector,
     AIcUiProviderInstance,

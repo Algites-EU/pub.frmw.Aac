@@ -11,7 +11,7 @@ from algites.lib.aac.coreintf.configuration import (
 )
 from algites.lib.aac.coreintf.context import AIcConfigurationScope
 from algites.lib.aac.coreintf.instances import AIcBindingPreference
-from algites.lib.aac.coreintf.presentation import AIcDisplayText
+from algites.lib.aac.coreintf.presentation import AIcDisplayText, normalize_display_text
 from algites.lib.aac.coreintf.packages import AInStoredPackageState
 from algites.lib.aac.coreintf.solver import AIcTargetStateRequest, AIcTargetStateSolution, AIcTargetStateSolverResult
 from algites.lib.aac.coreintf.observation import (
@@ -329,7 +329,7 @@ class AIcCoreUiController(AIiAacUiController):
             component = entry.component
             release = entry.release
             licensing_scope_names = {
-                item.type: (_display_text(item.name) or item.type)
+                item.type: (_display_text_value(item.name) or item.type)
                 for item in release.entitlement_licensing_scopes
             }
             provides = tuple(
@@ -365,7 +365,7 @@ class AIcCoreUiController(AIiAacUiController):
                     component_id=entry.component_id, component_version=entry.component_version, artifact_id=artifact.id,
                     name=_display_text(component.name), description=_display_text(component.description),
                     publisher=(
-                        _display_text(component.publisher.name) if component.publisher and component.publisher.name
+                        _display_text_value(component.publisher.name) if component.publisher and component.publisher.name
                         else (component.publisher.id if component.publisher else None)
                     ),
                     package_format=artifact.package_format, artifact_uri=artifact.locator.uri, sha256=artifact.sha256,
@@ -457,7 +457,7 @@ class AIcCoreUiController(AIiAacUiController):
             ) for item in plan.replacements),
             plan.compatible,
             tuple(AIcUiUpgradeDiagnostic(
-                item.component_id, item.message, item.consumer_instance_id, item.requirement_id,
+                item.component_id, AIcDisplayText(text=item.message), item.consumer_instance_id, item.requirement_id,
                 item.capability_id, item.consumer_versions, item.provider_versions,
                 item.available_provider_component_ids, item.blocking, item.code,
             ) for item in plan.diagnostics),
@@ -497,31 +497,31 @@ class AIcCoreUiController(AIiAacUiController):
         )
 
 
-def _display_text(value: AIcDisplayText | None) -> str | None:
+def _display_text(value: AIcDisplayText | None) -> AIcDisplayText | None:
+    return value
+
+
+def _display_text_value(value: AIcDisplayText | None) -> str | None:
     return None if value is None else value.fallback
 
 
-def _schema_display_text(value: object | None) -> str | None:
+def _schema_display_text(value: object | None) -> AIcDisplayText | None:
     if value is None:
         return None
-    if isinstance(value, str):
-        return value
-    if isinstance(value, Mapping):
-        text = value.get("text")
-        key = value.get("resource_key")
-        return str(text) if text is not None else (str(key) if key is not None else None)
-    return str(value)
+    if isinstance(value, (str, Mapping, AIcDisplayText)):
+        return normalize_display_text(value)
+    return AIcDisplayText(text=str(value))
 
 
 def _field_from_schema(field_id: str, raw: Mapping[str, object], value: object, required: bool) -> AIcUiField:
-    title = _schema_display_text(raw.get("x-aac-name")) or str(raw.get("title", field_id.replace("_", " ").title()))
+    title = _schema_display_text(raw.get("x-aac-name")) or AIcDisplayText(text=str(raw.get("title", field_id.replace("_", " ").title())))
     description = _schema_display_text(raw.get("x-aac-description"))
     if description is None and raw.get("description") is not None:
-        description = str(raw["description"])
+        description = AIcDisplayText(text=str(raw["description"]))
     ui_type = str(raw.get("x-aac-ui-type", "")).upper()
     secret = bool(raw.get("x-aac-secret", False))
     enum_values = raw.get("enum")
-    choices = tuple(AIcUiChoice(item, str(item)) for item in enum_values) if isinstance(enum_values, list) else ()
+    choices = tuple(AIcUiChoice(item, AIcDisplayText(text=str(item))) for item in enum_values) if isinstance(enum_values, list) else ()
     if ui_type in AInUiFieldType.__members__:
         field_type = AInUiFieldType[ui_type]
     elif choices:

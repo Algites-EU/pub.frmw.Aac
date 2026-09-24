@@ -169,6 +169,19 @@ class AIcSchemaRegistry:
 
 
 
+
+    def normalize_identity(
+        self, schema_id: str, version: int, value: Mapping[str, object] | None, *, apply_defaults: bool = True
+    ) -> dict[str, object]:
+        registered = self.get_identity(schema_id, version)
+        return self.normalize(registered.resource_name, value, apply_defaults=apply_defaults)
+
+    def normalize_value_identity(
+        self, schema_id: str, version: int, value: object, *, apply_defaults: bool = True
+    ) -> object:
+        registered = self.get_identity(schema_id, version)
+        return self.normalize_value(registered.resource_name, value, apply_defaults=apply_defaults)
+
     def validate_resolved_configuration(self, resource_name: str, value: Mapping[str, object] | None) -> tuple[str, ...]:
         """Validate a resolved runtime configuration without treating top-level ``required`` as availability.
 

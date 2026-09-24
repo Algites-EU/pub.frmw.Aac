@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "algites-aac-dataentity-yamlfsdes"
+version = "1.0.dev0"
+description = "YAML File-System Data Entity Storage provider for AAC"
+readme = "README.md"
+requires-python = ">=3.13"
+license = "LicenseRef-Proprietary"
+authors = [{name = "Algites"}]
+dependencies = [
+  "algites-aac-coreintf==1.0.dev0",
+  "PyYAML>=6",
+  "jsonschema>=4.20",
+]
+
+[project.optional-dependencies]
+develop = [
+  "pytest>=8",
+  "algites-aac-coreimpl==1.0.dev0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src/product/python"]
+include = ["algites.lib.aac.dataentity.yamlfsdes*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+"algites.lib.aac.dataentity.yamlfsdes" = ["component.yml", "schemas/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["src/develop/python"]
+addopts = "--import-mode=importlib"
+cache_dir = "run/develop/pytest/cache"

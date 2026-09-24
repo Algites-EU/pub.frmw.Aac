@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.operation-interaction-caller-to-provider-message",
+  "x-aac-schema-version": 1,
+  "title": "Operation Interaction Caller To Provider Message 1",
+  "type": "object",
+  "required": [
+    "last_accepted_state_result_revision",
+    "interaction_mode",
+    "cancellation_requested",
+    "detail_level",
+    "failure_detail_level",
+    "state_result_delivery_mode",
+    "state_result_request_id"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "last_accepted_state_result_revision": {"type": "integer", "minimum": 0},
+    "interaction_mode": {"enum": ["FOREGROUND", "BACKGROUND"]},
+    "cancellation_requested": {"type": "boolean"},
+    "detail_level": {"enum": ["SUMMARY", "DETAILED"]},
+    "reporting_interval_ms": {"type": ["integer", "null"], "minimum": 0},
+    "failure_detail_level": {"enum": ["BASIC", "STACK_TRACE"]},
+    "state_result_delivery_mode": {"enum": ["ON_DEMAND_COMPLETE", "ON_DEMAND_DELTA", "ON_CHANGE_COMPLETE", "ON_CHANGE_DELTA", "ALWAYS_COMPLETE"]},
+    "state_result_request_id": {"type": "integer", "minimum": 0}
+  }
+}

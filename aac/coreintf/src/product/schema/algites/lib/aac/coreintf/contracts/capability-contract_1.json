@@ -69,6 +69,24 @@
           ]
         }
       ]
+    },
+    "schemaRef": {
+      "type": "object",
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
     }
   },
   "type": "object",
@@ -152,22 +170,6 @@
           "description": {
             "$ref": "#/$defs/displayText"
           },
-          "input": {
-            "type": "string",
-            "minLength": 1
-          },
-          "output": {
-            "type": "string",
-            "minLength": 1
-          },
-          "input_schema": {
-            "type": "string",
-            "pattern": ".+_[1-9][0-9]*\\.json$"
-          },
-          "output_schema": {
-            "type": "string",
-            "pattern": ".+_[1-9][0-9]*\\.json$"
-          },
           "authorization": {
             "$ref": "#/$defs/authorizationRequirement"
           },
@@ -187,6 +189,32 @@
           },
           "metadata": {
             "type": "object"
+          },
+          "interactions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "kind",
+                "schema"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "INPUT",
+                    "RUNNING_COMPLETE_STATE_RESULT",
+                    "RUNNING_DELTA_STATE_RESULT",
+                    "FINAL_SUCCESS_STATE_RESULT",
+                    "FINAL_CANCELLED_STATE_RESULT",
+                    "FINAL_FAILED_STATE_RESULT_EXTENSION"
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/$defs/schemaRef"
+                }
+              }
+            }
           }
         }
       }

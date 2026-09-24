@@ -606,3 +606,10 @@ Dynamic readiness that requires a live target runtime MUST NOT be guessed during
 `Application-Component-Target-State-Solver-Specification.md` defines how Core may search catalog/package candidates before a replacement. Solver output is a plan only. Artifact retrieval/verification, descriptor validation, complete target-state preflight and the durable replacement transaction defined here remain mandatory.
 
 The solver intentionally applies a stricter downgrade policy than this transaction mechanism: manual replacement may tolerate unsupported newer persisted contributions, while automatic downgrade alternatives require unchanged relevant persistent schema identities/write versions.
+
+## Operation-parameter configuration migration
+
+Capability-provider operation parameters have no independent schema/version number. Their definitions belong to a concrete component version. Therefore, if a target component version changes an operation-parameter value schema, removes/renames a parameter, changes an enum domain, or changes semantics in a way that can invalidate persisted component/provider-instance values, the upgrade plan MUST treat migration of those values as component-owned configuration migration work.
+
+The target implementation MUST NOT become active while persisted required operation-parameter configuration is invalid under the target definition. Compatible unchanged definitions may retain older persisted values; persisted provenance SHOULD retain the component version that wrote each value so migration tooling and diagnostics can distinguish carried-forward configuration from values written by the target component version.
+

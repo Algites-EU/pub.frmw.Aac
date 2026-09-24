@@ -6,15 +6,24 @@ capability:
     text: Ensure Data Entity storage support
     resource_key: aac.data.entity.ensure.storage.support.name
   description:
-    text: Idempotently ensures physical storage support for one canonical Data Entity schema version.
+    text: Idempotently ensures physical storage support for one canonical Data Entity
+      schema version.
     resource_key: aac.data.entity.ensure.storage.support.description
 operations:
-  - id: ensure
-    name:
-      text: Ensure storage support
-      resource_key: aac.data.entity.ensure.storage.support.operation.ensure.name
-    description:
-      text: Idempotently ensures physical storage support for one canonical Data Entity schema version.
-      resource_key: aac.data.entity.ensure.storage.support.operation.ensure.description
-    input_schema: data-entity-ensure-storage-support-request_1.json
-    output_schema: data-entity-ensure-storage-support-result_1.json
+- id: ensure
+  name:
+    text: Ensure storage support
+    resource_key: aac.data.entity.ensure.storage.support.operation.ensure.name
+  description:
+    text: Idempotently ensures physical storage support for one canonical Data Entity
+      schema version.
+    resource_key: aac.data.entity.ensure.storage.support.operation.ensure.description
+  interactions:
+  - kind: INPUT
+    schema:
+      id: _AAC.schema.data-entity-ensure-storage-support-request
+      version: 1
+  - kind: FINAL_SUCCESS_STATE_RESULT
+    schema:
+      id: _AAC.schema.data-entity-ensure-storage-support-result
+      version: 1

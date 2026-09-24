@@ -9,7 +9,7 @@ class Provider:
     calls = 0
     def edit_1(self):
         self.calls += 1
-        return {"ok": True}
+        return None
 
 
 def _catalog():

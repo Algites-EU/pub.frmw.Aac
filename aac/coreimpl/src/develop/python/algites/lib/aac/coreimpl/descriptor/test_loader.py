@@ -108,3 +108,61 @@ component:
           versions: [1]
       implementation_class: example:Provider
 ''')
+
+
+def test_provider_operation_parameter_definitions_are_loaded_with_display_text_and_scopes():
+    descriptor = AIcDescriptorLoader.load_text('''
+component:
+  id: x.operation-parameters
+  version: 3
+  capability_providers:
+    - id: git
+      capabilities:
+        - id: x.sync
+          versions: [1]
+      implementation_class: example:GitProvider
+      operations:
+        - capability: x.sync
+          capability_version: 1
+          operation: pull
+          interaction:
+            supported_state_result_delivery_modes: [ON_DEMAND_COMPLETE]
+          parameters:
+            - id: integration_strategy
+              name:
+                text: Integration strategy
+                resource_key: x.integrationStrategy.name
+              description:
+                text: How retrieved revisions are integrated.
+                resource_key: x.integrationStrategy.description
+              value_schema:
+                type: string
+                enum: [MERGE, REBASE]
+              enum_values:
+                - value: MERGE
+                  name:
+                    text: Merge
+                  description:
+                    text: Merge histories.
+                - value: REBASE
+                  name:
+                    text: Rebase
+                  description:
+                    text: Reapply local revisions.
+              default: MERGE
+              component_configurable: true
+              instance_configurable: true
+              invocation_overridable: true
+''')
+    provider = descriptor.capability_providers[0]
+    operation = provider.operation_parameter_definition("x.sync", 1, "pull")
+    assert operation is not None
+    parameter = operation.parameter("integration_strategy")
+    assert parameter.name.text == "Integration strategy"
+    assert parameter.name.resource_key == "x.integrationStrategy.name"
+    assert parameter.description.resource_key == "x.integrationStrategy.description"
+    assert parameter.enum_values[0].description.text == "Merge histories."
+    assert parameter.has_default and parameter.default == "MERGE"
+    assert parameter.component_configurable
+    assert parameter.instance_configurable
+    assert parameter.invocation_overridable

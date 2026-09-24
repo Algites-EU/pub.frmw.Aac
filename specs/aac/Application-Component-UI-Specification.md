@@ -112,16 +112,42 @@ An installation/admission or administration UI MAY allow an authorized administr
 
 Operation-level `all_of`/`any_of` expressions are canonical contract data and generally need not be edited by administrators; they may be shown diagnostically to explain why an invocation is denied.
 
-### III.6 Presentation metadata and localization-ready text
+### III.6 Presentation metadata, display text and display content
 
-User-visible definitions SHOULD expose `name` and `description` separately from technical IDs. UI renders direct fallback `text` when provided. A definition may additionally or alternatively supply `resource_key`; products MAY resolve that key through their own localization resources. AAC v1 does not prescribe a localization engine.
+Every human-facing AAC name, description, label, choice caption and similar short presentation string MUST use the common `AIcDisplayText` model rather than parallel `*_resource_key` fields or renderer-specific strings. `AIcDisplayText` contains direct/fallback `text` and an optional `resource_key`; products MAY resolve that key through their own localization resources. AAC does not prescribe a localization engine.
 
-Configuration fields MAY use `x-aac-name` and `x-aac-description` with the same text/resource-key shape, falling back to JSON Schema `title` and `description`.
+Configuration fields MAY use `x-aac-name` and `x-aac-description` with the same text/resource-key shape, falling back to JSON Schema `title` and `description` when canonical display metadata is unavailable.
 
+Longer or formatted display bodies use `AIcDisplayContent`, which is deliberately distinct from short `AIcDisplayText`. The baseline formats are:
+
+```text
+PLAIN_TEXT
+MARKDOWN
+HTML
+```
+
+`PLAIN_TEXT` may be multi-line. `MARKDOWN` and `HTML` describe presentation content, not executable component UI. A renderer/host that renders HTML MUST apply its own sanitization and active-content policy; declaring HTML content never grants script/code execution.
+
+The technology-neutral UI model includes display blocks and panels/containers. A panel may have `AIcDisplayText` title/description and may contain display content, forms and nested panels. The model describes semantic UI composition; it does not prescribe `QWidget`, DOM, terminal or other toolkit classes.
 
 ### III.7 Observation topology
 
 Observation configuration identifies an observer provider instance and one or more selectors containing capability pattern, optional versions, optional operations and PRE/POST phases. This topology is Core-owned and separate from the observer provider's own configuration.
+
+### III.8 Running operations and Operation Interaction
+
+A product UI MAY attach an Operation Interaction controller to any Core-mediated capability invocation. The UI consumes provider-to-caller messages and sends caller-to-provider interaction state; the provider never receives a toolkit/UI object.
+
+The provider-to-caller direction includes Core-owned execution state, result revisions, optional operation-specific state-result payloads, and zero or more structured `STATUS`, `PROGRESS`, `DETAIL`, and `DIAGNOSTIC` events. One message may contain several events so a renderer can update related progress indicators atomically. Progress identifiers may form parent/child hierarchies.
+
+The caller-to-provider direction contains user/host choices such as cooperative cancellation, detail/reporting preferences, selected state-result delivery mode and the latest result revision accepted by the caller. UI code MUST NOT assume that result revisions are cumulative deltas; whether gaps matter is defined by the operation. The caller may use result revisions to avoid comparing/serializing large result payloads merely to discover whether a logical result changed.
+
+`FOREGROUND` and `BACKGROUND` are interaction modes of the same running operation. Moving an invocation to `BACKGROUND` does not detach it, terminate reporting or change provider execution semantics. The host SHOULD retain it in a visible running-operations/task model (for example a status/task area), continue showing relevant state/progress, permit unrelated application interaction where product policy allows it, and allow the same invocation to be brought back to a foreground presentation.
+
+Asynchronous execution and background presentation are independent. A UI normally starts a potentially long operation asynchronously while initially presenting it in `FOREGROUND`; choosing "Run in background" changes only the interaction mode. A caller that needs no live interaction can instead use the ordinary synchronous invocation and receive only the final output.
+
+Concrete presentation remains host-owned. A Qt renderer may use a dialog plus task area, a web renderer may use an activity drawer, and a CLI may print periodic status while returning control according to its own execution model. AAC standardizes semantic interaction, revisions and delivery modes, not visual placement.
+
 
 ## IV. Contextual configuration and entitlement
 
@@ -186,7 +212,7 @@ The renderer remains product/toolkit-owned. The component receives only normaliz
 
 ### V.1 `aac/uiintf`
 
-`uiintf` depends only on the public AAC Core interface artifact. It defines normalized DTO/view models and `AIiAacUiController`. It contains no PySide6 dependency.
+`uiintf` depends only on the public AAC Core interface artifact. It defines normalized DTO/view models and `AIiAacUiController`, including forms/fields/choices, `AIcUiDisplay`, and nested `AIcUiPanel` composition. Human-facing model fields use `AIcDisplayText`; longer bodies use `AIcDisplayContent`. It contains no PySide6 dependency.
 
 ### V.2 `aac/uiqt`
 

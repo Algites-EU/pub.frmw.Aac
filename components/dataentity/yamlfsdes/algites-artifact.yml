@@ -1,0 +1,4 @@
+artifact:
+  name: Algites Application Components YAML File-System Data Entity Storage
+  description: YAML file-system implementation of AAC generic Data Entity storage capabilities
+  technologyKinds: [python]

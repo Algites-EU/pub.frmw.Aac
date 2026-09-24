@@ -12,6 +12,7 @@ from PySide6.QtWidgets import (
     QDialogButtonBox,
     QDoubleSpinBox,
     QFormLayout,
+    QGroupBox,
     QHBoxLayout,
     QHeaderView,
     QLabel,
@@ -24,10 +25,13 @@ from PySide6.QtWidgets import (
     QTabWidget,
     QTableWidget,
     QTableWidgetItem,
+    QTextBrowser,
     QTextEdit,
     QVBoxLayout,
     QWidget,
 )
+
+from algites.lib.aac.coreintf.presentation import AInDisplayContentFormat, AIcDisplayText
 
 from algites.lib.aac.uiintf import (
     AIiAacUiController,
@@ -36,21 +40,71 @@ from algites.lib.aac.uiintf import (
     AIcUiField,
     AIcUiFieldGroup,
     AIcUiForm,
+    AIcUiDisplay,
+    AIcUiPanel,
     AIcUiObservationBinding,
     AIcUiObservationSelector,
     AIcUiRequirementEditor,
 )
 
 
+def _ui_text(value: AIcDisplayText | str | None) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, AIcDisplayText):
+        return value.fallback
+    return str(value)
+
+
+class AIcQtDisplayWidget(QWidget):
+    """Baseline Qt renderer for toolkit-neutral AAC display content."""
+
+    def __init__(self, display: AIcUiDisplay, parent: QWidget | None = None) -> None:
+        super().__init__(parent)
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        if display.title is not None:
+            title = QLabel(f"<b>{_ui_text(display.title)}</b>")
+            title.setWordWrap(True)
+            layout.addWidget(title)
+        browser = QTextBrowser()
+        content = display.content
+        if content.format is AInDisplayContentFormat.MARKDOWN:
+            browser.setMarkdown(content.fallback)
+        elif content.format is AInDisplayContentFormat.HTML:
+            browser.setHtml(content.fallback)
+        else:
+            browser.setPlainText(content.fallback)
+        browser.setOpenExternalLinks(False)
+        layout.addWidget(browser)
+
+
+class AIcQtPanelWidget(QGroupBox):
+    """Baseline recursive Qt renderer for AAC panels/display blocks."""
+
+    def __init__(self, panel: AIcUiPanel, parent: QWidget | None = None) -> None:
+        super().__init__(_ui_text(panel.title), parent)
+        layout = QVBoxLayout(self)
+        if panel.description is not None:
+            description = QLabel(_ui_text(panel.description))
+            description.setWordWrap(True)
+            layout.addWidget(description)
+        for display in panel.displays:
+            layout.addWidget(AIcQtDisplayWidget(display, self))
+        for child in panel.panels:
+            layout.addWidget(AIcQtPanelWidget(child, self))
+
+
+
 class AIcQtFormDialog(QDialog):
     def __init__(self, form: AIcUiForm, parent: QWidget | None = None) -> None:
         super().__init__(parent)
         self.form = form
-        self.setWindowTitle(form.title)
+        self.setWindowTitle(_ui_text(form.title))
         self._editors: dict[str, QWidget] = {}
         layout = QVBoxLayout(self)
         if form.description:
-            description = QLabel(form.description)
+            description = QLabel(_ui_text(form.description))
             description.setWordWrap(True)
             layout.addWidget(description)
         self._provider_selector = None
@@ -72,15 +126,15 @@ class AIcQtFormDialog(QDialog):
             layout.addWidget(selector_row)
         for group in form.groups:
             if group.label:
-                label = QLabel(f"<b>{group.label}</b>")
+                label = QLabel(f"<b>{_ui_text(group.label)}</b>")
                 layout.addWidget(label)
             grid = QFormLayout()
             for field in group.fields:
                 editor = self._create_editor(field)
                 self._editors[field.id] = editor
-                grid.addRow(field.label + (" *" if field.required else ""), editor)
+                grid.addRow(_ui_text(field.label) + (" *" if field.required else ""), editor)
                 if field.description:
-                    help_label = QLabel(field.description)
+                    help_label = QLabel(_ui_text(field.description))
                     help_label.setWordWrap(True)
                     help_label.setStyleSheet("font-size: 90%;")
                     grid.addRow("", help_label)
@@ -111,7 +165,7 @@ class AIcQtFormDialog(QDialog):
         elif field.field_type is AInUiFieldType.ENUM:
             widget = QComboBox()
             for choice in field.choices:
-                widget.addItem(choice.label, choice.value)
+                widget.addItem(_ui_text(choice.label), choice.value)
             index = widget.findData(value)
             if index >= 0:
                 widget.setCurrentIndex(index)
@@ -186,7 +240,7 @@ class AIcQtRequirementDialog(QDialog):
         )
         selected = set(editor.selected_provider_instance_ids)
         for choice in editor.provider_choices:
-            item = QListWidgetItem(choice.label)
+            item = QListWidgetItem(_ui_text(choice.label))
             item.setData(Qt.ItemDataRole.UserRole, choice.value)
             self.list.addItem(item)
             if choice.value in selected:
@@ -398,7 +452,7 @@ class AIcAacAdministrationWidget(QWidget):
         self.instances_table.setRowCount(len(instances))
         for row, item in enumerate(instances):
             self._set_row(self.instances_table, row, (
-                item.name, item.component_id, item.provider_definition_id, item.capabilities_text, item.access_mode, item.state,
+                _ui_text(item.name), item.component_id, item.provider_definition_id, item.capabilities_text, item.access_mode, item.state,
                 item.readiness_state or "-", "; ".join(item.readiness_reasons), item.id,
             ), user_data=item.id)
 
@@ -514,7 +568,7 @@ class AIcAacAdministrationWidget(QWidget):
         for row, item in enumerate(entries):
             state = "INSTALLED" if item.installed else ("DOWNLOADED" if item.downloaded else "AVAILABLE")
             self._set_row(self.catalog_table, row, (
-                item.name or item.component_id, item.component_id, str(item.component_version), item.artifact_id,
+                _ui_text(item.name) if item.name is not None else item.component_id, item.component_id, str(item.component_version), item.artifact_id,
                 item.publisher or "", "; ".join(item.provides), "; ".join(item.requires),
                 "; ".join(item.entitlement_summary) or "included/no declaration", state, item.source_id,
                 item.entitlement_info_url or "",
@@ -583,7 +637,7 @@ class AIcAacAdministrationWidget(QWidget):
                 if item.capability_id:
                     context.append(f"capability {item.capability_id}")
                 suffix = f" ({'; '.join(context)})" if context else ""
-                lines.append(f"  [{item.code}] {item.message}{suffix}")
+                lines.append(f"  [{item.code}] {_ui_text(item.message)}{suffix}")
 
         missing_entitlements = tuple(item for item in solution.entitlement_diagnostics if not item.granted)
         if missing_entitlements:
@@ -627,7 +681,7 @@ class AIcAacAdministrationWidget(QWidget):
                 if item.capability_id:
                     context.append(f"capability {item.capability_id}")
                 suffix = f" ({'; '.join(context)})" if context else ""
-                lines.append(f"  [{item.code}] {item.message}{suffix}")
+                lines.append(f"  [{item.code}] {_ui_text(item.message)}{suffix}")
         return "\n".join(lines)
 
     def _solve_catalog_target(self) -> None:
@@ -801,7 +855,7 @@ class AIcAacAdministrationWidget(QWidget):
         available = [item for item in observers if item.id not in configured]
         if not available:
             QMessageBox.information(self, "Observation", "No unconfigured observation provider instance is available."); return
-        choices = tuple(AIcUiChoice(item.id, f"{item.name} — {item.component_id} [{item.id}]") for item in available)
+        choices = tuple(AIcUiChoice(item.id, f"{_ui_text(item.name)} — {item.component_id} [{item.id}]") for item in available)
         form = AIcUiForm("observer", "Configure observer", (AIcUiFieldGroup("main", "", (
             AIcUiField("observer", "Observer instance", AInUiFieldType.ENUM, choices[0].value, True, choices=choices),
         )),))

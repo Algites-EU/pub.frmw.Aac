@@ -262,7 +262,7 @@ def test_catalog_browse_download_install_ui_flow(tmp_path):
 
     assert controller.catalog_defaults() == ("eu.algites.app.orchestrator", "PYTHON")
     (item,) = controller.catalog_packages("eu.algites.app.orchestrator", "PYTHON", "UI Demo")
-    assert item.name == "UI Demo"
+    assert item.name.fallback == "UI Demo"
     assert item.entitlement_summary == (
         "com.example.ui-cap/1:BASIC [included]",
         "com.example.ui-cap/1:PRO [User]",
