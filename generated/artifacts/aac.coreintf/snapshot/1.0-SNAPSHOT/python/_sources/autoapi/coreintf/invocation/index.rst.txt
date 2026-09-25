@@ -10,8 +10,10 @@ Submodules
 .. toctree::
    :maxdepth: 1
 
+   /autoapi/coreintf/invocation/context/index
    /autoapi/coreintf/invocation/endpoint/index
    /autoapi/coreintf/invocation/handle/index
+   /autoapi/coreintf/invocation/interaction/index
    /autoapi/coreintf/invocation/models/index
 
 

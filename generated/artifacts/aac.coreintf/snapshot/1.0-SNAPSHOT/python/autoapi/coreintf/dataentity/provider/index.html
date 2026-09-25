@@ -58,6 +58,15 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#coreintf.dataentity.provider.AIiDataEntityRetireStorageSupport_1" title="coreintf.dataentity.provider.AIiDataEntityRetireStorageSupport_1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIiDataEntityRetireStorageSupport_1</span></code></a></p></td>
 <td><p>Helper class that provides a standard way to create an ABC using</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.dataentity.provider.AIiDataEntityCreateStorageBackup_1" title="coreintf.dataentity.provider.AIiDataEntityCreateStorageBackup_1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIiDataEntityCreateStorageBackup_1</span></code></a></p></td>
+<td><p>Helper class that provides a standard way to create an ABC using</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.dataentity.provider.AIiDataEntityInspectStorageBackup_1" title="coreintf.dataentity.provider.AIiDataEntityInspectStorageBackup_1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIiDataEntityInspectStorageBackup_1</span></code></a></p></td>
+<td><p>Helper class that provides a standard way to create an ABC using</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.dataentity.provider.AIiDataEntityRestoreStorageBackup_1" title="coreintf.dataentity.provider.AIiDataEntityRestoreStorageBackup_1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIiDataEntityRestoreStorageBackup_1</span></code></a></p></td>
+<td><p>Helper class that provides a standard way to create an ABC using</p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -137,6 +146,45 @@ inheritance.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="coreintf.dataentity.provider.AIiDataEntityRetireStorageSupport_1.retire_1">
 <span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">retire_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreintf.dataentity.provider.AIiDataEntityRetireStorageSupport_1.retire_1" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.dataentity.provider.AIiDataEntityCreateStorageBackup_1">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.dataentity.provider.</span></span><span class="sig-name descname"><span class="pre">AIiDataEntityCreateStorageBackup_1</span></span><a class="headerlink" href="#coreintf.dataentity.provider.AIiDataEntityCreateStorageBackup_1" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.dataentity.provider.AIiDataEntityCreateStorageBackup_1.create_backup_1">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">create_backup_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreintf.dataentity.provider.AIiDataEntityCreateStorageBackup_1.create_backup_1" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.dataentity.provider.AIiDataEntityInspectStorageBackup_1">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.dataentity.provider.</span></span><span class="sig-name descname"><span class="pre">AIiDataEntityInspectStorageBackup_1</span></span><a class="headerlink" href="#coreintf.dataentity.provider.AIiDataEntityInspectStorageBackup_1" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.dataentity.provider.AIiDataEntityInspectStorageBackup_1.inspect_backup_1">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">inspect_backup_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreintf.dataentity.provider.AIiDataEntityInspectStorageBackup_1.inspect_backup_1" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.dataentity.provider.AIiDataEntityRestoreStorageBackup_1">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.dataentity.provider.</span></span><span class="sig-name descname"><span class="pre">AIiDataEntityRestoreStorageBackup_1</span></span><a class="headerlink" href="#coreintf.dataentity.provider.AIiDataEntityRestoreStorageBackup_1" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.dataentity.provider.AIiDataEntityRestoreStorageBackup_1.restore_backup_1">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">restore_backup_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreintf.dataentity.provider.AIiDataEntityRestoreStorageBackup_1.restore_backup_1" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

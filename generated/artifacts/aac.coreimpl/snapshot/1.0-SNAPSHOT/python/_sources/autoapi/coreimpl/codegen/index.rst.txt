@@ -18,10 +18,11 @@ Module Contents
 
 .. py:class:: AIcPythonCapabilityBindingGenerator(schemas: coreimpl.schemas.AIcSchemaRegistry)
 
-   Generate Python ABC/DTO source from one canonical capability contract.
+   Generate Python provider/caller bindings from one canonical capability contract.
 
-   The generated interface is a language binding, never a second source of truth.
-   Authorization decorators are generated from the canonical operation metadata.
+   Portable interaction schemas remain the source of truth.  Data types are projected
+   deterministically from schema identity; operation-specific failure exception names
+   are projected deterministically from capability/operation identity.
 
 
    .. py:attribute:: schemas

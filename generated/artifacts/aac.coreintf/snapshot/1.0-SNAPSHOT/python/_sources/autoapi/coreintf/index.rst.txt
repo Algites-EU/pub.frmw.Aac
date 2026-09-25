@@ -27,6 +27,7 @@ Submodules
    /autoapi/coreintf/entitlement/index
    /autoapi/coreintf/errors/index
    /autoapi/coreintf/instances/index
+   /autoapi/coreintf/interaction_types/index
    /autoapi/coreintf/invocation/index
    /autoapi/coreintf/lifecycle/index
    /autoapi/coreintf/migration/index

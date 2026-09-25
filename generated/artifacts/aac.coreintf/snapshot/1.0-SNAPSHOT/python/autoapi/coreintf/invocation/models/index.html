@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <link rel="next" title="coreintf.lifecycle" href="../../lifecycle/index.html" />
-    <link rel="prev" title="coreintf.invocation.handle" href="../handle/index.html" />
+    <link rel="prev" title="coreintf.invocation.interaction" href="../interaction/index.html" />
    
   <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
   
@@ -36,6 +36,19 @@
             
   <section id="module-coreintf.invocation.models">
 <span id="coreintf-invocation-models"></span><h1>coreintf.invocation.models<a class="headerlink" href="#module-coreintf.invocation.models" title="Link to this heading">¶</a></h1>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.invocation.models.AIcOperationSuccessT" title="coreintf.invocation.models.AIcOperationSuccessT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcOperationSuccessT</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.invocation.models.AIcOperationCancelledT" title="coreintf.invocation.models.AIcOperationCancelledT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcOperationCancelledT</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
 <table class="autosummary longtable docutils align-default">
@@ -44,6 +57,12 @@
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#coreintf.invocation.models.AIcInvocationOutput" title="coreintf.invocation.models.AIcInvocationOutput"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcInvocationOutput</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.invocation.models.AInOperationCompletionState" title="coreintf.invocation.models.AInOperationCompletionState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInOperationCompletionState</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.invocation.models.AIcOperationCompletion" title="coreintf.invocation.models.AIcOperationCompletion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcOperationCompletion</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -90,6 +109,16 @@
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.invocation.models.AIcInvocationInput.operation_parameter_overrides">
+<span class="sig-name descname"><span class="pre">operation_parameter_overrides</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.invocation.models.AIcInvocationInput.operation_parameter_overrides" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.invocation.models.AIcInvocationInput.effective_operation_parameters">
+<span class="sig-name descname"><span class="pre">effective_operation_parameters</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.invocation.models.AIcInvocationInput.effective_operation_parameters" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="coreintf.invocation.models.AIcInvocationInput.consumer_instance_id">
 <span class="sig-name descname"><span class="pre">consumer_instance_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.invocation.models.AIcInvocationInput.consumer_instance_id" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -97,6 +126,11 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreintf.invocation.models.AIcInvocationInput.requirement_id">
 <span class="sig-name descname"><span class="pre">requirement_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.invocation.models.AIcInvocationInput.requirement_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.invocation.models.AIcInvocationInput.locale">
+<span class="sig-name descname"><span class="pre">locale</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.invocation.models.AIcInvocationInput.locale" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -117,6 +151,62 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreintf.invocation.models.AIcInvocationOutput.error">
 <span class="sig-name descname"><span class="pre">error</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.invocation.models.AIcInvocationOutput.error" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.invocation.models.AInOperationCompletionState">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.invocation.models.</span></span><span class="sig-name descname"><span class="pre">AInOperationCompletionState</span></span><a class="headerlink" href="#coreintf.invocation.models.AInOperationCompletionState" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.invocation.models.AInOperationCompletionState.SUCCESS">
+<span class="sig-name descname"><span class="pre">SUCCESS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SUCCESS'</span></span><a class="headerlink" href="#coreintf.invocation.models.AInOperationCompletionState.SUCCESS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.invocation.models.AInOperationCompletionState.CANCELLED">
+<span class="sig-name descname"><span class="pre">CANCELLED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CANCELLED'</span></span><a class="headerlink" href="#coreintf.invocation.models.AInOperationCompletionState.CANCELLED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="coreintf.invocation.models.AIcOperationSuccessT">
+<span class="sig-prename descclassname"><span class="pre">coreintf.invocation.models.</span></span><span class="sig-name descname"><span class="pre">AIcOperationSuccessT</span></span><a class="headerlink" href="#coreintf.invocation.models.AIcOperationSuccessT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="coreintf.invocation.models.AIcOperationCancelledT">
+<span class="sig-prename descclassname"><span class="pre">coreintf.invocation.models.</span></span><span class="sig-name descname"><span class="pre">AIcOperationCancelledT</span></span><a class="headerlink" href="#coreintf.invocation.models.AIcOperationCancelledT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.invocation.models.AIcOperationCompletion">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.invocation.models.</span></span><span class="sig-name descname"><span class="pre">AIcOperationCompletion</span></span><a class="headerlink" href="#coreintf.invocation.models.AIcOperationCompletion" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Generic</span></code>[<a class="reference internal" href="#coreintf.invocation.models.AIcOperationSuccessT" title="coreintf.invocation.models.AIcOperationSuccessT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcOperationSuccessT</span></code></a>, <a class="reference internal" href="#coreintf.invocation.models.AIcOperationCancelledT" title="coreintf.invocation.models.AIcOperationCancelledT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcOperationCancelledT</span></code></a>]</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.invocation.models.AIcOperationCompletion.state">
+<span class="sig-name descname"><span class="pre">state</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.invocation.models.AInOperationCompletionState" title="coreintf.invocation.models.AInOperationCompletionState"><span class="pre">AInOperationCompletionState</span></a></span><a class="headerlink" href="#coreintf.invocation.models.AIcOperationCompletion.state" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.invocation.models.AIcOperationCompletion.success_result">
+<span class="sig-name descname"><span class="pre">success_result</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.invocation.models.AIcOperationSuccessT" title="coreintf.invocation.models.AIcOperationSuccessT"><span class="pre">AIcOperationSuccessT</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.invocation.models.AIcOperationCompletion.success_result" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.invocation.models.AIcOperationCompletion.cancelled_result">
+<span class="sig-name descname"><span class="pre">cancelled_result</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.invocation.models.AIcOperationCancelledT" title="coreintf.invocation.models.AIcOperationCancelledT"><span class="pre">AIcOperationCancelledT</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.invocation.models.AIcOperationCompletion.cancelled_result" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -165,7 +255,7 @@
   <li><a href="../../../index.html">API Reference</a><ul>
   <li><a href="../../index.html">coreintf</a><ul>
   <li><a href="../index.html">coreintf.invocation</a><ul>
-      <li>Previous: <a href="../handle/index.html" title="previous chapter">coreintf.invocation.handle</a></li>
+      <li>Previous: <a href="../interaction/index.html" title="previous chapter">coreintf.invocation.interaction</a></li>
       <li>Next: <a href="../../lifecycle/index.html" title="next chapter">coreintf.lifecycle</a></li>
   </ul></li>
   </ul></li>

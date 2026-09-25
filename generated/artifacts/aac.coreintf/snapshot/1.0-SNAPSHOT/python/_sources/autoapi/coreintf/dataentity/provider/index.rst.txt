@@ -15,6 +15,9 @@ Classes
    coreintf.dataentity.provider.AIiDataEntityInspectStorageSupport_1
    coreintf.dataentity.provider.AIiDataEntityEnsureStorageSupport_1
    coreintf.dataentity.provider.AIiDataEntityRetireStorageSupport_1
+   coreintf.dataentity.provider.AIiDataEntityCreateStorageBackup_1
+   coreintf.dataentity.provider.AIiDataEntityInspectStorageBackup_1
+   coreintf.dataentity.provider.AIiDataEntityRestoreStorageBackup_1
 
 
 Module Contents
@@ -100,6 +103,48 @@ Module Contents
 
 
    .. py:method:: retire_1(request: Mapping[str, object]) -> Mapping[str, object]
+      :abstractmethod:
+
+
+
+.. py:class:: AIiDataEntityCreateStorageBackup_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: create_backup_1(request: Mapping[str, object]) -> Mapping[str, object]
+      :abstractmethod:
+
+
+
+.. py:class:: AIiDataEntityInspectStorageBackup_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: inspect_backup_1(request: Mapping[str, object]) -> Mapping[str, object]
+      :abstractmethod:
+
+
+
+.. py:class:: AIiDataEntityRestoreStorageBackup_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: restore_backup_1(request: Mapping[str, object]) -> Mapping[str, object]
       :abstractmethod:
 
 

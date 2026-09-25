@@ -16,6 +16,9 @@ Attributes
    coreimpl.dataentity.INSPECT_STORAGE_SUPPORT_CAPABILITY_ID
    coreimpl.dataentity.ENSURE_STORAGE_SUPPORT_CAPABILITY_ID
    coreimpl.dataentity.RETIRE_STORAGE_SUPPORT_CAPABILITY_ID
+   coreimpl.dataentity.CREATE_STORAGE_BACKUP_CAPABILITY_ID
+   coreimpl.dataentity.INSPECT_STORAGE_BACKUP_CAPABILITY_ID
+   coreimpl.dataentity.RESTORE_STORAGE_BACKUP_CAPABILITY_ID
 
 
 Classes
@@ -27,6 +30,7 @@ Classes
    coreimpl.dataentity.AIcDataEntityImplementationRegistry
    coreimpl.dataentity.AIcDataEntityMarshaller
    coreimpl.dataentity.AIcProviderCapabilityInvoker
+   coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade
    coreimpl.dataentity.AIcGetRecordFacade
    coreimpl.dataentity.AIcDataEntityQueryPage
    coreimpl.dataentity.AIcQueryRecordsFacade
@@ -34,6 +38,9 @@ Classes
    coreimpl.dataentity.AIcInspectStorageSupportFacade
    coreimpl.dataentity.AIcEnsureStorageSupportFacade
    coreimpl.dataentity.AIcRetireStorageSupportFacade
+   coreimpl.dataentity.AIcCreateStorageBackupFacade
+   coreimpl.dataentity.AIcInspectStorageBackupFacade
+   coreimpl.dataentity.AIcRestoreStorageBackupFacade
    coreimpl.dataentity.AIcDataEntityProviderFacade
 
 
@@ -64,6 +71,18 @@ Module Contents
 
 .. py:data:: RETIRE_STORAGE_SUPPORT_CAPABILITY_ID
    :value: '_AAC.data-entity.retire-storage-support'
+
+
+.. py:data:: CREATE_STORAGE_BACKUP_CAPABILITY_ID
+   :value: '_AAC.data-entity.create-storage-backup'
+
+
+.. py:data:: INSPECT_STORAGE_BACKUP_CAPABILITY_ID
+   :value: '_AAC.data-entity.inspect-storage-backup'
+
+
+.. py:data:: RESTORE_STORAGE_BACKUP_CAPABILITY_ID
+   :value: '_AAC.data-entity.restore-storage-backup'
 
 
 .. py:class:: AIcDataEntityViewRegistry
@@ -128,9 +147,33 @@ Module Contents
    .. py:method:: invoke(capability_id: str, version: int, operation_id: str, arguments: Mapping[str, object]) -> Mapping[str, object]
 
 
+.. py:class:: AIcBoundDataEntityCapabilityFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :value: 1
+
+
+
+   .. py:attribute:: write_operation
+      :value: False
+
+
+
+   .. py:attribute:: invoker
+
+
+   .. py:attribute:: marshaller
+      :value: None
+
+
+
 .. py:class:: AIcGetRecordFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
 
-   Bases: :py:obj:`_AIcBoundDataEntityCapabilityFacade`
+   Bases: :py:obj:`AIcBoundDataEntityCapabilityFacade`
 
 
    .. py:attribute:: capability_id
@@ -159,7 +202,7 @@ Module Contents
 
 .. py:class:: AIcQueryRecordsFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
 
-   Bases: :py:obj:`_AIcBoundDataEntityCapabilityFacade`
+   Bases: :py:obj:`AIcBoundDataEntityCapabilityFacade`
 
 
    .. py:attribute:: capability_id
@@ -175,7 +218,7 @@ Module Contents
 
 .. py:class:: AIcApplyDirectRecordChangesFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
 
-   Bases: :py:obj:`_AIcBoundDataEntityCapabilityFacade`
+   Bases: :py:obj:`AIcBoundDataEntityCapabilityFacade`
 
 
    .. py:attribute:: capability_id
@@ -202,7 +245,7 @@ Module Contents
 
 .. py:class:: AIcInspectStorageSupportFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
 
-   Bases: :py:obj:`_AIcBoundDataEntityCapabilityFacade`
+   Bases: :py:obj:`AIcBoundDataEntityCapabilityFacade`
 
 
    .. py:attribute:: capability_id
@@ -215,7 +258,7 @@ Module Contents
 
 .. py:class:: AIcEnsureStorageSupportFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
 
-   Bases: :py:obj:`_AIcBoundDataEntityCapabilityFacade`
+   Bases: :py:obj:`AIcBoundDataEntityCapabilityFacade`
 
 
    .. py:attribute:: capability_id
@@ -233,7 +276,7 @@ Module Contents
 
 .. py:class:: AIcRetireStorageSupportFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
 
-   Bases: :py:obj:`_AIcBoundDataEntityCapabilityFacade`
+   Bases: :py:obj:`AIcBoundDataEntityCapabilityFacade`
 
 
    .. py:attribute:: capability_id
@@ -247,6 +290,50 @@ Module Contents
 
 
    .. py:method:: retire(schema_id: str, schema_version: int) -> Mapping[str, object]
+
+
+.. py:class:: AIcCreateStorageBackupFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
+
+   Bases: :py:obj:`AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.create-storage-backup'
+
+
+
+   .. py:method:: create_backup(backup_file: str, *, overwrite: bool = False) -> Mapping[str, object]
+
+
+.. py:class:: AIcInspectStorageBackupFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
+
+   Bases: :py:obj:`AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.inspect-storage-backup'
+
+
+
+   .. py:method:: inspect_backup(backup_file: str) -> Mapping[str, object]
+
+
+.. py:class:: AIcRestoreStorageBackupFacade(invoker: AIcProviderCapabilityInvoker, marshaller: AIcDataEntityMarshaller | None = None)
+
+   Bases: :py:obj:`AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.restore-storage-backup'
+
+
+
+   .. py:attribute:: write_operation
+      :value: True
+
+
+
+   .. py:method:: restore_backup(backup_file: str, *, mode: str = 'EMPTY_ONLY') -> Mapping[str, object]
 
 
 .. py:class:: AIcDataEntityProviderFacade(provider: algites.lib.aac.coreintf.instances.AIcProviderInstance, endpoints: coreimpl.invocation.AIcEndpointRegistry, dispatcher: coreimpl.invocation.AIcInvocationDispatcher, marshaller: AIcDataEntityMarshaller)
@@ -282,5 +369,14 @@ Module Contents
 
 
    .. py:attribute:: retire_storage_support
+
+
+   .. py:attribute:: create_storage_backup
+
+
+   .. py:attribute:: inspect_storage_backup
+
+
+   .. py:attribute:: restore_storage_backup
 
 

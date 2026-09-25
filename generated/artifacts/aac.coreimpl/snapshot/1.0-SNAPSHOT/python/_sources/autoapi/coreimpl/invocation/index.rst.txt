@@ -9,6 +9,7 @@ Classes
 
 .. autoapisummary::
 
+   coreimpl.invocation.AIcValidatedOperationInteractionProviderProxy
    coreimpl.invocation.AIcObjectCapabilityEndpoint
    coreimpl.invocation.AIcEndpointRegistry
    coreimpl.invocation.AIcInvocationDispatcher
@@ -29,6 +30,32 @@ Module Contents
 ---------------
 
 .. py:function:: authorization_principal_context(principal: algites.lib.aac.coreintf.authorization.AIcAuthorizationPrincipal | None)
+
+.. py:class:: AIcValidatedOperationInteractionProviderProxy(delegate: algites.lib.aac.coreintf.invocation.AIiOperationInteractionProviderToCaller, operation, schema_registry)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.invocation.AIiOperationInteractionProviderToCaller`
+
+
+   Validate portable RUNNING state-result payloads while delegating interaction transport.
+
+
+   .. py:method:: declare_features(features: algites.lib.aac.coreintf.invocation.AIcOperationInteractionFeatures) -> None
+
+
+   .. py:method:: report_events(events) -> None
+
+
+   .. py:method:: state_result_changed() -> int
+
+
+   .. py:method:: update_state_result(state_result: object) -> int
+
+
+   .. py:method:: deliver_state_result(state_result: object, *, revision: int | None = None) -> None
+
+
+   .. py:method:: caller_snapshot()
+
 
 .. py:class:: AIcObjectCapabilityEndpoint(provider: object)
 
@@ -58,7 +85,7 @@ Module Contents
    .. py:method:: get(provider_instance_id: str) -> algites.lib.aac.coreintf.invocation.AIiCapabilityEndpoint
 
 
-.. py:class:: AIcInvocationDispatcher(contracts: coreimpl.contracts.AIcActiveContractCatalog, observations: coreimpl.observation.AIcObservationDispatcher | None = None, component_authorizations: coreimpl.authorization.AIcComponentAuthorizationGrantStore | None = None, principal_authorization_provider: algites.lib.aac.coreintf.authorization.AIiAuthorizationProvider | None = None, *, entitlement_remediator: algites.lib.aac.coreintf.entitlement.AIiEntitlementRemediator | None = None, entitlement_refresh_callback: Callable[[], None] | None = None)
+.. py:class:: AIcInvocationDispatcher(contracts: coreimpl.contracts.AIcActiveContractCatalog, observations: coreimpl.observation.AIcObservationDispatcher | None = None, component_authorizations: coreimpl.authorization.AIcComponentAuthorizationGrantStore | None = None, principal_authorization_provider: algites.lib.aac.coreintf.authorization.AIiAuthorizationProvider | None = None, *, entitlement_remediator: algites.lib.aac.coreintf.entitlement.AIiEntitlementRemediator | None = None, entitlement_refresh_callback: Callable[[], None] | None = None, operation_parameter_resolver: Callable[[algites.lib.aac.coreintf.invocation.AIcInvocationInput], Mapping[str, object]] | None = None, provider_operation_resolver: Callable[[algites.lib.aac.coreintf.invocation.AIcInvocationInput], algites.lib.aac.coreintf.descriptor.AIcCapabilityProviderOperationDescriptor] | None = None)
 
    .. py:attribute:: contracts
 
@@ -88,7 +115,17 @@ Module Contents
 
 
 
-   .. py:method:: invoke(endpoint: algites.lib.aac.coreintf.invocation.AIiCapabilityEndpoint, invocation_input: algites.lib.aac.coreintf.invocation.AIcInvocationInput) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
+   .. py:attribute:: operation_parameter_resolver
+      :value: None
+
+
+
+   .. py:attribute:: provider_operation_resolver
+      :value: None
+
+
+
+   .. py:method:: invoke(endpoint: algites.lib.aac.coreintf.invocation.AIiCapabilityEndpoint, invocation_input: algites.lib.aac.coreintf.invocation.AIcInvocationInput, operation_interaction: algites.lib.aac.coreintf.invocation.AIiOperationInteractionProviderToCaller | None = None) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
 
 
 .. py:class:: AIcCoreCapabilityHandle(binding: algites.lib.aac.coreintf.instances.AIcBinding, endpoints: AIcEndpointRegistry, dispatcher: AIcInvocationDispatcher)
@@ -101,10 +138,19 @@ Module Contents
 
 
 
-   .. py:method:: invoke(operation_id: str, arguments: Mapping[str, object] | None = None) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
+   .. py:method:: invoke(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: algites.lib.aac.coreintf.invocation.AIiOperationInteractionProviderToCaller | None = None, locale: str | None = None) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
 
 
-.. py:function:: invoke_handle_with_parent_context(handle: algites.lib.aac.coreintf.invocation.AIiCapabilityHandle, parent_invocation_id: str | None, operation_id: str, arguments: Mapping[str, object] | None = None) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
+   .. py:method:: new_operation_interaction(*, listener: Callable[[object], None] | None = None, exception_factory: algites.lib.aac.coreintf.invocation.AIiOperationFailureExceptionFactory | None = None) -> algites.lib.aac.coreintf.invocation.AIiOperationInteractionCallerToProvider
+
+
+   .. py:method:: invoke_completion(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: algites.lib.aac.coreintf.invocation.AIiOperationInteractionCallerToProvider | None = None, locale: str | None = None) -> algites.lib.aac.coreintf.invocation.AIcOperationCompletion
+
+
+   .. py:method:: start(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: algites.lib.aac.coreintf.invocation.AIiOperationInteractionCallerToProvider | None = None, locale: str | None = None) -> algites.lib.aac.coreintf.invocation.AIiOperationInteractionCallerToProvider
+
+
+.. py:function:: invoke_handle_with_parent_context(handle: algites.lib.aac.coreintf.invocation.AIiCapabilityHandle, parent_invocation_id: str | None, operation_id: str, arguments: Mapping[str, object] | None = None, operation_parameters: Mapping[str, object] | None = None, operation_interaction: algites.lib.aac.coreintf.invocation.AIiOperationInteractionProviderToCaller | None = None, locale: str | None = None) -> algites.lib.aac.coreintf.invocation.AIcInvocationOutput
 
    Invoke a Core handle while restoring causal context received over a runtime boundary.
 

@@ -1,0 +1,64 @@
+yamlfsdes.provider
+==================
+
+.. py:module:: yamlfsdes.provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   yamlfsdes.provider.AIcYamlFsDataEntityStorageProvider
+   yamlfsdes.provider.AIcOperationProgress
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcYamlFsDataEntityStorageProvider(configuration: Mapping[str, object] | None = None)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.runtime.AIiProviderRuntime`, :py:obj:`algites.lib.aac.coreintf.dataentity.AIiDataEntityGetRecord_1`, :py:obj:`algites.lib.aac.coreintf.dataentity.AIiDataEntityInspectStorageBackup_1`, :py:obj:`algites.lib.aac.coreintf.dataentity.AIiDataEntityQueryRecords_1`, :py:obj:`algites.lib.aac.coreintf.dataentity.AIiDataEntityApplyDirectRecordChanges_1`, :py:obj:`algites.lib.aac.coreintf.dataentity.AIiDataEntityCreateStorageBackup_1`, :py:obj:`algites.lib.aac.coreintf.dataentity.AIiDataEntityInspectStorageSupport_1`, :py:obj:`algites.lib.aac.coreintf.dataentity.AIiDataEntityEnsureStorageSupport_1`, :py:obj:`algites.lib.aac.coreintf.dataentity.AIiDataEntityRetireStorageSupport_1`, :py:obj:`algites.lib.aac.coreintf.dataentity.AIiDataEntityRestoreStorageBackup_1`
+
+
+   YAML filesystem implementation of the AAC generic Data Entity storage capabilities.
+
+
+   .. py:attribute:: root
+
+
+   .. py:method:: get_1(request: Mapping[str, object]) -> Mapping[str, object]
+
+
+   .. py:method:: query_1(request: Mapping[str, object]) -> Mapping[str, object]
+
+
+   .. py:method:: apply_1(request: Mapping[str, object]) -> Mapping[str, object]
+
+
+   .. py:method:: inspect_1(request: Mapping[str, object]) -> Mapping[str, object]
+
+
+   .. py:method:: ensure_1(request: Mapping[str, object]) -> Mapping[str, object]
+
+
+   .. py:method:: retire_1(request: Mapping[str, object]) -> Mapping[str, object]
+
+
+   .. py:method:: create_backup_1(request: Mapping[str, object]) -> Mapping[str, object]
+
+
+   .. py:method:: inspect_backup_1(request: Mapping[str, object]) -> Mapping[str, object]
+
+
+   .. py:method:: restore_backup_1(request: Mapping[str, object]) -> Mapping[str, object]
+
+
+.. py:class:: AIcOperationProgress
+
+   .. py:method:: checkpoint() -> None
+
+
+   .. py:method:: report(phase_id: str, text: str, *, current: int | float | None = None, total: int | float | None = None, unit: str | None = None, force: bool = False) -> None
+
+

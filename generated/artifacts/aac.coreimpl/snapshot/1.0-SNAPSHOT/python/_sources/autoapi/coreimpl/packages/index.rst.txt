@@ -201,6 +201,8 @@ Module Contents
 
 
    .. py:attribute:: transaction_recovery
+      :value: None
+
 
 
    .. py:attribute:: automation_policy

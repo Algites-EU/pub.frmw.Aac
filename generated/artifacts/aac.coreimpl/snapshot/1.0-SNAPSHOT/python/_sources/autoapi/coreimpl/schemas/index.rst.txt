@@ -113,6 +113,12 @@ Module Contents
    .. py:method:: normalize_value(resource_name: str, value: object, *, apply_defaults: bool = True) -> object
 
 
+   .. py:method:: normalize_identity(schema_id: str, version: int, value: Mapping[str, object] | None, *, apply_defaults: bool = True) -> dict[str, object]
+
+
+   .. py:method:: normalize_value_identity(schema_id: str, version: int, value: object, *, apply_defaults: bool = True) -> object
+
+
    .. py:method:: validate_resolved_configuration(resource_name: str, value: Mapping[str, object] | None) -> tuple[str, Ellipsis]
 
       Validate a resolved runtime configuration without treating top-level ``required`` as availability.

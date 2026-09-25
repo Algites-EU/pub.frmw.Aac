@@ -1,0 +1,79 @@
+coreimpl.operation_parameters
+=============================
+
+.. py:module:: coreimpl.operation_parameters
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.operation_parameters.AIcConfiguredOperationParameterValue
+   coreimpl.operation_parameters.AIcOperationParameterConfigurationStore
+   coreimpl.operation_parameters.AIcOperationParameterResolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfiguredOperationParameterValue
+
+   .. py:attribute:: value
+      :type:  object
+
+
+   .. py:attribute:: written_by_component_version
+      :type:  int
+
+
+.. py:class:: AIcOperationParameterConfigurationStore(store: algites.lib.aac.coreintf.persistence.AIiStateStore)
+
+   Core-owned persisted component/instance defaults for provider operation parameters.
+
+
+   .. py:attribute:: store
+
+
+   .. py:method:: set_component_value(component_id: str, provider_definition_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str, value: object, *, component_version: int) -> None
+
+
+   .. py:method:: set_instance_value(component_id: str, provider_definition_id: str, provider_instance_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str, value: object, *, component_version: int) -> None
+
+
+   .. py:method:: delete_component_value(component_id: str, provider_definition_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str) -> None
+
+
+   .. py:method:: delete_instance_value(component_id: str, provider_definition_id: str, provider_instance_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str) -> None
+
+
+   .. py:method:: component_value(component_id: str, provider_definition_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str) -> AIcConfiguredOperationParameterValue | None
+
+
+   .. py:method:: instance_value(component_id: str, provider_definition_id: str, provider_instance_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str) -> AIcConfiguredOperationParameterValue | None
+
+
+.. py:class:: AIcOperationParameterResolver(configuration_store: AIcOperationParameterConfigurationStore)
+
+   Resolve definition default -> component -> provider instance -> invocation override.
+
+
+   .. py:attribute:: configuration_store
+
+
+   .. py:method:: validate_definition(parameter: algites.lib.aac.coreintf.descriptor.AIcOperationParameterDefinitionDescriptor) -> None
+      :staticmethod:
+
+
+
+   .. py:method:: validate_provider_definition(provider: algites.lib.aac.coreintf.descriptor.AIcProviderDefinitionDescriptor) -> None
+      :classmethod:
+
+
+
+   .. py:method:: resolve(provider: algites.lib.aac.coreintf.descriptor.AIcProviderDefinitionDescriptor, *, component_id: str, component_version: int, provider_instance_id: str, capability_id: str, capability_version: int, operation_id: str, invocation_overrides: Mapping[str, object] | None = None) -> dict[str, object]
+
+
+   .. py:method:: validate_configured_value(parameter: algites.lib.aac.coreintf.descriptor.AIcOperationParameterDefinitionDescriptor, value: object, *, scope: str) -> None
+
+

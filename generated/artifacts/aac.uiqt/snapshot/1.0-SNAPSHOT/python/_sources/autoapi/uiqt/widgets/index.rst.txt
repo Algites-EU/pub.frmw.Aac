@@ -9,6 +9,8 @@ Classes
 
 .. autoapisummary::
 
+   uiqt.widgets.AIcQtDisplayWidget
+   uiqt.widgets.AIcQtPanelWidget
    uiqt.widgets.AIcQtFormDialog
    uiqt.widgets.AIcQtRequirementDialog
    uiqt.widgets.AIcQtObservationDialog
@@ -17,6 +19,22 @@ Classes
 
 Module Contents
 ---------------
+
+.. py:class:: AIcQtDisplayWidget(display: algites.lib.aac.uiintf.AIcUiDisplay, parent: PySide6.QtWidgets.QWidget | None = None)
+
+   Bases: :py:obj:`PySide6.QtWidgets.QWidget`
+
+
+   Baseline Qt renderer for toolkit-neutral AAC display content.
+
+
+.. py:class:: AIcQtPanelWidget(panel: algites.lib.aac.uiintf.AIcUiPanel, parent: PySide6.QtWidgets.QWidget | None = None)
+
+   Bases: :py:obj:`PySide6.QtWidgets.QGroupBox`
+
+
+   Baseline recursive Qt renderer for AAC panels/display blocks.
+
 
 .. py:class:: AIcQtFormDialog(form: algites.lib.aac.uiintf.AIcUiForm, parent: PySide6.QtWidgets.QWidget | None = None)
 

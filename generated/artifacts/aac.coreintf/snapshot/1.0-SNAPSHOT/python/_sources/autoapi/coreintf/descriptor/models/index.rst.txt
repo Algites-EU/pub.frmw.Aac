@@ -17,6 +17,10 @@ Classes
    coreintf.descriptor.models.AIcProviderRuntimeDescriptor
    coreintf.descriptor.models.AIcInitialProviderInstanceDescriptor
    coreintf.descriptor.models.AIcConsumerRequirementDescriptor
+   coreintf.descriptor.models.AIcOperationParameterEnumValueDescriptor
+   coreintf.descriptor.models.AIcOperationParameterDefinitionDescriptor
+   coreintf.descriptor.models.AIcCapabilityProviderOperationInteractionDescriptor
+   coreintf.descriptor.models.AIcCapabilityProviderOperationDescriptor
    coreintf.descriptor.models.AIcProviderDefinitionDescriptor
    coreintf.descriptor.models.AIcEntitlementLicensingScopeDescriptor
    coreintf.descriptor.models.AIcPermissionDescriptor
@@ -242,6 +246,139 @@ Module Contents
 
 
 
+.. py:class:: AIcOperationParameterEnumValueDescriptor
+
+   .. py:attribute:: value
+      :type:  object
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+.. py:class:: AIcOperationParameterDefinitionDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText
+
+
+   .. py:attribute:: value_schema
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: enum_values
+      :type:  tuple[AIcOperationParameterEnumValueDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: required
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: default
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: has_default
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: component_configurable
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: instance_configurable
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: invocation_overridable
+      :type:  bool
+      :value: False
+
+
+
+.. py:class:: AIcCapabilityProviderOperationInteractionDescriptor
+
+   .. py:attribute:: supported_state_result_delivery_modes
+      :type:  tuple[coreintf.interaction_types.AInStateResultDeliveryMode, Ellipsis]
+
+
+   .. py:attribute:: progress_reporting
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: cancellation
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: detail_level
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: reporting_interval
+      :type:  bool
+      :value: False
+
+
+
+.. py:class:: AIcCapabilityProviderOperationDescriptor
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: operation_id
+      :type:  str
+
+
+   .. py:attribute:: interaction
+      :type:  AIcCapabilityProviderOperationInteractionDescriptor
+
+
+   .. py:attribute:: parameters
+      :type:  tuple[AIcOperationParameterDefinitionDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: parameter(parameter_id: str) -> AIcOperationParameterDefinitionDescriptor
+
+
 .. py:class:: AIcProviderDefinitionDescriptor
 
    .. py:attribute:: id
@@ -270,6 +407,12 @@ Module Contents
 
    .. py:attribute:: requirements
       :type:  tuple[AIcConsumerRequirementDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: operations
+      :type:  tuple[AIcCapabilityProviderOperationDescriptor, Ellipsis]
       :value: ()
 
 
@@ -306,6 +449,12 @@ Module Contents
 
 
    .. py:method:: supports_capability(capability_id: str) -> bool
+
+
+   .. py:method:: operation_definition(capability_id: str, capability_version: int, operation_id: str) -> AIcCapabilityProviderOperationDescriptor | None
+
+
+   .. py:method:: operation_parameter_definition(capability_id: str, capability_version: int, operation_id: str) -> AIcCapabilityProviderOperationDescriptor | None
 
 
 .. py:class:: AIcEntitlementLicensingScopeDescriptor

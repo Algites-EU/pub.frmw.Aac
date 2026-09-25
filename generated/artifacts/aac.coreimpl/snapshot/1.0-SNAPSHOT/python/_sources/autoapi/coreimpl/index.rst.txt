@@ -43,6 +43,8 @@ Submodules
    /autoapi/coreimpl/migration/index
    /autoapi/coreimpl/namespace/index
    /autoapi/coreimpl/observation/index
+   /autoapi/coreimpl/operation_interaction/index
+   /autoapi/coreimpl/operation_parameters/index
    /autoapi/coreimpl/package_documents/index
    /autoapi/coreimpl/package_transactions/index
    /autoapi/coreimpl/packages/index

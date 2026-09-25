@@ -1,0 +1,59 @@
+coreintf.interaction_types
+==========================
+
+.. py:module:: coreintf.interaction_types
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.interaction_types.AInStateResultDeliveryMode
+
+
+Module Contents
+---------------
+
+.. py:class:: AInStateResultDeliveryMode
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: ON_DEMAND_COMPLETE
+      :value: 'ON_DEMAND_COMPLETE'
+
+
+
+   .. py:attribute:: ON_DEMAND_DELTA
+      :value: 'ON_DEMAND_DELTA'
+
+
+
+   .. py:attribute:: ON_CHANGE_COMPLETE
+      :value: 'ON_CHANGE_COMPLETE'
+
+
+
+   .. py:attribute:: ON_CHANGE_DELTA
+      :value: 'ON_CHANGE_DELTA'
+
+
+
+   .. py:attribute:: ALWAYS_COMPLETE
+      :value: 'ALWAYS_COMPLETE'
+
+
+

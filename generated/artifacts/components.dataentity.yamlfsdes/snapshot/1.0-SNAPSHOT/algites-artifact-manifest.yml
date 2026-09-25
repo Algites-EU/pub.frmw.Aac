@@ -1,0 +1,18 @@
+manifestVersion: 1
+artifact:
+  repositoryId: pub.frmw.ApplicationComponents
+  localArtifactId: components.dataentity.yamlfsdes
+  artifactCoordinateId: pub.frmw.ApplicationComponents_components.dataentity.yamlfsdes
+  version: 1.0-SNAPSHOT
+  sourcePath: components/dataentity/yamlfsdes
+  structureKind: artifact
+  name: "Algites Application Components YAML File-System Data Entity Storage"
+  description: "YAML file-system implementation of AAC generic Data Entity storage capabilities"
+sourceMetadata:
+  descriptorHierarchy:
+    - structureKind: repository
+      path: algites-source-repository.yml
+      sha256: 644d1ebf58a6eb9b543ea572c7e80aea0178ba289790b7e15632a3a35e7ffc87
+    - structureKind: artifact
+      path: components/dataentity/yamlfsdes/algites-artifact.yml
+      sha256: e7b853e9f923fed9d30d944ba47d2e70a13ef6408d006ca04646401aa5e2e163

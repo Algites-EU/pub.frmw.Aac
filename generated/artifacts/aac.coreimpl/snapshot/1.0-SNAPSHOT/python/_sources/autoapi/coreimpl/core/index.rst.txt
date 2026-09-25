@@ -419,6 +419,12 @@ Module Contents
 
 
 
+   .. py:method:: configure_component_operation_parameter(component_id: str, provider_definition_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str, value: object) -> None
+
+
+   .. py:method:: configure_provider_instance_operation_parameter(instance_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str, value: object) -> None
+
+
    .. py:method:: authorization_context(principal: algites.lib.aac.coreintf.authorization.AIcAuthorizationPrincipal | None)
 
 

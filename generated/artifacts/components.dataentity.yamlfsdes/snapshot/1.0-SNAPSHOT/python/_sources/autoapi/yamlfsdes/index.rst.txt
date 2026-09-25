@@ -1,0 +1,15 @@
+yamlfsdes
+=========
+
+.. py:module:: yamlfsdes
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/yamlfsdes/provider/index
+
+

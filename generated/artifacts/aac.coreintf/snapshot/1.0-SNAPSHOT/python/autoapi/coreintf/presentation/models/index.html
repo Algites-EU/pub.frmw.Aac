@@ -41,7 +41,13 @@
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.presentation.models.AIcDisplayText" title="coreintf.presentation.models.AIcDisplayText"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcDisplayText</span></code></a></p></td>
-<td><p>Technology-neutral user-visible text metadata.</p></td>
+<td><p>Technology-neutral user-visible short text metadata.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.presentation.models.AInDisplayContentFormat" title="coreintf.presentation.models.AInDisplayContentFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInDisplayContentFormat</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.presentation.models.AIcDisplayContent" title="coreintf.presentation.models.AIcDisplayContent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcDisplayContent</span></code></a></p></td>
+<td><p>Technology-neutral multi-line or formatted display content.</p></td>
 </tr>
 </tbody>
 </table>
@@ -53,6 +59,9 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.presentation.models.normalize_display_text" title="coreintf.presentation.models.normalize_display_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_display_text</span></code></a>(→ AIcDisplayText | None)</p></td>
 <td><p>Normalize a descriptor/contract display-text value.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.presentation.models.normalize_display_content" title="coreintf.presentation.models.normalize_display_content"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_display_content</span></code></a>(→ AIcDisplayContent | None)</p></td>
+<td><p>Normalize display-content metadata without rendering it.</p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -61,7 +70,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="coreintf.presentation.models.AIcDisplayText">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.presentation.models.</span></span><span class="sig-name descname"><span class="pre">AIcDisplayText</span></span><a class="headerlink" href="#coreintf.presentation.models.AIcDisplayText" title="Link to this definition">¶</a></dt>
-<dd><p>Technology-neutral user-visible text metadata.</p>
+<dd><p>Technology-neutral user-visible short text metadata.</p>
 <p><cite>text</cite> is the immediate/fallback rendering. <cite>resource_key</cite> is an opaque
 localization key for a future/product-provided localization engine.
 AAC Core does not resolve resource keys itself.</p>
@@ -82,13 +91,74 @@ AAC Core does not resolve resource keys itself.</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.presentation.models.AInDisplayContentFormat">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.presentation.models.</span></span><span class="sig-name descname"><span class="pre">AInDisplayContentFormat</span></span><a class="headerlink" href="#coreintf.presentation.models.AInDisplayContentFormat" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.presentation.models.AInDisplayContentFormat.PLAIN_TEXT">
+<span class="sig-name descname"><span class="pre">PLAIN_TEXT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PLAIN_TEXT'</span></span><a class="headerlink" href="#coreintf.presentation.models.AInDisplayContentFormat.PLAIN_TEXT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.presentation.models.AInDisplayContentFormat.MARKDOWN">
+<span class="sig-name descname"><span class="pre">MARKDOWN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MARKDOWN'</span></span><a class="headerlink" href="#coreintf.presentation.models.AInDisplayContentFormat.MARKDOWN" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.presentation.models.AInDisplayContentFormat.HTML">
+<span class="sig-name descname"><span class="pre">HTML</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'HTML'</span></span><a class="headerlink" href="#coreintf.presentation.models.AInDisplayContentFormat.HTML" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.presentation.models.AIcDisplayContent">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.presentation.models.</span></span><span class="sig-name descname"><span class="pre">AIcDisplayContent</span></span><a class="headerlink" href="#coreintf.presentation.models.AIcDisplayContent" title="Link to this definition">¶</a></dt>
+<dd><p>Technology-neutral multi-line or formatted display content.</p>
+<p>Renderers decide how MARKDOWN and HTML are presented. HTML is content, not
+executable UI; host policy is responsible for sanitization and active-content restrictions.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.presentation.models.AIcDisplayContent.content">
+<span class="sig-name descname"><span class="pre">content</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.presentation.models.AIcDisplayContent.content" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.presentation.models.AIcDisplayContent.resource_key">
+<span class="sig-name descname"><span class="pre">resource_key</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.presentation.models.AIcDisplayContent.resource_key" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.presentation.models.AIcDisplayContent.format">
+<span class="sig-name descname"><span class="pre">format</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.presentation.models.AInDisplayContentFormat" title="coreintf.presentation.models.AInDisplayContentFormat"><span class="pre">AInDisplayContentFormat</span></a></span><a class="headerlink" href="#coreintf.presentation.models.AIcDisplayContent.format" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="coreintf.presentation.models.AIcDisplayContent.fallback">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">fallback</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.presentation.models.AIcDisplayContent.fallback" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="coreintf.presentation.models.normalize_display_text">
 <span class="sig-prename descclassname"><span class="pre">coreintf.presentation.models.</span></span><span class="sig-name descname"><span class="pre">normalize_display_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreintf.presentation.models.AIcDisplayText" title="coreintf.presentation.models.AIcDisplayText"><span class="pre">AIcDisplayText</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#coreintf.presentation.models.normalize_display_text" title="Link to this definition">¶</a></dt>
 <dd><p>Normalize a descriptor/contract display-text value.</p>
-<p>Accepted forms are a plain string or a mapping with <cite>text</cite> and/or
-<cite>resource_key</cite>. Kept as a function rather than an implicit parser so
-technology bindings can use the same model without a localization engine.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coreintf.presentation.models.normalize_display_content">
+<span class="sig-prename descclassname"><span class="pre">coreintf.presentation.models.</span></span><span class="sig-name descname"><span class="pre">normalize_display_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreintf.presentation.models.AIcDisplayContent" title="coreintf.presentation.models.AIcDisplayContent"><span class="pre">AIcDisplayContent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#coreintf.presentation.models.normalize_display_content" title="Link to this definition">¶</a></dt>
+<dd><p>Normalize display-content metadata without rendering it.</p>
 </dd></dl>
 
 </section>

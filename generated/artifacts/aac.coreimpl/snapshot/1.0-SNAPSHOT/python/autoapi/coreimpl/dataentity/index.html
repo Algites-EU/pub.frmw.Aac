@@ -61,6 +61,15 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.dataentity.RETIRE_STORAGE_SUPPORT_CAPABILITY_ID" title="coreimpl.dataentity.RETIRE_STORAGE_SUPPORT_CAPABILITY_ID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RETIRE_STORAGE_SUPPORT_CAPABILITY_ID</span></code></a></p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.dataentity.CREATE_STORAGE_BACKUP_CAPABILITY_ID" title="coreimpl.dataentity.CREATE_STORAGE_BACKUP_CAPABILITY_ID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CREATE_STORAGE_BACKUP_CAPABILITY_ID</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.dataentity.INSPECT_STORAGE_BACKUP_CAPABILITY_ID" title="coreimpl.dataentity.INSPECT_STORAGE_BACKUP_CAPABILITY_ID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">INSPECT_STORAGE_BACKUP_CAPABILITY_ID</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.dataentity.RESTORE_STORAGE_BACKUP_CAPABILITY_ID" title="coreimpl.dataentity.RESTORE_STORAGE_BACKUP_CAPABILITY_ID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RESTORE_STORAGE_BACKUP_CAPABILITY_ID</span></code></a></p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -80,25 +89,37 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcProviderCapabilityInvoker" title="coreimpl.dataentity.AIcProviderCapabilityInvoker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcProviderCapabilityInvoker</span></code></a></p></td>
 <td><p>Invoke one capability on one explicitly selected provider instance.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcGetRecordFacade" title="coreimpl.dataentity.AIcGetRecordFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcGetRecordFacade</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade" title="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBoundDataEntityCapabilityFacade</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityQueryPage" title="coreimpl.dataentity.AIcDataEntityQueryPage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcDataEntityQueryPage</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcGetRecordFacade" title="coreimpl.dataentity.AIcGetRecordFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcGetRecordFacade</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcQueryRecordsFacade" title="coreimpl.dataentity.AIcQueryRecordsFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcQueryRecordsFacade</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityQueryPage" title="coreimpl.dataentity.AIcDataEntityQueryPage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcDataEntityQueryPage</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcApplyDirectRecordChangesFacade" title="coreimpl.dataentity.AIcApplyDirectRecordChangesFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcApplyDirectRecordChangesFacade</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcQueryRecordsFacade" title="coreimpl.dataentity.AIcQueryRecordsFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcQueryRecordsFacade</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcInspectStorageSupportFacade" title="coreimpl.dataentity.AIcInspectStorageSupportFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcInspectStorageSupportFacade</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcApplyDirectRecordChangesFacade" title="coreimpl.dataentity.AIcApplyDirectRecordChangesFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcApplyDirectRecordChangesFacade</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcEnsureStorageSupportFacade" title="coreimpl.dataentity.AIcEnsureStorageSupportFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEnsureStorageSupportFacade</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcInspectStorageSupportFacade" title="coreimpl.dataentity.AIcInspectStorageSupportFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcInspectStorageSupportFacade</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcRetireStorageSupportFacade" title="coreimpl.dataentity.AIcRetireStorageSupportFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcRetireStorageSupportFacade</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcEnsureStorageSupportFacade" title="coreimpl.dataentity.AIcEnsureStorageSupportFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcEnsureStorageSupportFacade</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcRetireStorageSupportFacade" title="coreimpl.dataentity.AIcRetireStorageSupportFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcRetireStorageSupportFacade</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcCreateStorageBackupFacade" title="coreimpl.dataentity.AIcCreateStorageBackupFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcCreateStorageBackupFacade</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcInspectStorageBackupFacade" title="coreimpl.dataentity.AIcInspectStorageBackupFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcInspectStorageBackupFacade</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcRestoreStorageBackupFacade" title="coreimpl.dataentity.AIcRestoreStorageBackupFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcRestoreStorageBackupFacade</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityProviderFacade" title="coreimpl.dataentity.AIcDataEntityProviderFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcDataEntityProviderFacade</span></code></a></p></td>
@@ -142,6 +163,21 @@
 <dl class="py data">
 <dt class="sig sig-object py" id="coreimpl.dataentity.RETIRE_STORAGE_SUPPORT_CAPABILITY_ID">
 <span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">RETIRE_STORAGE_SUPPORT_CAPABILITY_ID</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.retire-storage-support'</span></span><a class="headerlink" href="#coreimpl.dataentity.RETIRE_STORAGE_SUPPORT_CAPABILITY_ID" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="coreimpl.dataentity.CREATE_STORAGE_BACKUP_CAPABILITY_ID">
+<span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">CREATE_STORAGE_BACKUP_CAPABILITY_ID</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.create-storage-backup'</span></span><a class="headerlink" href="#coreimpl.dataentity.CREATE_STORAGE_BACKUP_CAPABILITY_ID" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="coreimpl.dataentity.INSPECT_STORAGE_BACKUP_CAPABILITY_ID">
+<span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">INSPECT_STORAGE_BACKUP_CAPABILITY_ID</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.inspect-storage-backup'</span></span><a class="headerlink" href="#coreimpl.dataentity.INSPECT_STORAGE_BACKUP_CAPABILITY_ID" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="coreimpl.dataentity.RESTORE_STORAGE_BACKUP_CAPABILITY_ID">
+<span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">RESTORE_STORAGE_BACKUP_CAPABILITY_ID</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.restore-storage-backup'</span></span><a class="headerlink" href="#coreimpl.dataentity.RESTORE_STORAGE_BACKUP_CAPABILITY_ID" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py class">
@@ -247,9 +283,39 @@
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">AIcBoundDataEntityCapabilityFacade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">invoker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcProviderCapabilityInvoker" title="coreimpl.dataentity.AIcProviderCapabilityInvoker"><span class="pre">AIcProviderCapabilityInvoker</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">marshaller</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityMarshaller" title="coreimpl.dataentity.AIcDataEntityMarshaller"><span class="pre">AIcDataEntityMarshaller</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade.capability_id">
+<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade.capability_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade.capability_version">
+<span class="sig-name descname"><span class="pre">capability_version</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade.capability_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade.write_operation">
+<span class="sig-name descname"><span class="pre">write_operation</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade.write_operation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade.invoker">
+<span class="sig-name descname"><span class="pre">invoker</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade.invoker" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade.marshaller">
+<span class="sig-name descname"><span class="pre">marshaller</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade.marshaller" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcGetRecordFacade">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">AIcGetRecordFacade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">invoker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcProviderCapabilityInvoker" title="coreimpl.dataentity.AIcProviderCapabilityInvoker"><span class="pre">AIcProviderCapabilityInvoker</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">marshaller</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityMarshaller" title="coreimpl.dataentity.AIcDataEntityMarshaller"><span class="pre">AIcDataEntityMarshaller</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.dataentity.AIcGetRecordFacade" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">_AIcBoundDataEntityCapabilityFacade</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade" title="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBoundDataEntityCapabilityFacade</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcGetRecordFacade.capability_id">
 <span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.get-record'</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcGetRecordFacade.capability_id" title="Link to this definition">¶</a></dt>
@@ -286,7 +352,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcQueryRecordsFacade">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">AIcQueryRecordsFacade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">invoker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcProviderCapabilityInvoker" title="coreimpl.dataentity.AIcProviderCapabilityInvoker"><span class="pre">AIcProviderCapabilityInvoker</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">marshaller</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityMarshaller" title="coreimpl.dataentity.AIcDataEntityMarshaller"><span class="pre">AIcDataEntityMarshaller</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.dataentity.AIcQueryRecordsFacade" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">_AIcBoundDataEntityCapabilityFacade</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade" title="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBoundDataEntityCapabilityFacade</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcQueryRecordsFacade.capability_id">
 <span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.query-records'</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcQueryRecordsFacade.capability_id" title="Link to this definition">¶</a></dt>
@@ -307,7 +373,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcApplyDirectRecordChangesFacade">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">AIcApplyDirectRecordChangesFacade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">invoker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcProviderCapabilityInvoker" title="coreimpl.dataentity.AIcProviderCapabilityInvoker"><span class="pre">AIcProviderCapabilityInvoker</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">marshaller</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityMarshaller" title="coreimpl.dataentity.AIcDataEntityMarshaller"><span class="pre">AIcDataEntityMarshaller</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.dataentity.AIcApplyDirectRecordChangesFacade" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">_AIcBoundDataEntityCapabilityFacade</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade" title="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBoundDataEntityCapabilityFacade</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcApplyDirectRecordChangesFacade.capability_id">
 <span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.apply-direct-record-changes'</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcApplyDirectRecordChangesFacade.capability_id" title="Link to this definition">¶</a></dt>
@@ -343,7 +409,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcInspectStorageSupportFacade">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">AIcInspectStorageSupportFacade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">invoker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcProviderCapabilityInvoker" title="coreimpl.dataentity.AIcProviderCapabilityInvoker"><span class="pre">AIcProviderCapabilityInvoker</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">marshaller</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityMarshaller" title="coreimpl.dataentity.AIcDataEntityMarshaller"><span class="pre">AIcDataEntityMarshaller</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.dataentity.AIcInspectStorageSupportFacade" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">_AIcBoundDataEntityCapabilityFacade</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade" title="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBoundDataEntityCapabilityFacade</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcInspectStorageSupportFacade.capability_id">
 <span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.inspect-storage-support'</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcInspectStorageSupportFacade.capability_id" title="Link to this definition">¶</a></dt>
@@ -359,7 +425,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcEnsureStorageSupportFacade">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">AIcEnsureStorageSupportFacade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">invoker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcProviderCapabilityInvoker" title="coreimpl.dataentity.AIcProviderCapabilityInvoker"><span class="pre">AIcProviderCapabilityInvoker</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">marshaller</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityMarshaller" title="coreimpl.dataentity.AIcDataEntityMarshaller"><span class="pre">AIcDataEntityMarshaller</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.dataentity.AIcEnsureStorageSupportFacade" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">_AIcBoundDataEntityCapabilityFacade</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade" title="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBoundDataEntityCapabilityFacade</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcEnsureStorageSupportFacade.capability_id">
 <span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.ensure-storage-support'</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcEnsureStorageSupportFacade.capability_id" title="Link to this definition">¶</a></dt>
@@ -380,7 +446,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcRetireStorageSupportFacade">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">AIcRetireStorageSupportFacade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">invoker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcProviderCapabilityInvoker" title="coreimpl.dataentity.AIcProviderCapabilityInvoker"><span class="pre">AIcProviderCapabilityInvoker</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">marshaller</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityMarshaller" title="coreimpl.dataentity.AIcDataEntityMarshaller"><span class="pre">AIcDataEntityMarshaller</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.dataentity.AIcRetireStorageSupportFacade" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">_AIcBoundDataEntityCapabilityFacade</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade" title="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBoundDataEntityCapabilityFacade</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcRetireStorageSupportFacade.capability_id">
 <span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.retire-storage-support'</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcRetireStorageSupportFacade.capability_id" title="Link to this definition">¶</a></dt>
@@ -394,6 +460,59 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcRetireStorageSupportFacade.retire">
 <span class="sig-name descname"><span class="pre">retire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreimpl.dataentity.AIcRetireStorageSupportFacade.retire" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcCreateStorageBackupFacade">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">AIcCreateStorageBackupFacade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">invoker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcProviderCapabilityInvoker" title="coreimpl.dataentity.AIcProviderCapabilityInvoker"><span class="pre">AIcProviderCapabilityInvoker</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">marshaller</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityMarshaller" title="coreimpl.dataentity.AIcDataEntityMarshaller"><span class="pre">AIcDataEntityMarshaller</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.dataentity.AIcCreateStorageBackupFacade" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade" title="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBoundDataEntityCapabilityFacade</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcCreateStorageBackupFacade.capability_id">
+<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.create-storage-backup'</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcCreateStorageBackupFacade.capability_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcCreateStorageBackupFacade.create_backup">
+<span class="sig-name descname"><span class="pre">create_backup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backup_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreimpl.dataentity.AIcCreateStorageBackupFacade.create_backup" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcInspectStorageBackupFacade">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">AIcInspectStorageBackupFacade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">invoker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcProviderCapabilityInvoker" title="coreimpl.dataentity.AIcProviderCapabilityInvoker"><span class="pre">AIcProviderCapabilityInvoker</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">marshaller</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityMarshaller" title="coreimpl.dataentity.AIcDataEntityMarshaller"><span class="pre">AIcDataEntityMarshaller</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.dataentity.AIcInspectStorageBackupFacade" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade" title="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBoundDataEntityCapabilityFacade</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcInspectStorageBackupFacade.capability_id">
+<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.inspect-storage-backup'</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcInspectStorageBackupFacade.capability_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcInspectStorageBackupFacade.inspect_backup">
+<span class="sig-name descname"><span class="pre">inspect_backup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backup_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreimpl.dataentity.AIcInspectStorageBackupFacade.inspect_backup" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcRestoreStorageBackupFacade">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.dataentity.</span></span><span class="sig-name descname"><span class="pre">AIcRestoreStorageBackupFacade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">invoker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcProviderCapabilityInvoker" title="coreimpl.dataentity.AIcProviderCapabilityInvoker"><span class="pre">AIcProviderCapabilityInvoker</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">marshaller</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreimpl.dataentity.AIcDataEntityMarshaller" title="coreimpl.dataentity.AIcDataEntityMarshaller"><span class="pre">AIcDataEntityMarshaller</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.dataentity.AIcRestoreStorageBackupFacade" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade" title="coreimpl.dataentity.AIcBoundDataEntityCapabilityFacade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcBoundDataEntityCapabilityFacade</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcRestoreStorageBackupFacade.capability_id">
+<span class="sig-name descname"><span class="pre">capability_id</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_AAC.data-entity.restore-storage-backup'</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcRestoreStorageBackupFacade.capability_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcRestoreStorageBackupFacade.write_operation">
+<span class="sig-name descname"><span class="pre">write_operation</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcRestoreStorageBackupFacade.write_operation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcRestoreStorageBackupFacade.restore_backup">
+<span class="sig-name descname"><span class="pre">restore_backup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backup_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'EMPTY_ONLY'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#coreimpl.dataentity.AIcRestoreStorageBackupFacade.restore_backup" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -447,6 +566,21 @@ mutating facades while its declared capability set determines which subfacades a
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreimpl.dataentity.AIcDataEntityProviderFacade.retire_storage_support">
 <span class="sig-name descname"><span class="pre">retire_storage_support</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcDataEntityProviderFacade.retire_storage_support" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcDataEntityProviderFacade.create_storage_backup">
+<span class="sig-name descname"><span class="pre">create_storage_backup</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcDataEntityProviderFacade.create_storage_backup" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcDataEntityProviderFacade.inspect_storage_backup">
+<span class="sig-name descname"><span class="pre">inspect_storage_backup</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcDataEntityProviderFacade.inspect_storage_backup" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreimpl.dataentity.AIcDataEntityProviderFacade.restore_storage_backup">
+<span class="sig-name descname"><span class="pre">restore_storage_backup</span></span><a class="headerlink" href="#coreimpl.dataentity.AIcDataEntityProviderFacade.restore_storage_backup" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

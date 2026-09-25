@@ -1,0 +1,43 @@
+coreintf.invocation.context
+===========================
+
+.. py:module:: coreintf.invocation.context
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   coreintf.invocation.context.current_operation_parameters
+   coreintf.invocation.context.current_operation_interaction
+   coreintf.invocation.context.current_invocation_locale
+   coreintf.invocation.context.operation_parameter_context
+   coreintf.invocation.context.operation_interaction_context
+   coreintf.invocation.context.invocation_locale_context
+
+
+Module Contents
+---------------
+
+.. py:function:: current_operation_parameters() -> Mapping[str, object]
+
+   Return effective provider-specific parameters for the current capability invocation.
+
+
+.. py:function:: current_operation_interaction() -> coreintf.invocation.interaction.AIiOperationInteractionProviderToCaller
+
+   Return the provider-facing interaction channel for the current capability invocation.
+
+
+.. py:function:: current_invocation_locale() -> str | None
+
+   Return the BCP-47 locale requested for the current capability invocation, if any.
+
+
+.. py:function:: operation_parameter_context(parameters: Mapping[str, object])
+
+.. py:function:: operation_interaction_context(interaction: coreintf.invocation.interaction.AIiOperationInteractionProviderToCaller | None)
+
+.. py:function:: invocation_locale_context(locale: str | None)
+

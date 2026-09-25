@@ -1,0 +1,685 @@
+coreintf.invocation.interaction
+===============================
+
+.. py:module:: coreintf.invocation.interaction
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   coreintf.invocation.interaction.AIxOperationFailureT
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   coreintf.invocation.interaction.AIxCapabilityOperationFailed
+   coreintf.invocation.interaction.AIxOperationCancelled
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreintf.invocation.interaction.AInOperationExecutionState
+   coreintf.invocation.interaction.AInOperationInteractionEventType
+   coreintf.invocation.interaction.AInOperationInteractionSeverity
+   coreintf.invocation.interaction.AInOperationInteractionMode
+   coreintf.invocation.interaction.AInOperationInteractionDetailLevel
+   coreintf.invocation.interaction.AInOperationInteractionFailureDetailLevel
+   coreintf.invocation.interaction.AIcOperationInteractionEvent
+   coreintf.invocation.interaction.AIcOperationInteractionFeatures
+   coreintf.invocation.interaction.AIcOperationInteractionProviderToCallerMessage
+   coreintf.invocation.interaction.AIcOperationInteractionCallerToProviderMessage
+   coreintf.invocation.interaction.AIcOperationFailure
+   coreintf.invocation.interaction.AIiOperationFailureExceptionFactory
+   coreintf.invocation.interaction.AIcCallableOperationFailureExceptionFactory
+   coreintf.invocation.interaction.AIiOperationInteractionProviderToCaller
+   coreintf.invocation.interaction.AIiOperationInteractionCallerToProvider
+   coreintf.invocation.interaction.AIcNullOperationInteraction
+
+
+Module Contents
+---------------
+
+.. py:class:: AInOperationExecutionState
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: PENDING
+      :value: 'PENDING'
+
+
+
+   .. py:attribute:: RUNNING
+      :value: 'RUNNING'
+
+
+
+   .. py:attribute:: COMPLETED
+      :value: 'COMPLETED'
+
+
+
+   .. py:attribute:: FAILED
+      :value: 'FAILED'
+
+
+
+   .. py:attribute:: CANCELLED
+      :value: 'CANCELLED'
+
+
+
+.. py:class:: AInOperationInteractionEventType
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: STATUS
+      :value: 'STATUS'
+
+
+
+   .. py:attribute:: PROGRESS
+      :value: 'PROGRESS'
+
+
+
+   .. py:attribute:: DETAIL
+      :value: 'DETAIL'
+
+
+
+   .. py:attribute:: DIAGNOSTIC
+      :value: 'DIAGNOSTIC'
+
+
+
+.. py:class:: AInOperationInteractionSeverity
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: INFO
+      :value: 'INFO'
+
+
+
+   .. py:attribute:: WARNING
+      :value: 'WARNING'
+
+
+
+   .. py:attribute:: ERROR
+      :value: 'ERROR'
+
+
+
+.. py:class:: AInOperationInteractionMode
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: FOREGROUND
+      :value: 'FOREGROUND'
+
+
+
+   .. py:attribute:: BACKGROUND
+      :value: 'BACKGROUND'
+
+
+
+.. py:class:: AInOperationInteractionDetailLevel
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: SUMMARY
+      :value: 'SUMMARY'
+
+
+
+   .. py:attribute:: DETAILED
+      :value: 'DETAILED'
+
+
+
+.. py:class:: AInOperationInteractionFailureDetailLevel
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: BASIC
+      :value: 'BASIC'
+
+
+
+   .. py:attribute:: STACK_TRACE
+      :value: 'STACK_TRACE'
+
+
+
+.. py:class:: AIcOperationInteractionEvent
+
+   .. py:attribute:: event_type
+      :type:  AInOperationInteractionEventType
+
+
+   .. py:attribute:: progress_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: parent_progress_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: phase_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: name
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: current
+      :type:  int | float | None
+      :value: None
+
+
+
+   .. py:attribute:: total
+      :type:  int | float | None
+      :value: None
+
+
+
+   .. py:attribute:: unit
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: severity
+      :type:  AInOperationInteractionSeverity
+
+
+   .. py:attribute:: code
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: details
+      :type:  Mapping[str, object]
+
+
+.. py:class:: AIcOperationInteractionFeatures
+
+   .. py:attribute:: progress_reporting
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: cancellation
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: detail_level
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: reporting_interval
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: supported_state_result_delivery_modes
+      :type:  tuple[coreintf.interaction_types.AInStateResultDeliveryMode, Ellipsis]
+
+
+.. py:class:: AIcOperationInteractionProviderToCallerMessage
+
+   .. py:attribute:: interaction_revision
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: execution_state
+      :type:  AInOperationExecutionState
+
+
+   .. py:attribute:: state_result_revision
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: state_result_payload_revision
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: state_result
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: events
+      :type:  tuple[AIcOperationInteractionEvent, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: features
+      :type:  AIcOperationInteractionFeatures
+
+
+   .. py:property:: state_result_included
+      :type: bool
+
+
+
+.. py:class:: AIcOperationInteractionCallerToProviderMessage
+
+   .. py:attribute:: last_accepted_state_result_revision
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: interaction_mode
+      :type:  AInOperationInteractionMode
+
+
+   .. py:attribute:: cancellation_requested
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: detail_level
+      :type:  AInOperationInteractionDetailLevel
+
+
+   .. py:attribute:: reporting_interval_ms
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: failure_detail_level
+      :type:  AInOperationInteractionFailureDetailLevel
+
+
+   .. py:attribute:: state_result_delivery_mode
+      :type:  coreintf.interaction_types.AInStateResultDeliveryMode
+
+
+   .. py:attribute:: state_result_request_id
+      :type:  int
+      :value: 0
+
+
+
+.. py:class:: AIcOperationFailure
+
+   .. py:attribute:: system_message
+      :type:  str
+
+
+   .. py:attribute:: exception_type
+      :type:  str
+
+
+   .. py:attribute:: user_message
+      :type:  coreintf.presentation.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: error_code
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: stack_trace
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: details
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: extension
+      :type:  object | None
+      :value: None
+
+
+
+.. py:exception:: AIxCapabilityOperationFailed(failure: AIcOperationFailure)
+
+   Bases: :py:obj:`RuntimeError`
+
+
+   Caller-side AAC exception representing a FAILED capability-operation execution.
+
+
+   .. py:attribute:: failure
+
+
+   .. py:attribute:: additional_data
+
+
+.. py:data:: AIxOperationFailureT
+
+.. py:class:: AIiOperationFailureExceptionFactory
+
+   Bases: :py:obj:`Generic`\ [\ :py:obj:`AIxOperationFailureT`\ ], :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: create(failure: AIcOperationFailure) -> AIxOperationFailureT
+      :abstractmethod:
+
+
+
+.. py:class:: AIcCallableOperationFailureExceptionFactory(factory: Callable[[AIcOperationFailure], AIxOperationFailureT])
+
+   Bases: :py:obj:`AIiOperationFailureExceptionFactory`\ [\ :py:obj:`AIxOperationFailureT`\ ]
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: create(failure: AIcOperationFailure) -> AIxOperationFailureT
+
+
+.. py:exception:: AIxOperationCancelled(message: str = 'operation cancelled', *, state_result: object = None, has_state_result: bool = False)
+
+   Bases: :py:obj:`RuntimeError`
+
+
+   Raised by a cooperative provider after observing cancellation_requested.
+
+
+   .. py:attribute:: state_result
+      :value: None
+
+
+
+   .. py:attribute:: has_state_result
+      :value: False
+
+
+
+.. py:class:: AIiOperationInteractionProviderToCaller
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Provider-facing half of one bidirectional, UI-neutral operation interaction.
+
+
+   .. py:method:: declare_features(features: AIcOperationInteractionFeatures) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: report_events(events: tuple[AIcOperationInteractionEvent, Ellipsis]) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: report(event: AIcOperationInteractionEvent) -> None
+
+
+   .. py:method:: state_result_changed() -> int
+      :abstractmethod:
+
+
+      Publish a new logical result revision without attaching its payload.
+
+
+
+   .. py:method:: update_state_result(state_result: object) -> int
+      :abstractmethod:
+
+
+      Publish a new immutable result revision, attaching payload when the selected delivery mode requires it.
+
+
+
+   .. py:method:: deliver_state_result(state_result: object, *, revision: int | None = None) -> None
+      :abstractmethod:
+
+
+      Deliver an existing result revision without creating another logical result revision.
+
+
+
+   .. py:method:: caller_snapshot() -> AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+.. py:class:: AIiOperationInteractionCallerToProvider
+
+   Bases: :py:obj:`AIiOperationInteractionProviderToCaller`, :py:obj:`Generic`\ [\ :py:obj:`AIxOperationFailureT`\ ], :py:obj:`abc.ABC`
+
+
+   Caller-facing controller for an interactive or asynchronous capability invocation.
+
+
+   .. py:method:: set_exception_factory(factory: AIiOperationFailureExceptionFactory[AIxOperationFailureT] | None) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: exception_factory() -> AIiOperationFailureExceptionFactory[AIxOperationFailureT] | None
+      :abstractmethod:
+
+
+
+   .. py:method:: provider_snapshot() -> AIcOperationInteractionProviderToCallerMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: request_cancellation() -> AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: set_interaction_mode(mode: AInOperationInteractionMode) -> AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: set_detail_level(level: AInOperationInteractionDetailLevel) -> AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: set_reporting_interval_ms(value: int | None) -> AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: set_failure_detail_level(level: AInOperationInteractionFailureDetailLevel) -> AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: set_state_result_delivery_mode(mode: coreintf.interaction_types.AInStateResultDeliveryMode) -> AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: request_state_result() -> AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: accept_state_result_revision(revision: int) -> AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: wait_for_terminal_state(timeout: float | None = None) -> AIcOperationInteractionProviderToCallerMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: core_transition(state: AInOperationExecutionState, *, state_result: object = None, has_state_result: bool = False) -> None
+      :abstractmethod:
+
+
+      Apply a Core-owned lifecycle transition atomically with its optional terminal state result.
+
+
+
+.. py:class:: AIcNullOperationInteraction
+
+   Bases: :py:obj:`AIiOperationInteractionProviderToCaller`
+
+
+   No-op interaction used by simple synchronous invocations without a caller callback.
+
+
+   .. py:method:: declare_features(features: AIcOperationInteractionFeatures) -> None
+
+
+   .. py:method:: report_events(events: tuple[AIcOperationInteractionEvent, Ellipsis]) -> None
+
+
+   .. py:method:: state_result_changed() -> int
+
+      Publish a new logical result revision without attaching its payload.
+
+
+
+   .. py:method:: update_state_result(state_result: object) -> int
+
+      Publish a new immutable result revision, attaching payload when the selected delivery mode requires it.
+
+
+
+   .. py:method:: deliver_state_result(state_result: object, *, revision: int | None = None) -> None
+
+      Deliver an existing result revision without creating another logical result revision.
+
+
+
+   .. py:method:: caller_snapshot() -> AIcOperationInteractionCallerToProviderMessage
+
+

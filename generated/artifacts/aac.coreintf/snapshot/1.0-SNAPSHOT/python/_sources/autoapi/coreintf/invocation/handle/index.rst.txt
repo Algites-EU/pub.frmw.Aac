@@ -30,7 +30,20 @@ Module Contents
 
 
 
-   .. py:method:: invoke(operation_id: str, arguments: Mapping[str, object] | None = None) -> coreintf.invocation.models.AIcInvocationOutput
+   .. py:method:: invoke(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: coreintf.invocation.interaction.AIiOperationInteractionProviderToCaller | None = None, locale: str | None = None) -> coreintf.invocation.models.AIcInvocationOutput
+      :abstractmethod:
+
+
+
+   .. py:method:: new_operation_interaction(*, listener: Callable[[object], None] | None = None, exception_factory: coreintf.invocation.interaction.AIiOperationFailureExceptionFactory | None = None) -> coreintf.invocation.interaction.AIiOperationInteractionCallerToProvider
+      :abstractmethod:
+
+
+
+   .. py:method:: invoke_completion(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: coreintf.invocation.interaction.AIiOperationInteractionCallerToProvider | None = None, locale: str | None = None) -> coreintf.invocation.models.AIcOperationCompletion
+
+
+   .. py:method:: start(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: coreintf.invocation.interaction.AIiOperationInteractionCallerToProvider | None = None, locale: str | None = None) -> coreintf.invocation.interaction.AIiOperationInteractionCallerToProvider
       :abstractmethod:
 
 

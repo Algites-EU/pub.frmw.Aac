@@ -1,0 +1,82 @@
+coreimpl.operation_interaction
+==============================
+
+.. py:module:: coreimpl.operation_interaction
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   coreimpl.operation_interaction.AIcOperationInteractionController
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationInteractionController(listener: Callable[[algites.lib.aac.coreintf.invocation.AIcOperationInteractionProviderToCallerMessage], None] | None = None, *, caller_state: algites.lib.aac.coreintf.invocation.AIcOperationInteractionCallerToProviderMessage | None = None)
+
+   Bases: :py:obj:`algites.lib.aac.coreintf.invocation.AIiOperationInteractionCallerToProvider`
+
+
+   Thread-safe caller controller and provider interaction endpoint for one invocation.
+
+
+   .. py:method:: set_exception_factory(factory: algites.lib.aac.coreintf.invocation.AIiOperationFailureExceptionFactory | None) -> None
+
+
+   .. py:method:: exception_factory() -> algites.lib.aac.coreintf.invocation.AIiOperationFailureExceptionFactory | None
+
+
+   .. py:method:: declare_features(features: algites.lib.aac.coreintf.invocation.AIcOperationInteractionFeatures) -> None
+
+
+   .. py:method:: report_events(events: tuple[algites.lib.aac.coreintf.invocation.AIcOperationInteractionEvent, Ellipsis]) -> None
+
+
+   .. py:method:: state_result_changed() -> int
+
+
+   .. py:method:: update_state_result(state_result: object) -> int
+
+
+   .. py:method:: deliver_state_result(state_result: object, *, revision: int | None = None) -> None
+
+
+   .. py:method:: caller_snapshot() -> algites.lib.aac.coreintf.invocation.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: provider_snapshot() -> algites.lib.aac.coreintf.invocation.AIcOperationInteractionProviderToCallerMessage
+
+
+   .. py:method:: request_cancellation() -> algites.lib.aac.coreintf.invocation.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: set_interaction_mode(mode: algites.lib.aac.coreintf.invocation.AInOperationInteractionMode) -> algites.lib.aac.coreintf.invocation.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: set_detail_level(level: algites.lib.aac.coreintf.invocation.AInOperationInteractionDetailLevel) -> algites.lib.aac.coreintf.invocation.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: set_reporting_interval_ms(value: int | None) -> algites.lib.aac.coreintf.invocation.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: set_failure_detail_level(level: algites.lib.aac.coreintf.invocation.AInOperationInteractionFailureDetailLevel) -> algites.lib.aac.coreintf.invocation.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: set_state_result_delivery_mode(mode: algites.lib.aac.coreintf.invocation.AInStateResultDeliveryMode) -> algites.lib.aac.coreintf.invocation.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: request_state_result() -> algites.lib.aac.coreintf.invocation.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: accept_state_result_revision(revision: int) -> algites.lib.aac.coreintf.invocation.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: wait_for_terminal_state(timeout: float | None = None) -> algites.lib.aac.coreintf.invocation.AIcOperationInteractionProviderToCallerMessage
+
+
+   .. py:method:: core_transition(state: algites.lib.aac.coreintf.invocation.AInOperationExecutionState, *, state_result: object = None, has_state_result: bool = False) -> None
+
+

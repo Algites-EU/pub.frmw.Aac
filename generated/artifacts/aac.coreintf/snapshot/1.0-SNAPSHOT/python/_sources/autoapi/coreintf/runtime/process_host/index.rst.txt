@@ -11,6 +11,7 @@ Classes
 
    coreintf.runtime.process_host.AIcProcessCapabilityHandle
    coreintf.runtime.process_host.AIcHostChannel
+   coreintf.runtime.process_host.AIcProcessOperationInteraction
 
 
 Functions
@@ -37,7 +38,10 @@ Module Contents
 
 
 
-   .. py:method:: invoke(operation_id: str, arguments: Mapping[str, object] | None = None) -> coreintf.invocation.AIcInvocationOutput
+   .. py:method:: invoke(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: coreintf.invocation.AIiOperationInteractionProviderToCaller | None = None, locale: str | None = None) -> coreintf.invocation.AIcInvocationOutput
+
+
+   .. py:method:: start(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: coreintf.invocation.AIiOperationInteractionCallerToProvider | None = None, locale: str | None = None) -> coreintf.invocation.AIiOperationInteractionCallerToProvider
 
 
 .. py:class:: AIcHostChannel
@@ -51,7 +55,45 @@ Module Contents
    .. py:method:: respond(request_id: str, *, success: bool, result: object | None = None, error: Mapping[str, object] | None = None) -> None
 
 
-   .. py:method:: core_invoke(requirement_id: str, handle_index: int, operation_id: str, arguments: Mapping[str, object], parent_invocation_id: str | None) -> Mapping[str, object]
+   .. py:method:: core_invoke(requirement_id: str, handle_index: int, operation_id: str, arguments: Mapping[str, object], operation_parameters: Mapping[str, object], parent_invocation_id: str | None, locale: str | None) -> Mapping[str, object]
+
+
+   .. py:method:: operation_interaction_caller_snapshot(invocation_id: str) -> coreintf.invocation.AIcOperationInteractionCallerToProviderMessage
+
+
+.. py:class:: AIcProcessOperationInteraction(invocation_id: str, channel: AIcHostChannel)
+
+   Bases: :py:obj:`coreintf.invocation.AIiOperationInteractionProviderToCaller`
+
+
+   Provider-facing half of one bidirectional, UI-neutral operation interaction.
+
+
+   .. py:method:: declare_features(features: coreintf.invocation.AIcOperationInteractionFeatures) -> None
+
+
+   .. py:method:: report_events(events: tuple[coreintf.invocation.AIcOperationInteractionEvent, Ellipsis]) -> None
+
+
+   .. py:method:: state_result_changed() -> int
+
+      Publish a new logical result revision without attaching its payload.
+
+
+
+   .. py:method:: update_state_result(state_result: object) -> int
+
+      Publish a new immutable result revision, attaching payload when the selected delivery mode requires it.
+
+
+
+   .. py:method:: deliver_state_result(state_result: object, *, revision: int | None = None) -> None
+
+      Deliver an existing result revision without creating another logical result revision.
+
+
+
+   .. py:method:: caller_snapshot() -> coreintf.invocation.AIcOperationInteractionCallerToProviderMessage
 
 
 .. py:function:: main() -> int

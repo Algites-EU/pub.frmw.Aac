@@ -58,10 +58,19 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#coreintf.contracts.models.AIcOperationAuthorizationRequirement" title="coreintf.contracts.models.AIcOperationAuthorizationRequirement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcOperationAuthorizationRequirement</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.contracts.models.AIcCapabilityOperation" title="coreintf.contracts.models.AIcCapabilityOperation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcCapabilityOperation</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.contracts.models.AInCapabilityOperationInteractionKind" title="coreintf.contracts.models.AInCapabilityOperationInteractionKind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AInCapabilityOperationInteractionKind</span></code></a></p></td>
+<td><p>str(object='') -&gt; str</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.contracts.models.AIcSchemaRef" title="coreintf.contracts.models.AIcSchemaRef"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcSchemaRef</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.contracts.models.AIcCapabilityContract" title="coreintf.contracts.models.AIcCapabilityContract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcCapabilityContract</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.contracts.models.AIcCapabilityOperationInteraction" title="coreintf.contracts.models.AIcCapabilityOperationInteraction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcCapabilityOperationInteraction</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coreintf.contracts.models.AIcCapabilityOperation" title="coreintf.contracts.models.AIcCapabilityOperation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcCapabilityOperation</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coreintf.contracts.models.AIcCapabilityContract" title="coreintf.contracts.models.AIcCapabilityContract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcCapabilityContract</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -210,6 +219,81 @@ errors defaults to ‘strict’.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AInCapabilityOperationInteractionKind">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.contracts.models.</span></span><span class="sig-name descname"><span class="pre">AInCapabilityOperationInteractionKind</span></span><a class="headerlink" href="#coreintf.contracts.models.AInCapabilityOperationInteractionKind" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to ‘utf-8’.
+errors defaults to ‘strict’.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AInCapabilityOperationInteractionKind.INPUT">
+<span class="sig-name descname"><span class="pre">INPUT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'INPUT'</span></span><a class="headerlink" href="#coreintf.contracts.models.AInCapabilityOperationInteractionKind.INPUT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AInCapabilityOperationInteractionKind.RUNNING_COMPLETE_STATE_RESULT">
+<span class="sig-name descname"><span class="pre">RUNNING_COMPLETE_STATE_RESULT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'RUNNING_COMPLETE_STATE_RESULT'</span></span><a class="headerlink" href="#coreintf.contracts.models.AInCapabilityOperationInteractionKind.RUNNING_COMPLETE_STATE_RESULT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AInCapabilityOperationInteractionKind.RUNNING_DELTA_STATE_RESULT">
+<span class="sig-name descname"><span class="pre">RUNNING_DELTA_STATE_RESULT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'RUNNING_DELTA_STATE_RESULT'</span></span><a class="headerlink" href="#coreintf.contracts.models.AInCapabilityOperationInteractionKind.RUNNING_DELTA_STATE_RESULT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AInCapabilityOperationInteractionKind.FINAL_SUCCESS_STATE_RESULT">
+<span class="sig-name descname"><span class="pre">FINAL_SUCCESS_STATE_RESULT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FINAL_SUCCESS_STATE_RESULT'</span></span><a class="headerlink" href="#coreintf.contracts.models.AInCapabilityOperationInteractionKind.FINAL_SUCCESS_STATE_RESULT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AInCapabilityOperationInteractionKind.FINAL_CANCELLED_STATE_RESULT">
+<span class="sig-name descname"><span class="pre">FINAL_CANCELLED_STATE_RESULT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FINAL_CANCELLED_STATE_RESULT'</span></span><a class="headerlink" href="#coreintf.contracts.models.AInCapabilityOperationInteractionKind.FINAL_CANCELLED_STATE_RESULT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AInCapabilityOperationInteractionKind.FINAL_FAILED_STATE_RESULT_EXTENSION">
+<span class="sig-name descname"><span class="pre">FINAL_FAILED_STATE_RESULT_EXTENSION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FINAL_FAILED_STATE_RESULT_EXTENSION'</span></span><a class="headerlink" href="#coreintf.contracts.models.AInCapabilityOperationInteractionKind.FINAL_FAILED_STATE_RESULT_EXTENSION" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcSchemaRef">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.contracts.models.</span></span><span class="sig-name descname"><span class="pre">AIcSchemaRef</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcSchemaRef" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcSchemaRef.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcSchemaRef.id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcSchemaRef.version">
+<span class="sig-name descname"><span class="pre">version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcSchemaRef.version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityOperationInteraction">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.contracts.models.</span></span><span class="sig-name descname"><span class="pre">AIcCapabilityOperationInteraction</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityOperationInteraction" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityOperationInteraction.kind">
+<span class="sig-name descname"><span class="pre">kind</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.contracts.models.AInCapabilityOperationInteractionKind" title="coreintf.contracts.models.AInCapabilityOperationInteractionKind"><span class="pre">AInCapabilityOperationInteractionKind</span></a></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityOperationInteraction.kind" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityOperationInteraction.schema">
+<span class="sig-name descname"><span class="pre">schema</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#coreintf.contracts.models.AIcSchemaRef" title="coreintf.contracts.models.AIcSchemaRef"><span class="pre">AIcSchemaRef</span></a></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityOperationInteraction.schema" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityOperation">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreintf.contracts.models.</span></span><span class="sig-name descname"><span class="pre">AIcCapabilityOperation</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityOperation" title="Link to this definition">¶</a></dt>
 <dd><dl class="py attribute">
@@ -218,23 +302,8 @@ errors defaults to ‘strict’.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityOperation.input_type">
-<span class="sig-name descname"><span class="pre">input_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Object'</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityOperation.input_type" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityOperation.output_type">
-<span class="sig-name descname"><span class="pre">output_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Object'</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityOperation.output_type" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityOperation.input_schema">
-<span class="sig-name descname"><span class="pre">input_schema</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityOperation.input_schema" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityOperation.output_schema">
-<span class="sig-name descname"><span class="pre">output_schema</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityOperation.output_schema" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityOperation.interactions">
+<span class="sig-name descname"><span class="pre">interactions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#coreintf.contracts.models.AIcCapabilityOperationInteraction" title="coreintf.contracts.models.AIcCapabilityOperationInteraction"><span class="pre">AIcCapabilityOperationInteraction</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityOperation.interactions" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -265,6 +334,16 @@ errors defaults to ‘strict’.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityOperation.metadata">
 <span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityOperation.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityOperation.interaction">
+<span class="sig-name descname"><span class="pre">interaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreintf.contracts.models.AInCapabilityOperationInteractionKind" title="coreintf.contracts.models.AInCapabilityOperationInteractionKind"><span class="pre">AInCapabilityOperationInteractionKind</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreintf.contracts.models.AIcCapabilityOperationInteraction" title="coreintf.contracts.models.AIcCapabilityOperationInteraction"><span class="pre">AIcCapabilityOperationInteraction</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityOperation.interaction" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coreintf.contracts.models.AIcCapabilityOperation.schema_ref">
+<span class="sig-name descname"><span class="pre">schema_ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#coreintf.contracts.models.AInCapabilityOperationInteractionKind" title="coreintf.contracts.models.AInCapabilityOperationInteractionKind"><span class="pre">AInCapabilityOperationInteractionKind</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#coreintf.contracts.models.AIcSchemaRef" title="coreintf.contracts.models.AIcSchemaRef"><span class="pre">AIcSchemaRef</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#coreintf.contracts.models.AIcCapabilityOperation.schema_ref" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

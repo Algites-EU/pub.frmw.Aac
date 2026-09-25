@@ -41,7 +41,7 @@
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#coreimpl.codegen.AIcPythonCapabilityBindingGenerator" title="coreimpl.codegen.AIcPythonCapabilityBindingGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcPythonCapabilityBindingGenerator</span></code></a></p></td>
-<td><p>Generate Python ABC/DTO source from one canonical capability contract.</p></td>
+<td><p>Generate Python provider/caller bindings from one canonical capability contract.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#coreimpl.codegen.AIcPythonDataEntityBindingGenerator" title="coreimpl.codegen.AIcPythonDataEntityBindingGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcPythonDataEntityBindingGenerator</span></code></a></p></td>
 <td><p>Generate one versioned Python Data Entity view interface and codec from canonical JSON Schema.</p></td>
@@ -54,9 +54,10 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="coreimpl.codegen.AIcPythonCapabilityBindingGenerator">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">coreimpl.codegen.</span></span><span class="sig-name descname"><span class="pre">AIcPythonCapabilityBindingGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schemas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../schemas/index.html#coreimpl.schemas.AIcSchemaRegistry" title="coreimpl.schemas.AIcSchemaRegistry"><span class="pre">coreimpl.schemas.AIcSchemaRegistry</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#coreimpl.codegen.AIcPythonCapabilityBindingGenerator" title="Link to this definition">¶</a></dt>
-<dd><p>Generate Python ABC/DTO source from one canonical capability contract.</p>
-<p>The generated interface is a language binding, never a second source of truth.
-Authorization decorators are generated from the canonical operation metadata.</p>
+<dd><p>Generate Python provider/caller bindings from one canonical capability contract.</p>
+<p>Portable interaction schemas remain the source of truth.  Data types are projected
+deterministically from schema identity; operation-specific failure exception names
+are projected deterministically from capability/operation identity.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="coreimpl.codegen.AIcPythonCapabilityBindingGenerator.schemas">
 <span class="sig-name descname"><span class="pre">schemas</span></span><a class="headerlink" href="#coreimpl.codegen.AIcPythonCapabilityBindingGenerator.schemas" title="Link to this definition">¶</a></dt>
