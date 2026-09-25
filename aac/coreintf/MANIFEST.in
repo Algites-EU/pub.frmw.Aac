@@ -1,1 +1,2 @@
-recursive-include src/product/schema *.json
+recursive-include src/product/jsondefs *
+recursive-include src/product/yamldefs *

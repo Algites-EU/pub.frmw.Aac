@@ -1,0 +1,42 @@
+from __future__ import annotations
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Mapping
+from ..presentation.api import AIcDisplayText
+
+from .aic_entitlement_licensing_scope import AIcEntitlementLicensingScope
+from .ain_permission_retry_disposition import AInPermissionRetryDisposition
+from .aic_entitlement_subject import AIcEntitlementSubject
+from .aic_entitlement_issuer import AIcEntitlementIssuer
+from .aic_entitlement_permission_grant import AIcEntitlementPermissionGrant
+from .aic_entitlement_capability_grant import AIcEntitlementCapabilityGrant
+from .aic_entitlement_component_grant import AIcEntitlementComponentGrant
+from .aic_entitlement_request_reference import AIcEntitlementRequestReference
+from .aic_entitlement_document import AIcEntitlementDocument
+from .aic_requested_capability_grant import AIcRequestedCapabilityGrant
+from .aic_requested_component_grant import AIcRequestedComponentGrant
+from .aic_entitlement_issuing_request import AIcEntitlementIssuingRequest
+from .aic_entitlement_evidence import AIcEntitlementEvidence
+from .aic_entitlement_evidence_verification import AIcEntitlementEvidenceVerification
+from .aic_entitlement_provider_request import AIcEntitlementProviderRequest
+from .aic_entitlement_grant_provenance import AIcEntitlementGrantProvenance
+from .aic_effective_entitlement_permission import AIcEffectiveEntitlementPermission
+from .aic_capability_entitlement_context import AIcCapabilityEntitlementContext
+from .aic_entitlement_context import AIcEntitlementContext
+from .aic_entitlement_provider_binding import AIcEntitlementProviderBinding
+from .aic_trusted_entitlement_issuer_rule import AIcTrustedEntitlementIssuerRule
+from .aic_entitlement_remediation_request import AIcEntitlementRemediationRequest
+from .aic_entitlement_remediation_outcome import AIcEntitlementRemediationOutcome
+from .aic_entitlement_licensing_scope_definition import AIcEntitlementLicensingScopeDefinition
+from .aic_entitlement_profile import AIcEntitlementProfile
+from .aic_entitlement_provider_registration import AIcEntitlementProviderRegistration
+from .aic_entitlement_licensing_scope_resolver_registration import AIcEntitlementLicensingScopeResolverRegistration
+from .aic_entitlement_bootstrap import AIcEntitlementBootstrap
+from .aic_entitlement_licensing_scope_resolution_request import AIcEntitlementLicensingScopeResolutionRequest
+from .aic_resolved_entitlement_licensing_scope import AIcResolvedEntitlementLicensingScope
+
+def _validate_licensing_scope_type(value: str) -> str:
+    normalized = value.strip()
+    if not normalized:
+        raise ValueError("entitlement licensing scope type must not be empty")
+    return normalized

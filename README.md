@@ -118,7 +118,7 @@ The repository currently publishes nine AAC artifacts:
 
 - `aac/coreintf` — public Python contracts, ABCs, DTOs, enums and technology-profile types. It must not depend on `coreimpl` or concrete providers.
 - `aac/coreimpl` — reusable Core implementation. Its production dependency is `coreintf`; reference components are development/conformance dependencies only.
-- `aac/simpleaudit` — minimal `_AAC.capability.observation/1` provider used as a real component and conformance fixture.
+- `components/observation/simpleaudit` — minimal `_AAC.capability.observation/1` provider used as a real component and conformance fixture.
 - `components/dataentity/yamlfsdes` — YAML File-System Data Entity Storage component implementing the generic Data Entity storage, storage-support, and backup/restore capabilities over a durable data/schema tree with revision/CAS enforcement and recoverable journals.
 - `aac/verify/sigstore` — optional Sigstore implementation of package and entitlement-evidence verification SPIs. Core does not depend on Sigstore.
 - `aac/uiintf` — technology-neutral administration controller contract and normalized UI models.
@@ -132,7 +132,9 @@ Reusable concrete components live under `components/<functional-area>/<artifact>
 
 #### Technology implementations
 
-The source layout is intentionally multi-technology capable. An artifact may carry one or more technology trees such as `src/product/python`, `src/product/java`, or technology-neutral `src/product/schema`, with corresponding development trees under `src/develop/<technology>`. A build may target all supported technologies or a selected subset; technology-specific publication destinations remain independently configurable. Development tools follow the same artifact layout under `devtools/aacbuilding` and `devtools/generators/aaccodegen`; there is no repository-special top-level source exception.
+The source layout is intentionally multi-technology capable. An artifact may carry one or more technology trees such as `src/product/python` and `src/product/java`, plus technology-neutral definition/configuration roots such as `src/product/jsondefs`, `src/product/yamldefs`, `src/product/xmldefs`, and `src/product/config`, with corresponding development roots below `src/develop/`. The source kind is selected by semantic role and is not repeated inside the business-relative `eu/algites/...` path. A build may target all supported technologies or a selected subset; technology-specific publication destinations remain independently configurable. Development tools follow the same artifact layout under `devtools/aacbuilding` and `devtools/generators/aaccodegen`; there is no repository-special top-level source exception.
+
+Within Python product code, each main public `AI*` type lives in its own deterministic snake_case module named from that type; private helper types may remain beside it. Separate AAC distributions may contribute to the same business namespace only through PEP 420, and no two distributions may publish the same module or resource path.
 
 The repository version is defined by `algites-source-repository.yml`. `devtools/aacbuilding/src/product/python/sync_versions.py` maps the Algites repository version to PEP 440 versions and checks internal dependency pins. The current `1.0-SNAPSHOT` context maps to `1.0.dev0`.
 
@@ -162,7 +164,7 @@ capability-contract_1.json
 
 A schema version is independent of a component release version. Persisted configuration and Data Entities use explicit canonical schema identity/version metadata. Data Entity support separately declares readable versions, writable versions, a preferred write version and migration paths.
 
-Canonical AAC JSON schemas are technology-neutral source resources under `aac/coreintf/src/product/schema/algites/frmw/aac/coreintf/<functional-area>/`. Functional areas mirror the Python API where practical (`catalog`, `descriptor`, `capability`, `dataentity`, `observation`, `runtime`, `configuration`, `entitlement`, `packages`, and so on); truly cross-cutting schemas belong under `common`. The Python build packages these same canonical files into the `coreintf` wheel as importable resources. This layout prepares later Java/MPS bindings to consume the same schema sources without making Python the owner of the definitions.
+Canonical AAC JSON schemas are technology-neutral source resources under `aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/<functional-area>/`. Functional areas mirror the Python API where practical (`catalog`, `descriptor`, `capability`, `dataentity`, `observation`, `runtime`, `configuration`, `entitlement`, `packages`, and so on); truly cross-cutting schemas belong under `common`. The Python build packages these same canonical files into the `coreintf` wheel as importable resources. This layout prepares later Java/MPS bindings to consume the same schema sources without making Python the owner of the definitions.
 
 ### III. Component descriptors and capability contracts
 

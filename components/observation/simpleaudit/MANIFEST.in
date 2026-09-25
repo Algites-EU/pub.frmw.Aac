@@ -1,0 +1,2 @@
+recursive-include src/product/config *
+recursive-include src/product/jsondefs *

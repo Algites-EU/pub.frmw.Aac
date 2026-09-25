@@ -10,7 +10,7 @@ def expected_text(path: Path) -> str:
     version=artifact_context(ROOT, artifact).pep440
     text=path.read_text(encoding='utf-8')
     text=re.sub(r'(?m)^version\s*=\s*"[^"]+"\s*$', f'version = "{version}"', text, count=1)
-    text=re.sub(r'(algites-aac-[A-Za-z0-9_-]+)==[^"\s,]+', rf'\1=={version}', text)
+    text=re.sub(r'(eu-algites-pub-frmw-aac-[A-Za-z0-9_-]+)==[^"\s,]+', rf'\1=={version}', text)
     return text
 
 def main():

@@ -1360,7 +1360,7 @@ A generated method SHOULD accept one normalized/generated input DTO and return o
 
 This approach preserves identical contract identity across in-process, subinterpreter and process/RPC profiles and allows the same input/output schemas to drive validation and, where appropriate, generic UI forms.
 
-A canonical capability contract is defined once by its owning contract artifact and may be implemented by multiple independent providers, including providers written in different technologies. Consumers and providers share the canonical contract identity; they do not copy provider-private interface definitions. Technology-neutral schema/contract sources may therefore live under an artifact's `src/product/schema` tree while Java, Python, or other bindings are generated under their respective technology trees.
+A canonical capability contract is defined once by its owning contract artifact and may be implemented by multiple independent providers, including providers written in different technologies. Consumers and providers share the canonical contract identity; they do not copy provider-private interface definitions. Technology-neutral definitions therefore live under format/role-specific source roots such as `src/product/jsondefs`, `src/product/yamldefs`, or `src/product/xmldefs`, while concrete configuration instances belong under `src/product/config`; Java, Python, or other bindings are generated under their respective technology trees.
 
 ## VIII.3 Process/RPC profiles
 
