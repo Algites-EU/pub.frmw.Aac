@@ -2,7 +2,7 @@
 
 Reusable Python implementation of Algites Application Components.
 
-Public import namespace: `algites.lib.aac.coreimpl`.
+Public import namespace: `algites.frmw.aac.coreimpl`.
 
 Production dependencies are `coreintf` plus generic runtime libraries. `simpleaudit` is a development/conformance dependency only and is never imported by production Core code.
 

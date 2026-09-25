@@ -529,7 +529,7 @@ Preferred flow treats one or many component replacements as one plan:
 ```text
 acquire/verify/stage all candidate component packages
 
-Core reads target static descriptors/contracts/schemas/transformation metadata
+Core reads target static descriptors/capability/schemas/transformation metadata
 Core constructs the complete hypothetical target component set
 Core rebuilds the target active contract catalog from that set
 Core resolves the complete target provider/consumer graph
@@ -1051,7 +1051,9 @@ capability_providers:
     capabilities:
       - id: _AAC.capability.observation
         versions: [1]
-    implementation_class: example.audit:AIcAuditProvider
+    implementation_classes:
+    - technology-kind: python
+      class-name: example.audit:AIcAuditProvider
     runtime:
       profile: PROCESS
 ```
@@ -1230,7 +1232,7 @@ Its distribution may therefore include the canonical contract JAR, for example:
 git-component-package/
     descriptor.yml
 
-    contracts/
+    capability/
         algites-vcs-status_4.jar
 
     implementation/

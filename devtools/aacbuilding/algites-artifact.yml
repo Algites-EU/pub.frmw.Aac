@@ -1,0 +1,5 @@
+artifact:
+  name: AAC Development Tools
+  description: Repository development, verification and build tools
+  technologyKinds: [python]
+

@@ -114,7 +114,7 @@ This repository contains the realization of the language-neutral AAC rules and i
 
 ### I. Repository and artifacts
 
-The repository currently publishes eight AAC artifacts:
+The repository currently publishes nine AAC artifacts:
 
 - `aac/coreintf` — public Python contracts, ABCs, DTOs, enums and technology-profile types. It must not depend on `coreimpl` or concrete providers.
 - `aac/coreimpl` — reusable Core implementation. Its production dependency is `coreintf`; reference components are development/conformance dependencies only.
@@ -123,15 +123,18 @@ The repository currently publishes eight AAC artifacts:
 - `aac/verify/sigstore` — optional Sigstore implementation of package and entitlement-evidence verification SPIs. Core does not depend on Sigstore.
 - `aac/uiintf` — technology-neutral administration controller contract and normalized UI models.
 - `aac/uiqt` — PySide6 administration widget and Core-backed controller.
-- `devtools` — first-class development-tool artifact; its Python sources live under `devtools/src/product/python`.
+- `devtools/aacbuilding` — repository build/test/version/convention tooling.
+- `devtools/generators/aaccodegen` — public AAC code-generation tool for capability bindings and Data Entity bindings/codecs.
 
-Authoritative source lives below each artifact's `src/` tree. Generated/runtime/build output lives below `run/` and is not authoritative source.
+Authoritative source lives below each artifact's `src/` tree. Generated/runtime/build output is repository-central under `build/run/<artifact-relative-path>/run/` and is not authoritative source; ordinary build/test/package/codegen work must not write derived state into artifact directories.
 
 Reusable concrete components live under `components/<functional-area>/<artifact>`, while AAC framework/runtime artifacts remain under `aac/`. Each component directory is still a normal Algites artifact and follows the same source conventions.
 
-The source layout is intentionally multi-technology capable. An artifact may carry one or more technology trees such as `src/product/python`, `src/product/java`, or technology-neutral `src/product/schema`, with corresponding development trees under `src/develop/<technology>`. A build may target all supported technologies or a selected subset; technology-specific publication destinations remain independently configurable. The `devtools` artifact follows the same layout instead of using a repository-special top-level `tools/` source exception.
+#### Technology implementations
 
-The repository version is defined by `algites-source-repository.yml`. `devtools/src/product/python/sync_versions.py` maps the Algites repository version to PEP 440 versions and checks internal dependency pins. The current `1.0-SNAPSHOT` context maps to `1.0.dev0`.
+The source layout is intentionally multi-technology capable. An artifact may carry one or more technology trees such as `src/product/python`, `src/product/java`, or technology-neutral `src/product/schema`, with corresponding development trees under `src/develop/<technology>`. A build may target all supported technologies or a selected subset; technology-specific publication destinations remain independently configurable. Development tools follow the same artifact layout under `devtools/aacbuilding` and `devtools/generators/aaccodegen`; there is no repository-special top-level source exception.
+
+The repository version is defined by `algites-source-repository.yml`. `devtools/aacbuilding/src/product/python/sync_versions.py` maps the Algites repository version to PEP 440 versions and checks internal dependency pins. The current `1.0-SNAPSHOT` context maps to `1.0.dev0`.
 
 All artifacts require Python 3.13 or newer. The optional CPython subinterpreter profile requires CPython 3.14+ because it uses `concurrent.interpreters`.
 
@@ -147,7 +150,7 @@ Production Python types follow the Algites naming convention:
 - `AIcg..._N` — generated non-data class;
 - `AIcgd..._N` — generated data-object/DTO class (`d` is used only when the class is explicitly a data object).
 
-Generated types expose canonical-source ID/version metadata and, where available, the canonical resource path; the same provenance is repeated in their docstring. DTO names are derived from the canonical schema identity, not merely from the operation position that references the schema, so one shared schema yields one generated type identity. `devtools/src/product/python/check_conventions.py` checks the production tree.
+Generated types expose canonical-source ID/version metadata and, where available, the canonical resource path; the same provenance is repeated in their docstring. DTO names are derived from the canonical schema identity, not merely from the operation position that references the schema, so one shared schema yields one generated type identity. `devtools/aacbuilding/src/product/python/check_conventions.py` checks the production tree.
 
 Versioned Algites-controlled schema/resource files use the `<name>_<version>` form, for example:
 
@@ -159,11 +162,11 @@ capability-contract_1.json
 
 A schema version is independent of a component release version. Persisted configuration and Data Entities use explicit canonical schema identity/version metadata. Data Entity support separately declares readable versions, writable versions, a preferred write version and migration paths.
 
-Canonical AAC JSON schemas are technology-neutral source resources under `aac/coreintf/src/product/schema/algites/lib/aac/coreintf/<functional-area>/`. Functional areas mirror the Python API where practical (`catalog`, `descriptor`, `contracts`, `configuration`, `entitlement`, `packages`, and so on); truly cross-cutting schemas belong under `common`. The Python build packages these same canonical files into the `coreintf` wheel as importable resources. This layout prepares later Java/MPS bindings to consume the same schema sources without making Python the owner of the definitions.
+Canonical AAC JSON schemas are technology-neutral source resources under `aac/coreintf/src/product/schema/algites/frmw/aac/coreintf/<functional-area>/`. Functional areas mirror the Python API where practical (`catalog`, `descriptor`, `capability`, `dataentity`, `observation`, `runtime`, `configuration`, `entitlement`, `packages`, and so on); truly cross-cutting schemas belong under `common`. The Python build packages these same canonical files into the `coreintf` wheel as importable resources. This layout prepares later Java/MPS bindings to consume the same schema sources without making Python the owner of the definitions.
 
 ### III. Component descriptors and capability contracts
 
-Component descriptors are packaged YAML resources loaded without executing arbitrary component business logic. The descriptor field for component-declared capability implementation roles is explicitly named `capability_providers`; it does not represent data-source instances. Each entry is a capability provider definition from which Core may create configured provider instances. A descriptor can declare:
+Component descriptors are packaged YAML resources loaded without executing arbitrary component business logic. The descriptor field for component-declared capability implementation roles is explicitly named `capability_providers`; it does not represent data-source instances. Each entry is a capability provider definition from which Core may create configured provider instances. A provider definition declares `implementation_classes`, a technology-keyed set of implementation class names (for example Python and Java); the runtime profile selects the class for the active technology rather than assuming that one artifact has exactly one technology implementation. A descriptor can declare:
 
 - stable component identity and component version;
 - capability provider definitions and initial provider instances;
@@ -171,7 +174,7 @@ Component descriptors are packaged YAML resources loaded without executing arbit
 - consumer requirements, cardinality and mandatory/optional semantics;
 - requested capability authorizations;
 - component and provider-instance configuration schemas;
-- capability-contract resources;
+- canonical capability resources (`capability`) and capability-group resources;
 - first-class entitlement licensing-scope declarations with display name/description/resource keys, plus `provided_capability_entitlements` capability-version permission declarations using `possible_licensing_scopes` (an empty set means no external entitlement evidence is required);
 - generic `data_entity_support`, Data Entity requirements and migration metadata;
 - runtime/lifecycle metadata and presentation metadata;
@@ -316,7 +319,7 @@ Before runtime deactivation, Core constructs the hypothetical target state by re
 
 Intermediate component combinations are intentionally irrelevant. For example, `A/2 + B/1` and `A/1 + B/2` may both be invalid while the atomic target `A/2 + B/2` is valid.
 
-During tentative commit Core sets `AIcConfigurationReadService.persist_migrations = False`, writes a durable replacement journal, deactivates the affected runtime, admits all target descriptors/contracts/schemas, reconciles provider instances and activates the complete target graph. No configuration provider or Data Entity storage is rewritten while transaction rollback may still be required.
+During tentative commit Core sets `AIcConfigurationReadService.persist_migrations = False`, writes a durable replacement journal, deactivates the affected runtime, admits all target descriptors/capability/schemas, reconciles provider instances and activates the complete target graph. No configuration provider or Data Entity storage is rewritten while transaction rollback may still be required.
 
 Package replacement binds to the generic durable AAC transaction journal. The journal UUID is solely a transaction identity/correlation value; its descriptor carries a revisioned read set, a write set, the source/target package-set plan and recovery material. Generic recovery phases are `PREPARED`, `COMMIT_STARTED`, `COMMITTED`, `CLEANUP_COMPLETED` and `ABORTED`. Atomic replacement of `active-package-set.json` is the durable commit boundary. Therefore a process/host crash yields only two authoritative cases on next startup:
 
@@ -365,7 +368,7 @@ The host product owns the `QApplication` and event loop. AAC supplies reusable w
 
 ### XIII. Generated bindings and presentation metadata
 
-Canonical capability contracts may define operation request/result schemas and authorization requirements. `AIcPythonCapabilityBindingGenerator` and `devtools/src/product/python/generate_capability_bindings.py` generate Python interfaces/DTOs from those contracts, including operation IDs and authorization metadata. Generated behavioral interfaces and their methods are capability-version-qualified (`AIig..._N`, `operation_N(...)`) so one provider object can safely implement several versions/capabilities at once. `AIcPythonDataEntityBindingGenerator` similarly generates versioned Data Entity view interfaces with version-suffixed field accessors plus version-specific codecs.
+Canonical capability contracts may define operation request/result schemas and authorization requirements. The public `devtools/generators/aaccodegen` artifact provides `AIcPythonCapabilityBindingGenerator` and `AIcPythonDataEntityBindingGenerator` plus the `aaccodegen` CLI. It generates Python capability interfaces/DTOs and versioned Data Entity view interfaces/codecs while retaining canonical source identity/version/provenance. Generated behavioral interfaces and their methods are capability-version-qualified (`AIig..._N`, `operation_N(...)`) so one provider object can safely implement several versions/capabilities at once.
 
 `AIcDisplayText` provides localization-ready presentation metadata with fallback text, opaque resource key, or both. JSON Schema-driven fields can use AAC presentation extensions with standard JSON Schema title/description as fallback.
 
@@ -374,13 +377,13 @@ Canonical capability contracts may define operation request/result schemas and a
 Repository checks are intentionally runnable in small functional blocks.
 
 ```bash
-python devtools/src/product/python/sync_versions.py --check
-python devtools/src/product/python/check_conventions.py
-python devtools/src/product/python/test_all.py
-python devtools/src/product/python/build_all.py
+python devtools/aacbuilding/src/product/python/sync_versions.py --check
+python devtools/aacbuilding/src/product/python/check_conventions.py
+python devtools/aacbuilding/src/product/python/test_all.py
+python devtools/aacbuilding/src/product/python/build_all.py
 ```
 
-`devtools/src/product/python/test_all.py` executes artifact and Core functional suites separately to keep individual test runs bounded. `devtools/src/product/python/build_all.py` creates wheel and source-distribution outputs in each artifact's `run/bld` directory.
+`devtools/aacbuilding/src/product/python/test_all.py` executes artifact and Core functional suites separately to keep individual test runs bounded. `devtools/aacbuilding/src/product/python/build_all.py` creates wheel and source-distribution outputs centrally under `build/run/<artifact-relative-path>/run/bld`.
 
 For local development, the artifact source roots can be placed on `PYTHONPATH`, or individual artifacts can be installed as normal Python distributions.
 

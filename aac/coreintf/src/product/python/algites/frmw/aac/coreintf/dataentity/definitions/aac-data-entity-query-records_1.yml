@@ -1,0 +1,37 @@
+capability:
+  id: _AAC.data-entity.query-records
+  version: 1
+  group_id: _AAC.data-entity.loading
+  name:
+    text: Query Data Entity records
+    resource_key: aac.data.entity.query.records.name
+  description:
+    text: Queries stored Data Entity records through provider-independent technical
+      selectors.
+    resource_key: aac.data.entity.query.records.description
+operations:
+- id: query
+  name:
+    text: Query records
+    resource_key: aac.data.entity.query.records.operation.query.name
+  description:
+    text: Queries stored Data Entity records through provider-independent technical
+      selectors.
+    resource_key: aac.data.entity.query.records.operation.query.description
+  interactions:
+  - kind: INPUT
+    schema:
+      id: _AAC.schema.data-entity-query-records-request
+      version: 1
+  - kind: RUNNING_COMPLETE_STATE_RESULT
+    schema:
+      id: _AAC.schema.data-entity-query-records-running-complete-result
+      version: 1
+  - kind: RUNNING_DELTA_STATE_RESULT
+    schema:
+      id: _AAC.schema.data-entity-query-records-running-delta-result
+      version: 1
+  - kind: FINAL_SUCCESS_STATE_RESULT
+    schema:
+      id: _AAC.schema.data-entity-query-records-result
+      version: 1

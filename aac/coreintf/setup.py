@@ -13,8 +13,8 @@ class build_py(_build_py):
     def run(self):
         super().run()
         artifact = Path(__file__).resolve().parent
-        source = artifact / "src/product/schema/algites/lib/aac/coreintf"
-        target = Path(self.build_lib) / "algites/lib/aac/coreintf"
+        source = artifact / "src/product/schema/algites/frmw/aac/coreintf"
+        target = Path(self.build_lib) / "algites/frmw/aac/coreintf"
         if source.is_dir():
             for path in source.rglob("*.json"):
                 relative = path.relative_to(source)

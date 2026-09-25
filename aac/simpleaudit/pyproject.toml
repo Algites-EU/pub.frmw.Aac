@@ -14,13 +14,13 @@ dependencies = ["algites-aac-coreintf==1.0.dev0"]
 
 [tool.setuptools.packages.find]
 where = ["src/product/python"]
-include = ["algites.lib.aac.simpleaudit*"]
+include = ["algites.frmw.aac.simpleaudit*"]
 namespaces = true
 
 [tool.setuptools.package-data]
-"algites.lib.aac.simpleaudit" = ["component.yml", "schemas/*.json"]
+"algites.frmw.aac.simpleaudit" = ["component.yml", "schemas/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["src/develop/python"]
 addopts = "--import-mode=importlib"
-cache_dir = "run/develop/pytest/cache"
+cache_dir = "../../build/run/aac/simpleaudit/run/develop/pytest/cache"

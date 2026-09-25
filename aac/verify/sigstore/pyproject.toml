@@ -17,10 +17,10 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["src/product/python"]
-include = ["algites.lib.aac.verify.sigstore*"]
+include = ["algites.frmw.aac.verify.sigstore*"]
 namespaces = true
 
 [tool.pytest.ini_options]
 testpaths = ["src/develop/python"]
 addopts = "--import-mode=importlib"
-cache_dir = "run/develop/pytest/cache"
+cache_dir = "../../../build/run/aac/verify/sigstore/run/develop/pytest/cache"

@@ -91,7 +91,7 @@ Groups may form an arbitrary nested hierarchy. A group without `parent_group_id`
 
 Group IDs are globally meaningful within the active AAC environment and follow the same namespace ownership rules as other framework/component identities. Group display text uses the normal `AIcDisplayText` representation (`text` plus optional `resource_key`) and therefore does not introduce parallel localization fields.
 
-Components that introduce their own groups declare static `capability_groups` resources in their component descriptor. Core admits those group definitions before the component's `contracts` resources. Repeated identical group definitions may be deduplicated; conflicting canonical definitions for the same group ID MUST be rejected. A child group MUST reference a parent that has already been admitted from built-ins or the target component set.
+Components that introduce their own groups declare static `capability_groups` resources in their component descriptor. Core admits those group definitions before the component's `capability` resources. Repeated identical group definitions may be deduplicated; conflicting canonical definitions for the same group ID MUST be rejected. A child group MUST reference a parent that has already been admitted from built-ins or the target component set.
 
 Framework groups currently include:
 

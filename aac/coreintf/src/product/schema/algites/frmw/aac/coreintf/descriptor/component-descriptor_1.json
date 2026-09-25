@@ -1,0 +1,834 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AAC Component Descriptor 1",
+  "$defs": {
+    "persistedSchema": {
+      "type": "object",
+      "required": [
+        "id",
+        "write_version",
+        "readable_versions",
+        "resource"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "write_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "readable_versions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "resource": {
+          "type": "string",
+          "minLength": 1
+        },
+        "migrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/schemaMigrationStep"
+          }
+        }
+      }
+    },
+    "displayText": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "resource_key": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "anyOf": [
+            {
+              "required": [
+                "text"
+              ]
+            },
+            {
+              "required": [
+                "resource_key"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "schemaMigrationStep": {
+      "type": "object",
+      "required": [
+        "from",
+        "to",
+        "migrator"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "from": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "to": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "migrator": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "dataEntityRequirement": {
+      "type": "object",
+      "required": [
+        "schema_id",
+        "access"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "access": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "READ",
+              "WRITE"
+            ]
+          }
+        },
+        "readable_versions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "writable_versions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "access": {
+                "contains": {
+                  "const": "READ"
+                }
+              }
+            },
+            "required": [
+              "access"
+            ]
+          },
+          "then": {
+            "required": [
+              "readable_versions"
+            ],
+            "properties": {
+              "readable_versions": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "access": {
+                "contains": {
+                  "const": "WRITE"
+                }
+              }
+            },
+            "required": [
+              "access"
+            ]
+          },
+          "then": {
+            "required": [
+              "writable_versions"
+            ],
+            "properties": {
+              "writable_versions": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "dataEntitySupport": {
+      "type": "object",
+      "required": [
+        "schema_id",
+        "readable_versions",
+        "writable_versions"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "readable_versions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "writable_versions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "preferred_write_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "migrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/schemaMigrationStep"
+          }
+        },
+        "data_entity_requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dataEntityRequirement"
+          }
+        },
+        "name": {
+          "$ref": "#/$defs/displayText"
+        },
+        "description": {
+          "$ref": "#/$defs/displayText"
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "writable_versions": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "writable_versions"
+            ]
+          },
+          "then": {
+            "required": [
+              "preferred_write_version"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "preferred_write_version"
+              ]
+            }
+          }
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "readable_versions": {
+                  "minItems": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "writable_versions": {
+                  "minItems": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "required": [
+    "component"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "component": {
+      "type": "object",
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "capability_groups": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "capability": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "component_configuration_schema": {
+          "$ref": "#/$defs/persistedSchema"
+        },
+        "capability_providers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "capabilities",
+              "implementation_classes"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "capabilities": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "versions"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "versions": {
+                      "type": "array",
+                      "minItems": 1,
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "configuration_schema": {
+                "$ref": "#/$defs/persistedSchema"
+              },
+              "initial_instances": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "configuration": {
+                      "type": "object"
+                    },
+                    "access_mode": {
+                      "enum": [
+                        "READ_ONLY",
+                        "READ_WRITE"
+                      ],
+                      "default": "READ_WRITE"
+                    }
+                  }
+                }
+              },
+              "runtime_factory_class": {
+                "type": "string",
+                "minLength": 1
+              },
+              "requirements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "capability"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "capability": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "versions": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1
+                      }
+                    },
+                    "cardinality": {
+                      "enum": [
+                        "SINGLE",
+                        "MULTIPLE"
+                      ]
+                    },
+                    "mandatory": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "$ref": "#/$defs/displayText"
+                    },
+                    "description": {
+                      "$ref": "#/$defs/displayText"
+                    },
+                    "requested_authorizations": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "runtime": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "profile": {
+                    "enum": [
+                      "IN_PROCESS",
+                      "PROCESS",
+                      "SUBINTERPRETER"
+                    ]
+                  },
+                  "command": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "cwd": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "environment": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "timeout_seconds": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                }
+              },
+              "name": {
+                "$ref": "#/$defs/displayText"
+              },
+              "description": {
+                "$ref": "#/$defs/displayText"
+              },
+              "readiness_requirements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "source",
+                    "key"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "source": {
+                      "enum": [
+                        "COMPONENT_CONFIGURATION",
+                        "PROVIDER_CONFIGURATION",
+                        "CONTEXT"
+                      ]
+                    },
+                    "key": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "missing_state": {
+                      "enum": [
+                        "DEGRADED",
+                        "NOT_READY"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              "operations": {
+                "type": "array",
+                "description": "Provider-specific metadata for concrete capability operations implemented by this provider definition.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "capability",
+                    "capability_version",
+                    "operation",
+                    "interaction"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "capability": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "capability_version": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "operation": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "interaction": {
+                      "type": "object",
+                      "required": [
+                        "supported_state_result_delivery_modes"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "supported_state_result_delivery_modes": {
+                          "type": "array",
+                          "minItems": 1,
+                          "uniqueItems": true,
+                          "contains": {
+                            "const": "ON_DEMAND_COMPLETE"
+                          },
+                          "items": {
+                            "enum": [
+                              "ON_DEMAND_COMPLETE",
+                              "ON_DEMAND_DELTA",
+                              "ON_CHANGE_COMPLETE",
+                              "ON_CHANGE_DELTA",
+                              "ALWAYS_COMPLETE"
+                            ]
+                          }
+                        },
+                        "progress_reporting": {
+                          "type": "boolean",
+                          "default": false
+                        },
+                        "cancellation": {
+                          "type": "boolean",
+                          "default": false
+                        },
+                        "detail_level": {
+                          "type": "boolean",
+                          "default": false
+                        },
+                        "reporting_interval": {
+                          "type": "boolean",
+                          "default": false
+                        }
+                      }
+                    },
+                    "parameters": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "description",
+                          "value_schema"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "name": {
+                            "$ref": "#/$defs/displayText"
+                          },
+                          "description": {
+                            "$ref": "#/$defs/displayText"
+                          },
+                          "value_schema": {
+                            "type": "object"
+                          },
+                          "enum_values": {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "value",
+                                "name"
+                              ],
+                              "additionalProperties": false,
+                              "properties": {
+                                "value": {},
+                                "name": {
+                                  "$ref": "#/$defs/displayText"
+                                },
+                                "description": {
+                                  "$ref": "#/$defs/displayText"
+                                }
+                              }
+                            }
+                          },
+                          "required": {
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "default": {},
+                          "component_configurable": {
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "instance_configurable": {
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "invocation_overridable": {
+                            "type": "boolean",
+                            "default": false
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "implementation_classes": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "technology-kind",
+                    "class-name"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "technology-kind": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "class-name": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "Component-declared capability provider definitions. Each definition binds one implementation role to the capability contract versions it provides; configured provider instances are created from these definitions."
+        },
+        "lifecycle": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "provision": {
+              "type": "string"
+            },
+            "validate": {
+              "type": "string"
+            },
+            "unprovision": {
+              "type": "string"
+            }
+          }
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "name": {
+          "$ref": "#/$defs/displayText"
+        },
+        "description": {
+          "$ref": "#/$defs/displayText"
+        },
+        "entitlement_licensing_scopes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name": {
+                "$ref": "#/$defs/displayText"
+              },
+              "description": {
+                "$ref": "#/$defs/displayText"
+              },
+              "metadata": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "provided_capability_entitlements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "capability",
+              "permissions"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "capability": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "version"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "version": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              },
+              "permissions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "description": {
+                      "$ref": "#/$defs/displayText"
+                    },
+                    "metadata": {
+                      "type": "object"
+                    },
+                    "name": {
+                      "$ref": "#/$defs/displayText"
+                    },
+                    "possible_licensing_scopes": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "name": {
+                "$ref": "#/$defs/displayText"
+              },
+              "description": {
+                "$ref": "#/$defs/displayText"
+              }
+            }
+          }
+        },
+        "data_entity_support": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dataEntitySupport"
+          }
+        }
+      }
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.component-descriptor",
+  "x-aac-schema-version": 1
+}

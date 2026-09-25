@@ -13,13 +13,13 @@ authors = [{name = "Algites"}]
 
 [tool.setuptools.packages.find]
 where = ["src/product/python"]
-include = ["algites.lib.aac.coreintf*"]
+include = ["algites.frmw.aac.coreintf*"]
 namespaces = true
 
 [tool.setuptools.package-data]
-"algites.lib.aac.coreintf" = ["contracts/definitions/*.yml"]
+"algites.frmw.aac.coreintf" = ["dataentity/definitions/*.yml", "observation/definitions/*.yml", "runtime/definitions/*.yml"]
 
 [tool.pytest.ini_options]
 testpaths = ["src/develop/python"]
 addopts = "--import-mode=importlib"
-cache_dir = "run/develop/pytest/cache"
+cache_dir = "../../build/run/aac/coreintf/run/develop/pytest/cache"

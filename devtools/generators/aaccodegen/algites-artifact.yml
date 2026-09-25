@@ -1,0 +1,4 @@
+artifact:
+  name: Algites AAC Code Generator
+  description: Public shared generators for canonical AAC capability and Data Entity technology bindings
+  technologyKinds: [python]

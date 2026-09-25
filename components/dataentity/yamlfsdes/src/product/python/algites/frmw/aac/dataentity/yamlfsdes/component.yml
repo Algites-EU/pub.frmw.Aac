@@ -1,0 +1,132 @@
+component:
+  id: _AAC.component.dataentity.yamlfsdes
+  version: 1
+  name:
+    text: YAML File-System Data Entity Storage
+    resource_key: aac.dataentity.yamlfsdes.component.name
+  description:
+    text: Stores AAC Data Entity records as YAML files partitioned by canonical schema
+      ID and stored schema version.
+    resource_key: aac.dataentity.yamlfsdes.component.description
+  capability_providers:
+  - id: yamlfsdes
+    name:
+      text: YAML File-System Data Entity Storage provider
+      resource_key: aac.dataentity.yamlfsdes.provider.name
+    description:
+      text: Provides generic AAC Data Entity loading, direct storing, physical storage-support
+        management, and provider-consistent backup/restore over a YAML filesystem
+        layout.
+      resource_key: aac.dataentity.yamlfsdes.provider.description
+    capabilities:
+    - id: _AAC.data-entity.get-record
+      versions:
+      - 1
+    - id: _AAC.data-entity.query-records
+      versions:
+      - 1
+    - id: _AAC.data-entity.apply-direct-record-changes
+      versions:
+      - 1
+    - id: _AAC.data-entity.inspect-storage-support
+      versions:
+      - 1
+    - id: _AAC.data-entity.ensure-storage-support
+      versions:
+      - 1
+    - id: _AAC.data-entity.retire-storage-support
+      versions:
+      - 1
+    - id: _AAC.data-entity.create-storage-backup
+      versions:
+      - 1
+    - id: _AAC.data-entity.inspect-storage-backup
+      versions:
+      - 1
+    - id: _AAC.data-entity.restore-storage-backup
+      versions:
+      - 1
+    implementation_classes:
+    - technology-kind: python
+      class-name: algites.frmw.aac.dataentity.yamlfsdes.provider:AIcYamlFsDataEntityStorageProvider
+    configuration_schema:
+      id: _AAC.schema.yamlfsdes-config
+      write_version: 1
+      readable_versions:
+      - 1
+      resource: schemas/yamlfsdes-config_1.json
+    operations:
+    - capability: _AAC.data-entity.get-record
+      capability_version: 1
+      operation: get
+      interaction:
+        supported_state_result_delivery_modes:
+        - ON_DEMAND_COMPLETE
+    - capability: _AAC.data-entity.query-records
+      capability_version: 1
+      operation: query
+      interaction:
+        supported_state_result_delivery_modes:
+        - ON_DEMAND_COMPLETE
+        - ON_DEMAND_DELTA
+        - ON_CHANGE_COMPLETE
+        - ON_CHANGE_DELTA
+        - ALWAYS_COMPLETE
+    - capability: _AAC.data-entity.apply-direct-record-changes
+      capability_version: 1
+      operation: apply
+      interaction:
+        supported_state_result_delivery_modes:
+        - ON_DEMAND_COMPLETE
+        - ON_DEMAND_DELTA
+        - ON_CHANGE_COMPLETE
+        - ON_CHANGE_DELTA
+        - ALWAYS_COMPLETE
+        progress_reporting: true
+        cancellation: true
+        reporting_interval: true
+    - capability: _AAC.data-entity.inspect-storage-support
+      capability_version: 1
+      operation: inspect
+      interaction:
+        supported_state_result_delivery_modes:
+        - ON_DEMAND_COMPLETE
+    - capability: _AAC.data-entity.ensure-storage-support
+      capability_version: 1
+      operation: ensure
+      interaction:
+        supported_state_result_delivery_modes:
+        - ON_DEMAND_COMPLETE
+    - capability: _AAC.data-entity.retire-storage-support
+      capability_version: 1
+      operation: retire
+      interaction:
+        supported_state_result_delivery_modes:
+        - ON_DEMAND_COMPLETE
+    - capability: _AAC.data-entity.create-storage-backup
+      capability_version: 1
+      operation: create_backup
+      interaction:
+        supported_state_result_delivery_modes:
+        - ON_DEMAND_COMPLETE
+        progress_reporting: true
+        cancellation: true
+        reporting_interval: true
+    - capability: _AAC.data-entity.inspect-storage-backup
+      capability_version: 1
+      operation: inspect_backup
+      interaction:
+        supported_state_result_delivery_modes:
+        - ON_DEMAND_COMPLETE
+        progress_reporting: true
+        cancellation: true
+        reporting_interval: true
+    - capability: _AAC.data-entity.restore-storage-backup
+      capability_version: 1
+      operation: restore_backup
+      interaction:
+        supported_state_result_delivery_modes:
+        - ON_DEMAND_COMPLETE
+        progress_reporting: true
+        cancellation: true
+        reporting_interval: true

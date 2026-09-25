@@ -310,7 +310,7 @@ stage/verify target artifacts
 complete target-state preflight
 suppress persistence convergence
 deactivate/suspend affected runtime
-admit target descriptors/contracts/schemas
+admit target descriptors/capability/schemas
 switch/reconcile Core-owned provider-instance/binding topology
 construct/wire target runtime using on-the-fly normalized data
 activate complete target graph

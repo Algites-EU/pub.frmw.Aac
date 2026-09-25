@@ -888,7 +888,7 @@ No component migration or business capability may bypass this split by writing t
 - one or more canonical Data Entity reference targets, optionally restricted to a canonical schema path;
 - `ALL`/`ANY` matching for several reference selectors.
 
-Results are ordered by logical UID (`UID_ASC` by default, with `UID_DESC` available), use a bounded `limit`, and may return an opaque `continuation_token`. The continuation token is provider-owned pagination state and MUST NOT be interpreted by consumers. AAC v1 deliberately does not define arbitrary payload predicates, joins, aggregation, or provider-specific SQL/document query syntax.
+Results are ordered by logical UID (`UID_ASC` by default, with `UID_DESC` available). `limit` is optional; when omitted, all matching records are returned, and when present it is a positive provider-independent page-size request with no AAC-defined maximum. A bounded page may return an opaque `continuation_token`. The continuation token is provider-owned pagination state and MUST NOT be interpreted by consumers. AAC v1 deliberately does not define arbitrary payload predicates, joins, aggregation, or provider-specific SQL/document query syntax.
 
 ### IV.12.2 Atomic direct record changes
 

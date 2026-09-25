@@ -2,7 +2,7 @@
 
 Python language binding of the technology-neutral Algites Application Components contracts.
 
-Public import namespace: `algites.lib.aac.coreintf`.
+Public import namespace: `algites.frmw.aac.coreintf`.
 
 This artifact is the dependency boundary for Python AAC components. It does not depend on `coreimpl` or any concrete provider implementation.
 
@@ -21,7 +21,7 @@ It defines the public models and SPIs for:
 - target-state solver request/result models, structured causal explanations, bounded alternatives, entitlement/readiness diagnostics, and package-preparation selections;
 - presentation metadata (`AIcDisplayText`) and generated-binding metadata.
 
-Canonical schemas live in the technology-neutral `src/product/schema/algites/lib/aac/coreintf/<functional-area>/` source tree and are packaged into technology distributions during build. Because AAC is not yet deployed, internal AAC document formats currently have one authoritative revision, version `1` (for example `component-descriptor_1.json`, `catalog_1.json`, `entitlement-document_1.json`, and `catalog-bootstrap_1.json`); development-time historical variants are not retained as compatibility layers. Every JSON Schema self-identifies through `x-aac-schema-id` and `x-aac-schema-version`.
+Canonical schemas live in the technology-neutral `src/product/schema/algites/frmw/aac/coreintf/<functional-area>/` source tree and are packaged into technology distributions during build. Because AAC is not yet deployed, internal AAC document formats currently have one authoritative revision, version `1` (for example `component-descriptor_1.json`, `catalog_1.json`, `entitlement-document_1.json`, and `catalog-bootstrap_1.json`); development-time historical variants are not retained as compatibility layers. Every JSON Schema self-identifies through `x-aac-schema-id` and `x-aac-schema-version`.
 
 Component version is release provenance; persisted-data compatibility is governed by explicit schema identities/versions, direct-readable declarations and migration paths; runtime interpretation is independent from optional persistence convergence.
 
