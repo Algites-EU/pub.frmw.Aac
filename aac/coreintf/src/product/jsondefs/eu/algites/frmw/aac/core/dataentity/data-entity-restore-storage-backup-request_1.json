@@ -5,18 +5,18 @@
   "title": "Data Entity Restore Storage Backup Request 1",
   "type": "object",
   "required": [
-    "backup_file"
+    "BackupFile"
   ],
   "additionalProperties": false,
   "properties": {
-    "backup_file": {
+    "BackupFile": {
       "type": "string",
       "minLength": 1
     },
-    "mode": {
+    "Mode": {
       "enum": [
-        "EMPTY_ONLY",
-        "REPLACE_ALL"
+        "empty_only",
+        "replace_all"
       ]
     }
   }

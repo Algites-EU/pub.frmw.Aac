@@ -64,218 +64,218 @@ def _parse_persisted_schema(raw_schema: Any) -> AIcPersistedSchemaDescriptor | N
         raise ValueError("persisted schema declaration must be a mapping")
     migrations = tuple(
         AIcSchemaMigrationStepDescriptor(
-            from_version=int(item["from"]),
-            to_version=int(item["to"]),
-            migrator_id=str(item["migrator"]),
+            from_version=int(item["From"]),
+            to_version=int(item["To"]),
+            migrator_id=str(item["Migrator"]),
         )
-        for item in raw_schema.get("migrations", ())
+        for item in raw_schema.get("Migrations", ())
     )
     return AIcPersistedSchemaDescriptor(
-        schema_id=str(raw_schema["id"]),
-        write_version=int(raw_schema["write_version"]),
-        readable_versions=tuple(int(v) for v in raw_schema["readable_versions"]),
+        schema_id=str(raw_schema["Id"]),
+        write_version=int(raw_schema["WriteVersion"]),
+        readable_versions=tuple(int(v) for v in raw_schema["ReadableVersions"]),
         migrations=migrations,
-        resource_name=str(raw_schema["resource"]),
+        resource_name=str(raw_schema["Resource"]),
     )
 
 def _parse_requirement(raw_requirement: Mapping[str, Any]) -> AIcConsumerRequirementDescriptor:
     return AIcConsumerRequirementDescriptor(
-        id=raw_requirement["id"],
-        capability_id=raw_requirement["capability"],
-        versions=tuple(int(v) for v in raw_requirement.get("versions", ())),
-        cardinality=AInConsumerCardinality(raw_requirement.get("cardinality", "SINGLE")),
-        mandatory=bool(raw_requirement.get("mandatory", True)),
-        requested_authorizations=tuple(str(v) for v in raw_requirement.get("requested_authorizations", ())),
-        name=normalize_display_text(raw_requirement.get("name")),
-        description=normalize_display_text(raw_requirement.get("description")),
+        id=raw_requirement["Id"],
+        capability_id=raw_requirement["Capability"],
+        versions=tuple(int(v) for v in raw_requirement.get("Versions", ())),
+        cardinality=AInConsumerCardinality(raw_requirement.get("Cardinality", "single")),
+        mandatory=bool(raw_requirement.get("Mandatory", True)),
+        requested_authorizations=tuple(str(v) for v in raw_requirement.get("RequestedAuthorizations", ())),
+        name=normalize_display_text(raw_requirement.get("Name")),
+        description=normalize_display_text(raw_requirement.get("Description")),
     )
 
 def _parse_component(component: Mapping[str, Any]) -> AIcComponentDescriptor:
     capability_providers = []
-    for raw_provider in component.get("capability_providers", ()):
+    for raw_provider in component.get("CapabilityProviders", ()):
         capabilities = tuple(
             AIcProvidedCapability(
-                id=str(item["id"]),
-                versions=tuple(sorted({int(version) for version in item["versions"]})),
+                id=str(item["Id"]),
+                versions=tuple(sorted({int(version) for version in item["Versions"]})),
             )
-            for item in raw_provider["capabilities"]
+            for item in raw_provider["Capabilities"]
         )
         initial_instances = tuple(
             AIcInitialProviderInstanceDescriptor(
-                name=item.get("name", "default"),
-                configuration=item.get("configuration", {}),
-                access_mode=AInProviderAccessMode(str(item.get("access_mode", "READ_WRITE"))),
+                name=item.get("Name", "default"),
+                configuration=item.get("Configuration", {}),
+                access_mode=AInProviderAccessMode(str(item.get("AccessMode", "read_write"))),
             )
-            for item in raw_provider.get("initial_instances", ())
+            for item in raw_provider.get("InitialInstances", ())
         )
-        requirements = tuple(_parse_requirement(item) for item in raw_provider.get("requirements", ()))
+        requirements = tuple(_parse_requirement(item) for item in raw_provider.get("Requirements", ()))
         provider_operations = tuple(
             AIcCapabilityProviderOperationDescriptor(
-                capability_id=str(item["capability"]),
-                capability_version=int(item["capability_version"]),
-                operation_id=str(item["operation"]),
+                capability_id=str(item["Capability"]),
+                capability_version=int(item["CapabilityVersion"]),
+                operation_id=str(item["Operation"]),
                 interaction=AIcCapabilityProviderOperationInteractionDescriptor(
                     supported_state_result_delivery_modes=tuple(
                         AInStateResultDeliveryMode(str(value))
-                        for value in item["interaction"]["supported_state_result_delivery_modes"]
+                        for value in item["Interaction"]["SupportedStateResultDeliveryModes"]
                     ),
-                    progress_reporting=bool(item["interaction"].get("progress_reporting", False)),
-                    cancellation=bool(item["interaction"].get("cancellation", False)),
-                    detail_level=bool(item["interaction"].get("detail_level", False)),
-                    reporting_interval=bool(item["interaction"].get("reporting_interval", False)),
+                    progress_reporting=bool(item["Interaction"].get("ProgressReporting", False)),
+                    cancellation=bool(item["Interaction"].get("Cancellation", False)),
+                    detail_level=bool(item["Interaction"].get("DetailLevel", False)),
+                    reporting_interval=bool(item["Interaction"].get("ReportingInterval", False)),
                 ),
                 parameters=tuple(
                     AIcOperationParameterDefinitionDescriptor(
-                        id=str(parameter["id"]),
-                        name=normalize_display_text(parameter["name"]),
-                        description=normalize_display_text(parameter["description"]),
-                        value_schema=dict(parameter["value_schema"]),
+                        id=str(parameter["Id"]),
+                        name=normalize_display_text(parameter["Name"]),
+                        description=normalize_display_text(parameter["Description"]),
+                        value_schema=dict(parameter["ValueSchema"]),
                         enum_values=tuple(
                             AIcOperationParameterEnumValueDescriptor(
-                                value=enum_item.get("value"),
-                                name=normalize_display_text(enum_item["name"]),
-                                description=normalize_display_text(enum_item.get("description")),
+                                value=enum_item.get("Value"),
+                                name=normalize_display_text(enum_item["Name"]),
+                                description=normalize_display_text(enum_item.get("Description")),
                             )
-                            for enum_item in parameter.get("enum_values", ())
+                            for enum_item in parameter.get("EnumValues", ())
                         ),
-                        required=bool(parameter.get("required", False)),
-                        default=parameter.get("default"),
-                        has_default="default" in parameter,
-                        component_configurable=bool(parameter.get("component_configurable", False)),
-                        instance_configurable=bool(parameter.get("instance_configurable", False)),
-                        invocation_overridable=bool(parameter.get("invocation_overridable", False)),
+                        required=bool(parameter.get("Required", False)),
+                        default=parameter.get("Default"),
+                        has_default="Default" in parameter,
+                        component_configurable=bool(parameter.get("ComponentConfigurable", False)),
+                        instance_configurable=bool(parameter.get("InstanceConfigurable", False)),
+                        invocation_overridable=bool(parameter.get("InvocationOverridable", False)),
                     )
-                    for parameter in item.get("parameters", ())
+                    for parameter in item.get("Parameters", ())
                 ),
             )
-            for item in raw_provider.get("operations", ())
+            for item in raw_provider.get("Operations", ())
         )
-        raw_runtime = raw_provider.get("runtime", {}) or {}
+        raw_runtime = raw_provider.get("Runtime", {}) or {}
         runtime = AIcProviderRuntimeDescriptor(
-            profile=AInProviderRuntimeProfile(raw_runtime.get("profile", "IN_PROCESS")),
-            command=tuple(str(v) for v in raw_runtime.get("command", ())),
-            cwd=str(raw_runtime["cwd"]) if raw_runtime.get("cwd") is not None else None,
-            environment={str(k): str(v) for k, v in raw_runtime.get("environment", {}).items()},
-            timeout_seconds=float(raw_runtime.get("timeout_seconds", 30.0)),
+            profile=AInProviderRuntimeProfile(raw_runtime.get("Profile", "in_process")),
+            command=tuple(str(v) for v in raw_runtime.get("Command", ())),
+            cwd=str(raw_runtime["Cwd"]) if raw_runtime.get("Cwd") is not None else None,
+            environment={str(k): str(v) for k, v in raw_runtime.get("Environment", {}).items()},
+            timeout_seconds=float(raw_runtime.get("TimeoutSeconds", 30.0)),
         )
         readiness_requirements = tuple(
             AIcReadinessRequirementDescriptor(
-                id=str(item["id"]),
-                source=AInReadinessRequirementSource(str(item["source"])),
-                key=str(item["key"]),
-                missing_state=AInReadinessState(str(item.get("missing_state", "NOT_READY"))),
-                message=(str(item["message"]) if item.get("message") is not None else None),
+                id=str(item["Id"]),
+                source=AInReadinessRequirementSource(str(item["Source"])),
+                key=str(item["Key"]),
+                missing_state=AInReadinessState(str(item.get("MissingState", "not_ready"))),
+                message=(str(item["Message"]) if item.get("Message") is not None else None),
             )
-            for item in raw_provider.get("readiness_requirements", ())
+            for item in raw_provider.get("ReadinessRequirements", ())
         )
         capability_providers.append(AIcProviderDefinitionDescriptor(
-            id=raw_provider["id"],
+            id=raw_provider["Id"],
             capabilities=capabilities,
             implementation_classes=tuple(
                 AIcProviderImplementationClassDescriptor(
-                    technology_kind=str(item["technology-kind"]),
-                    class_name=str(item["class-name"]),
+                    technology_kind=str(item["TechnologyKind"]),
+                    class_name=str(item["ClassName"]),
                 )
-                for item in raw_provider["implementation_classes"]
+                for item in raw_provider["ImplementationClasses"]
             ),
-            name=normalize_display_text(raw_provider.get("name")),
-            description=normalize_display_text(raw_provider.get("description")),
-            configuration_schema=_parse_persisted_schema(raw_provider.get("configuration_schema")),
+            name=normalize_display_text(raw_provider.get("Name")),
+            description=normalize_display_text(raw_provider.get("Description")),
+            configuration_schema=_parse_persisted_schema(raw_provider.get("ConfigurationSchema")),
             initial_instances=initial_instances,
             requirements=requirements,
             operations=provider_operations,
             readiness_requirements=readiness_requirements,
-            runtime_factory_class=raw_provider.get("runtime_factory_class"),
+            runtime_factory_class=raw_provider.get("RuntimeFactoryClass"),
             runtime=runtime,
         ))
 
     entitlement_licensing_scopes = tuple(
         AIcEntitlementLicensingScopeDescriptor(
-            type=str(item["type"]),
-            name=normalize_display_text(item.get("name")),
-            description=normalize_display_text(item.get("description")),
-            metadata=dict(item.get("metadata", {})),
+            type=str(item["Type"]),
+            name=normalize_display_text(item.get("Name")),
+            description=normalize_display_text(item.get("Description")),
+            metadata=dict(item.get("Metadata", {})),
         )
-        for item in component.get("entitlement_licensing_scopes", ())
+        for item in component.get("EntitlementLicensingScopes", ())
     )
 
     provided_capability_entitlements = []
-    for raw_capability in component.get("provided_capability_entitlements", ()):
+    for raw_capability in component.get("ProvidedCapabilityEntitlements", ()):
         permissions = tuple(
             AIcPermissionDescriptor(
-                id=item["id"],
-                name=normalize_display_text(item.get("name")),
-                description=normalize_display_text(item.get("description")),
+                id=item["Id"],
+                name=normalize_display_text(item.get("Name")),
+                description=normalize_display_text(item.get("Description")),
                 possible_licensing_scope_types=tuple(
-                    str(v) for v in item.get("possible_licensing_scopes", ())
+                    str(v) for v in item.get("PossibleLicensingScopes", ())
                 ),
-                metadata=item.get("metadata", {}),
+                metadata=item.get("Metadata", {}),
             )
-            for item in raw_capability.get("permissions", ())
+            for item in raw_capability.get("Permissions", ())
         )
         provided_capability_entitlements.append(AIcCapabilityEntitlementDescriptor(
-            capability_id=raw_capability["capability"]["id"],
-            capability_version=int(raw_capability["capability"]["version"]),
+            capability_id=raw_capability["Capability"]["Id"],
+            capability_version=int(raw_capability["Capability"]["Version"]),
             permissions=permissions,
-            name=normalize_display_text(raw_capability.get("name")),
-            description=normalize_display_text(raw_capability.get("description")),
+            name=normalize_display_text(raw_capability.get("Name")),
+            description=normalize_display_text(raw_capability.get("Description")),
         ))
 
 
     data_entity_support = []
-    for raw_support in component.get("data_entity_support", ()):
+    for raw_support in component.get("DataEntitySupport", ()):
         migrations = tuple(
             AIcSchemaMigrationStepDescriptor(
-                from_version=int(item["from"]),
-                to_version=int(item["to"]),
-                migrator_id=str(item["migrator"]),
+                from_version=int(item["From"]),
+                to_version=int(item["To"]),
+                migrator_id=str(item["Migrator"]),
             )
-            for item in raw_support.get("migrations", ())
+            for item in raw_support.get("Migrations", ())
         )
         requirements = tuple(
             AIcDataEntityRequirementDescriptor(
-                schema_id=str(item["schema_id"]),
-                access=tuple(AInDataEntityAccess(str(value)) for value in item.get("access", ())),
-                readable_versions=tuple(int(value) for value in item.get("readable_versions", ())),
-                writable_versions=tuple(int(value) for value in item.get("writable_versions", ())),
-                required=bool(item.get("required", True)),
+                schema_id=str(item["SchemaId"]),
+                access=tuple(AInDataEntityAccess(str(value)) for value in item.get("Access", ())),
+                readable_versions=tuple(int(value) for value in item.get("ReadableVersions", ())),
+                writable_versions=tuple(int(value) for value in item.get("WritableVersions", ())),
+                required=bool(item.get("Required", True)),
             )
-            for item in raw_support.get("data_entity_requirements", ())
+            for item in raw_support.get("DataEntityRequirements", ())
         )
         data_entity_support.append(AIcDataEntitySupportDescriptor(
-            schema_id=str(raw_support["schema_id"]),
-            readable_versions=tuple(int(value) for value in raw_support.get("readable_versions", ())),
-            writable_versions=tuple(int(value) for value in raw_support.get("writable_versions", ())),
+            schema_id=str(raw_support["SchemaId"]),
+            readable_versions=tuple(int(value) for value in raw_support.get("ReadableVersions", ())),
+            writable_versions=tuple(int(value) for value in raw_support.get("WritableVersions", ())),
             preferred_write_version=(
-                int(raw_support["preferred_write_version"])
-                if raw_support.get("preferred_write_version") is not None else None
+                int(raw_support["PreferredWriteVersion"])
+                if raw_support.get("PreferredWriteVersion") is not None else None
             ),
             migrations=migrations,
             data_entity_requirements=requirements,
-            name=normalize_display_text(raw_support.get("name")),
-            description=normalize_display_text(raw_support.get("description")),
-            metadata=dict(raw_support.get("metadata", {})),
+            name=normalize_display_text(raw_support.get("Name")),
+            description=normalize_display_text(raw_support.get("Description")),
+            metadata=dict(raw_support.get("Metadata", {})),
         ))
 
-    raw_lifecycle = component.get("lifecycle", {}) or {}
+    raw_lifecycle = component.get("Lifecycle", {}) or {}
     lifecycle = AIcLifecycleHooksDescriptor(**{
         name: raw_lifecycle.get(name)
         for name in ("provision", "validate", "unprovision")
     })
     return AIcComponentDescriptor(
-        id=component["id"],
-        version=int(component["version"]),
-        name=normalize_display_text(component.get("name")),
-        description=normalize_display_text(component.get("description")),
+        id=component["Id"],
+        version=int(component["Version"]),
+        name=normalize_display_text(component.get("Name")),
+        description=normalize_display_text(component.get("Description")),
         capability_providers=tuple(capability_providers),
-        capability_group_resources=tuple(str(v) for v in component.get("capability_groups", ())),
-        contract_resources=tuple(str(v) for v in component.get("capability", ())),
-        component_configuration_schema=_parse_persisted_schema(component.get("component_configuration_schema")),
+        capability_group_resources=tuple(str(v) for v in component.get("CapabilityGroups", ())),
+        contract_resources=tuple(str(v) for v in component.get("Capability", ())),
+        component_configuration_schema=_parse_persisted_schema(component.get("ComponentConfigurationSchema")),
         entitlement_licensing_scopes=entitlement_licensing_scopes,
         provided_capability_entitlements=tuple(provided_capability_entitlements),
         data_entity_support=tuple(data_entity_support),
         lifecycle=lifecycle,
-        metadata=component.get("metadata", {}),
+        metadata=component.get("Metadata", {}),
     )
 
 def read_discovered_resource(discovered: AIcDiscoveredComponent, resource_name: str) -> tuple[str, str]:

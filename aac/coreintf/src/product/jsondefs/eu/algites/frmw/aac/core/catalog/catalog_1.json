@@ -2,39 +2,39 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "required": [
-    "catalog"
+    "Catalog"
   ],
   "additionalProperties": false,
   "properties": {
-    "catalog": {
+    "Catalog": {
       "type": "object",
       "required": [
-        "format_version",
-        "product_id",
-        "technology_id",
-        "components"
+        "FormatVersion",
+        "ProductId",
+        "TechnologyId",
+        "Components"
       ],
       "additionalProperties": false,
       "properties": {
-        "format_version": {
+        "FormatVersion": {
           "const": 1
         },
-        "product_id": {
+        "ProductId": {
           "type": "string",
           "minLength": 1
         },
-        "technology_id": {
+        "TechnologyId": {
           "type": "string",
           "minLength": 1
         },
-        "generated_at": {
+        "GeneratedAt": {
           "type": "string",
           "minLength": 1
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         },
-        "components": {
+        "Components": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/component"
@@ -55,11 +55,11 @@
           "additionalProperties": false,
           "minProperties": 1,
           "properties": {
-            "text": {
+            "Text": {
               "type": "string",
               "minLength": 1
             },
-            "resource_key": {
+            "ResourceKey": {
               "type": "string",
               "minLength": 1
             }
@@ -70,24 +70,24 @@
     "permission": {
       "type": "object",
       "required": [
-        "id"
+        "Id"
       ],
       "additionalProperties": false,
       "properties": {
-        "id": {
+        "Id": {
           "type": "string",
           "minLength": 1
         },
-        "name": {
+        "Name": {
           "$ref": "#/$defs/displayText"
         },
-        "description": {
+        "Description": {
           "$ref": "#/$defs/displayText"
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         },
-        "possible_licensing_scopes": {
+        "PossibleLicensingScopes": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -100,39 +100,39 @@
     "capabilityEntitlement": {
       "type": "object",
       "required": [
-        "capability",
-        "permissions"
+        "Capability",
+        "Permissions"
       ],
       "additionalProperties": false,
       "properties": {
-        "capability": {
+        "Capability": {
           "type": "object",
           "required": [
-            "id",
-            "version"
+            "Id",
+            "Version"
           ],
           "additionalProperties": false,
           "properties": {
-            "id": {
+            "Id": {
               "type": "string",
               "minLength": 1
             },
-            "version": {
+            "Version": {
               "type": "integer",
               "minimum": 1
             }
           }
         },
-        "permissions": {
+        "Permissions": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/permission"
           }
         },
-        "name": {
+        "Name": {
           "$ref": "#/$defs/displayText"
         },
-        "description": {
+        "Description": {
           "$ref": "#/$defs/displayText"
         }
       }
@@ -140,41 +140,41 @@
     "artifact": {
       "type": "object",
       "required": [
-        "id",
-        "locator",
-        "artifact_filename",
-        "package_format",
-        "descriptor_path",
-        "sha256"
+        "Id",
+        "Locator",
+        "ArtifactFilename",
+        "PackageFormat",
+        "DescriptorPath",
+        "Sha256"
       ],
       "additionalProperties": false,
       "properties": {
-        "id": {
+        "Id": {
           "type": "string",
           "minLength": 1
         },
-        "locator": {
+        "Locator": {
           "type": "object",
           "required": [
-            "type"
+            "Type"
           ],
           "additionalProperties": false,
           "properties": {
-            "type": {
+            "Type": {
               "enum": [
-                "URI",
-                "REPOSITORY"
+                "uri",
+                "repository"
               ]
             },
-            "uri": {
+            "Uri": {
               "type": "string",
               "minLength": 1
             },
-            "repository_id": {
+            "RepositoryId": {
               "type": "string",
               "minLength": 1
             },
-            "coordinates": {
+            "Coordinates": {
               "type": "object"
             }
           },
@@ -182,58 +182,58 @@
             {
               "if": {
                 "properties": {
-                  "type": {
-                    "const": "URI"
+                  "Type": {
+                    "const": "uri"
                   }
                 }
               },
               "then": {
                 "required": [
-                  "uri"
+                  "Uri"
                 ]
               }
             },
             {
               "if": {
                 "properties": {
-                  "type": {
-                    "const": "REPOSITORY"
+                  "Type": {
+                    "const": "repository"
                   }
                 }
               },
               "then": {
                 "required": [
-                  "repository_id"
+                  "RepositoryId"
                 ]
               }
             }
           ]
         },
-        "artifact_filename": {
+        "ArtifactFilename": {
           "type": "string",
           "minLength": 1
         },
-        "package_format": {
+        "PackageFormat": {
           "type": "string",
           "minLength": 1
         },
-        "descriptor_path": {
+        "DescriptorPath": {
           "type": "string",
           "minLength": 1
         },
-        "sha256": {
+        "Sha256": {
           "type": "string",
           "pattern": "^[0-9a-fA-F]{64}$"
         },
-        "runtime_package": {
+        "RuntimePackage": {
           "type": "string",
           "minLength": 1
         },
-        "verifier_id": {
+        "VerifierId": {
           "type": "string",
           "minLength": 1
         },
-        "platforms": {
+        "Platforms": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -241,7 +241,7 @@
             "minLength": 1
           }
         },
-        "architectures": {
+        "Architectures": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -249,35 +249,35 @@
             "minLength": 1
           }
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         },
-        "authentication_profile_id": {
+        "AuthenticationProfileId": {
           "type": "string",
           "minLength": 1
         },
-        "sidecars": {
+        "Sidecars": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "uri",
-              "suffix"
+              "Uri",
+              "Suffix"
             ],
             "additionalProperties": false,
             "properties": {
-              "uri": {
+              "Uri": {
                 "type": "string",
                 "minLength": 1
               },
-              "suffix": {
+              "Suffix": {
                 "type": "string",
                 "pattern": "^\\..+"
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               }
             }
@@ -288,38 +288,38 @@
     "release": {
       "type": "object",
       "required": [
-        "version",
-        "artifacts"
+        "Version",
+        "Artifacts"
       ],
       "additionalProperties": false,
       "properties": {
-        "version": {
+        "Version": {
           "type": "integer",
           "minimum": 1
         },
-        "published_at": {
+        "PublishedAt": {
           "type": "string",
           "minLength": 1
         },
-        "release_notes_url": {
+        "ReleaseNotesUrl": {
           "type": "string",
           "minLength": 1
         },
-        "provides": {
+        "Provides": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "capability",
-              "versions"
+              "Capability",
+              "Versions"
             ],
             "additionalProperties": false,
             "properties": {
-              "capability": {
+              "Capability": {
                 "type": "string",
                 "minLength": 1
               },
-              "versions": {
+              "Versions": {
                 "type": "array",
                 "minItems": 1,
                 "uniqueItems": true,
@@ -331,25 +331,25 @@
             }
           }
         },
-        "requires": {
+        "Requires": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "capability"
+              "Id",
+              "Capability"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "capability": {
+              "Capability": {
                 "type": "string",
                 "minLength": 1
               },
-              "versions": {
+              "Versions": {
                 "type": "array",
                 "uniqueItems": true,
                 "items": {
@@ -357,60 +357,60 @@
                   "minimum": 1
                 }
               },
-              "cardinality": {
+              "Cardinality": {
                 "enum": [
-                  "SINGLE",
-                  "MULTIPLE"
+                  "single",
+                  "multiple"
                 ]
               },
-              "mandatory": {
+              "Mandatory": {
                 "type": "boolean"
               }
             }
           }
         },
-        "artifacts": {
+        "Artifacts": {
           "type": "array",
           "minItems": 1,
           "items": {
             "$ref": "#/$defs/artifact"
           }
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         },
-        "persistent_schemas": {
+        "PersistentSchemas": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/persistentSchema"
           }
         },
-        "entitlement_licensing_scopes": {
+        "EntitlementLicensingScopes": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "type"
+              "Type"
             ],
             "additionalProperties": false,
             "properties": {
-              "type": {
+              "Type": {
                 "type": "string",
                 "minLength": 1
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               },
-              "metadata": {
+              "Metadata": {
                 "type": "object"
               }
             }
           }
         },
-        "provided_capability_entitlements": {
+        "ProvidedCapabilityEntitlements": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/capabilityEntitlement"
@@ -421,67 +421,67 @@
     "component": {
       "type": "object",
       "required": [
-        "component_id",
-        "releases"
+        "ComponentId",
+        "Releases"
       ],
       "additionalProperties": false,
       "properties": {
-        "component_id": {
+        "ComponentId": {
           "type": "string",
           "minLength": 1
         },
-        "name": {
+        "Name": {
           "$ref": "#/$defs/displayText"
         },
-        "description": {
+        "Description": {
           "$ref": "#/$defs/displayText"
         },
-        "publisher": {
+        "Publisher": {
           "type": "object",
           "required": [
-            "id"
+            "Id"
           ],
           "additionalProperties": false,
           "properties": {
-            "id": {
+            "Id": {
               "type": "string",
               "minLength": 1
             },
-            "name": {
+            "Name": {
               "$ref": "#/$defs/displayText"
             }
           }
         },
-        "homepage_url": {
+        "HomepageUrl": {
           "type": "string",
           "minLength": 1
         },
-        "documentation_url": {
+        "DocumentationUrl": {
           "type": "string",
           "minLength": 1
         },
-        "support_url": {
+        "SupportUrl": {
           "type": "string",
           "minLength": 1
         },
-        "entitlement_info_url": {
+        "EntitlementInfoUrl": {
           "type": "string",
           "minLength": 1
         },
-        "icon": {
+        "Icon": {
           "type": "object",
           "required": [
-            "url"
+            "Url"
           ],
           "additionalProperties": false,
           "properties": {
-            "url": {
+            "Url": {
               "type": "string",
               "minLength": 1
             }
           }
         },
-        "categories": {
+        "Categories": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -489,7 +489,7 @@
             "minLength": 1
           }
         },
-        "tags": {
+        "Tags": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -497,13 +497,13 @@
             "minLength": 1
           }
         },
-        "releases": {
+        "Releases": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/release"
           }
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         }
       }
@@ -511,31 +511,31 @@
     "persistentSchema": {
       "type": "object",
       "required": [
-        "kind",
-        "schema_id"
+        "Kind",
+        "SchemaId"
       ],
       "additionalProperties": false,
       "properties": {
-        "kind": {
+        "Kind": {
           "enum": [
-            "COMPONENT_CONFIGURATION",
-            "PROVIDER_CONFIGURATION",
-            "DATA_ENTITY"
+            "component_configuration",
+            "provider_configuration",
+            "data_entity"
           ]
         },
-        "schema_id": {
+        "SchemaId": {
           "type": "string",
           "minLength": 1
         },
-        "write_version": {
+        "WriteVersion": {
           "type": "integer",
           "minimum": 1
         },
-        "provider_id": {
+        "ProviderId": {
           "type": "string",
           "minLength": 1
         },
-        "readable_versions": {
+        "ReadableVersions": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -543,7 +543,7 @@
             "minimum": 1
           }
         },
-        "writable_versions": {
+        "WritableVersions": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -551,7 +551,7 @@
             "minimum": 1
           }
         },
-        "preferred_write_version": {
+        "PreferredWriteVersion": {
           "type": "integer",
           "minimum": 1
         }
@@ -560,35 +560,35 @@
         {
           "if": {
             "properties": {
-              "kind": {
-                "const": "COMPONENT_CONFIGURATION"
+              "Kind": {
+                "const": "component_configuration"
               }
             }
           },
           "then": {
             "required": [
-              "write_version"
+              "WriteVersion"
             ],
             "not": {
               "anyOf": [
                 {
                   "required": [
-                    "provider_id"
+                    "ProviderId"
                   ]
                 },
                 {
                   "required": [
-                    "readable_versions"
+                    "ReadableVersions"
                   ]
                 },
                 {
                   "required": [
-                    "writable_versions"
+                    "WritableVersions"
                   ]
                 },
                 {
                   "required": [
-                    "preferred_write_version"
+                    "PreferredWriteVersion"
                   ]
                 }
               ]
@@ -598,31 +598,31 @@
         {
           "if": {
             "properties": {
-              "kind": {
-                "const": "PROVIDER_CONFIGURATION"
+              "Kind": {
+                "const": "provider_configuration"
               }
             }
           },
           "then": {
             "required": [
-              "provider_id",
-              "write_version"
+              "ProviderId",
+              "WriteVersion"
             ],
             "not": {
               "anyOf": [
                 {
                   "required": [
-                    "readable_versions"
+                    "ReadableVersions"
                   ]
                 },
                 {
                   "required": [
-                    "writable_versions"
+                    "WritableVersions"
                   ]
                 },
                 {
                   "required": [
-                    "preferred_write_version"
+                    "PreferredWriteVersion"
                   ]
                 }
               ]
@@ -632,26 +632,26 @@
         {
           "if": {
             "properties": {
-              "kind": {
-                "const": "DATA_ENTITY"
+              "Kind": {
+                "const": "data_entity"
               }
             }
           },
           "then": {
             "required": [
-              "readable_versions",
-              "writable_versions"
+              "ReadableVersions",
+              "WritableVersions"
             ],
             "not": {
               "anyOf": [
                 {
                   "required": [
-                    "provider_id"
+                    "ProviderId"
                   ]
                 },
                 {
                   "required": [
-                    "write_version"
+                    "WriteVersion"
                   ]
                 }
               ]
@@ -661,14 +661,14 @@
                 "anyOf": [
                   {
                     "properties": {
-                      "readable_versions": {
+                      "ReadableVersions": {
                         "minItems": 1
                       }
                     }
                   },
                   {
                     "properties": {
-                      "writable_versions": {
+                      "WritableVersions": {
                         "minItems": 1
                       }
                     }
@@ -678,23 +678,23 @@
               {
                 "if": {
                   "properties": {
-                    "writable_versions": {
+                    "WritableVersions": {
                       "minItems": 1
                     }
                   },
                   "required": [
-                    "writable_versions"
+                    "WritableVersions"
                   ]
                 },
                 "then": {
                   "required": [
-                    "preferred_write_version"
+                    "PreferredWriteVersion"
                   ]
                 },
                 "else": {
                   "not": {
                     "required": [
-                      "preferred_write_version"
+                      "PreferredWriteVersion"
                     ]
                   }
                 }

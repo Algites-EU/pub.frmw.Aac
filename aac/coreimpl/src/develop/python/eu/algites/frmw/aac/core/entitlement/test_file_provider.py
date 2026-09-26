@@ -27,7 +27,7 @@ def _descriptor():
         entitlement_licensing_scopes=(AIcEntitlementLicensingScopeDescriptor("WORKSPACE"),),
         provided_capability_entitlements=(AIcCapabilityEntitlementDescriptor(
             "vendor.foo.document", 1,
-            (AIcPermissionDescriptor("WRITE", possible_licensing_scope_types=("WORKSPACE",)),),
+            (AIcPermissionDescriptor("write", possible_licensing_scope_types=("WORKSPACE",)),),
         ),),
     )
 
@@ -35,17 +35,17 @@ def _descriptor():
 def test_file_entitlement_provider_requires_trusted_issuer(tmp_path: Path):
     path = tmp_path / "bundle.entitlement.yml"
     path.write_text('''
-entitlement:
-  format_version: 1
-  entitlement_id: bundle-1
-  issuer: {id: vendor.example}
-  licensing_scope: {type: WORKSPACE}
-  subject: {id: ws-1, display_name: Project One}
-  components:
-    - id: vendor.foo
-      grants:
-        - capability: {id: vendor.foo.document, version: 1}
-          permissions: [{id: WRITE}]
+Entitlement:
+  FormatVersion: 1
+  EntitlementId: bundle-1
+  Issuer: {Id: vendor.example}
+  LicensingScope: {Type: WORKSPACE}
+  Subject: {Id: ws-1, DisplayName: Project One}
+  Components:
+    - Id: vendor.foo
+      Grants:
+        - Capability: {Id: vendor.foo.document, Version: 1}
+          Permissions: [{Id: write}]
 ''', encoding="utf-8")
     Path(str(path) + ".sigstore.json").write_text("{}", encoding="utf-8")
 
@@ -58,11 +58,11 @@ entitlement:
     ),)
 
     denied = AIcEntitlementManager(providers, verifiers, trust).evaluate_component(_descriptor(), licensing_scopes=scopes)
-    assert not denied.has_permission("vendor.foo.document", 1, "WRITE")
+    assert not denied.has_permission("vendor.foo.document", 1, "write")
     assert any("not trusted" in item for item in denied.diagnostics)
 
     trust.register(AIcTrustedEntitlementIssuerRule(
         "vendor.example", component_ids=("vendor.foo",), evidence_types=("SIGSTORE",), signer_identities=("release@example.test",)
     ))
     allowed = AIcEntitlementManager(providers, verifiers, trust).evaluate_component(_descriptor(), licensing_scopes=scopes)
-    assert allowed.has_permission("vendor.foo.document", 1, "WRITE")
+    assert allowed.has_permission("vendor.foo.document", 1, "write")

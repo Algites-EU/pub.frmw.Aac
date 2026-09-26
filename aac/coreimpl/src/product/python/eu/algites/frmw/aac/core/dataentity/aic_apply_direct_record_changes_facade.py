@@ -25,21 +25,21 @@ class AIcApplyDirectRecordChangesFacade(AIcBoundDataEntityCapabilityFacade):
     write_operation = True
 
     def apply_raw(self, changes: tuple[Mapping[str, object], ...]) -> Mapping[str, object]:
-        return self._invoke("apply", {"changes": [dict(change) for change in changes]})
+        return self._invoke("apply", {"Changes": [dict(change) for change in changes]})
 
     def save(self, envelope: AIcTypedDataEntityEnvelope[object]) -> Mapping[str, object]:
         if self.marshaller is None:
             raise RuntimeError("typed Data Entity access requires a marshaller")
         raw = self.marshaller.marshal(envelope)
         result = self.apply_raw(({
-            "change_id": str(uuid4()),
-            "type": "REPLACE_RECORD",
-            "schema_id": raw.schema_id,
-            "uid": raw.uid,
-            "schema_version": raw.schema_version,
-            "state": raw.state.value,
-            "payload": dict(raw.payload),
-            "expected_record_revision": raw.record_revision,
+            "ChangeId": str(uuid4()),
+            "Type": "replace_record",
+            "SchemaId": raw.schema_id,
+            "Uid": raw.uid,
+            "SchemaVersion": raw.schema_version,
+            "State": raw.state.value,
+            "Payload": dict(raw.payload),
+            "ExpectedRecordRevision": raw.record_revision,
         },))
         return result
 
@@ -64,23 +64,23 @@ class AIcApplyDirectRecordChangesFacade(AIcBoundDataEntityCapabilityFacade):
             apply_defaults=False,
         )
         if not isinstance(normalized, Mapping):
-            raise TypeError("canonical Data Entity schema must normalize to a JSON object")
+            raise TypeError("canonical Data Entity schema must normalize to a json object")
         payload = dict(normalized)
         return self.apply_raw(({
-            "change_id": str(uuid4()),
-            "type": "CREATE_RECORD",
-            "schema_id": schema_id,
-            "uid": uid,
-            "schema_version": implementation.canonical_schema_version,
-            "state": state.value,
-            "payload": payload,
+            "ChangeId": str(uuid4()),
+            "Type": "create_record",
+            "SchemaId": schema_id,
+            "Uid": uid,
+            "SchemaVersion": implementation.canonical_schema_version,
+            "State": state.value,
+            "Payload": payload,
         },))
 
     def delete(self, schema_id: str, uid: str, expected_record_revision: int | str) -> Mapping[str, object]:
         return self.apply_raw(({
-            "change_id": str(uuid4()),
-            "type": "DELETE_RECORD",
-            "schema_id": schema_id,
-            "uid": uid,
-            "expected_record_revision": expected_record_revision,
+            "ChangeId": str(uuid4()),
+            "Type": "delete_record",
+            "SchemaId": schema_id,
+            "Uid": uid,
+            "ExpectedRecordRevision": expected_record_revision,
         },))

@@ -36,7 +36,7 @@ def test_provider_results_conform_to_builtin_capability_contract_schemas(tmp_pat
     from eu.algites.frmw.aac.core.invocation.api import AIcInvocationInput
     from eu.algites.frmw.aac.dataentity.yamlfsdes import AIcYamlFsDataEntityStorageProvider
 
-    runtime = AIcYamlFsDataEntityStorageProvider({"root_directory": str(tmp_path / "data")})
+    runtime = AIcYamlFsDataEntityStorageProvider({"RootDirectory": str(tmp_path / "data")})
     endpoint = AIcObjectCapabilityEndpoint(runtime)
     catalog = AIcActiveContractCatalog()
     catalog.admit_builtin_contracts()
@@ -59,49 +59,49 @@ def test_provider_results_conform_to_builtin_capability_contract_schemas(tmp_pat
         "_AAC.data-entity.ensure-storage-support",
         "ensure",
         {
-            "schema_id": "test.entity",
-            "schema_version": 1,
-            "canonical_schema": {"type": "object", "properties": {"name": {"type": "string"}}},
-            "references": [],
+            "SchemaId": "test.entity",
+            "SchemaVersion": 1,
+            "CanonicalSchema": {"type": "object", "properties": {"Name": {"type": "string"}}},
+            "References": [],
         },
     )
-    assert ensure_result["status"] == "READY"
+    assert ensure_result["Status"] == "ready"
     apply_result = invoke(
         "_AAC.data-entity.apply-direct-record-changes",
         "apply",
-        {"changes": [{
-            "change_id": "create-1",
-            "type": "CREATE_RECORD",
-            "schema_id": "test.entity",
-            "uid": "u1",
-            "schema_version": 1,
-            "state": "ACTIVE",
-            "payload": {"name": "A"},
+        {"Changes": [{
+            "ChangeId": "create-1",
+            "Type": "create_record",
+            "SchemaId": "test.entity",
+            "Uid": "u1",
+            "SchemaVersion": 1,
+            "State": "active",
+            "Payload": {"Name": "A"},
         }]},
     )
-    assert apply_result["changes"][0]["record_revision"] == 1
+    assert apply_result["Changes"][0]["RecordRevision"] == 1
     get_result = invoke(
         "_AAC.data-entity.get-record",
         "get",
-        {"schema_id": "test.entity", "uid": "u1"},
+        {"SchemaId": "test.entity", "Uid": "u1"},
     )
-    assert get_result["record"]["payload"] == {"name": "A"}
+    assert get_result["Record"]["Payload"] == {"Name": "A"}
     query_result = invoke(
         "_AAC.data-entity.query-records",
         "query",
-        {"schema_id": "test.entity", "stored_schema_version_filter": [1]},
+        {"SchemaId": "test.entity", "StoredSchemaVersionFilter": [1]},
     )
-    assert len(query_result["records"]) == 1
+    assert len(query_result["Records"]) == 1
     backup_file = tmp_path / "dispatcher-backup.zip"
     backup_result = invoke(
         "_AAC.data-entity.create-storage-backup",
         "create_backup",
-        {"backup_file": str(backup_file)},
+        {"BackupFile": str(backup_file)},
     )
-    assert backup_result["format"] == "ZIP"
+    assert backup_result["Format"] == "zip"
     inspect_backup_result = invoke(
         "_AAC.data-entity.inspect-storage-backup",
         "inspect_backup",
-        {"backup_file": str(backup_file)},
+        {"BackupFile": str(backup_file)},
     )
-    assert inspect_backup_result["status"] == "VALID"
+    assert inspect_backup_result["Status"] == "valid"

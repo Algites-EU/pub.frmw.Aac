@@ -26,7 +26,7 @@ def _write_candidate(root: Path, package: str, *, version: int, broken: bool = F
     (pkg / "schemas" / "simpleaudit-config_1.json").write_text(schema_text, encoding="utf-8")
     impl = f"{package}.missing:Nope" if broken else f"{package}.provider:AIcCandidateObserver"
     (pkg / "component.yml").write_text(
-        f'''component:\n  id: _AAC.component.simpleaudit\n  version: {version}\n  capability_providers:\n    - id: observation\n      capabilities:\n        - id: _AAC.capability.observation\n          versions: [1]\n      implementation_classes:\n        - technology-kind: python\n          class-name: {impl}\n      operations:\n        - capability: _AAC.capability.observation\n          capability_version: 1\n          operation: observe\n          interaction:\n            supported_state_result_delivery_modes: [ON_DEMAND_COMPLETE]\n      configuration_schema:\n        id: simpleaudit-config\n        write_version: 1\n        readable_versions: [1]\n        resource: simpleaudit-config_1.json\n      initial_instances:\n        - name: default\n          configuration: {{}}\n''',
+        f'''Component:\n  Id: _AAC.component.simpleaudit\n  Version: {version}\n  CapabilityProviders:\n    - Id: observation\n      Capabilities:\n        - Id: _AAC.capability.observation\n          Versions: [1]\n      ImplementationClasses:\n        - TechnologyKind: python\n          ClassName: {impl}\n      Operations:\n        - Capability: _AAC.capability.observation\n          CapabilityVersion: 1\n          Operation: observe\n          Interaction:\n            SupportedStateResultDeliveryModes: [on_demand_complete]\n      ConfigurationSchema:\n        Id: simpleaudit-config\n        WriteVersion: 1\n        ReadableVersions: [1]\n        Resource: simpleaudit-config_1.json\n      InitialInstances:\n        - Name: default\n          Configuration: {{}}\n''',
         encoding="utf-8",
     )
 
@@ -86,38 +86,38 @@ def _write_graph_component(root: Path, package: str, *, component_id: str, versi
     contracts = ""
     if contract_version is not None:
         (pkg / "capability" / f"x_{contract_version}.yml").write_text(
-            f"capability:\n  id: com.example.x\n  version: {contract_version}\n  group_id: _AAC.runtime\n"
-            "operations:\n  - id: ping\n",
+            f"Capability:\n  Id: com.example.x\n  Version: {contract_version}\n  GroupId: _AAC.runtime\n"
+            "Operations:\n  - Id: ping\n",
             encoding="utf-8",
         )
-        contracts = f"  capability:\n    - capability/x_{contract_version}.yml\n"
+        contracts = f"  Capability:\n    - capability/x_{contract_version}.yml\n"
     requirement = ""
     if requirement_version is not None:
         requirement = (
-            "      requirements:\n"
-            "        - id: x\n"
-            "          capability: com.example.x\n"
-            f"          versions: [{requirement_version}]\n"
-            "          mandatory: true\n"
+            "      Requirements:\n"
+            "        - Id: x\n"
+            "          Capability: com.example.x\n"
+            f"          Versions: [{requirement_version}]\n"
+            "          Mandatory: true\n"
         )
     (pkg / "component.yml").write_text(
-        f"component:\n  id: {component_id}\n  version: {version}\n"
+        f"Component:\n  Id: {component_id}\n  Version: {version}\n"
         + contracts
-        + "  capability_providers:\n"
-          "    - id: main\n"
-        + f"      capabilities:\n        - id: {provided_capability}\n          versions: [{provided_version}]\n"
-          f"      implementation_classes:\n        - technology-kind: python\n          class-name: {package}.provider:Provider\n"
+        + "  CapabilityProviders:\n"
+          "    - Id: main\n"
+        + f"      Capabilities:\n        - Id: {provided_capability}\n          Versions: [{provided_version}]\n"
+          f"      ImplementationClasses:\n        - TechnologyKind: python\n          ClassName: {package}.provider:Provider\n"
         + (
-            "      operations:\n"
-            "        - capability: com.example.x\n"
-            f"          capability_version: {provided_version}\n"
-            "          operation: ping\n"
-            "          interaction:\n"
-            "            supported_state_result_delivery_modes: [ON_DEMAND_COMPLETE]\n"
+            "      Operations:\n"
+            "        - Capability: com.example.x\n"
+            f"          CapabilityVersion: {provided_version}\n"
+            "          Operation: ping\n"
+            "          Interaction:\n"
+            "            SupportedStateResultDeliveryModes: [on_demand_complete]\n"
             if provided_capability == "com.example.x" else ""
           )
         + requirement
-        + "      initial_instances:\n        - name: default\n          configuration: {}\n",
+        + "      InitialInstances:\n        - Name: default\n          Configuration: {}\n",
         encoding="utf-8",
     )
 
@@ -180,50 +180,50 @@ def _write_migrating_component(root: Path, package: str, *, version: int, broken
     if version == 1:
         (pkg / "schemas" / "upgrade-component-config_1.json").write_text(
             '{"x-aac-schema-id":"upgrade-component-config","x-aac-schema-version":1,'
-            '"type":"object","properties":{"old_name":{"type":"string"}},"required":["old_name"]}',
+            '"type": "object","properties":{"old_name":{"type": "string"}},"required":["old_name"]}',
             encoding="utf-8",
         )
         (pkg / "schemas" / "upgrade-data_1.json").write_text(
             '{"x-aac-schema-id":"upgrade-data","x-aac-schema-version":1,'
-            '"type":"object","properties":{"old_name":{"type":"string"}},"required":["old_name"]}',
+            '"type": "object","properties":{"old_name":{"type": "string"}},"required":["old_name"]}',
             encoding="utf-8",
         )
-        config = """  component_configuration_schema:\n    id: upgrade-component-config\n    write_version: 1\n    readable_versions: [1]\n    resource: upgrade-component-config_1.json\n"""
-        data_entity_support = """  data_entity_support:\n    - schema_id: upgrade-data\n      readable_versions: [1]\n      writable_versions: [1]\n      preferred_write_version: 1\n"""
+        config = """  ComponentConfigurationSchema:\n    Id: upgrade-component-config\n    WriteVersion: 1\n    ReadableVersions: [1]\n    Resource: upgrade-component-config_1.json\n"""
+        data_entity_support = """  DataEntitySupport:\n    - SchemaId: upgrade-data\n      ReadableVersions: [1]\n      WritableVersions: [1]\n      PreferredWriteVersion: 1\n"""
     else:
         (pkg / "schemas" / "upgrade-component-config_2.json").write_text(
             '{"x-aac-schema-id":"upgrade-component-config","x-aac-schema-version":2,'
-            '"type":"object","properties":{"new_name":{"type":"string"}},"required":["new_name"]}',
+            '"type": "object","properties":{"new_name":{"type": "string"}},"required":["new_name"]}',
             encoding="utf-8",
         )
         (pkg / "schemas" / "upgrade-data_2.json").write_text(
             '{"x-aac-schema-id":"upgrade-data","x-aac-schema-version":2,'
-            '"type":"object","properties":{"new_name":{"type":"string"}},"required":["new_name"]}',
+            '"type": "object","properties":{"new_name":{"type": "string"}},"required":["new_name"]}',
             encoding="utf-8",
         )
-        config = """  component_configuration_schema:\n    id: upgrade-component-config\n    write_version: 2\n    readable_versions: [2]\n    resource: upgrade-component-config_2.json\n    migrations:\n      - from: 1\n        to: 2\n        migrator: cfg-1-to-2\n"""
-        data_entity_support = """  data_entity_support:\n    - schema_id: upgrade-data\n      readable_versions: [1, 2]\n      writable_versions: [1, 2]\n      preferred_write_version: 2\n      migrations:\n        - from: 1\n          to: 2\n          migrator: data-1-to-2\n"""
+        config = """  ComponentConfigurationSchema:\n    Id: upgrade-component-config\n    WriteVersion: 2\n    ReadableVersions: [2]\n    Resource: upgrade-component-config_2.json\n    Migrations:\n      - From: 1\n        To: 2\n        Migrator: cfg-1-to-2\n"""
+        data_entity_support = """  DataEntitySupport:\n    - SchemaId: upgrade-data\n      ReadableVersions: [1, 2]\n      WritableVersions: [1, 2]\n      PreferredWriteVersion: 2\n      Migrations:\n        - From: 1\n          To: 2\n          Migrator: data-1-to-2\n"""
     implementation = f"{package}.missing:Nope" if broken else f"{package}.provider:Provider"
     (pkg / "component.yml").write_text(
-        "component:\n"
-        "  id: com.example.migrating\n"
-        f"  version: {version}\n"
+        "Component:\n"
+        "  Id: com.example.migrating\n"
+        f"  Version: {version}\n"
         + config
-        + "  capability_providers:\n"
-          "    - id: main\n"
-          "      capabilities:\n"
-          "        - id: _AAC.capability.observation\n"
-          "          versions: [1]\n"
-        + f"      implementation_classes:\n        - technology-kind: python\n          class-name: {implementation}\n"
-          "      operations:\n"
-          "        - capability: _AAC.capability.observation\n"
-          "          capability_version: 1\n"
-          "          operation: observe\n"
-          "          interaction:\n"
-          "            supported_state_result_delivery_modes: [ON_DEMAND_COMPLETE]\n"
-          "      initial_instances:\n"
-          "        - name: default\n"
-          "          configuration: {}\n"
+        + "  CapabilityProviders:\n"
+          "    - Id: main\n"
+          "      Capabilities:\n"
+          "        - Id: _AAC.capability.observation\n"
+          "          Versions: [1]\n"
+        + f"      ImplementationClasses:\n        - TechnologyKind: python\n          ClassName: {implementation}\n"
+          "      Operations:\n"
+          "        - Capability: _AAC.capability.observation\n"
+          "          CapabilityVersion: 1\n"
+          "          Operation: observe\n"
+          "          Interaction:\n"
+          "            SupportedStateResultDeliveryModes: [on_demand_complete]\n"
+          "      InitialInstances:\n"
+          "        - Name: default\n"
+          "          Configuration: {}\n"
         + data_entity_support,
         encoding="utf-8",
     )
@@ -314,35 +314,35 @@ def test_failed_upgrade_leaves_persisted_configuration_untouched(tmp_path: Path)
 def _write_same_namespace_wheel(path: Path, *, version: int, broken: bool = False) -> None:
     from zipfile import ZipFile
 
-    component = f'''component:
-  id: com.example.same-namespace
-  version: {version}
-  capability:
+    component = f'''Component:
+  Id: com.example.same-namespace
+  Version: {version}
+  Capability:
     - capability/same_1.yml
-  capability_providers:
-    - id: main
-      capabilities:
-        - id: com.example.same.capability
-          versions: [1]
-      implementation_classes:
-      - technology-kind: python
-        class-name: sameupgrade.{"missing" if broken else "provider"}:{"Nope" if broken else "Provider"}
-      operations:
-        - capability: com.example.same.capability
-          capability_version: 1
-          operation: ping
-          interaction:
-            supported_state_result_delivery_modes: [ON_DEMAND_COMPLETE]
-      initial_instances:
-        - name: default
-          configuration: {{}}
+  CapabilityProviders:
+    - Id: main
+      Capabilities:
+        - Id: com.example.same.capability
+          Versions: [1]
+      ImplementationClasses:
+      - TechnologyKind: python
+        ClassName: sameupgrade.{"missing" if broken else "provider"}:{"Nope" if broken else "Provider"}
+      Operations:
+        - Capability: com.example.same.capability
+          CapabilityVersion: 1
+          Operation: ping
+          Interaction:
+            SupportedStateResultDeliveryModes: [on_demand_complete]
+      InitialInstances:
+        - Name: default
+          Configuration: {{}}
 '''
-    contract = '''capability:
-  id: com.example.same.capability
-  version: 1
-  group_id: _AAC.runtime
-operations:
-  - id: ping
+    contract = '''Capability:
+  Id: com.example.same.capability
+  Version: 1
+  GroupId: _AAC.runtime
+Operations:
+  - Id: ping
 '''
     provider = (
         "from eu.algites.frmw.aac.core.runtime.api import AIiProviderRuntime\n"

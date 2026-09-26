@@ -26,8 +26,8 @@ class AIcEnsureStorageSupportFacade(AIcBoundDataEntityCapabilityFacade):
 
     def ensure(self, schema_id: str, schema_version: int, canonical_schema: Mapping[str, object], references=()) -> Mapping[str, object]:
         return self._invoke("ensure", {
-            "schema_id": schema_id,
-            "schema_version": schema_version,
-            "canonical_schema": dict(canonical_schema),
-            "references": list(references),
+            "SchemaId": schema_id,
+            "SchemaVersion": schema_version,
+            "CanonicalSchema": dict(canonical_schema),
+            "References": list(references),
         })

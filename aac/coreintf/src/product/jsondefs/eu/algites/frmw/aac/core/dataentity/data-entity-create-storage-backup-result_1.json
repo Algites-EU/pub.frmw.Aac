@@ -5,29 +5,29 @@
   "title": "Data Entity Create Storage Backup Result 1",
   "type": "object",
   "required": [
-    "backup_file",
-    "format",
-    "schema_version_count",
-    "record_count"
+    "BackupFile",
+    "Format",
+    "SchemaVersionCount",
+    "RecordCount"
   ],
   "additionalProperties": false,
   "properties": {
-    "backup_file": {
+    "BackupFile": {
       "type": "string",
       "minLength": 1
     },
-    "format": {
-      "const": "ZIP"
+    "Format": {
+      "const": "zip"
     },
-    "schema_version_count": {
+    "SchemaVersionCount": {
       "type": "integer",
       "minimum": 0
     },
-    "record_count": {
+    "RecordCount": {
       "type": "integer",
       "minimum": 0
     },
-    "metadata": {
+    "Metadata": {
       "type": "object"
     }
   }

@@ -38,9 +38,9 @@ from .aic_process_capability_handle import AIcProcessCapabilityHandle
 from .aic_host_channel import AIcHostChannel
 from .aic_process_operation_interaction import AIcProcessOperationInteraction
 
-"""Reference Python host for the AAC PROCESS runtime profile.
+"""Reference Python host for the AAC process runtime profile.
 
-The host reserves stdin/stdout for the AAC JSON-lines control protocol.  Component
+The host reserves stdin/stdout for the AAC json-lines control protocol.  Component
 stdout is redirected to stderr so arbitrary provider output cannot corrupt protocol
 frames.  Core may forward that diagnostic stream according to product policy.
 """
@@ -54,21 +54,21 @@ def main() -> int:
         frame = channel.read()
         if frame is None:
             return 0
-        kind = str(frame.get("kind", ""))
-        request_id = str(frame.get("request_id", ""))
+        kind = str(frame.get("Kind", ""))
+        request_id = str(frame.get("RequestId", ""))
         try:
             if kind == "bootstrap":
-                runtime = _bootstrap(frame.get("payload"), channel)
+                runtime = _bootstrap(frame.get("Payload"), channel)
                 channel.respond(request_id, success=True, result={"host": "python", "protocol": 1})
             elif kind == "lifecycle":
                 if runtime is None:
                     raise RuntimeError("provider runtime has not been bootstrapped")
-                result = _lifecycle(runtime, frame.get("action"), frame.get("payload"), channel)
+                result = _lifecycle(runtime, frame.get("Action"), frame.get("Payload"), channel)
                 channel.respond(request_id, success=True, result=result)
             elif kind == "invoke":
                 if runtime is None:
                     raise RuntimeError("provider runtime has not been bootstrapped")
-                invocation = _invocation_from_dict(_as_mapping(frame.get("payload")))
+                invocation = _invocation_from_dict(_as_mapping(frame.get("Payload")))
                 output = _invoke_runtime(runtime, invocation, channel)
                 channel.respond(request_id, success=True, result=_jsonable(output))
             elif kind == "shutdown":
@@ -77,18 +77,18 @@ def main() -> int:
             else:
                 raise ValueError(f"unknown AAC process frame kind {kind!r}")
         except Exception as exc:  # Host must return protocol failures, never traceback on protocol stdout.
-            channel.respond(request_id, success=False, error={"type": type(exc).__name__, "message": str(exc)})
+            channel.respond(request_id, success=False, error={"Type": type(exc).__name__, "Message": str(exc)})
 
 def _bootstrap(raw_payload: object, channel: AIcHostChannel) -> AIiProviderRuntime:
     payload = _as_mapping(raw_payload)
-    instance = _provider_instance_from_dict(_as_mapping(payload["provider_instance"]))
-    entitlement = _entitlement_context_from_dict(_as_mapping(payload.get("entitlement", {})), str(instance.component_id))
-    component_configuration = _effective_configuration_from_dict(_as_mapping(payload["component_configuration"]))
-    provider_instance_configuration = _effective_configuration_from_dict(_as_mapping(payload["provider_instance_configuration"]))
+    instance = _provider_instance_from_dict(_as_mapping(payload["ProviderInstance"]))
+    entitlement = _entitlement_context_from_dict(_as_mapping(payload.get("Entitlement", {})), str(instance.component_id))
+    component_configuration = _effective_configuration_from_dict(_as_mapping(payload["ComponentConfiguration"]))
+    provider_instance_configuration = _effective_configuration_from_dict(_as_mapping(payload["ProviderInstanceConfiguration"]))
     context = AIcProviderRuntimeContext(
-        str(payload["application_scope_id"]), instance, entitlement, component_configuration, provider_instance_configuration
+        str(payload["ApplicationScopeId"]), instance, entitlement, component_configuration, provider_instance_configuration
     )
-    factory_name = payload.get("runtime_factory_class")
+    factory_name = payload.get("RuntimeFactoryClass")
     if factory_name:
         factory_class = _load_class(str(factory_name))
         factory = factory_class()
@@ -96,7 +96,7 @@ def _bootstrap(raw_payload: object, channel: AIcHostChannel) -> AIiProviderRunti
             raise TypeError("runtime factory does not implement AIiProviderRuntimeFactory")
         runtime = factory.create(context)
     else:
-        provider_class = _load_class(str(payload["implementation_class"]))
+        provider_class = _load_class(str(payload["ImplementationClass"]))
         effective_values = provider_instance_configuration.plain_values()
         runtime = provider_class(effective_values if effective_values else dict(instance.configuration))
     if not isinstance(runtime, AIiProviderRuntime):
@@ -107,9 +107,9 @@ def _lifecycle(runtime: AIiProviderRuntime, action: object, raw_payload: object,
     action = str(action)
     payload = _as_mapping(raw_payload or {})
     if action == "entitlement_changed":
-        runtime.entitlement_changed(_entitlement_context_from_dict(_as_mapping(payload.get("entitlement", {})), ""))
+        runtime.entitlement_changed(_entitlement_context_from_dict(_as_mapping(payload.get("Entitlement", {})), ""))
     elif action == "wire":
-        runtime.wire(_build_handles(payload.get("bindings", {}), channel))
+        runtime.wire(_build_handles(payload.get("Bindings", {}), channel))
     elif action == "prepare_activation":
         runtime.prepare_activation()
     elif action == "readiness":
@@ -117,9 +117,9 @@ def _lifecycle(runtime: AIiProviderRuntime, action: object, raw_payload: object,
     elif action == "activate":
         runtime.activate()
     elif action == "suspend":
-        runtime.suspend(str(payload.get("reason", "")))
+        runtime.suspend(str(payload.get("Reason", "")))
     elif action == "deactivate":
-        runtime.deactivate(str(payload.get("reason", "")))
+        runtime.deactivate(str(payload.get("Reason", "")))
     else:
         raise ValueError(f"unknown provider lifecycle action {action!r}")
     return None
@@ -148,6 +148,12 @@ def _generated_capability_invoker(runtime: object, capability_id: str, capabilit
             if invoker is not None:
                 return invoker
     return None
+
+def _python_identifier(aExternalName: str) -> str:
+    import re
+    locValue = re.sub(r"(.)([A-Z][a-z]+)", r"\1_\2", aExternalName)
+    locValue = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", locValue)
+    return locValue.replace("-", "_").lower()
 
 def _invoke_runtime(
     runtime: AIiProviderRuntime, invocation: AIcInvocationInput, channel: AIcHostChannel | None = None
@@ -178,13 +184,13 @@ def _invoke_runtime(
                             result = method(_coerce_value(annotation, dict(invocation.arguments)))
                         else:
                             kwargs = {
-                                name: _coerce_value(hints.get(name), value)
+                                _python_identifier(name): _coerce_value(hints.get(_python_identifier(name)), value)
                                 for name, value in invocation.arguments.items()
                             }
                             result = method(**kwargs)
                     else:
                         kwargs = {
-                            name: _coerce_value(hints.get(name), value)
+                            _python_identifier(name): _coerce_value(hints.get(_python_identifier(name)), value)
                             for name, value in invocation.arguments.items()
                         }
                         result = method(**kwargs)
@@ -193,47 +199,47 @@ def _invoke_runtime(
         return AIcInvocationOutput(True, result=_jsonable(result))
     except AIxOperationCancelled as exc:
         return AIcInvocationOutput(False, error={
-            "type": "OPERATION_CANCELLED",
-            "message": str(exc) or "operation cancelled",
-            "has_state_result": exc.has_state_result,
-            "state_result": exc.state_result if exc.has_state_result else None,
+            "Type": "OPERATION_CANCELLED",
+            "Message": str(exc) or "operation cancelled",
+            "HasStateResult": exc.has_state_result,
+            "StateResult": exc.state_result if exc.has_state_result else None,
         })
     except AIxCapabilityOperationFailed as exc:
         failure = exc.failure
         error: dict[str, object] = {
-            "type": failure.exception_type,
-            "message": failure.system_message,
+            "Type": failure.exception_type,
+            "Message": failure.system_message,
         }
         if failure.user_message is not None:
-            error["user_message"] = dataclasses.asdict(failure.user_message)
+            error["UserMessage"] = dataclasses.asdict(failure.user_message)
         if failure.error_code is not None:
-            error["error_code"] = failure.error_code
+            error["ErrorCode"] = failure.error_code
         if failure.stack_trace is not None:
-            error["stack_trace"] = failure.stack_trace
+            error["StackTrace"] = failure.stack_trace
         if failure.details:
-            error["details"] = dict(failure.details)
+            error["Details"] = dict(failure.details)
         if failure.extension is not None:
-            error["extension"] = _jsonable(failure.extension)
+            error["Extension"] = _jsonable(failure.extension)
         return AIcInvocationOutput(False, error=error)
     except AIxPermissionDenied as exc:
         return AIcInvocationOutput(False, error={
-            "type": "PERMISSION_DENIED",
-            "message": str(exc),
-            "capability_id": exc.capability_id or invocation.capability_id,
-            "capability_version": exc.capability_version or invocation.capability_version,
+            "Type": "PERMISSION_DENIED",
+            "Message": str(exc),
+            "CapabilityId": exc.capability_id or invocation.capability_id,
+            "CapabilityVersion": exc.capability_version or invocation.capability_version,
             "permission_id": exc.permission_id,
             "retry_disposition": exc.retry_disposition.value,
             "remediation_hint": exc.remediation_hint,
         })
     except Exception as exc:
         error: dict[str, object] = {
-            "type": f"{type(exc).__module__}.{type(exc).__qualname__}",
-            "message": str(exc) or type(exc).__name__,
+            "Type": f"{type(exc).__module__}.{type(exc).__qualname__}",
+            "Message": str(exc) or type(exc).__name__,
         }
         try:
             caller = current_operation_interaction().caller_snapshot()
             if caller.failure_detail_level is AInOperationInteractionFailureDetailLevel.STACK_TRACE:
-                error["stack_trace"] = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
+                error["StackTrace"] = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
         except Exception:
             pass
         return AIcInvocationOutput(False, error=error)
@@ -259,7 +265,7 @@ def _coerce_value(annotation: object | None, value: object) -> object:
     if inspect.isclass(annotation) and dataclasses.is_dataclass(annotation):
         raw = _as_mapping(value)
         hints = get_type_hints(annotation)
-        return annotation(**{field.name: _coerce_value(hints.get(field.name), raw.get(field.name)) for field in dataclasses.fields(annotation)})
+        return annotation(**{field.name: _coerce_value(hints.get(field.name), raw.get("".join(part[:1].upper() + part[1:] for part in field.name.split("_")))) for field in dataclasses.fields(annotation)})
     if origin in (tuple, list) and isinstance(value, (tuple, list)):
         item_type = args[0] if args else None
         converted = [_coerce_value(item_type, item) for item in value]
@@ -280,159 +286,146 @@ def _load_class(path: str) -> type:
 
 def _provider_instance_from_dict(raw: Mapping[str, object]) -> AIcProviderInstance:
     return AIcProviderInstance(
-        id=str(raw["id"]),
-        component_id=str(raw["component_id"]),
-        provider_definition_id=str(raw["provider_definition_id"]),
-        name=str(raw["name"]),
+        id=str(raw["Id"]),
+        component_id=str(raw["ComponentId"]),
+        provider_definition_id=str(raw["ProviderDefinitionId"]),
+        name=str(raw["Name"]),
         capabilities=tuple(
-            AIcProvidedCapability(str(item["id"]), tuple(int(version) for version in item.get("versions", ())))
-            for item in raw.get("capabilities", ())
+            AIcProvidedCapability(str(item["Id"]), tuple(int(version) for version in item.get("Versions", ())))
+            for item in raw.get("Capabilities", ())
             if isinstance(item, Mapping)
         ),
-        implementation_class=str(raw["implementation_class"]),
-        access_mode=AInProviderAccessMode(str(raw.get("access_mode", AInProviderAccessMode.READ_WRITE.value))),
-        configuration=dict(_as_mapping(raw.get("configuration", {}))),
-        configuration_schema=str(raw["configuration_schema"]) if raw.get("configuration_schema") is not None else None,
-        state=AInProviderInstanceState(str(raw.get("state", AInProviderInstanceState.CONFIGURED.value))),
+        implementation_class=str(raw["ImplementationClass"]),
+        access_mode=AInProviderAccessMode(str(raw.get("AccessMode", AInProviderAccessMode.READ_WRITE.value))),
+        configuration=dict(_as_mapping(raw.get("Configuration", {}))),
+        configuration_schema=str(raw["ConfigurationSchema"]) if raw.get("ConfigurationSchema") is not None else None,
+        state=AInProviderInstanceState(str(raw.get("State", AInProviderInstanceState.CONFIGURED.value))),
     )
 
 def _entitlement_context_from_dict(raw: Mapping[str, object], fallback_component_id: str) -> AIcEntitlementContext:
     capability_contexts = []
-    raw_capabilities = raw.get("capabilities", ())
+    raw_capabilities = raw.get("Capabilities", ())
     for raw_capability in raw_capabilities if isinstance(raw_capabilities, (list, tuple)) else ():
         if not isinstance(raw_capability, Mapping):
             continue
         permissions: dict[str, AIcEffectiveEntitlementPermission] = {}
-        raw_permissions = raw_capability.get("permissions", {})
+        raw_permissions = raw_capability.get("Permissions", {})
         if isinstance(raw_permissions, Mapping):
             for permission_id, raw_permission in raw_permissions.items():
                 if not isinstance(raw_permission, Mapping):
                     continue
                 provenance_values = []
-                raw_provenance = raw_permission.get("provenance", ())
+                raw_provenance = raw_permission.get("Provenance", ())
                 for item in raw_provenance if isinstance(raw_provenance, (list, tuple)) else ():
                     if not isinstance(item, Mapping):
                         continue
-                    scope_raw = item.get("licensing_scope", {})
+                    scope_raw = item.get("LicensingScope", {})
                     if not isinstance(scope_raw, Mapping):
                         scope_raw = {}
-                    scope_type = scope_raw.get("type")
+                    scope_type = scope_raw.get("Type")
                     if scope_type is None or not str(scope_type).strip():
                         raise ValueError("entitlement provenance licensing_scope requires a non-empty type")
                     scope = AIcEntitlementLicensingScope(
                         str(scope_type),
-                        str(scope_raw["id"]) if scope_raw.get("id") is not None else None,
+                        str(scope_raw["Id"]) if scope_raw.get("Id") is not None else None,
                     )
                     provenance_values.append(AIcEntitlementGrantProvenance(
-                        str(item.get("entitlement_provider_id", "")),
-                        str(item.get("entitlement_id", "")),
-                        str(item.get("issuer_id", "")),
+                        str(item.get("EntitlementProviderId", "")),
+                        str(item.get("EntitlementId", "")),
+                        str(item.get("IssuerId", "")),
                         scope,
-                        str(item.get("capability_id", raw_capability.get("capability_id", ""))),
-                        int(item.get("capability_version", raw_capability.get("capability_version", 1))),
-                        str(item.get("permission_id", permission_id)),
-                        str(item["valid_from"]) if item.get("valid_from") is not None else None,
-                        str(item["valid_until"]) if item.get("valid_until") is not None else None,
+                        str(item.get("CapabilityId", raw_capability.get("CapabilityId", ""))),
+                        int(item.get("CapabilityVersion", raw_capability.get("CapabilityVersion", 1))),
+                        str(item.get("PermissionId", permission_id)),
+                        str(item["ValidFrom"]) if item.get("ValidFrom") is not None else None,
+                        str(item["ValidUntil"]) if item.get("ValidUntil") is not None else None,
                     ))
-                raw_constraints = raw_permission.get("constraints", ())
+                raw_constraints = raw_permission.get("Constraints", ())
                 constraints = tuple(dict(v) for v in raw_constraints if isinstance(v, Mapping)) if isinstance(raw_constraints, (list, tuple)) else ()
                 permissions[str(permission_id)] = AIcEffectiveEntitlementPermission(
-                    str(raw_permission.get("id", permission_id)),
-                    str(raw_permission["effective_from"]) if raw_permission.get("effective_from") is not None else None,
-                    str(raw_permission["effective_until"]) if raw_permission.get("effective_until") is not None else None,
+                    str(raw_permission.get("Id", permission_id)),
+                    str(raw_permission["EffectiveFrom"]) if raw_permission.get("EffectiveFrom") is not None else None,
+                    str(raw_permission["EffectiveUntil"]) if raw_permission.get("EffectiveUntil") is not None else None,
                     constraints,
                     tuple(provenance_values),
-                    bool(raw_permission.get("implicit", False)),
+                    bool(raw_permission.get("Implicit", False)),
                 )
         capability_contexts.append(AIcCapabilityEntitlementContext(
-            str(raw_capability.get("capability_id", "")),
-            int(raw_capability.get("capability_version", 1)),
+            str(raw_capability.get("CapabilityId", "")),
+            int(raw_capability.get("CapabilityVersion", 1)),
             permissions,
         ))
-    diagnostics_raw = raw.get("diagnostics", ())
+    diagnostics_raw = raw.get("Diagnostics", ())
     return AIcEntitlementContext(
-        component_id=str(raw.get("component_id", fallback_component_id)),
+        component_id=str(raw.get("ComponentId", fallback_component_id)),
         capabilities=tuple(capability_contexts),
-        next_transition_at=str(raw["next_transition_at"]) if raw.get("next_transition_at") is not None else None,
+        next_transition_at=str(raw["NextTransitionAt"]) if raw.get("NextTransitionAt") is not None else None,
         diagnostics=tuple(str(v) for v in diagnostics_raw) if isinstance(diagnostics_raw, (list, tuple)) else (),
     )
 
 def _effective_configuration_from_dict(raw: Mapping[str, object]) -> AIcEffectiveConfiguration:
-    target_raw = _as_mapping(raw.get("configuration_target", {}))
+    target_raw = _as_mapping(raw.get("ConfigurationTarget", {}))
     target = AIcConfigurationTarget(
-        AInConfigurationTargetKind(str(target_raw.get("kind", "COMPONENT"))),
-        str(target_raw.get("component_id", "")),
-        str(target_raw["provider_instance_id"]) if target_raw.get("provider_instance_id") is not None else None,
+        AInConfigurationTargetKind(str(target_raw.get("Kind", "component"))),
+        str(target_raw.get("ComponentId", "")),
+        str(target_raw["ProviderInstanceId"]) if target_raw.get("ProviderInstanceId") is not None else None,
     )
     values: dict[str, AIcEffectiveConfigurationValue] = {}
-    raw_values = raw.get("values", {})
+    raw_values = raw.get("Values", {})
     if isinstance(raw_values, Mapping):
         for property_id, item in raw_values.items():
             if not isinstance(item, Mapping):
                 continue
-            policy_raw = item.get("effective_policy", {})
+            policy_raw = item.get("EffectivePolicy", {})
             policy_map = policy_raw if isinstance(policy_raw, Mapping) else {}
             policy = AIcEffectiveConfigurationPolicy(
-                lock=policy_map.get("lock"), has_lock=bool(policy_map.get("has_lock", False)),
-                minimum=policy_map.get("minimum"), maximum=policy_map.get("maximum"),
-                in_set=tuple(policy_map["in_set"]) if isinstance(policy_map.get("in_set"), (list, tuple)) else None,
-                not_in_set=tuple(policy_map.get("not_in_set", ())) if isinstance(policy_map.get("not_in_set", ()), (list, tuple)) else (),
+                lock=policy_map.get("Lock"), has_lock=bool(policy_map.get("HasLock", False)),
+                minimum=policy_map.get("Minimum"), maximum=policy_map.get("Maximum"),
+                in_set=tuple(policy_map["InSet"]) if isinstance(policy_map.get("InSet"), (list, tuple)) else None,
+                not_in_set=tuple(policy_map.get("NotInSet", ())) if isinstance(policy_map.get("NotInSet", ()), (list, tuple)) else (),
                 provenance=(),
             )
             values[str(property_id)] = AIcEffectiveConfigurationValue(
-                str(item.get("property_id", property_id)), item.get("value"),
-                AInConfigurationValueSourceKind(str(item.get("source_kind", "UNDEFINED"))),
+                str(item.get("PropertyId", property_id)), item.get("Value"),
+                AInConfigurationValueSourceKind(str(item.get("SourceKind", "undefined"))),
                 None, policy, (),
             )
     # Resolved scope details are diagnostic here; process providers need effective values/target.
     return AIcEffectiveConfiguration(target, values, ())
 
 def _invocation_from_dict(raw: Mapping[str, object]) -> AIcInvocationInput:
-    return AIcInvocationInput(
-        invocation_id=str(raw["invocation_id"]),
-        parent_invocation_id=str(raw["parent_invocation_id"]) if raw.get("parent_invocation_id") is not None else None,
-        capability_id=str(raw["capability_id"]),
-        capability_version=int(raw["capability_version"]),
-        operation_id=str(raw["operation_id"]),
-        provider_instance_id=str(raw["provider_instance_id"]),
-        arguments=dict(_as_mapping(raw.get("arguments", {}))),
-        operation_parameter_overrides=dict(_as_mapping(raw.get("operation_parameter_overrides", {}))),
-        effective_operation_parameters=dict(_as_mapping(raw.get("effective_operation_parameters", {}))),
-        consumer_instance_id=str(raw["consumer_instance_id"]) if raw.get("consumer_instance_id") is not None else None,
-        requirement_id=str(raw["requirement_id"]) if raw.get("requirement_id") is not None else None,
-        locale=str(raw["locale"]) if raw.get("locale") is not None else None,
-    )
+    return AIcInvocationInput.from_mapping(raw)
 
 def _display_text_from_dict(raw: object) -> AIcDisplayText | None:
     if raw is None:
         return None
     value = _as_mapping(raw)
     return AIcDisplayText(
-        text=str(value["text"]) if value.get("text") is not None else None,
-        resource_key=str(value["resource_key"]) if value.get("resource_key") is not None else None,
+        text=str(value["Text"]) if value.get("Text") is not None else None,
+        resource_key=str(value["ResourceKey"]) if value.get("ResourceKey") is not None else None,
     )
 
 def _operation_interaction_caller_message_from_dict(
     raw: Mapping[str, object]
 ) -> AIcOperationInteractionCallerToProviderMessage:
     return AIcOperationInteractionCallerToProviderMessage(
-        last_accepted_state_result_revision=int(raw.get("last_accepted_state_result_revision", 0)),
-        interaction_mode=AInOperationInteractionMode(str(raw.get("interaction_mode", "FOREGROUND"))),
-        cancellation_requested=bool(raw.get("cancellation_requested", False)),
-        detail_level=AInOperationInteractionDetailLevel(str(raw.get("detail_level", "SUMMARY"))),
-        reporting_interval_ms=(int(raw["reporting_interval_ms"]) if raw.get("reporting_interval_ms") is not None else None),
-        failure_detail_level=AInOperationInteractionFailureDetailLevel(str(raw.get("failure_detail_level", "BASIC"))),
-        state_result_delivery_mode=AInStateResultDeliveryMode(str(raw.get("state_result_delivery_mode", "ON_DEMAND_COMPLETE"))),
-        state_result_request_id=int(raw.get("state_result_request_id", 0)),
+        last_accepted_state_result_revision=int(raw.get("LastAcceptedStateResultRevision", 0)),
+        interaction_mode=AInOperationInteractionMode(str(raw.get("InteractionMode", "foreground"))),
+        cancellation_requested=bool(raw.get("CancellationRequested", False)),
+        detail_level=AInOperationInteractionDetailLevel(str(raw.get("DetailLevel", "summary"))),
+        reporting_interval_ms=(int(raw["ReportingIntervalMs"]) if raw.get("ReportingIntervalMs") is not None else None),
+        failure_detail_level=AInOperationInteractionFailureDetailLevel(str(raw.get("FailureDetailLevel", "basic"))),
+        state_result_delivery_mode=AInStateResultDeliveryMode(str(raw.get("StateResultDeliveryMode", "on_demand_complete"))),
+        state_result_request_id=int(raw.get("StateResultRequestId", 0)),
     )
 
 def _binding_from_dict(raw: Mapping[str, object]) -> AIcBinding:
     return AIcBinding(
-        consumer_instance_id=str(raw["consumer_instance_id"]),
-        requirement_id=str(raw["requirement_id"]),
-        provider_instance_id=str(raw["provider_instance_id"]),
-        capability_id=str(raw["capability_id"]),
-        capability_version=int(raw["capability_version"]),
+        consumer_instance_id=str(raw["ConsumerInstanceId"]),
+        requirement_id=str(raw["RequirementId"]),
+        provider_instance_id=str(raw["ProviderInstanceId"]),
+        capability_id=str(raw["CapabilityId"]),
+        capability_version=int(raw["CapabilityVersion"]),
     )
 
 def _as_mapping(value: object) -> Mapping[str, object]:
@@ -442,7 +435,7 @@ def _as_mapping(value: object) -> Mapping[str, object]:
 
 def _jsonable(value: object) -> object:
     if dataclasses.is_dataclass(value) and not isinstance(value, type):
-        return {field.name: _jsonable(getattr(value, field.name)) for field in dataclasses.fields(value)}
+        return {"".join(part[:1].upper() + part[1:] for part in field.name.split("_")): _jsonable(getattr(value, field.name)) for field in dataclasses.fields(value)}
     if isinstance(value, Enum):
         return value.value
     if isinstance(value, Mapping):

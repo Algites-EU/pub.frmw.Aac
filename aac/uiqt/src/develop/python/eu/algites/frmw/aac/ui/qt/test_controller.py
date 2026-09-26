@@ -21,10 +21,10 @@ def test_simpleaudit_configuration_form_and_update():
 
     instance = controller.provider_instances()[0]
     form = controller.provider_configuration_form(instance.id)
-    assert [field.id for field in form.fields] == ["output", "format"]
-    assert form.fields[1].field_type.value == "ENUM"
-    updated = controller.update_provider_configuration(instance.id, {"output": {"type": "STDOUT"}, "format": "TEXT"})
-    assert core.instances.get(updated.id).configuration["format"] == "TEXT"
+    assert [field.id for field in form.fields] == ["Output", "Format"]
+    assert form.fields[1].field_type.value == "enum"
+    updated = controller.update_provider_configuration(instance.id, {"Output": {"Type": "stdout"}, "Format": "text"})
+    assert core.instances.get(updated.id).configuration["Format"] == "text"
 
 
 def test_requirements_include_unresolved_and_preference_uses_instance_ids():
@@ -64,7 +64,7 @@ def test_observation_topology_round_trip():
     core.provisioning.provision("test", descriptor)
     controller = AIcCoreUiController(core)
     observer = controller.provider_instances()[0]
-    binding = AIcUiObservationBinding(observer.id, (AIcUiObservationSelector("vendor.*", (), (), ("PRE", "POST")),))
+    binding = AIcUiObservationBinding(observer.id, (AIcUiObservationSelector("vendor.*", (), (), ("pre", "post")),))
     controller.put_observation_binding(binding)
     assert controller.observation_bindings() == (binding,)
     controller.delete_observation_binding(observer.id)
@@ -93,7 +93,7 @@ def test_create_provider_instance_can_start_unconfigured():
     core._installed[descriptor.id] = AIcInstalledComponent(AIcDiscoveredComponent(descriptor, None, "test"))
     controller = AIcCoreUiController(core)
     created = controller.create_provider_instance(descriptor.id, "p", "new")
-    assert created.state == "UNCONFIGURED"
+    assert created.state == "unconfigured"
 
 
 def test_scoped_configuration_form_exposes_rw_provider_and_updates_it(tmp_path):
@@ -104,27 +104,27 @@ def test_scoped_configuration_form_exposes_rw_provider_and_updates_it(tmp_path):
     descriptor = core.installed("_AAC.component.simpleaudit").descriptor
     core.provisioning.provision("test", descriptor)
     bootstrap = AIcConfigurationBootstrapLoader.load_text(f"""
-configuration_bootstrap:
-  schema_version: 1
-  default_configuration_profile: p
-  configuration_scope_resolvers:
-    - id: mapping
-      type: MAPPING
-  configuration_providers:
-    - id: workspace-file
-      type: FILESYSTEM
-      settings:
+ConfigurationBootstrap:
+  SchemaVersion: 1
+  DefaultConfigurationProfile: p
+  ConfigurationScopeResolvers:
+    - Id: mapping
+      Type: MAPPING
+  ConfigurationProviders:
+    - Id: workspace-file
+      Type: FILESYSTEM
+      Settings:
         root: {str(tmp_path)!r}
-  configuration_profiles:
-    - id: p
-      version: 1
-      configuration_scopes:
-        - id: workspace
-          type: WORKSPACE
-          resolver: mapping
-          configuration_providers:
-            - id: workspace-file
-              priority: 100
+  ConfigurationProfiles:
+    - Id: p
+      Version: 1
+      ConfigurationScopes:
+        - Id: workspace
+          Type: WORKSPACE
+          Resolver: mapping
+          ConfigurationProviders:
+            - Id: workspace-file
+              Priority: 100
 """)
     core.apply_configuration_bootstrap(bootstrap, context={"WORKSPACE": "w-1"})
     controller = AIcCoreUiController(core, {"configuration_admin": True})
@@ -136,10 +136,10 @@ configuration_bootstrap:
     controller.update_provider_scoped_configuration(
         instance.id, option.configuration_scope.type, option.configuration_scope.id,
         option.configuration_provider_id,
-        {"output": {"type": "STDOUT"}, "format": "TEXT"}, option.record_revision,
+        {"Output": {"Type": "stdout"}, "Format": "text"}, option.record_revision,
     )
     effective = core.resolve_provider_scoped_configuration(instance.id)
-    assert effective.plain_values()["format"] == "TEXT"
+    assert effective.plain_values()["Format"] == "text"
 
 
 def test_entitlement_status_exposes_effective_permission_metadata():
@@ -151,13 +151,13 @@ def test_entitlement_status_exposes_effective_permission_metadata():
         capability_providers=(AIcProviderDefinitionDescriptor("p", (AIcProvidedCapability("vendor.entitled.cap", (1,)),), (AIcProviderImplementationClassDescriptor("python", "vendor:Provider"),)),),
         provided_capability_entitlements=(AIcCapabilityEntitlementDescriptor(
             "vendor.entitled.cap", 1,
-            (AIcPermissionDescriptor("BASIC"),),
+            (AIcPermissionDescriptor("basic"),),
         ),),
     )
     core._installed[descriptor.id] = AIcInstalledComponent(AIcDiscoveredComponent(descriptor, None, "test"))
     status = AIcCoreUiController(core).entitlement_status(descriptor.id)
     assert len(status.permissions) == 1
-    assert status.permissions[0].permission_id == "BASIC"
+    assert status.permissions[0].permission_id == "basic"
     assert status.permissions[0].implicit
 
 
@@ -175,84 +175,84 @@ def test_catalog_browse_download_install_ui_flow(tmp_path):
 
     wheel = tmp_path / "demo.whl"
     descriptor_path = "demo/component.yml"
-    descriptor = '''component:
-  id: com.example.ui-demo
-  version: 2
-  capability_providers:
-    - id: main
-      capabilities:
-        - id: com.example.ui-cap
-          versions: [1]
-      implementation_classes:
-      - technology-kind: python
-        class-name: demo:Provider
-  entitlement_licensing_scopes:
-    - type: USER
-      name: User
-      description: One identified user.
-  provided_capability_entitlements:
-    - capability:
-        id: com.example.ui-cap
-        version: 1
-      permissions:
-        - id: BASIC
-        - id: PRO
-          possible_licensing_scopes: [USER]
+    descriptor = '''Component:
+  Id: com.example.ui-demo
+  Version: 2
+  CapabilityProviders:
+    - Id: main
+      Capabilities:
+        - Id: com.example.ui-cap
+          Versions: [1]
+      ImplementationClasses:
+      - TechnologyKind: python
+        ClassName: demo:Provider
+  EntitlementLicensingScopes:
+    - Type: USER
+      Name: User
+      Description: One identified user.
+  ProvidedCapabilityEntitlements:
+    - Capability:
+        Id: com.example.ui-cap
+        Version: 1
+      Permissions:
+        - Id: basic
+        - Id: PRO
+          PossibleLicensingScopes: [USER]
 '''
     with ZipFile(wheel, "w") as archive:
         archive.writestr(descriptor_path, descriptor)
     digest = hashlib.sha256(wheel.read_bytes()).hexdigest()
     catalog = tmp_path / "catalog.yml"
-    catalog.write_text(f'''catalog:
-  format_version: 1
-  product_id: eu.algites.app.orchestrator
-  technology_id: PYTHON
-  components:
-    - component_id: com.example.ui-demo
-      name: UI Demo
-      description: Catalog UI test component
-      entitlement_info_url: https://example.invalid/license
-      releases:
-        - version: 2
-          provides:
-            - capability: com.example.ui-cap
-              versions: [1]
-          entitlement_licensing_scopes:
-            - type: USER
-              name: User
-              description: One identified user.
-          provided_capability_entitlements:
-            - capability:
-                id: com.example.ui-cap
-                version: 1
-              permissions:
-                - id: BASIC
-                - id: PRO
-                  possible_licensing_scopes: [USER]
-          artifacts:
-            - id: wheel
-              locator:
-                type: URI
-                uri: {wheel.name}
-              artifact_filename: demo.whl
-              package_format: PYTHON_WHEEL
-              descriptor_path: {descriptor_path}
-              sha256: {digest}
-              runtime_package: demo
-              verifier_id: test
+    catalog.write_text(f'''Catalog:
+  FormatVersion: 1
+  ProductId: eu.algites.app.orchestrator
+  TechnologyId: PYTHON
+  Components:
+    - ComponentId: com.example.ui-demo
+      Name: UI Demo
+      Description: Catalog UI test component
+      EntitlementInfoUrl: https://example.invalid/license
+      Releases:
+        - Version: 2
+          Provides:
+            - Capability: com.example.ui-cap
+              Versions: [1]
+          EntitlementLicensingScopes:
+            - Type: USER
+              Name: User
+              Description: One identified user.
+          ProvidedCapabilityEntitlements:
+            - Capability:
+                Id: com.example.ui-cap
+                Version: 1
+              Permissions:
+                - Id: basic
+                - Id: PRO
+                  PossibleLicensingScopes: [USER]
+          Artifacts:
+            - Id: wheel
+              Locator:
+                Type: uri
+                Uri: {wheel.name}
+              ArtifactFilename: demo.whl
+              PackageFormat: PYTHON_WHEEL
+              DescriptorPath: {descriptor_path}
+              Sha256: {digest}
+              RuntimePackage: demo
+              VerifierId: test
 ''', encoding="utf-8")
 
     core = AIcApplicationComponentCore()
     core.configure_package_management(AIcPackageStoreLayout(str(tmp_path / "product")))
     core.register_package_verifier("test", _Verifier())
-    core.apply_catalog_bootstrap(AIcCatalogBootstrapLoader.load_text(f'''catalog_bootstrap:
-  schema_version: 1
-  product_id: eu.algites.app.orchestrator
-  technology_id: PYTHON
-  sources:
-    - id: local
-      type: FILESYSTEM
-      uri: {catalog}
+    core.apply_catalog_bootstrap(AIcCatalogBootstrapLoader.load_text(f'''CatalogBootstrap:
+  SchemaVersion: 1
+  ProductId: eu.algites.app.orchestrator
+  TechnologyId: PYTHON
+  Sources:
+    - Id: local
+      Type: FILESYSTEM
+      Uri: {catalog}
 '''))
     current_descriptor = AIcComponentDescriptor(
         "com.example.ui-demo", 1,
@@ -267,7 +267,7 @@ def test_catalog_browse_download_install_ui_flow(tmp_path):
     (item,) = controller.catalog_packages("eu.algites.app.orchestrator", "PYTHON", "UI Demo")
     assert item.name.fallback == "UI Demo"
     assert item.entitlement_summary == (
-        "com.example.ui-cap/1:BASIC [included]",
+        "com.example.ui-cap/1:basic [included]",
         "com.example.ui-cap/1:PRO [User]",
     )
     assert not item.downloaded and not item.installed
@@ -280,11 +280,11 @@ def test_catalog_browse_download_install_ui_flow(tmp_path):
     assert not solver_result.primary.contains_downgrade
 
     downloaded = controller.download_catalog_package(item.identity)
-    assert downloaded.state == "DOWNLOADED"
+    assert downloaded.state == "downloaded"
     refreshed = controller.catalog_packages("eu.algites.app.orchestrator", "PYTHON", "UI Demo")[0]
     assert refreshed.downloaded and not refreshed.installed
 
     installed = controller.install_catalog_package(item.identity)
-    assert installed.state == "INSTALLED"
+    assert installed.state == "installed"
     refreshed = controller.catalog_packages("eu.algites.app.orchestrator", "PYTHON", "UI Demo")[0]
     assert refreshed.downloaded and refreshed.installed

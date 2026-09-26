@@ -86,10 +86,8 @@ def _response_revision(headers, body):
         try:
             raw = json.loads(body.decode("utf-8"))
             if isinstance(raw, Mapping):
-                if "record_revision" in raw:
-                    return raw["record_revision"]
-                if "revision" in raw:
-                    return raw["revision"]
+                if "RecordRevision" in raw:
+                    return raw["RecordRevision"]
         except Exception:
             pass
     return None
@@ -135,8 +133,8 @@ class AIcHttpConfigurationProvider(AIiConfigurationProvider):
             "configuration_scope_type": request.configuration_scope.type,
             "configuration_scope_id": request.configuration_scope.id or "",
             "target_kind": request.configuration_target.kind.value,
-            "component_id": request.configuration_target.component_id,
-            "provider_instance_id": request.configuration_target.provider_instance_id or "",
+            "ComponentId": request.configuration_target.component_id,
+            "ProviderInstanceId": request.configuration_target.provider_instance_id or "",
         })
         return self.base_url + ("&" if "?" in self.base_url else "?") + query
 
@@ -173,7 +171,7 @@ class AIcHttpConfigurationProvider(AIiConfigurationProvider):
             raise PermissionError("configuration-provider is read-only")
         request = AIcConfigurationProviderRequest(change_set.configuration_target, change_set.configuration_scope, change_set.actor_context)
         if self.mutation_method == "PATCH":
-            body = json.dumps({"configuration_change_set": AIcConfigurationDocumentCodec.encode_change_set(change_set)}).encode("utf-8")
+            body = json.dumps({"ConfigurationChangeSet": AIcConfigurationDocumentCodec.encode_change_set(change_set)}).encode("utf-8")
             status, headers, response = self._request(
                 "PATCH", self._url(request), request.context, body=body, expected_record_revision=change_set.expected_record_revision
             )

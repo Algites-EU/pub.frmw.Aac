@@ -3,63 +3,63 @@
   "title": "AAC Provider Instance 1",
   "type": "object",
   "required": [
-    "id",
-    "component_id",
-    "provider_definition_id",
-    "name",
-    "capabilities",
-    "access_mode",
-    "implementation_class"
+    "Id",
+    "ComponentId",
+    "ProviderDefinitionId",
+    "Name",
+    "Capabilities",
+    "AccessMode",
+    "ImplementationClass"
   ],
   "properties": {
-    "id": {
+    "Id": {
       "type": "string",
       "minLength": 1
     },
-    "component_id": {
+    "ComponentId": {
       "type": "string",
       "minLength": 1
     },
-    "provider_definition_id": {
+    "ProviderDefinitionId": {
       "type": "string",
       "minLength": 1
     },
-    "name": {
+    "Name": {
       "type": "string",
       "minLength": 1
     },
-    "implementation_class": {
+    "ImplementationClass": {
       "type": "string",
       "minLength": 1
     },
-    "configuration_schema": {
+    "ConfigurationSchema": {
       "type": [
         "string",
         "null"
       ]
     },
-    "configuration": {
+    "Configuration": {
       "type": "object"
     },
-    "state": {
+    "State": {
       "type": "string"
     },
-    "capabilities": {
+    "Capabilities": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
         "required": [
-          "id",
-          "versions"
+          "Id",
+          "Versions"
         ],
         "additionalProperties": false,
         "properties": {
-          "id": {
+          "Id": {
             "type": "string",
             "minLength": 1
           },
-          "versions": {
+          "Versions": {
             "type": "array",
             "minItems": 1,
             "uniqueItems": true,
@@ -71,10 +71,10 @@
         }
       }
     },
-    "access_mode": {
+    "AccessMode": {
       "enum": [
-        "READ_ONLY",
-        "READ_WRITE"
+        "read_only",
+        "read_write"
       ]
     }
   },

@@ -1,9 +1,10 @@
-group:
-  id: _AAC.data-entity.storage-backup-restore
-  parent_group_id: _AAC.data-entity
-  name:
-    text: Data Entity Storage Backup and Restore
-    resource_key: aac.data.entity.storage.backup.restore.name
-  description:
-    text: Capabilities that create, inspect, and restore provider-specific consistent backups of one Data Entity storage provider instance.
-    resource_key: aac.data.entity.storage.backup.restore.description
+Group:
+  Id: _AAC.data-entity.storage-backup-restore
+  ParentGroupId: _AAC.data-entity
+  Name:
+    Text: Data Entity Storage Backup and Restore
+    ResourceKey: aac.data.entity.storage.backup.restore.name
+  Description:
+    Text: Capabilities that create, inspect, and restore provider-specific 
+      consistent backups of one Data Entity storage provider instance.
+    ResourceKey: aac.data.entity.storage.backup.restore.description

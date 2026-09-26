@@ -47,19 +47,19 @@ def _resolve_operation_interaction(explicit: AIiOperationInteractionProviderToCa
 
 def _failure_from_output(output: AIcInvocationOutput) -> AIcOperationFailure:
     error = dict(output.error or {})
-    system_message = str(error.pop("message", "operation failed"))
-    exception_type = str(error.pop("type", "AAC.OperationFailure"))
-    stack_trace = str(error.pop("stack_trace")) if error.get("stack_trace") is not None else None
-    error.pop("stack_trace", None)
-    error_code = str(error.pop("error_code")) if error.get("error_code") is not None else None
-    error.pop("error_code", None)
-    user_message_raw = error.pop("user_message", None)
+    system_message = str(error.pop("Message", "operation failed"))
+    exception_type = str(error.pop("Type", "AAC.OperationFailure"))
+    stack_trace = str(error.pop("StackTrace")) if error.get("StackTrace") is not None else None
+    error.pop("StackTrace", None)
+    error_code = str(error.pop("ErrorCode")) if error.get("ErrorCode") is not None else None
+    error.pop("ErrorCode", None)
+    user_message_raw = error.pop("UserMessage", None)
     user_message = None
     if isinstance(user_message_raw, Mapping):
         from eu.algites.frmw.aac.core.presentation.api import normalize_display_text
         user_message = normalize_display_text(user_message_raw)
-    extension = error.pop("extension", None)
-    explicit_details = error.pop("details", None)
+    extension = error.pop("Extension", None)
+    explicit_details = error.pop("Details", None)
     details = dict(explicit_details) if isinstance(explicit_details, Mapping) else {}
     details.update(error)
     return AIcOperationFailure(
@@ -131,10 +131,10 @@ class AIcCoreCapabilityHandle(AIiCapabilityHandle):
                 AInOperationCompletionState.SUCCESS, success_result=output.result
             )
         error = dict(output.error or {})
-        if error.get("type") == "OPERATION_CANCELLED":
+        if error.get("Type") == "OPERATION_CANCELLED":
             return AIcOperationCompletion(
                 AInOperationCompletionState.CANCELLED,
-                cancelled_result=error.get("state_result") if error.get("has_state_result") else None,
+                cancelled_result=error.get("StateResult") if error.get("has_state_result") else None,
             )
         failure = _failure_from_output(output)
         factory = operation_interaction.exception_factory() if operation_interaction is not None else None

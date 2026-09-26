@@ -11,15 +11,15 @@ def _binding_to_dict(binding: AIcBinding) -> dict[str, object]:
     return {
         "consumer_instance_id": binding.consumer_instance_id,
         "requirement_id": binding.requirement_id,
-        "provider_instance_id": binding.provider_instance_id,
-        "capability_id": binding.capability_id,
-        "capability_version": binding.capability_version,
+        "ProviderInstanceId": binding.provider_instance_id,
+        "CapabilityId": binding.capability_id,
+        "CapabilityVersion": binding.capability_version,
     }
 
 def _binding_from_dict(raw) -> AIcBinding:
     return AIcBinding(
-        str(raw["consumer_instance_id"]), str(raw["requirement_id"]), str(raw["provider_instance_id"]),
-        str(raw["capability_id"]), int(raw["capability_version"]),
+        str(raw["consumer_instance_id"]), str(raw["requirement_id"]), str(raw["ProviderInstanceId"]),
+        str(raw["CapabilityId"]), int(raw["CapabilityVersion"]),
     )
 
 class AIcBindingStore:

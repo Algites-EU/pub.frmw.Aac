@@ -25,18 +25,18 @@ def test_builtin_capability_groups_are_nested_and_all_builtin_contracts_are_grou
 def test_group_definition_deduplicates_but_conflicting_definition_is_rejected():
     groups = AIcCapabilityGroupCatalog()
     text = """
-group:
-  id: vendor.storage
-  name: Vendor storage
+Group:
+  Id: vendor.storage
+  Name: Vendor storage
 """
     first = groups.admit_text(text, source="a")
     second = groups.admit_text(text, source="b")
     assert first.fingerprint == second.fingerprint
     with pytest.raises(AIxContractConflictError):
         groups.admit_text("""
-group:
-  id: vendor.storage
-  name: Different name
+Group:
+  Id: vendor.storage
+  Name: Different name
 """, source="c")
 
 
@@ -44,12 +44,12 @@ def test_contract_with_unknown_group_is_rejected():
     catalog = AIcActiveContractCatalog()
     with pytest.raises(AIxContractAdmissionError, match="unknown group"):
         catalog.admit_text("""
-capability:
-  id: vendor.capability
-  version: 1
-  group_id: vendor.missing
-operations:
-  - id: run
+Capability:
+  Id: vendor.capability
+  Version: 1
+  GroupId: vendor.missing
+Operations:
+  - Id: run
 """)
 
 
@@ -57,13 +57,13 @@ def test_direct_changes_schema_enforces_expected_revision_for_replace_and_delete
     catalog = AIcActiveContractCatalog()
     catalog.admit_builtin_contracts()
     schema = "data-entity-apply-direct-record-changes-request_1.json"
-    valid = {"changes": [{
-        "change_id": "c1", "type": "REPLACE_RECORD", "schema_id": "x", "uid": "u1",
-        "schema_version": 2, "state": "ACTIVE", "payload": {"v": 1}, "expected_record_revision": 4
+    valid = {"Changes": [{
+        "ChangeId": "c1", "Type": "replace_record", "SchemaId": "x", "Uid": "u1",
+        "SchemaVersion": 2, "State": "active", "Payload": {"v": 1}, "ExpectedRecordRevision": 4
     }]}
     assert catalog.schema_registry.normalize(schema, valid, apply_defaults=False) == valid
-    invalid = {"changes": [{
-        "change_id": "c1", "type": "DELETE_RECORD", "schema_id": "x", "uid": "u1"
+    invalid = {"Changes": [{
+        "ChangeId": "c1", "Type": "delete_record", "SchemaId": "x", "Uid": "u1"
     }]}
     with pytest.raises(Exception):
         catalog.schema_registry.normalize(schema, invalid, apply_defaults=False)
@@ -72,10 +72,10 @@ def test_direct_changes_schema_enforces_expected_revision_for_replace_and_delete
 def test_query_schema_applies_portable_defaults():
     catalog = AIcActiveContractCatalog()
     catalog.admit_builtin_contracts()
-    value = catalog.schema_registry.normalize("data-entity-query-records-request_1.json", {"schema_id": "x"})
-    assert value["states"] == ["ACTIVE"]
-    assert value["reference_match"] == "ALL"
-    assert value["order"] == "UID_ASC"
+    value = catalog.schema_registry.normalize("data-entity-query-records-request_1.json", {"SchemaId": "x"})
+    assert value["States"] == ["active"]
+    assert value["ReferenceMatch"] == "all"
+    assert value["Order"] == "uid_asc"
     assert "limit" not in value
 
 

@@ -5,38 +5,38 @@
   "title": "Data Entity Query Records Running Complete Result 1",
   "type": "object",
   "required": [
-    "records",
-    "continuation_token"
+    "Records",
+    "ContinuationToken"
   ],
   "additionalProperties": false,
   "properties": {
-    "records": {
+    "Records": {
       "type": "array",
       "items": {
         "type": "object",
         "required": [
-          "uid",
-          "schema_id",
-          "schema_version",
-          "record_revision",
-          "state",
-          "payload"
+          "Uid",
+          "SchemaId",
+          "SchemaVersion",
+          "RecordRevision",
+          "State",
+          "Payload"
         ],
         "additionalProperties": false,
         "properties": {
-          "uid": {
+          "Uid": {
             "type": "string",
             "minLength": 1
           },
-          "schema_id": {
+          "SchemaId": {
             "type": "string",
             "minLength": 1
           },
-          "schema_version": {
+          "SchemaVersion": {
             "type": "integer",
             "minimum": 1
           },
-          "record_revision": {
+          "RecordRevision": {
             "oneOf": [
               {
                 "type": "integer",
@@ -48,19 +48,19 @@
               }
             ]
           },
-          "state": {
+          "State": {
             "enum": [
-              "ACTIVE",
-              "TOMBSTONE"
+              "active",
+              "tombstone"
             ]
           },
-          "payload": {
+          "Payload": {
             "type": "object"
           }
         }
       }
     },
-    "continuation_token": {
+    "ContinuationToken": {
       "oneOf": [
         {
           "type": "string",

@@ -1,4 +1,6 @@
-artifact:
-  name: Algites Application Components Core Implementation
-  description: Reusable implementations of the Algites Application Components runtime in specified technologies
-  technologyKinds: [python]
+Artifact:
+  TechnologyKinds:
+  - python
+  Name: Algites Application Components Core Implementation
+  Description: Reusable implementations of the Algites Application Components 
+    runtime in specified technologies

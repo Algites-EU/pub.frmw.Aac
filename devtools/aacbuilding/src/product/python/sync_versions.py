@@ -22,5 +22,5 @@ def main():
             if a.check: bad.append(str(p.relative_to(ROOT)))
             else: p.write_text(exp,encoding='utf-8')
     if bad:
-        raise SystemExit('version metadata not synchronized with repository versionContext: '+', '.join(bad))
+        raise SystemExit('version metadata not synchronized with repository Version: '+', '.join(bad))
 if __name__=='__main__': main()

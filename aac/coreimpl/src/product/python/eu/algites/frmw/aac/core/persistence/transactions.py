@@ -20,15 +20,15 @@ def _now() -> str:
 
 def _read_to_raw(item: AIcPersistenceTransactionRead) -> dict[str, object]:
     return {
-        "record_id": item.record_id,
-        "expected_record_revision": item.expected_record_revision,
-        "expect_absent": item.expect_absent,
+        "RecordId": item.record_id,
+        "ExpectedRecordRevision": item.expected_record_revision,
+        "ExpectAbsent": item.expect_absent,
     }
 
 def _write_to_raw(item: AIcPersistenceTransactionWrite) -> dict[str, object]:
     return {
-        "record_id": item.record_id,
-        "operation": item.operation,
-        "target_record_revision": item.target_record_revision,
-        "metadata": dict(item.metadata),
+        "RecordId": item.record_id,
+        "Operation": item.operation,
+        "TargetRecordRevision": item.target_record_revision,
+        "Metadata": dict(item.metadata),
     }

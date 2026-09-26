@@ -3,60 +3,60 @@
   "title": "AAC Observation Input 1",
   "type": "object",
   "required": [
-    "invocation_id",
-    "phase",
-    "capability_id",
-    "capability_version",
-    "operation_id",
-    "provider_instance_id"
+    "InvocationId",
+    "Phase",
+    "CapabilityId",
+    "CapabilityVersion",
+    "OperationId",
+    "ProviderInstanceId"
   ],
   "properties": {
-    "invocation_id": {
+    "InvocationId": {
       "type": "string"
     },
-    "parent_invocation_id": {
+    "ParentInvocationId": {
       "type": [
         "string",
         "null"
       ]
     },
-    "phase": {
+    "Phase": {
       "enum": [
-        "PRE",
-        "POST"
+        "pre",
+        "post"
       ]
     },
-    "capability_id": {
+    "CapabilityId": {
       "type": "string"
     },
-    "capability_version": {
+    "CapabilityVersion": {
       "type": "integer",
       "minimum": 1
     },
-    "operation_id": {
+    "OperationId": {
       "type": "string"
     },
-    "provider_instance_id": {
+    "ProviderInstanceId": {
       "type": "string"
     },
-    "arguments": {
+    "Arguments": {
       "type": "object"
     },
-    "outcome": {
+    "Outcome": {
       "enum": [
-        "SUCCESS",
-        "ERROR",
+        "success",
+        "error",
         null
       ]
     },
-    "result": {},
-    "error": {
+    "Result": {},
+    "Error": {
       "type": [
         "object",
         "null"
       ]
     },
-    "metadata": {
+    "Metadata": {
       "type": "object"
     }
   },

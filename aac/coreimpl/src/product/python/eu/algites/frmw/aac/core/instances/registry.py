@@ -17,36 +17,36 @@ def instance_to_dict(instance: AIcProviderInstance) -> dict[str, object]:
 
 def _instance_to_dict(instance: AIcProviderInstance) -> dict[str, object]:
     return {
-        "id": instance.id,
-        "component_id": instance.component_id,
-        "provider_definition_id": instance.provider_definition_id,
-        "name": instance.name,
-        "capabilities": [
-            {"id": capability.id, "versions": list(capability.versions)}
+        "Id": instance.id,
+        "ComponentId": instance.component_id,
+        "ProviderDefinitionId": instance.provider_definition_id,
+        "Name": instance.name,
+        "Capabilities": [
+            {"Id": capability.id, "Versions": list(capability.versions)}
             for capability in instance.capabilities
         ],
-        "implementation_class": instance.implementation_class,
-        "access_mode": instance.access_mode.value,
-        "configuration": dict(instance.configuration),
-        "configuration_schema": instance.configuration_schema,
-        "state": instance.state.value,
+        "ImplementationClass": instance.implementation_class,
+        "AccessMode": instance.access_mode.value,
+        "Configuration": dict(instance.configuration),
+        "ConfigurationSchema": instance.configuration_schema,
+        "State": instance.state.value,
     }
 
 def _instance_from_dict(raw: dict[str, object] | object) -> AIcProviderInstance:
     if not isinstance(raw, dict):
         raise ValueError("persisted provider instance must be an object")
     return AIcProviderInstance(
-        id=str(raw["id"]),
-        component_id=str(raw["component_id"]),
-        provider_definition_id=str(raw["provider_definition_id"]),
-        name=str(raw["name"]),
+        id=str(raw["Id"]),
+        component_id=str(raw["ComponentId"]),
+        provider_definition_id=str(raw["ProviderDefinitionId"]),
+        name=str(raw["Name"]),
         capabilities=tuple(
-            AIcProvidedCapability(str(item["id"]), tuple(int(version) for version in item["versions"]))
-            for item in raw["capabilities"]
+            AIcProvidedCapability(str(item["Id"]), tuple(int(version) for version in item["Versions"]))
+            for item in raw["Capabilities"]
         ),
-        implementation_class=str(raw["implementation_class"]),
-        access_mode=AInProviderAccessMode(str(raw.get("access_mode", AInProviderAccessMode.READ_WRITE.value))),
-        configuration=dict(raw.get("configuration", {})),
-        configuration_schema=str(raw["configuration_schema"]) if raw.get("configuration_schema") is not None else None,
-        state=AInProviderInstanceState(str(raw.get("state", AInProviderInstanceState.CONFIGURED.value))),
+        implementation_class=str(raw["ImplementationClass"]),
+        access_mode=AInProviderAccessMode(str(raw.get("AccessMode", AInProviderAccessMode.READ_WRITE.value))),
+        configuration=dict(raw.get("Configuration", {})),
+        configuration_schema=str(raw["ConfigurationSchema"]) if raw.get("ConfigurationSchema") is not None else None,
+        state=AInProviderInstanceState(str(raw.get("State", AInProviderInstanceState.CONFIGURED.value))),
     )

@@ -25,4 +25,4 @@ class AIcRetireStorageSupportFacade(AIcBoundDataEntityCapabilityFacade):
     write_operation = True
 
     def retire(self, schema_id: str, schema_version: int) -> Mapping[str, object]:
-        return self._invoke("retire", {"schema_id": schema_id, "schema_version": schema_version})
+        return self._invoke("retire", {"SchemaId": schema_id, "SchemaVersion": schema_version})

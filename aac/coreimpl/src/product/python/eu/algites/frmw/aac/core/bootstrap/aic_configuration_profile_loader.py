@@ -39,14 +39,14 @@ class AIcConfigurationProfileLoader:
                 path = "$" + "".join(f"[{p}]" if isinstance(p, int) else f".{p}" for p in error.absolute_path)
                 rendered.append(f"{path}: {error.message}")
             raise AIxDescriptorError(f"{source}: configuration profile schema validation failed: " + "; ".join(rendered))
-        body = raw["configuration_profile"]
+        body = raw["ConfigurationProfile"]
         scopes = []
-        for item in body.get("configuration_scopes", ()):
+        for item in body.get("ConfigurationScopes", ()):
             scopes.append(AIcConfigurationScopeDefinition(
-                id=str(item["id"]), configuration_scope_type=str(item["type"]),
-                configuration_scope_resolver_id=str(item["resolver"]),
-                name=normalize_display_text(item.get("name")), description=normalize_display_text(item.get("description")),
-                configuration_providers=tuple(AIcConfigurationProviderBinding(str(v["id"]), int(v.get("priority", 0))) for v in item.get("configuration_providers", ())),
-                policy_authority=bool(item.get("policy_authority", True)), mandatory=bool(item.get("mandatory", False)),
+                id=str(item["Id"]), configuration_scope_type=str(item["Type"]),
+                configuration_scope_resolver_id=str(item["Resolver"]),
+                name=normalize_display_text(item.get("Name")), description=normalize_display_text(item.get("Description")),
+                configuration_providers=tuple(AIcConfigurationProviderBinding(str(v["Id"]), int(v.get("Priority", 0))) for v in item.get("ConfigurationProviders", ())),
+                policy_authority=bool(item.get("PolicyAuthority", True)), mandatory=bool(item.get("Mandatory", False)),
             ))
-        return AIcConfigurationProfile(str(body["id"]), int(body["version"]), tuple(scopes), name=normalize_display_text(body.get("name")), description=normalize_display_text(body.get("description")))
+        return AIcConfigurationProfile(str(body["Id"]), int(body["Version"]), tuple(scopes), name=normalize_display_text(body.get("Name")), description=normalize_display_text(body.get("Description")))

@@ -1,9 +1,10 @@
-group:
-  id: _AAC.data-entity.loading
-  parent_group_id: _AAC.data-entity
-  name:
-    text: Data Entity Loading
-    resource_key: aac.data.entity.loading.name
-  description:
-    text: Capabilities that load Data Entity records without directly mutating storage.
-    resource_key: aac.data.entity.loading.description
+Group:
+  Id: _AAC.data-entity.loading
+  ParentGroupId: _AAC.data-entity
+  Name:
+    Text: Data Entity Loading
+    ResourceKey: aac.data.entity.loading.name
+  Description:
+    Text: Capabilities that load Data Entity records without directly mutating 
+      storage.
+    ResourceKey: aac.data.entity.loading.description

@@ -41,7 +41,7 @@ def make_wheel(root: Path, *, component_id="com.example.demo", version=1, filena
     wheel = root / filename
     descriptor_path = "demo/component.yml"
     with ZipFile(wheel, "w") as archive:
-        archive.writestr(descriptor_path, f"component:\n  id: {component_id}\n  version: {version}\n")
+        archive.writestr(descriptor_path, f"Component:\n  Id: {component_id}\n  Version: {version}\n")
     return wheel, descriptor_path
 
 
@@ -76,11 +76,11 @@ def test_legacy_package_selection_state_migrates_to_authoritative_manifest(tmp_p
     state_path = tmp_path / "core-state.json"
     store = AIcJsonFileStateStore(state_path)
     store.put("aac.packages.selection", "app:com.example.demo", {
-        "component_version": 1,
-        "sha256": "a" * 64,
-        "selected_at": "2026-09-15T00:00:00+00:00",
-        "previous_sha256": None,
-        "previous_version": None,
+        "ComponentVersion": 1,
+        "Sha256": "a" * 64,
+        "SelectedAt": "2026-09-15T00:00:00+00:00",
+        "PreviousSha256": None,
+        "PreviousVersion": None,
     })
 
     manager = AIcPackageManager(AIcPackageStoreLayout(str(product)), store=store)
@@ -202,7 +202,7 @@ def test_paid_component_without_implicit_or_effective_permission_blocks_only_aut
         ),),
         provided_capability_entitlements=(AIcCapabilityEntitlementDescriptor(
             "com.example.cap", 1,
-            (AIcPermissionDescriptor("BASIC"),),
+            (AIcPermissionDescriptor("basic"),),
         ),),
     )
     assert AIcPackageManager.automatic_entitlement_allows(free_descriptor, set())
@@ -210,43 +210,43 @@ def test_paid_component_without_implicit_or_effective_permission_blocks_only_aut
 
 def test_package_bootstrap_and_workspace_documents_load(tmp_path):
     bootstrap = AIcPackageBootstrapLoader.load_text(f"""
-package_bootstrap:
-  schema_version: 1
-  layout:
-    product_root: {tmp_path}
-    package_store_subdirectory: components
-  sources:
-    - id: local
-      uri: {tmp_path}/packages.yml
-      verifier_id: sigstore
+PackageBootstrap:
+  SchemaVersion: 1
+  Layout:
+    ProductRoot: {tmp_path}
+    PackageStoreSubdirectory: components
+  Sources:
+    - Id: local
+      Uri: {tmp_path}/packages.yml
+      VerifierId: sigstore
 """)
     assert bootstrap.layout.package_store_subdirectory == "components"
     assert bootstrap.layout.downloaded_subdirectory == "downloaded"
     assert bootstrap.sources[0].verifier_id == "sigstore"
 
     requirements = AIcWorkspaceComponentRequirementsLoader.load_text("""
-workspace_component_requirements:
-  workspace_id: ws-1
-  update_policy: AUTO_COMPATIBLE
-  requirements:
-    - component_id: com.example.demo
-      versions: [1, 2]
+WorkspaceComponentRequirements:
+  WorkspaceId: ws-1
+  UpdatePolicy: auto_compatible
+  Requirements:
+    - ComponentId: com.example.demo
+      Versions: [1, 2]
 """)
     assert requirements.update_policy is AInPackageUpdatePolicy.AUTO_COMPATIBLE
 
     digest = "a" * 64
     lock = AIcWorkspaceComponentLockLoader.load_text(f"""
-workspace_component_lock:
-  workspace_id: ws-1
-  entries:
-    - component_id: com.example.demo
-      component_version: 2
-      sha256: {digest}
-      source_id: local
-      artifact_uri: file:///demo.whl
-      artifact_filename: demo.whl
-      package_format: PYTHON_WHEEL
-      descriptor_path: demo/component.yml
+WorkspaceComponentLock:
+  WorkspaceId: ws-1
+  Entries:
+    - ComponentId: com.example.demo
+      ComponentVersion: 2
+      Sha256: {digest}
+      SourceId: local
+      ArtifactUri: file:///demo.whl
+      ArtifactFilename: demo.whl
+      PackageFormat: PYTHON_WHEEL
+      DescriptorPath: demo/component.yml
 """)
     assert lock.entry("com.example.demo").sha256 == digest
 
@@ -309,17 +309,17 @@ def test_manifest_package_source_resolves_relative_artifact_uri(tmp_path):
     digest = hashlib.sha256(wheel.read_bytes()).hexdigest()
     manifest = source / "packages.yml"
     manifest.write_text(f"""
-format_version: 1
-packages:
-  - component_id: com.example.demo
-    component_version: 1
-    artifact_uri: demo.whl
-    artifact_filename: demo.whl
-    package_format: PYTHON_WHEEL
-    descriptor_path: {descriptor_path}
-    sha256: {digest}
-    runtime_package: demo
-    verifier_id: test
+FormatVersion: 1
+Packages:
+  - ComponentId: com.example.demo
+    ComponentVersion: 1
+    ArtifactUri: demo.whl
+    ArtifactFilename: demo.whl
+    PackageFormat: PYTHON_WHEEL
+    DescriptorPath: {descriptor_path}
+    Sha256: {digest}
+    RuntimePackage: demo
+    VerifierId: test
 """, encoding="utf-8")
     from eu.algites.frmw.aac.core.packages.store import AIcManifestPackageSource
     package_source = AIcManifestPackageSource("repo", str(manifest))
@@ -332,16 +332,16 @@ packages:
 
 def test_package_bootstrap_registers_manifest_source(tmp_path):
     manifest = tmp_path / "packages.yml"
-    manifest.write_text("format_version: 1\npackages: []\n", encoding="utf-8")
+    manifest.write_text("FormatVersion: 1\nPackages: []\n", encoding="utf-8")
     bootstrap = AIcPackageBootstrapLoader.load_text(f"""
-package_bootstrap:
-  schema_version: 1
-  layout:
-    product_root: {tmp_path}/product
-  sources:
-    - id: repo
-      uri: {manifest}
-      priority: 10
+PackageBootstrap:
+  SchemaVersion: 1
+  Layout:
+    ProductRoot: {tmp_path}/product
+  Sources:
+    - Id: repo
+      Uri: {manifest}
+      Priority: 10
 """)
     core = AIcApplicationComponentCore()
     core.apply_package_bootstrap(bootstrap)
@@ -419,18 +419,18 @@ def test_interrupted_precommit_transaction_restores_source_core_state_on_startup
     manager = AIcPackageManager(AIcPackageStoreLayout(str(product)), store=store)
     old, new = _installed_demo_versions(tmp_path, manager)
     manager.selections.select("app", old)
-    store.put("test", "marker", {"value": "source"})
+    store.put("test", "marker", {"Value": "source"})
     snapshot = store.snapshot()
 
     tx = manager.begin_replacement_transaction("app", (new,), snapshot)
     manager.mark_replacement_cutover_started(tx)
-    store.put("test", "marker", {"value": "target-uncommitted"})
+    store.put("test", "marker", {"Value": "target-uncommitted"})
 
     recovered_store = AIcJsonFileStateStore(state_path)
     recovered = AIcPackageManager(AIcPackageStoreLayout(str(product)), store=recovered_store)
     assert recovered.transaction_recovery is not None
     assert recovered.transaction_recovery.action == "RESTORED_SOURCE_STATE"
-    assert recovered_store.get("test", "marker") == {"value": "source"}
+    assert recovered_store.get("test", "marker") == {"Value": "source"}
     selection = recovered.selections.get("app", "com.example.demo")
     assert selection is not None and selection.component_version == 1
     assert not recovered.transactions.active_pointer.exists()
@@ -444,10 +444,10 @@ def test_interrupted_postcommit_transaction_recovers_forward_and_finishes_cleanu
     manager = AIcPackageManager(AIcPackageStoreLayout(str(product)), store=store)
     old, new = _installed_demo_versions(tmp_path, manager)
     manager.selections.select("app", old)
-    store.put("test", "marker", {"value": "source"})
+    store.put("test", "marker", {"Value": "source"})
     tx = manager.begin_replacement_transaction("app", (new,), store.snapshot())
     manager.mark_replacement_cutover_started(tx)
-    store.put("test", "marker", {"value": "target"})
+    store.put("test", "marker", {"Value": "target"})
     committed, _ = manager.commit_replacement_selections(tx)
     assert committed.last_transaction_id == tx.transaction_id
     assert manager.package_store.find("com.example.demo", 1, old.sha256) is not None
@@ -456,7 +456,7 @@ def test_interrupted_postcommit_transaction_recovers_forward_and_finishes_cleanu
     recovered = AIcPackageManager(AIcPackageStoreLayout(str(product)), store=recovered_store)
     assert recovered.transaction_recovery is not None
     assert recovered.transaction_recovery.action == "COMPLETED_TARGET_CLEANUP"
-    assert recovered_store.get("test", "marker") == {"value": "target"}
+    assert recovered_store.get("test", "marker") == {"Value": "target"}
     selection = recovered.selections.get("app", "com.example.demo")
     assert selection is not None and selection.component_version == 2
     assert recovered.package_store.find("com.example.demo", 1, old.sha256) is None
@@ -468,12 +468,12 @@ def test_interrupted_postcommit_transaction_recovers_forward_and_finishes_cleanu
 
 
 def test_package_bootstrap_can_override_core_transaction_state_folders(tmp_path):
-    text = f"""package_bootstrap:
-  schema_version: 1
-  layout:
-    product_root: {tmp_path / 'product'}
-    core_state_subdirectory: durable-aac
-    transactions_subdirectory: replacement-journal
+    text = f"""PackageBootstrap:
+  SchemaVersion: 1
+  Layout:
+    ProductRoot: {tmp_path / 'product'}
+    CoreStateSubdirectory: durable-aac
+    TransactionsSubdirectory: replacement-journal
 """
     bootstrap = AIcPackageBootstrapLoader.load_text(text)
     assert bootstrap.layout.core_state_subdirectory == "durable-aac"
@@ -489,14 +489,14 @@ def test_replacement_cutover_revalidates_core_state_before_first_mutation(tmp_pa
     manager = AIcPackageManager(AIcPackageStoreLayout(str(product)), store=store)
     old, new = _installed_demo_versions(tmp_path, manager)
     manager.selections.select("app", old)
-    store.put("test", "marker", {"value": "source"})
+    store.put("test", "marker", {"Value": "source"})
     transaction = manager.begin_replacement_transaction("app", (new,), store.snapshot())
 
     second_process_view = AIcJsonFileStateStore(state_path)
-    second_process_view.put("test", "marker", {"value": "concurrent"})
+    second_process_view.put("test", "marker", {"Value": "concurrent"})
 
     with pytest.raises(AIxPersistenceRevisionConflict):
         manager.mark_replacement_cutover_started(transaction)
 
-    assert store.get("test", "marker") == {"value": "concurrent"}
+    assert store.get("test", "marker") == {"Value": "concurrent"}
     manager.rollback_replacement_transaction(transaction, ("pre-cutover conflict",))

@@ -38,7 +38,7 @@ from .aic_host_channel import AIcHostChannel
 
 def _jsonable(value: object) -> object:
     if dataclasses.is_dataclass(value) and not isinstance(value, type):
-        return {field.name: _jsonable(getattr(value, field.name)) for field in dataclasses.fields(value)}
+        return {"".join(part[:1].upper() + part[1:] for part in field.name.split("_")): _jsonable(getattr(value, field.name)) for field in dataclasses.fields(value)}
     if isinstance(value, Enum):
         return value.value
     if isinstance(value, Mapping):
@@ -54,37 +54,37 @@ class AIcProcessOperationInteraction(AIiOperationInteractionProviderToCaller):
 
     def declare_features(self, features: AIcOperationInteractionFeatures) -> None:
         self._channel.write({
-            "kind": "operation_interaction_features",
-            "invocation_id": self._invocation_id,
-            "features": _jsonable(features),
+            "Kind": "operation_interaction_features",
+            "InvocationId": self._invocation_id,
+            "Features": _jsonable(features),
         })
 
     def report_events(self, events: tuple[AIcOperationInteractionEvent, ...]) -> None:
         if not events:
             return
         self._channel.write({
-            "kind": "operation_interaction_events",
-            "invocation_id": self._invocation_id,
-            "events": _jsonable(events),
+            "Kind": "operation_interaction_events",
+            "InvocationId": self._invocation_id,
+            "Events": _jsonable(events),
         })
 
     def state_result_changed(self) -> int:
         result = self._channel._operation_interaction_request(
             self._invocation_id, "operation_interaction_state_result_changed"
         )
-        return int(result["revision"])
+        return int(result["Revision"])
 
     def update_state_result(self, state_result: object) -> int:
         result = self._channel._operation_interaction_request(
             self._invocation_id, "operation_interaction_update_state_result",
-            {"state_result": _jsonable(state_result)},
+            {"StateResult": _jsonable(state_result)},
         )
-        return int(result["revision"])
+        return int(result["Revision"])
 
     def deliver_state_result(self, state_result: object, *, revision: int | None = None) -> None:
         self._channel._operation_interaction_request(
             self._invocation_id, "operation_interaction_deliver_state_result",
-            {"state_result": _jsonable(state_result), "revision": revision},
+            {"StateResult": _jsonable(state_result), "Revision": revision},
         )
 
     def caller_snapshot(self) -> AIcOperationInteractionCallerToProviderMessage:

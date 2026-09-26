@@ -1,29 +1,31 @@
-capability:
-  id: _AAC.data-entity.restore-storage-backup
-  version: 1
-  group_id: _AAC.data-entity.storage-backup-restore
-  name:
-    text: Restore Data Entity storage backup
-    resource_key: aac.data.entity.restore.storage.backup.name
-  description:
-    text: Restores one provider-specific physical backup into the explicitly selected
-      provider instance.
-    resource_key: aac.data.entity.restore.storage.backup.description
-operations:
-- id: restore_backup
-  name:
-    text: Restore storage backup
-    resource_key: aac.data.entity.restore.storage.backup.operation.restore.backup.name
-  description:
-    text: Restores one provider-specific physical backup into the explicitly selected
-      provider instance.
-    resource_key: aac.data.entity.restore.storage.backup.operation.restore.backup.description
-  interactions:
-  - kind: INPUT
-    schema:
-      id: _AAC.schema.data-entity-restore-storage-backup-request
-      version: 1
-  - kind: FINAL_SUCCESS_STATE_RESULT
-    schema:
-      id: _AAC.schema.data-entity-restore-storage-backup-result
-      version: 1
+Capability:
+  Id: _AAC.data-entity.restore-storage-backup
+  Version: 1
+  GroupId: _AAC.data-entity.storage-backup-restore
+  Name:
+    Text: Restore Data Entity storage backup
+    ResourceKey: aac.data.entity.restore.storage.backup.name
+  Description:
+    Text: Restores one provider-specific physical backup into the explicitly 
+      selected provider instance.
+    ResourceKey: aac.data.entity.restore.storage.backup.description
+Operations:
+- Id: restore_backup
+  Name:
+    Text: Restore storage backup
+    ResourceKey: 
+      aac.data.entity.restore.storage.backup.operation.restore.backup.name
+  Description:
+    Text: Restores one provider-specific physical backup into the explicitly 
+      selected provider instance.
+    ResourceKey: 
+      aac.data.entity.restore.storage.backup.operation.restore.backup.description
+  Interactions:
+  - Kind: input
+    Schema:
+      Id: _AAC.schema.data-entity-restore-storage-backup-request
+      Version: 1
+  - Kind: final_success_state_result
+    Schema:
+      Id: _AAC.schema.data-entity-restore-storage-backup-result
+      Version: 1

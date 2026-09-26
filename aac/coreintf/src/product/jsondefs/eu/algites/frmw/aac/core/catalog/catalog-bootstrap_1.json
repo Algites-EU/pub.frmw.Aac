@@ -2,73 +2,73 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "required": [
-    "catalog_bootstrap"
+    "CatalogBootstrap"
   ],
   "additionalProperties": false,
   "properties": {
-    "catalog_bootstrap": {
+    "CatalogBootstrap": {
       "type": "object",
       "required": [
-        "schema_version",
-        "product_id",
-        "technology_id"
+        "SchemaVersion",
+        "ProductId",
+        "TechnologyId"
       ],
       "additionalProperties": false,
       "properties": {
-        "schema_version": {
+        "SchemaVersion": {
           "const": 1
         },
-        "product_id": {
+        "ProductId": {
           "type": "string",
           "minLength": 1
         },
-        "technology_id": {
+        "TechnologyId": {
           "type": "string",
           "minLength": 1
         },
-        "sources": {
+        "Sources": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "type",
-              "uri"
+              "Id",
+              "Type",
+              "Uri"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "type": {
+              "Type": {
                 "type": "string",
                 "minLength": 1
               },
-              "uri": {
+              "Uri": {
                 "type": "string",
                 "minLength": 1
               },
-              "authentication_profile_id": {
+              "AuthenticationProfileId": {
                 "type": "string",
                 "minLength": 1
               },
-              "priority": {
+              "Priority": {
                 "type": "integer"
               },
-              "settings": {
+              "Settings": {
                 "type": "object"
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               }
             }
           }
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         }
       }
@@ -86,11 +86,11 @@
           "additionalProperties": false,
           "minProperties": 1,
           "properties": {
-            "text": {
+            "Text": {
               "type": "string",
               "minLength": 1
             },
-            "resource_key": {
+            "ResourceKey": {
               "type": "string",
               "minLength": 1
             }

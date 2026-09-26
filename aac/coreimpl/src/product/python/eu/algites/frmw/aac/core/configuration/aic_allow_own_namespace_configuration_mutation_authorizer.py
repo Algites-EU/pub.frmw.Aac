@@ -31,18 +31,18 @@ class AIcAllowOwnNamespaceConfigurationMutationAuthorizer(AIiConfigurationMutati
     """Baseline Core authorizer: caller may mutate only its own component namespace.
 
     Product profiles can replace this with principal/role-aware authorization.  The actor
-    component id is supplied as ``actor_context['component_id']``; product/UI administrative
+    component id is supplied as ``actor_context['ComponentId']``; product/UI administrative
     principals may set ``configuration_admin=True``.
     """
 
     def authorized_capabilities(self, request, actor_context, provider_capabilities):
         technical = tuple(provider_capabilities)
-        if actor_context.get("configuration_admin") is True or actor_context.get("component_id") == request.configuration_target.component_id:
+        if actor_context.get("configuration_admin") is True or actor_context.get("ComponentId") == request.configuration_target.component_id:
             return technical
         return tuple(item for item in technical if item is AInConfigurationProviderCapability.READ)
 
     def authorize(self, change_set: AIcConfigurationChangeSet) -> tuple[bool, tuple[str, ...]]:
-        actor = change_set.actor_context.get("component_id")
+        actor = change_set.actor_context.get("ComponentId")
         if change_set.actor_context.get("configuration_admin") is True:
             return True, ()
         if actor == change_set.configuration_target.component_id:

@@ -83,7 +83,7 @@ def _read_uri(
         path = Path(unquote(parsed.path)) if parsed.scheme == "file" else Path(uri)
         return path.read_bytes()
     if parsed.scheme not in {"http", "https"}:
-        raise AIxPackageManagementError(f"unsupported package URI scheme {parsed.scheme!r}")
+        raise AIxPackageManagementError(f"unsupported package uri scheme {parsed.scheme!r}")
     material = authentication.material(
         authentication_profile_id, transport_kind="HTTP", endpoint=uri, context=context
     ) if authentication is not None else AIcAuthenticationMaterial()
@@ -116,35 +116,35 @@ class AIcPackageStore:
     def _write_record(self, directory: Path, record: AIcStoredPackage) -> None:
         directory.mkdir(parents=True, exist_ok=True)
         raw = {
-            "component_id": record.component_id,
-            "component_version": record.component_version,
-            "sha256": record.sha256,
-            "state": record.state.value,
-            "artifact_filename": Path(record.artifact_path).name,
-            "package_format": record.package_format,
-            "descriptor_path": record.descriptor_path,
-            "runtime_package": record.runtime_package,
+            "ComponentId": record.component_id,
+            "ComponentVersion": record.component_version,
+            "Sha256": record.sha256,
+            "State": record.state.value,
+            "ArtifactFilename": Path(record.artifact_path).name,
+            "PackageFormat": record.package_format,
+            "DescriptorPath": record.descriptor_path,
+            "RuntimePackage": record.runtime_package,
             "provenance": {
-                "source_id": record.provenance.source_id,
+                "SourceId": record.provenance.source_id,
                 "source_uri": record.provenance.source_uri,
-                "artifact_uri": record.provenance.artifact_uri,
-                "sha256": record.provenance.sha256,
+                "ArtifactUri": record.provenance.artifact_uri,
+                "Sha256": record.provenance.sha256,
                 "downloaded_at": record.provenance.downloaded_at,
-                "verifier_id": record.provenance.verifier_id,
+                "VerifierId": record.provenance.verifier_id,
                 "signer_identity": record.provenance.signer_identity,
                 "verification_metadata": dict(record.provenance.verification_metadata),
             },
-            "sidecars": {suffix: Path(path).name for suffix, path in record.sidecar_paths.items()},
-            "metadata": dict(record.metadata),
+            "Sidecars": {suffix: Path(path).name for suffix, path in record.sidecar_paths.items()},
+            "Metadata": dict(record.metadata),
         }
         atomic_write_json(self._record_path(directory), raw)
 
     def _read_record(self, directory: Path) -> AIcStoredPackage:
         raw = json.loads(self._record_path(directory).read_text(encoding="utf-8"))
         provenance_raw = raw["provenance"]
-        artifact_path = directory / raw["artifact_filename"]
-        sidecars = {str(suffix): str(directory / filename) for suffix, filename in raw.get("sidecars", {}).items()}
-        derived_state = AInStoredPackageState(str(raw["state"]))
+        artifact_path = directory / raw["ArtifactFilename"]
+        sidecars = {str(suffix): str(directory / filename) for suffix, filename in raw.get("Sidecars", {}).items()}
+        derived_state = AInStoredPackageState(str(raw["State"]))
         try:
             if directory.is_relative_to(self.downloaded_root):
                 derived_state = AInStoredPackageState.DOWNLOADED
@@ -155,16 +155,16 @@ class AIcPackageStore:
         except (AttributeError, ValueError):
             pass
         return AIcStoredPackage(
-            str(raw["component_id"]), int(raw["component_version"]), str(raw["sha256"]),
-            derived_state, str(artifact_path), str(raw["package_format"]),
-            str(raw["descriptor_path"]), raw.get("runtime_package"),
+            str(raw["ComponentId"]), int(raw["ComponentVersion"]), str(raw["Sha256"]),
+            derived_state, str(artifact_path), str(raw["PackageFormat"]),
+            str(raw["DescriptorPath"]), raw.get("RuntimePackage"),
             AIcPackageProvenance(
-                str(provenance_raw["source_id"]), provenance_raw.get("source_uri"),
-                str(provenance_raw["artifact_uri"]), str(provenance_raw["sha256"]),
-                str(provenance_raw["downloaded_at"]), provenance_raw.get("verifier_id"),
+                str(provenance_raw["SourceId"]), provenance_raw.get("source_uri"),
+                str(provenance_raw["ArtifactUri"]), str(provenance_raw["Sha256"]),
+                str(provenance_raw["downloaded_at"]), provenance_raw.get("VerifierId"),
                 provenance_raw.get("signer_identity"), dict(provenance_raw.get("verification_metadata", {})),
             ),
-            sidecars, dict(raw.get("metadata", {})),
+            sidecars, dict(raw.get("Metadata", {})),
         )
 
     def store_downloaded(self, candidate: AIcPackageCandidate, *, authentication: AIcAuthenticationService | None = None,

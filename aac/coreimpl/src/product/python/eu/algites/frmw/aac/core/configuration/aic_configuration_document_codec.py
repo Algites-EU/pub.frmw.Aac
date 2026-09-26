@@ -39,14 +39,14 @@ def _optional_str(value):
     return None if value is None else str(value)
 
 def _encode_target(target):
-    result = {"kind": target.kind.value, "component_id": target.component_id}
+    result = {"Kind": target.kind.value, "ComponentId": target.component_id}
     if target.provider_instance_id is not None:
-        result["provider_instance_id"] = target.provider_instance_id
+        result["ProviderInstanceId"] = target.provider_instance_id
     return result
 
 def _decode_target(raw):
     return AIcConfigurationTarget(
-        AInConfigurationTargetKind(str(raw["kind"])), str(raw["component_id"]), _optional_str(raw.get("provider_instance_id"))
+        AInConfigurationTargetKind(str(raw["Kind"])), str(raw["ComponentId"]), _optional_str(raw.get("ProviderInstanceId"))
     )
 
 class AIcConfigurationDocumentCodec:
@@ -56,70 +56,70 @@ class AIcConfigurationDocumentCodec:
     def encode_snapshot(snapshot: AIcConfigurationProviderSnapshot) -> dict[str, object]:
         payload = snapshot.payload
         return {
-            "format_version": 1,
-            "configuration_scope": {"type": snapshot.configuration_scope.type, "id": snapshot.configuration_scope.id},
-            "configuration_target": _encode_target(snapshot.configuration_target),
-            "record_revision": snapshot.record_revision,
-            "payload": {
-                "configuration_schema_id": payload.configuration_schema_id,
-                "configuration_schema_version": payload.configuration_schema_version,
-                "written_by_component_version": payload.written_by_component_version,
-                "values": copy.deepcopy(dict(payload.values)),
-                "policies": {
-                    key: [{"mode": item.mode.value, "value": copy.deepcopy(item.value)} for item in values]
+            "FormatVersion": 1,
+            "ConfigurationScope": {"Type": snapshot.configuration_scope.type, "Id": snapshot.configuration_scope.id},
+            "ConfigurationTarget": _encode_target(snapshot.configuration_target),
+            "RecordRevision": snapshot.record_revision,
+            "Payload": {
+                "ConfigurationSchemaId": payload.configuration_schema_id,
+                "ConfigurationSchemaVersion": payload.configuration_schema_version,
+                "WrittenByComponentVersion": payload.written_by_component_version,
+                "Values": copy.deepcopy(dict(payload.values)),
+                "Policies": {
+                    key: [{"Mode": item.mode.value, "Value": copy.deepcopy(item.value)} for item in values]
                     for key, values in payload.policies.items()
                 },
-                "metadata": copy.deepcopy(dict(payload.metadata)),
+                "Metadata": copy.deepcopy(dict(payload.metadata)),
             },
         }
 
     @staticmethod
     def decode_snapshot(raw: Mapping[str, object]) -> AIcConfigurationProviderSnapshot:
-        format_version = int(raw.get("format_version", 0))
+        format_version = int(raw.get("FormatVersion", 0))
         if format_version != 1:
             raise ValueError("unsupported configuration provider document format_version; expected 1")
-        raw_scope = _mapping(raw.get("configuration_scope"), "configuration_scope")
-        raw_target = _mapping(raw.get("configuration_target"), "configuration_target")
-        raw_payload = _mapping(raw.get("payload"), "payload")
-        scope = AIcConfigurationScope(str(raw_scope["type"]), _optional_str(raw_scope.get("id")))
+        raw_scope = _mapping(raw.get("ConfigurationScope"), "configuration_scope")
+        raw_target = _mapping(raw.get("ConfigurationTarget"), "configuration_target")
+        raw_payload = _mapping(raw.get("Payload"), "payload")
+        scope = AIcConfigurationScope(str(raw_scope["Type"]), _optional_str(raw_scope.get("Id")))
         target = _decode_target(raw_target)
         policies = {}
-        for property_id, raw_items in _mapping(raw_payload.get("policies", {}), "payload.policies").items():
+        for property_id, raw_items in _mapping(raw_payload.get("Policies", {}), "payload.policies").items():
             if not isinstance(raw_items, list):
                 raise ValueError("policy list must be an array")
             policies[str(property_id)] = tuple(
-                AIcConfigurationPolicy(AInConfigurationPolicyMode(str(_mapping(item, "policy")["mode"])), _mapping(item, "policy").get("value"))
+                AIcConfigurationPolicy(AInConfigurationPolicyMode(str(_mapping(item, "policy")["Mode"])), _mapping(item, "policy").get("Value"))
                 for item in raw_items
             )
         payload = AIcConfigurationPersistedPayload(
             configuration_target=target,
-            configuration_schema_id=str(raw_payload["configuration_schema_id"]),
-            configuration_schema_version=int(raw_payload["configuration_schema_version"]),
-            written_by_component_version=int(raw_payload["written_by_component_version"]),
-            values=dict(_mapping(raw_payload.get("values", {}), "payload.values")),
+            configuration_schema_id=str(raw_payload["ConfigurationSchemaId"]),
+            configuration_schema_version=int(raw_payload["ConfigurationSchemaVersion"]),
+            written_by_component_version=int(raw_payload["WrittenByComponentVersion"]),
+            values=dict(_mapping(raw_payload.get("Values", {}), "payload.values")),
             policies=policies,
-            metadata=dict(_mapping(raw_payload.get("metadata", {}), "payload.metadata")),
+            metadata=dict(_mapping(raw_payload.get("Metadata", {}), "payload.metadata")),
         )
-        revision = raw.get("record_revision")
+        revision = raw.get("RecordRevision")
         return AIcConfigurationProviderSnapshot(scope, target, revision, payload)
 
     @staticmethod
     def encode_change_set(change_set: AIcConfigurationChangeSet) -> dict[str, object]:
         return {
-            "configuration_scope": {"type": change_set.configuration_scope.type, "id": change_set.configuration_scope.id},
-            "configuration_provider_id": change_set.configuration_provider_id,
-            "configuration_target": _encode_target(change_set.configuration_target),
-            "expected_record_revision": change_set.expected_record_revision,
-            "configuration_schema_id": change_set.configuration_schema_id,
-            "configuration_schema_version": change_set.configuration_schema_version,
-            "written_by_component_version": change_set.written_by_component_version,
-            "changes": [
+            "ConfigurationScope": {"Type": change_set.configuration_scope.type, "Id": change_set.configuration_scope.id},
+            "ConfigurationProviderId": change_set.configuration_provider_id,
+            "ConfigurationTarget": _encode_target(change_set.configuration_target),
+            "ExpectedRecordRevision": change_set.expected_record_revision,
+            "ConfigurationSchemaId": change_set.configuration_schema_id,
+            "ConfigurationSchemaVersion": change_set.configuration_schema_version,
+            "WrittenByComponentVersion": change_set.written_by_component_version,
+            "Changes": [
                 {
-                    "property_id": change.property_id,
-                    "operation": change.operation.value,
-                    **({"value": copy.deepcopy(change.value)} if change.has_value else {}),
-                    **({"policy_modes": [
-                        {"mode": item.mode.value, "value": copy.deepcopy(item.value)} for item in change.policy_modes
+                    "PropertyId": change.property_id,
+                    "Operation": change.operation.value,
+                    **({"Value": copy.deepcopy(change.value)} if change.has_value else {}),
+                    **({"PolicyModes": [
+                        {"Mode": item.mode.value, "Value": copy.deepcopy(item.value)} for item in change.policy_modes
                     ]} if change.policy_modes else {}),
                 }
                 for change in change_set.changes

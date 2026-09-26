@@ -3,33 +3,33 @@
   "title": "AAC Configuration Persisted Payload 1",
   "type": "object",
   "required": [
-    "configuration_target",
-    "configuration_schema",
-    "written_by_component_version",
-    "values",
-    "policies"
+    "ConfigurationTarget",
+    "ConfigurationSchema",
+    "WrittenByComponentVersion",
+    "Values",
+    "Policies"
   ],
   "additionalProperties": false,
   "properties": {
-    "configuration_target": {
+    "ConfigurationTarget": {
       "type": "object",
       "required": [
-        "kind",
-        "component_id"
+        "Kind",
+        "ComponentId"
       ],
       "additionalProperties": false,
       "properties": {
-        "kind": {
+        "Kind": {
           "enum": [
-            "COMPONENT",
-            "PROVIDER_INSTANCE"
+            "component",
+            "provider_instance"
           ]
         },
-        "component_id": {
+        "ComponentId": {
           "type": "string",
           "minLength": 1
         },
-        "provider_instance_id": {
+        "ProviderInstanceId": {
           "type": "string",
           "minLength": 1
         }
@@ -38,48 +38,48 @@
         {
           "if": {
             "properties": {
-              "kind": {
-                "const": "PROVIDER_INSTANCE"
+              "Kind": {
+                "const": "provider_instance"
               }
             }
           },
           "then": {
             "required": [
-              "provider_instance_id"
+              "ProviderInstanceId"
             ]
           }
         }
       ]
     },
-    "configuration_schema": {
+    "ConfigurationSchema": {
       "type": "object",
       "required": [
-        "id",
-        "version"
+        "Id",
+        "Version"
       ],
       "additionalProperties": false,
       "properties": {
-        "id": {
+        "Id": {
           "type": "string",
           "minLength": 1
         },
-        "version": {
+        "Version": {
           "type": "integer",
           "minimum": 1
         }
       }
     },
-    "written_by_component_version": {
+    "WrittenByComponentVersion": {
       "type": "integer",
       "minimum": 1
     },
-    "values": {
+    "Values": {
       "type": "object"
     },
-    "policies": {
+    "Policies": {
       "type": "object"
     },
-    "metadata": {
+    "Metadata": {
       "type": "object"
     }
   },

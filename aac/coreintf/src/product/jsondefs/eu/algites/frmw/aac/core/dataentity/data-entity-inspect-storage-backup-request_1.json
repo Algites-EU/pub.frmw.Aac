@@ -5,20 +5,20 @@
   "title": "Data Entity Inspect Storage Backup Request 1",
   "type": "object",
   "required": [
-    "backup_file"
+    "BackupFile"
   ],
   "additionalProperties": false,
   "properties": {
-    "backup_file": {
+    "BackupFile": {
       "type": "string",
       "minLength": 1
     },
-    "validation_level": {
+    "ValidationLevel": {
       "enum": [
-        "INTEGRITY",
-        "FULL"
+        "integrity",
+        "full"
       ],
-      "default": "INTEGRITY"
+      "default": "integrity"
     }
   }
 }

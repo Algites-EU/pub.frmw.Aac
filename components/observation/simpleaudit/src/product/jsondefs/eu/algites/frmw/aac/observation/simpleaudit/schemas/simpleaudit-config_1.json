@@ -4,77 +4,77 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "output": {
+    "Output": {
       "type": "object",
       "default": {
-        "type": "STDOUT"
+        "Type": "stdout"
       },
       "x-aac-name": {
-        "text": "Output",
-        "resource_key": "aac.simpleaudit.config.output.name"
+        "Text": "Output",
+        "ResourceKey": "aac.simpleaudit.config.output.name"
       },
       "x-aac-description": {
-        "text": "Selects where audit records are written.",
-        "resource_key": "aac.simpleaudit.config.output.description"
+        "Text": "Selects where audit records are written.",
+        "ResourceKey": "aac.simpleaudit.config.output.description"
       },
       "additionalProperties": false,
       "properties": {
-        "type": {
+        "Type": {
           "enum": [
-            "STDOUT",
-            "FILE"
+            "stdout",
+            "file"
           ],
-          "default": "STDOUT",
+          "default": "stdout",
           "x-aac-name": {
-            "text": "Output type",
-            "resource_key": "aac.simpleaudit.config.output.type.name"
+            "Text": "Output type",
+            "ResourceKey": "aac.simpleaudit.config.output.type.name"
           }
         },
-        "path": {
+        "Path": {
           "type": "string",
           "minLength": 1,
           "x-aac-name": {
-            "text": "File path",
-            "resource_key": "aac.simpleaudit.config.output.path.name"
+            "Text": "File path",
+            "ResourceKey": "aac.simpleaudit.config.output.path.name"
           }
         }
       },
       "required": [
-        "type"
+        "Type"
       ],
       "allOf": [
         {
           "if": {
             "properties": {
-              "type": {
-                "const": "FILE"
+              "Type": {
+                "const": "file"
               }
             },
             "required": [
-              "type"
+              "Type"
             ]
           },
           "then": {
             "required": [
-              "path"
+              "Path"
             ]
           }
         }
       ]
     },
-    "format": {
+    "Format": {
       "enum": [
-        "JSON",
-        "TEXT"
+        "json",
+        "text"
       ],
-      "default": "JSON",
+      "default": "json",
       "x-aac-name": {
-        "text": "Format",
-        "resource_key": "aac.simpleaudit.config.format.name"
+        "Text": "Format",
+        "ResourceKey": "aac.simpleaudit.config.format.name"
       },
       "x-aac-description": {
-        "text": "Selects the serialized audit-record format.",
-        "resource_key": "aac.simpleaudit.config.format.description"
+        "Text": "Selects the serialized audit-record format.",
+        "ResourceKey": "aac.simpleaudit.config.format.description"
       }
     }
   },

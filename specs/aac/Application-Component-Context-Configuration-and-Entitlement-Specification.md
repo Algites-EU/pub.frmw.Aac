@@ -105,14 +105,14 @@ AAC Core MUST NOT define a closed entitlement licensing-scope enum. A component 
 Conceptually:
 
 ```yaml
-entitlement_licensing_scopes:
+EntitlementLicensingScopes:
   - type: SOURCE_REPOSITORY
-    name:
-      text: Source repository
-      resource_key: entitlement.licensing_scope.source_repository.name
+    Name:
+      Text: Source repository
+      ResourceKey: entitlement.licensing_scope.source_repository.name
     description:
-      text: One logical source-control repository lineage.
-      resource_key: entitlement.licensing_scope.source_repository.description
+      Text: One logical source-control repository lineage.
+      ResourceKey: entitlement.licensing_scope.source_repository.description
 ```
 
 The declaration explains the licensing scope and allows Core/UI/catalog tooling to present it. It does **not** itself determine the current concrete subject. A registered entitlement licensing-scope resolver is responsible for deriving a trusted concrete subject identity from the current product state and for defining which state transformations preserve that identity.
@@ -245,15 +245,15 @@ Conceptually:
 ```yaml
 timeout:
   type: integer
-  configuration_scopes: [SYSTEM, USER, WORKSPACE, CUSTOMER, ORGANIZATION]
+  ConfigurationScopes: [SYSTEM, USER, WORKSPACE, CUSTOMER, ORGANIZATION]
 
 repository_url:
   type: string
-  configuration_scopes: [WORKSPACE, CUSTOMER]
+  ConfigurationScopes: [WORKSPACE, CUSTOMER]
 
 local_cache_directory:
   type: string
-  configuration_scopes: [USER]
+  ConfigurationScopes: [USER]
 ```
 
 The names outside the well-known `SYSTEM`, `USER`, and `WORKSPACE` set are configuration-profile/deployment-defined strings rather than AAC enum members.
@@ -278,18 +278,18 @@ PROVIDER_INSTANCE
 Conceptually:
 
 ```yaml
-configuration_target:
-  kind: COMPONENT
-  component_id: com.vendor.foo
+ConfigurationTarget:
+  Kind: component
+  ComponentId: com.vendor.foo
 ```
 
 or:
 
 ```yaml
-configuration_target:
-  kind: PROVIDER_INSTANCE
-  component_id: com.vendor.foo
-  provider_instance_id: 92c6...immutable-guid...
+ConfigurationTarget:
+  Kind: provider_instance
+  ComponentId: com.vendor.foo
+  ProviderInstanceId: 92c6...immutable-guid...
 ```
 
 A component SHOULD declare separate schemas for component configuration and provider-instance configuration when it uses both target kinds.
@@ -329,26 +329,26 @@ Mutations SHOULD be expressed as normalized logical change sets rather than seri
 Conceptually:
 
 ```yaml
-configuration_scope:
+ConfigurationScope:
   type: WORKSPACE
-  id: project-x
+  Id: project-x
 
 configuration_provider: workspace-config
 
-configuration_target:
-  kind: PROVIDER_INSTANCE
-  component_id: com.vendor.foo
-  provider_instance_id: 92c6...
+ConfigurationTarget:
+  Kind: provider_instance
+  ComponentId: com.vendor.foo
+  ProviderInstanceId: 92c6...
 
-expected_record_revision: 184
+ExpectedRecordRevision: 184
 
-changes:
+Changes:
   - property: repository_url
-    operation: SET_VALUE
-    value: https://example.invalid/repository
+    Operation: SET_VALUE
+    Value: https://example.invalid/repository
 
   - property: timeout
-    operation: SET_POLICY
+    Operation: SET_POLICY
     policy_modes:
       MIN: 20
       MAX: 60
@@ -608,13 +608,13 @@ An authentication profile contains non-secret parameters directly and secret mat
 
 ```yaml
 authentication_profile:
-  id: company-api
-  mechanism: BEARER
-  parameters:
+  Id: company-api
+  Mechanism: BEARER
+  Parameters:
     token:
-      secret_reference:
-        secret_provider_id: os-keyring
-        key: company-api-token
+      SecretReference:
+        SecretProviderId: os-keyring
+        Key: company-api-token
 ```
 
 A configuration-provider, entitlement-provider, package repository, licensing service, bootstrap/profile source, or other remote facility MAY reference the same authentication profile model. The remote facility MUST NOT need to know how the referenced secret is physically stored.
@@ -687,23 +687,23 @@ Data Entities are distinct from component/provider configuration and from runtim
 A component descriptor may declare:
 
 ```yaml
-data_entity_support:
-  - schema_id: eu.algites.monitoring.site-data
-    readable_versions: [2, 3]
-    writable_versions: [2, 3]
-    preferred_write_version: 3
-    migrations:
-      - from: 2
-        to: 3
-        migrator: eu.algites.monitoring:migrate_site_data_2_to_3
-    data_entity_requirements:
-      - schema_id: _AO.entity.site
-        access: [READ]
-        readable_versions: [4, 5]
+DataEntitySupport:
+  - SchemaId: eu.algites.monitoring.site-data
+    ReadableVersions: [2, 3]
+    WritableVersions: [2, 3]
+    PreferredWriteVersion: 3
+    Migrations:
+      - From: 2
+        To: 3
+        Migrator: eu.algites.monitoring:migrate_site_data_2_to_3
+    DataEntityRequirements:
+      - SchemaId: _AO.entity.site
+        Access: [read]
+        ReadableVersions: [4, 5]
         required: true
-      - schema_id: eu.algites.inventory.asset
-        access: [READ]
-        readable_versions: [1, 2]
+      - SchemaId: eu.algites.inventory.asset
+        Access: [read]
+        ReadableVersions: [1, 2]
         required: false
 ```
 
@@ -731,7 +731,7 @@ A field that stores the UID of another Data Entity declares that relation direct
     "site_uid": {
       "type": "string",
       "x-aac-data-entity-reference": {
-        "schema_id": "_AO.entity.site"
+        "SchemaId": "_AO.entity.site"
       }
     }
   }
@@ -757,12 +757,12 @@ A configuration descriptor that names a concrete resource must agree with the id
 The normalized envelope is conceptually:
 
 ```yaml
-uid: ...
-schema_id: _AO.entity.site
-schema_version: 4
-record_revision: ...
-state: ACTIVE
-payload:
+Uid: ...
+SchemaId: _AO.entity.site
+SchemaVersion: 4
+RecordRevision: ...
+State: active
+Payload:
   ...
 ```
 
@@ -1026,31 +1026,31 @@ optional metadata
 Conceptually:
 
 ```yaml
-entitlement_licensing_scopes:
+EntitlementLicensingScopes:
   - type: USER
-    name:
-      text: User
-      resource_key: entitlement.licensing_scope.user.name
+    Name:
+      Text: User
+      ResourceKey: entitlement.licensing_scope.user.name
     description:
-      text: One resolved user identity.
-      resource_key: entitlement.licensing_scope.user.description
+      Text: One resolved user identity.
+      ResourceKey: entitlement.licensing_scope.user.description
 
   - type: SOURCE_REPOSITORY
-    name:
-      text: Source repository
-      resource_key: entitlement.licensing_scope.source_repository.name
+    Name:
+      Text: Source repository
+      ResourceKey: entitlement.licensing_scope.source_repository.name
     description:
-      text: One logical source-control repository lineage.
-      resource_key: entitlement.licensing_scope.source_repository.description
+      Text: One logical source-control repository lineage.
+      ResourceKey: entitlement.licensing_scope.source_repository.description
 
-provided_capability_entitlements:
-  - capability:
-      id: com.vendor.foo.document
-      version: 1
-    permissions:
-      - id: view
-      - id: edit
-        possible_licensing_scopes: [USER, SOURCE_REPOSITORY]
+ProvidedCapabilityEntitlements:
+  - Capability:
+      Id: com.vendor.foo.document
+      Version: 1
+    Permissions:
+      - Id: view
+      - Id: edit
+        PossibleLicensingScopes: [USER, SOURCE_REPOSITORY]
 ```
 
 A permission with no `possible_licensing_scopes` is available without external entitlement evidence. A non-empty list identifies the licensing-scope types through which that permission may be granted. Every type referenced by `possible_licensing_scopes` in the current component descriptor MUST have a corresponding `entitlement_licensing_scopes` declaration.
@@ -1076,14 +1076,14 @@ Every external entitlement grant MUST identify the **entitlement licensing scope
 Conceptually:
 
 ```yaml
-licensing_scope:
+LicensingScope:
   type: SOURCE_REPOSITORY
-  id: 0b5c...resolved-lineage-subject...
+  Id: 0b5c...resolved-lineage-subject...
 
-subject:
-  id: 0b5c...resolved-lineage-subject...
-  display_name: Application source repository
-  attributes: ...
+Subject:
+  Id: 0b5c...resolved-lineage-subject...
+  DisplayName: Application source repository
+  Attributes: ...
 ```
 
 The concrete licensing-scope ID and entitlement subject ID identify the same resolved subject. Grant matching MUST rely on the stable subject identity, licensing-scope type, issuer/trust domain, and other normative signed fields. Human-readable names, addresses, and similar attributes are signed audit/display metadata and MUST NOT replace the stable subject ID.
@@ -1111,28 +1111,28 @@ For offline/manual issuance, AAC MAY define a normalized entitlement-issuing req
 Conceptually:
 
 ```yaml
-entitlement_request:
-  format_version: 1
-  request_id: ...
+EntitlementRequest:
+  FormatVersion: 1
+  RequestId: ...
 
-  requested_licensing_scope:
+  RequestedLicensingScope:
     type: SOURCE_REPOSITORY
-    id: 0b5c...resolved-lineage-subject...
+    Id: 0b5c...resolved-lineage-subject...
 
-  subject:
-    id: 0b5c...resolved-lineage-subject...
-    display_name: Application source repository
+  Subject:
+    Id: 0b5c...resolved-lineage-subject...
+    DisplayName: Application source repository
 
-  components:
-    - id: com.vendor.foo
-      requested_grants:
-        - capability:
-            id: com.vendor.foo.document
-            version: 1
-          permissions: [view, edit]
+  Components:
+    - Id: com.vendor.foo
+      RequestedGrants:
+        - Capability:
+            Id: com.vendor.foo.document
+            Version: 1
+          Permissions: [view, edit]
 
-  generated_at: ...
-  request_digest: sha256:...
+  GeneratedAt: ...
+  RequestDigest: sha256:...
 ```
 
 A product MAY bind a returned entitlement to an exact issuing request by carrying both the stable `request_id` and a digest of the normalized request. The entitlement issuer remains authoritative: subject-generated request material proves request provenance/identity only and MUST NOT itself authorize rights. A valid entitlement still requires evidence from an issuer trusted for the affected component(s).
@@ -1146,51 +1146,51 @@ Trusted entitlement evidence SHOULD be technology-neutral at the Core model laye
 A normalized signed entitlement document may conceptually contain:
 
 ```yaml
-entitlement:
-  format_version: 1
-  entitlement_id: ...
+Entitlement:
+  FormatVersion: 1
+  EntitlementId: ...
 
-  issuer:
-    id: vendor.example
+  Issuer:
+    Id: vendor.example
 
-  issued_for_request:
-    request_id: ...
-    request_digest: sha256:...
+  IssuedForRequest:
+    RequestId: ...
+    RequestDigest: sha256:...
 
-  licensing_scope:
+  LicensingScope:
     type: SOURCE_REPOSITORY
-    id: 0b5c...resolved-lineage-subject...
+    Id: 0b5c...resolved-lineage-subject...
 
-  subject:
-    id: 0b5c...resolved-lineage-subject...
-    display_name: Application source repository
-    attributes: ...
+  Subject:
+    Id: 0b5c...resolved-lineage-subject...
+    DisplayName: Application source repository
+    Attributes: ...
 
-  components:
-    - id: com.vendor.foo
-      grants:
-        - capability:
-            id: com.vendor.foo.document
-            version: 1
-          permissions:
-            - id: view
-              valid_from: ...
-              valid_until: ...
-            - id: edit
-              valid_from: ...
-              valid_until: ...
+  Components:
+    - Id: com.vendor.foo
+      Grants:
+        - Capability:
+            Id: com.vendor.foo.document
+            Version: 1
+          Permissions:
+            - Id: view
+              ValidFrom: ...
+              ValidUntil: ...
+            - Id: edit
+              ValidFrom: ...
+              ValidUntil: ...
 
-    - id: com.vendor.bar
-      grants:
-        - capability:
-            id: com.vendor.bar.export
-            version: 2
-          permissions:
-            - id: export-pdf
-              valid_from: ...
-              valid_until: ...
+    - Id: com.vendor.bar
+      Grants:
+        - Capability:
+            Id: com.vendor.bar.export
+            Version: 2
+          Permissions:
+            - Id: export-pdf
+              ValidFrom: ...
+              ValidUntil: ...
 
-  issued_at: ...
+  IssuedAt: ...
 ```
 
 One entitlement document therefore MAY carry grants for any number of components, which enables a product/plugin bundle to be licensed and signed as one evidence object. The document-level issuer, entitlement licensing scope, subject, and signature/trust evidence apply to every component entry in that document. Components that must be licensed for a different subject or entitlement licensing scope belong in a different entitlement document.

@@ -43,14 +43,14 @@ def _optional_str(value):
     return None if value is None else str(value)
 
 def _encode_target(target):
-    result = {"kind": target.kind.value, "component_id": target.component_id}
+    result = {"Kind": target.kind.value, "ComponentId": target.component_id}
     if target.provider_instance_id is not None:
-        result["provider_instance_id"] = target.provider_instance_id
+        result["ProviderInstanceId"] = target.provider_instance_id
     return result
 
 def _decode_target(raw):
     return AIcConfigurationTarget(
-        AInConfigurationTargetKind(str(raw["kind"])), str(raw["component_id"]), _optional_str(raw.get("provider_instance_id"))
+        AInConfigurationTargetKind(str(raw["Kind"])), str(raw["ComponentId"]), _optional_str(raw.get("ProviderInstanceId"))
     )
 
 def _safe_segment(value: str) -> str:
@@ -120,8 +120,8 @@ def _response_revision(headers, body):
         try:
             raw = json.loads(body.decode("utf-8"))
             if isinstance(raw, Mapping):
-                if "record_revision" in raw:
-                    return raw["record_revision"]
+                if "RecordRevision" in raw:
+                    return raw["RecordRevision"]
                 if "revision" in raw:
                     return raw["revision"]
         except Exception:

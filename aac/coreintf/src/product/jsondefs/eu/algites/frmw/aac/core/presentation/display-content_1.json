@@ -6,9 +6,33 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "content": {"type": "string", "minLength": 1},
-    "resource_key": {"type": "string", "minLength": 1},
-    "format": {"enum": ["PLAIN_TEXT", "MARKDOWN", "HTML"], "default": "PLAIN_TEXT"}
+    "Content": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ResourceKey": {
+      "type": "string",
+      "minLength": 1
+    },
+    "Format": {
+      "enum": [
+        "plain_text",
+        "markdown",
+        "html"
+      ],
+      "default": "plain_text"
+    }
   },
-  "anyOf": [{"required": ["content"]}, {"required": ["resource_key"]}]
+  "anyOf": [
+    {
+      "required": [
+        "Content"
+      ]
+    },
+    {
+      "required": [
+        "ResourceKey"
+      ]
+    }
+  ]
 }

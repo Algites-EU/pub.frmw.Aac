@@ -5,11 +5,11 @@
   "title": "YAML File-System Data Entity Storage Configuration 1",
   "type": "object",
   "required": [
-    "root_directory"
+    "RootDirectory"
   ],
   "additionalProperties": false,
   "properties": {
-    "root_directory": {
+    "RootDirectory": {
       "type": "string",
       "minLength": 1,
       "description": "Root directory containing schema/version/UID YAML Data Entity records."

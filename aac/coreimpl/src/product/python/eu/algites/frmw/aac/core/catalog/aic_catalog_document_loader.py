@@ -59,10 +59,10 @@ class AIcCatalogDocumentLoader:
             raise AIxPackageManagementError(f"invalid catalog document {source}: {exc}") from exc
         if not isinstance(raw, Mapping):
             raise AIxPackageManagementError(f"catalog document {source} root must be an object")
-        body_probe = raw.get("catalog")
+        body_probe = raw.get("Catalog")
         if not isinstance(body_probe, Mapping):
             raise AIxPackageManagementError(f"catalog document {source} requires catalog object")
-        format_version = int(body_probe.get("format_version", 0))
+        format_version = int(body_probe.get("FormatVersion", 0))
         if format_version != 1:
             raise AIxPackageManagementError(f"catalog document {source} has unsupported format_version {format_version}; expected 1")
         schema_text = read_core_schema("catalog_1.json")
@@ -72,132 +72,132 @@ class AIcCatalogDocumentLoader:
             raise AIxPackageManagementError(
                 f"catalog document {source} schema validation failed: {_render_validation_errors(errors)}"
             )
-        body = raw["catalog"]
+        body = raw["Catalog"]
         components: list[AIcCatalogComponent] = []
-        for raw_component in body.get("components", ()):
+        for raw_component in body.get("Components", ()):
             releases: list[AIcCatalogRelease] = []
-            for raw_release in raw_component.get("releases", ()):
+            for raw_release in raw_component.get("Releases", ()):
                 provides = tuple(AIcCatalogCapabilityOffer(
-                    str(item["capability"]), tuple(int(version) for version in item.get("versions", ()))
-                ) for item in raw_release.get("provides", ()))
+                    str(item["Capability"]), tuple(int(version) for version in item.get("Versions", ()))
+                ) for item in raw_release.get("Provides", ()))
                 requires = tuple(AIcCatalogCapabilityRequirement(
-                    id=str(item["id"]),
-                    capability_id=str(item["capability"]),
-                    versions=tuple(int(version) for version in item.get("versions", ())),
-                    cardinality=AInConsumerCardinality(str(item.get("cardinality", "SINGLE"))),
-                    mandatory=bool(item.get("mandatory", True)),
-                ) for item in raw_release.get("requires", ()))
+                    id=str(item["Id"]),
+                    capability_id=str(item["Capability"]),
+                    versions=tuple(int(version) for version in item.get("Versions", ())),
+                    cardinality=AInConsumerCardinality(str(item.get("Cardinality", "single"))),
+                    mandatory=bool(item.get("Mandatory", True)),
+                ) for item in raw_release.get("Requires", ()))
                 entitlement_licensing_scopes = tuple(
                     AIcEntitlementLicensingScopeDescriptor(
-                        type=str(item["type"]),
-                        name=normalize_display_text(item.get("name")),
-                        description=normalize_display_text(item.get("description")),
-                        metadata=dict(item.get("metadata", {})),
+                        type=str(item["Type"]),
+                        name=normalize_display_text(item.get("Name")),
+                        description=normalize_display_text(item.get("Description")),
+                        metadata=dict(item.get("Metadata", {})),
                     )
-                    for item in raw_release.get("entitlement_licensing_scopes", ())
+                    for item in raw_release.get("EntitlementLicensingScopes", ())
                 )
                 entitlements = []
-                for raw_entitlement in raw_release.get("provided_capability_entitlements", ()):
+                for raw_entitlement in raw_release.get("ProvidedCapabilityEntitlements", ()):
                     permissions = tuple(AIcPermissionDescriptor(
-                        id=str(item["id"]),
-                        name=normalize_display_text(item.get("name")),
-                        description=normalize_display_text(item.get("description")),
+                        id=str(item["Id"]),
+                        name=normalize_display_text(item.get("Name")),
+                        description=normalize_display_text(item.get("Description")),
                         possible_licensing_scope_types=tuple(
-                            str(value) for value in item.get("possible_licensing_scopes", ())
+                            str(value) for value in item.get("PossibleLicensingScopes", ())
                         ),
-                        metadata=dict(item.get("metadata", {})),
-                    ) for item in raw_entitlement.get("permissions", ()))
+                        metadata=dict(item.get("Metadata", {})),
+                    ) for item in raw_entitlement.get("Permissions", ()))
                     entitlements.append(AIcCapabilityEntitlementDescriptor(
-                        capability_id=str(raw_entitlement["capability"]["id"]),
-                        capability_version=int(raw_entitlement["capability"]["version"]),
+                        capability_id=str(raw_entitlement["Capability"]["Id"]),
+                        capability_version=int(raw_entitlement["Capability"]["Version"]),
                         permissions=permissions,
-                        name=normalize_display_text(raw_entitlement.get("name")),
-                        description=normalize_display_text(raw_entitlement.get("description")),
+                        name=normalize_display_text(raw_entitlement.get("Name")),
+                        description=normalize_display_text(raw_entitlement.get("Description")),
                     ))
                 artifacts = []
-                for raw_artifact in raw_release.get("artifacts", ()):
-                    raw_locator = raw_artifact["locator"]
-                    locator_uri = str(raw_locator["uri"]) if raw_locator.get("uri") is not None else None
+                for raw_artifact in raw_release.get("Artifacts", ()):
+                    raw_locator = raw_artifact["Locator"]
+                    locator_uri = str(raw_locator["Uri"]) if raw_locator.get("Uri") is not None else None
                     if locator_uri is not None and source_uri is not None:
                         locator_uri = _resolve_relative_uri(source_uri, locator_uri)
                     sidecars = tuple(AIcPackageSidecar(
-                        uri=(_resolve_relative_uri(source_uri, str(item["uri"])) if source_uri is not None else str(item["uri"])),
-                        suffix=str(item["suffix"]),
-                        name=normalize_display_text(item.get("name")),
-                        description=normalize_display_text(item.get("description")),
-                    ) for item in raw_artifact.get("sidecars", ()))
+                        uri=(_resolve_relative_uri(source_uri, str(item["Uri"])) if source_uri is not None else str(item["Uri"])),
+                        suffix=str(item["Suffix"]),
+                        name=normalize_display_text(item.get("Name")),
+                        description=normalize_display_text(item.get("Description")),
+                    ) for item in raw_artifact.get("Sidecars", ()))
                     artifacts.append(AIcCatalogArtifact(
-                        id=str(raw_artifact["id"]),
+                        id=str(raw_artifact["Id"]),
                         locator=AIcCatalogArtifactLocator(
-                            type=str(raw_locator["type"]),
+                            type=str(raw_locator["Type"]),
                             uri=locator_uri,
-                            repository_id=(str(raw_locator["repository_id"]) if raw_locator.get("repository_id") is not None else None),
-                            coordinates=dict(raw_locator.get("coordinates", {})),
+                            repository_id=(str(raw_locator["RepositoryId"]) if raw_locator.get("RepositoryId") is not None else None),
+                            coordinates=dict(raw_locator.get("Coordinates", {})),
                         ),
-                        artifact_filename=str(raw_artifact["artifact_filename"]),
-                        package_format=str(raw_artifact["package_format"]),
-                        descriptor_path=str(raw_artifact["descriptor_path"]),
-                        sha256=str(raw_artifact["sha256"]),
-                        runtime_package=(str(raw_artifact["runtime_package"]) if raw_artifact.get("runtime_package") is not None else None),
-                        verifier_id=(str(raw_artifact["verifier_id"]) if raw_artifact.get("verifier_id") is not None else None),
-                        authentication_profile_id=(str(raw_artifact["authentication_profile_id"]) if raw_artifact.get("authentication_profile_id") is not None else None),
+                        artifact_filename=str(raw_artifact["ArtifactFilename"]),
+                        package_format=str(raw_artifact["PackageFormat"]),
+                        descriptor_path=str(raw_artifact["DescriptorPath"]),
+                        sha256=str(raw_artifact["Sha256"]),
+                        runtime_package=(str(raw_artifact["RuntimePackage"]) if raw_artifact.get("RuntimePackage") is not None else None),
+                        verifier_id=(str(raw_artifact["VerifierId"]) if raw_artifact.get("VerifierId") is not None else None),
+                        authentication_profile_id=(str(raw_artifact["AuthenticationProfileId"]) if raw_artifact.get("AuthenticationProfileId") is not None else None),
                         sidecars=sidecars,
-                        platforms=tuple(str(value) for value in raw_artifact.get("platforms", ())),
-                        architectures=tuple(str(value) for value in raw_artifact.get("architectures", ())),
-                        metadata=dict(raw_artifact.get("metadata", {})),
+                        platforms=tuple(str(value) for value in raw_artifact.get("Platforms", ())),
+                        architectures=tuple(str(value) for value in raw_artifact.get("Architectures", ())),
+                        metadata=dict(raw_artifact.get("Metadata", {})),
                     ))
                 persistent_schemas = []
-                for item in raw_release.get("persistent_schemas", ()):
-                    kind = AInCatalogPersistentSchemaKind(str(item["kind"]))
+                for item in raw_release.get("PersistentSchemas", ()):
+                    kind = AInCatalogPersistentSchemaKind(str(item["Kind"]))
                     persistent_schemas.append(AIcCatalogPersistentSchema(
                         kind=kind,
-                        schema_id=str(item["schema_id"]),
-                        write_version=(int(item["write_version"]) if item.get("write_version") is not None else None),
-                        provider_id=(str(item["provider_id"]) if item.get("provider_id") is not None else None),
-                        readable_versions=tuple(int(value) for value in item.get("readable_versions", ())),
-                        writable_versions=tuple(int(value) for value in item.get("writable_versions", ())),
+                        schema_id=str(item["SchemaId"]),
+                        write_version=(int(item["WriteVersion"]) if item.get("WriteVersion") is not None else None),
+                        provider_id=(str(item["ProviderId"]) if item.get("ProviderId") is not None else None),
+                        readable_versions=tuple(int(value) for value in item.get("ReadableVersions", ())),
+                        writable_versions=tuple(int(value) for value in item.get("WritableVersions", ())),
                         preferred_write_version=(
-                            int(item["preferred_write_version"])
-                            if item.get("preferred_write_version") is not None else None
+                            int(item["PreferredWriteVersion"])
+                            if item.get("PreferredWriteVersion") is not None else None
                         ),
                     ))
                 persistent_schemas = tuple(persistent_schemas)
                 releases.append(AIcCatalogRelease(
-                    version=int(raw_release["version"]),
+                    version=int(raw_release["Version"]),
                     provides=provides,
                     requires=requires,
                     entitlement_licensing_scopes=entitlement_licensing_scopes,
                     provided_capability_entitlements=tuple(entitlements),
                     persistent_schemas=persistent_schemas,
                     artifacts=tuple(artifacts),
-                    published_at=(str(raw_release["published_at"]) if raw_release.get("published_at") is not None else None),
-                    release_notes_url=(str(raw_release["release_notes_url"]) if raw_release.get("release_notes_url") is not None else None),
-                    metadata=dict(raw_release.get("metadata", {})),
+                    published_at=(str(raw_release["PublishedAt"]) if raw_release.get("PublishedAt") is not None else None),
+                    release_notes_url=(str(raw_release["ReleaseNotesUrl"]) if raw_release.get("ReleaseNotesUrl") is not None else None),
+                    metadata=dict(raw_release.get("Metadata", {})),
                 ))
-            raw_publisher = raw_component.get("publisher")
-            raw_icon = raw_component.get("icon")
+            raw_publisher = raw_component.get("Publisher")
+            raw_icon = raw_component.get("Icon")
             components.append(AIcCatalogComponent(
-                component_id=str(raw_component["component_id"]),
+                component_id=str(raw_component["ComponentId"]),
                 releases=tuple(releases),
-                name=normalize_display_text(raw_component.get("name")),
-                description=normalize_display_text(raw_component.get("description")),
+                name=normalize_display_text(raw_component.get("Name")),
+                description=normalize_display_text(raw_component.get("Description")),
                 publisher=(AIcCatalogPublisher(
-                    str(raw_publisher["id"]), normalize_display_text(raw_publisher.get("name"))
+                    str(raw_publisher["Id"]), normalize_display_text(raw_publisher.get("Name"))
                 ) if isinstance(raw_publisher, Mapping) else None),
-                homepage_url=(str(raw_component["homepage_url"]) if raw_component.get("homepage_url") is not None else None),
-                documentation_url=(str(raw_component["documentation_url"]) if raw_component.get("documentation_url") is not None else None),
-                support_url=(str(raw_component["support_url"]) if raw_component.get("support_url") is not None else None),
-                entitlement_info_url=(str(raw_component["entitlement_info_url"]) if raw_component.get("entitlement_info_url") is not None else None),
-                icon=(AIcCatalogIcon(str(raw_icon["url"])) if isinstance(raw_icon, Mapping) else None),
-                categories=tuple(str(value) for value in raw_component.get("categories", ())),
-                tags=tuple(str(value) for value in raw_component.get("tags", ())),
-                metadata=dict(raw_component.get("metadata", {})),
+                homepage_url=(str(raw_component["HomepageUrl"]) if raw_component.get("HomepageUrl") is not None else None),
+                documentation_url=(str(raw_component["DocumentationUrl"]) if raw_component.get("DocumentationUrl") is not None else None),
+                support_url=(str(raw_component["SupportUrl"]) if raw_component.get("SupportUrl") is not None else None),
+                entitlement_info_url=(str(raw_component["EntitlementInfoUrl"]) if raw_component.get("EntitlementInfoUrl") is not None else None),
+                icon=(AIcCatalogIcon(str(raw_icon["Url"])) if isinstance(raw_icon, Mapping) else None),
+                categories=tuple(str(value) for value in raw_component.get("Categories", ())),
+                tags=tuple(str(value) for value in raw_component.get("Tags", ())),
+                metadata=dict(raw_component.get("Metadata", {})),
             ))
         return AIcCatalogDocument(
-            format_version=int(body["format_version"]),
-            product_id=str(body["product_id"]),
-            technology_id=str(body["technology_id"]),
+            format_version=int(body["FormatVersion"]),
+            product_id=str(body["ProductId"]),
+            technology_id=str(body["TechnologyId"]),
             components=tuple(components),
-            generated_at=(str(body["generated_at"]) if body.get("generated_at") is not None else None),
-            metadata=dict(body.get("metadata", {})),
+            generated_at=(str(body["GeneratedAt"]) if body.get("GeneratedAt") is not None else None),
+            metadata=dict(body.get("Metadata", {})),
         )

@@ -1,9 +1,9 @@
-licenses:
-  - id: Apache-2.0
-    enabled: true
-    contentKinds:
-      - product
-  - id: CC-BY-4.0
-    enabled: true
-    contentKinds:
-      - documentation
+Licenses:
+- Id: Apache-2.0
+  Enabled: true
+  ContentKinds:
+  - product
+- Id: CC-BY-4.0
+  Enabled: true
+  ContentKinds:
+  - documentation

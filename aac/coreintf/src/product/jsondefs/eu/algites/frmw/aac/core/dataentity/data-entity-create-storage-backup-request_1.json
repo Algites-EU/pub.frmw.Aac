@@ -5,15 +5,15 @@
   "title": "Data Entity Create Storage Backup Request 1",
   "type": "object",
   "required": [
-    "backup_file"
+    "BackupFile"
   ],
   "additionalProperties": false,
   "properties": {
-    "backup_file": {
+    "BackupFile": {
       "type": "string",
       "minLength": 1
     },
-    "overwrite": {
+    "Overwrite": {
       "type": "boolean"
     }
   }

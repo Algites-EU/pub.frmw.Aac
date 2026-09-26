@@ -42,13 +42,13 @@ The authoritative layout is deliberately transparent:
 A record is self-describing even though its identity and stored schema version are also encoded in the path:
 
 ```yaml
-uid: 8b42a7fe-80bc-4c5b-b7f0-c6b714c04921
-schema_id: _AO.entity.site
-schema_version: 2
-record_revision: 7
-state: ACTIVE
-payload:
-  name: Main site
+Uid: 8b42a7fe-80bc-4c5b-b7f0-c6b714c04921
+SchemaId: _AO.entity.site
+SchemaVersion: 2
+RecordRevision: 7
+State: active
+Payload:
+  Name: Main site
 ```
 
 The provider verifies that `uid`, `schema_id` and `schema_version` inside the file agree with the physical path. A logical `(schema_id, uid)` may occur in only one stored-version directory at a time. A duplicate UID across versions is treated as storage corruption rather than silently choosing one copy.
@@ -135,8 +135,8 @@ The provider holds the storage lock while constructing the ZIP. The result there
 `inspect-storage-backup` is non-mutating and accepts:
 
 ```yaml
-backup_file: /path/to/backup.zip
-validation_level: INTEGRITY   # optional; INTEGRITY is the default
+BackupFile: /path/to/backup.zip
+ValidationLevel: integrity   # optional; integrity is the default
 ```
 
 Two validation levels are defined:

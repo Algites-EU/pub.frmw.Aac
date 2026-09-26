@@ -5,16 +5,16 @@
   "title": "Data Entity Retire Storage Support Request 1",
   "type": "object",
   "required": [
-    "schema_id",
-    "schema_version"
+    "SchemaId",
+    "SchemaVersion"
   ],
   "additionalProperties": false,
   "properties": {
-    "schema_id": {
+    "SchemaId": {
       "type": "string",
       "minLength": 1
     },
-    "schema_version": {
+    "SchemaVersion": {
       "type": "integer",
       "minimum": 1
     }

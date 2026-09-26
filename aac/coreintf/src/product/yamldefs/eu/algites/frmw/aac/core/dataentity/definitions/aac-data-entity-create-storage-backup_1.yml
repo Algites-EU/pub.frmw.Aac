@@ -1,29 +1,31 @@
-capability:
-  id: _AAC.data-entity.create-storage-backup
-  version: 1
-  group_id: _AAC.data-entity.storage-backup-restore
-  name:
-    text: Create Data Entity storage backup
-    resource_key: aac.data.entity.create.storage.backup.name
-  description:
-    text: Creates a provider-consistent physical backup at the caller-selected backup
-      file.
-    resource_key: aac.data.entity.create.storage.backup.description
-operations:
-- id: create_backup
-  name:
-    text: Create storage backup
-    resource_key: aac.data.entity.create.storage.backup.operation.create.backup.name
-  description:
-    text: Creates a provider-consistent physical backup at the caller-selected backup
-      file.
-    resource_key: aac.data.entity.create.storage.backup.operation.create.backup.description
-  interactions:
-  - kind: INPUT
-    schema:
-      id: _AAC.schema.data-entity-create-storage-backup-request
-      version: 1
-  - kind: FINAL_SUCCESS_STATE_RESULT
-    schema:
-      id: _AAC.schema.data-entity-create-storage-backup-result
-      version: 1
+Capability:
+  Id: _AAC.data-entity.create-storage-backup
+  Version: 1
+  GroupId: _AAC.data-entity.storage-backup-restore
+  Name:
+    Text: Create Data Entity storage backup
+    ResourceKey: aac.data.entity.create.storage.backup.name
+  Description:
+    Text: Creates a provider-consistent physical backup at the caller-selected 
+      backup file.
+    ResourceKey: aac.data.entity.create.storage.backup.description
+Operations:
+- Id: create_backup
+  Name:
+    Text: Create storage backup
+    ResourceKey: 
+      aac.data.entity.create.storage.backup.operation.create.backup.name
+  Description:
+    Text: Creates a provider-consistent physical backup at the caller-selected 
+      backup file.
+    ResourceKey: 
+      aac.data.entity.create.storage.backup.operation.create.backup.description
+  Interactions:
+  - Kind: input
+    Schema:
+      Id: _AAC.schema.data-entity-create-storage-backup-request
+      Version: 1
+  - Kind: final_success_state_result
+    Schema:
+      Id: _AAC.schema.data-entity-create-storage-backup-result
+      Version: 1

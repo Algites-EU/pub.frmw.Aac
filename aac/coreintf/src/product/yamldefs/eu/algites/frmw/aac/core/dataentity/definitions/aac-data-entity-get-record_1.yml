@@ -1,27 +1,27 @@
-capability:
-  id: _AAC.data-entity.get-record
-  version: 1
-  group_id: _AAC.data-entity.loading
-  name:
-    text: Get Data Entity record
-    resource_key: aac.data.entity.get.record.name
-  description:
-    text: Loads one stored Data Entity record by logical identity.
-    resource_key: aac.data.entity.get.record.description
-operations:
-- id: get
-  name:
-    text: Get record
-    resource_key: aac.data.entity.get.record.operation.get.name
-  description:
-    text: Loads one stored Data Entity record by logical identity.
-    resource_key: aac.data.entity.get.record.operation.get.description
-  interactions:
-  - kind: INPUT
-    schema:
-      id: _AAC.schema.data-entity-get-record-request
-      version: 1
-  - kind: FINAL_SUCCESS_STATE_RESULT
-    schema:
-      id: _AAC.schema.data-entity-get-record-result
-      version: 1
+Capability:
+  Id: _AAC.data-entity.get-record
+  Version: 1
+  GroupId: _AAC.data-entity.loading
+  Name:
+    Text: Get Data Entity record
+    ResourceKey: aac.data.entity.get.record.name
+  Description:
+    Text: Loads one stored Data Entity record by logical identity.
+    ResourceKey: aac.data.entity.get.record.description
+Operations:
+- Id: get
+  Name:
+    Text: Get record
+    ResourceKey: aac.data.entity.get.record.operation.get.name
+  Description:
+    Text: Loads one stored Data Entity record by logical identity.
+    ResourceKey: aac.data.entity.get.record.operation.get.description
+  Interactions:
+  - Kind: input
+    Schema:
+      Id: _AAC.schema.data-entity-get-record-request
+      Version: 1
+  - Kind: final_success_state_result
+    Schema:
+      Id: _AAC.schema.data-entity-get-record-result
+      Version: 1

@@ -36,16 +36,16 @@ def _load_yaml(text: str, schema_name: str, source: str) -> Mapping[str, Any]:
 class AIcWorkspaceComponentRequirementsLoader:
     @staticmethod
     def load_text(text: str, source: str = "<memory>") -> AIcWorkspaceComponentRequirements:
-        raw = _load_yaml(text, "workspace-component-requirements_1.json", source)["workspace_component_requirements"]
+        raw = _load_yaml(text, "workspace-component-requirements_1.json", source)["WorkspaceComponentRequirements"]
         return AIcWorkspaceComponentRequirements(
-            workspace_id=str(raw["workspace_id"]),
-            update_policy=AInPackageUpdatePolicy(str(raw.get("update_policy", "MANUAL"))),
+            workspace_id=str(raw["WorkspaceId"]),
+            update_policy=AInPackageUpdatePolicy(str(raw.get("UpdatePolicy", "manual"))),
             requirements=tuple(
                 AIcWorkspaceComponentRequirement(
-                    component_id=str(item["component_id"]), versions=tuple(int(v) for v in item.get("versions", ())),
-                    required=bool(item.get("required", True)), source_ids=tuple(str(v) for v in item.get("source_ids", ())),
-                    name=normalize_display_text(item.get("name")), description=normalize_display_text(item.get("description")),
+                    component_id=str(item["ComponentId"]), versions=tuple(int(v) for v in item.get("Versions", ())),
+                    required=bool(item.get("Required", True)), source_ids=tuple(str(v) for v in item.get("SourceIds", ())),
+                    name=normalize_display_text(item.get("Name")), description=normalize_display_text(item.get("Description")),
                 )
-                for item in raw.get("requirements", ())
+                for item in raw.get("Requirements", ())
             ),
         )

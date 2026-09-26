@@ -26,23 +26,23 @@ from eu.algites.frmw.aac.core.invocation.dispatcher import invoke_handle_with_pa
 
 def _output_from_raw(raw: object) -> AIcInvocationOutput:
     # Persistent process host wraps the provider AIcInvocationOutput in a request result.
-    if isinstance(raw, Mapping) and "success" in raw:
+    if isinstance(raw, Mapping) and "Success" in raw:
         return AIcInvocationOutput(
-            success=bool(raw.get("success")),
-            result=raw.get("result"),
-            error=raw.get("error") if isinstance(raw.get("error"), Mapping) else None,
+            success=bool(raw.get("Success")),
+            result=raw.get("Result"),
+            error=raw.get("Error") if isinstance(raw.get("Error"), Mapping) else None,
         )
-    return AIcInvocationOutput(False, error={"type": "InvalidProcessResponse", "message": "response must contain boolean success"})
+    return AIcInvocationOutput(False, error={"Type": "InvalidProcessResponse", "Message": "response must contain boolean success"})
 
 def _json_default(value: object) -> object:
     if hasattr(value, "value"):
         return getattr(value, "value")
-    raise TypeError(f"value of type {type(value).__name__} is not JSON serializable")
+    raise TypeError(f"value of type {type(value).__name__} is not json serializable")
 
 class AIcJsonLineProcessEndpoint(AIiCapabilityEndpoint):
     """Legacy one-invocation-per-process endpoint retained for explicit utility use.
 
-    Normal AAC PROCESS provider runtimes use AIcProcessProviderRuntime below, which owns
+    Normal AAC process provider runtimes use AIcProcessProviderRuntime below, which owns
     one persistent process per provider instance for the full runtime lifecycle.
     """
 
@@ -62,7 +62,7 @@ class AIcJsonLineProcessEndpoint(AIiCapabilityEndpoint):
         self.timeout = timeout
 
     def invoke(self, invocation_input: AIcInvocationInput) -> AIcInvocationOutput:
-        payload = json.dumps(asdict(invocation_input), sort_keys=True, separators=(",", ":"), default=_json_default)
+        payload = json.dumps(invocation_input.to_mapping(), sort_keys=True, separators=(",", ":"), default=_json_default)
         process_env = os.environ.copy()
         process_env.update(self.env)
         try:
@@ -77,19 +77,19 @@ class AIcJsonLineProcessEndpoint(AIiCapabilityEndpoint):
                 check=False,
             )
         except (OSError, subprocess.TimeoutExpired) as exc:
-            return AIcInvocationOutput(False, error={"type": type(exc).__name__, "message": str(exc)})
+            return AIcInvocationOutput(False, error={"Type": type(exc).__name__, "Message": str(exc)})
         if completed.returncode != 0:
             return AIcInvocationOutput(False, error={
-                "type": "ProcessExitError",
-                "message": f"process exited with code {completed.returncode}",
+                "Type": "ProcessExitError",
+                "Message": f"process exited with code {completed.returncode}",
                 "stderr": completed.stderr[-4000:],
             })
         try:
             raw = json.loads(completed.stdout)
         except json.JSONDecodeError as exc:
             return AIcInvocationOutput(False, error={
-                "type": "InvalidProcessResponse",
-                "message": str(exc),
+                "Type": "InvalidProcessResponse",
+                "Message": str(exc),
                 "stdout": completed.stdout[-4000:],
             })
         return _output_from_raw(raw)

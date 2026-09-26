@@ -24,55 +24,55 @@ from eu.algites.frmw.aac.core.presentation.api import normalize_display_text
 
 def _parse_bootstrap(raw: Mapping[str, Any]) -> AIcConfigurationBootstrap:
     profiles: list[AIcConfigurationProfile] = []
-    for raw_profile in raw.get("configuration_profiles", ()):
+    for raw_profile in raw.get("ConfigurationProfiles", ()):
         scopes: list[AIcConfigurationScopeDefinition] = []
-        for raw_scope in raw_profile.get("configuration_scopes", ()):
+        for raw_scope in raw_profile.get("ConfigurationScopes", ()):
             bindings = tuple(
-                AIcConfigurationProviderBinding(str(item["id"]), int(item.get("priority", 0)))
-                for item in raw_scope.get("configuration_providers", ())
+                AIcConfigurationProviderBinding(str(item["Id"]), int(item.get("Priority", 0)))
+                for item in raw_scope.get("ConfigurationProviders", ())
             )
             scopes.append(AIcConfigurationScopeDefinition(
-                id=str(raw_scope["id"]),
-                configuration_scope_type=str(raw_scope["type"]),
-                configuration_scope_resolver_id=str(raw_scope["resolver"]),
-                name=normalize_display_text(raw_scope.get("name")),
-                description=normalize_display_text(raw_scope.get("description")),
+                id=str(raw_scope["Id"]),
+                configuration_scope_type=str(raw_scope["Type"]),
+                configuration_scope_resolver_id=str(raw_scope["Resolver"]),
+                name=normalize_display_text(raw_scope.get("Name")),
+                description=normalize_display_text(raw_scope.get("Description")),
                 configuration_providers=bindings,
-                policy_authority=bool(raw_scope.get("policy_authority", True)),
-                mandatory=bool(raw_scope.get("mandatory", False)),
+                policy_authority=bool(raw_scope.get("PolicyAuthority", True)),
+                mandatory=bool(raw_scope.get("Mandatory", False)),
             ))
-        profiles.append(AIcConfigurationProfile(str(raw_profile["id"]), int(raw_profile["version"]), tuple(scopes), name=normalize_display_text(raw_profile.get("name")), description=normalize_display_text(raw_profile.get("description"))))
+        profiles.append(AIcConfigurationProfile(str(raw_profile["Id"]), int(raw_profile["Version"]), tuple(scopes), name=normalize_display_text(raw_profile.get("Name")), description=normalize_display_text(raw_profile.get("Description"))))
 
     providers = tuple(
         AIcConfigurationProviderRegistration(
-            id=str(item["id"]), type=str(item["type"]),
-            name=normalize_display_text(item.get("name")), description=normalize_display_text(item.get("description")),
-            settings=dict(item.get("settings", {})),
-            authentication_profile_id=str(item["authentication_profile_id"]) if item.get("authentication_profile_id") is not None else None,
+            id=str(item["Id"]), type=str(item["Type"]),
+            name=normalize_display_text(item.get("Name")), description=normalize_display_text(item.get("Description")),
+            settings=dict(item.get("Settings", {})),
+            authentication_profile_id=str(item["AuthenticationProfileId"]) if item.get("AuthenticationProfileId") is not None else None,
         )
-        for item in raw.get("configuration_providers", ())
+        for item in raw.get("ConfigurationProviders", ())
     )
     resolvers = tuple(
-        AIcConfigurationScopeResolverRegistration(id=str(item["id"]), type=str(item["type"]), name=normalize_display_text(item.get("name")), description=normalize_display_text(item.get("description")), settings=dict(item.get("settings", {})))
-        for item in raw.get("configuration_scope_resolvers", ())
+        AIcConfigurationScopeResolverRegistration(id=str(item["Id"]), type=str(item["Type"]), name=normalize_display_text(item.get("Name")), description=normalize_display_text(item.get("Description")), settings=dict(item.get("Settings", {})))
+        for item in raw.get("ConfigurationScopeResolvers", ())
     )
     return AIcConfigurationBootstrap(
-        schema_version=int(raw["schema_version"]),
-        default_configuration_profile_id=str(raw["default_configuration_profile"]),
+        schema_version=int(raw["SchemaVersion"]),
+        default_configuration_profile_id=str(raw["DefaultConfigurationProfile"]),
         configuration_profiles=tuple(profiles),
         configuration_providers=providers,
         configuration_scope_resolvers=resolvers,
         configuration_profile_sources=tuple(
             AIcConfigurationProfileSourceRegistration(
-                id=str(item["id"]), uri=str(item["uri"]),
-                name=normalize_display_text(item.get("name")), description=normalize_display_text(item.get("description")),
-                authentication_profile_id=str(item["authentication_profile_id"]) if item.get("authentication_profile_id") is not None else None,
-                required=bool(item.get("required", True)),
-            ) for item in raw.get("configuration_profile_sources", ())
+                id=str(item["Id"]), uri=str(item["Uri"]),
+                name=normalize_display_text(item.get("Name")), description=normalize_display_text(item.get("Description")),
+                authentication_profile_id=str(item["AuthenticationProfileId"]) if item.get("AuthenticationProfileId") is not None else None,
+                required=bool(item.get("Required", True)),
+            ) for item in raw.get("ConfigurationProfileSources", ())
         ),
-        workspace_configuration_profiles=AInWorkspaceConfigurationProfilePolicy(raw.get("workspace_configuration_profiles", "FORBIDDEN")),
-        mandatory_configuration_scope_definition_ids=tuple(str(v) for v in raw.get("mandatory_configuration_scope_definition_ids", ())),
-        metadata=dict(raw.get("metadata", {})),
+        workspace_configuration_profiles=AInWorkspaceConfigurationProfilePolicy(raw.get("WorkspaceConfigurationProfiles", "forbidden")),
+        mandatory_configuration_scope_definition_ids=tuple(str(v) for v in raw.get("MandatoryConfigurationScopeDefinitionIds", ())),
+        metadata=dict(raw.get("Metadata", {})),
     )
 
 class AIcConfigurationBootstrapLoader:
@@ -97,7 +97,7 @@ class AIcConfigurationBootstrapLoader:
             raise AIxDescriptorError(f"{source}: configuration bootstrap root must be a mapping")
         AIcConfigurationBootstrapLoader._validate(raw, source)
         try:
-            return _parse_bootstrap(raw["configuration_bootstrap"])
+            return _parse_bootstrap(raw["ConfigurationBootstrap"])
         except (KeyError, TypeError, ValueError) as exc:
             raise AIxDescriptorError(f"{source}: invalid configuration bootstrap: {exc}") from exc
 

@@ -4,64 +4,64 @@
   "title": "AAC Active Package Set 1",
   "type": "object",
   "required": [
-    "format_version",
-    "record_revision",
-    "selections"
+    "FormatVersion",
+    "RecordRevision",
+    "Selections"
   ],
   "additionalProperties": false,
   "properties": {
-    "format_version": {
+    "FormatVersion": {
       "const": 1
     },
-    "record_revision": {
+    "RecordRevision": {
       "type": "integer",
       "minimum": 0
     },
-    "last_transaction_id": {
+    "LastTransactionId": {
       "type": [
         "string",
         "null"
       ]
     },
-    "selections": {
+    "Selections": {
       "type": "array",
       "items": {
         "type": "object",
         "required": [
-          "application_scope_id",
-          "component_id",
-          "component_version",
-          "sha256",
-          "selected_at"
+          "ApplicationScopeId",
+          "ComponentId",
+          "ComponentVersion",
+          "Sha256",
+          "SelectedAt"
         ],
         "additionalProperties": false,
         "properties": {
-          "application_scope_id": {
+          "ApplicationScopeId": {
             "type": "string",
             "minLength": 1
           },
-          "component_id": {
+          "ComponentId": {
             "type": "string",
             "minLength": 1
           },
-          "component_version": {
+          "ComponentVersion": {
             "type": "integer",
             "minimum": 1
           },
-          "sha256": {
+          "Sha256": {
             "type": "string",
             "minLength": 1
           },
-          "selected_at": {
+          "SelectedAt": {
             "type": "string"
           },
-          "previous_sha256": {
+          "PreviousSha256": {
             "type": [
               "string",
               "null"
             ]
           },
-          "previous_version": {
+          "PreviousVersion": {
             "type": [
               "integer",
               "null"

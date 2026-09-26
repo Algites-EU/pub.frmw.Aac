@@ -3,89 +3,89 @@
   "title": "AAC Configuration Profile 1",
   "type": "object",
   "required": [
-    "configuration_profile"
+    "ConfigurationProfile"
   ],
   "additionalProperties": false,
   "properties": {
-    "configuration_profile": {
+    "ConfigurationProfile": {
       "type": "object",
       "required": [
-        "id",
-        "version",
-        "configuration_scopes"
+        "Id",
+        "Version",
+        "ConfigurationScopes"
       ],
       "additionalProperties": false,
       "properties": {
-        "id": {
+        "Id": {
           "type": "string",
           "minLength": 1
         },
-        "version": {
+        "Version": {
           "type": "integer",
           "minimum": 1
         },
-        "configuration_scopes": {
+        "ConfigurationScopes": {
           "type": "array",
           "minItems": 1,
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "type",
-              "resolver"
+              "Id",
+              "Type",
+              "Resolver"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "type": {
+              "Type": {
                 "type": "string",
                 "minLength": 1
               },
-              "resolver": {
+              "Resolver": {
                 "type": "string",
                 "minLength": 1
               },
-              "policy_authority": {
+              "PolicyAuthority": {
                 "type": "boolean"
               },
-              "mandatory": {
+              "Mandatory": {
                 "type": "boolean"
               },
-              "configuration_providers": {
+              "ConfigurationProviders": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "required": [
-                    "id"
+                    "Id"
                   ],
                   "additionalProperties": false,
                   "properties": {
-                    "id": {
+                    "Id": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "priority": {
+                    "Priority": {
                       "type": "integer"
                     }
                   }
                 }
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               }
             }
           }
         },
-        "name": {
+        "Name": {
           "$ref": "#/$defs/displayText"
         },
-        "description": {
+        "Description": {
           "$ref": "#/$defs/displayText"
         }
       }
@@ -102,11 +102,11 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "text": {
+            "Text": {
               "type": "string",
               "minLength": 1
             },
-            "resource_key": {
+            "ResourceKey": {
               "type": "string",
               "minLength": 1
             }
@@ -114,12 +114,12 @@
           "anyOf": [
             {
               "required": [
-                "text"
+                "Text"
               ]
             },
             {
               "required": [
-                "resource_key"
+                "ResourceKey"
               ]
             }
           ]

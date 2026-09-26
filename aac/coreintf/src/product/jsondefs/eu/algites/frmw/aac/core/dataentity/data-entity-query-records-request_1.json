@@ -5,29 +5,29 @@
   "title": "Data Entity Query Records Request 1",
   "type": "object",
   "required": [
-    "schema_id"
+    "SchemaId"
   ],
   "additionalProperties": false,
   "properties": {
-    "schema_id": {
+    "SchemaId": {
       "type": "string",
       "minLength": 1
     },
-    "states": {
+    "States": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
       "items": {
         "enum": [
-          "ACTIVE",
-          "TOMBSTONE"
+          "active",
+          "tombstone"
         ]
       },
       "default": [
-        "ACTIVE"
+        "active"
       ]
     },
-    "uids": {
+    "Uids": {
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -36,34 +36,34 @@
       },
       "minItems": 1
     },
-    "references": {
+    "References": {
       "type": "array",
       "items": {
         "type": "object",
         "required": [
-          "target"
+          "Target"
         ],
         "additionalProperties": false,
         "properties": {
-          "target": {
+          "Target": {
             "type": "object",
             "required": [
-              "schema_id",
-              "uid"
+              "SchemaId",
+              "Uid"
             ],
             "additionalProperties": false,
             "properties": {
-              "schema_id": {
+              "SchemaId": {
                 "type": "string",
                 "minLength": 1
               },
-              "uid": {
+              "Uid": {
                 "type": "string",
                 "minLength": 1
               }
             }
           },
-          "schema_path": {
+          "SchemaPath": {
             "type": "array",
             "minItems": 1,
             "items": {
@@ -75,29 +75,29 @@
       },
       "minItems": 1
     },
-    "reference_match": {
+    "ReferenceMatch": {
       "enum": [
-        "ALL",
-        "ANY"
+        "all",
+        "any"
       ],
-      "default": "ALL"
+      "default": "all"
     },
-    "order": {
+    "Order": {
       "enum": [
-        "UID_ASC",
-        "UID_DESC"
+        "uid_asc",
+        "uid_desc"
       ],
-      "default": "UID_ASC"
+      "default": "uid_asc"
     },
-    "limit": {
+    "Limit": {
       "type": "integer",
       "minimum": 1
     },
-    "continuation_token": {
+    "ContinuationToken": {
       "type": "string",
       "minLength": 1
     },
-    "stored_schema_version_filter": {
+    "StoredSchemaVersionFilter": {
       "type": "array",
       "uniqueItems": true,
       "items": {

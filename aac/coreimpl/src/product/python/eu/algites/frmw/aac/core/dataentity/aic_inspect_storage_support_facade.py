@@ -24,4 +24,4 @@ class AIcInspectStorageSupportFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = INSPECT_STORAGE_SUPPORT_CAPABILITY_ID
 
     def inspect(self, schema_id: str, schema_version: int) -> Mapping[str, object]:
-        return self._invoke("inspect", {"schema_id": schema_id, "schema_version": schema_version})
+        return self._invoke("inspect", {"SchemaId": schema_id, "SchemaVersion": schema_version})

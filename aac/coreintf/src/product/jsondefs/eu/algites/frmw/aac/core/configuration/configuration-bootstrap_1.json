@@ -3,34 +3,34 @@
   "title": "AAC Configuration Bootstrap 1",
   "type": "object",
   "required": [
-    "configuration_bootstrap"
+    "ConfigurationBootstrap"
   ],
   "additionalProperties": false,
   "properties": {
-    "configuration_bootstrap": {
+    "ConfigurationBootstrap": {
       "type": "object",
       "required": [
-        "schema_version",
-        "default_configuration_profile",
-        "configuration_profiles"
+        "SchemaVersion",
+        "DefaultConfigurationProfile",
+        "ConfigurationProfiles"
       ],
       "additionalProperties": false,
       "properties": {
-        "schema_version": {
+        "SchemaVersion": {
           "const": 1
         },
-        "default_configuration_profile": {
+        "DefaultConfigurationProfile": {
           "type": "string",
           "minLength": 1
         },
-        "workspace_configuration_profiles": {
+        "WorkspaceConfigurationProfiles": {
           "enum": [
-            "FORBIDDEN",
-            "ALLOWED",
-            "ALLOWED_IF_SIGNED"
+            "forbidden",
+            "allowed",
+            "allowed_if_signed"
           ]
         },
-        "mandatory_configuration_scope_definition_ids": {
+        "MandatoryConfigurationScopeDefinitionIds": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -38,189 +38,189 @@
             "minLength": 1
           }
         },
-        "configuration_profiles": {
+        "ConfigurationProfiles": {
           "type": "array",
           "minItems": 1,
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "version",
-              "configuration_scopes"
+              "Id",
+              "Version",
+              "ConfigurationScopes"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "version": {
+              "Version": {
                 "type": "integer",
                 "minimum": 1
               },
-              "configuration_scopes": {
+              "ConfigurationScopes": {
                 "type": "array",
                 "minItems": 1,
                 "items": {
                   "type": "object",
                   "required": [
-                    "id",
-                    "type",
-                    "resolver"
+                    "Id",
+                    "Type",
+                    "Resolver"
                   ],
                   "additionalProperties": false,
                   "properties": {
-                    "id": {
+                    "Id": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "type": {
+                    "Type": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "resolver": {
+                    "Resolver": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "policy_authority": {
+                    "PolicyAuthority": {
                       "type": "boolean"
                     },
-                    "mandatory": {
+                    "Mandatory": {
                       "type": "boolean"
                     },
-                    "configuration_providers": {
+                    "ConfigurationProviders": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "required": [
-                          "id"
+                          "Id"
                         ],
                         "additionalProperties": false,
                         "properties": {
-                          "id": {
+                          "Id": {
                             "type": "string",
                             "minLength": 1
                           },
-                          "priority": {
+                          "Priority": {
                             "type": "integer"
                           }
                         }
                       }
                     },
-                    "name": {
+                    "Name": {
                       "$ref": "#/$defs/displayText"
                     },
-                    "description": {
+                    "Description": {
                       "$ref": "#/$defs/displayText"
                     }
                   }
                 }
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               }
             }
           }
         },
-        "configuration_providers": {
+        "ConfigurationProviders": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "type"
+              "Id",
+              "Type"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "type": {
+              "Type": {
                 "type": "string",
                 "minLength": 1
               },
-              "settings": {
+              "Settings": {
                 "type": "object"
               },
-              "authentication_profile_id": {
+              "AuthenticationProfileId": {
                 "type": "string",
                 "minLength": 1
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               }
             }
           }
         },
-        "configuration_scope_resolvers": {
+        "ConfigurationScopeResolvers": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "type"
+              "Id",
+              "Type"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "type": {
+              "Type": {
                 "type": "string",
                 "minLength": 1
               },
-              "settings": {
+              "Settings": {
                 "type": "object"
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               }
             }
           }
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         },
-        "configuration_profile_sources": {
+        "ConfigurationProfileSources": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "uri"
+              "Id",
+              "Uri"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "uri": {
+              "Uri": {
                 "type": "string",
                 "minLength": 1
               },
-              "authentication_profile_id": {
+              "AuthenticationProfileId": {
                 "type": "string",
                 "minLength": 1
               },
-              "required": {
+              "Required": {
                 "type": "boolean"
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               }
             }
@@ -240,11 +240,11 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "text": {
+            "Text": {
               "type": "string",
               "minLength": 1
             },
-            "resource_key": {
+            "ResourceKey": {
               "type": "string",
               "minLength": 1
             }
@@ -252,12 +252,12 @@
           "anyOf": [
             {
               "required": [
-                "text"
+                "Text"
               ]
             },
             {
               "required": [
-                "resource_key"
+                "ResourceKey"
               ]
             }
           ]

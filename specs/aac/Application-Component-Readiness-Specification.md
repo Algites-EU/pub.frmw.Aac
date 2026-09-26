@@ -89,16 +89,16 @@ CONTEXT
 A requirement identifies a stable value/key and declares the readiness state produced when the value is unavailable:
 
 ```yaml
-readiness_requirements:
-  - id: smtp-endpoint
-    source: COMPONENT_CONFIGURATION
-    key: smtp.server
-    missing_state: NOT_READY
+ReadinessRequirements:
+  - Id: smtp-endpoint
+    Source: component_configuration
+    Key: smtp.server
+    MissingState: not_ready
 
-  - id: optional-region
-    source: CONTEXT
-    key: deployment.region
-    missing_state: DEGRADED
+  - Id: optional-region
+    Source: context
+    Key: deployment.region
+    MissingState: degraded
 ```
 
 `missing_state` MUST be `DEGRADED` or `NOT_READY`. Absence can never produce `READY`.

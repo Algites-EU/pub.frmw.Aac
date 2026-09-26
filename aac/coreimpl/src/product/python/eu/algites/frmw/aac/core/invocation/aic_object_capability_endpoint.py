@@ -2,6 +2,7 @@ from __future__ import annotations
 import copy
 import dataclasses
 import inspect
+import re
 import types
 import traceback
 import threading
@@ -46,6 +47,15 @@ def _generated_capability_invoker(provider: object, capability_id: str, capabili
                 return invoker
     return None
 
+def _python_identifier(aExternalName: str) -> str:
+    """Map a canonical external property name to the Python identifier convention."""
+    locValue = re.sub(r"(.)([A-Z][a-z]+)", r"\1_\2", aExternalName)
+    locValue = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", locValue)
+    return locValue.replace("-", "_").lower()
+
+def _external_property_name(aPythonName: str) -> str:
+    return "".join(locPart[:1].upper() + locPart[1:] for locPart in aPythonName.split("_"))
+
 def _coerce_invocation_value(annotation: object | None, value: object) -> object:
     if annotation is None or annotation is inspect._empty or annotation is Any:
         return value
@@ -69,7 +79,10 @@ def _coerce_invocation_value(annotation: object | None, value: object) -> object
             raise TypeError(f"cannot coerce {type(value).__name__} to dataclass {annotation.__name__}")
         hints = get_type_hints(annotation)
         return annotation(**{
-            field.name: _coerce_invocation_value(hints.get(field.name), value.get(field.name))
+            field.name: _coerce_invocation_value(
+                hints.get(field.name),
+                value.get(_external_property_name(field.name)),
+            )
             for field in dataclasses.fields(annotation)
         })
     if origin in (tuple, list) and isinstance(value, (tuple, list)):
@@ -87,34 +100,34 @@ def _invoke_versioned_method(method, arguments: Mapping[str, object]):
         annotation = hints.get(parameter.name)
         if parameter.name == "request" or (inspect.isclass(annotation) and dataclasses.is_dataclass(annotation)):
             return method(_coerce_invocation_value(annotation, dict(arguments)))
-    return method(**dict(arguments))
+    return method(**{_python_identifier(key): value for key, value in arguments.items()})
 
 def _exception_error(exc: Exception) -> dict[str, object]:
     if isinstance(exc, AIxCapabilityOperationFailed):
         failure = exc.failure
         error: dict[str, object] = {
-            "type": failure.exception_type,
-            "message": failure.system_message,
+            "Type": failure.exception_type,
+            "Message": failure.system_message,
         }
         if failure.user_message is not None:
-            error["user_message"] = dataclasses.asdict(failure.user_message)
+            error["UserMessage"] = dataclasses.asdict(failure.user_message)
         if failure.error_code is not None:
-            error["error_code"] = failure.error_code
+            error["ErrorCode"] = failure.error_code
         if failure.stack_trace is not None:
-            error["stack_trace"] = failure.stack_trace
+            error["StackTrace"] = failure.stack_trace
         if failure.details:
-            error["details"] = dict(failure.details)
+            error["Details"] = dict(failure.details)
         if failure.extension is not None:
-            error["extension"] = copy.deepcopy(failure.extension)
+            error["Extension"] = copy.deepcopy(failure.extension)
         return error
     error: dict[str, object] = {
-        "type": f"{type(exc).__module__}.{type(exc).__qualname__}",
-        "message": str(exc) or type(exc).__name__,
+        "Type": f"{type(exc).__module__}.{type(exc).__qualname__}",
+        "Message": str(exc) or type(exc).__name__,
     }
     try:
         caller = current_operation_interaction().caller_snapshot()
         if caller.failure_detail_level is AInOperationInteractionFailureDetailLevel.STACK_TRACE:
-            error["stack_trace"] = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
+            error["StackTrace"] = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
     except Exception:
         pass
     return error
@@ -143,17 +156,17 @@ class AIcObjectCapabilityEndpoint(AIiCapabilityEndpoint):
             return AIcInvocationOutput(False, error=_exception_error(exc))
         except AIxOperationCancelled as exc:
             return AIcInvocationOutput(False, error={
-                "type": "OPERATION_CANCELLED",
-                "message": str(exc) or "operation cancelled",
+                "Type": "OPERATION_CANCELLED",
+                "Message": str(exc) or "operation cancelled",
                 "has_state_result": exc.has_state_result,
-                "state_result": exc.state_result if exc.has_state_result else None,
+                "StateResult": exc.state_result if exc.has_state_result else None,
             })
         except AIxPermissionDenied as exc:
             return AIcInvocationOutput(False, error={
-                "type": "PERMISSION_DENIED",
-                "message": str(exc),
-                "capability_id": exc.capability_id or invocation_input.capability_id,
-                "capability_version": exc.capability_version or invocation_input.capability_version,
+                "Type": "PERMISSION_DENIED",
+                "Message": str(exc),
+                "CapabilityId": exc.capability_id or invocation_input.capability_id,
+                "CapabilityVersion": exc.capability_version or invocation_input.capability_version,
                 "permission_id": exc.permission_id,
                 "retry_disposition": exc.retry_disposition.value,
                 "remediation_hint": exc.remediation_hint,

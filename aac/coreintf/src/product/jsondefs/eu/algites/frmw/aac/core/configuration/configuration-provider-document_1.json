@@ -3,29 +3,29 @@
   "title": "AAC Configuration Provider Document 1",
   "type": "object",
   "required": [
-    "format_version",
-    "configuration_scope",
-    "configuration_target",
-    "record_revision",
-    "payload"
+    "FormatVersion",
+    "ConfigurationScope",
+    "ConfigurationTarget",
+    "RecordRevision",
+    "Payload"
   ],
   "additionalProperties": false,
   "properties": {
-    "format_version": {
+    "FormatVersion": {
       "const": 1
     },
-    "configuration_scope": {
+    "ConfigurationScope": {
       "type": "object",
       "required": [
-        "type"
+        "Type"
       ],
       "additionalProperties": false,
       "properties": {
-        "type": {
+        "Type": {
           "type": "string",
           "minLength": 1
         },
-        "id": {
+        "Id": {
           "type": [
             "string",
             "null"
@@ -33,65 +33,65 @@
         }
       }
     },
-    "configuration_target": {
+    "ConfigurationTarget": {
       "type": "object",
       "required": [
-        "kind",
-        "component_id"
+        "Kind",
+        "ComponentId"
       ],
       "additionalProperties": false,
       "properties": {
-        "kind": {
+        "Kind": {
           "enum": [
-            "COMPONENT",
-            "PROVIDER_INSTANCE"
+            "component",
+            "provider_instance"
           ]
         },
-        "component_id": {
+        "ComponentId": {
           "type": "string",
           "minLength": 1
         },
-        "provider_instance_id": {
+        "ProviderInstanceId": {
           "type": "string",
           "minLength": 1
         }
       }
     },
-    "payload": {
+    "Payload": {
       "type": "object",
       "required": [
-        "configuration_schema_id",
-        "configuration_schema_version",
-        "written_by_component_version",
-        "values",
-        "policies"
+        "ConfigurationSchemaId",
+        "ConfigurationSchemaVersion",
+        "WrittenByComponentVersion",
+        "Values",
+        "Policies"
       ],
       "additionalProperties": false,
       "properties": {
-        "configuration_schema_id": {
+        "ConfigurationSchemaId": {
           "type": "string",
           "minLength": 1
         },
-        "configuration_schema_version": {
+        "ConfigurationSchemaVersion": {
           "type": "integer",
           "minimum": 1
         },
-        "written_by_component_version": {
+        "WrittenByComponentVersion": {
           "type": "integer",
           "minimum": 1
         },
-        "values": {
+        "Values": {
           "type": "object"
         },
-        "policies": {
+        "Policies": {
           "type": "object"
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         }
       }
     },
-    "record_revision": {
+    "RecordRevision": {
       "type": "integer",
       "minimum": 1
     }

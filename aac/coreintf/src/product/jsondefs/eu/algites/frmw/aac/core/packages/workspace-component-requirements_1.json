@@ -3,45 +3,45 @@
   "$id": "_AAC.schema.workspace-component-requirements/1",
   "type": "object",
   "required": [
-    "workspace_component_requirements"
+    "WorkspaceComponentRequirements"
   ],
   "additionalProperties": false,
   "properties": {
-    "workspace_component_requirements": {
+    "WorkspaceComponentRequirements": {
       "type": "object",
       "required": [
-        "workspace_id",
-        "requirements"
+        "WorkspaceId",
+        "Requirements"
       ],
       "additionalProperties": false,
       "properties": {
-        "workspace_id": {
+        "WorkspaceId": {
           "type": "string",
           "minLength": 1
         },
-        "update_policy": {
+        "UpdatePolicy": {
           "enum": [
-            "MANUAL",
-            "NOTIFY",
-            "AUTO_COMPATIBLE",
-            "AUTO_LOCKED"
+            "manual",
+            "notify",
+            "auto_compatible",
+            "auto_locked"
           ],
-          "default": "MANUAL"
+          "default": "manual"
         },
-        "requirements": {
+        "Requirements": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "component_id"
+              "ComponentId"
             ],
             "additionalProperties": false,
             "properties": {
-              "component_id": {
+              "ComponentId": {
                 "type": "string",
                 "minLength": 1
               },
-              "versions": {
+              "Versions": {
                 "type": "array",
                 "items": {
                   "type": "integer",
@@ -49,11 +49,11 @@
                 },
                 "uniqueItems": true
               },
-              "required": {
+              "Required": {
                 "type": "boolean",
                 "default": true
               },
-              "source_ids": {
+              "SourceIds": {
                 "type": "array",
                 "items": {
                   "type": "string",
@@ -61,8 +61,8 @@
                 },
                 "uniqueItems": true
               },
-              "name": {},
-              "description": {}
+              "Name": {},
+              "Description": {}
             }
           }
         }

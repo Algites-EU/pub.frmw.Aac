@@ -24,4 +24,4 @@ class AIcInspectStorageBackupFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = INSPECT_STORAGE_BACKUP_CAPABILITY_ID
 
     def inspect_backup(self, backup_file: str) -> Mapping[str, object]:
-        return self._invoke("inspect_backup", {"backup_file": backup_file})
+        return self._invoke("inspect_backup", {"BackupFile": backup_file})

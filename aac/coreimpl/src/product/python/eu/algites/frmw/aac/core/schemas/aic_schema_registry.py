@@ -20,9 +20,9 @@ def schema_identity(schema: Mapping[str, object]) -> tuple[str, int]:
     schema_id = schema.get(AAC_SCHEMA_ID_KEY)
     schema_version = schema.get(AAC_SCHEMA_VERSION_KEY)
     if not isinstance(schema_id, str) or not schema_id.strip():
-        raise ValueError(f"JSON schema must declare non-empty {AAC_SCHEMA_ID_KEY!r}")
+        raise ValueError(f"json schema must declare non-empty {AAC_SCHEMA_ID_KEY!r}")
     if not isinstance(schema_version, int) or isinstance(schema_version, bool) or schema_version < 1:
-        raise ValueError(f"JSON schema must declare integer {AAC_SCHEMA_VERSION_KEY!r} >= 1")
+        raise ValueError(f"json schema must declare integer {AAC_SCHEMA_VERSION_KEY!r} >= 1")
     return schema_id.strip(), schema_version
 
 def _data_entity_reference_targets(schema: object, path: tuple[str, ...] = ()):
@@ -31,12 +31,12 @@ def _data_entity_reference_targets(schema: object, path: tuple[str, ...] = ()):
         if annotation is not None:
             if not isinstance(annotation, Mapping):
                 raise ValueError(f"{AAC_DATA_ENTITY_REFERENCE_KEY!r} at {'.'.join(path) or '$'} must be an object")
-            unknown = set(annotation) - {"schema_id"}
+            unknown = set(annotation) - {"SchemaId"}
             if unknown:
                 raise ValueError(
                     f"{AAC_DATA_ENTITY_REFERENCE_KEY!r} at {'.'.join(path) or '$'} contains unsupported keys {sorted(unknown)!r}"
                 )
-            target = annotation.get("schema_id")
+            target = annotation.get("SchemaId")
             if not isinstance(target, str) or not target.strip():
                 raise ValueError(
                     f"{AAC_DATA_ENTITY_REFERENCE_KEY!r} at {'.'.join(path) or '$'} requires non-empty schema_id"
@@ -96,7 +96,7 @@ class AIcSchemaRegistry:
     def register_text(self, resource_name: str, text: str, *, source: str = "<memory>") -> AIcRegisteredSchema:
         raw = json.loads(text)
         if not isinstance(raw, Mapping):
-            raise ValueError("JSON schema root must be an object")
+            raise ValueError("json schema root must be an object")
         Draft202012Validator.check_schema(raw)
         tuple(_data_entity_reference_targets(raw))
         return self.register(resource_name, raw, source=source)
@@ -176,7 +176,7 @@ class AIcSchemaRegistry:
 
         AAC multi-provider resolution may legitimately yield missing/UNDEFINED top-level values.
         ``required`` remains meaningful inside concrete nested structures that are present, but
-        runtime availability/readiness is not inferred from top-level JSON Schema requiredness.
+        runtime availability/readiness is not inferred from top-level json Schema requiredness.
         """
         registered = self.get(resource_name)
         schema = copy.deepcopy(dict(registered.schema))

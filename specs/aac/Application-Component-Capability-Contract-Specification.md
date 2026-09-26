@@ -62,10 +62,10 @@ A capability has a stable globally meaningful identifier.
 Conceptually:
 
 ```yaml
-capability:
-  id: "algites.object-store"
-  version: 3
-  group_id: "algites.storage"
+Capability:
+  Id: "algites.object-store"
+  Version: 3
+  GroupId: "algites.storage"
 ```
 
 Product profiles may reserve their own namespaces.
@@ -146,30 +146,30 @@ A capability contract contains one or more **operations**.
 Conceptually:
 
 ```yaml
-capability:
-  id: "algites.secrets.store"
-  version: 2
-  group_id: "algites.security"
+Capability:
+  Id: "algites.secrets.store"
+  Version: 2
+  GroupId: "algites.security"
 
-operations:
-  - id: get
-    interactions:
-      - kind: INPUT
-        schema: {id: algites.secrets.store.get.request, version: 2}
-      - kind: FINAL_SUCCESS_STATE_RESULT
-        schema: {id: algites.secrets.store.get.result, version: 2}
+Operations:
+  - Id: get
+    Interactions:
+      - Kind: input
+        Schema: {Id: algites.secrets.store.get.request, Version: 2}
+      - Kind: final_success_state_result
+        Schema: {Id: algites.secrets.store.get.result, Version: 2}
 
-  - id: put
-    interactions:
-      - kind: INPUT
-        schema: {id: algites.secrets.store.put.request, version: 2}
-      - kind: FINAL_SUCCESS_STATE_RESULT
-        schema: {id: algites.secrets.store.put.result, version: 2}
+  - Id: put
+    Interactions:
+      - Kind: input
+        Schema: {Id: algites.secrets.store.put.request, Version: 2}
+      - Kind: final_success_state_result
+        Schema: {Id: algites.secrets.store.put.result, Version: 2}
 
-  - id: delete
-    interactions:
-      - kind: INPUT
-        schema: {id: algites.secrets.store.delete.request, version: 2}
+  - Id: delete
+    Interactions:
+      - Kind: input
+        Schema: {Id: algites.secrets.store.delete.request, Version: 2}
 ```
 
 A capability MAY contain only one operation when that is the natural contract boundary.
@@ -221,7 +221,7 @@ It SHOULD be concise, stable, and independent of implementation language.
 For example:
 
 ```yaml
-id: commit
+Id: commit
 ```
 
 A Java binding for capability contract version 4 might expose:
@@ -311,17 +311,17 @@ Operation parameters are provider-specific implementation controls, not addition
 A provider-operation descriptor therefore has the conceptual shape:
 
 ```yaml
-operations:
-  - capability: <capability-id>
-    capability_version: <version>
-    operation: <operation-id>
-    interaction:
-      supported_state_result_delivery_modes: [...]
-      progress_reporting: false
-      cancellation: false
-      detail_level: false
-      reporting_interval: false
-    parameters: [...]
+Operations:
+  - Capability: <capability-id>
+    CapabilityVersion: <version>
+    Operation: <operation-id>
+    Interaction:
+      SupportedStateResultDeliveryModes: [...]
+      ProgressReporting: false
+      Cancellation: false
+      DetailLevel: false
+      ReportingInterval: false
+    Parameters: [...]
 ```
 
 A capability-provider operation-parameter definition contains:
@@ -339,38 +339,38 @@ A capability-provider operation-parameter definition contains:
 Example:
 
 ```yaml
-operations:
-  - capability: _AAC.vcs.distributed-repository-synchronization
-    capability_version: 1
-    operation: pull
-    interaction:
-      supported_state_result_delivery_modes: [ON_DEMAND_COMPLETE]
-    parameters:
-      - id: integration_strategy
-        name:
-          text: Integration strategy
-          resource_key: vcs.pull.integrationStrategy.name
+Operations:
+  - Capability: _AAC.vcs.distributed-repository-synchronization
+    CapabilityVersion: 1
+    Operation: pull
+    Interaction:
+      SupportedStateResultDeliveryModes: [on_demand_complete]
+    Parameters:
+      - Id: integration_strategy
+        Name:
+          Text: Integration strategy
+          ResourceKey: vcs.pull.integrationStrategy.name
         description:
-          text: Determines how retrieved revisions are integrated.
-          resource_key: vcs.pull.integrationStrategy.description
-        value_schema:
+          Text: Determines how retrieved revisions are integrated.
+          ResourceKey: vcs.pull.integrationStrategy.description
+        ValueSchema:
           type: string
           enum: [MERGE, REBASE, FAST_FORWARD_ONLY]
-        enum_values:
-          - value: MERGE
-            name:
-              text: Merge
+        EnumValues:
+          - Value: MERGE
+            Name:
+              Text: Merge
             description:
-              text: Merge the histories.
-          - value: REBASE
-            name:
-              text: Rebase
+              Text: Merge the histories.
+          - Value: REBASE
+            Name:
+              Text: Rebase
             description:
-              text: Reapply local revisions on top of the retrieved history.
+              Text: Reapply local revisions on top of the retrieved history.
         default: MERGE
-        component_configurable: true
-        instance_configurable: true
-        invocation_overridable: true
+        ComponentConfigurable: true
+        InstanceConfigurable: true
+        InvocationOverridable: true
 ```
 
 The effective value precedence is:
@@ -476,8 +476,8 @@ Core SHOULD make nested invocation relationships observable through correlation 
 Conceptually:
 
 ```yaml
-invocation_id: "..."
-parent_invocation_id: "..."
+InvocationId: "..."
+ParentInvocationId: "..."
 ```
 
 This is useful for tracing a logical call graph without exposing implementation-private stack frames.
@@ -771,30 +771,30 @@ Capability **authorization** answers which operations a consumer component and t
 A capability version MAY publish an authorization vocabulary. Every authorization permission intended for user/admin interaction MUST carry stable machine identity and presentation metadata:
 
 ```yaml
-capability:
-  id: _AO.core.siteManagement
-  version: 1
-  name:
-    text: Site management
-    resource_key: ao.siteManagement.name
+Capability:
+  Id: _AO.core.siteManagement
+  Version: 1
+  Name:
+    Text: Site management
+    ResourceKey: ao.siteManagement.name
   description:
-    text: Read and modify Orchestrator Site entities.
-    resource_key: ao.siteManagement.description
+    Text: Read and modify Orchestrator Site entities.
+    ResourceKey: ao.siteManagement.description
 
-authorization_permissions:
-  - id: VIEW_SITE
-    name:
-      text: View sites
-      resource_key: ao.siteManagement.authorization.view.name
+AuthorizationPermissions:
+  - Id: VIEW_SITE
+    Name:
+      Text: View sites
+      ResourceKey: ao.siteManagement.authorization.view.name
     description:
-      text: Allows the component to read Site data.
+      Text: Allows the component to read Site data.
 
-  - id: EDIT_SITE
-    name:
-      text: Edit sites
-      resource_key: ao.siteManagement.authorization.edit.name
+  - Id: EDIT_SITE
+    Name:
+      Text: Edit sites
+      ResourceKey: ao.siteManagement.authorization.edit.name
     description:
-      text: Allows the component to modify writable Site attributes.
+      Text: Allows the component to modify writable Site attributes.
 ```
 
 `id` is the stable semantic identity. `name` and `description` are presentation metadata and MUST NOT be used as identity. A display text MAY contain direct `text`, an opaque `resource_key`, or both. When both are present, direct text is the baseline fallback. AAC does not require a localization engine in the baseline specification.
@@ -804,9 +804,9 @@ authorization_permissions:
 Each operation MAY reference authorization permissions declared by that same capability version. The baseline authorization expression contains only two flat constructs:
 
 ```yaml
-authorization:
-  all_of: [EDIT_SITE]
-  any_of: [STANDARD_EDITOR, ADVANCED_EDITOR]
+Authorization:
+  AllOf: [EDIT_SITE]
+  AnyOf: [STANDARD_EDITOR, ADVANCED_EDITOR]
 ```
 
 Semantics are:
@@ -825,9 +825,9 @@ A consumer requirement MAY request a subset of the authorization vocabulary of t
 
 ```yaml
 consumes:
-  capability: _AO.core.siteManagement
-  version: 1
-  requested_authorizations:
+  Capability: _AO.core.siteManagement
+  Version: 1
+  RequestedAuthorizations:
     - VIEW_SITE
     - EDIT_SITE
 ```
@@ -885,9 +885,9 @@ The observation capability has its own independent contract version.
 Conceptually:
 
 ```yaml
-provides:
+Provides:
   _AAC.capability.observation:
-    versions: [1]
+    Versions: [1]
 ```
 
 ## V.2 Why observation is not per-capability
@@ -927,27 +927,27 @@ A separate `ERROR` phase is not required in the baseline model; provider failure
 A PRE event SHOULD contain at least:
 
 ```yaml
-invocation_id: "..."
-parent_invocation_id: "..."   # optional
-phase: PRE
+InvocationId: "..."
+ParentInvocationId: "..."   # optional
+Phase: pre
 
-capability:
-  id: "example.vcs.repository"
-  version: 1
+Capability:
+  Id: "example.vcs.repository"
+  Version: 1
 
-operation:
-  id: commit
+Operation:
+  Id: commit
 
 consumer:
-  component_id: "..."
+  ComponentId: "..."
   logical_scope_id: "..."     # optional
 
 provider:
-  component_id: "..."
-  provider_definition_id: "..."
+  ComponentId: "..."
+  ProviderDefinitionId: "..."
   instance_id: "..."
 
-arguments:
+Arguments:
   ... normalized and redacted contract values ...
 
 timestamp: "..."
@@ -962,24 +962,24 @@ A POST event SHOULD contain the same invocation identity and routing context plu
 Success example:
 
 ```yaml
-invocation_id: "..."
-phase: POST
+InvocationId: "..."
+Phase: post
 
-capability:
-  id: "example.vcs.repository"
-  version: 1
+Capability:
+  Id: "example.vcs.repository"
+  Version: 1
 
-operation:
-  id: commit
+Operation:
+  Id: commit
 
-arguments:
+Arguments:
   ...
 
-outcome:
+Outcome:
   success: true
-  result:
+  Result:
     ... normalized and redacted result ...
-  error: null
+  Error: null
 
 duration_ms: 37
 timestamp: "..."
@@ -988,13 +988,13 @@ timestamp: "..."
 Failure example:
 
 ```yaml
-outcome:
+Outcome:
   success: false
-  result: null
-  error:
+  Result: null
+  Error:
     contract_error_id: "..."
-    message: "..."
-    details:
+    Message: "..."
+    Details:
       ... normalized and redacted values ...
 ```
 
@@ -1076,10 +1076,10 @@ These are separate concerns.
 For example, an observer instance may contain:
 
 ```yaml
-id: "4b8e6d8d-6c7f-4de7-8e2f-..."
-name: "stdout"
-configuration:
-  output: stdout
+Id: "4b8e6d8d-6c7f-4de7-8e2f-..."
+Name: "stdout"
+Configuration:
+  Output: stdout
   pretty_print: true
 ```
 
@@ -1088,9 +1088,9 @@ while Core-owned topology contains:
 ```yaml
 observer_instance_id: "4b8e6d8d-6c7f-4de7-8e2f-..."
 observes:
-  - capability: "example.vcs.repository"
-    operations: [commit, push]
-    phases: [PRE, POST]
+  - Capability: "example.vcs.repository"
+    Operations: [commit, push]
+    phases: [pre, post]
 ```
 
 The observer plugin MUST NOT silently invent or persist hidden observation targets outside Core-owned binding state.
@@ -1110,10 +1110,10 @@ Conceptually:
 
 ```yaml
 observes:
-  - capability: "example.vcs.repository"
-    versions: [1, 2]
-    operations: [commit, push]
-    phases: [PRE, POST]
+  - Capability: "example.vcs.repository"
+    Versions: [1, 2]
+    Operations: [commit, push]
+    phases: [pre, post]
 ```
 
 ## VI.3 Operation selectors reference the capability contract
@@ -1125,8 +1125,8 @@ Every operation ID is interpreted in the scope of the selector's capability and 
 Thus:
 
 ```yaml
-capability: "example.vcs.repository"
-operations: [commit]
+Capability: "example.vcs.repository"
+Operations: [commit]
 ```
 
 means:
@@ -1144,8 +1144,8 @@ If `operations` is omitted, the selector applies to every operation of the selec
 Therefore:
 
 ```yaml
-- capability: "example.vcs.repository"
-  phases: [PRE, POST]
+- Capability: "example.vcs.repository"
+  phases: [pre, post]
 ```
 
 is equivalent to observing all operations of that capability.
@@ -1155,8 +1155,8 @@ is equivalent to observing all operations of that capability.
 A product MAY support a capability wildcard for generic tracers:
 
 ```yaml
-- capability: "*"
-  phases: [PRE, POST]
+- Capability: "*"
+  phases: [pre, post]
 ```
 
 This means all **observable** admitted capability invocations, subject to mandatory exclusions and security policy.
@@ -1184,9 +1184,9 @@ When a selector names a concrete capability/version/operation, Core SHOULD valid
 Invalid example:
 
 ```yaml
-capability: "example.vcs.repository"
-versions: [1]
-operations: [nonexistent-operation]
+Capability: "example.vcs.repository"
+Versions: [1]
+Operations: [nonexistent-operation]
 ```
 
 Core should report a configuration error rather than silently ignore the unknown operation.
@@ -1379,9 +1379,9 @@ Definitions that may be presented to users or administrators SHOULD carry `name`
 The common display-text shape permits:
 
 ```yaml
-name:
-  text: Edit sites
-  resource_key: ao.authorization.editSite.name
+Name:
+  Text: Edit sites
+  ResourceKey: ao.authorization.editSite.name
 ```
 
 or either field alone. `resource_key` is intentionally opaque to AAC v1; a product-localization engine MAY resolve it. No localization engine is required by this specification. `text` is the baseline fallback when available.

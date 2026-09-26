@@ -26,25 +26,25 @@ def test_process_runtime_coerces_direct_operation_object_to_typed_dataclass():
         operation_id="observe",
         provider_instance_id="observer",
         arguments={
-            "invocation_id": "observed",
-            "parent_invocation_id": None,
-            "phase": "PRE",
-            "capability_id": "x.cap",
-            "capability_version": 1,
-            "operation_id": "run",
-            "provider_instance_id": "provider",
-            "arguments": {"value": 7},
-            "outcome": None,
-            "result": None,
-            "error": None,
-            "metadata": {},
+            "InvocationId": "observed",
+            "ParentInvocationId": None,
+            "Phase": "pre",
+            "CapabilityId": "x.cap",
+            "CapabilityVersion": 1,
+            "OperationId": "run",
+            "ProviderInstanceId": "provider",
+            "Arguments": {"Value": 7},
+            "Outcome": None,
+            "Result": None,
+            "Error": None,
+            "Metadata": {},
         },
     )
 
     output = _invoke_runtime(runtime, invocation)
 
     assert output.success
-    assert output.result["accepted"] is True
+    assert output.result["Accepted"] is True
     assert isinstance(runtime.received, AIcObservationInput)
     assert runtime.received.phase is AInObservationPhase.PRE
-    assert runtime.received.arguments == {"value": 7}
+    assert runtime.received.arguments == {"Value": 7}

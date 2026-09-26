@@ -39,8 +39,8 @@ class AIcOperationParameterConfigurationStore:
 
     def _put(self, key: str, value: object, component_version: int) -> None:
         self.store.put(_OPERATION_PARAMETER_CONFIGURATION_NAMESPACE, key, {
-            "value": value,
-            "written_by_component_version": component_version,
+            "Value": value,
+            "WrittenByComponentVersion": component_version,
         })
 
     def set_component_value(
@@ -49,7 +49,7 @@ class AIcOperationParameterConfigurationStore:
         *, component_version: int,
     ) -> None:
         self._put(self._key(
-            "COMPONENT", component_id, provider_definition_id, capability_id,
+            "component", component_id, provider_definition_id, capability_id,
             capability_version, operation_id, parameter_id,
         ), value, component_version)
 
@@ -59,7 +59,7 @@ class AIcOperationParameterConfigurationStore:
         value: object, *, component_version: int,
     ) -> None:
         self._put(self._key(
-            "PROVIDER_INSTANCE", component_id, provider_definition_id, capability_id,
+            "provider_instance", component_id, provider_definition_id, capability_id,
             capability_version, operation_id, parameter_id, provider_instance_id,
         ), value, component_version)
 
@@ -68,7 +68,7 @@ class AIcOperationParameterConfigurationStore:
         capability_version: int, operation_id: str, parameter_id: str,
     ) -> None:
         self.store.delete(_OPERATION_PARAMETER_CONFIGURATION_NAMESPACE, self._key(
-            "COMPONENT", component_id, provider_definition_id, capability_id,
+            "component", component_id, provider_definition_id, capability_id,
             capability_version, operation_id, parameter_id,
         ))
 
@@ -77,7 +77,7 @@ class AIcOperationParameterConfigurationStore:
         capability_id: str, capability_version: int, operation_id: str, parameter_id: str,
     ) -> None:
         self.store.delete(_OPERATION_PARAMETER_CONFIGURATION_NAMESPACE, self._key(
-            "PROVIDER_INSTANCE", component_id, provider_definition_id, capability_id,
+            "provider_instance", component_id, provider_definition_id, capability_id,
             capability_version, operation_id, parameter_id, provider_instance_id,
         ))
 
@@ -86,7 +86,7 @@ class AIcOperationParameterConfigurationStore:
         if raw is None:
             return None
         return AIcConfiguredOperationParameterValue(
-            raw.get("value"), int(raw["written_by_component_version"])
+            raw.get("Value"), int(raw["WrittenByComponentVersion"])
         )
 
     def component_value(
@@ -94,7 +94,7 @@ class AIcOperationParameterConfigurationStore:
         capability_version: int, operation_id: str, parameter_id: str,
     ) -> AIcConfiguredOperationParameterValue | None:
         return self._get(self._key(
-            "COMPONENT", component_id, provider_definition_id, capability_id,
+            "component", component_id, provider_definition_id, capability_id,
             capability_version, operation_id, parameter_id,
         ))
 
@@ -103,6 +103,6 @@ class AIcOperationParameterConfigurationStore:
         capability_id: str, capability_version: int, operation_id: str, parameter_id: str,
     ) -> AIcConfiguredOperationParameterValue | None:
         return self._get(self._key(
-            "PROVIDER_INSTANCE", component_id, provider_definition_id, capability_id,
+            "provider_instance", component_id, provider_definition_id, capability_id,
             capability_version, operation_id, parameter_id, provider_instance_id,
         ))

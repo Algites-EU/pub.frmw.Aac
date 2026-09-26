@@ -3,139 +3,139 @@
   "$id": "_AAC.schema.package-bootstrap/1",
   "type": "object",
   "required": [
-    "package_bootstrap"
+    "PackageBootstrap"
   ],
   "additionalProperties": false,
   "properties": {
-    "package_bootstrap": {
+    "PackageBootstrap": {
       "type": "object",
       "required": [
-        "schema_version",
-        "layout"
+        "SchemaVersion",
+        "Layout"
       ],
       "additionalProperties": false,
       "properties": {
-        "schema_version": {
+        "SchemaVersion": {
           "const": 1
         },
-        "layout": {
+        "Layout": {
           "type": "object",
           "required": [
-            "product_root"
+            "ProductRoot"
           ],
           "additionalProperties": false,
           "properties": {
-            "product_root": {
+            "ProductRoot": {
               "type": "string",
               "minLength": 1
             },
-            "package_store_subdirectory": {
+            "PackageStoreSubdirectory": {
               "type": "string",
               "minLength": 1,
               "default": "plugins"
             },
-            "downloaded_subdirectory": {
+            "DownloadedSubdirectory": {
               "type": "string",
               "minLength": 1,
               "default": "downloaded"
             },
-            "installed_subdirectory": {
+            "InstalledSubdirectory": {
               "type": "string",
               "minLength": 1,
               "default": "installed"
             },
-            "obsolete_subdirectory": {
+            "ObsoleteSubdirectory": {
               "type": "string",
               "minLength": 1,
               "default": "obsolete"
             },
-            "core_state_subdirectory": {
+            "CoreStateSubdirectory": {
               "type": "string",
               "minLength": 1,
               "default": "aac-state"
             },
-            "transactions_subdirectory": {
+            "TransactionsSubdirectory": {
               "type": "string",
               "minLength": 1,
               "default": "transactions"
             },
-            "core_lock_filename": {
+            "CoreLockFilename": {
               "type": "string",
               "minLength": 1,
               "default": "core.lock"
             }
           }
         },
-        "sources": {
+        "Sources": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "uri"
+              "Id",
+              "Uri"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "type": {
+              "Type": {
                 "type": "string",
                 "minLength": 1,
                 "default": "MANIFEST"
               },
-              "uri": {
+              "Uri": {
                 "type": "string",
                 "minLength": 1
               },
-              "authentication_profile_id": {
+              "AuthenticationProfileId": {
                 "type": [
                   "string",
                   "null"
                 ]
               },
-              "verifier_id": {
+              "VerifierId": {
                 "type": [
                   "string",
                   "null"
                 ]
               },
-              "priority": {
+              "Priority": {
                 "type": "integer",
                 "default": 0
               },
-              "settings": {
+              "Settings": {
                 "type": "object"
               },
-              "name": {},
-              "description": {}
+              "Name": {},
+              "Description": {}
             }
           }
         },
-        "automation_policy": {
+        "AutomationPolicy": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "verify_on_download": {
+            "VerifyOnDownload": {
               "type": "boolean",
               "default": true
             },
-            "require_entitlement_for_automatic_paid_component": {
+            "RequireEntitlementForAutomaticPaidComponent": {
               "type": "boolean",
               "default": true
             },
-            "allow_automatic_download": {
+            "AllowAutomaticDownload": {
               "type": "boolean",
               "default": true
             },
-            "allow_automatic_install": {
+            "AllowAutomaticInstall": {
               "type": "boolean",
               "default": true
             }
           }
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         }
       }

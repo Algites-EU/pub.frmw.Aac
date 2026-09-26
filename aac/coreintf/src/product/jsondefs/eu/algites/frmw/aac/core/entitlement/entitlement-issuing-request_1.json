@@ -3,90 +3,90 @@
   "title": "AAC Entitlement Issuing Request 1",
   "type": "object",
   "required": [
-    "entitlement_request"
+    "EntitlementRequest"
   ],
   "additionalProperties": false,
   "properties": {
-    "entitlement_request": {
+    "EntitlementRequest": {
       "type": "object",
       "required": [
-        "format_version",
-        "request_id",
-        "requested_licensing_scope",
-        "subject",
-        "components"
+        "FormatVersion",
+        "RequestId",
+        "RequestedLicensingScope",
+        "Subject",
+        "Components"
       ],
       "additionalProperties": false,
       "properties": {
-        "format_version": {
+        "FormatVersion": {
           "const": 1
         },
-        "request_id": {
+        "RequestId": {
           "type": "string",
           "minLength": 1
         },
-        "subject": {
+        "Subject": {
           "type": "object",
           "required": [
-            "id"
+            "Id"
           ],
           "additionalProperties": false,
           "properties": {
-            "id": {
+            "Id": {
               "type": "string",
               "minLength": 1
             },
-            "display_name": {
+            "DisplayName": {
               "type": "string"
             },
-            "attributes": {
+            "Attributes": {
               "type": "object"
             }
           }
         },
-        "components": {
+        "Components": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "requested_grants"
+              "Id",
+              "RequestedGrants"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "requested_grants": {
+              "RequestedGrants": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "required": [
-                    "capability",
-                    "permissions"
+                    "Capability",
+                    "Permissions"
                   ],
                   "additionalProperties": false,
                   "properties": {
-                    "capability": {
+                    "Capability": {
                       "type": "object",
                       "required": [
-                        "id",
-                        "version"
+                        "Id",
+                        "Version"
                       ],
                       "additionalProperties": false,
                       "properties": {
-                        "id": {
+                        "Id": {
                           "type": "string",
                           "minLength": 1
                         },
-                        "version": {
+                        "Version": {
                           "type": "integer",
                           "minimum": 1
                         }
                       }
                     },
-                    "permissions": {
+                    "Permissions": {
                       "type": "array",
                       "uniqueItems": true,
                       "items": {
@@ -100,24 +100,24 @@
             }
           }
         },
-        "generated_at": {
+        "GeneratedAt": {
           "type": "string"
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         },
-        "request_digest": {
+        "RequestDigest": {
           "type": "string",
           "minLength": 1
         },
-        "requested_licensing_scope": {
+        "RequestedLicensingScope": {
           "type": "object",
           "required": [
-            "type"
+            "Type"
           ],
           "additionalProperties": false,
           "properties": {
-            "type": {
+            "Type": {
               "type": "string",
               "minLength": 1
             }

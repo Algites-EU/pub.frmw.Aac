@@ -39,24 +39,24 @@ def _display_text_from_raw(raw: object) -> AIcDisplayText | None:
     if not isinstance(raw, Mapping):
         raise TypeError("operation interaction display text must be an object")
     return AIcDisplayText(
-        text=str(raw["text"]) if raw.get("text") is not None else None,
-        resource_key=str(raw["resource_key"]) if raw.get("resource_key") is not None else None,
+        text=str(raw["Text"]) if raw.get("Text") is not None else None,
+        resource_key=str(raw["ResourceKey"]) if raw.get("ResourceKey") is not None else None,
     )
 
 def _operation_interaction_event_from_dict(raw: Mapping[str, object]) -> AIcOperationInteractionEvent:
-    details = raw.get("details", {})
+    details = raw.get("Details", {})
     return AIcOperationInteractionEvent(
-        event_type=AInOperationInteractionEventType(str(raw["event_type"])),
-        progress_id=str(raw["progress_id"]) if raw.get("progress_id") is not None else None,
-        parent_progress_id=str(raw["parent_progress_id"]) if raw.get("parent_progress_id") is not None else None,
-        phase_id=str(raw["phase_id"]) if raw.get("phase_id") is not None else None,
-        name=_display_text_from_raw(raw.get("name")),
-        description=_display_text_from_raw(raw.get("description")),
-        current=raw.get("current") if isinstance(raw.get("current"), (int, float)) else None,
-        total=raw.get("total") if isinstance(raw.get("total"), (int, float)) else None,
-        unit=str(raw["unit"]) if raw.get("unit") is not None else None,
-        severity=AInOperationInteractionSeverity(str(raw.get("severity", "INFO"))),
-        code=str(raw["code"]) if raw.get("code") is not None else None,
+        event_type=AInOperationInteractionEventType(str(raw["EventType"])),
+        progress_id=str(raw["ProgressId"]) if raw.get("ProgressId") is not None else None,
+        parent_progress_id=str(raw["ParentProgressId"]) if raw.get("ParentProgressId") is not None else None,
+        phase_id=str(raw["PhaseId"]) if raw.get("PhaseId") is not None else None,
+        name=_display_text_from_raw(raw.get("Name")),
+        description=_display_text_from_raw(raw.get("Description")),
+        current=raw.get("Current") if isinstance(raw.get("Current"), (int, float)) else None,
+        total=raw.get("Total") if isinstance(raw.get("Total"), (int, float)) else None,
+        unit=str(raw["Unit"]) if raw.get("Unit") is not None else None,
+        severity=AInOperationInteractionSeverity(str(raw.get("Severity", "info"))),
+        code=str(raw["Code"]) if raw.get("Code") is not None else None,
         details=dict(details) if isinstance(details, Mapping) else {},
     )
 
@@ -64,13 +64,13 @@ def _output_from_raw(raw: object) -> AIcInvocationOutput:
     # Persistent process host wraps the provider AIcInvocationOutput in a request result.
     if isinstance(raw, Mapping) and "success" in raw:
         return AIcInvocationOutput(
-            success=bool(raw.get("success")),
-            result=raw.get("result"),
-            error=raw.get("error") if isinstance(raw.get("error"), Mapping) else None,
+            success=bool(raw.get("Success")),
+            result=raw.get("Result"),
+            error=raw.get("Error") if isinstance(raw.get("Error"), Mapping) else None,
         )
-    return AIcInvocationOutput(False, error={"type": "InvalidProcessResponse", "message": "response must contain boolean success"})
+    return AIcInvocationOutput(False, error={"Type": "InvalidProcessResponse", "Message": "response must contain boolean success"})
 
 def _json_default(value: object) -> object:
     if hasattr(value, "value"):
         return getattr(value, "value")
-    raise TypeError(f"value of type {type(value).__name__} is not JSON serializable")
+    raise TypeError(f"value of type {type(value).__name__} is not json serializable")

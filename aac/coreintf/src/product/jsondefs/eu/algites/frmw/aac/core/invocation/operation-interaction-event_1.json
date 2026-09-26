@@ -4,37 +4,144 @@
   "x-aac-schema-version": 1,
   "title": "Operation Interaction Event 1",
   "type": "object",
-  "required": ["event_type"],
+  "required": [
+    "EventType"
+  ],
   "additionalProperties": false,
   "$defs": {
     "display_text": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "text": {"type": "string", "minLength": 1},
-        "resource_key": {"type": "string", "minLength": 1}
+        "Text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ResourceKey": {
+          "type": "string",
+          "minLength": 1
+        }
       },
-      "anyOf": [{"required": ["text"]}, {"required": ["resource_key"]}]
+      "anyOf": [
+        {
+          "required": [
+            "Text"
+          ]
+        },
+        {
+          "required": [
+            "ResourceKey"
+          ]
+        }
+      ]
     }
   },
   "properties": {
-    "event_type": {"enum": ["STATUS", "PROGRESS", "DETAIL", "DIAGNOSTIC"]},
-    "progress_id": {"type": ["string", "null"], "minLength": 1},
-    "parent_progress_id": {"type": ["string", "null"], "minLength": 1},
-    "phase_id": {"type": ["string", "null"], "minLength": 1},
-    "name": {"anyOf": [{"$ref": "#/$defs/display_text"}, {"type": "null"}]},
-    "description": {"anyOf": [{"$ref": "#/$defs/display_text"}, {"type": "null"}]},
-    "current": {"type": ["number", "null"], "minimum": 0},
-    "total": {"type": ["number", "null"], "minimum": 0},
-    "unit": {"type": ["string", "null"], "minLength": 1},
-    "severity": {"enum": ["INFO", "WARNING", "ERROR"]},
-    "code": {"type": ["string", "null"], "minLength": 1},
-    "details": {"type": "object"}
+    "EventType": {
+      "enum": [
+        "status",
+        "progress",
+        "detail",
+        "diagnostic"
+      ]
+    },
+    "ProgressId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "ParentProgressId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "PhaseId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "Name": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/display_text"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "Description": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/display_text"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "Current": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "Total": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "Unit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "Severity": {
+      "enum": [
+        "info",
+        "warning",
+        "error"
+      ]
+    },
+    "Code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "Details": {
+      "type": "object"
+    }
   },
   "allOf": [
     {
-      "if": {"properties": {"event_type": {"const": "PROGRESS"}}, "required": ["event_type"]},
-      "then": {"required": ["progress_id"]}
+      "if": {
+        "properties": {
+          "EventType": {
+            "const": "progress"
+          }
+        },
+        "required": [
+          "EventType"
+        ]
+      },
+      "then": {
+        "required": [
+          "ProgressId"
+        ]
+      }
     }
   ]
 }

@@ -52,32 +52,32 @@ class AIcSecurityBootstrapLoader:
                 rendered.append(f"{path}: {error.message}")
             raise AIxDescriptorError(f"{source}: security bootstrap schema validation failed: " + "; ".join(rendered))
         try:
-            body = raw["security_bootstrap"]
+            body = raw["SecurityBootstrap"]
             secret_providers = tuple(AIcSecretProviderRegistration(
-                id=str(item["id"]), type=str(item["type"]),
-                name=normalize_display_text(item.get("name")), description=normalize_display_text(item.get("description")),
-                settings=dict(item.get("settings", {})), bootstrap_safe=bool(item.get("bootstrap_safe", False))
-            ) for item in body.get("secret_providers", ()))
+                id=str(item["Id"]), type=str(item["Type"]),
+                name=normalize_display_text(item.get("Name")), description=normalize_display_text(item.get("Description")),
+                settings=dict(item.get("Settings", {})), bootstrap_safe=bool(item.get("BootstrapSafe", False))
+            ) for item in body.get("SecretProviders", ()))
             profiles = []
-            for item in body.get("authentication_profiles", ()):
+            for item in body.get("AuthenticationProfiles", ()):
                 parameters = {}
-                for key, value in dict(item.get("parameters", {})).items():
-                    if isinstance(value, Mapping) and "secret_reference" in value:
-                        ref = value["secret_reference"]
+                for key, value in dict(item.get("Parameters", {})).items():
+                    if isinstance(value, Mapping) and "SecretReference" in value:
+                        ref = value["SecretReference"]
                         parameters[str(key)] = AIcAuthenticationParameter(secret_reference=AIcSecretReference(
-                            str(ref["secret_provider_id"]), str(ref["key"]),
-                            str(ref["version"]) if ref.get("version") is not None else None,
-                            dict(ref.get("metadata", {})),
+                            str(ref["SecretProviderId"]), str(ref["Key"]),
+                            str(ref["Version"]) if ref.get("Version") is not None else None,
+                            dict(ref.get("Metadata", {})),
                         ))
                     else:
                         parameters[str(key)] = AIcAuthenticationParameter(value=value)
                 profiles.append(AIcAuthenticationProfile(
-                    id=str(item["id"]), mechanism=str(item["mechanism"]),
-                    name=normalize_display_text(item.get("name")), description=normalize_display_text(item.get("description")),
-                    parameters=parameters, metadata=dict(item.get("metadata", {}))
+                    id=str(item["Id"]), mechanism=str(item["Mechanism"]),
+                    name=normalize_display_text(item.get("Name")), description=normalize_display_text(item.get("Description")),
+                    parameters=parameters, metadata=dict(item.get("Metadata", {}))
                 ))
             return AIcSecurityBootstrap(
-                int(body["schema_version"]), secret_providers, tuple(profiles), dict(body.get("metadata", {}))
+                int(body["SchemaVersion"]), secret_providers, tuple(profiles), dict(body.get("Metadata", {}))
             )
         except (KeyError, TypeError, ValueError) as exc:
             raise AIxDescriptorError(f"{source}: invalid security bootstrap: {exc}") from exc

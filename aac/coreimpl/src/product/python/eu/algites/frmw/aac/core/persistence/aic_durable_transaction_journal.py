@@ -18,17 +18,17 @@ def _now() -> str:
 
 def _read_to_raw(item: AIcPersistenceTransactionRead) -> dict[str, object]:
     return {
-        "record_id": item.record_id,
-        "expected_record_revision": item.expected_record_revision,
-        "expect_absent": item.expect_absent,
+        "RecordId": item.record_id,
+        "ExpectedRecordRevision": item.expected_record_revision,
+        "ExpectAbsent": item.expect_absent,
     }
 
 def _write_to_raw(item: AIcPersistenceTransactionWrite) -> dict[str, object]:
     return {
-        "record_id": item.record_id,
-        "operation": item.operation,
-        "target_record_revision": item.target_record_revision,
-        "metadata": dict(item.metadata),
+        "RecordId": item.record_id,
+        "Operation": item.operation,
+        "TargetRecordRevision": item.target_record_revision,
+        "Metadata": dict(item.metadata),
     }
 
 class AIcDurableTransactionJournal:
@@ -69,9 +69,9 @@ class AIcDurableTransactionJournal:
             raw = json.loads(self.active_pointer.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
             raise AIxPersistenceError(f"cannot read active transaction pointer: {exc}") from exc
-        if not isinstance(raw, Mapping) or not raw.get("transaction_id"):
+        if not isinstance(raw, Mapping) or not raw.get("TransactionId"):
             raise AIxPersistenceError("active transaction pointer is invalid")
-        return str(raw["transaction_id"])
+        return str(raw["TransactionId"])
 
     def begin(
         self,
@@ -101,19 +101,19 @@ class AIcDurableTransactionJournal:
             directory.mkdir(parents=True, exist_ok=False)
             fsync_directory(directory.parent)
             plan = {
-                "format_version": 1,
-                "transaction_id": transaction_id,
-                "transaction_type": transaction_type,
-                "created_at": _now(),
-                "read_set": [_read_to_raw(item) for item in read_set],
-                "write_set": [_write_to_raw(item) for item in write_set],
-                "metadata": dict(metadata or {}),
+                "FormatVersion": 1,
+                "TransactionId": transaction_id,
+                "TransactionType": transaction_type,
+                "CreatedAt": _now(),
+                "ReadSet": [_read_to_raw(item) for item in read_set],
+                "WriteSet": [_write_to_raw(item) for item in write_set],
+                "Metadata": dict(metadata or {}),
             }
             atomic_write_json(self._plan_path(transaction_id), plan)
             for name, payload in (recovery_payloads or {}).items():
                 atomic_write_json(self.recovery_payload_path(transaction_id, name), dict(payload))
             self.write_phase(transaction_id, AInPersistenceTransactionPhase.PREPARED)
-            atomic_write_json(self.active_pointer, {"format_version": 1, "transaction_id": transaction_id})
+            atomic_write_json(self.active_pointer, {"FormatVersion": 1, "TransactionId": transaction_id})
             return descriptor
 
     def write_phase(
@@ -123,11 +123,11 @@ class AIcDurableTransactionJournal:
         diagnostics: tuple[str, ...] = (),
     ) -> None:
         atomic_write_json(self._state_path(transaction_id), {
-            "format_version": 1,
-            "transaction_id": transaction_id,
-            "phase": phase.value,
-            "updated_at": _now(),
-            "diagnostics": list(diagnostics),
+            "FormatVersion": 1,
+            "TransactionId": transaction_id,
+            "Phase": phase.value,
+            "UpdatedAt": _now(),
+            "Diagnostics": list(diagnostics),
         })
 
     def read_plan(self, transaction_id: str) -> Mapping[str, object]:
@@ -135,7 +135,7 @@ class AIcDurableTransactionJournal:
             raw = json.loads(self._plan_path(transaction_id).read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
             raise AIxPersistenceError(f"cannot read transaction plan {transaction_id}: {exc}") from exc
-        if not isinstance(raw, Mapping) or int(raw.get("format_version", 0)) != 1:
+        if not isinstance(raw, Mapping) or int(raw.get("FormatVersion", 0)) != 1:
             raise AIxPersistenceError(f"transaction plan {transaction_id} is invalid")
         return raw
 
@@ -144,7 +144,7 @@ class AIcDurableTransactionJournal:
             raw = json.loads(self._state_path(transaction_id).read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
             raise AIxPersistenceError(f"cannot read transaction state {transaction_id}: {exc}") from exc
-        return AInPersistenceTransactionPhase(str(raw["phase"]))
+        return AInPersistenceTransactionPhase(str(raw["Phase"]))
 
     def read_recovery_payload(self, transaction_id: str, name: str) -> Mapping[str, object]:
         try:

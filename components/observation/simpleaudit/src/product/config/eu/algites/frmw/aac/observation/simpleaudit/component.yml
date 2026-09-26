@@ -1,46 +1,48 @@
-component:
-  id: _AAC.component.simpleaudit
-  version: 1
-  name:
-    text: Simple audit observer
-    resource_key: aac.simpleaudit.component.name
-  description:
-    text: Reference AAC observer that writes normalized capability invocation records
-      to standard output or a file.
-    resource_key: aac.simpleaudit.component.description
-  capability_providers:
-  - id: observation
-    name:
-      text: Simple audit observation provider
-      resource_key: aac.simpleaudit.provider.observation.name
-    description:
-      text: Observes capability invocations and emits JSON or text audit records.
-      resource_key: aac.simpleaudit.provider.observation.description
-    capabilities:
-    - id: _AAC.capability.observation
-      versions:
+Component:
+  Id: _AAC.component.simpleaudit
+  Version: 1
+  Name:
+    Text: Simple audit observer
+    ResourceKey: aac.simpleaudit.component.name
+  Description:
+    Text: Reference AAC observer that writes normalized capability invocation 
+      records to standard output or a file.
+    ResourceKey: aac.simpleaudit.component.description
+  CapabilityProviders:
+  - Id: observation
+    Name:
+      Text: Simple audit observation provider
+      ResourceKey: aac.simpleaudit.provider.observation.name
+    Description:
+      Text: Observes capability invocations and emits JSON or text audit 
+        records.
+      ResourceKey: aac.simpleaudit.provider.observation.description
+    Capabilities:
+    - Id: _AAC.capability.observation
+      Versions:
       - 1
-    implementation_classes:
-    - technology-kind: python
-      class-name: eu.algites.frmw.aac.observation.simpleaudit.provider:AIcSimpleAuditObserver
-    runtime:
-      profile: PROCESS
-    configuration_schema:
-      id: simpleaudit-config
-      write_version: 1
-      readable_versions:
+    ImplementationClasses:
+    - TechnologyKind: python
+      ClassName: 
+        eu.algites.frmw.aac.observation.simpleaudit.provider:AIcSimpleAuditObserver
+    Runtime:
+      Profile: process
+    ConfigurationSchema:
+      Id: simpleaudit-config
+      WriteVersion: 1
+      ReadableVersions:
       - 1
-      resource: simpleaudit-config_1.json
-    initial_instances:
-    - name: default
-      configuration:
-        output:
-          type: STDOUT
-        format: JSON
-    operations:
-    - capability: _AAC.capability.observation
-      capability_version: 1
-      operation: observe
-      interaction:
-        supported_state_result_delivery_modes:
-        - ON_DEMAND_COMPLETE
+      Resource: simpleaudit-config_1.json
+    InitialInstances:
+    - Name: default
+      Configuration:
+        Output:
+          Type: stdout
+        Format: json
+    Operations:
+    - Capability: _AAC.capability.observation
+      CapabilityVersion: 1
+      Operation: observe
+      Interaction:
+        SupportedStateResultDeliveryModes:
+        - on_demand_complete

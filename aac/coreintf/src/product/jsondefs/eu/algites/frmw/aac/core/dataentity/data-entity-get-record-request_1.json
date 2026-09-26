@@ -5,16 +5,16 @@
   "title": "Data Entity Get Record Request 1",
   "type": "object",
   "required": [
-    "schema_id",
-    "uid"
+    "SchemaId",
+    "Uid"
   ],
   "additionalProperties": false,
   "properties": {
-    "schema_id": {
+    "SchemaId": {
       "type": "string",
       "minLength": 1
     },
-    "uid": {
+    "Uid": {
       "type": "string",
       "minLength": 1
     }

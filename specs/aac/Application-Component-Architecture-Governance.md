@@ -189,10 +189,10 @@ Every component MUST have a stable logical identifier independent of its release
 Conceptually:
 
 ```yaml
-component:
-  id: "eu.algites.component.git"
-  version: "4.2.0"
-  name: "Git Integration"
+Component:
+  Id: "eu.algites.component.git"
+  Version: "4.2.0"
+  Name: "Git Integration"
 ```
 
 The identifier MUST remain stable across releases of the same logical component.
@@ -422,7 +422,7 @@ A component MUST advertise only capability versions it actually knows and intent
 Valid:
 
 ```yaml
-versions: [1, 2, 3]
+Versions: [1, 2, 3]
 ```
 
 A closed range MAY be used only if it expands to a finite set of known versions.
@@ -563,8 +563,8 @@ Example:
 ```yaml
 consumes:
   algites.configuration.change-plan:
-    versions: [2, 3, 4]
-    mandatory: true
+    Versions: [2, 3, 4]
+    Mandatory: true
 ```
 
 ## IV.11 Provided capabilities
@@ -576,9 +576,9 @@ A provided capability declaration means:
 Example:
 
 ```yaml
-provides:
+Provides:
   algites.vcs.status:
-    versions: [1, 2, 3]
+    Versions: [1, 2, 3]
 ```
 
 The provider may be Core or an extension component.
@@ -790,8 +790,8 @@ Preferred:
 ```yaml
 consumes:
   algites.object-store:
-    versions: [2,3]
-    mandatory: true
+    Versions: [2,3]
+    Mandatory: true
 ```
 
 Instead of:
@@ -1062,19 +1062,19 @@ A component declares the Data Entity schemas it can semantically interpret or pr
 Conceptually:
 
 ```yaml
-data_entity_support:
-  - schema_id: eu.algites.monitoring.site-data
-    readable_versions: [2, 3]
-    writable_versions: [2, 3]
-    preferred_write_version: 3
-    migrations:
-      - from: 2
-        to: 3
-        migrator: eu.algites.monitoring:migrate_site_data_2_to_3
-    data_entity_requirements:
-      - schema_id: _AO.entity.site
-        access: [READ]
-        readable_versions: [4, 5]
+DataEntitySupport:
+  - SchemaId: eu.algites.monitoring.site-data
+    ReadableVersions: [2, 3]
+    WritableVersions: [2, 3]
+    PreferredWriteVersion: 3
+    Migrations:
+      - From: 2
+        To: 3
+        Migrator: eu.algites.monitoring:migrate_site_data_2_to_3
+    DataEntityRequirements:
+      - SchemaId: _AO.entity.site
+        Access: [read]
+        ReadableVersions: [4, 5]
         required: true
 ```
 
@@ -1111,7 +1111,7 @@ Concrete Data Entity relationships are declared in the canonical schema at the f
   "site_uid": {
     "type": "string",
     "x-aac-data-entity-reference": {
-      "schema_id": "_AO.entity.site"
+      "SchemaId": "_AO.entity.site"
     }
   }
 }

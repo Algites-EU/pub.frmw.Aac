@@ -12,11 +12,11 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "text": {
+            "Text": {
               "type": "string",
               "minLength": 1
             },
-            "resource_key": {
+            "ResourceKey": {
               "type": "string",
               "minLength": 1
             }
@@ -24,12 +24,12 @@
           "anyOf": [
             {
               "required": [
-                "text"
+                "Text"
               ]
             },
             {
               "required": [
-                "resource_key"
+                "ResourceKey"
               ]
             }
           ]
@@ -39,33 +39,33 @@
   },
   "type": "object",
   "required": [
-    "group"
+    "Group"
   ],
   "additionalProperties": false,
   "properties": {
-    "group": {
+    "Group": {
       "type": "object",
       "required": [
-        "id",
-        "name"
+        "Id",
+        "Name"
       ],
       "additionalProperties": false,
       "properties": {
-        "id": {
+        "Id": {
           "type": "string",
           "minLength": 1
         },
-        "parent_group_id": {
+        "ParentGroupId": {
           "type": "string",
           "minLength": 1
         },
-        "name": {
+        "Name": {
           "$ref": "#/$defs/displayText"
         },
-        "description": {
+        "Description": {
           "$ref": "#/$defs/displayText"
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         }
       }

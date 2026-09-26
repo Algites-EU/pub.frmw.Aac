@@ -16,8 +16,8 @@ def normalize_display_text(value: object | None) -> AIcDisplayText | None:
         return AIcDisplayText(text=value)
     if isinstance(value, dict):
         return AIcDisplayText(
-            text=str(value["text"]) if value.get("text") is not None else None,
-            resource_key=str(value["resource_key"]) if value.get("resource_key") is not None else None,
+            text=str(value["Text"]) if value.get("Text") is not None else None,
+            resource_key=str(value["ResourceKey"]) if value.get("ResourceKey") is not None else None,
         )
     raise TypeError("display text must be string, mapping, AIcDisplayText, or None")
 
@@ -31,8 +31,8 @@ def normalize_display_content(value: object | None) -> AIcDisplayContent | None:
         return AIcDisplayContent(content=value)
     if isinstance(value, dict):
         return AIcDisplayContent(
-            content=str(value["content"]) if value.get("content") is not None else None,
-            resource_key=str(value["resource_key"]) if value.get("resource_key") is not None else None,
-            format=AInDisplayContentFormat(str(value.get("format", "PLAIN_TEXT"))),
+            content=str(value["Content"]) if value.get("Content") is not None else None,
+            resource_key=str(value["ResourceKey"]) if value.get("ResourceKey") is not None else None,
+            format=AInDisplayContentFormat(str(value.get("Format", "plain_text"))),
         )
     raise TypeError("display content must be string, mapping, AIcDisplayContent, or None")

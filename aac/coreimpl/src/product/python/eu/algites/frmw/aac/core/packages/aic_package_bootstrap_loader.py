@@ -37,42 +37,42 @@ class AIcPackageBootstrapLoader:
     @staticmethod
     def load_text(text: str, source: str = "<memory>") -> AIcPackageBootstrap:
         initial = yaml.safe_load(text)
-        if not isinstance(initial, Mapping) or not isinstance(initial.get("package_bootstrap"), Mapping):
+        if not isinstance(initial, Mapping) or not isinstance(initial.get("PackageBootstrap"), Mapping):
             raise ValueError(f"{source}: package bootstrap document root is invalid")
-        schema_version = int(initial["package_bootstrap"].get("schema_version", 0))
+        schema_version = int(initial["PackageBootstrap"].get("SchemaVersion", 0))
         if schema_version != 1:
             raise ValueError(f"{source}: unsupported package bootstrap schema_version {schema_version}; expected 1")
         raw = _load_yaml(text, "package-bootstrap_1.json", source)
-        root = raw["package_bootstrap"]
-        layout_raw = root["layout"]
-        policy_raw = root.get("automation_policy", {})
+        root = raw["PackageBootstrap"]
+        layout_raw = root["Layout"]
+        policy_raw = root.get("AutomationPolicy", {})
         return AIcPackageBootstrap(
-            schema_version=int(root["schema_version"]),
+            schema_version=int(root["SchemaVersion"]),
             layout=AIcPackageStoreLayout(
-                product_root=str(layout_raw["product_root"]),
-                package_store_subdirectory=str(layout_raw.get("package_store_subdirectory", "plugins")),
-                downloaded_subdirectory=str(layout_raw.get("downloaded_subdirectory", "downloaded")),
-                installed_subdirectory=str(layout_raw.get("installed_subdirectory", "installed")),
-                obsolete_subdirectory=str(layout_raw.get("obsolete_subdirectory", "obsolete")),
-                core_state_subdirectory=str(layout_raw.get("core_state_subdirectory", "aac-state")),
-                transactions_subdirectory=str(layout_raw.get("transactions_subdirectory", "transactions")),
-                core_lock_filename=str(layout_raw.get("core_lock_filename", "core.lock")),
+                product_root=str(layout_raw["ProductRoot"]),
+                package_store_subdirectory=str(layout_raw.get("PackageStoreSubdirectory", "plugins")),
+                downloaded_subdirectory=str(layout_raw.get("DownloadedSubdirectory", "downloaded")),
+                installed_subdirectory=str(layout_raw.get("InstalledSubdirectory", "installed")),
+                obsolete_subdirectory=str(layout_raw.get("ObsoleteSubdirectory", "obsolete")),
+                core_state_subdirectory=str(layout_raw.get("CoreStateSubdirectory", "aac-state")),
+                transactions_subdirectory=str(layout_raw.get("TransactionsSubdirectory", "transactions")),
+                core_lock_filename=str(layout_raw.get("CoreLockFilename", "core.lock")),
             ),
             sources=tuple(
                 AIcPackageSourceRegistration(
-                    id=str(item["id"]), type=str(item.get("type", "MANIFEST")), uri=str(item["uri"]),
-                    authentication_profile_id=str(item["authentication_profile_id"]) if item.get("authentication_profile_id") is not None else None,
-                    verifier_id=str(item["verifier_id"]) if item.get("verifier_id") is not None else None,
-                    priority=int(item.get("priority", 0)), settings=dict(item.get("settings", {})),
-                    name=normalize_display_text(item.get("name")), description=normalize_display_text(item.get("description")),
+                    id=str(item["Id"]), type=str(item.get("Type", "MANIFEST")), uri=str(item["Uri"]),
+                    authentication_profile_id=str(item["AuthenticationProfileId"]) if item.get("AuthenticationProfileId") is not None else None,
+                    verifier_id=str(item["VerifierId"]) if item.get("VerifierId") is not None else None,
+                    priority=int(item.get("Priority", 0)), settings=dict(item.get("Settings", {})),
+                    name=normalize_display_text(item.get("Name")), description=normalize_display_text(item.get("Description")),
                 )
-                for item in root.get("sources", ())
+                for item in root.get("Sources", ())
             ),
             automation_policy=AIcPackageAutomationPolicy(
-                verify_on_download=bool(policy_raw.get("verify_on_download", True)),
-                require_entitlement_for_automatic_paid_component=bool(policy_raw.get("require_entitlement_for_automatic_paid_component", True)),
-                allow_automatic_download=bool(policy_raw.get("allow_automatic_download", True)),
-                allow_automatic_install=bool(policy_raw.get("allow_automatic_install", True)),
+                verify_on_download=bool(policy_raw.get("VerifyOnDownload", True)),
+                require_entitlement_for_automatic_paid_component=bool(policy_raw.get("RequireEntitlementForAutomaticPaidComponent", True)),
+                allow_automatic_download=bool(policy_raw.get("AllowAutomaticDownload", True)),
+                allow_automatic_install=bool(policy_raw.get("AllowAutomaticInstall", True)),
             ),
-            metadata=dict(root.get("metadata", {})),
+            metadata=dict(root.get("Metadata", {})),
         )

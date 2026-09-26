@@ -33,7 +33,7 @@ def _invoke_entrypoint(entrypoint: str, payload: Mapping[str, object], provider_
     module_name, sep, attr_name = entrypoint.partition(":")
     if not sep:
         provider_to_core.put(("final", 0, AIcInvocationOutput(False, error={
-            "type": "ValueError", "message": "subinterpreter entrypoint must use 'module:function'"
+            "Type": "ValueError", "Message": "subinterpreter entrypoint must use 'module:function'"
         })))
         return
     interaction = AIcSubinterpreterOperationInteraction(provider_to_core, core_to_provider)
@@ -42,19 +42,19 @@ def _invoke_entrypoint(entrypoint: str, payload: Mapping[str, object], provider_
         parameters = payload.get("effective_operation_parameters", {})
         if not isinstance(parameters, Mapping):
             raise TypeError("effective_operation_parameters must be an object")
-        locale = str(payload["locale"]) if payload.get("locale") is not None else None
+        locale = str(payload["Locale"]) if payload.get("Locale") is not None else None
         with operation_parameter_context(parameters), operation_interaction_context(interaction), invocation_locale_context(locale):
-            result = target(str(payload["operation_id"]), dict(payload.get("arguments", {})))
+            result = target(str(payload["OperationId"]), dict(payload.get("Arguments", {})))
         provider_to_core.put(("final", 0, AIcInvocationOutput(True, result=result)))
     except AIxOperationCancelled as exc:
         provider_to_core.put(("final", 0, AIcInvocationOutput(False, error={
-            "type": "OPERATION_CANCELLED",
-            "message": str(exc) or "operation cancelled",
+            "Type": "OPERATION_CANCELLED",
+            "Message": str(exc) or "operation cancelled",
             "has_state_result": exc.has_state_result,
-            "state_result": exc.state_result if exc.has_state_result else None,
+            "StateResult": exc.state_result if exc.has_state_result else None,
         })))
     except Exception as exc:
         provider_to_core.put(("final", 0, AIcInvocationOutput(False, error={
-            "type": f"{type(exc).__module__}.{type(exc).__qualname__}",
-            "message": str(exc) or type(exc).__name__,
+            "Type": f"{type(exc).__module__}.{type(exc).__qualname__}",
+            "Message": str(exc) or type(exc).__name__,
         })))

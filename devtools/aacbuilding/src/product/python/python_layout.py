@@ -62,7 +62,7 @@ def iter_python_artifacts(repository: Path) -> tuple[Path, ...]:
             continue
         artifact = descriptor.parent
         text = descriptor.read_text(encoding="utf-8")
-        if re.search(r"(?is)\btechnologyKinds\b\s*:\s*(?:\[[^\]]*\bpython\b[^\]]*\]|(?:\n\s+-\s*python\b))", text):
+        if re.search(r"(?is)\bTechnologyKinds\b\s*:\s*(?:\[[^\]]*\bpython\b[^\]]*\]|(?:\n\s+-\s*python\b))", text):
             artifacts.append(artifact)
     return tuple(artifacts)
 
@@ -115,7 +115,7 @@ def validate_repository_source_layout(repository: Path) -> list[str]:
                     "use jsondefs, yamldefs, xmldefs, or config according to semantic role"
                 )
 
-        for python_root in sorted(repository.rglob(f"src/{scope}/python*")):
+        for python_root in sorted(repository.rglob(f"src/{scope}/python")):
             if is_repository_build_path(python_root, repository):
                 continue
             if not python_root.is_dir() or source_kind_base(python_root.name) != "python":

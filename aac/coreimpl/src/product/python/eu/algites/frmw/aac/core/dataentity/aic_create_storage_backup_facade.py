@@ -24,7 +24,7 @@ class AIcCreateStorageBackupFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = CREATE_STORAGE_BACKUP_CAPABILITY_ID
 
     def create_backup(self, backup_file: str, *, overwrite: bool = False) -> Mapping[str, object]:
-        arguments: dict[str, object] = {"backup_file": backup_file}
+        arguments: dict[str, object] = {"BackupFile": backup_file}
         if overwrite:
-            arguments["overwrite"] = True
+            arguments["Overwrite"] = True
         return self._invoke("create_backup", arguments)

@@ -3,97 +3,97 @@
   "$id": "_AAC.schema.workspace-component-lock/1",
   "type": "object",
   "required": [
-    "workspace_component_lock"
+    "WorkspaceComponentLock"
   ],
   "additionalProperties": false,
   "properties": {
-    "workspace_component_lock": {
+    "WorkspaceComponentLock": {
       "type": "object",
       "required": [
-        "workspace_id",
-        "entries"
+        "WorkspaceId",
+        "Entries"
       ],
       "additionalProperties": false,
       "properties": {
-        "workspace_id": {
+        "WorkspaceId": {
           "type": "string",
           "minLength": 1
         },
-        "entries": {
+        "Entries": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "component_id",
-              "component_version",
-              "sha256",
-              "source_id",
-              "artifact_uri",
-              "artifact_filename",
-              "package_format",
-              "descriptor_path"
+              "ComponentId",
+              "ComponentVersion",
+              "Sha256",
+              "SourceId",
+              "ArtifactUri",
+              "ArtifactFilename",
+              "PackageFormat",
+              "DescriptorPath"
             ],
             "additionalProperties": false,
             "properties": {
-              "component_id": {
+              "ComponentId": {
                 "type": "string",
                 "minLength": 1
               },
-              "component_version": {
+              "ComponentVersion": {
                 "type": "integer",
                 "minimum": 1
               },
-              "sha256": {
+              "Sha256": {
                 "type": "string",
                 "pattern": "^[0-9a-fA-F]{64}$"
               },
-              "source_id": {
+              "SourceId": {
                 "type": "string",
                 "minLength": 1
               },
-              "artifact_uri": {
+              "ArtifactUri": {
                 "type": "string",
                 "minLength": 1
               },
-              "artifact_filename": {
+              "ArtifactFilename": {
                 "type": "string",
                 "minLength": 1
               },
-              "package_format": {
+              "PackageFormat": {
                 "type": "string",
                 "minLength": 1
               },
-              "descriptor_path": {
+              "DescriptorPath": {
                 "type": "string",
                 "minLength": 1
               },
-              "runtime_package": {
+              "RuntimePackage": {
                 "type": [
                   "string",
                   "null"
                 ]
               },
-              "verifier_id": {
+              "VerifierId": {
                 "type": [
                   "string",
                   "null"
                 ]
               },
-              "sidecars": {
+              "Sidecars": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "required": [
-                    "uri",
-                    "suffix"
+                    "Uri",
+                    "Suffix"
                   ],
                   "additionalProperties": false,
                   "properties": {
-                    "uri": {
+                    "Uri": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "suffix": {
+                    "Suffix": {
                       "type": "string",
                       "pattern": "^\\..+"
                     }

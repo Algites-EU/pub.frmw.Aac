@@ -9,10 +9,10 @@ def test_json_line_process_endpoint_can_call_isolated_external_runtime(tmp_path)
     script.write_text(
         "import json,sys\n"
         "v=json.loads(sys.stdin.readline())\n"
-        "print(json.dumps({'success': True, 'result': {'operation': v['operation_id'], 'value': v['arguments']['value']}}))\n",
+        "print(json.dumps({'Success': True, 'Result': {'Operation': v['OperationId'], 'Value': v['Arguments']['Value']}}))\n",
         encoding="utf-8",
     )
     endpoint = AIcJsonLineProcessEndpoint([sys.executable, str(script)])
-    result = endpoint.invoke(AIcInvocationInput("i", None, "x", 1, "work", "p", {"value": 7}))
+    result = endpoint.invoke(AIcInvocationInput("i", None, "x", 1, "work", "p", {"Value": 7}))
     assert result.success
-    assert result.result == {"operation": "work", "value": 7}
+    assert result.result == {"Operation": "work", "Value": 7}

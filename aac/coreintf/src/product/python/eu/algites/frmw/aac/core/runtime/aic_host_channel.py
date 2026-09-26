@@ -38,14 +38,14 @@ def _operation_interaction_caller_message_from_dict(
     raw: Mapping[str, object]
 ) -> AIcOperationInteractionCallerToProviderMessage:
     return AIcOperationInteractionCallerToProviderMessage(
-        last_accepted_state_result_revision=int(raw.get("last_accepted_state_result_revision", 0)),
-        interaction_mode=AInOperationInteractionMode(str(raw.get("interaction_mode", "FOREGROUND"))),
-        cancellation_requested=bool(raw.get("cancellation_requested", False)),
-        detail_level=AInOperationInteractionDetailLevel(str(raw.get("detail_level", "SUMMARY"))),
-        reporting_interval_ms=(int(raw["reporting_interval_ms"]) if raw.get("reporting_interval_ms") is not None else None),
-        failure_detail_level=AInOperationInteractionFailureDetailLevel(str(raw.get("failure_detail_level", "BASIC"))),
-        state_result_delivery_mode=AInStateResultDeliveryMode(str(raw.get("state_result_delivery_mode", "ON_DEMAND_COMPLETE"))),
-        state_result_request_id=int(raw.get("state_result_request_id", 0)),
+        last_accepted_state_result_revision=int(raw.get("LastAcceptedStateResultRevision", 0)),
+        interaction_mode=AInOperationInteractionMode(str(raw.get("InteractionMode", "foreground"))),
+        cancellation_requested=bool(raw.get("CancellationRequested", False)),
+        detail_level=AInOperationInteractionDetailLevel(str(raw.get("DetailLevel", "summary"))),
+        reporting_interval_ms=(int(raw["ReportingIntervalMs"]) if raw.get("ReportingIntervalMs") is not None else None),
+        failure_detail_level=AInOperationInteractionFailureDetailLevel(str(raw.get("FailureDetailLevel", "basic"))),
+        state_result_delivery_mode=AInStateResultDeliveryMode(str(raw.get("StateResultDeliveryMode", "on_demand_complete"))),
+        state_result_request_id=int(raw.get("StateResultRequestId", 0)),
     )
 
 def _as_mapping(value: object) -> Mapping[str, object]:
@@ -78,7 +78,7 @@ class AIcHostChannel:
             return None
         raw = json.loads(line)
         if not isinstance(raw, dict):
-            raise ValueError("AAC process frame must be a JSON object")
+            raise ValueError("AAC process frame must be a json object")
         return raw
 
     def write(self, frame: Mapping[str, object]) -> None:
@@ -86,7 +86,7 @@ class AIcHostChannel:
         self._protocol_writer.flush()
 
     def respond(self, request_id: str, *, success: bool, result: object | None = None, error: Mapping[str, object] | None = None) -> None:
-        self.write({"kind": "response", "request_id": request_id, "success": success, "result": result, "error": error})
+        self.write({"Kind": "response", "RequestId": request_id, "Success": success, "Result": result, "Error": error})
 
     def core_invoke(
         self, requirement_id: str, handle_index: int, operation_id: str, arguments: Mapping[str, object],
@@ -95,23 +95,23 @@ class AIcHostChannel:
         self._next_id += 1
         request_id = f"child-{self._next_id}"
         self.write({
-            "kind": "core_invoke",
-            "request_id": request_id,
-            "requirement_id": requirement_id,
-            "handle_index": handle_index,
-            "operation_id": operation_id,
-            "arguments": dict(arguments),
-            "operation_parameters": dict(operation_parameters),
-            "parent_invocation_id": parent_invocation_id,
-            "locale": locale,
+            "Kind": "core_invoke",
+            "RequestId": request_id,
+            "RequirementId": requirement_id,
+            "HandleIndex": handle_index,
+            "OperationId": operation_id,
+            "Arguments": dict(arguments),
+            "OperationParameters": dict(operation_parameters),
+            "ParentInvocationId": parent_invocation_id,
+            "Locale": locale,
         })
         while True:
             frame = self.read()
             if frame is None:
                 raise RuntimeError("Core process channel closed while waiting for nested invocation")
-            if frame.get("kind") == "core_response" and frame.get("request_id") == request_id:
+            if frame.get("Kind") == "core_response" and frame.get("RequestId") == request_id:
                 return frame
-            raise RuntimeError(f"unexpected AAC frame while waiting for core response: {frame.get('kind')!r}")
+            raise RuntimeError(f"unexpected AAC frame while waiting for core response: {frame.get('Kind')!r}")
 
 
     def _operation_interaction_request(
@@ -119,7 +119,7 @@ class AIcHostChannel:
     ) -> Mapping[str, object]:
         self._next_id += 1
         request_id = f"interaction-{self._next_id}"
-        frame = {"kind": kind, "request_id": request_id, "invocation_id": invocation_id}
+        frame = {"Kind": kind, "RequestId": request_id, "InvocationId": invocation_id}
         if payload:
             frame.update(dict(payload))
         self.write(frame)
@@ -127,15 +127,15 @@ class AIcHostChannel:
             response = self.read()
             if response is None:
                 raise RuntimeError("Core process channel closed while waiting for operation interaction response")
-            if response.get("kind") == "operation_interaction_response" and response.get("request_id") == request_id:
-                if not bool(response.get("success", False)):
-                    raise RuntimeError(str(response.get("error") or "operation interaction request failed"))
-                result = response.get("result", {})
+            if response.get("Kind") == "operation_interaction_response" and response.get("RequestId") == request_id:
+                if not bool(response.get("Success", False)):
+                    raise RuntimeError(str(response.get("Error") or "operation interaction request failed"))
+                result = response.get("Result", {})
                 return _as_mapping(result) if isinstance(result, Mapping) else {}
-            raise RuntimeError(f"unexpected AAC frame while waiting for operation interaction response: {response.get('kind')!r}")
+            raise RuntimeError(f"unexpected AAC frame while waiting for operation interaction response: {response.get('Kind')!r}")
 
     def operation_interaction_caller_snapshot(
         self, invocation_id: str
     ) -> AIcOperationInteractionCallerToProviderMessage:
         result = self._operation_interaction_request(invocation_id, "operation_interaction_caller_snapshot")
-        return _operation_interaction_caller_message_from_dict(_as_mapping(result.get("caller", {})))
+        return _operation_interaction_caller_message_from_dict(_as_mapping(result.get("Caller", {})))

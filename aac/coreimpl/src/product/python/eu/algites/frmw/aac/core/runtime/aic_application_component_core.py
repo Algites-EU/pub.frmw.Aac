@@ -249,10 +249,10 @@ class AIcApplicationComponentCore:
             kwargs = dict(
                 authentication=self.authentication,
                 authentication_profile_id=source.authentication_profile_id,
-                timeout_seconds=float(source.settings.get("timeout_seconds", 30.0)),
+                timeout_seconds=float(source.settings.get("TimeoutSeconds", 30.0)),
                 context=self.application_context,
             )
-            if kind in {"FILE", "FILESYSTEM"}:
+            if kind in {"file", "FILESYSTEM"}:
                 provider = AIcFilesystemCatalogProvider(source.id, source.uri, **kwargs)
             elif kind in {"HTTP", "HTTPS"}:
                 provider = AIcHttpCatalogProvider(source.id, source.uri, **kwargs)
@@ -364,7 +364,7 @@ class AIcApplicationComponentCore:
     ) -> AIcPackageCandidate:
         entry = self._catalog_entry(source_id, product_id, technology_id, component_id, component_version)
         artifact = self._catalog_artifact(entry, artifact_id)
-        if artifact.locator.type.upper() != "URI" or not artifact.locator.uri:
+        if artifact.locator.type.lower() != "uri" or not artifact.locator.uri:
             raise ValueError(
                 f"catalog artifact {artifact.id!r} uses locator type {artifact.locator.type!r}; no repository adapter is registered"
             )
@@ -460,7 +460,7 @@ class AIcApplicationComponentCore:
                 AIcManifestPackageSource(
                     source.id, source.uri, authentication=self.authentication,
                     authentication_profile_id=source.authentication_profile_id, verifier_id=source.verifier_id,
-                    priority=source.priority, timeout_seconds=float(source.settings.get("timeout_seconds", 30.0)),
+                    priority=source.priority, timeout_seconds=float(source.settings.get("TimeoutSeconds", 30.0)),
                     context=self.application_context,
                 ),
                 priority=source.priority,
@@ -549,7 +549,7 @@ class AIcApplicationComponentCore:
                     continue
             installed = self.install_downloaded_package(action.candidate, downloaded)
             self.select_package(scope_id, installed)
-            rewritten.append(replace(action, action="AUTO_INSTALLED", reason=f"installed sha256:{installed.sha256}"))
+            rewritten.append(replace(action, action="AUTO_INSTALLED", reason=f"installed Sha256:{installed.sha256}"))
         return AIcPackageReconciliationPlan(plan.workspace_id, plan.policy, tuple(rewritten))
 
 
@@ -668,7 +668,7 @@ class AIcApplicationComponentCore:
                 settings = dict(registration.settings)
                 if kind == "ENVIRONMENT":
                     provider = AIcEnvironmentSecretProvider(str(settings.get("prefix", "")))
-                elif kind in {"FILE", "FILESYSTEM"}:
+                elif kind in {"file", "FILESYSTEM"}:
                     provider = AIcFileSecretProvider(
                         str(settings["root"]), read_only=bool(settings.get("read_only", True)),
                         encoding=str(settings.get("encoding", "utf-8")),
@@ -823,7 +823,7 @@ class AIcApplicationComponentCore:
                     )
             settings = dict(registration.settings)
             kind = registration.type.upper()
-            if kind in {"FILE", "FILESYSTEM"}:
+            if kind in {"file", "FILESYSTEM"}:
                 provider = AIcFileSystemConfigurationProvider(
                     str(settings["root"]), read_only=bool(settings.get("read_only", False)),
                     allow_policy_write=bool(settings.get("allow_policy_write", True)),
@@ -834,7 +834,7 @@ class AIcApplicationComponentCore:
                     authentication_profile_id=registration.authentication_profile_id,
                     read_only=bool(settings.get("read_only", False)),
                     allow_policy_write=bool(settings.get("allow_policy_write", True)),
-                    timeout_seconds=float(settings.get("timeout_seconds", 10.0)),
+                    timeout_seconds=float(settings.get("TimeoutSeconds", 10.0)),
                     mutation_method=str(settings.get("mutation_method", "PATCH")),
                 )
             else:
@@ -911,7 +911,7 @@ class AIcApplicationComponentCore:
                 continue
             kind = registration.type.upper()
             settings = dict(registration.settings)
-            if kind in {"FILE", "FILESYSTEM"}:
+            if kind in {"file", "FILESYSTEM"}:
                 self.register_file_entitlement_provider(
                     registration.id, str(settings["root"]),
                     pattern=str(settings.get("pattern", "*.entitlement.yml")),
@@ -1081,7 +1081,7 @@ class AIcApplicationComponentCore:
             missing_operation_keys = expected_operation_keys - declared_operation_keys
             if missing_operation_keys:
                 raise ValueError(
-                    f"provider {provider.id!r} must declare operation metadata for every provided operation: "
+                    f"provider {provider.id!r} must declare operation metadata for every provided Operation: "
                     f"{sorted(missing_operation_keys)!r}"
                 )
             for provider_operation in provider.operations:
@@ -1106,7 +1106,7 @@ class AIcApplicationComponentCore:
                 }) and AInCapabilityOperationInteractionKind.RUNNING_DELTA_STATE_RESULT not in interaction_kinds:
                     raise ValueError(
                         f"provider {provider.id!r} operation {provider_operation.operation_id!r} declares delta delivery "
-                        "but the capability operation defines no RUNNING_DELTA_STATE_RESULT interaction"
+                        "but the capability operation defines no running_delta_state_result interaction"
                     )
             for requirement in provider.requirements:
                 for version in requirement.versions:
@@ -1220,7 +1220,7 @@ class AIcApplicationComponentCore:
         parameter = self._operation_parameter_definition(
             provider, capability_id, capability_version, operation_id, parameter_id
         )
-        self.operation_parameter_resolver.validate_configured_value(parameter, value, scope="COMPONENT")
+        self.operation_parameter_resolver.validate_configured_value(parameter, value, scope="component")
         self.operation_parameter_configurations.set_component_value(
             component_id, provider_definition_id, capability_id, capability_version, operation_id, parameter_id, value,
             component_version=installed.descriptor.version,
@@ -1236,7 +1236,7 @@ class AIcApplicationComponentCore:
         parameter = self._operation_parameter_definition(
             provider, capability_id, capability_version, operation_id, parameter_id
         )
-        self.operation_parameter_resolver.validate_configured_value(parameter, value, scope="PROVIDER_INSTANCE")
+        self.operation_parameter_resolver.validate_configured_value(parameter, value, scope="provider_instance")
         self.operation_parameter_configurations.set_instance_value(
             instance.component_id, provider.id, instance.id, capability_id, capability_version, operation_id,
             parameter_id, value, component_version=installed.descriptor.version,
@@ -1291,7 +1291,7 @@ class AIcApplicationComponentCore:
         requested = set(requirement.requested_authorizations)
         unknown = set(permission_ids) - requested
         if unknown:
-            raise ValueError(f"cannot grant authorization permissions not requested by the component: {sorted(unknown)!r}")
+            raise ValueError(f"cannot grant authorization permissions not requested by the Component: {sorted(unknown)!r}")
         grant = AIcComponentAuthorizationGrant(
             consumer_instance_id, requirement_id, tuple(permission_ids), approved_by=approved_by
         )
@@ -1610,7 +1610,7 @@ class AIcApplicationComponentCore:
     def _discovered_from_stored_package(self, package: AIcStoredPackage):
         if self.package_manager is None:
             raise RuntimeError("package management is not configured")
-        if package.state.value != "INSTALLED":
+        if package.state.value != "installed":
             raise AIxUpgradeError("only installed/staged target packages can participate in an upgrade transaction")
         if not package.runtime_package:
             raise AIxUpgradeError(f"stored package {package.component_id!r} has no Python runtime_package")

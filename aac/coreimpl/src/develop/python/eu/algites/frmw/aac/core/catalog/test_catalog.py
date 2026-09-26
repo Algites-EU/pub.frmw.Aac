@@ -26,37 +26,37 @@ def _wheel(root: Path) -> tuple[Path, str, str]:
     root.mkdir(parents=True, exist_ok=True)
     wheel = root / "demo.whl"
     descriptor_path = "demo/component.yml"
-    descriptor = '''component:
-  id: com.example.demo
-  version: 2
-  capability_providers:
-    - id: main
-      capabilities:
-        - id: com.example.cap
-          versions: [1, 2]
-      implementation_classes:
-      - technology-kind: python
-        class-name: demo:Provider
-      requirements:
-        - id: storage
-          capability: com.example.storage
-          versions: [3]
-          mandatory: true
-  entitlement_licensing_scopes:
-    - type: USER
-      name: User
-      description: One identified user.
-    - type: ORGANIZATION
-      name: Organization
-      description: One organization.
-  provided_capability_entitlements:
-    - capability:
-        id: com.example.cap
-        version: 2
-      permissions:
-        - id: BASIC
-        - id: PRO
-          possible_licensing_scopes: [USER, ORGANIZATION]
+    descriptor = '''Component:
+  Id: com.example.demo
+  Version: 2
+  CapabilityProviders:
+    - Id: main
+      Capabilities:
+        - Id: com.example.cap
+          Versions: [1, 2]
+      ImplementationClasses:
+      - TechnologyKind: python
+        ClassName: demo:Provider
+      Requirements:
+        - Id: storage
+          Capability: com.example.storage
+          Versions: [3]
+          Mandatory: true
+  EntitlementLicensingScopes:
+    - Type: USER
+      Name: User
+      Description: One identified user.
+    - Type: ORGANIZATION
+      Name: Organization
+      Description: One organization.
+  ProvidedCapabilityEntitlements:
+    - Capability:
+        Id: com.example.cap
+        Version: 2
+      Permissions:
+        - Id: basic
+        - Id: PRO
+          PossibleLicensingScopes: [USER, ORGANIZATION]
 '''
     with ZipFile(wheel, "w") as archive:
         archive.writestr(descriptor_path, descriptor)
@@ -64,60 +64,60 @@ def _wheel(root: Path) -> tuple[Path, str, str]:
 
 
 def _catalog_text(wheel: Path, descriptor_path: str, digest: str) -> str:
-    return f'''catalog:
-  format_version: 1
-  product_id: eu.algites.app.orchestrator
-  technology_id: PYTHON
-  components:
-    - component_id: com.example.demo
-      name: Demo component
-      description: Test catalog component
-      publisher:
-        id: com.example
-        name: Example Inc.
-      homepage_url: https://example.invalid/demo
-      documentation_url: https://example.invalid/demo/docs
-      entitlement_info_url: https://example.invalid/demo/license
-      icon:
-        url: https://example.invalid/demo/icon.png
-      categories: [integration]
-      tags: [demo, test]
-      releases:
-        - version: 2
-          provides:
-            - capability: com.example.cap
-              versions: [1, 2]
-          requires:
-            - id: storage
-              capability: com.example.storage
-              versions: [3]
-              mandatory: true
-          entitlement_licensing_scopes:
-            - type: USER
-              name: User
-              description: One identified user.
-            - type: ORGANIZATION
-              name: Organization
-              description: One organization.
-          provided_capability_entitlements:
-            - capability:
-                id: com.example.cap
-                version: 2
-              permissions:
-                - id: BASIC
-                - id: PRO
-                  possible_licensing_scopes: [USER, ORGANIZATION]
-          artifacts:
-            - id: universal-wheel
-              locator:
-                type: URI
-                uri: {wheel.name}
-              artifact_filename: demo.whl
-              package_format: PYTHON_WHEEL
-              descriptor_path: {descriptor_path}
-              sha256: {digest}
-              runtime_package: demo
-              verifier_id: test
+    return f'''Catalog:
+  FormatVersion: 1
+  ProductId: eu.algites.app.orchestrator
+  TechnologyId: PYTHON
+  Components:
+    - ComponentId: com.example.demo
+      Name: Demo component
+      Description: Test catalog component
+      Publisher:
+        Id: com.example
+        Name: Example Inc.
+      HomepageUrl: https://example.invalid/demo
+      DocumentationUrl: https://example.invalid/demo/docs
+      EntitlementInfoUrl: https://example.invalid/demo/license
+      Icon:
+        Url: https://example.invalid/demo/icon.png
+      Categories: [integration]
+      Tags: [demo, test]
+      Releases:
+        - Version: 2
+          Provides:
+            - Capability: com.example.cap
+              Versions: [1, 2]
+          Requires:
+            - Id: storage
+              Capability: com.example.storage
+              Versions: [3]
+              Mandatory: true
+          EntitlementLicensingScopes:
+            - Type: USER
+              Name: User
+              Description: One identified user.
+            - Type: ORGANIZATION
+              Name: Organization
+              Description: One organization.
+          ProvidedCapabilityEntitlements:
+            - Capability:
+                Id: com.example.cap
+                Version: 2
+              Permissions:
+                - Id: basic
+                - Id: PRO
+                  PossibleLicensingScopes: [USER, ORGANIZATION]
+          Artifacts:
+            - Id: universal-wheel
+              Locator:
+                Type: uri
+                Uri: {wheel.name}
+              ArtifactFilename: demo.whl
+              PackageFormat: PYTHON_WHEEL
+              DescriptorPath: {descriptor_path}
+              Sha256: {digest}
+              RuntimePackage: demo
+              VerifierId: test
 '''
 
 
@@ -138,7 +138,7 @@ def test_catalog_query_is_scoped_by_product_and_technology_and_filters_locally(t
     assert results[0].component.entitlement_info_url.endswith("/license")
     assert [scope.type for scope in results[0].release.entitlement_licensing_scopes] == ["USER", "ORGANIZATION"]
     assert results[0].release.entitlement_licensing_scopes[0].name.text == "User"
-    assert results[0].release.provided_capability_entitlements[0].permission("BASIC").implicit
+    assert results[0].release.provided_capability_entitlements[0].permission("basic").implicit
     assert results[0].release.provided_capability_entitlements[0].permission("PRO").possible_licensing_scope_types == ("USER", "ORGANIZATION")
     assert Path(results[0].release.artifacts[0].locator.uri) == wheel
     assert provider.query(AIcCatalogQuery("other.product", "PYTHON")) == ()
@@ -150,21 +150,21 @@ def test_catalog_exposes_persistent_schema_summary_for_solver(tmp_path):
     wheel, descriptor_path, digest = _wheel(tmp_path)
     text = _catalog_text(wheel, descriptor_path, digest)
     text = text.replace(
-        "          artifacts:\n",
-        "          persistent_schemas:\n"
-        "            - kind: COMPONENT_CONFIGURATION\n"
-        "              schema_id: com.example.demo.config\n"
-        "              write_version: 2\n"
-        "            - kind: PROVIDER_CONFIGURATION\n"
-        "              provider_id: main\n"
-        "              schema_id: com.example.demo.main.config\n"
-        "              write_version: 4\n"
-        "            - kind: DATA_ENTITY\n"
-        "              schema_id: com.example.demo.site-data\n"
-        "              readable_versions: [1, 2]\n"
-        "              writable_versions: [2]\n"
-        "              preferred_write_version: 2\n"
-        "          artifacts:\n",
+        "          Artifacts:\n",
+        "          PersistentSchemas:\n"
+        "            - Kind: component_configuration\n"
+        "              SchemaId: com.example.demo.config\n"
+        "              WriteVersion: 2\n"
+        "            - Kind: provider_configuration\n"
+        "              ProviderId: main\n"
+        "              SchemaId: com.example.demo.main.config\n"
+        "              WriteVersion: 4\n"
+        "            - Kind: data_entity\n"
+        "              SchemaId: com.example.demo.site-data\n"
+        "              ReadableVersions: [1, 2]\n"
+        "              WritableVersions: [2]\n"
+        "              PreferredWriteVersion: 2\n"
+        "          Artifacts:\n",
         1,
     )
     document = AIcCatalogDocumentLoader.load_text(text, source="catalog.yml")
@@ -183,14 +183,14 @@ def test_catalog_bootstrap_registers_filesystem_provider_and_core_can_download_i
     wheel, descriptor_path, digest = _wheel(tmp_path)
     catalog_path = tmp_path / "catalog.yml"
     catalog_path.write_text(_catalog_text(wheel, descriptor_path, digest), encoding="utf-8")
-    bootstrap = AIcCatalogBootstrapLoader.load_text(f'''catalog_bootstrap:
-  schema_version: 1
-  product_id: eu.algites.app.orchestrator
-  technology_id: PYTHON
-  sources:
-    - id: local
-      type: FILESYSTEM
-      uri: {catalog_path}
+    bootstrap = AIcCatalogBootstrapLoader.load_text(f'''CatalogBootstrap:
+  SchemaVersion: 1
+  ProductId: eu.algites.app.orchestrator
+  TechnologyId: PYTHON
+  Sources:
+    - Id: local
+      Type: FILESYSTEM
+      Uri: {catalog_path}
 ''')
 
     core = AIcApplicationComponentCore()
@@ -211,20 +211,20 @@ def test_catalog_bootstrap_registers_filesystem_provider_and_core_can_download_i
 
 def test_catalog_metadata_mismatch_is_rejected_after_download(tmp_path):
     wheel, descriptor_path, digest = _wheel(tmp_path)
-    text = _catalog_text(wheel, descriptor_path, digest).replace("versions: [1, 2]", "versions: [1]", 1)
+    text = _catalog_text(wheel, descriptor_path, digest).replace("Versions: [1, 2]", "Versions: [1]", 1)
     catalog_path = tmp_path / "catalog.yml"
     catalog_path.write_text(text, encoding="utf-8")
     core = AIcApplicationComponentCore()
     core.configure_package_management(AIcPackageStoreLayout(str(tmp_path / "product")))
     core.register_package_verifier("test", _Verifier())
-    core.apply_catalog_bootstrap(AIcCatalogBootstrapLoader.load_text(f'''catalog_bootstrap:
-  schema_version: 1
-  product_id: eu.algites.app.orchestrator
-  technology_id: PYTHON
-  sources:
-    - id: local
-      type: FILESYSTEM
-      uri: {catalog_path}
+    core.apply_catalog_bootstrap(AIcCatalogBootstrapLoader.load_text(f'''CatalogBootstrap:
+  SchemaVersion: 1
+  ProductId: eu.algites.app.orchestrator
+  TechnologyId: PYTHON
+  Sources:
+    - Id: local
+      Type: FILESYSTEM
+      Uri: {catalog_path}
 '''))
     with pytest.raises(ValueError, match="provides metadata"):
         core.download_catalog_package(
@@ -266,58 +266,58 @@ def test_http_catalog_provider_reads_same_document_and_resolves_relative_artifac
 
 def test_catalog_uses_explicit_persistent_schema_discriminators_and_provided_entitlements():
     text = """
-catalog:
-  format_version: 1
-  product_id: p
-  technology_id: python
-  components:
-    - component_id: com.example.foo
-      releases:
-        - version: 1
-          provides:
-            - capability: com.example.repository
-              versions: [1]
-          entitlement_licensing_scopes:
-            - type: USER
-          provided_capability_entitlements:
-            - capability: {id: com.example.repository, version: 1}
-              permissions:
-                - id: WRITE
-                  possible_licensing_scopes: [USER]
-          persistent_schemas:
-            - kind: COMPONENT_CONFIGURATION
-              schema_id: foo.configuration
-              write_version: 1
-            - kind: PROVIDER_CONFIGURATION
-              provider_id: repository
-              schema_id: foo.repository.configuration
-              write_version: 2
-            - kind: DATA_ENTITY
-              schema_id: foo.site-data
-              readable_versions: [2, 3]
-              writable_versions: [3]
-              preferred_write_version: 3
-            - kind: DATA_ENTITY
-              schema_id: foo.service-def-data
-              readable_versions: [1, 2]
-              writable_versions: [2]
-              preferred_write_version: 2
-          artifacts:
-            - id: py
-              locator: {type: URI, uri: file:///tmp/foo.whl}
-              artifact_filename: foo.whl
-              package_format: wheel
-              descriptor_path: component.yml
-              sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Catalog:
+  FormatVersion: 1
+  ProductId: p
+  TechnologyId: python
+  Components:
+    - ComponentId: com.example.foo
+      Releases:
+        - Version: 1
+          Provides:
+            - Capability: com.example.repository
+              Versions: [1]
+          EntitlementLicensingScopes:
+            - Type: USER
+          ProvidedCapabilityEntitlements:
+            - Capability: {Id: com.example.repository, Version: 1}
+              Permissions:
+                - Id: write
+                  PossibleLicensingScopes: [USER]
+          PersistentSchemas:
+            - Kind: component_configuration
+              SchemaId: foo.configuration
+              WriteVersion: 1
+            - Kind: provider_configuration
+              ProviderId: repository
+              SchemaId: foo.repository.configuration
+              WriteVersion: 2
+            - Kind: data_entity
+              SchemaId: foo.site-data
+              ReadableVersions: [2, 3]
+              WritableVersions: [3]
+              PreferredWriteVersion: 3
+            - Kind: data_entity
+              SchemaId: foo.service-def-data
+              ReadableVersions: [1, 2]
+              WritableVersions: [2]
+              PreferredWriteVersion: 2
+          Artifacts:
+            - Id: py
+              Locator: {Type: uri, Uri: file:///tmp/foo.whl}
+              ArtifactFilename: foo.whl
+              PackageFormat: wheel
+              DescriptorPath: component.yml
+              Sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     """
     document = AIcCatalogDocumentLoader.load_text(text)
     release = document.components[0].releases[0]
-    assert release.provided_capability_entitlements[0].permission("WRITE").possible_licensing_scope_types == ("USER",)
+    assert release.provided_capability_entitlements[0].permission("write").possible_licensing_scope_types == ("USER",)
     assert [item.identity for item in release.persistent_schemas] == [
-        ("COMPONENT_CONFIGURATION", None),
-        ("PROVIDER_CONFIGURATION", "repository"),
-        ("DATA_ENTITY", "foo.site-data"),
-        ("DATA_ENTITY", "foo.service-def-data"),
+        ("component_configuration", None),
+        ("provider_configuration", "repository"),
+        ("data_entity", "foo.site-data"),
+        ("data_entity", "foo.service-def-data"),
     ]
 
 

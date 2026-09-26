@@ -91,7 +91,7 @@ class AIcTargetStateUpgradeAnalyzer:
                     if missing:
                         diagnostics.append(AIcUpgradeCompatibilityDiagnostic(
                             consumer.component_id,
-                            f"binding preference references provider instances absent from target state: {sorted(missing)}",
+                            f"binding preference references provider instances absent from target State: {sorted(missing)}",
                             consumer.id, requirement.id, requirement.capability_id, requirement.versions,
                         ))
                         continue
@@ -205,7 +205,7 @@ class AIcTargetStateUpgradeAnalyzer:
                 descriptor.id,
                 f"target provider {instance.name!r} readiness is {report.state.value}: {detail}",
                 consumer_instance_id=instance.id, capability_id=None,
-                blocking=False, code=f"READINESS_{report.state.value}",
+                blocking=False, code=f"READINESS_{report.state.name}",
             ))
         return tuple(diagnostics)
 

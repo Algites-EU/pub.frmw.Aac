@@ -57,7 +57,7 @@ def _object_operation(
 
 class Echo:
     def run_1(self, token, value):
-        return {"token": token, "value": value}
+        return {"token": token, "Value": value}
 
 
 class Collector(AIiObservationProvider):
@@ -81,7 +81,7 @@ def test_invocation_generates_pre_post_and_redacts_contract_sensitive_paths():
     observations.register("observer", collector, (AIcObservationSelector(capability="x.cap"),))
     dispatcher = AIcInvocationDispatcher(catalog, observations)
     output = dispatcher.invoke(AIcObjectCapabilityEndpoint(Echo()), AIcInvocationInput(
-        "inv", None, "x.cap", 1, "run", "provider", {"token": "secret", "value": 5}
+        "inv", None, "x.cap", 1, "run", "provider", {"token": "secret", "Value": 5}
     ))
     assert output.success and output.result["token"] == "secret"
     assert collector.values[0].arguments["token"] == "<redacted>"
@@ -96,8 +96,8 @@ def test_operation_input_and_output_schema_are_core_validated():
     from eu.algites.frmw.aac.core.schemas.registry import AIcSchemaRegistry
 
     schemas = AIcSchemaRegistry()
-    schemas.register("echo-input_1.json", {"x-aac-schema-id": "test.echo-input", "x-aac-schema-version": 1, "type": "object", "required": ["value"], "properties": {"value": {"type": "string"}}, "additionalProperties": False})
-    schemas.register("echo-output_1.json", {"x-aac-schema-id": "test.echo-output", "x-aac-schema-version": 1, "type": "object", "required": ["value"], "properties": {"value": {"type": "string"}}, "additionalProperties": False})
+    schemas.register("echo-input_1.json", {"x-aac-schema-id": "test.echo-input", "x-aac-schema-version": 1, "type": "object", "required": ["Value"], "properties": {"Value": {"type": "string"}}, "additionalProperties": False})
+    schemas.register("echo-output_1.json", {"x-aac-schema-id": "test.echo-output", "x-aac-schema-version": 1, "type": "object", "required": ["Value"], "properties": {"Value": {"type": "string"}}, "additionalProperties": False})
     catalog = AIcActiveContractCatalog(schemas)
     catalog.admit_builtin_contracts()
     catalog.admit(AIcCapabilityContract(AIcCapabilityRef("test.schema", 1), "_AAC.runtime", (
@@ -109,13 +109,13 @@ def test_operation_input_and_output_schema_are_core_validated():
 
     class Provider:
         def run_1(self, value):
-            return {"value": value}
+            return {"Value": value}
 
     dispatcher = AIcInvocationDispatcher(catalog)
-    bad = dispatcher.invoke(AIcObjectCapabilityEndpoint(Provider()), AIcInvocationInput("i1", None, "test.schema", 1, "run", "p", {"value": 7}))
-    assert not bad.success and bad.error["type"] == "AIxSchemaValidationError"
-    good = dispatcher.invoke(AIcObjectCapabilityEndpoint(Provider()), AIcInvocationInput("i2", None, "test.schema", 1, "run", "p", {"value": "ok"}))
-    assert good.success and good.result == {"value": "ok"}
+    bad = dispatcher.invoke(AIcObjectCapabilityEndpoint(Provider()), AIcInvocationInput("i1", None, "test.schema", 1, "run", "p", {"Value": 7}))
+    assert not bad.success and bad.error["Type"] == "AIxSchemaValidationError"
+    good = dispatcher.invoke(AIcObjectCapabilityEndpoint(Provider()), AIcInvocationInput("i2", None, "test.schema", 1, "run", "p", {"Value": "ok"}))
+    assert good.success and good.result == {"Value": "ok"}
 
 
 def test_permission_denied_is_normalized_for_core_bridge():
@@ -134,7 +134,7 @@ def test_permission_denied_is_normalized_for_core_bridge():
         def write_1(self):
             raise AIxPermissionDenied(
                 "upgrade required",
-                permission_id="WRITE",
+                permission_id="write",
                 retry_disposition=AInPermissionRetryDisposition.SAFE_AFTER_ENTITLEMENT_CHANGE,
                 remediation_hint="professional",
             )
@@ -144,9 +144,9 @@ def test_permission_denied_is_normalized_for_core_bridge():
         AIcInvocationInput("i", None, "x.secured", 1, "write", "p", {}),
     )
     assert not output.success
-    assert output.error["type"] == "PERMISSION_DENIED"
-    assert output.error["permission_id"] == "WRITE"
-    assert output.error["retry_disposition"] == "SAFE_AFTER_ENTITLEMENT_CHANGE"
+    assert output.error["Type"] == "PERMISSION_DENIED"
+    assert output.error["permission_id"] == "write"
+    assert output.error["retry_disposition"] == "safe_after_entitlement_change"
 
 
 def test_safe_permission_denial_can_remediate_refresh_and_retry_once():
@@ -170,7 +170,7 @@ def test_safe_permission_denial_can_remediate_refresh_and_retry_once():
             self.calls += 1
             if self.calls == 1:
                 raise AIxPermissionDenied(
-                    "upgrade required", permission_id="WRITE",
+                    "upgrade required", permission_id="write",
                     retry_disposition=AInPermissionRetryDisposition.SAFE_AFTER_ENTITLEMENT_CHANGE,
                 )
             return None
@@ -208,7 +208,7 @@ def test_observation_contract_uses_direct_input_object_without_transport_wrapper
 
         def observe_1(self, observation_input: AIcObservationInput):
             self.received = observation_input
-            return {"accepted": True}
+            return {"Accepted": True}
 
     event = AIcObservationInput(
         invocation_id="observed",
@@ -218,20 +218,20 @@ def test_observation_contract_uses_direct_input_object_without_transport_wrapper
         capability_version=1,
         operation_id="run",
         provider_instance_id="provider",
-        arguments={"value": 7},
+        arguments={"Value": 7},
     )
     provider = EndpointObserver()
     output = AIcInvocationDispatcher(catalog).invoke(
         AIcObjectCapabilityEndpoint(provider),
         AIcInvocationInput(
-            "delivery", None, "_AAC.capability.observation", 1, "observe", "observer", asdict(event)
+            "delivery", None, "_AAC.capability.observation", 1, "observe", "observer", event.to_mapping()
         ),
     )
 
-    assert output.success and output.result["accepted"] is True
+    assert output.success and output.result["Accepted"] is True
     assert isinstance(provider.received, AIcObservationInput)
     assert provider.received.invocation_id == "observed"
-    assert provider.received.arguments == {"value": 7}
+    assert provider.received.arguments == {"Value": 7}
 
     wrapped = AIcInvocationDispatcher(catalog).invoke(
         AIcObjectCapabilityEndpoint(provider),
@@ -241,7 +241,7 @@ def test_observation_contract_uses_direct_input_object_without_transport_wrapper
         ),
     )
     assert not wrapped.success
-    assert wrapped.error["type"] == "AIxSchemaValidationError"
+    assert wrapped.error["Type"] == "AIxSchemaValidationError"
 
 
 def test_effective_operation_parameters_are_separate_from_portable_input_and_visible_to_provider():
@@ -257,10 +257,10 @@ def test_effective_operation_parameters_are_separate_from_portable_input_and_vis
 
     class Provider:
         def run_1(self, value):
-            return {"value": value, "parameters": dict(current_operation_parameters())}
+            return {"Value": value, "Parameters": dict(current_operation_parameters())}
 
     def resolve(invocation):
-        assert invocation.arguments == {"value": 5}
+        assert invocation.arguments == {"Value": 5}
         assert invocation.operation_parameter_overrides == {"strategy": "REBASE"}
         return {"strategy": "REBASE", "timeout": 30}
 
@@ -268,12 +268,12 @@ def test_effective_operation_parameters_are_separate_from_portable_input_and_vis
     output = dispatcher.invoke(
         AIcObjectCapabilityEndpoint(Provider()),
         AIcInvocationInput(
-            "i", None, "x.parameters", 1, "run", "p", {"value": 5},
+            "i", None, "x.parameters", 1, "run", "p", {"Value": 5},
             operation_parameter_overrides={"strategy": "REBASE"},
         ),
     )
     assert output.success
-    assert output.result == {"value": 5, "parameters": {"strategy": "REBASE", "timeout": 30}}
+    assert output.result == {"Value": 5, "Parameters": {"strategy": "REBASE", "timeout": 30}}
 
 
 def test_operation_interaction_is_separate_from_portable_input_and_bidirectional():
@@ -313,8 +313,8 @@ def test_operation_interaction_is_separate_from_portable_input_and_bidirectional
             ))
             state = interaction.caller_snapshot()
             return {
-                "value": value,
-                "mode": state.interaction_mode.value,
+                "Value": value,
+                "Mode": state.interaction_mode.value,
                 "detail": state.detail_level.value,
                 "interval": state.reporting_interval_ms,
             }
@@ -330,11 +330,11 @@ def test_operation_interaction_is_separate_from_portable_input_and_bidirectional
     messages.clear()
     output = AIcInvocationDispatcher(catalog).invoke(
         AIcObjectCapabilityEndpoint(Provider()),
-        AIcInvocationInput("i", None, "x.interaction", 1, "run", "p", {"value": 5}),
+        AIcInvocationInput("i", None, "x.interaction", 1, "run", "p", {"Value": 5}),
         interaction,
     )
     assert output.success
-    assert output.result == {"value": 5, "mode": "BACKGROUND", "detail": "DETAILED", "interval": 750}
+    assert output.result == {"Value": 5, "Mode": "background", "detail": "detailed", "interval": 750}
     progress_events = [event for message in messages for event in message.events]
     assert len(progress_events) == 1
     assert progress_events[0].phase_id == "work" and progress_events[0].current == 2 and progress_events[0].total == 4
@@ -376,7 +376,7 @@ def test_async_start_uses_same_interaction_lifecycle_and_propagates_locale():
                 ),
             ))
             interaction.update_state_result({"partial": value})
-            return {"value": value, "locale": current_invocation_locale()}
+            return {"Value": value, "locale": current_invocation_locale()}
 
     binding = AIcBinding("consumer", "requirement", "provider", "x.async", 1)
     endpoints = AIcEndpointRegistry()
@@ -386,12 +386,12 @@ def test_async_start_uses_same_interaction_lifecycle_and_propagates_locale():
     interaction = AIcOperationInteractionController(messages.append)
     interaction.set_state_result_delivery_mode(AInStateResultDeliveryMode.ON_CHANGE_DELTA)
 
-    returned = handle.start("run", {"value": 7}, operation_interaction=interaction, locale="cs-CZ")
+    returned = handle.start("run", {"Value": 7}, operation_interaction=interaction, locale="cs-CZ")
     assert returned is interaction
     terminal = interaction.wait_for_terminal_state(timeout=2.0)
 
     assert terminal.execution_state is AInOperationExecutionState.COMPLETED
-    assert terminal.state_result == {"value": 7, "locale": "cs-CZ"}
+    assert terminal.state_result == {"Value": 7, "locale": "cs-CZ"}
     assert terminal.state_result_revision == 2
     partial = [
         message for message in messages
@@ -416,7 +416,7 @@ def test_simple_synchronous_invocations_get_fresh_on_demand_interaction_state():
         def run_1(self):
             interaction = current_operation_interaction()
             return {
-                "mode": interaction.caller_snapshot().state_result_delivery_mode.value,
+                "Mode": interaction.caller_snapshot().state_result_delivery_mode.value,
                 "first_result_revision": interaction.update_state_result({"partial": True}),
             }
 
@@ -432,8 +432,8 @@ def test_simple_synchronous_invocations_get_fresh_on_demand_interaction_state():
     )
 
     assert first.success and second.success
-    assert first.result == {"mode": "ON_DEMAND_COMPLETE", "first_result_revision": 1}
-    assert second.result == {"mode": "ON_DEMAND_COMPLETE", "first_result_revision": 1}
+    assert first.result == {"Mode": "on_demand_complete", "first_result_revision": 1}
+    assert second.result == {"Mode": "on_demand_complete", "first_result_revision": 1}
 
 
 def test_cooperative_cancellation_can_publish_atomic_cancelled_state_result():
@@ -533,4 +533,4 @@ def test_running_state_result_is_validated_against_selected_interaction_schema()
         interaction,
     )
     assert not output.success
-    assert str(output.error["type"]).endswith("AIxSchemaValidationError")
+    assert str(output.error["Type"]).endswith("AIxSchemaValidationError")

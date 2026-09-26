@@ -1,10 +1,9 @@
-sourceRepository:
-  id: pub.frmw.Aac
-  groupId: eu.algites.frmw.aac
-  name: Algites Application Components framework public repository
-
-versionContext:
-  releaseLine: "1"
-  revision: 0
-  qualifierKind: SNAPSHOT
-  qualifierLabel: SNAPSHOT
+SourceRepository:
+  Id: pub.frmw.Aac
+  Name: Algites Application Components framework public repository
+  Visibility: pub
+GroupId: eu.algites.frmw.aac
+Version:
+  ReleaseLine: '1'
+  Revision: 0
+  QualifierKind: snapshot

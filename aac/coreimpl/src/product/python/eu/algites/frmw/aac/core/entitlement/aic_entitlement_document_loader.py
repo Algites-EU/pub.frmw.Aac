@@ -66,52 +66,52 @@ class AIcEntitlementDocumentLoader:
     @staticmethod
     def load_text(text: str, source: str = "<memory>") -> AIcEntitlementDocument:
         raw = _load_yaml(text, source)
-        data = _mapping(raw.get("entitlement"))
-        format_version = int(data.get("format_version", 0))
+        data = _mapping(raw.get("Entitlement"))
+        format_version = int(data.get("FormatVersion", 0))
         if format_version != 1:
             raise AIxEntitlementError(f"{source}: unsupported entitlement document format_version {format_version}; expected 1")
         _validate(raw, "entitlement-document_1.json", source)
-        scope_data = _mapping(data["licensing_scope"])
-        subject_data = _mapping(data["subject"])
+        scope_data = _mapping(data["LicensingScope"])
+        subject_data = _mapping(data["Subject"])
         subject = AIcEntitlementSubject(
-            str(subject_data["id"]),
-            str(subject_data["display_name"]) if subject_data.get("display_name") is not None else None,
-            dict(_mapping(subject_data.get("attributes", {}))),
+            str(subject_data["Id"]),
+            str(subject_data["DisplayName"]) if subject_data.get("DisplayName") is not None else None,
+            dict(_mapping(subject_data.get("Attributes", {}))),
         )
-        scope = AIcEntitlementLicensingScope(str(scope_data["type"]), subject.id)
-        issuer_data = _mapping(data["issuer"])
-        issuer = AIcEntitlementIssuer(str(issuer_data["id"]), {str(k): v for k, v in issuer_data.items() if k != "id"})
+        scope = AIcEntitlementLicensingScope(str(scope_data["Type"]), subject.id)
+        issuer_data = _mapping(data["Issuer"])
+        issuer = AIcEntitlementIssuer(str(issuer_data["Id"]), {str(k): v for k, v in issuer_data.items() if k != "id"})
         components = []
-        for component_raw in data.get("components", ()):
+        for component_raw in data.get("Components", ()):
             component = _mapping(component_raw)
             grants = []
-            for grant_raw in component.get("grants", ()):
+            for grant_raw in component.get("Grants", ()):
                 grant = _mapping(grant_raw)
-                capability = _mapping(grant["capability"])
+                capability = _mapping(grant["Capability"])
                 permissions = tuple(
                     AIcEntitlementPermissionGrant(
-                        str(_mapping(item)["id"]),
-                        str(_mapping(item)["valid_from"]) if _mapping(item).get("valid_from") is not None else None,
-                        str(_mapping(item)["valid_until"]) if _mapping(item).get("valid_until") is not None else None,
-                        dict(_mapping(_mapping(item).get("constraints", {}))),
-                        dict(_mapping(_mapping(item).get("metadata", {}))),
+                        str(_mapping(item)["Id"]),
+                        str(_mapping(item)["ValidFrom"]) if _mapping(item).get("ValidFrom") is not None else None,
+                        str(_mapping(item)["ValidUntil"]) if _mapping(item).get("ValidUntil") is not None else None,
+                        dict(_mapping(_mapping(item).get("Constraints", {}))),
+                        dict(_mapping(_mapping(item).get("Metadata", {}))),
                     )
-                    for item in grant.get("permissions", ())
+                    for item in grant.get("Permissions", ())
                 )
-                grants.append(AIcEntitlementCapabilityGrant(str(capability["id"]), int(capability["version"]), permissions))
-            components.append(AIcEntitlementComponentGrant(str(component["id"]), tuple(grants)))
+                grants.append(AIcEntitlementCapabilityGrant(str(capability["Id"]), int(capability["Version"]), permissions))
+            components.append(AIcEntitlementComponentGrant(str(component["Id"]), tuple(grants)))
         issued_for_request = None
-        if data.get("issued_for_request") is not None:
-            request_ref = _mapping(data["issued_for_request"])
+        if data.get("IssuedForRequest") is not None:
+            request_ref = _mapping(data["IssuedForRequest"])
             issued_for_request = AIcEntitlementRequestReference(
-                str(request_ref["request_id"]), str(request_ref["request_digest"])
+                str(request_ref["RequestId"]), str(request_ref["RequestDigest"])
             )
         return AIcEntitlementDocument(
-            format_version=int(data["format_version"]), entitlement_id=str(data["entitlement_id"]),
+            format_version=int(data["FormatVersion"]), entitlement_id=str(data["EntitlementId"]),
             issuer=issuer, licensing_scope=scope, subject=subject, components=tuple(components),
             issued_for_request=issued_for_request,
-            issued_at=str(data["issued_at"]) if data.get("issued_at") is not None else None,
-            valid_from=str(data["valid_from"]) if data.get("valid_from") is not None else None,
-            valid_until=str(data["valid_until"]) if data.get("valid_until") is not None else None,
-            metadata=dict(_mapping(data.get("metadata", {}))),
+            issued_at=str(data["IssuedAt"]) if data.get("IssuedAt") is not None else None,
+            valid_from=str(data["ValidFrom"]) if data.get("ValidFrom") is not None else None,
+            valid_until=str(data["ValidUntil"]) if data.get("ValidUntil") is not None else None,
+            metadata=dict(_mapping(data.get("Metadata", {}))),
         )

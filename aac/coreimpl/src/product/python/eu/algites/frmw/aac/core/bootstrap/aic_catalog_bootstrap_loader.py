@@ -49,22 +49,22 @@ class AIcCatalogBootstrapLoader:
                 rendered.append(f"{path}: {error.message}")
             raise AIxDescriptorError(f"{source}: catalog bootstrap schema validation failed: " + "; ".join(rendered))
         try:
-            body = raw["catalog_bootstrap"]
+            body = raw["CatalogBootstrap"]
             return AIcCatalogBootstrap(
-                schema_version=int(body["schema_version"]),
-                product_id=str(body["product_id"]),
-                technology_id=str(body["technology_id"]),
+                schema_version=int(body["SchemaVersion"]),
+                product_id=str(body["ProductId"]),
+                technology_id=str(body["TechnologyId"]),
                 sources=tuple(AIcCatalogSourceRegistration(
-                    id=str(item["id"]),
-                    type=str(item["type"]),
-                    uri=str(item["uri"]),
-                    authentication_profile_id=(str(item["authentication_profile_id"]) if item.get("authentication_profile_id") is not None else None),
-                    priority=int(item.get("priority", 0)),
-                    settings=dict(item.get("settings", {})),
-                    name=normalize_display_text(item.get("name")),
-                    description=normalize_display_text(item.get("description")),
-                ) for item in body.get("sources", ())),
-                metadata=dict(body.get("metadata", {})),
+                    id=str(item["Id"]),
+                    type=str(item["Type"]),
+                    uri=str(item["Uri"]),
+                    authentication_profile_id=(str(item["AuthenticationProfileId"]) if item.get("AuthenticationProfileId") is not None else None),
+                    priority=int(item.get("Priority", 0)),
+                    settings=dict(item.get("Settings", {})),
+                    name=normalize_display_text(item.get("Name")),
+                    description=normalize_display_text(item.get("Description")),
+                ) for item in body.get("Sources", ())),
+                metadata=dict(body.get("Metadata", {})),
             )
         except (KeyError, TypeError, ValueError) as exc:
             raise AIxDescriptorError(f"{source}: invalid catalog bootstrap: {exc}") from exc

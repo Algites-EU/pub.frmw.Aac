@@ -1,9 +1,10 @@
-group:
-  id: _AAC.runtime.observation
-  parent_group_id: _AAC.runtime
-  name:
-    text: Runtime Observation
-    resource_key: aac.runtime.observation.name
-  description:
-    text: Capabilities that observe normalized runtime activity without changing the observed outcome.
-    resource_key: aac.runtime.observation.description
+Group:
+  Id: _AAC.runtime.observation
+  ParentGroupId: _AAC.runtime
+  Name:
+    Text: Runtime Observation
+    ResourceKey: aac.runtime.observation.name
+  Description:
+    Text: Capabilities that observe normalized runtime activity without changing
+      the observed outcome.
+    ResourceKey: aac.runtime.observation.description

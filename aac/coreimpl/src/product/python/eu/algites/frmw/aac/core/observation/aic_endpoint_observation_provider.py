@@ -18,7 +18,7 @@ from eu.algites.frmw.aac.core.persistence.aic_in_memory_state_store import AIcIn
 OBSERVATION_CAPABILITY_ID = "_AAC.capability.observation"
 
 class AIcEndpointObservationProvider(AIiObservationProvider):
-    """Observation-provider adapter for non-object endpoints such as PROCESS runtimes."""
+    """Observation-provider adapter for non-object endpoints such as process runtimes."""
 
     def __init__(self, instance_id: str, endpoint: AIiCapabilityEndpoint, invocation_dispatcher) -> None:
         self.instance_id = instance_id
@@ -33,7 +33,7 @@ class AIcEndpointObservationProvider(AIiObservationProvider):
             capability_version=1,
             operation_id="observe",
             provider_instance_id=self.instance_id,
-            arguments=asdict(observation_input),
+            arguments=observation_input.to_mapping(),
         )
         output = self.invocation_dispatcher.invoke(self.endpoint, invocation)
         if not output.success:
@@ -43,7 +43,7 @@ class AIcEndpointObservationProvider(AIiObservationProvider):
             return raw
         if isinstance(raw, dict):
             return AIcObservationOutput(
-                accepted=bool(raw.get("accepted", True)),
-                diagnostic=str(raw["diagnostic"]) if raw.get("diagnostic") is not None else None,
+                accepted=bool(raw.get("Accepted", True)),
+                diagnostic=str(raw["Diagnostic"]) if raw.get("Diagnostic") is not None else None,
             )
         raise TypeError("observation endpoint returned an invalid output")

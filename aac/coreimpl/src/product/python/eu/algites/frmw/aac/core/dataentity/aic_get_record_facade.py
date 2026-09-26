@@ -25,15 +25,15 @@ GET_RECORD_CAPABILITY_ID = "_AAC.data-entity.get-record"
 def _raw_envelope(raw: object) -> AIcDataEntityEnvelope:
     if not isinstance(raw, Mapping):
         raise TypeError("Data Entity provider returned a non-object record")
-    payload = raw.get("payload")
+    payload = raw.get("Payload")
     if not isinstance(payload, Mapping):
         raise TypeError("Data Entity provider returned a non-object payload")
     return AIcDataEntityEnvelope(
-        uid=str(raw["uid"]),
-        schema_id=str(raw["schema_id"]),
-        schema_version=int(raw["schema_version"]),
-        record_revision=raw["record_revision"],
-        state=AInDataEntityState(str(raw["state"])),
+        uid=str(raw["Uid"]),
+        schema_id=str(raw["SchemaId"]),
+        schema_version=int(raw["SchemaVersion"]),
+        record_revision=raw["RecordRevision"],
+        state=AInDataEntityState(str(raw["State"])),
         payload=dict(payload),
     )
 
@@ -41,8 +41,8 @@ class AIcGetRecordFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = GET_RECORD_CAPABILITY_ID
 
     def get_raw(self, schema_id: str, uid: str) -> AIcDataEntityEnvelope | None:
-        result = self._invoke("get", {"schema_id": schema_id, "uid": uid})
-        raw = result.get("record")
+        result = self._invoke("get", {"SchemaId": schema_id, "Uid": uid})
+        raw = result.get("Record")
         return None if raw is None else _raw_envelope(raw)
 
     def get(self, data_type: AIcDataEntityType[T], uid: str) -> AIcTypedDataEntityEnvelope[T] | None:

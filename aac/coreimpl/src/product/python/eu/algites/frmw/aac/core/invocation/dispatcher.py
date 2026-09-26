@@ -118,47 +118,47 @@ def _exception_error(exc: Exception) -> dict[str, object]:
     if isinstance(exc, AIxCapabilityOperationFailed):
         failure = exc.failure
         error: dict[str, object] = {
-            "type": failure.exception_type,
-            "message": failure.system_message,
+            "Type": failure.exception_type,
+            "Message": failure.system_message,
         }
         if failure.user_message is not None:
-            error["user_message"] = dataclasses.asdict(failure.user_message)
+            error["UserMessage"] = dataclasses.asdict(failure.user_message)
         if failure.error_code is not None:
-            error["error_code"] = failure.error_code
+            error["ErrorCode"] = failure.error_code
         if failure.stack_trace is not None:
-            error["stack_trace"] = failure.stack_trace
+            error["StackTrace"] = failure.stack_trace
         if failure.details:
-            error["details"] = dict(failure.details)
+            error["Details"] = dict(failure.details)
         if failure.extension is not None:
-            error["extension"] = copy.deepcopy(failure.extension)
+            error["Extension"] = copy.deepcopy(failure.extension)
         return error
     error: dict[str, object] = {
-        "type": f"{type(exc).__module__}.{type(exc).__qualname__}",
-        "message": str(exc) or type(exc).__name__,
+        "Type": f"{type(exc).__module__}.{type(exc).__qualname__}",
+        "Message": str(exc) or type(exc).__name__,
     }
     try:
         caller = current_operation_interaction().caller_snapshot()
         if caller.failure_detail_level is AInOperationInteractionFailureDetailLevel.STACK_TRACE:
-            error["stack_trace"] = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
+            error["StackTrace"] = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
     except Exception:
         pass
     return error
 
 def _failure_from_output(output: AIcInvocationOutput) -> AIcOperationFailure:
     error = dict(output.error or {})
-    system_message = str(error.pop("message", "operation failed"))
-    exception_type = str(error.pop("type", "AAC.OperationFailure"))
-    stack_trace = str(error.pop("stack_trace")) if error.get("stack_trace") is not None else None
-    error.pop("stack_trace", None)
-    error_code = str(error.pop("error_code")) if error.get("error_code") is not None else None
-    error.pop("error_code", None)
-    user_message_raw = error.pop("user_message", None)
+    system_message = str(error.pop("Message", "operation failed"))
+    exception_type = str(error.pop("Type", "AAC.OperationFailure"))
+    stack_trace = str(error.pop("StackTrace")) if error.get("StackTrace") is not None else None
+    error.pop("StackTrace", None)
+    error_code = str(error.pop("ErrorCode")) if error.get("ErrorCode") is not None else None
+    error.pop("ErrorCode", None)
+    user_message_raw = error.pop("UserMessage", None)
     user_message = None
     if isinstance(user_message_raw, Mapping):
         from eu.algites.frmw.aac.core.presentation.api import normalize_display_text
         user_message = normalize_display_text(user_message_raw)
-    extension = error.pop("extension", None)
-    explicit_details = error.pop("details", None)
+    extension = error.pop("Extension", None)
+    explicit_details = error.pop("Details", None)
     details = dict(explicit_details) if isinstance(explicit_details, Mapping) else {}
     details.update(error)
     return AIcOperationFailure(

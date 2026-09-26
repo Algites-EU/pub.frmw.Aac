@@ -65,9 +65,9 @@ class AIcProcessCapabilityHandle(AIiCapabilityHandle):
             locale if locale is not None else current_invocation_locale(),
         )
         return AIcInvocationOutput(
-            success=bool(response.get("success", False)),
-            result=response.get("result"),
-            error=response.get("error") if isinstance(response.get("error"), Mapping) else None,
+            success=bool(response.get("Success", False)),
+            result=response.get("Result"),
+            error=response.get("Error") if isinstance(response.get("Error"), Mapping) else None,
         )
 
     def start(
@@ -81,8 +81,8 @@ class AIcProcessCapabilityHandle(AIiCapabilityHandle):
         thread = threading.Thread(
             target=self.invoke,
             kwargs={
-                "operation_id": operation_id,
-                "arguments": arguments,
+                "OperationId": operation_id,
+                "Arguments": arguments,
                 "operation_parameters": operation_parameters,
                 "operation_interaction": operation_interaction,
                 "locale": locale,

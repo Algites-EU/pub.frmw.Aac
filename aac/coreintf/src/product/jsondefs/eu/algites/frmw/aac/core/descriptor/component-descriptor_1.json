@@ -5,22 +5,22 @@
     "persistedSchema": {
       "type": "object",
       "required": [
-        "id",
-        "write_version",
-        "readable_versions",
-        "resource"
+        "Id",
+        "WriteVersion",
+        "ReadableVersions",
+        "Resource"
       ],
       "additionalProperties": false,
       "properties": {
-        "id": {
+        "Id": {
           "type": "string",
           "minLength": 1
         },
-        "write_version": {
+        "WriteVersion": {
           "type": "integer",
           "minimum": 1
         },
-        "readable_versions": {
+        "ReadableVersions": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
@@ -29,11 +29,11 @@
             "minimum": 1
           }
         },
-        "resource": {
+        "Resource": {
           "type": "string",
           "minLength": 1
         },
-        "migrations": {
+        "Migrations": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/schemaMigrationStep"
@@ -51,11 +51,11 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "text": {
+            "Text": {
               "type": "string",
               "minLength": 1
             },
-            "resource_key": {
+            "ResourceKey": {
               "type": "string",
               "minLength": 1
             }
@@ -63,12 +63,12 @@
           "anyOf": [
             {
               "required": [
-                "text"
+                "Text"
               ]
             },
             {
               "required": [
-                "resource_key"
+                "ResourceKey"
               ]
             }
           ]
@@ -78,21 +78,21 @@
     "schemaMigrationStep": {
       "type": "object",
       "required": [
-        "from",
-        "to",
-        "migrator"
+        "From",
+        "To",
+        "Migrator"
       ],
       "additionalProperties": false,
       "properties": {
-        "from": {
+        "From": {
           "type": "integer",
           "minimum": 1
         },
-        "to": {
+        "To": {
           "type": "integer",
           "minimum": 1
         },
-        "migrator": {
+        "Migrator": {
           "type": "string",
           "minLength": 1
         }
@@ -101,27 +101,27 @@
     "dataEntityRequirement": {
       "type": "object",
       "required": [
-        "schema_id",
-        "access"
+        "SchemaId",
+        "Access"
       ],
       "additionalProperties": false,
       "properties": {
-        "schema_id": {
+        "SchemaId": {
           "type": "string",
           "minLength": 1
         },
-        "access": {
+        "Access": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
           "items": {
             "enum": [
-              "READ",
-              "WRITE"
+              "read",
+              "write"
             ]
           }
         },
-        "readable_versions": {
+        "ReadableVersions": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -129,7 +129,7 @@
             "minimum": 1
           }
         },
-        "writable_versions": {
+        "WritableVersions": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -137,7 +137,7 @@
             "minimum": 1
           }
         },
-        "required": {
+        "Required": {
           "type": "boolean"
         }
       },
@@ -145,22 +145,22 @@
         {
           "if": {
             "properties": {
-              "access": {
+              "Access": {
                 "contains": {
-                  "const": "READ"
+                  "const": "read"
                 }
               }
             },
             "required": [
-              "access"
+              "Access"
             ]
           },
           "then": {
             "required": [
-              "readable_versions"
+              "ReadableVersions"
             ],
             "properties": {
-              "readable_versions": {
+              "ReadableVersions": {
                 "minItems": 1
               }
             }
@@ -169,22 +169,22 @@
         {
           "if": {
             "properties": {
-              "access": {
+              "Access": {
                 "contains": {
-                  "const": "WRITE"
+                  "const": "write"
                 }
               }
             },
             "required": [
-              "access"
+              "Access"
             ]
           },
           "then": {
             "required": [
-              "writable_versions"
+              "WritableVersions"
             ],
             "properties": {
-              "writable_versions": {
+              "WritableVersions": {
                 "minItems": 1
               }
             }
@@ -195,17 +195,17 @@
     "dataEntitySupport": {
       "type": "object",
       "required": [
-        "schema_id",
-        "readable_versions",
-        "writable_versions"
+        "SchemaId",
+        "ReadableVersions",
+        "WritableVersions"
       ],
       "additionalProperties": false,
       "properties": {
-        "schema_id": {
+        "SchemaId": {
           "type": "string",
           "minLength": 1
         },
-        "readable_versions": {
+        "ReadableVersions": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -213,7 +213,7 @@
             "minimum": 1
           }
         },
-        "writable_versions": {
+        "WritableVersions": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -221,29 +221,29 @@
             "minimum": 1
           }
         },
-        "preferred_write_version": {
+        "PreferredWriteVersion": {
           "type": "integer",
           "minimum": 1
         },
-        "migrations": {
+        "Migrations": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/schemaMigrationStep"
           }
         },
-        "data_entity_requirements": {
+        "DataEntityRequirements": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/dataEntityRequirement"
           }
         },
-        "name": {
+        "Name": {
           "$ref": "#/$defs/displayText"
         },
-        "description": {
+        "Description": {
           "$ref": "#/$defs/displayText"
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         }
       },
@@ -251,23 +251,23 @@
         {
           "if": {
             "properties": {
-              "writable_versions": {
+              "WritableVersions": {
                 "minItems": 1
               }
             },
             "required": [
-              "writable_versions"
+              "WritableVersions"
             ]
           },
           "then": {
             "required": [
-              "preferred_write_version"
+              "PreferredWriteVersion"
             ]
           },
           "else": {
             "not": {
               "required": [
-                "preferred_write_version"
+                "PreferredWriteVersion"
               ]
             }
           }
@@ -276,14 +276,14 @@
           "anyOf": [
             {
               "properties": {
-                "readable_versions": {
+                "ReadableVersions": {
                   "minItems": 1
                 }
               }
             },
             {
               "properties": {
-                "writable_versions": {
+                "WritableVersions": {
                   "minItems": 1
                 }
               }
@@ -295,27 +295,27 @@
   },
   "type": "object",
   "required": [
-    "component"
+    "Component"
   ],
   "additionalProperties": false,
   "properties": {
-    "component": {
+    "Component": {
       "type": "object",
       "required": [
-        "id",
-        "version"
+        "Id",
+        "Version"
       ],
       "additionalProperties": false,
       "properties": {
-        "id": {
+        "Id": {
           "type": "string",
           "minLength": 1
         },
-        "version": {
+        "Version": {
           "type": "integer",
           "minimum": 1
         },
-        "capability_groups": {
+        "CapabilityGroups": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -323,7 +323,7 @@
             "minLength": 1
           }
         },
-        "capability": {
+        "Capability": {
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -331,40 +331,40 @@
             "minLength": 1
           }
         },
-        "component_configuration_schema": {
+        "ComponentConfigurationSchema": {
           "$ref": "#/$defs/persistedSchema"
         },
-        "capability_providers": {
+        "CapabilityProviders": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "capabilities",
-              "implementation_classes"
+              "Id",
+              "Capabilities",
+              "ImplementationClasses"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "capabilities": {
+              "Capabilities": {
                 "type": "array",
                 "minItems": 1,
                 "items": {
                   "type": "object",
                   "required": [
-                    "id",
-                    "versions"
+                    "Id",
+                    "Versions"
                   ],
                   "additionalProperties": false,
                   "properties": {
-                    "id": {
+                    "Id": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "versions": {
+                    "Versions": {
                       "type": "array",
                       "minItems": 1,
                       "uniqueItems": true,
@@ -376,55 +376,55 @@
                   }
                 }
               },
-              "configuration_schema": {
+              "ConfigurationSchema": {
                 "$ref": "#/$defs/persistedSchema"
               },
-              "initial_instances": {
+              "InitialInstances": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "additionalProperties": false,
                   "properties": {
-                    "name": {
+                    "Name": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "configuration": {
+                    "Configuration": {
                       "type": "object"
                     },
-                    "access_mode": {
+                    "AccessMode": {
                       "enum": [
-                        "READ_ONLY",
-                        "READ_WRITE"
+                        "read_only",
+                        "read_write"
                       ],
-                      "default": "READ_WRITE"
+                      "default": "read_write"
                     }
                   }
                 }
               },
-              "runtime_factory_class": {
+              "RuntimeFactoryClass": {
                 "type": "string",
                 "minLength": 1
               },
-              "requirements": {
+              "Requirements": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "required": [
-                    "id",
-                    "capability"
+                    "Id",
+                    "Capability"
                   ],
                   "additionalProperties": false,
                   "properties": {
-                    "id": {
+                    "Id": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "capability": {
+                    "Capability": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "versions": {
+                    "Versions": {
                       "type": "array",
                       "uniqueItems": true,
                       "items": {
@@ -432,22 +432,22 @@
                         "minimum": 1
                       }
                     },
-                    "cardinality": {
+                    "Cardinality": {
                       "enum": [
-                        "SINGLE",
-                        "MULTIPLE"
+                        "single",
+                        "multiple"
                       ]
                     },
-                    "mandatory": {
+                    "Mandatory": {
                       "type": "boolean"
                     },
-                    "name": {
+                    "Name": {
                       "$ref": "#/$defs/displayText"
                     },
-                    "description": {
+                    "Description": {
                       "$ref": "#/$defs/displayText"
                     },
-                    "requested_authorizations": {
+                    "RequestedAuthorizations": {
                       "type": "array",
                       "uniqueItems": true,
                       "items": {
@@ -458,18 +458,18 @@
                   }
                 }
               },
-              "runtime": {
+              "Runtime": {
                 "type": "object",
                 "additionalProperties": false,
                 "properties": {
-                  "profile": {
+                  "Profile": {
                     "enum": [
-                      "IN_PROCESS",
-                      "PROCESS",
-                      "SUBINTERPRETER"
+                      "in_process",
+                      "process",
+                      "subinterpreter"
                     ]
                   },
-                  "command": {
+                  "Command": {
                     "type": "array",
                     "minItems": 1,
                     "items": {
@@ -477,195 +477,195 @@
                       "minLength": 1
                     }
                   },
-                  "cwd": {
+                  "Cwd": {
                     "type": "string",
                     "minLength": 1
                   },
-                  "environment": {
+                  "Environment": {
                     "type": "object",
                     "additionalProperties": {
                       "type": "string"
                     }
                   },
-                  "timeout_seconds": {
+                  "TimeoutSeconds": {
                     "type": "number",
                     "exclusiveMinimum": 0
                   }
                 }
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               },
-              "readiness_requirements": {
+              "ReadinessRequirements": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "required": [
-                    "id",
-                    "source",
-                    "key"
+                    "Id",
+                    "Source",
+                    "Key"
                   ],
                   "additionalProperties": false,
                   "properties": {
-                    "id": {
+                    "Id": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "source": {
+                    "Source": {
                       "enum": [
-                        "COMPONENT_CONFIGURATION",
-                        "PROVIDER_CONFIGURATION",
-                        "CONTEXT"
+                        "component_configuration",
+                        "provider_configuration",
+                        "context"
                       ]
                     },
-                    "key": {
+                    "Key": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "missing_state": {
+                    "MissingState": {
                       "enum": [
-                        "DEGRADED",
-                        "NOT_READY"
+                        "degraded",
+                        "not_ready"
                       ]
                     },
-                    "message": {
+                    "Message": {
                       "type": "string",
                       "minLength": 1
                     }
                   }
                 }
               },
-              "operations": {
+              "Operations": {
                 "type": "array",
                 "description": "Provider-specific metadata for concrete capability operations implemented by this provider definition.",
                 "items": {
                   "type": "object",
                   "required": [
-                    "capability",
-                    "capability_version",
-                    "operation",
-                    "interaction"
+                    "Capability",
+                    "CapabilityVersion",
+                    "Operation",
+                    "Interaction"
                   ],
                   "additionalProperties": false,
                   "properties": {
-                    "capability": {
+                    "Capability": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "capability_version": {
+                    "CapabilityVersion": {
                       "type": "integer",
                       "minimum": 1
                     },
-                    "operation": {
+                    "Operation": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "interaction": {
+                    "Interaction": {
                       "type": "object",
                       "required": [
-                        "supported_state_result_delivery_modes"
+                        "SupportedStateResultDeliveryModes"
                       ],
                       "additionalProperties": false,
                       "properties": {
-                        "supported_state_result_delivery_modes": {
+                        "SupportedStateResultDeliveryModes": {
                           "type": "array",
                           "minItems": 1,
                           "uniqueItems": true,
                           "contains": {
-                            "const": "ON_DEMAND_COMPLETE"
+                            "const": "on_demand_complete"
                           },
                           "items": {
                             "enum": [
-                              "ON_DEMAND_COMPLETE",
-                              "ON_DEMAND_DELTA",
-                              "ON_CHANGE_COMPLETE",
-                              "ON_CHANGE_DELTA",
-                              "ALWAYS_COMPLETE"
+                              "on_demand_complete",
+                              "on_demand_delta",
+                              "on_change_complete",
+                              "on_change_delta",
+                              "always_complete"
                             ]
                           }
                         },
-                        "progress_reporting": {
+                        "ProgressReporting": {
                           "type": "boolean",
                           "default": false
                         },
-                        "cancellation": {
+                        "Cancellation": {
                           "type": "boolean",
                           "default": false
                         },
-                        "detail_level": {
+                        "DetailLevel": {
                           "type": "boolean",
                           "default": false
                         },
-                        "reporting_interval": {
+                        "ReportingInterval": {
                           "type": "boolean",
                           "default": false
                         }
                       }
                     },
-                    "parameters": {
+                    "Parameters": {
                       "type": "array",
                       "minItems": 1,
                       "items": {
                         "type": "object",
                         "required": [
-                          "id",
-                          "name",
-                          "description",
-                          "value_schema"
+                          "Id",
+                          "Name",
+                          "Description",
+                          "ValueSchema"
                         ],
                         "additionalProperties": false,
                         "properties": {
-                          "id": {
+                          "Id": {
                             "type": "string",
                             "minLength": 1
                           },
-                          "name": {
+                          "Name": {
                             "$ref": "#/$defs/displayText"
                           },
-                          "description": {
+                          "Description": {
                             "$ref": "#/$defs/displayText"
                           },
-                          "value_schema": {
+                          "ValueSchema": {
                             "type": "object"
                           },
-                          "enum_values": {
+                          "EnumValues": {
                             "type": "array",
                             "minItems": 1,
                             "items": {
                               "type": "object",
                               "required": [
-                                "value",
-                                "name"
+                                "Value",
+                                "Name"
                               ],
                               "additionalProperties": false,
                               "properties": {
-                                "value": {},
-                                "name": {
+                                "Value": {},
+                                "Name": {
                                   "$ref": "#/$defs/displayText"
                                 },
-                                "description": {
+                                "Description": {
                                   "$ref": "#/$defs/displayText"
                                 }
                               }
                             }
                           },
-                          "required": {
+                          "Required": {
                             "type": "boolean",
                             "default": false
                           },
-                          "default": {},
-                          "component_configurable": {
+                          "Default": {},
+                          "ComponentConfigurable": {
                             "type": "boolean",
                             "default": false
                           },
-                          "instance_configurable": {
+                          "InstanceConfigurable": {
                             "type": "boolean",
                             "default": false
                           },
-                          "invocation_overridable": {
+                          "InvocationOverridable": {
                             "type": "boolean",
                             "default": false
                           }
@@ -675,22 +675,22 @@
                   }
                 }
               },
-              "implementation_classes": {
+              "ImplementationClasses": {
                 "type": "array",
                 "minItems": 1,
                 "items": {
                   "type": "object",
                   "required": [
-                    "technology-kind",
-                    "class-name"
+                    "TechnologyKind",
+                    "ClassName"
                   ],
                   "additionalProperties": false,
                   "properties": {
-                    "technology-kind": {
+                    "TechnologyKind": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "class-name": {
+                    "ClassName": {
                       "type": "string",
                       "minLength": 1
                     }
@@ -701,106 +701,106 @@
           },
           "description": "Component-declared capability provider definitions. Each definition binds one implementation role to the capability contract versions it provides; configured provider instances are created from these definitions."
         },
-        "lifecycle": {
+        "Lifecycle": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "provision": {
+            "Provision": {
               "type": "string"
             },
-            "validate": {
+            "Validate": {
               "type": "string"
             },
-            "unprovision": {
+            "Unprovision": {
               "type": "string"
             }
           }
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         },
-        "name": {
+        "Name": {
           "$ref": "#/$defs/displayText"
         },
-        "description": {
+        "Description": {
           "$ref": "#/$defs/displayText"
         },
-        "entitlement_licensing_scopes": {
+        "EntitlementLicensingScopes": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "type"
+              "Type"
             ],
             "additionalProperties": false,
             "properties": {
-              "type": {
+              "Type": {
                 "type": "string",
                 "minLength": 1
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               },
-              "metadata": {
+              "Metadata": {
                 "type": "object"
               }
             }
           }
         },
-        "provided_capability_entitlements": {
+        "ProvidedCapabilityEntitlements": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "capability",
-              "permissions"
+              "Capability",
+              "Permissions"
             ],
             "additionalProperties": false,
             "properties": {
-              "capability": {
+              "Capability": {
                 "type": "object",
                 "required": [
-                  "id",
-                  "version"
+                  "Id",
+                  "Version"
                 ],
                 "additionalProperties": false,
                 "properties": {
-                  "id": {
+                  "Id": {
                     "type": "string",
                     "minLength": 1
                   },
-                  "version": {
+                  "Version": {
                     "type": "integer",
                     "minimum": 1
                   }
                 }
               },
-              "permissions": {
+              "Permissions": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "required": [
-                    "id"
+                    "Id"
                   ],
                   "additionalProperties": false,
                   "properties": {
-                    "id": {
+                    "Id": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "description": {
+                    "Description": {
                       "$ref": "#/$defs/displayText"
                     },
-                    "metadata": {
+                    "Metadata": {
                       "type": "object"
                     },
-                    "name": {
+                    "Name": {
                       "$ref": "#/$defs/displayText"
                     },
-                    "possible_licensing_scopes": {
+                    "PossibleLicensingScopes": {
                       "type": "array",
                       "uniqueItems": true,
                       "items": {
@@ -811,16 +811,16 @@
                   }
                 }
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               }
             }
           }
         },
-        "data_entity_support": {
+        "DataEntitySupport": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/dataEntitySupport"

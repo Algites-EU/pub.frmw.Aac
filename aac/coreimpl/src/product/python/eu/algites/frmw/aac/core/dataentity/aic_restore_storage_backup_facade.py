@@ -24,5 +24,5 @@ class AIcRestoreStorageBackupFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = RESTORE_STORAGE_BACKUP_CAPABILITY_ID
     write_operation = True
 
-    def restore_backup(self, backup_file: str, *, mode: str = "EMPTY_ONLY") -> Mapping[str, object]:
-        return self._invoke("restore_backup", {"backup_file": backup_file, "mode": mode})
+    def restore_backup(self, backup_file: str, *, mode: str = "empty_only") -> Mapping[str, object]:
+        return self._invoke("restore_backup", {"BackupFile": backup_file, "Mode": mode})

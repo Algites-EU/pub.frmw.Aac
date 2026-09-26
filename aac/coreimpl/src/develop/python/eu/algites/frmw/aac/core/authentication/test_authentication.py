@@ -6,30 +6,30 @@ from eu.algites.frmw.aac.core.runtime.application import AIcApplicationComponent
 
 
 SECURITY = """
-security_bootstrap:
-  schema_version: 1
-  secret_providers:
-    - id: env
-      type: ENVIRONMENT
-      bootstrap_safe: true
-      settings:
+SecurityBootstrap:
+  SchemaVersion: 1
+  SecretProviders:
+    - Id: env
+      Type: ENVIRONMENT
+      BootstrapSafe: true
+      Settings:
         prefix: AAC_TEST_
-  authentication_profiles:
-    - id: basic
-      mechanism: BASIC
-      parameters:
+  AuthenticationProfiles:
+    - Id: basic
+      Mechanism: basic
+      Parameters:
         username: alice
         password:
-          secret_reference:
-            secret_provider_id: env
-            key: PASSWORD
-    - id: bearer
-      mechanism: BEARER
-      parameters:
+          SecretReference:
+            SecretProviderId: env
+            Key: PASSWORD
+    - Id: bearer
+      Mechanism: BEARER
+      Parameters:
         token:
-          secret_reference:
-            secret_provider_id: env
-            key: TOKEN
+          SecretReference:
+            SecretProviderId: env
+            Key: TOKEN
 """
 
 
@@ -51,4 +51,4 @@ def test_environment_secret_provider_is_read_only(monkeypatch):
     monkeypatch.setenv("X", "value")
     service = AIcAuthenticationService()
     service.secret_providers.register("env", AIcEnvironmentSecretProvider())
-    assert service.secret_providers.get("env").capabilities()[0].value == "READ"
+    assert service.secret_providers.get("env").capabilities()[0].value == "read"

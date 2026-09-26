@@ -64,13 +64,13 @@ class AIcCapabilityGroupCatalog:
             raise AIxContractAdmissionError(f"capability-group {source} must be a mapping")
         try:
             self.schema_registry.normalize("capability-group_1.json", raw, apply_defaults=False)
-            item = raw["group"]
+            item = raw["Group"]
             group = AIcCapabilityGroup(
-                id=str(item["id"]),
-                parent_group_id=str(item["parent_group_id"]) if item.get("parent_group_id") is not None else None,
-                name=normalize_display_text(item.get("name")),
-                description=normalize_display_text(item.get("description")),
-                metadata=dict(item.get("metadata", {})),
+                id=str(item["Id"]),
+                parent_group_id=str(item["ParentGroupId"]) if item.get("ParentGroupId") is not None else None,
+                name=normalize_display_text(item.get("Name")),
+                description=normalize_display_text(item.get("Description")),
+                metadata=dict(item.get("Metadata", {})),
             )
         except Exception as exc:
             raise AIxContractAdmissionError(f"capability-group schema validation failed for {source}: {exc}") from exc

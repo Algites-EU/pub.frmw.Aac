@@ -27,7 +27,7 @@ def _next_integer_revision(current: AIcPersistedRecord | None) -> int:
     if current is None:
         return 1
     if not isinstance(current.record_revision, int):
-        raise AIxPersistenceError("Core-owned state store requires MONOTONIC_INTEGER record revisions")
+        raise AIxPersistenceError("Core-owned state store requires monotonic_integer record revisions")
     return current.record_revision + 1
 
 def _validate_expectation(
@@ -96,7 +96,7 @@ def _apply_mutations(
     return tuple(written)
 
 class AIcJsonFileStateStore(AIiStateStore):
-    """Revisioned atomic JSON persistence adapter for Core-owned normalized state."""
+    """Revisioned atomic json persistence adapter for Core-owned normalized state."""
 
     def __init__(self, path: str | Path, *, mutation_lock_path: str | Path | None = None) -> None:
         self.path = Path(path)
@@ -116,9 +116,9 @@ class AIcJsonFileStateStore(AIiStateStore):
             raise AIxPersistenceError(f"cannot read state store {self.path}: {exc}") from exc
         if not isinstance(raw, dict):
             raise AIxPersistenceError(f"state store {self.path} root must be an object")
-        if int(raw.get("format_version", 0)) != 1:
+        if int(raw.get("FormatVersion", 0)) != 1:
             raise AIxPersistenceError(f"state store {self.path} requires format_version 1")
-        raw_records = raw.get("records", {})
+        raw_records = raw.get("Records", {})
         if not isinstance(raw_records, Mapping):
             raise AIxPersistenceError(f"state store {self.path} records must be an object")
         result: dict[str, dict[str, AIcPersistedRecord]] = {}
@@ -127,23 +127,23 @@ class AIcJsonFileStateStore(AIiStateStore):
                 raise AIxPersistenceError(f"state store namespace {namespace!r} must be an object")
             target: dict[str, AIcPersistedRecord] = {}
             for key, envelope in values.items():
-                if not isinstance(envelope, Mapping) or not isinstance(envelope.get("payload"), Mapping):
+                if not isinstance(envelope, Mapping) or not isinstance(envelope.get("Payload"), Mapping):
                     raise AIxPersistenceError(f"state record {namespace}:{key} is invalid")
                 target[str(key)] = AIcPersistedRecord(
-                    str(namespace), str(key), int(envelope["record_revision"]), _clone(dict(envelope["payload"]))
+                    str(namespace), str(key), int(envelope["RecordRevision"]), _clone(dict(envelope["Payload"]))
                 )
             result[str(namespace)] = target
         return result
 
     def _write(self, records: Mapping[str, Mapping[str, AIcPersistedRecord]]) -> None:
         raw = {
-            "format_version": 1,
-            "revision_kind": AInRecordRevisionKind.MONOTONIC_INTEGER.value,
-            "records": {
+            "FormatVersion": 1,
+            "RevisionKind": AInRecordRevisionKind.MONOTONIC_INTEGER.value,
+            "Records": {
                 namespace: {
                     key: {
-                        "record_revision": record.record_revision,
-                        "payload": _clone(dict(record.payload)),
+                        "RecordRevision": record.record_revision,
+                        "Payload": _clone(dict(record.payload)),
                     }
                     for key, record in values.items()
                 }

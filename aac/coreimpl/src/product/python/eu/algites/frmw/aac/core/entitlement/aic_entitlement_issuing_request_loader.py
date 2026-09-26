@@ -66,35 +66,35 @@ class AIcEntitlementIssuingRequestLoader:
     @staticmethod
     def load_text(text: str, source: str = "<memory>") -> AIcEntitlementIssuingRequest:
         raw = _load_yaml(text, source)
-        data = _mapping(raw.get("entitlement_request"))
-        format_version = int(data.get("format_version", 0))
+        data = _mapping(raw.get("EntitlementRequest"))
+        format_version = int(data.get("FormatVersion", 0))
         if format_version != 1:
             raise AIxEntitlementError(f"{source}: unsupported entitlement issuing request format_version {format_version}; expected 1")
         _validate(raw, "entitlement-issuing-request_1.json", source)
-        scope_data = _mapping(data["requested_licensing_scope"])
-        subject_data = _mapping(data["subject"])
+        scope_data = _mapping(data["RequestedLicensingScope"])
+        subject_data = _mapping(data["Subject"])
         subject = AIcEntitlementSubject(
-            str(subject_data["id"]),
-            str(subject_data["display_name"]) if subject_data.get("display_name") is not None else None,
-            dict(_mapping(subject_data.get("attributes", {}))),
+            str(subject_data["Id"]),
+            str(subject_data["DisplayName"]) if subject_data.get("DisplayName") is not None else None,
+            dict(_mapping(subject_data.get("Attributes", {}))),
         )
-        scope = AIcEntitlementLicensingScope(str(scope_data["type"]), subject.id)
+        scope = AIcEntitlementLicensingScope(str(scope_data["Type"]), subject.id)
         components = []
-        for component_raw in data.get("components", ()):
+        for component_raw in data.get("Components", ()):
             component = _mapping(component_raw)
             requested = []
-            for grant_raw in component.get("requested_grants", ()):
+            for grant_raw in component.get("RequestedGrants", ()):
                 grant = _mapping(grant_raw)
-                capability = _mapping(grant["capability"])
+                capability = _mapping(grant["Capability"])
                 requested.append(AIcRequestedCapabilityGrant(
-                    str(capability["id"]), int(capability["version"]),
-                    tuple(str(v) for v in grant.get("permissions", ())),
+                    str(capability["Id"]), int(capability["Version"]),
+                    tuple(str(v) for v in grant.get("Permissions", ())),
                 ))
-            components.append(AIcRequestedComponentGrant(str(component["id"]), tuple(requested)))
+            components.append(AIcRequestedComponentGrant(str(component["Id"]), tuple(requested)))
         return AIcEntitlementIssuingRequest(
-            format_version=int(data["format_version"]), request_id=str(data["request_id"]),
+            format_version=int(data["FormatVersion"]), request_id=str(data["RequestId"]),
             requested_licensing_scope=scope, subject=subject, components=tuple(components),
-            generated_at=str(data["generated_at"]) if data.get("generated_at") is not None else None,
-            request_digest=str(data["request_digest"]) if data.get("request_digest") is not None else None,
-            metadata=dict(_mapping(data.get("metadata", {}))),
+            generated_at=str(data["GeneratedAt"]) if data.get("GeneratedAt") is not None else None,
+            request_digest=str(data["RequestDigest"]) if data.get("RequestDigest") is not None else None,
+            metadata=dict(_mapping(data.get("Metadata", {}))),
         )

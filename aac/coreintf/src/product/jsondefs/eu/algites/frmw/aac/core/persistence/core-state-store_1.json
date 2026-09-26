@@ -4,34 +4,34 @@
   "title": "AAC Core State Store 1",
   "type": "object",
   "required": [
-    "format_version",
-    "revision_kind",
-    "records"
+    "FormatVersion",
+    "RevisionKind",
+    "Records"
   ],
   "additionalProperties": false,
   "properties": {
-    "format_version": {
+    "FormatVersion": {
       "const": 1
     },
-    "revision_kind": {
-      "const": "MONOTONIC_INTEGER"
+    "RevisionKind": {
+      "const": "monotonic_integer"
     },
-    "records": {
+    "Records": {
       "type": "object",
       "additionalProperties": {
         "type": "object",
         "additionalProperties": {
           "type": "object",
           "required": [
-            "record_revision",
-            "payload"
+            "RecordRevision",
+            "Payload"
           ],
           "additionalProperties": false,
           "properties": {
-            "record_revision": {
+            "RecordRevision": {
               "$ref": "../common/persistence/record-revision-monotonic-integer_1.json"
             },
-            "payload": {
+            "Payload": {
               "type": "object"
             }
           }

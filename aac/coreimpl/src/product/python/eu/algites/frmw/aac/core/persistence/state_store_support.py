@@ -30,7 +30,7 @@ def _next_integer_revision(current: AIcPersistedRecord | None) -> int:
     if current is None:
         return 1
     if not isinstance(current.record_revision, int):
-        raise AIxPersistenceError("Core-owned state store requires MONOTONIC_INTEGER record revisions")
+        raise AIxPersistenceError("Core-owned state store requires monotonic_integer record revisions")
     return current.record_revision + 1
 
 def _validate_expectation(
@@ -102,12 +102,12 @@ def state_snapshot_to_raw(
     snapshot: Mapping[str, Mapping[str, AIcPersistedRecord]],
 ) -> dict[str, object]:
     return {
-        "format_version": 1,
+        "FormatVersion": 1,
         "namespaces": {
             namespace: {
                 key: {
-                    "record_revision": record.record_revision,
-                    "payload": _clone(dict(record.payload)),
+                    "RecordRevision": record.record_revision,
+                    "Payload": _clone(dict(record.payload)),
                 }
                 for key, record in values.items()
             }
@@ -116,7 +116,7 @@ def state_snapshot_to_raw(
     }
 
 def state_snapshot_from_raw(raw: Mapping[str, object]) -> Mapping[str, Mapping[str, AIcPersistedRecord]]:
-    if int(raw.get("format_version", 0)) != 1 or not isinstance(raw.get("namespaces"), Mapping):
+    if int(raw.get("FormatVersion", 0)) != 1 or not isinstance(raw.get("namespaces"), Mapping):
         raise AIxPersistenceError("Core state recovery snapshot is invalid")
     result: dict[str, dict[str, AIcPersistedRecord]] = {}
     for namespace, values in raw["namespaces"].items():
@@ -124,10 +124,10 @@ def state_snapshot_from_raw(raw: Mapping[str, object]) -> Mapping[str, Mapping[s
             raise AIxPersistenceError(f"Core state recovery namespace {namespace!r} is invalid")
         target: dict[str, AIcPersistedRecord] = {}
         for key, envelope in values.items():
-            if not isinstance(envelope, Mapping) or not isinstance(envelope.get("payload"), Mapping):
+            if not isinstance(envelope, Mapping) or not isinstance(envelope.get("Payload"), Mapping):
                 raise AIxPersistenceError(f"Core state recovery record {namespace}:{key} is invalid")
             target[str(key)] = AIcPersistedRecord(
-                str(namespace), str(key), envelope["record_revision"], _clone(dict(envelope["payload"]))
+                str(namespace), str(key), envelope["RecordRevision"], _clone(dict(envelope["Payload"]))
             )
         result[str(namespace)] = target
     return result

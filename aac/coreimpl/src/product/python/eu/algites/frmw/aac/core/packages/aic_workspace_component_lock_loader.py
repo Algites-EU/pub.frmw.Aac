@@ -36,18 +36,18 @@ def _load_yaml(text: str, schema_name: str, source: str) -> Mapping[str, Any]:
 class AIcWorkspaceComponentLockLoader:
     @staticmethod
     def load_text(text: str, source: str = "<memory>") -> AIcWorkspaceComponentLock:
-        raw = _load_yaml(text, "workspace-component-lock_1.json", source)["workspace_component_lock"]
+        raw = _load_yaml(text, "workspace-component-lock_1.json", source)["WorkspaceComponentLock"]
         return AIcWorkspaceComponentLock(
-            workspace_id=str(raw["workspace_id"]),
+            workspace_id=str(raw["WorkspaceId"]),
             entries=tuple(
                 AIcWorkspaceComponentLockEntry(
-                    component_id=str(item["component_id"]), component_version=int(item["component_version"]),
-                    sha256=str(item["sha256"]), source_id=str(item["source_id"]), artifact_uri=str(item["artifact_uri"]),
-                    artifact_filename=str(item["artifact_filename"]), package_format=str(item["package_format"]),
-                    descriptor_path=str(item["descriptor_path"]), runtime_package=str(item["runtime_package"]) if item.get("runtime_package") is not None else None,
-                    verifier_id=str(item["verifier_id"]) if item.get("verifier_id") is not None else None,
-                    sidecars=tuple(AIcPackageSidecar(str(sc["uri"]), str(sc["suffix"])) for sc in item.get("sidecars", ())),
+                    component_id=str(item["ComponentId"]), component_version=int(item["ComponentVersion"]),
+                    sha256=str(item["Sha256"]), source_id=str(item["SourceId"]), artifact_uri=str(item["ArtifactUri"]),
+                    artifact_filename=str(item["ArtifactFilename"]), package_format=str(item["PackageFormat"]),
+                    descriptor_path=str(item["DescriptorPath"]), runtime_package=str(item["RuntimePackage"]) if item.get("RuntimePackage") is not None else None,
+                    verifier_id=str(item["VerifierId"]) if item.get("VerifierId") is not None else None,
+                    sidecars=tuple(AIcPackageSidecar(str(sc["Uri"]), str(sc["Suffix"])) for sc in item.get("Sidecars", ())),
                 )
-                for item in raw.get("entries", ())
+                for item in raw.get("Entries", ())
             ),
         )

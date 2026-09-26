@@ -52,26 +52,26 @@ class _Handler(BaseHTTPRequestHandler):
         expected = self.headers.get("If-Match")
         if _State.document is not None and expected != f'"{_State.record_revision}"':
             self.send_response(412); self.send_header("ETag", f'"{_State.record_revision}"'); self.end_headers(); return
-        raw = json.loads(self.rfile.read(int(self.headers.get("Content-Length", "0"))))["configuration_change_set"]
+        raw = json.loads(self.rfile.read(int(self.headers.get("Content-Length", "0"))))["ConfigurationChangeSet"]
         if _State.document is None:
             _State.document = {
-                "format_version": 1,
-                "configuration_scope": raw["configuration_scope"],
-                "configuration_target": raw["configuration_target"],
-                "revision": 0,
-                "payload": {
-                    "configuration_schema_id": raw["configuration_schema_id"],
-                    "configuration_schema_version": raw["configuration_schema_version"],
-                    "written_by_component_version": raw["written_by_component_version"],
-                    "values": {}, "policies": {}, "metadata": {}
+                "FormatVersion": 1,
+                "ConfigurationScope": raw["ConfigurationScope"],
+                "ConfigurationTarget": raw["ConfigurationTarget"],
+                "RecordRevision": 0,
+                "Payload": {
+                    "ConfigurationSchemaId": raw["ConfigurationSchemaId"],
+                    "ConfigurationSchemaVersion": raw["ConfigurationSchemaVersion"],
+                    "WrittenByComponentVersion": raw["WrittenByComponentVersion"],
+                    "Values": {}, "Policies": {}, "Metadata": {}
                 }
             }
-        for change in raw["changes"]:
-            if change["operation"] == "SET_VALUE":
-                _State.document["payload"]["values"][change["property_id"]] = change.get("value")
+        for change in raw["Changes"]:
+            if change["Operation"] == "set_value":
+                _State.document["Payload"]["Values"][change["PropertyId"]] = change.get("Value")
         _State.record_revision += 1
-        _State.document["revision"] = _State.record_revision
-        body = json.dumps({"revision": _State.record_revision}).encode()
+        _State.document["RecordRevision"] = _State.record_revision
+        body = json.dumps({"RecordRevision": _State.record_revision}).encode()
         self.send_response(200); self.send_header("ETag", f'"{_State.record_revision}"')
         self.send_header("Content-Length", str(len(body))); self.end_headers(); self.wfile.write(body)
 
@@ -104,10 +104,10 @@ def _target():
 def _change(expected=None, value="one"):
     return AIcConfigurationChangeSet(
         AIcConfigurationScope("WORKSPACE", "w"), "http", _target(),
-        (AIcConfigurationChange("mode", AInConfigurationMutationOperation.SET_VALUE, value, True),),
+        (AIcConfigurationChange("Mode", AInConfigurationMutationOperation.SET_VALUE, value, True),),
         expected_record_revision=expected,
         configuration_schema_id="foo-component-config", configuration_schema_version=1,
-        written_by_component_version=1, actor_context={"component_id": "vendor.foo"},
+        written_by_component_version=1, actor_context={"ComponentId": "vendor.foo"},
     )
 
 
@@ -118,7 +118,7 @@ def test_http_patch_provider_uses_auth_and_etag(server, monkeypatch):
     assert _State.authorization == "Bearer token-1"
     snap = provider.snapshot(AIcConfigurationProviderRequest(_target(), AIcConfigurationScope("WORKSPACE", "w")))
     assert snap.record_revision == 1
-    assert snap.payload.values["mode"] == "one"
+    assert snap.payload.values["Mode"] == "one"
     second = provider.apply_changes(_change(1, "two"))
     assert second.record_revision == 2
 

@@ -3,98 +3,98 @@
   "title": "AAC Entitlement Bootstrap 1",
   "type": "object",
   "required": [
-    "entitlement_bootstrap"
+    "EntitlementBootstrap"
   ],
   "additionalProperties": false,
   "properties": {
-    "entitlement_bootstrap": {
+    "EntitlementBootstrap": {
       "type": "object",
       "required": [
-        "schema_version",
-        "default_entitlement_profile",
-        "entitlement_profiles"
+        "SchemaVersion",
+        "DefaultEntitlementProfile",
+        "EntitlementProfiles"
       ],
       "additionalProperties": false,
       "properties": {
-        "schema_version": {
+        "SchemaVersion": {
           "const": 1
         },
-        "default_entitlement_profile": {
+        "DefaultEntitlementProfile": {
           "type": "string",
           "minLength": 1
         },
-        "entitlement_profiles": {
+        "EntitlementProfiles": {
           "type": "array",
           "minItems": 1,
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "version",
-              "licensing_scopes"
+              "Id",
+              "Version",
+              "LicensingScopes"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "version": {
+              "Version": {
                 "type": "integer",
                 "minimum": 1
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               },
-              "licensing_scopes": {
+              "LicensingScopes": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "required": [
-                    "id",
-                    "type",
-                    "resolver"
+                    "Id",
+                    "Type",
+                    "Resolver"
                   ],
                   "additionalProperties": false,
                   "properties": {
-                    "id": {
+                    "Id": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "type": {
+                    "Type": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "resolver": {
+                    "Resolver": {
                       "type": "string",
                       "minLength": 1
                     },
-                    "mandatory": {
+                    "Mandatory": {
                       "type": "boolean"
                     },
-                    "entitlement_providers": {
+                    "EntitlementProviders": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "required": [
-                          "id"
+                          "Id"
                         ],
                         "additionalProperties": false,
                         "properties": {
-                          "id": {
+                          "Id": {
                             "type": "string",
                             "minLength": 1
                           }
                         }
                       }
                     },
-                    "name": {
+                    "Name": {
                       "$ref": "#/$defs/displayText"
                     },
-                    "description": {
+                    "Description": {
                       "$ref": "#/$defs/displayText"
                     }
                   }
@@ -103,53 +103,53 @@
             }
           }
         },
-        "entitlement_providers": {
+        "EntitlementProviders": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "type"
+              "Id",
+              "Type"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "type": {
+              "Type": {
                 "type": "string",
                 "minLength": 1
               },
-              "settings": {
+              "Settings": {
                 "type": "object"
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               }
             }
           }
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         },
-        "trusted_issuers": {
+        "TrustedIssuers": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "issuer_id"
+              "IssuerId"
             ],
             "additionalProperties": false,
             "properties": {
-              "issuer_id": {
+              "IssuerId": {
                 "type": "string",
                 "minLength": 1
               },
-              "component_ids": {
+              "ComponentIds": {
                 "type": "array",
                 "uniqueItems": true,
                 "items": {
@@ -157,7 +157,7 @@
                   "minLength": 1
                 }
               },
-              "evidence_types": {
+              "EvidenceTypes": {
                 "type": "array",
                 "uniqueItems": true,
                 "items": {
@@ -165,7 +165,7 @@
                   "minLength": 1
                 }
               },
-              "signer_identities": {
+              "SignerIdentities": {
                 "type": "array",
                 "uniqueItems": true,
                 "items": {
@@ -176,31 +176,31 @@
             }
           }
         },
-        "licensing_scope_resolvers": {
+        "LicensingScopeResolvers": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "type"
+              "Id",
+              "Type"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "type": {
+              "Type": {
                 "type": "string",
                 "minLength": 1
               },
-              "settings": {
+              "Settings": {
                 "type": "object"
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               }
             }
@@ -220,11 +220,11 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "text": {
+            "Text": {
               "type": "string",
               "minLength": 1
             },
-            "resource_key": {
+            "ResourceKey": {
               "type": "string",
               "minLength": 1
             }
@@ -232,12 +232,12 @@
           "anyOf": [
             {
               "required": [
-                "text"
+                "Text"
               ]
             },
             {
               "required": [
-                "resource_key"
+                "ResourceKey"
               ]
             }
           ]

@@ -24,15 +24,15 @@ def _change_set(expected=None, value="https://one"):
     return AIcConfigurationChangeSet(
         AIcConfigurationScope("WORKSPACE", "w-1"), "fs", _target(),
         (
-            AIcConfigurationChange("url", AInConfigurationMutationOperation.SET_VALUE, value, True),
-            AIcConfigurationChange("timeout", AInConfigurationMutationOperation.SET_POLICY,
+            AIcConfigurationChange("Url", AInConfigurationMutationOperation.SET_VALUE, value, True),
+            AIcConfigurationChange("Timeout", AInConfigurationMutationOperation.SET_POLICY,
                                    policy_modes=(AIcConfigurationPolicy(AInConfigurationPolicyMode.MAX, 30),)),
         ),
         expected_record_revision=expected,
         configuration_schema_id="foo-config",
         configuration_schema_version=1,
         written_by_component_version=2,
-        actor_context={"component_id": "vendor.foo"},
+        actor_context={"ComponentId": "vendor.foo"},
     )
 
 
@@ -43,13 +43,13 @@ def test_filesystem_provider_atomic_change_set_roundtrip(tmp_path):
     request = AIcConfigurationProviderRequest(_target(), AIcConfigurationScope("WORKSPACE", "w-1"))
     snapshot = provider.snapshot(request)
     assert snapshot is not None
-    assert snapshot.payload.values["url"] == "https://one"
-    assert snapshot.payload.policies["timeout"][0].mode is AInConfigurationPolicyMode.MAX
+    assert snapshot.payload.values["Url"] == "https://one"
+    assert snapshot.payload.policies["Timeout"][0].mode is AInConfigurationPolicyMode.MAX
     assert snapshot.payload.configuration_schema_id == "foo-config"
 
     second = provider.apply_changes(_change_set(1, "https://two"))
     assert second.record_revision == 2
-    assert provider.snapshot(request).payload.values["url"] == "https://two"
+    assert provider.snapshot(request).payload.values["Url"] == "https://two"
 
 
 def test_filesystem_provider_rejects_stale_revision(tmp_path):
@@ -62,7 +62,7 @@ def test_filesystem_provider_rejects_stale_revision(tmp_path):
 def test_read_only_filesystem_provider_exposes_no_write_capability(tmp_path):
     provider = AIcFileSystemConfigurationProvider(tmp_path, read_only=True)
     caps = {item.value for item in provider.capabilities(AIcConfigurationProviderRequest(_target(), AIcConfigurationScope("SYSTEM")))}
-    assert caps == {"READ"}
+    assert caps == {"read"}
 
 
 def test_versioned_snapshot_is_migrated_and_rewritten_atomically(tmp_path):
@@ -77,7 +77,7 @@ def test_versioned_snapshot_is_migrated_and_rewritten_atomically(tmp_path):
     class AIcTestMigrator(AIiConfigurationMigrator):
         def migrate(self, request):
             values = dict(request.source.values)
-            values["new_name"] = values.pop("old_name")
+            values["NewName"] = values.pop("OldName")
             return AIcConfigurationMigrationResult("foo-config", 2, values, request.source.policies)
 
     provider = AIcFileSystemConfigurationProvider(tmp_path)
@@ -85,19 +85,19 @@ def test_versioned_snapshot_is_migrated_and_rewritten_atomically(tmp_path):
     scope = AIcConfigurationScope("WORKSPACE", "w-1")
     provider.apply_changes(AIcConfigurationChangeSet(
         scope, "fs", target,
-        (AIcConfigurationChange("old_name", AInConfigurationMutationOperation.SET_VALUE, "x", True),),
+        (AIcConfigurationChange("OldName", AInConfigurationMutationOperation.SET_VALUE, "x", True),),
         configuration_schema_id="foo-config", configuration_schema_version=1, written_by_component_version=1,
     ))
     registry = AIcConfigurationProviderRegistry(); registry.register("fs", provider)
     migrations = AIcConfigurationMigrationService({"1-to-2": AIcTestMigrator()})
     schemas = AIcSchemaRegistry()
-    schemas.register("foo-config_2.json", {"x-aac-schema-id": "foo-config", "x-aac-schema-version": 2, "type": "object", "properties": {"new_name": {"type": "string"}}, "required": ["new_name"]})
+    schemas.register("foo-config_2.json", {"x-aac-schema-id": "foo-config", "x-aac-schema-version": 2, "type": "object", "properties": {"NewName": {"type": "string"}}, "required": ["NewName"]})
     declaration = AIcPersistedSchemaDescriptor(
         "foo-config", 2, (2,), (AIcSchemaMigrationStepDescriptor(1, 2, "1-to-2"),), "foo-config_2.json"
     )
     service = AIcConfigurationReadService(registry, migrations, lambda target: (declaration, 2), schemas)
     contributions = service.contributions("fs", AIcConfigurationProviderRequest(target, scope))
-    assert [(item.property_id, item.value) for item in contributions] == [("new_name", "x")]
+    assert [(item.property_id, item.value) for item in contributions] == [("NewName", "x")]
     migrated = provider.snapshot(AIcConfigurationProviderRequest(target, scope))
     assert migrated.payload.configuration_schema_version == 2
     assert migrated.payload.written_by_component_version == 2
@@ -121,20 +121,20 @@ def test_directly_readable_old_snapshot_is_not_migrated_on_read_even_when_path_e
     target = _target(); scope = AIcConfigurationScope("WORKSPACE", "w-1")
     provider.apply_changes(AIcConfigurationChangeSet(
         scope, "fs", target,
-        (AIcConfigurationChange("url", AInConfigurationMutationOperation.SET_VALUE, "https://old", True),),
+        (AIcConfigurationChange("Url", AInConfigurationMutationOperation.SET_VALUE, "https://old", True),),
         configuration_schema_id="foo-config", configuration_schema_version=1, written_by_component_version=1,
     ))
     registry = AIcConfigurationProviderRegistry(); registry.register("fs", provider)
     migrations = AIcConfigurationMigrationService({"1-to-2": SameShapeMigrator()})
     schemas = AIcSchemaRegistry()
-    schemas.register("foo-config_1.json", {"x-aac-schema-id": "foo-config", "x-aac-schema-version": 1, "type": "object", "properties": {"url": {"type": "string"}}})
-    schemas.register("foo-config_2.json", {"x-aac-schema-id": "foo-config", "x-aac-schema-version": 2, "type": "object", "properties": {"url": {"type": "string"}}})
+    schemas.register("foo-config_1.json", {"x-aac-schema-id": "foo-config", "x-aac-schema-version": 1, "type": "object", "properties": {"Url": {"type": "string"}}})
+    schemas.register("foo-config_2.json", {"x-aac-schema-id": "foo-config", "x-aac-schema-version": 2, "type": "object", "properties": {"Url": {"type": "string"}}})
     declaration = AIcPersistedSchemaDescriptor(
         "foo-config", 2, (1, 2), (AIcSchemaMigrationStepDescriptor(1, 2, "1-to-2"),), "foo-config_2.json"
     )
     service = AIcConfigurationReadService(registry, migrations, lambda target: (declaration, 2), schemas)
     contributions = service.contributions("fs", AIcConfigurationProviderRequest(target, scope))
-    assert [(item.property_id, item.value) for item in contributions] == [("url", "https://old")]
+    assert [(item.property_id, item.value) for item in contributions] == [("Url", "https://old")]
     stored = provider.snapshot(AIcConfigurationProviderRequest(target, scope))
     assert stored.payload.configuration_schema_version == 1
     assert stored.record_revision == 1

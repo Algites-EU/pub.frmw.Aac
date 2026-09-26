@@ -49,11 +49,11 @@ def _change_set(actor="vendor.foo"):
         "rw",
         AIcConfigurationTarget(AInConfigurationTargetKind.PROVIDER_INSTANCE, "vendor.foo", "instance-1"),
         (
-            AIcConfigurationChange("url", AInConfigurationMutationOperation.SET_VALUE, "https://example", True),
-            AIcConfigurationChange("timeout", AInConfigurationMutationOperation.DELETE_VALUE),
+            AIcConfigurationChange("Url", AInConfigurationMutationOperation.SET_VALUE, "https://example", True),
+            AIcConfigurationChange("Timeout", AInConfigurationMutationOperation.DELETE_VALUE),
         ),
         expected_record_revision="rev-1",
-        actor_context={"component_id": actor},
+        actor_context={"ComponentId": actor},
     )
 
 
@@ -64,7 +64,7 @@ def test_atomic_change_set_is_forwarded_to_rw_provider_after_core_authorization(
     service = AIcConfigurationMutationService(registry, AIcAllowOwnNamespaceConfigurationMutationAuthorizer())
     result = service.apply(_change_set())
     assert result.record_revision == "rev-2"
-    assert result.changed_property_ids == ("url", "timeout")
+    assert result.changed_property_ids == ("Url", "Timeout")
     assert provider.applied[0].expected_record_revision == "rev-1"
 
 
@@ -85,7 +85,7 @@ def test_access_descriptor_intersects_provider_rw_with_core_authorization():
         AIcConfigurationTarget(AInConfigurationTargetKind.PROVIDER_INSTANCE, "vendor.foo", "instance-1"),
         AIcConfigurationScope("WORKSPACE", "project-x"),
     )
-    own = service.access_for("rw", request, {"component_id": "vendor.foo"})
-    other = service.access_for("rw", request, {"component_id": "vendor.other"})
-    assert "WRITE_VALUE" in {item.value for item in own.authorized_capabilities}
-    assert {item.value for item in other.authorized_capabilities} == {"READ"}
+    own = service.access_for("rw", request, {"ComponentId": "vendor.foo"})
+    other = service.access_for("rw", request, {"ComponentId": "vendor.other"})
+    assert "write_value" in {item.value for item in own.authorized_capabilities}
+    assert {item.value for item in other.authorized_capabilities} == {"read"}

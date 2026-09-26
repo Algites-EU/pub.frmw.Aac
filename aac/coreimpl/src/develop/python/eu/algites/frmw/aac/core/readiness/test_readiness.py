@@ -8,7 +8,7 @@ from eu.algites.frmw.aac.core.readiness.api import AInReadinessState
 from eu.algites.frmw.aac.core.runtime.application import AIcApplicationComponentCore
 
 
-def _write_component(root: Path, package: str, *, version: int = 1, dynamic: str = "READY", requirement_state: str = "NOT_READY") -> None:
+def _write_component(root: Path, package: str, *, version: int = 1, dynamic: str = "ready", requirement_state: str = "not_ready") -> None:
     pkg = root / package
     (pkg / "schemas").mkdir(parents=True)
     (pkg / "capability").mkdir(parents=True)
@@ -19,49 +19,49 @@ def _write_component(root: Path, package: str, *, version: int = 1, dynamic: str
         "class Provider(AIiProviderRuntime):\n"
         "    def __init__(self, configuration): self.configuration = configuration\n"
         f"    def readiness(self):\n"
-        f"        state = AInReadinessState.{dynamic}\n"
+        f"        state = AInReadinessState.{dynamic.upper()}\n"
         "        if state is AInReadinessState.READY: return AIcReadinessResult()\n"
         "        return AIcReadinessResult(state, (AIcReadinessReason('RUNTIME_TEST', 'runtime reported reduced readiness', state),))\n",
         encoding="utf-8",
     )
     (pkg / "capability" / "ready_1.yml").write_text(
-        "capability:\n  id: com.example.ready\n  version: 1\n  group_id: _AAC.runtime\noperations:\n  - id: ping\n",
+        "Capability:\n  Id: com.example.ready\n  Version: 1\n  GroupId: _AAC.runtime\nOperations:\n  - Id: ping\n",
         encoding="utf-8",
     )
     (pkg / "schemas" / "ready-config_1.json").write_text(
-        '{"x-aac-schema-id":"ready-config","x-aac-schema-version":1,"type":"object","properties":{"endpoint":{"type":"string"}}}', encoding="utf-8"
+        '{"x-aac-schema-id":"ready-config","x-aac-schema-version":1,"type": "object","properties":{"Endpoint":{"type": "string"}}}', encoding="utf-8"
     )
     (pkg / "component.yml").write_text(
-        "component:\n"
-        "  id: com.example.readiness\n"
-        f"  version: {version}\n"
-        "  component_configuration_schema:\n"
-        "    id: ready-config\n"
-        "    write_version: 1\n"
-        "    readable_versions: [1]\n"
-        "    resource: ready-config_1.json\n"
-        "  capability:\n"
+        "Component:\n"
+        "  Id: com.example.readiness\n"
+        f"  Version: {version}\n"
+        "  ComponentConfigurationSchema:\n"
+        "    Id: ready-config\n"
+        "    WriteVersion: 1\n"
+        "    ReadableVersions: [1]\n"
+        "    Resource: ready-config_1.json\n"
+        "  Capability:\n"
         "    - capability/ready_1.yml\n"
-        "  capability_providers:\n"
-        "    - id: main\n"
-        "      capabilities:\n"
-        "        - id: com.example.ready\n"
-        "          versions: [1]\n"
-        f"      implementation_classes:\n        - technology-kind: python\n          class-name: {package}.provider:Provider\n"
-        "      operations:\n"
-        "        - capability: com.example.ready\n"
-        "          capability_version: 1\n"
-        "          operation: ping\n"
-        "          interaction:\n"
-        "            supported_state_result_delivery_modes: [ON_DEMAND_COMPLETE]\n"
-        "      readiness_requirements:\n"
-        "        - id: endpoint\n"
-        "          source: COMPONENT_CONFIGURATION\n"
-        "          key: endpoint\n"
-        f"          missing_state: {requirement_state}\n"
-        "      initial_instances:\n"
-        "        - name: default\n"
-        "          configuration: {}\n",
+        "  CapabilityProviders:\n"
+        "    - Id: main\n"
+        "      Capabilities:\n"
+        "        - Id: com.example.ready\n"
+        "          Versions: [1]\n"
+        f"      ImplementationClasses:\n        - TechnologyKind: python\n          ClassName: {package}.provider:Provider\n"
+        "      Operations:\n"
+        "        - Capability: com.example.ready\n"
+        "          CapabilityVersion: 1\n"
+        "          Operation: ping\n"
+        "          Interaction:\n"
+        "            SupportedStateResultDeliveryModes: [on_demand_complete]\n"
+        "      ReadinessRequirements:\n"
+        "        - Id: endpoint\n"
+        "          Source: component_configuration\n"
+        "          Key: Endpoint\n"
+        f"          MissingState: {requirement_state}\n"
+        "      InitialInstances:\n"
+        "        - Name: default\n"
+        "          Configuration: {}\n",
         encoding="utf-8",
     )
 
@@ -86,7 +86,7 @@ def test_missing_configuration_affects_readiness_but_not_activation(tmp_path: Pa
 
 
 def test_dynamic_runtime_readiness_combines_with_static_readiness(tmp_path: Path):
-    _write_component(tmp_path, "ready_dynamic", dynamic="DEGRADED", requirement_state="DEGRADED")
+    _write_component(tmp_path, "ready_dynamic", dynamic="degraded", requirement_state="degraded")
     sys.path.insert(0, str(tmp_path))
     try:
         core = AIcApplicationComponentCore()
@@ -118,7 +118,7 @@ def test_upgrade_preflight_reports_nonblocking_target_readiness(tmp_path: Path):
         warnings = [item for item in plan.diagnostics if item.code == "READINESS_NOT_READY"]
         assert len(warnings) == 1
         assert not warnings[0].blocking
-        assert "endpoint" in warnings[0].message
+        assert "Endpoint" in warnings[0].message
     finally:
         sys.path.remove(str(tmp_path))
         for name in ("ready_v1", "ready_v1.provider", "ready_v2", "ready_v2.provider"):

@@ -1,4 +1,6 @@
-artifact:
-  name: AAC Sigstore Package Verifier
-  description: Sigstore package verification provider for Algites Application Components in specified technologies
-  technologyKinds: [python]
+Artifact:
+  TechnologyKinds:
+  - python
+  Name: AAC Sigstore Package Verifier
+  Description: Sigstore package verification provider for Algites Application 
+    Components in specified technologies

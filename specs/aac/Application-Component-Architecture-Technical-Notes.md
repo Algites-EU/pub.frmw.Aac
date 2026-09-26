@@ -788,9 +788,9 @@ Observer delivery is side-channel visibility over the same normalized invocation
 An observation binding may want to say:
 
 ```yaml
-capability: example.vcs.repository
-operations: [commit, push]
-phases: [PRE, POST]
+Capability: example.vcs.repository
+Operations: [commit, push]
+phases: [pre, post]
 ```
 
 The strings `commit` and `push` are interpreted by looking at the canonical `example.vcs.repository` contract. There is no global list containing all operations from every capability.
@@ -1046,16 +1046,16 @@ The reference Python profile uses a persistent JSON-lines control protocol. Requ
 A capability provider definition may select the profile declaratively, for example:
 
 ```yaml
-capability_providers:
-  - id: audit
-    capabilities:
-      - id: _AAC.capability.observation
-        versions: [1]
-    implementation_classes:
-    - technology-kind: python
-      class-name: example.audit:AIcAuditProvider
-    runtime:
-      profile: PROCESS
+CapabilityProviders:
+  - Id: audit
+    Capabilities:
+      - Id: _AAC.capability.observation
+        Versions: [1]
+    ImplementationClasses:
+    - TechnologyKind: python
+      ClassName: example.audit:AIcAuditProvider
+    Runtime:
+      Profile: process
 ```
 
 For the reference Python binding, omission of `runtime.command` means that Core starts the standard AAC Python process host using the selected Python executable. A profile may instead declare an explicit command/environment to enter a component-private Python environment or a different executable implementing the AAC process protocol.

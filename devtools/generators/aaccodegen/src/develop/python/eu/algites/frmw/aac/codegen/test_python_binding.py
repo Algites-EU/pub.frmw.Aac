@@ -10,35 +10,35 @@ def test_generated_python_binding_contains_dtos_authorization_and_is_invokable()
     catalog.schema_registry.register("site-edit-input_1.json", {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "x-aac-schema-id": "_AO.schema.site-edit-input", "x-aac-schema-version": 1, "type": "object",
-        "properties": {"site_id": {"type": "string"}, "display_name": {"type": "string"}},
+        "properties": {"site_id": {"type": "string"}, "DisplayName": {"type": "string"}},
         "required": ["site_id", "display_name"],
     })
     catalog.schema_registry.register("site-edit-output_1.json", {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "x-aac-schema-id": "_AO.schema.site-edit-output", "x-aac-schema-version": 1, "type": "object",
-        "properties": {"changed": {"type": "boolean"}}, "required": ["changed"],
+        "properties": {"Changed": {"type": "boolean"}}, "required": ["Changed"],
     })
     admitted = catalog.admit_text('''
-capability:
-  id: _AO.core.siteManagement
-  version: 1
-  group_id: _AAC.runtime
-  name: Site management
-authorization_permissions:
-  - id: EDIT_SITE
-    name: Edit sites
-  - id: STANDARD_EDITOR
-    name: Standard editor
-  - id: ADVANCED_EDITOR
-    name: Advanced editor
-operations:
-  - id: edit_site
-    authorization: {all_of: [EDIT_SITE], any_of: [STANDARD_EDITOR, ADVANCED_EDITOR]}
-    interactions:
-      - kind: INPUT
-        schema: {id: _AO.schema.site-edit-input, version: 1}
-      - kind: FINAL_SUCCESS_STATE_RESULT
-        schema: {id: _AO.schema.site-edit-output, version: 1}
+Capability:
+  Id: _AO.core.siteManagement
+  Version: 1
+  GroupId: _AAC.runtime
+  Name: Site management
+AuthorizationPermissions:
+  - Id: EDIT_SITE
+    Name: Edit sites
+  - Id: STANDARD_EDITOR
+    Name: Standard editor
+  - Id: ADVANCED_EDITOR
+    Name: Advanced editor
+Operations:
+  - Id: edit_site
+    Authorization: {AllOf: [EDIT_SITE], AnyOf: [STANDARD_EDITOR, ADVANCED_EDITOR]}
+    Interactions:
+      - Kind: input
+        Schema: {Id: _AO.schema.site-edit-input, Version: 1}
+      - Kind: final_success_state_result
+        Schema: {Id: _AO.schema.site-edit-output, Version: 1}
 ''')
     source = AIcPythonCapabilityBindingGenerator(catalog.schema_registry).generate(admitted.contract)
     namespace = {}
@@ -60,9 +60,9 @@ operations:
             return output_dto(changed=True)
 
     result = AIcObjectCapabilityEndpoint(Impl()).invoke(AIcInvocationInput(
-        "i", None, "_AO.core.siteManagement", 1, "edit_site", "provider", {"site_id": "s1", "display_name": "New"}
+        "i", None, "_AO.core.siteManagement", 1, "edit_site", "provider", {"site_id": "s1", "DisplayName": "New"}
     ))
-    assert result.success and result.result == {"changed": True}
+    assert result.success and result.result == {"Changed": True}
 
 
 def test_generated_python_binding_reuses_one_dto_type_for_one_canonical_schema():
@@ -72,27 +72,27 @@ def test_generated_python_binding_reuses_one_dto_type_for_one_canonical_schema()
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "x-aac-schema-id": "_AAC.schema.repository-identity", "x-aac-schema-version": 1,
         "type": "object",
-        "properties": {"id": {"type": "string"}},
-        "required": ["id"],
+        "properties": {"Id": {"type": "string"}},
+        "required": ["Id"],
     })
     admitted = catalog.admit_text('''
-capability:
-  id: _AAC.sourceRepositoryIdentification
-  version: 1
-  group_id: _AAC.runtime
-operations:
-  - id: identify
-    interactions:
-      - kind: INPUT
-        schema: {id: _AAC.schema.repository-identity, version: 1}
-      - kind: FINAL_SUCCESS_STATE_RESULT
-        schema: {id: _AAC.schema.repository-identity, version: 1}
-  - id: normalize
-    interactions:
-      - kind: INPUT
-        schema: {id: _AAC.schema.repository-identity, version: 1}
-      - kind: FINAL_SUCCESS_STATE_RESULT
-        schema: {id: _AAC.schema.repository-identity, version: 1}
+Capability:
+  Id: _AAC.sourceRepositoryIdentification
+  Version: 1
+  GroupId: _AAC.runtime
+Operations:
+  - Id: identify
+    Interactions:
+      - Kind: input
+        Schema: {Id: _AAC.schema.repository-identity, Version: 1}
+      - Kind: final_success_state_result
+        Schema: {Id: _AAC.schema.repository-identity, Version: 1}
+  - Id: normalize
+    Interactions:
+      - Kind: input
+        Schema: {Id: _AAC.schema.repository-identity, Version: 1}
+      - Kind: final_success_state_result
+        Schema: {Id: _AAC.schema.repository-identity, Version: 1}
 ''')
     source = AIcPythonCapabilityBindingGenerator(catalog.schema_registry).generate(
         admitted.contract, canonical_resource="source-repository-identification_1.yml"
@@ -117,8 +117,8 @@ def test_data_entity_binding_generator_uses_versioned_view_methods_and_codec():
         "x-aac-schema-id": "_AO.entity.site",
         "x-aac-schema-version": 2,
         "type": "object",
-        "required": ["name"],
-        "properties": {"name": {"type": "string"}},
+        "required": ["Name"],
+        "properties": {"Name": {"type": "string"}},
         "additionalProperties": False,
     })
     from eu.algites.frmw.aac.codegen import AIcPythonDataEntityBindingGenerator
@@ -150,15 +150,15 @@ def test_generated_caller_materializes_operation_specific_failure_exception_and_
         "type": "object", "properties": {"reason": {"type": "string"}}, "required": ["reason"],
     })
     admitted = catalog.admit_text('''
-capability:
-  id: _AO.core.failureTest
-  version: 1
-  group_id: _AAC.runtime
-operations:
-  - id: run
-    interactions:
-      - kind: FINAL_FAILED_STATE_RESULT_EXTENSION
-        schema: {id: _AO.schema.failure-data, version: 1}
+Capability:
+  Id: _AO.core.failureTest
+  Version: 1
+  GroupId: _AAC.runtime
+Operations:
+  - Id: run
+    Interactions:
+      - Kind: final_failed_state_result_extension
+        Schema: {Id: _AO.schema.failure-data, Version: 1}
 ''')
     source = AIcPythonCapabilityBindingGenerator(catalog.schema_registry).generate(admitted.contract)
     namespace = {}
@@ -219,17 +219,17 @@ def test_generated_binding_rejects_ambiguous_schema_name_projection():
             "type": "object",
         })
     admitted = catalog.admit_text('''
-capability:
-  id: _AO.core.namingCollision
-  version: 1
-  group_id: _AAC.runtime
-operations:
-  - id: run
-    interactions:
-      - kind: INPUT
-        schema: {id: alpha.same-name, version: 1}
-      - kind: FINAL_SUCCESS_STATE_RESULT
-        schema: {id: beta.same-name, version: 1}
+Capability:
+  Id: _AO.core.namingCollision
+  Version: 1
+  GroupId: _AAC.runtime
+Operations:
+  - Id: run
+    Interactions:
+      - Kind: input
+        Schema: {Id: alpha.same-name, Version: 1}
+      - Kind: final_success_state_result
+        Schema: {Id: beta.same-name, Version: 1}
 ''')
     with pytest.raises(ValueError, match="generated DTO name collision"):
         AIcPythonCapabilityBindingGenerator(catalog.schema_registry).generate(admitted.contract)

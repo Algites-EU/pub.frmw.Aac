@@ -21,3 +21,38 @@ class AIcObservationInput:
     result: object | None = None
     error: Mapping[str, object] | None = None
     metadata: Mapping[str, object] = field(default_factory=dict)
+
+    def to_mapping(self) -> dict[str, object]:
+        return {
+            "InvocationId": self.invocation_id,
+            "ParentInvocationId": self.parent_invocation_id,
+            "Phase": self.phase.value,
+            "CapabilityId": self.capability_id,
+            "CapabilityVersion": self.capability_version,
+            "OperationId": self.operation_id,
+            "ProviderInstanceId": self.provider_instance_id,
+            "Arguments": dict(self.arguments),
+            "Outcome": self.outcome.value if self.outcome is not None else None,
+            "Result": self.result,
+            "Error": dict(self.error) if self.error is not None else None,
+            "Metadata": dict(self.metadata),
+        }
+
+    @classmethod
+    def from_mapping(cls, aValue: Mapping[str, object]) -> "AIcObservationInput":
+        return cls(
+            invocation_id=str(aValue["InvocationId"]),
+            parent_invocation_id=(
+                str(aValue["ParentInvocationId"]) if aValue.get("ParentInvocationId") is not None else None
+            ),
+            phase=AInObservationPhase(str(aValue["Phase"])),
+            capability_id=str(aValue["CapabilityId"]),
+            capability_version=int(aValue["CapabilityVersion"]),
+            operation_id=str(aValue["OperationId"]),
+            provider_instance_id=str(aValue["ProviderInstanceId"]),
+            arguments=dict(aValue.get("Arguments", {})),
+            outcome=(AInObservationOutcome(str(aValue["Outcome"])) if aValue.get("Outcome") is not None else None),
+            result=aValue.get("Result"),
+            error=(dict(aValue["Error"]) if isinstance(aValue.get("Error"), Mapping) else None),
+            metadata=dict(aValue.get("Metadata", {})),
+        )

@@ -32,7 +32,7 @@ class AIcStaticEntitlementLicensingScopeResolver(AIiEntitlementLicensingScopeRes
         if isinstance(raw, AIcEntitlementSubject):
             return AIcEntitlementLicensingScope(request.licensing_scope_type, raw.id)
         if isinstance(raw, Mapping):
-            raw_id = raw.get("id")
+            raw_id = raw.get("Id")
             if raw_id is None:
                 return None
             return AIcEntitlementLicensingScope(request.licensing_scope_type, str(raw_id))
@@ -45,12 +45,12 @@ class AIcStaticEntitlementLicensingScopeResolver(AIiEntitlementLicensingScopeRes
         if isinstance(raw, AIcEntitlementSubject):
             return raw
         if isinstance(raw, Mapping):
-            raw_id = raw.get("id")
+            raw_id = raw.get("Id")
             if raw_id is None:
                 return None
             return AIcEntitlementSubject(
                 str(raw_id),
-                str(raw.get("display_name")) if raw.get("display_name") is not None else None,
-                dict(raw.get("attributes", {})) if isinstance(raw.get("attributes", {}), Mapping) else {},
+                str(raw.get("DisplayName")) if raw.get("DisplayName") is not None else None,
+                dict(raw.get("Attributes", {})) if isinstance(raw.get("Attributes", {}), Mapping) else {},
             )
         return AIcEntitlementSubject(str(raw))

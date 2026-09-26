@@ -3,72 +3,72 @@
   "title": "AAC Security Bootstrap 1",
   "type": "object",
   "required": [
-    "security_bootstrap"
+    "SecurityBootstrap"
   ],
   "additionalProperties": false,
   "properties": {
-    "security_bootstrap": {
+    "SecurityBootstrap": {
       "type": "object",
       "required": [
-        "schema_version"
+        "SchemaVersion"
       ],
       "additionalProperties": false,
       "properties": {
-        "schema_version": {
+        "SchemaVersion": {
           "const": 1
         },
-        "secret_providers": {
+        "SecretProviders": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "type"
+              "Id",
+              "Type"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "type": {
+              "Type": {
                 "type": "string",
                 "minLength": 1
               },
-              "settings": {
+              "Settings": {
                 "type": "object"
               },
-              "bootstrap_safe": {
+              "BootstrapSafe": {
                 "type": "boolean"
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               }
             }
           }
         },
-        "authentication_profiles": {
+        "AuthenticationProfiles": {
           "type": "array",
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "mechanism"
+              "Id",
+              "Mechanism"
             ],
             "additionalProperties": false,
             "properties": {
-              "id": {
+              "Id": {
                 "type": "string",
                 "minLength": 1
               },
-              "mechanism": {
+              "Mechanism": {
                 "type": "string",
                 "minLength": 1
               },
-              "parameters": {
+              "Parameters": {
                 "type": "object",
                 "additionalProperties": {
                   "oneOf": [
@@ -84,31 +84,31 @@
                     {
                       "type": "object",
                       "required": [
-                        "secret_reference"
+                        "SecretReference"
                       ],
                       "additionalProperties": false,
                       "properties": {
-                        "secret_reference": {
+                        "SecretReference": {
                           "type": "object",
                           "required": [
-                            "secret_provider_id",
-                            "key"
+                            "SecretProviderId",
+                            "Key"
                           ],
                           "additionalProperties": false,
                           "properties": {
-                            "secret_provider_id": {
+                            "SecretProviderId": {
                               "type": "string",
                               "minLength": 1
                             },
-                            "key": {
+                            "Key": {
                               "type": "string",
                               "minLength": 1
                             },
-                            "version": {
+                            "Version": {
                               "type": "string",
                               "minLength": 1
                             },
-                            "metadata": {
+                            "Metadata": {
                               "type": "object"
                             }
                           }
@@ -118,19 +118,19 @@
                   ]
                 }
               },
-              "metadata": {
+              "Metadata": {
                 "type": "object"
               },
-              "name": {
+              "Name": {
                 "$ref": "#/$defs/displayText"
               },
-              "description": {
+              "Description": {
                 "$ref": "#/$defs/displayText"
               }
             }
           }
         },
-        "metadata": {
+        "Metadata": {
           "type": "object"
         }
       }
@@ -147,11 +147,11 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "text": {
+            "Text": {
               "type": "string",
               "minLength": 1
             },
-            "resource_key": {
+            "ResourceKey": {
               "type": "string",
               "minLength": 1
             }
@@ -159,12 +159,12 @@
           "anyOf": [
             {
               "required": [
-                "text"
+                "Text"
               ]
             },
             {
               "required": [
-                "resource_key"
+                "ResourceKey"
               ]
             }
           ]

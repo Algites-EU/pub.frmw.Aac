@@ -8,8 +8,8 @@ def test_simpleaudit_defaults_are_applied():
     registry = AIcSchemaRegistry()
     registry.register_package_resource("eu.algites.frmw.aac.observation.simpleaudit", "schemas/simpleaudit-config_1.json")
     assert registry.normalize("simpleaudit-config_1.json", {}) == {
-        "output": {"type": "STDOUT"},
-        "format": "JSON",
+        "Output": {"Type": "stdout"},
+        "Format": "json",
     }
 
 
@@ -17,7 +17,7 @@ def test_file_output_requires_path():
     registry = AIcSchemaRegistry()
     registry.register_package_resource("eu.algites.frmw.aac.observation.simpleaudit", "schemas/simpleaudit-config_1.json")
     with pytest.raises(AIxSchemaValidationError):
-        registry.normalize("simpleaudit-config_1.json", {"output": {"type": "FILE"}})
+        registry.normalize("simpleaudit-config_1.json", {"Output": {"Type": "file"}})
 
 
 def test_schema_identity_is_explicit_and_independent_from_filename():
@@ -55,7 +55,7 @@ def test_data_entity_reference_annotation_is_discovered_from_schema_field():
             "properties": {
                 "site_uid": {
                     "type": "string",
-                    "x-aac-data-entity-reference": {"schema_id": "_AO.entity.site"},
+                    "x-aac-data-entity-reference": {"SchemaId": "_AO.entity.site"},
                 }
             },
         },

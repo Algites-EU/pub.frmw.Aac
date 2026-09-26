@@ -4,32 +4,82 @@
   "x-aac-schema-version": 1,
   "title": "Operation Interaction Provider To Caller Message 1",
   "type": "object",
-  "required": ["interaction_revision", "execution_state", "state_result_revision", "events", "features"],
+  "required": [
+    "InteractionRevision",
+    "ExecutionState",
+    "StateResultRevision",
+    "Events",
+    "Features"
+  ],
   "additionalProperties": false,
   "properties": {
-    "interaction_revision": {"type": "integer", "minimum": 0},
-    "execution_state": {"enum": ["PENDING", "RUNNING", "COMPLETED", "FAILED", "CANCELLED"]},
-    "state_result_revision": {"type": "integer", "minimum": 0},
-    "state_result_payload_revision": {"type": ["integer", "null"], "minimum": 1},
-    "state_result": {},
-    "events": {
-      "type": "array",
-      "items": {"$ref": "operation-interaction-event_1.json"}
+    "InteractionRevision": {
+      "type": "integer",
+      "minimum": 0
     },
-    "features": {
+    "ExecutionState": {
+      "enum": [
+        "pending",
+        "running",
+        "completed",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "StateResultRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "StateResultPayloadRevision": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "StateResult": {},
+    "Events": {
+      "type": "array",
+      "items": {
+        "$ref": "operation-interaction-event_1.json"
+      }
+    },
+    "Features": {
       "type": "object",
-      "required": ["progress_reporting", "cancellation", "detail_level", "reporting_interval", "supported_state_result_delivery_modes"],
+      "required": [
+        "ProgressReporting",
+        "Cancellation",
+        "DetailLevel",
+        "ReportingInterval",
+        "SupportedStateResultDeliveryModes"
+      ],
       "additionalProperties": false,
       "properties": {
-        "progress_reporting": {"type": "boolean"},
-        "cancellation": {"type": "boolean"},
-        "detail_level": {"type": "boolean"},
-        "reporting_interval": {"type": "boolean"},
-        "supported_state_result_delivery_modes": {
+        "ProgressReporting": {
+          "type": "boolean"
+        },
+        "Cancellation": {
+          "type": "boolean"
+        },
+        "DetailLevel": {
+          "type": "boolean"
+        },
+        "ReportingInterval": {
+          "type": "boolean"
+        },
+        "SupportedStateResultDeliveryModes": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": {"enum": ["ON_DEMAND_COMPLETE", "ON_DEMAND_DELTA", "ON_CHANGE_COMPLETE", "ON_CHANGE_DELTA", "ALWAYS_COMPLETE"]}
+          "items": {
+            "enum": [
+              "on_demand_complete",
+              "on_demand_delta",
+              "on_change_complete",
+              "on_change_delta",
+              "always_complete"
+            ]
+          }
         }
       }
     }

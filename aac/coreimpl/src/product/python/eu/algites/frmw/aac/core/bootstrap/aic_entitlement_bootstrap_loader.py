@@ -41,10 +41,10 @@ class AIcEntitlementBootstrapLoader:
             raise AIxDescriptorError(f"invalid YAML in entitlement bootstrap {source}: {exc}") from exc
         if not isinstance(raw, Mapping):
             raise AIxDescriptorError(f"{source}: entitlement bootstrap root must be a mapping")
-        body_probe = raw.get("entitlement_bootstrap")
+        body_probe = raw.get("EntitlementBootstrap")
         if not isinstance(body_probe, Mapping):
             raise AIxDescriptorError(f"{source}: entitlement bootstrap requires entitlement_bootstrap object")
-        schema_version = int(body_probe.get("schema_version", 0))
+        schema_version = int(body_probe.get("SchemaVersion", 0))
         if schema_version != 1:
             raise AIxDescriptorError(f"{source}: unsupported entitlement bootstrap schema_version {schema_version}; expected 1")
         schema_text = read_core_schema("entitlement-bootstrap_1.json")
@@ -57,41 +57,41 @@ class AIcEntitlementBootstrapLoader:
                 rendered.append(f"{path}: {error.message}")
             raise AIxDescriptorError(f"{source}: entitlement bootstrap schema validation failed: " + "; ".join(rendered))
         try:
-            body = raw["entitlement_bootstrap"]
+            body = raw["EntitlementBootstrap"]
             profiles = []
-            for raw_profile in body.get("entitlement_profiles", ()):
+            for raw_profile in body.get("EntitlementProfiles", ()):
                 definitions = []
-                raw_scope_definitions = raw_profile.get("licensing_scopes", ())
+                raw_scope_definitions = raw_profile.get("LicensingScopes", ())
                 for item in raw_scope_definitions:
                     definitions.append(AIcEntitlementLicensingScopeDefinition(
-                        id=str(item["id"]),
-                        licensing_scope_type=str(item["type"]),
-                        licensing_scope_resolver_id=str(item["resolver"]),
-                        name=normalize_display_text(item.get("name")), description=normalize_display_text(item.get("description")),
-                        entitlement_providers=tuple(AIcEntitlementProviderBinding(str(v["id"])) for v in item.get("entitlement_providers", ())),
-                        mandatory=bool(item.get("mandatory", False)),
+                        id=str(item["Id"]),
+                        licensing_scope_type=str(item["Type"]),
+                        licensing_scope_resolver_id=str(item["Resolver"]),
+                        name=normalize_display_text(item.get("Name")), description=normalize_display_text(item.get("Description")),
+                        entitlement_providers=tuple(AIcEntitlementProviderBinding(str(v["Id"])) for v in item.get("EntitlementProviders", ())),
+                        mandatory=bool(item.get("Mandatory", False)),
                     ))
-                profiles.append(AIcEntitlementProfile(str(raw_profile["id"]), int(raw_profile["version"]), tuple(definitions), name=normalize_display_text(raw_profile.get("name")), description=normalize_display_text(raw_profile.get("description"))))
+                profiles.append(AIcEntitlementProfile(str(raw_profile["Id"]), int(raw_profile["Version"]), tuple(definitions), name=normalize_display_text(raw_profile.get("Name")), description=normalize_display_text(raw_profile.get("Description"))))
             return AIcEntitlementBootstrap(
-                schema_version=int(body["schema_version"]),
-                default_entitlement_profile_id=str(body["default_entitlement_profile"]),
+                schema_version=int(body["SchemaVersion"]),
+                default_entitlement_profile_id=str(body["DefaultEntitlementProfile"]),
                 entitlement_profiles=tuple(profiles),
-                entitlement_providers=tuple(AIcEntitlementProviderRegistration(id=str(v["id"]), type=str(v["type"]), name=normalize_display_text(v.get("name")), description=normalize_display_text(v.get("description")), settings=dict(v.get("settings", {}))) for v in body.get("entitlement_providers", ())),
+                entitlement_providers=tuple(AIcEntitlementProviderRegistration(id=str(v["Id"]), type=str(v["Type"]), name=normalize_display_text(v.get("Name")), description=normalize_display_text(v.get("Description")), settings=dict(v.get("Settings", {}))) for v in body.get("EntitlementProviders", ())),
                 licensing_scope_resolvers=tuple(
                     AIcEntitlementLicensingScopeResolverRegistration(
-                        id=str(v["id"]), type=str(v["type"]),
-                        name=normalize_display_text(v.get("name")),
-                        description=normalize_display_text(v.get("description")),
-                        settings=dict(v.get("settings", {})),
+                        id=str(v["Id"]), type=str(v["Type"]),
+                        name=normalize_display_text(v.get("Name")),
+                        description=normalize_display_text(v.get("Description")),
+                        settings=dict(v.get("Settings", {})),
                     )
-                    for v in body.get("licensing_scope_resolvers", ())
+                    for v in body.get("LicensingScopeResolvers", ())
                 ),
                 trusted_issuers=tuple(AIcTrustedEntitlementIssuerRule(
-                    issuer_id=str(v["issuer_id"]), component_ids=tuple(str(x) for x in v.get("component_ids", ())),
-                    evidence_types=tuple(str(x) for x in v.get("evidence_types", ())),
-                    signer_identities=tuple(str(x) for x in v.get("signer_identities", ())),
-                ) for v in body.get("trusted_issuers", ())),
-                metadata=dict(body.get("metadata", {})),
+                    issuer_id=str(v["IssuerId"]), component_ids=tuple(str(x) for x in v.get("ComponentIds", ())),
+                    evidence_types=tuple(str(x) for x in v.get("EvidenceTypes", ())),
+                    signer_identities=tuple(str(x) for x in v.get("SignerIdentities", ())),
+                ) for v in body.get("TrustedIssuers", ())),
+                metadata=dict(body.get("Metadata", {})),
             )
         except (KeyError, TypeError, ValueError) as exc:
             raise AIxDescriptorError(f"{source}: invalid entitlement bootstrap: {exc}") from exc

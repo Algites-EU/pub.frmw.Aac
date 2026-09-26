@@ -72,10 +72,10 @@ class Codec1(AIiDataEntityCodec[E1_1]):
     view_type = E1_1
 
     def serialize(self, value: E1_1) -> Mapping[str, object]:
-        return {"name": value.get_name_1()}
+        return {"Name": value.get_name_1()}
 
     def deserialize_into(self, payload: Mapping[str, object], target: E1_1) -> None:
-        target.set_name_1(str(payload["name"]))
+        target.set_name_1(str(payload["Name"]))
 
 
 class Codec2(AIiDataEntityCodec[E1_2]):
@@ -84,11 +84,11 @@ class Codec2(AIiDataEntityCodec[E1_2]):
     view_type = E1_2
 
     def serialize(self, value: E1_2) -> Mapping[str, object]:
-        return {"name": value.get_name_2(), "currency": value.get_currency_2()}
+        return {"Name": value.get_name_2(), "Currency": value.get_currency_2()}
 
     def deserialize_into(self, payload: Mapping[str, object], target: E1_2) -> None:
-        target.set_name_2(str(payload["name"]))
-        target.set_currency_2(str(payload["currency"]))
+        target.set_name_2(str(payload["Name"]))
+        target.set_currency_2(str(payload["Currency"]))
 
 
 class StorageProvider:
@@ -96,28 +96,28 @@ class StorageProvider:
         self.applied = None
 
     def get_1(self, request):
-        assert request == {"schema_id": "test.e1", "uid": "u1"}
+        assert request == {"SchemaId": "test.e1", "Uid": "u1"}
         return {
-            "record": {
-                "uid": "u1",
-                "schema_id": "test.e1",
-                "schema_version": 1,
-                "record_revision": 7,
-                "state": "ACTIVE",
-                "payload": {"name": "old"},
+            "Record": {
+                "Uid": "u1",
+                "SchemaId": "test.e1",
+                "SchemaVersion": 1,
+                "RecordRevision": 7,
+                "State": "active",
+                "Payload": {"Name": "old"},
             }
         }
 
     def apply_1(self, request):
         self.applied = request
-        change = request["changes"][0]
+        change = request["Changes"][0]
         return {
-            "changes": [{
-                "change_id": change["change_id"],
-                "type": change["type"],
-                "schema_id": change["schema_id"],
-                "uid": change["uid"],
-                "record_revision": 8,
+            "Changes": [{
+                "ChangeId": change["ChangeId"],
+                "Type": change["Type"],
+                "SchemaId": change["SchemaId"],
+                "Uid": change["Uid"],
+                "RecordRevision": 8,
             }]
         }
 
@@ -125,8 +125,8 @@ class StorageProvider:
 def _marshaller() -> AIcDataEntityMarshaller:
     schemas = AIcSchemaRegistry()
     for version, required, properties in (
-        (1, ["name"], {"name": {"type": "string"}}),
-        (2, ["name", "currency"], {"name": {"type": "string"}, "currency": {"type": "string"}}),
+        (1, ["Name"], {"Name": {"type": "string"}}),
+        (2, ["Name", "Currency"], {"Name": {"type": "string"}, "Currency": {"type": "string"}}),
     ):
         schemas.register(f"test-e1_{version}.json", {
             "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -182,17 +182,17 @@ def test_stored_v1_materializes_as_current_polymorphic_v2_and_saves_canonical_v2
     envelope.entity.set_name_2("new")
     envelope.entity.set_currency_2("EUR")
     facade.apply_changes.save(envelope)
-    change = runtime.applied["changes"][0]
-    assert change["schema_version"] == 2
-    assert change["payload"] == {"name": "new", "currency": "EUR"}
-    assert change["expected_record_revision"] == 7
+    change = runtime.applied["Changes"][0]
+    assert change["SchemaVersion"] == 2
+    assert change["Payload"] == {"Name": "new", "Currency": "EUR"}
+    assert change["ExpectedRecordRevision"] == 7
 
 
 def test_read_only_provider_can_read_but_write_facade_rejects_mutation():
     facade, _ = _facade(AInProviderAccessMode.READ_ONLY)
     envelope = facade.get_record.get(E1_TYPE_2, "u1")
     assert envelope is not None
-    with pytest.raises(PermissionError, match="READ_ONLY"):
+    with pytest.raises(PermissionError, match="read_only"):
         facade.apply_changes.save(envelope)
 
 

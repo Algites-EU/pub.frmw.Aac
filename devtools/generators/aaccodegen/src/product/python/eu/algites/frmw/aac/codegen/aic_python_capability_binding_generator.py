@@ -10,6 +10,7 @@ def _pascal(value: str) -> str:
     return "".join(part[:1].upper() + part[1:] for part in parts) or "Capability"
 
 def _identifier(value: str) -> str:
+    value = re.sub(r"(?<!^)(?=[A-Z])", "_", value).lower()
     candidate = re.sub(r"[^A-Za-z0-9_]", "_", value)
     if not candidate or candidate[0].isdigit():
         candidate = "_" + candidate

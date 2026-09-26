@@ -16,15 +16,15 @@ def _catalog():
     catalog = AIcActiveContractCatalog()
     catalog.admit_builtin_contracts()
     catalog.admit_text('''
-capability: {id: x.secured, version: 1, group_id: _AAC.runtime}
-authorization_permissions:
-  - {id: EDIT, name: Edit}
-  - {id: ADMIN, name: Admin}
-operations:
-  - id: edit
-    authorization:
-      all_of: [EDIT]
-      any_of: [ADMIN, EDIT]
+Capability: {Id: x.secured, Version: 1, GroupId: _AAC.runtime}
+AuthorizationPermissions:
+  - {Id: EDIT, Name: Edit}
+  - {Id: ADMIN, Name: Admin}
+Operations:
+  - Id: edit
+    Authorization:
+      AllOf: [EDIT]
+      AnyOf: [ADMIN, EDIT]
 ''')
     return catalog
 
@@ -38,7 +38,7 @@ def test_core_bridge_rejects_before_provider_without_component_grant_and_accepts
         "i", None, "x.secured", 1, "edit", "provider", {}, consumer_instance_id="consumer", requirement_id="req"
     )
     denied = dispatcher.invoke(endpoint, invocation)
-    assert not denied.success and denied.error["type"] == "AUTHORIZATION_DENIED"
+    assert not denied.success and denied.error["Type"] == "AUTHORIZATION_DENIED"
     assert provider.calls == 0
     store.put(AIcComponentAuthorizationGrant("consumer", "req", ("EDIT",)))
     allowed = dispatcher.invoke(endpoint, invocation)

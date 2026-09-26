@@ -73,10 +73,10 @@ AAC package-management queries do not browse across technologies. A marketplace 
 A baseline catalog document repeats its query scope in the document header:
 
 ```yaml
-catalog:
-  format_version: 1
-  product_id: eu.algites.app.orchestrator
-  technology_id: PYTHON
+Catalog:
+  FormatVersion: 1
+  ProductId: eu.algites.app.orchestrator
+  TechnologyId: PYTHON
 ```
 
 The repeated `product_id` and `technology_id` are a sanity/integrity check for source configuration. A provider queried for another scope MUST NOT return entries from a mismatching document as valid results.
@@ -88,23 +88,23 @@ The baseline document MAY additionally contain generation/publication metadata, 
 Each catalog component entry MUST have a stable `component_id` and MAY provide discovery/presentation metadata:
 
 ```yaml
-component_id: eu.algites.foo
-name:
-  text: Foo Integration
+ComponentId: eu.algites.foo
+Name:
+  Text: Foo Integration
 description:
-  text: Integration with Foo services.
-publisher:
-  id: eu.algites
-  name:
-    text: Algites
-homepage_url: https://...
-documentation_url: https://...
-support_url: https://...
-entitlement_info_url: https://...
-icon:
-  url: https://...
-categories: [integration]
-tags: [foo, repository]
+  Text: Integration with Foo services.
+Publisher:
+  Id: eu.algites
+  Name:
+    Text: Algites
+HomepageUrl: https://...
+DocumentationUrl: https://...
+SupportUrl: https://...
+EntitlementInfoUrl: https://...
+Icon:
+  Url: https://...
+Categories: [integration]
+Tags: [foo, repository]
 ```
 
 The catalog is a discovery/presentation index, so name/description/publisher and useful URLs are appropriate catalog data even though they are not runtime capability contracts.
@@ -118,10 +118,10 @@ The baseline defines one icon URL. Rich marketplace media such as screenshots, v
 A component contains independently versioned releases:
 
 ```yaml
-releases:
-  - version: 3
-    published_at: ...
-    release_notes_url: ...
+Releases:
+  - Version: 3
+    PublishedAt: ...
+    ReleaseNotesUrl: ...
 ```
 
 A catalog release describes the complete technical metadata needed for discovery and target-state solving in the catalog scope.
@@ -131,9 +131,9 @@ A catalog release describes the complete technical metadata needed for discovery
 `provides` enumerates capability IDs and contract versions supplied by the release:
 
 ```yaml
-provides:
-  - capability: eu.algites.foo.repository
-    versions: [1, 2]
+Provides:
+  - Capability: eu.algites.foo.repository
+    Versions: [1, 2]
 ```
 
 Catalog `provides` metadata MUST describe the actual component descriptor accurately. Core MUST reject/admonish a downloaded candidate whose authoritative descriptor disagrees.
@@ -143,12 +143,12 @@ Catalog `provides` metadata MUST describe the actual component descriptor accura
 `requires` declares consumer requirements relevant to compatibility solving:
 
 ```yaml
-requires:
-  - id: storage
-    capability: _AAC.storage
-    versions: [2, 3]
-    cardinality: SINGLE
-    mandatory: true
+Requires:
+  - Id: storage
+    Capability: _AAC.storage
+    Versions: [2, 3]
+    Cardinality: single
+    Mandatory: true
 ```
 
 The baseline records capability, versions, cardinality, and mandatory/optional status. A future solver may use these values without first downloading every candidate artifact.
@@ -164,21 +164,21 @@ A release may publish a `persistent_schemas` summary so the target-state solver 
 Example:
 
 ```yaml
-persistent_schemas:
-  - kind: COMPONENT_CONFIGURATION
-    schema_id: eu.algites.foo.configuration
-    write_version: 4
+PersistentSchemas:
+  - Kind: component_configuration
+    SchemaId: eu.algites.foo.configuration
+    WriteVersion: 4
 
-  - kind: PROVIDER_CONFIGURATION
-    provider_id: repository
-    schema_id: eu.algites.foo.repository.configuration
-    write_version: 2
+  - Kind: provider_configuration
+    ProviderId: repository
+    SchemaId: eu.algites.foo.repository.configuration
+    WriteVersion: 2
 
-  - kind: DATA_ENTITY
-    schema_id: eu.algites.foo.site-data
-    readable_versions: [2, 3]
-    writable_versions: [2, 3]
-    preferred_write_version: 3
+  - Kind: data_entity
+    SchemaId: eu.algites.foo.site-data
+    ReadableVersions: [2, 3]
+    WritableVersions: [2, 3]
+    PreferredWriteVersion: 3
 ```
 
 `kind` is exactly one of:
@@ -206,27 +206,27 @@ Catalog format version 1 exposes both the component's entitlement licensing-scop
 Example:
 
 ```yaml
-entitlement_licensing_scopes:
+EntitlementLicensingScopes:
   - type: USER
-    name:
-      text: User
-      resource_key: entitlement.licensing_scope.user.name
+    Name:
+      Text: User
+      ResourceKey: entitlement.licensing_scope.user.name
   - type: SOURCE_REPOSITORY
-    name:
-      text: Source repository
-      resource_key: entitlement.licensing_scope.source_repository.name
+    Name:
+      Text: Source repository
+      ResourceKey: entitlement.licensing_scope.source_repository.name
     description:
-      text: One logical source-control repository lineage.
-      resource_key: entitlement.licensing_scope.source_repository.description
+      Text: One logical source-control repository lineage.
+      ResourceKey: entitlement.licensing_scope.source_repository.description
 
-provided_capability_entitlements:
-  - capability:
-      id: eu.algites.foo.repository
-      version: 1
-    permissions:
-      - id: read
-      - id: write
-        possible_licensing_scopes:
+ProvidedCapabilityEntitlements:
+  - Capability:
+      Id: eu.algites.foo.repository
+      Version: 1
+    Permissions:
+      - Id: read
+      - Id: write
+        PossibleLicensingScopes:
           - USER
           - SOURCE_REPOSITORY
 ```
@@ -246,14 +246,14 @@ A technology-scoped release contains one or more artifact variants. Technology i
 Multiple artifact variants within one technology MAY exist for platform, architecture, packaging format, or another technology-specific deployment constraint:
 
 ```yaml
-artifacts:
-  - id: universal-wheel
-    platforms: [linux, windows, macos]
-    architectures: [x86_64, aarch64]
-    package_format: PYTHON_WHEEL
-    descriptor_path: foo/component.yml
-    artifact_filename: foo.whl
-    sha256: ...
+Artifacts:
+  - Id: universal-wheel
+    Platforms: [linux, windows, macos]
+    Architectures: [x86_64, aarch64]
+    PackageFormat: PYTHON_WHEEL
+    DescriptorPath: foo/component.yml
+    ArtifactFilename: foo.whl
+    Sha256: ...
 ```
 
 Every artifact has a locator. Baseline locator types are:

@@ -5,42 +5,42 @@ from eu.algites.frmw.aac.core.bootstrap.loaders import AIcConfigurationBootstrap
 
 
 CONFIG_BOOTSTRAP = """
-configuration_bootstrap:
-  schema_version: 1
-  default_configuration_profile: customer-project
-  workspace_configuration_profiles: ALLOWED_IF_SIGNED
-  mandatory_configuration_scope_definition_ids: [system]
-  configuration_scope_resolvers:
-    - id: mapping
-      type: STATIC_CONTEXT
-  configuration_providers:
-    - id: system-config
-      type: FILE
-    - id: customer-config
-      type: HTTPS
-  configuration_profiles:
-    - id: customer-project
-      version: 1
-      configuration_scopes:
-        - id: user
-          type: USER
-          resolver: mapping
-        - id: workspace
-          type: WORKSPACE
-          resolver: mapping
-        - id: customer
-          type: CUSTOMER
-          resolver: mapping
-          configuration_providers:
-            - id: customer-config
-              priority: 100
-        - id: system
-          type: SYSTEM
-          resolver: mapping
-          mandatory: true
-          configuration_providers:
-            - id: system-config
-              priority: 100
+ConfigurationBootstrap:
+  SchemaVersion: 1
+  DefaultConfigurationProfile: customer-project
+  WorkspaceConfigurationProfiles: allowed_if_signed
+  MandatoryConfigurationScopeDefinitionIds: [system]
+  ConfigurationScopeResolvers:
+    - Id: mapping
+      Type: STATIC_CONTEXT
+  ConfigurationProviders:
+    - Id: system-config
+      Type: file
+    - Id: customer-config
+      Type: HTTPS
+  ConfigurationProfiles:
+    - Id: customer-project
+      Version: 1
+      ConfigurationScopes:
+        - Id: user
+          Type: USER
+          Resolver: mapping
+        - Id: workspace
+          Type: WORKSPACE
+          Resolver: mapping
+        - Id: customer
+          Type: CUSTOMER
+          Resolver: mapping
+          ConfigurationProviders:
+            - Id: customer-config
+              Priority: 100
+        - Id: system
+          Type: SYSTEM
+          Resolver: mapping
+          Mandatory: true
+          ConfigurationProviders:
+            - Id: system-config
+              Priority: 100
 """
 
 
@@ -50,34 +50,34 @@ def test_configuration_bootstrap_keeps_custom_scope_types_as_strings():
     assert [item.configuration_scope_type for item in profile.configuration_scopes] == [
         "USER", "WORKSPACE", "CUSTOMER", "SYSTEM"
     ]
-    assert bootstrap.workspace_configuration_profiles.value == "ALLOWED_IF_SIGNED"
+    assert bootstrap.workspace_configuration_profiles.value == "allowed_if_signed"
 
 
 def test_configuration_bootstrap_schema_is_fixed_and_rejects_unknown_fields():
     with pytest.raises(AIxDescriptorError):
-        AIcConfigurationBootstrapLoader.load_text(CONFIG_BOOTSTRAP.replace("schema_version: 1", "schema_version: 2"))
+        AIcConfigurationBootstrapLoader.load_text(CONFIG_BOOTSTRAP.replace("SchemaVersion: 1", "SchemaVersion: 2"))
 
 
 def test_entitlement_bootstrap_uses_separately_named_scopes_and_providers():
     bootstrap = AIcEntitlementBootstrapLoader.load_text("""
-entitlement_bootstrap:
-  schema_version: 1
-  default_entitlement_profile: project
-  licensing_scope_resolvers:
-    - id: mapping
-      type: STATIC_CONTEXT
-  entitlement_providers:
-    - id: licensing
-      type: HTTPS
-  entitlement_profiles:
-    - id: project
-      version: 1
-      licensing_scopes:
-        - id: workspace
-          type: WORKSPACE
-          resolver: mapping
-          entitlement_providers:
-            - id: licensing
+EntitlementBootstrap:
+  SchemaVersion: 1
+  DefaultEntitlementProfile: project
+  LicensingScopeResolvers:
+    - Id: mapping
+      Type: STATIC_CONTEXT
+  EntitlementProviders:
+    - Id: licensing
+      Type: HTTPS
+  EntitlementProfiles:
+    - Id: project
+      Version: 1
+      LicensingScopes:
+        - Id: workspace
+          Type: WORKSPACE
+          Resolver: mapping
+          EntitlementProviders:
+            - Id: licensing
 """)
     assert bootstrap.profile().licensing_scopes[0].licensing_scope_type == "WORKSPACE"
     assert bootstrap.entitlement_providers[0].id == "licensing"
@@ -89,48 +89,48 @@ def test_security_bootstrap_is_fixed_schema_and_configuration_provider_can_refer
 
     monkeypatch.setenv("AAC_REMOTE_TOKEN", "abc")
     security = AIcSecurityBootstrapLoader.load_text("""
-security_bootstrap:
-  schema_version: 1
-  secret_providers:
-    - id: env
-      type: ENVIRONMENT
-      bootstrap_safe: true
-  authentication_profiles:
-    - id: remote
-      mechanism: BEARER
-      parameters:
+SecurityBootstrap:
+  SchemaVersion: 1
+  SecretProviders:
+    - Id: env
+      Type: ENVIRONMENT
+      BootstrapSafe: true
+  AuthenticationProfiles:
+    - Id: remote
+      Mechanism: BEARER
+      Parameters:
         token:
-          secret_reference:
-            secret_provider_id: env
-            key: AAC_REMOTE_TOKEN
+          SecretReference:
+            SecretProviderId: env
+            Key: AAC_REMOTE_TOKEN
 """)
     config = AIcConfigurationBootstrapLoader.load_text(f"""
-configuration_bootstrap:
-  schema_version: 1
-  default_configuration_profile: p
-  configuration_scope_resolvers:
-    - id: mapping2
-      type: MAPPING
-  configuration_providers:
-    - id: local
-      type: FILESYSTEM
-      settings:
+ConfigurationBootstrap:
+  SchemaVersion: 1
+  DefaultConfigurationProfile: p
+  ConfigurationScopeResolvers:
+    - Id: mapping2
+      Type: MAPPING
+  ConfigurationProviders:
+    - Id: local
+      Type: FILESYSTEM
+      Settings:
         root: {str(tmp_path)!r}
-    - id: remote
-      type: HTTP
-      authentication_profile_id: remote
-      settings:
+    - Id: remote
+      Type: HTTP
+      AuthenticationProfileId: remote
+      Settings:
         base_url: http://127.0.0.1:9/configuration
         read_only: true
-  configuration_profiles:
-    - id: p
-      version: 1
-      configuration_scopes:
-        - id: system
-          type: SYSTEM
-          resolver: mapping2
-          configuration_providers:
-            - id: local
+  ConfigurationProfiles:
+    - Id: p
+      Version: 1
+      ConfigurationScopes:
+        - Id: system
+          Type: SYSTEM
+          Resolver: mapping2
+          ConfigurationProviders:
+            - Id: local
 """)
     core = AIcApplicationComponentCore()
     core.apply_security_bootstrap(security)
@@ -146,41 +146,41 @@ def test_configuration_provider_rejects_non_bootstrap_safe_authentication_profil
 
     monkeypatch.setenv("AAC_REMOTE_TOKEN", "abc")
     security = AIcSecurityBootstrapLoader.load_text("""
-security_bootstrap:
-  schema_version: 1
-  secret_providers:
-    - id: env
-      type: ENVIRONMENT
-      bootstrap_safe: false
-  authentication_profiles:
-    - id: remote
-      mechanism: BEARER
-      parameters:
+SecurityBootstrap:
+  SchemaVersion: 1
+  SecretProviders:
+    - Id: env
+      Type: ENVIRONMENT
+      BootstrapSafe: false
+  AuthenticationProfiles:
+    - Id: remote
+      Mechanism: BEARER
+      Parameters:
         token:
-          secret_reference:
-            secret_provider_id: env
-            key: AAC_REMOTE_TOKEN
+          SecretReference:
+            SecretProviderId: env
+            Key: AAC_REMOTE_TOKEN
 """)
     config = AIcConfigurationBootstrapLoader.load_text("""
-configuration_bootstrap:
-  schema_version: 1
-  default_configuration_profile: p
-  configuration_scope_resolvers:
-    - id: mapping2
-      type: MAPPING
-  configuration_providers:
-    - id: remote
-      type: HTTP
-      authentication_profile_id: remote
-      settings:
+ConfigurationBootstrap:
+  SchemaVersion: 1
+  DefaultConfigurationProfile: p
+  ConfigurationScopeResolvers:
+    - Id: mapping2
+      Type: MAPPING
+  ConfigurationProviders:
+    - Id: remote
+      Type: HTTP
+      AuthenticationProfileId: remote
+      Settings:
         base_url: http://127.0.0.1:9/configuration
-  configuration_profiles:
-    - id: p
-      version: 1
-      configuration_scopes:
-        - id: system
-          type: SYSTEM
-          resolver: mapping2
+  ConfigurationProfiles:
+    - Id: p
+      Version: 1
+      ConfigurationScopes:
+        - Id: system
+          Type: SYSTEM
+          Resolver: mapping2
 """)
     core = AIcApplicationComponentCore()
     core.apply_security_bootstrap(security)
@@ -193,38 +193,38 @@ def test_external_configuration_profile_can_be_loaded_from_trusted_file_source(t
 
     profile_path = tmp_path / "profile.yml"
     profile_path.write_text("""
-configuration_profile:
-  id: external
-  version: 1
-  configuration_scopes:
-    - id: system
-      type: SYSTEM
-      resolver: mapping
-      configuration_providers:
-        - id: local
+ConfigurationProfile:
+  Id: external
+  Version: 1
+  ConfigurationScopes:
+    - Id: system
+      Type: SYSTEM
+      Resolver: mapping
+      ConfigurationProviders:
+        - Id: local
 """, encoding="utf-8")
     bootstrap = AIcConfigurationBootstrapLoader.load_text(f"""
-configuration_bootstrap:
-  schema_version: 1
-  default_configuration_profile: external
-  configuration_scope_resolvers:
-    - id: mapping
-      type: MAPPING
-  configuration_providers:
-    - id: local
-      type: FILESYSTEM
-      settings:
+ConfigurationBootstrap:
+  SchemaVersion: 1
+  DefaultConfigurationProfile: external
+  ConfigurationScopeResolvers:
+    - Id: mapping
+      Type: MAPPING
+  ConfigurationProviders:
+    - Id: local
+      Type: FILESYSTEM
+      Settings:
         root: {str(tmp_path / 'config')!r}
-  configuration_profile_sources:
-    - id: external-source
-      uri: {str(profile_path)!r}
-  configuration_profiles:
-    - id: fallback
-      version: 1
-      configuration_scopes:
-        - id: system
-          type: SYSTEM
-          resolver: mapping
+  ConfigurationProfileSources:
+    - Id: external-source
+      Uri: {str(profile_path)!r}
+  ConfigurationProfiles:
+    - Id: fallback
+      Version: 1
+      ConfigurationScopes:
+        - Id: system
+          Type: SYSTEM
+          Resolver: mapping
 """)
     core = AIcApplicationComponentCore()
     scopes = core.apply_configuration_bootstrap(bootstrap)
@@ -234,31 +234,31 @@ configuration_bootstrap:
 
 def test_entitlement_bootstrap_loads_file_provider_and_trusted_issuer():
     bootstrap = AIcEntitlementBootstrapLoader.load_text('''
-entitlement_bootstrap:
-  schema_version: 1
-  default_entitlement_profile: p
-  licensing_scope_resolvers:
-    - id: mapping
-      type: MAPPING
-  entitlement_providers:
-    - id: licenses
-      type: FILE
-      settings: {root: /tmp/licenses, evidence_type: SIGSTORE}
-  trusted_issuers:
-    - issuer_id: vendor.example
-      component_ids: [vendor.foo]
-      evidence_types: [SIGSTORE]
-      signer_identities: [release@example.test]
-  entitlement_profiles:
-    - id: p
-      version: 1
-      licensing_scopes:
-        - id: workspace
-          type: WORKSPACE
-          resolver: mapping
-          entitlement_providers: [{id: licenses}]
+EntitlementBootstrap:
+  SchemaVersion: 1
+  DefaultEntitlementProfile: p
+  LicensingScopeResolvers:
+    - Id: mapping
+      Type: MAPPING
+  EntitlementProviders:
+    - Id: licenses
+      Type: file
+      Settings: {root: /tmp/licenses, evidence_type: SIGSTORE}
+  TrustedIssuers:
+    - IssuerId: vendor.example
+      ComponentIds: [vendor.foo]
+      EvidenceTypes: [SIGSTORE]
+      SignerIdentities: [release@example.test]
+  EntitlementProfiles:
+    - Id: p
+      Version: 1
+      LicensingScopes:
+        - Id: workspace
+          Type: WORKSPACE
+          Resolver: mapping
+          EntitlementProviders: [{Id: licenses}]
 ''')
-    assert bootstrap.entitlement_providers[0].type == "FILE"
+    assert bootstrap.entitlement_providers[0].type == "file"
     assert bootstrap.trusted_issuers[0].issuer_id == "vendor.example"
     assert bootstrap.trusted_issuers[0].allows("vendor.foo", "SIGSTORE", "release@example.test")
 
@@ -266,33 +266,33 @@ entitlement_bootstrap:
 def test_core_applies_file_entitlement_provider_and_trust_rule(tmp_path):
     from eu.algites.frmw.aac.core.runtime.application import AIcApplicationComponentCore
     bootstrap = AIcEntitlementBootstrapLoader.load_text(f'''
-entitlement_bootstrap:
-  schema_version: 1
-  default_entitlement_profile: p
-  licensing_scope_resolvers:
-    - id: _AAC.context.mapping
-      type: MAPPING
-  entitlement_providers:
-    - id: licenses
-      type: FILESYSTEM
-      settings:
+EntitlementBootstrap:
+  SchemaVersion: 1
+  DefaultEntitlementProfile: p
+  LicensingScopeResolvers:
+    - Id: _AAC.context.mapping
+      Type: MAPPING
+  EntitlementProviders:
+    - Id: licenses
+      Type: FILESYSTEM
+      Settings:
         root: {str(tmp_path)!r}
         evidence_type: SIGSTORE
-  trusted_issuers:
-    - issuer_id: vendor.example
-      component_ids: [vendor.foo]
-      evidence_types: [SIGSTORE]
-  entitlement_profiles:
-    - id: p
-      version: 1
-      licensing_scopes:
-        - id: workspace
-          type: WORKSPACE
-          resolver: _AAC.context.mapping
-          entitlement_providers: [{{id: licenses}}]
+  TrustedIssuers:
+    - IssuerId: vendor.example
+      ComponentIds: [vendor.foo]
+      EvidenceTypes: [SIGSTORE]
+  EntitlementProfiles:
+    - Id: p
+      Version: 1
+      LicensingScopes:
+        - Id: workspace
+          Type: WORKSPACE
+          Resolver: _AAC.context.mapping
+          EntitlementProviders: [{{Id: licenses}}]
 ''')
     core = AIcApplicationComponentCore()
-    scopes = core.apply_entitlement_bootstrap(bootstrap, context={"WORKSPACE": {"id": "ws-1", "display_name": "Project One"}})
+    scopes = core.apply_entitlement_bootstrap(bootstrap, context={"WORKSPACE": {"Id": "ws-1", "DisplayName": "Project One"}})
     assert core.entitlement_providers.get("licenses").root == tmp_path
     assert scopes[0].subject.display_name == "Project One"
     assert core.trusted_entitlement_issuers.has_rules()

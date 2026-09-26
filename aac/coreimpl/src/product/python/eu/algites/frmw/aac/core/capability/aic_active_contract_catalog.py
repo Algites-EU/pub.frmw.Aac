@@ -28,64 +28,64 @@ from .aic_capability_group_catalog import AIcCapabilityGroupCatalog
 
 def _parse_contract(raw: Mapping[str, Any], source: str) -> AIcCapabilityContract:
     try:
-        capability = raw["capability"]
-        operations = raw["operations"]
+        capability = raw["Capability"]
+        operations = raw["Operations"]
         if not isinstance(capability, Mapping) or not isinstance(operations, list):
             raise TypeError("capability must be a mapping and operations must be a list")
         permissions = tuple(
             AIcAuthorizationPermissionDescriptor(
-                id=str(item["id"]),
-                name=normalize_display_text(item.get("name")),
-                description=normalize_display_text(item.get("description")),
-                metadata=dict(item.get("metadata", {})),
+                id=str(item["Id"]),
+                name=normalize_display_text(item.get("Name")),
+                description=normalize_display_text(item.get("Description")),
+                metadata=dict(item.get("Metadata", {})),
             )
-            for item in raw.get("authorization_permissions", ())
+            for item in raw.get("AuthorizationPermissions", ())
         )
         parsed_ops = []
         for item in operations:
             if not isinstance(item, Mapping):
                 raise TypeError("operation must be a mapping")
-            raw_authorization = item.get("authorization")
+            raw_authorization = item.get("Authorization")
             authorization = None
             if raw_authorization is not None:
                 if not isinstance(raw_authorization, Mapping):
                     raise TypeError("operation authorization must be a mapping")
                 authorization = AIcOperationAuthorizationRequirement(
-                    all_of=tuple(str(v) for v in raw_authorization.get("all_of", ())),
-                    any_of=tuple(str(v) for v in raw_authorization.get("any_of", ())),
+                    all_of=tuple(str(v) for v in raw_authorization.get("AllOf", ())),
+                    any_of=tuple(str(v) for v in raw_authorization.get("AnyOf", ())),
                 )
-            raw_interactions = item.get("interactions", [])
+            raw_interactions = item.get("Interactions", [])
             if not isinstance(raw_interactions, list):
                 raise TypeError("operation interactions must be a list")
             interactions = []
             for raw_interaction in raw_interactions:
                 if not isinstance(raw_interaction, Mapping):
                     raise TypeError("operation interaction must be a mapping")
-                raw_schema = raw_interaction.get("schema")
+                raw_schema = raw_interaction.get("Schema")
                 if not isinstance(raw_schema, Mapping):
                     raise TypeError("operation interaction schema must be a mapping")
                 interactions.append(AIcCapabilityOperationInteraction(
-                    kind=AInCapabilityOperationInteractionKind(str(raw_interaction["kind"])),
-                    schema=AIcSchemaRef(str(raw_schema["id"]), int(raw_schema["version"])),
+                    kind=AInCapabilityOperationInteractionKind(str(raw_interaction["Kind"])),
+                    schema=AIcSchemaRef(str(raw_schema["Id"]), int(raw_schema["Version"])),
                 ))
             parsed_ops.append(AIcCapabilityOperation(
-                id=str(item["id"]),
+                id=str(item["Id"]),
                 interactions=tuple(interactions),
-                name=normalize_display_text(item.get("name")),
-                description=normalize_display_text(item.get("description")),
+                name=normalize_display_text(item.get("Name")),
+                description=normalize_display_text(item.get("Description")),
                 authorization=authorization,
-                sensitive_input_paths=tuple(str(v) for v in item.get("sensitive_input_paths", ())),
-                sensitive_output_paths=tuple(str(v) for v in item.get("sensitive_output_paths", ())),
-                metadata=dict(item.get("metadata", {})),
+                sensitive_input_paths=tuple(str(v) for v in item.get("SensitiveInputPaths", ())),
+                sensitive_output_paths=tuple(str(v) for v in item.get("SensitiveOutputPaths", ())),
+                metadata=dict(item.get("Metadata", {})),
             ))
         return AIcCapabilityContract(
-            capability=AIcCapabilityRef(str(capability["id"]), int(capability["version"])),
-            group_id=str(capability["group_id"]),
+            capability=AIcCapabilityRef(str(capability["Id"]), int(capability["Version"])),
+            group_id=str(capability["GroupId"]),
             operations=tuple(parsed_ops),
             authorization_permissions=permissions,
-            name=normalize_display_text(capability.get("name")),
-            description=normalize_display_text(capability.get("description")),
-            metadata=dict(raw.get("metadata", {})),
+            name=normalize_display_text(capability.get("Name")),
+            description=normalize_display_text(capability.get("Description")),
+            metadata=dict(raw.get("Metadata", {})),
         )
     except (KeyError, TypeError, ValueError) as exc:
         raise AIxContractAdmissionError(f"invalid capability contract in {source}: {exc}") from exc

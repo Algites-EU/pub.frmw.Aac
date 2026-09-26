@@ -40,11 +40,11 @@ from .aic_operation_progress import AIcOperationProgress
 
 _SAFE_SEGMENT = re.compile(r"[A-Za-z0-9_][A-Za-z0-9._-]*\Z")
 
-_RECORD_KEYS = {"uid", "schema_id", "schema_version", "record_revision", "state", "payload"}
+_RECORD_KEYS = {"Uid", "SchemaId", "SchemaVersion", "RecordRevision", "State", "Payload"}
 
-_SUPPORT_STATUSES = {"READY", "RETIRED"}
+_SUPPORT_STATUSES = {"ready", "retired"}
 
-_TRANSACTION_STATES = {"PREPARED", "COMMITTING", "COMMITTED"}
+_TRANSACTION_STATES = {"prepared", "COMMITTING", "committed"}
 
 _SUPPORT_FORMAT_VERSION = 1
 

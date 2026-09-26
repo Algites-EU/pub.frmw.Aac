@@ -56,14 +56,14 @@ RESTORE_STORAGE_BACKUP_CAPABILITY_ID = "_AAC.data-entity.restore-storage-backup"
 def _raw_envelope(raw: object) -> AIcDataEntityEnvelope:
     if not isinstance(raw, Mapping):
         raise TypeError("Data Entity provider returned a non-object record")
-    payload = raw.get("payload")
+    payload = raw.get("Payload")
     if not isinstance(payload, Mapping):
         raise TypeError("Data Entity provider returned a non-object payload")
     return AIcDataEntityEnvelope(
-        uid=str(raw["uid"]),
-        schema_id=str(raw["schema_id"]),
-        schema_version=int(raw["schema_version"]),
-        record_revision=raw["record_revision"],
-        state=AInDataEntityState(str(raw["state"])),
+        uid=str(raw["Uid"]),
+        schema_id=str(raw["SchemaId"]),
+        schema_version=int(raw["SchemaVersion"]),
+        record_revision=raw["RecordRevision"],
+        state=AInDataEntityState(str(raw["State"])),
         payload=dict(payload),
     )

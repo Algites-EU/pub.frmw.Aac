@@ -1,35 +1,39 @@
-capability:
-  id: _AAC.data-entity.apply-direct-record-changes
-  version: 1
-  group_id: _AAC.data-entity.storing
-  name:
-    text: Apply direct Data Entity record changes
-    resource_key: aac.data.entity.apply.direct.record.changes.name
-  description:
-    text: Atomically applies a direct Data Entity record changeset.
-    resource_key: aac.data.entity.apply.direct.record.changes.description
-operations:
-- id: apply
-  name:
-    text: Apply direct record changes
-    resource_key: aac.data.entity.apply.direct.record.changes.operation.apply.name
-  description:
-    text: Atomically applies a direct Data Entity record changeset.
-    resource_key: aac.data.entity.apply.direct.record.changes.operation.apply.description
-  interactions:
-  - kind: INPUT
-    schema:
-      id: _AAC.schema.data-entity-apply-direct-record-changes-request
-      version: 1
-  - kind: RUNNING_COMPLETE_STATE_RESULT
-    schema:
-      id: _AAC.schema.data-entity-apply-direct-record-changes-running-complete-result
-      version: 1
-  - kind: RUNNING_DELTA_STATE_RESULT
-    schema:
-      id: _AAC.schema.data-entity-apply-direct-record-changes-running-delta-result
-      version: 1
-  - kind: FINAL_SUCCESS_STATE_RESULT
-    schema:
-      id: _AAC.schema.data-entity-apply-direct-record-changes-result
-      version: 1
+Capability:
+  Id: _AAC.data-entity.apply-direct-record-changes
+  Version: 1
+  GroupId: _AAC.data-entity.storing
+  Name:
+    Text: Apply direct Data Entity record changes
+    ResourceKey: aac.data.entity.apply.direct.record.changes.name
+  Description:
+    Text: Atomically applies a direct Data Entity record changeset.
+    ResourceKey: aac.data.entity.apply.direct.record.changes.description
+Operations:
+- Id: apply
+  Name:
+    Text: Apply direct record changes
+    ResourceKey: 
+      aac.data.entity.apply.direct.record.changes.operation.apply.name
+  Description:
+    Text: Atomically applies a direct Data Entity record changeset.
+    ResourceKey: 
+      aac.data.entity.apply.direct.record.changes.operation.apply.description
+  Interactions:
+  - Kind: input
+    Schema:
+      Id: _AAC.schema.data-entity-apply-direct-record-changes-request
+      Version: 1
+  - Kind: running_complete_state_result
+    Schema:
+      Id: 
+        _AAC.schema.data-entity-apply-direct-record-changes-running-complete-result
+      Version: 1
+  - Kind: running_delta_state_result
+    Schema:
+      Id: 
+        _AAC.schema.data-entity-apply-direct-record-changes-running-delta-result
+      Version: 1
+  - Kind: final_success_state_result
+    Schema:
+      Id: _AAC.schema.data-entity-apply-direct-record-changes-result
+      Version: 1

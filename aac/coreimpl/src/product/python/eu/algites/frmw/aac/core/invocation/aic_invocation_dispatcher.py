@@ -49,47 +49,47 @@ def _exception_error(exc: Exception) -> dict[str, object]:
     if isinstance(exc, AIxCapabilityOperationFailed):
         failure = exc.failure
         error: dict[str, object] = {
-            "type": failure.exception_type,
-            "message": failure.system_message,
+            "Type": failure.exception_type,
+            "Message": failure.system_message,
         }
         if failure.user_message is not None:
-            error["user_message"] = dataclasses.asdict(failure.user_message)
+            error["UserMessage"] = dataclasses.asdict(failure.user_message)
         if failure.error_code is not None:
-            error["error_code"] = failure.error_code
+            error["ErrorCode"] = failure.error_code
         if failure.stack_trace is not None:
-            error["stack_trace"] = failure.stack_trace
+            error["StackTrace"] = failure.stack_trace
         if failure.details:
-            error["details"] = dict(failure.details)
+            error["Details"] = dict(failure.details)
         if failure.extension is not None:
-            error["extension"] = copy.deepcopy(failure.extension)
+            error["Extension"] = copy.deepcopy(failure.extension)
         return error
     error: dict[str, object] = {
-        "type": f"{type(exc).__module__}.{type(exc).__qualname__}",
-        "message": str(exc) or type(exc).__name__,
+        "Type": f"{type(exc).__module__}.{type(exc).__qualname__}",
+        "Message": str(exc) or type(exc).__name__,
     }
     try:
         caller = current_operation_interaction().caller_snapshot()
         if caller.failure_detail_level is AInOperationInteractionFailureDetailLevel.STACK_TRACE:
-            error["stack_trace"] = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
+            error["StackTrace"] = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
     except Exception:
         pass
     return error
 
 def _failure_from_output(output: AIcInvocationOutput) -> AIcOperationFailure:
     error = dict(output.error or {})
-    system_message = str(error.pop("message", "operation failed"))
-    exception_type = str(error.pop("type", "AAC.OperationFailure"))
-    stack_trace = str(error.pop("stack_trace")) if error.get("stack_trace") is not None else None
-    error.pop("stack_trace", None)
-    error_code = str(error.pop("error_code")) if error.get("error_code") is not None else None
-    error.pop("error_code", None)
-    user_message_raw = error.pop("user_message", None)
+    system_message = str(error.pop("Message", "operation failed"))
+    exception_type = str(error.pop("Type", "AAC.OperationFailure"))
+    stack_trace = str(error.pop("StackTrace")) if error.get("StackTrace") is not None else None
+    error.pop("StackTrace", None)
+    error_code = str(error.pop("ErrorCode")) if error.get("ErrorCode") is not None else None
+    error.pop("ErrorCode", None)
+    user_message_raw = error.pop("UserMessage", None)
     user_message = None
     if isinstance(user_message_raw, Mapping):
         from eu.algites.frmw.aac.core.presentation.api import normalize_display_text
         user_message = normalize_display_text(user_message_raw)
-    extension = error.pop("extension", None)
-    explicit_details = error.pop("details", None)
+    extension = error.pop("Extension", None)
+    explicit_details = error.pop("Details", None)
     details = dict(explicit_details) if isinstance(explicit_details, Mapping) else {}
     details.update(error)
     return AIcOperationFailure(
@@ -161,11 +161,11 @@ class AIcInvocationDispatcher:
     def _authorization_denial(self, invocation_input: AIcInvocationInput, operation, message: str) -> AIcInvocationOutput:
         requirement = operation.authorization
         return AIcInvocationOutput(False, error={
-            "type": "AUTHORIZATION_DENIED",
-            "message": message,
-            "capability_id": invocation_input.capability_id,
-            "capability_version": invocation_input.capability_version,
-            "operation_id": invocation_input.operation_id,
+            "Type": "AUTHORIZATION_DENIED",
+            "Message": message,
+            "CapabilityId": invocation_input.capability_id,
+            "CapabilityVersion": invocation_input.capability_version,
+            "OperationId": invocation_input.operation_id,
             "required_all_of": list(requirement.all_of if requirement is not None else ()),
             "required_any_of": list(requirement.any_of if requirement is not None else ()),
         })
@@ -196,10 +196,10 @@ class AIcInvocationDispatcher:
                 context={
                     "consumer_instance_id": invocation_input.consumer_instance_id,
                     "requirement_id": invocation_input.requirement_id,
-                    "provider_instance_id": invocation_input.provider_instance_id,
-                    "capability_id": invocation_input.capability_id,
-                    "capability_version": invocation_input.capability_version,
-                    "operation_id": invocation_input.operation_id,
+                    "ProviderInstanceId": invocation_input.provider_instance_id,
+                    "CapabilityId": invocation_input.capability_id,
+                    "CapabilityVersion": invocation_input.capability_version,
+                    "OperationId": invocation_input.operation_id,
                 },
             ))
             return decision.allowed
@@ -228,7 +228,7 @@ class AIcInvocationDispatcher:
                     input_schema.id, input_schema.version, dict(invocation_input.arguments)
                 )
                 if not isinstance(normalized_arguments, Mapping):
-                    return AIcInvocationOutput(False, error={"type": "AIxSchemaValidationError", "message": "operation INPUT schema must normalize to an object"})
+                    return AIcInvocationOutput(False, error={"Type": "AIxSchemaValidationError", "Message": "operation input schema must normalize to an object"})
                 invocation_input = AIcInvocationInput(
                     invocation_id=invocation_input.invocation_id,
                     parent_invocation_id=invocation_input.parent_invocation_id,
@@ -244,11 +244,11 @@ class AIcInvocationDispatcher:
                     locale=invocation_input.locale,
                 )
             except (AIxSchemaValidationError, KeyError) as exc:
-                return AIcInvocationOutput(False, error={"type": "AIxSchemaValidationError", "message": str(exc)})
+                return AIcInvocationOutput(False, error={"Type": "AIxSchemaValidationError", "Message": str(exc)})
         elif invocation_input.arguments:
             return AIcInvocationOutput(False, error={
-                "type": "UNEXPECTED_OPERATION_INPUT",
-                "message": "operation does not define an INPUT interaction",
+                "Type": "UNEXPECTED_OPERATION_INPUT",
+                "Message": "operation does not define an input interaction",
             })
 
         if self.operation_parameter_resolver is not None:
@@ -269,7 +269,7 @@ class AIcInvocationDispatcher:
                     locale=invocation_input.locale,
                 )
             except Exception as exc:
-                return AIcInvocationOutput(False, error={"type": type(exc).__name__, "message": str(exc)})
+                return AIcInvocationOutput(False, error={"Type": type(exc).__name__, "Message": str(exc)})
 
         if self.observations is not None:
             self.observations.dispatch(AIcObservationInput(
@@ -292,12 +292,12 @@ class AIcInvocationDispatcher:
             if (
                 not output.success
                 and output.error is not None
-                and output.error.get("type") == "PERMISSION_DENIED"
+                and output.error.get("Type") == "PERMISSION_DENIED"
                 and output.error.get("retry_disposition") == AInPermissionRetryDisposition.SAFE_AFTER_ENTITLEMENT_CHANGE.value
                 and self.entitlement_remediator is not None
             ):
                 remediation = self.entitlement_remediator.remediate(AIcEntitlementRemediationRequest(
-                    component_id=str(output.error.get("component_id") or ""),
+                    component_id=str(output.error.get("ComponentId") or ""),
                     provider_instance_id=invocation_input.provider_instance_id,
                     capability_id=invocation_input.capability_id,
                     capability_version=invocation_input.capability_version,
@@ -306,7 +306,7 @@ class AIcInvocationDispatcher:
                     context={
                         "consumer_instance_id": invocation_input.consumer_instance_id,
                         "requirement_id": invocation_input.requirement_id,
-                        "operation_id": invocation_input.operation_id,
+                        "OperationId": invocation_input.operation_id,
                     },
                 ))
                 if remediation.changed:
@@ -328,46 +328,46 @@ class AIcInvocationDispatcher:
                     )
                     output = AIcInvocationOutput(True, result=normalized_result)
                 except (AIxSchemaValidationError, KeyError) as exc:
-                    output = AIcInvocationOutput(False, error={"type": "AIxSchemaValidationError", "message": str(exc)})
+                    output = AIcInvocationOutput(False, error={"Type": "AIxSchemaValidationError", "Message": str(exc)})
             elif output.result is not None:
                 output = AIcInvocationOutput(False, error={
-                    "type": "UNEXPECTED_FINAL_SUCCESS_STATE_RESULT",
-                    "message": "operation returned a result but does not define FINAL_SUCCESS_STATE_RESULT",
+                    "Type": "UNEXPECTED_FINAL_SUCCESS_STATE_RESULT",
+                    "Message": "operation returned a result but does not define final_success_state_result",
                 })
 
         if not output.success and output.error is not None:
             error = dict(output.error)
-            if error.get("type") == "OPERATION_CANCELLED" and bool(error.get("has_state_result", False)):
+            if error.get("Type") == "OPERATION_CANCELLED" and bool(error.get("has_state_result", False)):
                 cancelled_schema = operation.schema_ref(AInCapabilityOperationInteractionKind.FINAL_CANCELLED_STATE_RESULT)
                 if cancelled_schema is None:
                     output = AIcInvocationOutput(False, error={
-                        "type": "UNEXPECTED_FINAL_CANCELLED_STATE_RESULT",
-                        "message": "operation returned cancelled state data but defines no FINAL_CANCELLED_STATE_RESULT",
+                        "Type": "UNEXPECTED_FINAL_CANCELLED_STATE_RESULT",
+                        "Message": "operation returned cancelled state data but defines no final_cancelled_state_result",
                     })
                 else:
                     try:
                         normalized_cancelled = self.contracts.schema_registry.normalize_value_identity(
-                            cancelled_schema.id, cancelled_schema.version, error.get("state_result")
+                            cancelled_schema.id, cancelled_schema.version, error.get("StateResult")
                         )
-                        error["state_result"] = normalized_cancelled
+                        error["StateResult"] = normalized_cancelled
                         output = AIcInvocationOutput(False, error=error)
                     except (AIxSchemaValidationError, KeyError) as exc:
-                        output = AIcInvocationOutput(False, error={"type": "AIxSchemaValidationError", "message": str(exc)})
-            elif error.get("extension") is not None:
+                        output = AIcInvocationOutput(False, error={"Type": "AIxSchemaValidationError", "Message": str(exc)})
+            elif error.get("Extension") is not None:
                 failed_schema = operation.schema_ref(AInCapabilityOperationInteractionKind.FINAL_FAILED_STATE_RESULT_EXTENSION)
                 if failed_schema is None:
                     output = AIcInvocationOutput(False, error={
-                        "type": "UNEXPECTED_FINAL_FAILED_STATE_RESULT_EXTENSION",
-                        "message": "operation returned failure extension data but defines no FINAL_FAILED_STATE_RESULT_EXTENSION",
+                        "Type": "UNEXPECTED_FINAL_FAILED_STATE_RESULT_EXTENSION",
+                        "Message": "operation returned failure extension data but defines no final_failed_state_result_extension",
                     })
                 else:
                     try:
-                        error["extension"] = self.contracts.schema_registry.normalize_value_identity(
-                            failed_schema.id, failed_schema.version, error.get("extension")
+                        error["Extension"] = self.contracts.schema_registry.normalize_value_identity(
+                            failed_schema.id, failed_schema.version, error.get("Extension")
                         )
                         output = AIcInvocationOutput(False, error=error)
                     except (AIxSchemaValidationError, KeyError) as exc:
-                        output = AIcInvocationOutput(False, error={"type": "AIxSchemaValidationError", "message": str(exc)})
+                        output = AIcInvocationOutput(False, error={"Type": "AIxSchemaValidationError", "Message": str(exc)})
 
         if self.observations is not None:
             result = _redact_value(output.result, operation.sensitive_output_paths)
@@ -402,8 +402,8 @@ class AIcInvocationDispatcher:
             provider_interaction = provider_operation.interaction
             if selected_mode not in provider_interaction.supported_state_result_delivery_modes:
                 output = AIcInvocationOutput(False, error={
-                    "type": "UNSUPPORTED_STATE_RESULT_DELIVERY_MODE",
-                    "message": f"provider operation does not support state-result delivery mode {selected_mode.value}",
+                    "Type": "UNSUPPORTED_STATE_RESULT_DELIVERY_MODE",
+                    "Message": f"provider operation does not support state-result delivery mode {selected_mode.value}",
                 })
                 if controller is not None:
                     controller.core_transition(AInOperationExecutionState.RUNNING)
@@ -439,10 +439,10 @@ class AIcInvocationDispatcher:
                     state_result=output.result,
                     has_state_result=has_final_success_result,
                 )
-            elif output.error is not None and output.error.get("type") == "OPERATION_CANCELLED":
+            elif output.error is not None and output.error.get("Type") == "OPERATION_CANCELLED":
                 controller.core_transition(
                     AInOperationExecutionState.CANCELLED,
-                    state_result=output.error.get("state_result"),
+                    state_result=output.error.get("StateResult"),
                     has_state_result=bool(output.error.get("has_state_result", False)),
                 )
             else:

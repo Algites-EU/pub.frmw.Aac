@@ -5,28 +5,28 @@
   "title": "AAC Data Entity Envelope 1",
   "type": "object",
   "required": [
-    "uid",
-    "schema_id",
-    "schema_version",
-    "record_revision",
-    "state",
-    "payload"
+    "Uid",
+    "SchemaId",
+    "SchemaVersion",
+    "RecordRevision",
+    "State",
+    "Payload"
   ],
   "additionalProperties": false,
   "properties": {
-    "uid": {
+    "Uid": {
       "type": "string",
       "minLength": 1
     },
-    "schema_id": {
+    "SchemaId": {
       "type": "string",
       "minLength": 1
     },
-    "schema_version": {
+    "SchemaVersion": {
       "type": "integer",
       "minimum": 1
     },
-    "record_revision": {
+    "RecordRevision": {
       "oneOf": [
         {
           "type": "integer",
@@ -38,13 +38,13 @@
         }
       ]
     },
-    "state": {
+    "State": {
       "enum": [
-        "ACTIVE",
-        "TOMBSTONE"
+        "active",
+        "tombstone"
       ]
     },
-    "payload": {
+    "Payload": {
       "type": "object"
     }
   }

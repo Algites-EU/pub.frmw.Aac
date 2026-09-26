@@ -72,10 +72,10 @@ class AIcPackageSelectionStore:
         for key, raw in raw_values.items():
             application_scope_id, component_id = key.split(":", 1)
             values.append(AIcPackageSelection(
-                application_scope_id, component_id, int(raw["component_version"]), str(raw["sha256"]),
-                str(raw["selected_at"]),
-                str(raw["previous_sha256"]) if raw.get("previous_sha256") is not None else None,
-                int(raw["previous_version"]) if raw.get("previous_version") is not None else None,
+                application_scope_id, component_id, int(raw["ComponentVersion"]), str(raw["Sha256"]),
+                str(raw["SelectedAt"]),
+                str(raw["PreviousSha256"]) if raw.get("PreviousSha256") is not None else None,
+                int(raw["PreviousVersion"]) if raw.get("PreviousVersion") is not None else None,
             ))
         manifest = AIcPackageSelectionManifest(1, tuple(sorted(values, key=lambda item: (item.application_scope_id, item.component_id))))
         self.manifest_store.write(manifest, expected_record_revision=0)
@@ -94,10 +94,10 @@ class AIcPackageSelectionStore:
         for key, raw in self.store.list(_PACKAGE_SELECTION_NAMESPACE).items():
             application_scope_id, component_id = key.split(":", 1)
             values.append(AIcPackageSelection(
-                application_scope_id, component_id, int(raw["component_version"]), str(raw["sha256"]),
-                str(raw["selected_at"]),
-                str(raw["previous_sha256"]) if raw.get("previous_sha256") is not None else None,
-                int(raw["previous_version"]) if raw.get("previous_version") is not None else None,
+                application_scope_id, component_id, int(raw["ComponentVersion"]), str(raw["Sha256"]),
+                str(raw["SelectedAt"]),
+                str(raw["PreviousSha256"]) if raw.get("PreviousSha256") is not None else None,
+                int(raw["PreviousVersion"]) if raw.get("PreviousVersion") is not None else None,
             ))
         return AIcPackageSelectionManifest(0, tuple(sorted(values, key=lambda item: (item.application_scope_id, item.component_id))))
 
@@ -118,11 +118,11 @@ class AIcPackageSelectionStore:
         for key, item in target.items():
             current = current_records.get(key)
             mutations.append(AIcStateMutation.put(_PACKAGE_SELECTION_NAMESPACE, key, {
-                "component_version": item.component_version,
-                "sha256": item.sha256,
-                "selected_at": item.selected_at,
-                "previous_sha256": item.previous_sha256,
-                "previous_version": item.previous_version,
+                "ComponentVersion": item.component_version,
+                "Sha256": item.sha256,
+                "SelectedAt": item.selected_at,
+                "PreviousSha256": item.previous_sha256,
+                "PreviousVersion": item.previous_version,
             }, expected_record_revision=None if current is None else current.record_revision, expect_absent=current is None))
         self.store.apply(tuple(mutations))
 

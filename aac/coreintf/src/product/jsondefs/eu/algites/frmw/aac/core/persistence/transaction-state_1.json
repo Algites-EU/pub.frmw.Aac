@@ -4,34 +4,34 @@
   "title": "AAC Persistence Transaction State 1",
   "type": "object",
   "required": [
-    "format_version",
-    "transaction_id",
-    "phase",
-    "updated_at",
-    "diagnostics"
+    "FormatVersion",
+    "TransactionId",
+    "Phase",
+    "UpdatedAt",
+    "Diagnostics"
   ],
   "additionalProperties": false,
   "properties": {
-    "format_version": {
+    "FormatVersion": {
       "const": 1
     },
-    "transaction_id": {
+    "TransactionId": {
       "type": "string",
       "minLength": 1
     },
-    "phase": {
+    "Phase": {
       "enum": [
-        "PREPARED",
-        "COMMIT_STARTED",
-        "COMMITTED",
-        "CLEANUP_COMPLETED",
-        "ABORTED"
+        "prepared",
+        "commit_started",
+        "committed",
+        "cleanup_completed",
+        "aborted"
       ]
     },
-    "updated_at": {
+    "UpdatedAt": {
       "type": "string"
     },
-    "diagnostics": {
+    "Diagnostics": {
       "type": "array",
       "items": {
         "type": "string"

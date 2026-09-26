@@ -3,15 +3,15 @@
   "$id": "_AAC.schema.package-source-manifest/1",
   "type": "object",
   "required": [
-    "format_version",
-    "packages"
+    "FormatVersion",
+    "Packages"
   ],
   "additionalProperties": false,
   "properties": {
-    "format_version": {
+    "FormatVersion": {
       "const": 1
     },
-    "packages": {
+    "Packages": {
       "type": "array"
     }
   },

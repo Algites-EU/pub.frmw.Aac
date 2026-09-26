@@ -5,7 +5,7 @@ import queue
 import subprocess
 import sys
 import threading
-from dataclasses import asdict
+import dataclasses
 from typing import Mapping, Sequence
 from uuid import uuid4
 from eu.algites.frmw.aac.core.descriptor.api import AIcProviderDefinitionDescriptor
@@ -24,6 +24,25 @@ from eu.algites.frmw.aac.core.implementation.errors import AIxProcessEndpointErr
 from eu.algites.frmw.aac.core.instances.registry import instance_to_dict
 from eu.algites.frmw.aac.core.invocation.dispatcher import invoke_handle_with_parent_context
 
+def _canonical_property_name(aPythonName: str) -> str:
+    return "".join(locPart[:1].upper() + locPart[1:] for locPart in aPythonName.split("_"))
+
+def _wire_value(aValue: object) -> object:
+    if dataclasses.is_dataclass(aValue):
+        return {
+            _canonical_property_name(locField.name): _wire_value(getattr(aValue, locField.name))
+            for locField in dataclasses.fields(aValue)
+        }
+    if hasattr(aValue, "value"):
+        return getattr(aValue, "value")
+    if isinstance(aValue, Mapping):
+        return {str(locKey): _wire_value(locValue) for locKey, locValue in aValue.items()}
+    if isinstance(aValue, tuple):
+        return [_wire_value(locValue) for locValue in aValue]
+    if isinstance(aValue, list):
+        return [_wire_value(locValue) for locValue in aValue]
+    return aValue
+
 _DEFAULT_PROCESS_COMMAND = (
     "{python}",
     "-m",
@@ -36,46 +55,46 @@ def _display_text_from_raw(raw: object) -> AIcDisplayText | None:
     if not isinstance(raw, Mapping):
         raise TypeError("operation interaction display text must be an object")
     return AIcDisplayText(
-        text=str(raw["text"]) if raw.get("text") is not None else None,
-        resource_key=str(raw["resource_key"]) if raw.get("resource_key") is not None else None,
+        text=str(raw["Text"]) if raw.get("Text") is not None else None,
+        resource_key=str(raw["ResourceKey"]) if raw.get("ResourceKey") is not None else None,
     )
 
 def _operation_interaction_event_from_dict(raw: Mapping[str, object]) -> AIcOperationInteractionEvent:
-    details = raw.get("details", {})
+    details = raw.get("Details", {})
     return AIcOperationInteractionEvent(
-        event_type=AInOperationInteractionEventType(str(raw["event_type"])),
-        progress_id=str(raw["progress_id"]) if raw.get("progress_id") is not None else None,
-        parent_progress_id=str(raw["parent_progress_id"]) if raw.get("parent_progress_id") is not None else None,
-        phase_id=str(raw["phase_id"]) if raw.get("phase_id") is not None else None,
-        name=_display_text_from_raw(raw.get("name")),
-        description=_display_text_from_raw(raw.get("description")),
-        current=raw.get("current") if isinstance(raw.get("current"), (int, float)) else None,
-        total=raw.get("total") if isinstance(raw.get("total"), (int, float)) else None,
-        unit=str(raw["unit"]) if raw.get("unit") is not None else None,
-        severity=AInOperationInteractionSeverity(str(raw.get("severity", "INFO"))),
-        code=str(raw["code"]) if raw.get("code") is not None else None,
+        event_type=AInOperationInteractionEventType(str(raw["EventType"])),
+        progress_id=str(raw["ProgressId"]) if raw.get("ProgressId") is not None else None,
+        parent_progress_id=str(raw["ParentProgressId"]) if raw.get("ParentProgressId") is not None else None,
+        phase_id=str(raw["PhaseId"]) if raw.get("PhaseId") is not None else None,
+        name=_display_text_from_raw(raw.get("Name")),
+        description=_display_text_from_raw(raw.get("Description")),
+        current=raw.get("Current") if isinstance(raw.get("Current"), (int, float)) else None,
+        total=raw.get("Total") if isinstance(raw.get("Total"), (int, float)) else None,
+        unit=str(raw["Unit"]) if raw.get("Unit") is not None else None,
+        severity=AInOperationInteractionSeverity(str(raw.get("Severity", "info"))),
+        code=str(raw["Code"]) if raw.get("Code") is not None else None,
         details=dict(details) if isinstance(details, Mapping) else {},
     )
 
 def _output_from_raw(raw: object) -> AIcInvocationOutput:
     # Persistent process host wraps the provider AIcInvocationOutput in a request result.
-    if isinstance(raw, Mapping) and "success" in raw:
+    if isinstance(raw, Mapping) and "Success" in raw:
         return AIcInvocationOutput(
-            success=bool(raw.get("success")),
-            result=raw.get("result"),
-            error=raw.get("error") if isinstance(raw.get("error"), Mapping) else None,
+            success=bool(raw.get("Success")),
+            result=raw.get("Result"),
+            error=raw.get("Error") if isinstance(raw.get("Error"), Mapping) else None,
         )
-    return AIcInvocationOutput(False, error={"type": "InvalidProcessResponse", "message": "response must contain boolean success"})
+    return AIcInvocationOutput(False, error={"Type": "InvalidProcessResponse", "Message": "response must contain boolean success"})
 
 def _json_default(value: object) -> object:
     if hasattr(value, "value"):
         return getattr(value, "value")
-    raise TypeError(f"value of type {type(value).__name__} is not JSON serializable")
+    raise TypeError(f"value of type {type(value).__name__} is not json serializable")
 
 class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
-    """Persistent AAC PROCESS runtime: exactly one child process per provider instance.
+    """Persistent AAC process Runtime: exactly one child process per provider instance.
 
-    Core owns the Popen handle, process lifetime and JSON-lines IPC channel.  Provider
+    Core owns the Popen handle, process lifetime and json-lines IPC channel.  Provider
     configuration and module state are therefore naturally instance-local.  Requests are
     serialized per instance; nested calls to already resolved consumed capabilities travel
     back to Core using `core_invoke` frames and are safe because the resolved instance graph
@@ -140,13 +159,13 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
         self._reader.start()
         self._stderr_reader.start()
         self._request("bootstrap", payload={
-            "application_scope_id": application_scope_id,
-            "provider_instance": instance_to_dict(instance),
-            "implementation_class": provider_definition.implementation_class_for("python"),
-            "runtime_factory_class": provider_definition.runtime_factory_class,
-            "entitlement": asdict(entitlement),
-            "component_configuration": asdict(component_configuration),
-            "provider_instance_configuration": asdict(provider_instance_configuration),
+            "ApplicationScopeId": application_scope_id,
+            "ProviderInstance": instance_to_dict(instance),
+            "ImplementationClass": provider_definition.implementation_class_for("python"),
+            "RuntimeFactoryClass": provider_definition.runtime_factory_class,
+            "Entitlement": _wire_value(entitlement),
+            "ComponentConfiguration": _wire_value(component_configuration),
+            "ProviderInstanceConfiguration": _wire_value(provider_instance_configuration),
         })
 
     @property
@@ -166,23 +185,23 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
         with self._interaction_lock:
             self._active_interactions[invocation_input.invocation_id] = interaction
         try:
-            result = self._request("invoke", payload=asdict(invocation_input))
+            result = self._request("invoke", payload=invocation_input.to_mapping())
         except Exception as exc:
-            return AIcInvocationOutput(False, error={"type": type(exc).__name__, "message": str(exc)})
+            return AIcInvocationOutput(False, error={"Type": type(exc).__name__, "Message": str(exc)})
         finally:
             with self._interaction_lock:
                 self._active_interactions.pop(invocation_input.invocation_id, None)
         return _output_from_raw(result)
 
     def entitlement_changed(self, entitlement: AIcEntitlementContext) -> None:
-        self._request("lifecycle", action="entitlement_changed", payload={"entitlement": asdict(entitlement)})
+        self._request("lifecycle", action="entitlement_changed", payload={"Entitlement": _wire_value(entitlement)})
 
     def wire(self, bindings: Mapping[str, tuple[AIiCapabilityHandle, ...]]) -> None:
         self._handles = {key: tuple(value) for key, value in bindings.items()}
         payload: dict[str, list[dict[str, object]]] = {}
         for requirement_id, handles in self._handles.items():
-            payload[requirement_id] = [asdict(handle.binding) for handle in handles]
-        self._request("lifecycle", action="wire", payload={"bindings": payload})
+            payload[requirement_id] = [_wire_value(handle.binding) for handle in handles]
+        self._request("lifecycle", action="wire", payload={"Bindings": payload})
 
     def prepare_activation(self) -> None:
         self._request("lifecycle", action="prepare_activation", payload={})
@@ -191,14 +210,14 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
         raw = self._request("lifecycle", action="readiness", payload={})
         if not isinstance(raw, Mapping):
             return AIcReadinessResult()
-        state = AInReadinessState(str(raw.get("state", "READY")))
+        state = AInReadinessState(str(raw.get("State", "ready")))
         reasons = tuple(
             AIcReadinessReason(
-                str(item.get("code", "RUNTIME_READINESS")),
-                str(item.get("message", "runtime readiness condition")),
-                AInReadinessState(str(item.get("state", state.value))),
-                str(item["requirement_id"]) if item.get("requirement_id") is not None else None,
-                str(item["key"]) if item.get("key") is not None else None,
+                str(item.get("Code", "RUNTIME_READINESS")),
+                str(item.get("Message", "runtime readiness condition")),
+                AInReadinessState(str(item.get("State", state.value))),
+                str(item["RequirementId"]) if item.get("RequirementId") is not None else None,
+                str(item["Key"]) if item.get("Key") is not None else None,
             )
             for item in raw.get("reasons", ()) if isinstance(item, Mapping)
         )
@@ -208,12 +227,12 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
         self._request("lifecycle", action="activate", payload={})
 
     def suspend(self, reason: str) -> None:
-        self._request("lifecycle", action="suspend", payload={"reason": reason})
+        self._request("lifecycle", action="suspend", payload={"Reason": reason})
 
     def deactivate(self, reason: str) -> None:
         if self._closed:
             return
-        self._request("lifecycle", action="deactivate", payload={"reason": reason})
+        self._request("lifecycle", action="deactivate", payload={"Reason": reason})
 
     def close(self) -> None:
         if self._closed:
@@ -252,9 +271,9 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
             waiter: queue.Queue[dict[str, object]] = queue.Queue(maxsize=1)
             with self._pending_lock:
                 self._pending[request_id] = waiter
-            frame: dict[str, object] = {"kind": kind, "request_id": request_id, "payload": dict(payload)}
+            frame: dict[str, object] = {"Kind": kind, "RequestId": request_id, "Payload": dict(payload)}
             if action is not None:
-                frame["action"] = action
+                frame["Action"] = action
             try:
                 self._write(frame)
                 try:
@@ -266,10 +285,10 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
             finally:
                 with self._pending_lock:
                     self._pending.pop(request_id, None)
-            if not bool(response.get("success", False)):
-                error = response.get("error")
+            if not bool(response.get("Success", False)):
+                error = response.get("Error")
                 raise AIxProcessEndpointError(f"provider process request failed: {error}")
-            return response.get("result")
+            return response.get("Result")
 
     def _write(self, frame: Mapping[str, object]) -> None:
         if self._process.stdin is None:
@@ -290,9 +309,9 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
                     frame = json.loads(line)
                     if not isinstance(frame, dict):
                         continue
-                    kind = frame.get("kind")
+                    kind = frame.get("Kind")
                     if kind == "response":
-                        request_id = str(frame.get("request_id", ""))
+                        request_id = str(frame.get("RequestId", ""))
                         with self._pending_lock:
                             waiter = self._pending.get(request_id)
                         if waiter is not None:
@@ -312,9 +331,9 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
                     elif kind == "operation_interaction_caller_snapshot":
                         self._handle_operation_interaction_caller_snapshot(frame)
                 except Exception as exc:
-                    self._stderr_lines.append(f"protocol reader error: {type(exc).__name__}: {exc}")
+                    self._stderr_lines.append(f"protocol reader Error: {type(exc).__name__}: {exc}")
         finally:
-            failure = {"kind": "response", "success": False, "error": {"type": "ProcessExitError", "message": self._process_failure_message()}}
+            failure = {"Kind": "response", "Success": False, "Error": {"Type": "ProcessExitError", "Message": self._process_failure_message()}}
             with self._pending_lock:
                 pending = tuple(self._pending.values())
             for waiter in pending:
@@ -333,81 +352,81 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
             print(text, file=sys.stdout, flush=True)
 
     def _handle_core_invoke(self, frame: Mapping[str, object]) -> None:
-        request_id = str(frame.get("request_id", ""))
+        request_id = str(frame.get("RequestId", ""))
         try:
-            requirement_id = str(frame["requirement_id"])
-            index = int(frame.get("handle_index", 0))
+            requirement_id = str(frame["RequirementId"])
+            index = int(frame.get("HandleIndex", 0))
             handles = self._handles[requirement_id]
             handle = handles[index]
-            arguments = frame.get("arguments", {})
+            arguments = frame.get("Arguments", {})
             if not isinstance(arguments, Mapping):
                 raise TypeError("nested invocation arguments must be an object")
-            operation_parameters = frame.get("operation_parameters", {})
+            operation_parameters = frame.get("OperationParameters", {})
             if not isinstance(operation_parameters, Mapping):
                 raise TypeError("nested invocation operation_parameters must be an object")
-            parent_invocation_id = str(frame["parent_invocation_id"]) if frame.get("parent_invocation_id") is not None else None
-            locale = str(frame["locale"]) if frame.get("locale") is not None else None
+            parent_invocation_id = str(frame["ParentInvocationId"]) if frame.get("ParentInvocationId") is not None else None
+            locale = str(frame["Locale"]) if frame.get("Locale") is not None else None
             with self._interaction_lock:
                 interaction = self._active_interactions.get(parent_invocation_id or "")
             output = invoke_handle_with_parent_context(
-                handle, parent_invocation_id, str(frame["operation_id"]), dict(arguments), dict(operation_parameters),
+                handle, parent_invocation_id, str(frame["OperationId"]), dict(arguments), dict(operation_parameters),
                 interaction, locale,
             )
             response = {
-                "kind": "core_response",
-                "request_id": request_id,
-                "success": output.success,
-                "result": output.result,
-                "error": output.error,
+                "Kind": "core_response",
+                "RequestId": request_id,
+                "Success": output.success,
+                "Result": output.result,
+                "Error": output.error,
             }
         except Exception as exc:
             response = {
-                "kind": "core_response",
-                "request_id": request_id,
-                "success": False,
-                "error": {"type": type(exc).__name__, "message": str(exc)},
+                "Kind": "core_response",
+                "RequestId": request_id,
+                "Success": False,
+                "Error": {"Type": type(exc).__name__, "Message": str(exc)},
             }
         self._write(response)
 
 
     def _interaction_for_frame(self, frame: Mapping[str, object]) -> AIiOperationInteractionProviderToCaller | None:
-        invocation_id = str(frame.get("invocation_id", ""))
+        invocation_id = str(frame.get("InvocationId", ""))
         with self._interaction_lock:
             return self._active_interactions.get(invocation_id)
 
     def _interaction_response(
         self, frame: Mapping[str, object], *, result: object | None = None, error: Mapping[str, object] | None = None
     ) -> None:
-        request_id = str(frame.get("request_id", ""))
+        request_id = str(frame.get("RequestId", ""))
         if not request_id:
             return
         self._write({
-            "kind": "operation_interaction_response",
-            "request_id": request_id,
-            "success": error is None,
-            "result": result,
-            "error": error,
+            "Kind": "operation_interaction_response",
+            "RequestId": request_id,
+            "Success": error is None,
+            "Result": result,
+            "Error": error,
         })
 
     def _handle_operation_interaction_features(self, frame: Mapping[str, object]) -> None:
         interaction = self._interaction_for_frame(frame)
-        raw = frame.get("features", {})
+        raw = frame.get("Features", {})
         if interaction is None or not isinstance(raw, Mapping):
             return
         interaction.declare_features(AIcOperationInteractionFeatures(
-            progress_reporting=bool(raw.get("progress_reporting", False)),
-            cancellation=bool(raw.get("cancellation", False)),
-            detail_level=bool(raw.get("detail_level", False)),
-            reporting_interval=bool(raw.get("reporting_interval", False)),
+            progress_reporting=bool(raw.get("ProgressReporting", False)),
+            cancellation=bool(raw.get("Cancellation", False)),
+            detail_level=bool(raw.get("DetailLevel", False)),
+            reporting_interval=bool(raw.get("ReportingInterval", False)),
             supported_state_result_delivery_modes=tuple(
                 AInStateResultDeliveryMode(str(value))
-                for value in raw.get("supported_state_result_delivery_modes", ("ON_DEMAND_COMPLETE",))
+                for value in raw.get("SupportedStateResultDeliveryModes", ("on_demand_complete",))
             ),
         ))
 
     def _handle_operation_interaction_events(self, frame: Mapping[str, object]) -> None:
         interaction = self._interaction_for_frame(frame)
-        raw_events = frame.get("events", ())
+        raw_events = frame.get("Events", ())
         if interaction is None or not isinstance(raw_events, (list, tuple)):
             return
         events = tuple(
@@ -419,41 +438,41 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
     def _handle_operation_interaction_state_result_changed(self, frame: Mapping[str, object]) -> None:
         interaction = self._interaction_for_frame(frame)
         if interaction is None:
-            self._interaction_response(frame, error={"type": "UnknownInvocation", "message": "operation interaction is no longer active"})
+            self._interaction_response(frame, error={"Type": "UnknownInvocation", "Message": "operation interaction is no longer active"})
             return
         try:
-            self._interaction_response(frame, result={"revision": interaction.state_result_changed()})
+            self._interaction_response(frame, result={"Revision": interaction.state_result_changed()})
         except Exception as exc:
-            self._interaction_response(frame, error={"type": type(exc).__name__, "message": str(exc)})
+            self._interaction_response(frame, error={"Type": type(exc).__name__, "Message": str(exc)})
 
     def _handle_operation_interaction_update_state_result(self, frame: Mapping[str, object]) -> None:
         interaction = self._interaction_for_frame(frame)
         if interaction is None:
-            self._interaction_response(frame, error={"type": "UnknownInvocation", "message": "operation interaction is no longer active"})
+            self._interaction_response(frame, error={"Type": "UnknownInvocation", "Message": "operation interaction is no longer active"})
             return
         try:
-            self._interaction_response(frame, result={"revision": interaction.update_state_result(frame.get("state_result"))})
+            self._interaction_response(frame, result={"Revision": interaction.update_state_result(frame.get("StateResult"))})
         except Exception as exc:
-            self._interaction_response(frame, error={"type": type(exc).__name__, "message": str(exc)})
+            self._interaction_response(frame, error={"Type": type(exc).__name__, "Message": str(exc)})
 
     def _handle_operation_interaction_deliver_state_result(self, frame: Mapping[str, object]) -> None:
         interaction = self._interaction_for_frame(frame)
         if interaction is None:
-            self._interaction_response(frame, error={"type": "UnknownInvocation", "message": "operation interaction is no longer active"})
+            self._interaction_response(frame, error={"Type": "UnknownInvocation", "Message": "operation interaction is no longer active"})
             return
         try:
-            revision = int(frame["revision"]) if frame.get("revision") is not None else None
-            interaction.deliver_state_result(frame.get("state_result"), revision=revision)
+            revision = int(frame["revision"]) if frame.get("Revision") is not None else None
+            interaction.deliver_state_result(frame.get("StateResult"), revision=revision)
             self._interaction_response(frame, result={})
         except Exception as exc:
-            self._interaction_response(frame, error={"type": type(exc).__name__, "message": str(exc)})
+            self._interaction_response(frame, error={"Type": type(exc).__name__, "Message": str(exc)})
 
     def _handle_operation_interaction_caller_snapshot(self, frame: Mapping[str, object]) -> None:
         interaction = self._interaction_for_frame(frame)
         if interaction is None:
-            self._interaction_response(frame, error={"type": "UnknownInvocation", "message": "operation interaction is no longer active"})
+            self._interaction_response(frame, error={"Type": "UnknownInvocation", "Message": "operation interaction is no longer active"})
             return
-        self._interaction_response(frame, result={"caller": asdict(interaction.caller_snapshot())})
+        self._interaction_response(frame, result={"Caller": _wire_value(interaction.caller_snapshot())})
 
     def _process_failure_message(self) -> str:
         code = self._process.poll()

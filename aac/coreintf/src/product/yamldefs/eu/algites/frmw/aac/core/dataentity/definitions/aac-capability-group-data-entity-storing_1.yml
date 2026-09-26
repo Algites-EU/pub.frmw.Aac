@@ -1,9 +1,9 @@
-group:
-  id: _AAC.data-entity.storing
-  parent_group_id: _AAC.data-entity
-  name:
-    text: Data Entity Storing
-    resource_key: aac.data.entity.storing.name
-  description:
-    text: Capabilities that directly mutate stored Data Entity records.
-    resource_key: aac.data.entity.storing.description
+Group:
+  Id: _AAC.data-entity.storing
+  ParentGroupId: _AAC.data-entity
+  Name:
+    Text: Data Entity Storing
+    ResourceKey: aac.data.entity.storing.name
+  Description:
+    Text: Capabilities that directly mutate stored Data Entity records.
+    ResourceKey: aac.data.entity.storing.description

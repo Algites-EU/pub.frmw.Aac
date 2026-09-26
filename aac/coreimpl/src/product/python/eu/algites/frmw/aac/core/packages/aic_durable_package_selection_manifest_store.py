@@ -23,46 +23,46 @@ from eu.algites.frmw.aac.core.persistence.transactions import AIcDurableTransact
 
 def _selection_to_raw(item: AIcPackageSelection) -> dict[str, object]:
     return {
-        "application_scope_id": item.application_scope_id,
-        "component_id": item.component_id,
-        "component_version": item.component_version,
-        "sha256": item.sha256,
-        "selected_at": item.selected_at,
-        "previous_sha256": item.previous_sha256,
-        "previous_version": item.previous_version,
+        "ApplicationScopeId": item.application_scope_id,
+        "ComponentId": item.component_id,
+        "ComponentVersion": item.component_version,
+        "Sha256": item.sha256,
+        "SelectedAt": item.selected_at,
+        "PreviousSha256": item.previous_sha256,
+        "PreviousVersion": item.previous_version,
     }
 
 def _selection_from_raw(raw: Mapping[str, object]) -> AIcPackageSelection:
     return AIcPackageSelection(
-        str(raw["application_scope_id"]),
-        str(raw["component_id"]),
-        int(raw["component_version"]),
-        str(raw["sha256"]),
-        str(raw["selected_at"]),
-        str(raw["previous_sha256"]) if raw.get("previous_sha256") is not None else None,
-        int(raw["previous_version"]) if raw.get("previous_version") is not None else None,
+        str(raw["ApplicationScopeId"]),
+        str(raw["ComponentId"]),
+        int(raw["ComponentVersion"]),
+        str(raw["Sha256"]),
+        str(raw["SelectedAt"]),
+        str(raw["PreviousSha256"]) if raw.get("PreviousSha256") is not None else None,
+        int(raw["PreviousVersion"]) if raw.get("PreviousVersion") is not None else None,
     )
 
 def manifest_to_raw(manifest: AIcPackageSelectionManifest) -> dict[str, object]:
     return {
-        "format_version": 1,
-        "record_revision": manifest.record_revision,
-        "last_transaction_id": manifest.last_transaction_id,
-        "selections": [_selection_to_raw(item) for item in manifest.selections],
+        "FormatVersion": 1,
+        "RecordRevision": manifest.record_revision,
+        "LastTransactionId": manifest.last_transaction_id,
+        "Selections": [_selection_to_raw(item) for item in manifest.selections],
     }
 
 def manifest_from_raw(raw: Mapping[str, object]) -> AIcPackageSelectionManifest:
-    format_version = int(raw.get("format_version", 0))
+    format_version = int(raw.get("FormatVersion", 0))
     if format_version != 1:
         raise AIxPersistenceError("active package set requires format_version 1")
-    values = raw.get("selections", ())
+    values = raw.get("Selections", ())
     if not isinstance(values, list):
         raise AIxPersistenceError("active package set selections must be an array")
-    revision = raw.get("record_revision", 0)
+    revision = raw.get("RecordRevision", 0)
     return AIcPackageSelectionManifest(
         int(revision),
         tuple(_selection_from_raw(item) for item in values if isinstance(item, Mapping)),
-        str(raw["last_transaction_id"]) if raw.get("last_transaction_id") is not None else None,
+        str(raw["LastTransactionId"]) if raw.get("LastTransactionId") is not None else None,
     )
 
 class AIcDurablePackageSelectionManifestStore:
