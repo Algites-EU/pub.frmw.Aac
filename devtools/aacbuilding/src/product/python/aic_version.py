@@ -4,7 +4,7 @@ from pathlib import Path
 import re
 
 @dataclass(frozen=True)
-class AIcVersionContext:
+class AIcVersion:
     release_line: str
     revision: int
     qualifier_kind: str
