@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.invocation.aic_validated_operation_interaction_provider_proxy
+=============================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_validated_operation_interaction_provider_proxy
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_validated_operation_interaction_provider_proxy.AIcValidatedOperationInteractionProviderProxy
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcValidatedOperationInteractionProviderProxy(delegate: eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionProviderToCaller, operation, schema_registry)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionProviderToCaller`
+
+
+   Validate portable RUNNING state-result payloads while delegating interaction transport.
+
+
+   .. py:method:: declare_features(features: eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionFeatures) -> None
+
+
+   .. py:method:: report_events(events) -> None
+
+
+   .. py:method:: state_result_changed() -> int
+
+
+   .. py:method:: update_state_result(state_result: object) -> int
+
+
+   .. py:method:: deliver_state_result(state_result: object, *, revision: int | None = None) -> None
+
+
+   .. py:method:: caller_snapshot()
+
+

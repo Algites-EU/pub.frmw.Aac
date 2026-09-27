@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.catalog.aii_catalog_provider
+============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aii_catalog_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aii_catalog_provider.AIiCatalogProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiCatalogProvider
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: query(query: python.eu.algites.frmw.aac.core.catalog.models.AIcCatalogQuery) -> tuple[python.eu.algites.frmw.aac.core.catalog.models.AIcCatalogEntry, Ellipsis]
+      :abstractmethod:
+
+
+

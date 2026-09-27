@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.capability.aic_capability_group
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.aic_capability_group
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.capability.aic_capability_group.AIcCapabilityGroup
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCapabilityGroup
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: parent_group_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

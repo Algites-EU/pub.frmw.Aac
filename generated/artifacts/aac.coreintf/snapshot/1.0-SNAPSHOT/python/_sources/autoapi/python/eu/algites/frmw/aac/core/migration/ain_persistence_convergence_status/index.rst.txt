@@ -1,0 +1,40 @@
+python.eu.algites.frmw.aac.core.migration.ain_persistence_convergence_status
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.migration.ain_persistence_convergence_status
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.migration.ain_persistence_convergence_status.AInPersistenceConvergenceStatus
+
+
+Module Contents
+---------------
+
+.. py:class:: AInPersistenceConvergenceStatus
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Whether a persisted representation can be safely converged to the target write version.
+
+
+   .. py:attribute:: NOT_NEEDED
+      :value: 'NOT_NEEDED'
+
+
+
+   .. py:attribute:: SUPPORTED
+      :value: 'SUPPORTED'
+
+
+
+   .. py:attribute:: NOT_SUPPORTED
+      :value: 'NOT_SUPPORTED'
+
+
+

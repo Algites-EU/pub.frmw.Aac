@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.migration.aic_schema_compatibility_evaluator
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.migration.aic_schema_compatibility_evaluator
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.migration.aic_schema_compatibility_evaluator.AIcSchemaCompatibilityEvaluator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSchemaCompatibilityEvaluator
+
+   .. py:method:: assess(schema_id: str, schema_version: int, declaration: eu.algites.frmw.aac.core.descriptor.api.AIcPersistedSchemaDescriptor) -> eu.algites.frmw.aac.core.migration.api.AIcSchemaCompatibilityAssessment
+
+

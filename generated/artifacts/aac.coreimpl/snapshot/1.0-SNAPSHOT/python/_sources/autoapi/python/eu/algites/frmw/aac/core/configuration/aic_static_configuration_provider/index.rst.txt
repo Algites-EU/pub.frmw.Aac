@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.configuration.aic_static_configuration_provider
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_static_configuration_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_static_configuration_provider.AIcStaticConfigurationProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcStaticConfigurationProvider(contributions: Mapping[object, Iterable[eu.algites.frmw.aac.core.configuration.api.AIcConfigurationContribution]])
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.configuration.api.AIiConfigurationProvider`
+
+
+   In-memory read-only provider useful for bootstrap defaults/tests.
+
+
+   .. py:method:: contributions(request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest) -> tuple[eu.algites.frmw.aac.core.configuration.api.AIcConfigurationContribution, Ellipsis]
+
+

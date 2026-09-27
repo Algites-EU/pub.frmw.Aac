@@ -1,0 +1,77 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_operation_parameter_definition_descriptor
+========================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_operation_parameter_definition_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_operation_parameter_definition_descriptor.AIcOperationParameterDefinitionDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationParameterDefinitionDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText
+
+
+   .. py:attribute:: value_schema
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: enum_values
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_operation_parameter_enum_value_descriptor.AIcOperationParameterEnumValueDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: required
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: default
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: has_default
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: component_configurable
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: instance_configurable
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: invocation_overridable
+      :type:  bool
+      :value: False
+
+
+

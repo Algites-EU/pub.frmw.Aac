@@ -1,0 +1,38 @@
+python.eu.algites.frmw.aac.core.upgrade.aic_upgrade_migration_coordinator
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.upgrade.aic_upgrade_migration_coordinator
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.upgrade.aic_upgrade_migration_coordinator.AIcUpgradeMigrationCoordinator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUpgradeMigrationCoordinator
+
+   Validate persisted data for a target state and optionally converge it afterwards.
+
+   ``stage`` is strictly side-effect free. It validates configuration persistence and the
+   declarative Data Entity schema model of the target component set. Data Entity persistence
+   itself is intentionally not accessed here; generic data-storage capabilities are defined in a
+   later AAC layer.
+
+   ``converge`` therefore performs only best-effort configuration persistence convergence.
+
+
+   .. py:method:: stage(core, replacements: tuple[eu.algites.frmw.aac.core.descriptor.loader.AIcDiscoveredComponent, Ellipsis]) -> python.eu.algites.frmw.aac.core.upgrade.aic_upgrade_migration_stage.AIcUpgradeMigrationStage
+
+
+   .. py:method:: converge(core, stage: python.eu.algites.frmw.aac.core.upgrade.aic_upgrade_migration_stage.AIcUpgradeMigrationStage) -> python.eu.algites.frmw.aac.core.upgrade.aic_persistence_convergence_outcome.AIcPersistenceConvergenceOutcome
+
+      Try to persist validated migrations independently, never rolling back component cutover.
+
+
+

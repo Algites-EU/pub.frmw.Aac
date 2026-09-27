@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_contribution_provenance
+=======================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_contribution_provenance
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_contribution_provenance.AIcConfigurationContributionProvenance
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationContributionProvenance
+
+   .. py:attribute:: configuration_scope
+      :type:  python.eu.algites.frmw.aac.core.context.api.AIcConfigurationScope
+
+
+   .. py:attribute:: configuration_provider_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_provider_priority
+      :type:  int
+
+
+   .. py:attribute:: provider_record_revision
+      :type:  str | int | None
+      :value: None
+
+
+

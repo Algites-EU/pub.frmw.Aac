@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_context
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_context
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_context.AIcLifecycleContext
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcLifecycleContext
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

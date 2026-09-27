@@ -1,0 +1,30 @@
+python.eu.algites.frmw.aac.core.authentication.aic_environment_secret_provider
+==============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aic_environment_secret_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aic_environment_secret_provider.AIcEnvironmentSecretProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEnvironmentSecretProvider(prefix: str = '')
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.authentication.api.AIiSecretProvider`
+
+
+   .. py:attribute:: prefix
+      :value: ''
+
+
+
+   .. py:method:: resolve(reference: eu.algites.frmw.aac.core.authentication.api.AIcSecretReference, context: Mapping[str, object] | None = None) -> str
+
+

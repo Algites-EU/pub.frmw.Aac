@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_identity
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_identity
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_identity.AIcDataEntityIdentity
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDataEntityIdentity
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: uid
+      :type:  str
+
+

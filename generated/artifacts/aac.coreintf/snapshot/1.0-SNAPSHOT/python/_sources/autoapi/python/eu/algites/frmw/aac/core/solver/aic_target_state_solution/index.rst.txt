@@ -1,0 +1,64 @@
+python.eu.algites.frmw.aac.core.solver.aic_target_state_solution
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.solver.aic_target_state_solution
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.solver.aic_target_state_solution.AIcTargetStateSolution
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcTargetStateSolution
+
+   .. py:attribute:: selections
+      :type:  tuple[python.eu.algites.frmw.aac.core.solver.aic_target_state_selection.AIcTargetStateSelection, Ellipsis]
+
+
+   .. py:attribute:: explanations
+      :type:  tuple[python.eu.algites.frmw.aac.core.solver.aic_solver_explanation.AIcSolverExplanation, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: entitlement_diagnostics
+      :type:  tuple[python.eu.algites.frmw.aac.core.solver.aic_solver_entitlement_diagnostic.AIcSolverEntitlementDiagnostic, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: readiness_diagnostics
+      :type:  tuple[python.eu.algites.frmw.aac.core.solver.aic_solver_readiness_diagnostic.AIcSolverReadinessDiagnostic, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: recommended
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: contains_downgrade
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: freshness_penalty
+      :type:  int
+      :value: 0
+
+
+
+   .. py:property:: changed
+      :type: tuple[python.eu.algites.frmw.aac.core.solver.aic_target_state_selection.AIcTargetStateSelection, Ellipsis]
+
+
+

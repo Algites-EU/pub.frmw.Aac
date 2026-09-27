@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_evidence_verifier_registry
+======================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_evidence_verifier_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_evidence_verifier_registry.AIcEntitlementEvidenceVerifierRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementEvidenceVerifierRegistry
+
+   .. py:method:: register(evidence_type: str, verifier: eu.algites.frmw.aac.core.entitlement.api.AIiEntitlementEvidenceVerifier) -> None
+
+
+   .. py:method:: verify(evidence: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementEvidence) -> eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementEvidenceVerification
+
+

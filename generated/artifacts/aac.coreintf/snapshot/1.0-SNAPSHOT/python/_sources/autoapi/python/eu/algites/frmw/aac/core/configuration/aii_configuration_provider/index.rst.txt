@@ -1,0 +1,74 @@
+python.eu.algites.frmw.aac.core.configuration.aii_configuration_provider
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aii_configuration_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aii_configuration_provider.AIiConfigurationProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiConfigurationProvider
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:property:: revision_kind
+      :type: python.eu.algites.frmw.aac.core.persistence.api.AInRecordRevisionKind
+
+
+
+   .. py:method:: persistence_capabilities(request: python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationProviderRequest) -> tuple[python.eu.algites.frmw.aac.core.persistence.api.AInPersistenceCapability, Ellipsis]
+
+      Declare persistence guarantees independently from logical configuration operations.
+
+      The baseline is read-only. Writable providers override this method when they can guarantee
+      conditional single-record replacement or genuine multi-record transactions. An atomic
+      change-set inside one configuration document is still a single-record mutation and MUST
+      NOT be advertised as ``MULTI_RECORD_TRANSACTION`` merely because several properties change.
+
+
+
+   .. py:method:: snapshot(request: python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationProviderRequest) -> python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationProviderSnapshot | None
+
+      Return a versioned persisted snapshot when this provider exposes one.
+
+
+
+   .. py:method:: contributions(request: python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationProviderRequest) -> tuple[python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationContribution, Ellipsis]
+      :abstractmethod:
+
+
+      Return normalized contributions for one target in one concrete configuration-scope.
+
+
+
+   .. py:method:: capabilities(request: python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationProviderRequest) -> tuple[python.eu.algites.frmw.aac.core.configuration.models.AInConfigurationProviderCapability, Ellipsis]
+
+      Return technical provider capabilities for this target/scope/context.
+
+
+
+   .. py:method:: apply_changes(change_set: python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationChangeSet) -> python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationMutationResult
+
+      Atomically apply a normalized change-set when supported.
+
+
+
+   .. py:method:: replace_payload(request: python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationProviderRequest, payload: python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationPersistedPayload, expected_record_revision: str | int | None = None) -> python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationMutationResult
+
+      Atomically replace a complete versioned payload, primarily for Core-orchestrated migration.
+
+
+

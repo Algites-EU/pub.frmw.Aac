@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.invocation.aic_core_capability_handle
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_core_capability_handle
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_core_capability_handle.AIcCoreCapabilityHandle
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCoreCapabilityHandle(binding: eu.algites.frmw.aac.core.instances.api.AIcBinding, endpoints: python.eu.algites.frmw.aac.core.invocation.aic_endpoint_registry.AIcEndpointRegistry, dispatcher: python.eu.algites.frmw.aac.core.invocation.aic_invocation_dispatcher.AIcInvocationDispatcher)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.invocation.api.AIiCapabilityHandle`
+
+
+   .. py:property:: binding
+      :type: eu.algites.frmw.aac.core.instances.api.AIcBinding
+
+
+
+   .. py:method:: invoke(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionProviderToCaller | None = None, locale: str | None = None) -> eu.algites.frmw.aac.core.invocation.api.AIcInvocationOutput
+
+
+   .. py:method:: new_operation_interaction(*, listener: Callable[[object], None] | None = None, exception_factory: eu.algites.frmw.aac.core.invocation.api.AIiOperationFailureExceptionFactory | None = None) -> eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionCallerToProvider
+
+
+   .. py:method:: invoke_completion(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionCallerToProvider | None = None, locale: str | None = None) -> eu.algites.frmw.aac.core.invocation.api.AIcOperationCompletion
+
+
+   .. py:method:: start(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionCallerToProvider | None = None, locale: str | None = None) -> eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionCallerToProvider
+
+

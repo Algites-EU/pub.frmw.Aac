@@ -1,0 +1,36 @@
+python.eu.algites.frmw.aac.core.runtime.aic_process_capability_handle
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.aic_process_capability_handle
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.aic_process_capability_handle.AIcProcessCapabilityHandle
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProcessCapabilityHandle(binding: python.eu.algites.frmw.aac.core.instances.api.AIcBinding, requirement_id: str, handle_index: int, channel: AIcHostChannel)
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.invocation.api.AIiCapabilityHandle`
+
+
+   Process-local consumer handle backed by Core over the host control channel.
+
+
+   .. py:property:: binding
+      :type: python.eu.algites.frmw.aac.core.instances.api.AIcBinding
+
+
+
+   .. py:method:: invoke(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: python.eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionProviderToCaller | None = None, locale: str | None = None) -> python.eu.algites.frmw.aac.core.invocation.api.AIcInvocationOutput
+
+
+   .. py:method:: start(operation_id: str, arguments: Mapping[str, object] | None = None, *, operation_parameters: Mapping[str, object] | None = None, operation_interaction: python.eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionCallerToProvider | None = None, locale: str | None = None) -> python.eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionCallerToProvider
+
+

@@ -1,0 +1,24 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_document_loader
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_document_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_document_loader.AIcEntitlementDocumentLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementDocumentLoader
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementDocument
+      :staticmethod:
+
+
+

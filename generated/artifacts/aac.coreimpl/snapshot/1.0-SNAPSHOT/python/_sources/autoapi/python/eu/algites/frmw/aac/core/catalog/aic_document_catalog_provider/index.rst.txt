@@ -1,0 +1,50 @@
+python.eu.algites.frmw.aac.core.catalog.aic_document_catalog_provider
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_document_catalog_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_document_catalog_provider.AIcDocumentCatalogProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDocumentCatalogProvider(source_id: str, uri: str, *, authentication: eu.algites.frmw.aac.core.authentication.implementation.AIcAuthenticationService | None = None, authentication_profile_id: str | None = None, timeout_seconds: float = 30.0, context: Mapping[str, object] | None = None)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.catalog.api.AIiCatalogProvider`
+
+
+   .. py:attribute:: source_id
+
+
+   .. py:attribute:: uri
+
+
+   .. py:attribute:: authentication
+      :value: None
+
+
+
+   .. py:attribute:: authentication_profile_id
+      :value: None
+
+
+
+   .. py:attribute:: timeout_seconds
+
+
+   .. py:attribute:: context
+
+
+   .. py:method:: document() -> eu.algites.frmw.aac.core.catalog.api.AIcCatalogDocument
+
+
+   .. py:method:: query(query: eu.algites.frmw.aac.core.catalog.api.AIcCatalogQuery) -> tuple[eu.algites.frmw.aac.core.catalog.api.AIcCatalogEntry, Ellipsis]
+
+

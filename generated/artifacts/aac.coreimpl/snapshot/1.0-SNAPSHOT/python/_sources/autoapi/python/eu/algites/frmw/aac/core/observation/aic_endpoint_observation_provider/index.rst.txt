@@ -1,0 +1,49 @@
+python.eu.algites.frmw.aac.core.observation.aic_endpoint_observation_provider
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.observation.aic_endpoint_observation_provider
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.observation.aic_endpoint_observation_provider.OBSERVATION_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.observation.aic_endpoint_observation_provider.AIcEndpointObservationProvider
+
+
+Module Contents
+---------------
+
+.. py:data:: OBSERVATION_CAPABILITY_ID
+   :value: '_AAC.capability.observation'
+
+
+.. py:class:: AIcEndpointObservationProvider(instance_id: str, endpoint: eu.algites.frmw.aac.core.invocation.api.AIiCapabilityEndpoint, invocation_dispatcher)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.observation.api.AIiObservationProvider`
+
+
+   Observation-provider adapter for non-object endpoints such as process runtimes.
+
+
+   .. py:attribute:: instance_id
+
+
+   .. py:attribute:: endpoint
+
+
+   .. py:attribute:: invocation_dispatcher
+
+
+   .. py:method:: observe_1(observation_input: eu.algites.frmw.aac.core.observation.api.AIcObservationInput) -> eu.algites.frmw.aac.core.observation.api.AIcObservationOutput
+
+

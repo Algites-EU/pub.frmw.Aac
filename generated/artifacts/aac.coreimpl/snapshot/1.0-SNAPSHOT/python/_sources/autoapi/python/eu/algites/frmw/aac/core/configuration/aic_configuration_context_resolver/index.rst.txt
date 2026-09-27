@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_context_resolver
+================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_context_resolver
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_context_resolver.AIcConfigurationContextResolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationContextResolver(resolvers: python.eu.algites.frmw.aac.core.configuration.aic_configuration_scope_resolver_registry.AIcConfigurationScopeResolverRegistry)
+
+   .. py:attribute:: resolvers
+
+
+   .. py:method:: resolve(profile: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProfile, context: Mapping[str, object]) -> tuple[eu.algites.frmw.aac.core.configuration.api.AIcResolvedConfigurationScope, Ellipsis]
+
+

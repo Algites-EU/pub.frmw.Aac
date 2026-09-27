@@ -1,0 +1,59 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_grant_provenance
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_grant_provenance
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_grant_provenance.AIcEntitlementGrantProvenance
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementGrantProvenance
+
+   .. py:attribute:: entitlement_provider_id
+      :type:  str
+
+
+   .. py:attribute:: entitlement_id
+      :type:  str
+
+
+   .. py:attribute:: issuer_id
+      :type:  str
+
+
+   .. py:attribute:: licensing_scope
+      :type:  python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_licensing_scope.AIcEntitlementLicensingScope
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permission_id
+      :type:  str
+
+
+   .. py:attribute:: valid_from
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: valid_until
+      :type:  str | None
+      :value: None
+
+
+

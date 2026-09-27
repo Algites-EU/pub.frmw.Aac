@@ -1,0 +1,46 @@
+python.eu.algites.frmw.aac.ui.aic_ui_configuration_scope
+========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_configuration_scope
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_configuration_scope.AIcUiConfigurationScope
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiConfigurationScope
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: editable
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: policy_authority
+      :type:  bool
+      :value: False
+
+
+
+   .. py:property:: key
+      :type: str
+
+
+

@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.schemas.resources
+=================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.schemas.resources
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.schemas.resources.schema_relative_path
+   python.eu.algites.frmw.aac.core.schemas.resources.read_core_schema
+
+
+Module Contents
+---------------
+
+.. py:function:: schema_relative_path(resource_name: str) -> str
+
+.. py:function:: read_core_schema(resource_name: str) -> str
+

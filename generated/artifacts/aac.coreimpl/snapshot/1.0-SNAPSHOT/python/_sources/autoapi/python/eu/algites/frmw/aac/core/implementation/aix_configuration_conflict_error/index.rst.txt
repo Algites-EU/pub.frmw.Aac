@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.implementation.aix_configuration_conflict_error
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.implementation.aix_configuration_conflict_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.implementation.aix_configuration_conflict_error.AIxConfigurationConflictError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxConfigurationConflictError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.implementation.aix_configuration_error.AIxConfigurationError`
+
+

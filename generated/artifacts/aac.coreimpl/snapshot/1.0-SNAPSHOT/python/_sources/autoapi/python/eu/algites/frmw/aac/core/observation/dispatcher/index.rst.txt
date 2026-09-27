@@ -1,0 +1,21 @@
+python.eu.algites.frmw.aac.core.observation.dispatcher
+======================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.observation.dispatcher
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.observation.dispatcher.OBSERVATION_CAPABILITY_ID
+
+
+Module Contents
+---------------
+
+.. py:data:: OBSERVATION_CAPABILITY_ID
+   :value: '_AAC.capability.observation'
+
+

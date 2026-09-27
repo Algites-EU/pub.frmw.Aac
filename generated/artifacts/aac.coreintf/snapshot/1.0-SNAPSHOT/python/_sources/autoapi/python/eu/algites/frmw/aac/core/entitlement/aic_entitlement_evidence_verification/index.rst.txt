@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_evidence_verification
+=================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_evidence_verification
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_evidence_verification.AIcEntitlementEvidenceVerification
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementEvidenceVerification
+
+   .. py:attribute:: valid
+      :type:  bool
+
+
+   .. py:attribute:: verifier_id
+      :type:  str
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: signer_identity
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

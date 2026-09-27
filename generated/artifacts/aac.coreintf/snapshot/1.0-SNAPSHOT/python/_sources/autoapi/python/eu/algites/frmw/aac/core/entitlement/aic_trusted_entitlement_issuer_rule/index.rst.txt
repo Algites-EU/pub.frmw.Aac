@@ -1,0 +1,44 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_trusted_entitlement_issuer_rule
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_trusted_entitlement_issuer_rule
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_trusted_entitlement_issuer_rule.AIcTrustedEntitlementIssuerRule
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcTrustedEntitlementIssuerRule
+
+   .. py:attribute:: issuer_id
+      :type:  str
+
+
+   .. py:attribute:: component_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: evidence_types
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: signer_identities
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: allows(component_id: str, evidence_type: str, signer_identity: str | None = None) -> bool
+
+

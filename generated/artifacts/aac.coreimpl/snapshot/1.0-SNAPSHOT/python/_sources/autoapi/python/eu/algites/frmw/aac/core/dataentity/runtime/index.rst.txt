@@ -1,0 +1,64 @@
+python.eu.algites.frmw.aac.core.dataentity.runtime
+==================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.runtime
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.runtime.T
+   python.eu.algites.frmw.aac.core.dataentity.runtime.GET_RECORD_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.runtime.QUERY_RECORDS_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.runtime.APPLY_DIRECT_RECORD_CHANGES_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.runtime.INSPECT_STORAGE_SUPPORT_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.runtime.ENSURE_STORAGE_SUPPORT_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.runtime.RETIRE_STORAGE_SUPPORT_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.runtime.CREATE_STORAGE_BACKUP_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.runtime.INSPECT_STORAGE_BACKUP_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.runtime.RESTORE_STORAGE_BACKUP_CAPABILITY_ID
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:data:: GET_RECORD_CAPABILITY_ID
+   :value: '_AAC.data-entity.get-record'
+
+
+.. py:data:: QUERY_RECORDS_CAPABILITY_ID
+   :value: '_AAC.data-entity.query-records'
+
+
+.. py:data:: APPLY_DIRECT_RECORD_CHANGES_CAPABILITY_ID
+   :value: '_AAC.data-entity.apply-direct-record-changes'
+
+
+.. py:data:: INSPECT_STORAGE_SUPPORT_CAPABILITY_ID
+   :value: '_AAC.data-entity.inspect-storage-support'
+
+
+.. py:data:: ENSURE_STORAGE_SUPPORT_CAPABILITY_ID
+   :value: '_AAC.data-entity.ensure-storage-support'
+
+
+.. py:data:: RETIRE_STORAGE_SUPPORT_CAPABILITY_ID
+   :value: '_AAC.data-entity.retire-storage-support'
+
+
+.. py:data:: CREATE_STORAGE_BACKUP_CAPABILITY_ID
+   :value: '_AAC.data-entity.create-storage-backup'
+
+
+.. py:data:: INSPECT_STORAGE_BACKUP_CAPABILITY_ID
+   :value: '_AAC.data-entity.inspect-storage-backup'
+
+
+.. py:data:: RESTORE_STORAGE_BACKUP_CAPABILITY_ID
+   :value: '_AAC.data-entity.restore-storage-backup'
+
+

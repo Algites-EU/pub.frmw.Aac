@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.capability.aic_authorization_permission_descriptor
+==================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.aic_authorization_permission_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.capability.aic_authorization_permission_descriptor.AIcAuthorizationPermissionDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAuthorizationPermissionDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

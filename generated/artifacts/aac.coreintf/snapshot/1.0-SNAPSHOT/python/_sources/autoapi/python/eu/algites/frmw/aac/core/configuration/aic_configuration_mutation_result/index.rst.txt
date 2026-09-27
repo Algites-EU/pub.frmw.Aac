@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_mutation_result
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_mutation_result
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_mutation_result.AIcConfigurationMutationResult
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationMutationResult
+
+   .. py:attribute:: record_revision
+      :type:  str | int | None
+      :value: None
+
+
+
+   .. py:attribute:: changed_property_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

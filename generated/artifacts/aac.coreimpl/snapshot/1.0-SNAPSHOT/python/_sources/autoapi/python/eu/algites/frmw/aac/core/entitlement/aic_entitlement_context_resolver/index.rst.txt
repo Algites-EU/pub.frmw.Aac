@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_context_resolver
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_context_resolver
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_context_resolver.AIcEntitlementContextResolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementContextResolver(resolvers: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_licensing_scope_resolver_registry.AIcEntitlementLicensingScopeResolverRegistry)
+
+   .. py:attribute:: resolvers
+
+
+   .. py:method:: resolve(profile: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementProfile, context: Mapping[str, object]) -> tuple[eu.algites.frmw.aac.core.entitlement.api.AIcResolvedEntitlementLicensingScope, Ellipsis]
+
+

@@ -1,0 +1,61 @@
+python.eu.algites.frmw.aac.ui.aic_ui_configuration_provider_option
+==================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_configuration_provider_option
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_configuration_provider_option.AIcUiConfigurationProviderOption
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiConfigurationProviderOption
+
+   .. py:attribute:: configuration_scope
+      :type:  python.eu.algites.frmw.aac.ui.aic_ui_configuration_scope.AIcUiConfigurationScope
+
+
+   .. py:attribute:: configuration_provider_id
+      :type:  str
+
+
+   .. py:attribute:: technical_capabilities
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: authorized_capabilities
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: record_revision
+      :type:  str | int | None
+      :value: None
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:property:: can_write_value
+      :type: bool
+
+
+
+   .. py:property:: can_write_policy
+      :type: bool
+
+
+

@@ -1,0 +1,33 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_subject
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_subject
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_subject.AIcEntitlementSubject
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementSubject
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: display_name
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: attributes
+      :type:  Mapping[str, object]
+
+

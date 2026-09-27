@@ -1,0 +1,111 @@
+python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine
+==============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcLifecycleEngine(*, contract_catalog: eu.algites.frmw.aac.core.capability.catalog.AIcActiveContractCatalog, provisioning: eu.algites.frmw.aac.core.provisioning.engine.AIcProvisioningEngine, entitlement: eu.algites.frmw.aac.core.entitlement.runtime.AIcEntitlementManager | None = None, store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore | None = None, endpoints: eu.algites.frmw.aac.core.invocation.dispatcher.AIcEndpointRegistry | None = None, handles: eu.algites.frmw.aac.core.invocation.dispatcher.AIcCapabilityHandleFactory | None = None, observations: eu.algites.frmw.aac.core.observation.dispatcher.AIcObservationDispatcher | None = None, verifier: eu.algites.frmw.aac.core.verification.api.AIiPackageVerifier | None = None)
+
+   .. py:attribute:: contract_catalog
+
+
+   .. py:attribute:: provisioning
+
+
+   .. py:attribute:: entitlement
+
+
+   .. py:attribute:: store
+
+
+   .. py:attribute:: endpoints
+
+
+   .. py:attribute:: handles
+      :value: None
+
+
+
+   .. py:attribute:: observations
+      :value: None
+
+
+
+   .. py:attribute:: verifier
+
+
+   .. py:attribute:: licensing_scopes
+      :type:  tuple[eu.algites.frmw.aac.core.entitlement.api.AIcResolvedEntitlementLicensingScope, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: entitlement_context
+      :type:  Mapping[str, object]
+
+
+   .. py:method:: status(application_scope_id: str, component_id: str) -> eu.algites.frmw.aac.core.lifecycle.api.AIcLifecycleStatus
+
+
+   .. py:method:: prepare_component(application_scope_id: str, component: eu.algites.frmw.aac.core.descriptor.loader.AIcDiscoveredComponent) -> eu.algites.frmw.aac.core.lifecycle.api.AIcLifecycleStatus
+
+
+   .. py:method:: mark_resolved(application_scope_id: str, descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor) -> eu.algites.frmw.aac.core.lifecycle.api.AIcLifecycleStatus
+
+
+   .. py:method:: activate_instance(application_scope_id: str, descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor, instance_id: str, bindings: tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis], *, component_configuration: eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration | None = None, provider_instance_configuration: eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration | None = None) -> eu.algites.frmw.aac.core.runtime.api.AIiProviderRuntime
+
+
+   .. py:method:: activate(application_scope_id: str, component: eu.algites.frmw.aac.core.descriptor.loader.AIcDiscoveredComponent, *, bindings: tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis] = ()) -> python.eu.algites.frmw.aac.core.lifecycle.aic_activation_outcome.AIcActivationOutcome
+
+
+   .. py:method:: provider_readiness(application_scope_id: str, provider_instance_id: str) -> eu.algites.frmw.aac.core.readiness.api.AIcProviderReadiness | None
+
+
+   .. py:method:: component_readiness(application_scope_id: str, component_id: str) -> eu.algites.frmw.aac.core.readiness.api.AIcComponentReadiness
+
+
+   .. py:method:: capability_readiness(application_scope_id: str) -> tuple[eu.algites.frmw.aac.core.readiness.api.AIcCapabilityReadiness, Ellipsis]
+
+
+   .. py:method:: refresh_instance_readiness(application_scope_id: str, descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor, instance_id: str, *, component_configuration: eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration | None = None, provider_configuration: eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration | None = None) -> eu.algites.frmw.aac.core.readiness.api.AIcProviderReadiness
+
+
+   .. py:method:: suspend_instance(instance_id: str, reason: str) -> None
+
+
+   .. py:method:: deactivate_instance(instance_id: str, reason: str) -> None
+
+
+   .. py:method:: suspend(application_scope_id: str, descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor, reason: str) -> eu.algites.frmw.aac.core.lifecycle.api.AIcLifecycleStatus
+
+
+   .. py:method:: deactivate(application_scope_id: str, descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor, reason: str) -> eu.algites.frmw.aac.core.lifecycle.api.AIcLifecycleStatus
+
+
+   .. py:method:: revalidate_entitlements(application_scope_id: str, descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor) -> tuple[str, Ellipsis]
+
+      Refresh effective permission contexts without rebuilding the binding graph.
+
+
+
+   .. py:method:: runtime(instance_id: str) -> eu.algites.frmw.aac.core.runtime.api.AIiProviderRuntime
+
+
+   .. py:method:: runtime_instance_ids() -> tuple[str, Ellipsis]
+
+
+   .. py:method:: deactivate_all_runtimes(reason: str) -> tuple[str, Ellipsis]
+
+

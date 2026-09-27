@@ -1,0 +1,32 @@
+python.eu.algites.frmw.aac.core.capability.aic_provided_capability
+==================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.aic_provided_capability
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.capability.aic_provided_capability.AIcProvidedCapability
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProvidedCapability
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:property:: latest_version
+      :type: int
+
+
+

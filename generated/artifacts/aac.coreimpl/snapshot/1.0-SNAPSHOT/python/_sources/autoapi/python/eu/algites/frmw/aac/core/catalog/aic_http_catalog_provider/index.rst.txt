@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.catalog.aic_http_catalog_provider
+=================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_http_catalog_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_http_catalog_provider.AIcHttpCatalogProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcHttpCatalogProvider
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.catalog.aic_document_catalog_provider.AIcDocumentCatalogProvider`
+
+

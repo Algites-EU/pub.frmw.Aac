@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.descriptor.loader
+=================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.loader
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.loader.read_discovered_resource
+   python.eu.algites.frmw.aac.core.descriptor.loader.iter_discovered_resources
+
+
+Module Contents
+---------------
+
+.. py:function:: read_discovered_resource(discovered: python.eu.algites.frmw.aac.core.descriptor.aic_discovered_component.AIcDiscoveredComponent, resource_name: str) -> tuple[str, str]
+
+   Read a component resource from its exact candidate artifact when available.
+
+
+.. py:function:: iter_discovered_resources(discovered: python.eu.algites.frmw.aac.core.descriptor.aic_discovered_component.AIcDiscoveredComponent, directory: str, *, suffix: str | None = None) -> tuple[tuple[str, str, str], Ellipsis]
+
+   Return ``(name, text, source)`` resources from the exact candidate package.
+
+

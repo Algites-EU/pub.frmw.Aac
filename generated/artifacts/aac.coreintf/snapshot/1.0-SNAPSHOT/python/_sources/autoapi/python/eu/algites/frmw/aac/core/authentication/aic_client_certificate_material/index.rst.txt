@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.authentication.aic_client_certificate_material
+==============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aic_client_certificate_material
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aic_client_certificate_material.AIcClientCertificateMaterial
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcClientCertificateMaterial
+
+   .. py:attribute:: certificate_path
+      :type:  str
+
+
+   .. py:attribute:: private_key_path
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: private_key_password
+      :type:  str | None
+      :value: None
+
+
+

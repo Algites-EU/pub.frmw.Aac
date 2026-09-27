@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_manager
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_manager
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_manager.AIcEntitlementManager
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementManager(providers: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_provider_registry.AIcEntitlementProviderRegistry | None = None, verifiers: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_evidence_verifier_registry.AIcEntitlementEvidenceVerifierRegistry | None = None, trusted_issuers: eu.algites.frmw.aac.core.entitlement.trust.AIcTrustedEntitlementIssuerRegistry | None = None, request_validator: Callable[[eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementDocument], None] | None = None)
+
+   Validate evidence and aggregate effective rights per capability version.
+
+
+   .. py:attribute:: providers
+
+
+   .. py:attribute:: verifiers
+
+
+   .. py:attribute:: trusted_issuers
+
+
+   .. py:attribute:: request_validator
+      :value: None
+
+
+
+   .. py:method:: evaluate_component(descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor, *, licensing_scopes: tuple[eu.algites.frmw.aac.core.entitlement.api.AIcResolvedEntitlementLicensingScope, Ellipsis] = (), provider_instance: eu.algites.frmw.aac.core.instances.api.AIcProviderInstance | None = None, context: Mapping[str, object] | None = None, now: datetime.datetime | None = None) -> eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementContext
+
+
+   .. py:method:: cached_context(component_id: str, provider_instance_id: str | None = None) -> eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementContext | None
+
+
+   .. py:method:: cached_contexts() -> tuple[eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementContext, Ellipsis]
+
+

@@ -1,0 +1,6 @@
+python.eu.algites.frmw.aac.core.interaction.controller
+======================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.interaction.controller
+
+

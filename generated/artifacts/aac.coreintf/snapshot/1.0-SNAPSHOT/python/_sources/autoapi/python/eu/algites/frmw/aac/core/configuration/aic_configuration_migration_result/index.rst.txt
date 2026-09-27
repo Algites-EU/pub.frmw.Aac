@@ -1,0 +1,41 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_migration_result
+================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_migration_result
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_migration_result.AIcConfigurationMigrationResult
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationMigrationResult
+
+   .. py:attribute:: configuration_schema_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_schema_version
+      :type:  int
+
+
+   .. py:attribute:: values
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: policies
+      :type:  Mapping[str, tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_policy.AIcConfigurationPolicy, Ellipsis]]
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.authentication.aic_bearer_authentication_handler
+================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aic_bearer_authentication_handler
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aic_bearer_authentication_handler.AIcBearerAuthenticationHandler
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcBearerAuthenticationHandler
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.authentication.api.AIiAuthenticationHandler`
+
+
+   .. py:method:: authenticate(request, secret_resolver)
+
+

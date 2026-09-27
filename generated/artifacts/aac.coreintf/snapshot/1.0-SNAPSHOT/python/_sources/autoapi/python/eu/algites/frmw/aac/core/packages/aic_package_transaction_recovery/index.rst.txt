@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_transaction_recovery
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_transaction_recovery
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_transaction_recovery.AIcPackageTransactionRecovery
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageTransactionRecovery
+
+   .. py:attribute:: transaction_id
+      :type:  str
+
+
+   .. py:attribute:: phase
+      :type:  python.eu.algites.frmw.aac.core.persistence.api.AInPersistenceTransactionPhase
+
+
+   .. py:attribute:: action
+      :type:  str
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

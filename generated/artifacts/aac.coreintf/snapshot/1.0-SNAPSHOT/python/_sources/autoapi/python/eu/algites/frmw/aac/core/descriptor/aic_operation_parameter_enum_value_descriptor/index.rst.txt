@@ -1,0 +1,33 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_operation_parameter_enum_value_descriptor
+========================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_operation_parameter_enum_value_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_operation_parameter_enum_value_descriptor.AIcOperationParameterEnumValueDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationParameterEnumValueDescriptor
+
+   .. py:attribute:: value
+      :type:  object
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+

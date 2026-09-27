@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.solver.aic_solver_requirement
+=============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.solver.aic_solver_requirement
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.solver.aic_solver_requirement.AIcSolverRequirement
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSolverRequirement
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: cardinality
+      :type:  eu.algites.frmw.aac.core.capability.api.AInConsumerCardinality
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+
+

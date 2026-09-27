@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.readiness.aic_readiness_reason
+==============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.readiness.aic_readiness_reason
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.readiness.aic_readiness_reason.AIcReadinessReason
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcReadinessReason
+
+   .. py:attribute:: code
+      :type:  str
+
+
+   .. py:attribute:: message
+      :type:  str
+
+
+   .. py:attribute:: state
+      :type:  python.eu.algites.frmw.aac.core.readiness.ain_readiness_state.AInReadinessState
+
+
+   .. py:attribute:: requirement_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: key
+      :type:  str | None
+      :value: None
+
+
+

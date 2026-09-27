@@ -1,0 +1,33 @@
+python.eu.algites.frmw.aac.ui.aic_ui_choice
+===========================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_choice
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_choice.AIcUiChoice
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiChoice
+
+   .. py:attribute:: value
+      :type:  object
+
+
+   .. py:attribute:: label
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText
+
+
+   .. py:attribute:: description
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+

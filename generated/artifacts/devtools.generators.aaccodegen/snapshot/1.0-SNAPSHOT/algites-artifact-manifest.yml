@@ -1,0 +1,13 @@
+ManifestVersion: 1
+Artifact:
+  RepositoryId: pub.frmw.Aac
+  LocalArtifactId: devtools.generators.aaccodegen
+  ArtifactCoordinateId: pub.frmw.Aac_devtools.generators.aaccodegen
+  GroupId: eu.algites.frmw.aac
+  Version: 1.0-SNAPSHOT
+  SourcePath: devtools/generators/aaccodegen
+  StructureKind: artifact
+  Name: "Algites AAC Code Generator"
+  Description: "Public shared generators for canonical AAC capability and Data"
+SourceMetadata:
+  DescriptorHierarchy:

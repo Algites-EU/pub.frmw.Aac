@@ -1,0 +1,19 @@
+python.eu.algites.frmw.aac.core.readiness.evaluator
+===================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.readiness.evaluator
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.readiness.evaluator.worst_readiness
+
+
+Module Contents
+---------------
+
+.. py:function:: worst_readiness(*states: eu.algites.frmw.aac.core.readiness.api.AInReadinessState) -> eu.algites.frmw.aac.core.readiness.api.AInReadinessState
+

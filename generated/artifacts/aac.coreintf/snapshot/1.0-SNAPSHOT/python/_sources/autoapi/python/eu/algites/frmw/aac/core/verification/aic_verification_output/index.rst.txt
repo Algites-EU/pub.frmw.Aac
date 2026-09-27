@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.verification.aic_verification_output
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.verification.aic_verification_output
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.verification.aic_verification_output.AIcVerificationOutput
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcVerificationOutput
+
+   .. py:attribute:: valid
+      :type:  bool
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: verifier_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: signer_identity
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

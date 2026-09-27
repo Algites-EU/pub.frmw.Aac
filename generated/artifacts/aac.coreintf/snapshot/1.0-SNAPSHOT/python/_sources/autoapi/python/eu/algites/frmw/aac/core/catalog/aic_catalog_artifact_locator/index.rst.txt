@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_artifact_locator
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_artifact_locator
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_artifact_locator.AIcCatalogArtifactLocator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogArtifactLocator
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: uri
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: repository_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: coordinates
+      :type:  Mapping[str, object]
+
+

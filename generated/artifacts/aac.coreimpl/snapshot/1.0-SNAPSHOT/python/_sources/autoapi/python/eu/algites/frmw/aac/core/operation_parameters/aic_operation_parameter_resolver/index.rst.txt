@@ -1,0 +1,41 @@
+python.eu.algites.frmw.aac.core.operation_parameters.aic_operation_parameter_resolver
+=====================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.operation_parameters.aic_operation_parameter_resolver
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.operation_parameters.aic_operation_parameter_resolver.AIcOperationParameterResolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationParameterResolver(configuration_store: python.eu.algites.frmw.aac.core.operation_parameters.aic_operation_parameter_configuration_store.AIcOperationParameterConfigurationStore)
+
+   Resolve definition default -> component -> provider instance -> invocation override.
+
+
+   .. py:attribute:: configuration_store
+
+
+   .. py:method:: validate_definition(parameter: eu.algites.frmw.aac.core.descriptor.api.AIcOperationParameterDefinitionDescriptor) -> None
+      :staticmethod:
+
+
+
+   .. py:method:: validate_provider_definition(provider: eu.algites.frmw.aac.core.descriptor.api.AIcProviderDefinitionDescriptor) -> None
+      :classmethod:
+
+
+
+   .. py:method:: resolve(provider: eu.algites.frmw.aac.core.descriptor.api.AIcProviderDefinitionDescriptor, *, component_id: str, component_version: int, provider_instance_id: str, capability_id: str, capability_version: int, operation_id: str, invocation_overrides: Mapping[str, object] | None = None) -> dict[str, object]
+
+
+   .. py:method:: validate_configured_value(parameter: eu.algites.frmw.aac.core.descriptor.api.AIcOperationParameterDefinitionDescriptor, value: object, *, scope: str) -> None
+
+

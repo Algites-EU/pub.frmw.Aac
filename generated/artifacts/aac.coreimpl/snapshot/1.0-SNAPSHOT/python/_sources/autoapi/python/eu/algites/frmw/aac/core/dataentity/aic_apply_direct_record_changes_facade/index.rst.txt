@@ -1,0 +1,56 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_apply_direct_record_changes_facade
+=================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_apply_direct_record_changes_facade
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_apply_direct_record_changes_facade.APPLY_DIRECT_RECORD_CHANGES_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_apply_direct_record_changes_facade.AIcApplyDirectRecordChangesFacade
+
+
+Module Contents
+---------------
+
+.. py:data:: APPLY_DIRECT_RECORD_CHANGES_CAPABILITY_ID
+   :value: '_AAC.data-entity.apply-direct-record-changes'
+
+
+.. py:class:: AIcApplyDirectRecordChangesFacade
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.dataentity.aic_bound_data_entity_capability_facade.AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.apply-direct-record-changes'
+
+
+
+   .. py:attribute:: write_operation
+      :value: True
+
+
+
+   .. py:method:: apply_raw(changes: tuple[Mapping[str, object], Ellipsis]) -> Mapping[str, object]
+
+
+   .. py:method:: save(envelope: eu.algites.frmw.aac.core.dataentity.api.AIcTypedDataEntityEnvelope[object]) -> Mapping[str, object]
+
+
+   .. py:method:: create(schema_id: str, uid: str, entity: object, *, state: eu.algites.frmw.aac.core.dataentity.api.AInDataEntityState = AInDataEntityState.ACTIVE) -> Mapping[str, object]
+
+
+   .. py:method:: delete(schema_id: str, uid: str, expected_record_revision: int | str) -> Mapping[str, object]
+
+

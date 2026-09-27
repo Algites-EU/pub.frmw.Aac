@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.implementation.aix_descriptor_validation_error
+==============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.implementation.aix_descriptor_validation_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.implementation.aix_descriptor_validation_error.AIxDescriptorValidationError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxDescriptorValidationError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.implementation.aix_core_implementation_error.AIxCoreImplementationError`
+
+

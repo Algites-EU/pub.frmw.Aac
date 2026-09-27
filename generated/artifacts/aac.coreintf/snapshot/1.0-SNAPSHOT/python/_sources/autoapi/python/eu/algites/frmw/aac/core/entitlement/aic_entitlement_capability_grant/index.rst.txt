@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_capability_grant
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_capability_grant
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_capability_grant.AIcEntitlementCapabilityGrant
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementCapabilityGrant
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permissions
+      :type:  tuple[python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_permission_grant.AIcEntitlementPermissionGrant, Ellipsis]
+
+

@@ -1,0 +1,77 @@
+python.eu.algites.frmw.aac.ui.aic_ui_requirement
+================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_requirement
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_requirement.AIcUiRequirement
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiRequirement
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: consumer_instance_name
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText
+
+
+   .. py:attribute:: requirement_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: cardinality
+      :type:  str
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+
+
+   .. py:attribute:: selected_provider_instance_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: requested_authorizations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: granted_authorizations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: name
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+

@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.dataentity.yamlfsdes.aic_operation_state_result_publisher
+====================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.dataentity.yamlfsdes.aic_operation_state_result_publisher
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.dataentity.yamlfsdes.aic_operation_state_result_publisher.AIcOperationStateResultPublisher
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationStateResultPublisher
+
+   Provider-owned state-result delivery helper; Core remains opaque to delta semantics.
+
+
+   .. py:method:: publish(*, complete: object, delta: object) -> int
+
+

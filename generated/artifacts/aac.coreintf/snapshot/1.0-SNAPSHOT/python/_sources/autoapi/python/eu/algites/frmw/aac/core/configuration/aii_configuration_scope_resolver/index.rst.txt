@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.configuration.aii_configuration_scope_resolver
+==============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aii_configuration_scope_resolver
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aii_configuration_scope_resolver.AIiConfigurationScopeResolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiConfigurationScopeResolver
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: resolve(request: python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationScopeResolutionRequest) -> python.eu.algites.frmw.aac.core.context.api.AIcConfigurationScope | None
+      :abstractmethod:
+
+
+      Resolve one profile configuration-scope definition to a concrete identity.
+
+
+

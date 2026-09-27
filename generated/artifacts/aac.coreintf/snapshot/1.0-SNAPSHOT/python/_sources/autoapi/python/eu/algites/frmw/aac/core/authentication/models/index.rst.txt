@@ -1,0 +1,21 @@
+python.eu.algites.frmw.aac.core.authentication.models
+=====================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.models
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.models.WELL_KNOWN_AUTHENTICATION_MECHANISMS
+
+
+Module Contents
+---------------
+
+.. py:data:: WELL_KNOWN_AUTHENTICATION_MECHANISMS
+   :value: ('NONE', 'BASIC', 'BEARER', 'CLIENT_CERTIFICATE')
+
+

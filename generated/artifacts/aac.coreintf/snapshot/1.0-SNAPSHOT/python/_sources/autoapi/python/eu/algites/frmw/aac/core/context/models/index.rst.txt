@@ -1,0 +1,21 @@
+python.eu.algites.frmw.aac.core.context.models
+==============================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.context.models
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.context.models.WELL_KNOWN_CONFIGURATION_SCOPE_TYPES
+
+
+Module Contents
+---------------
+
+.. py:data:: WELL_KNOWN_CONFIGURATION_SCOPE_TYPES
+   :value: ('SYSTEM', 'USER', 'WORKSPACE')
+
+

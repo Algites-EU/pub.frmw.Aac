@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.implementation.aix_persistence_revision_conflict
+================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.implementation.aix_persistence_revision_conflict
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.implementation.aix_persistence_revision_conflict.AIxPersistenceRevisionConflict
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxPersistenceRevisionConflict(record_id: str, expected, actual)
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.implementation.aix_persistence_error.AIxPersistenceError`
+
+
+   .. py:attribute:: record_id
+
+
+   .. py:attribute:: expected
+
+
+   .. py:attribute:: actual
+
+

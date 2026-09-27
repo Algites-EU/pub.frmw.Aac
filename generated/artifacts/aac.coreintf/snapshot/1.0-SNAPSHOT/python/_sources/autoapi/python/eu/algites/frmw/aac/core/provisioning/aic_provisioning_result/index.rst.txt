@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.provisioning.aic_provisioning_result
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.provisioning.aic_provisioning_result
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.provisioning.aic_provisioning_result.AIcProvisioningResult
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProvisioningResult
+
+   .. py:attribute:: requested_changes
+      :type:  tuple[python.eu.algites.frmw.aac.core.provisioning.aic_requested_state_change.AIcRequestedStateChange, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

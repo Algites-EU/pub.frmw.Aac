@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.authentication.aii_secret_resolver
+==================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aii_secret_resolver
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aii_secret_resolver.AIiSecretResolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiSecretResolver
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: resolve_secret(reference: python.eu.algites.frmw.aac.core.authentication.models.AIcSecretReference, context: Mapping[str, object] | None = None) -> str | bytes
+      :abstractmethod:
+
+
+      Resolve secret material without exposing storage details to the caller.
+
+
+

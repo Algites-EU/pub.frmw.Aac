@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_provider_registry
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_provider_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_provider_registry.AIcEntitlementProviderRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementProviderRegistry
+
+   .. py:method:: register(entitlement_provider_id: str, provider: eu.algites.frmw.aac.core.entitlement.api.AIiEntitlementProvider) -> None
+
+
+   .. py:method:: get(entitlement_provider_id: str) -> eu.algites.frmw.aac.core.entitlement.api.AIiEntitlementProvider
+
+

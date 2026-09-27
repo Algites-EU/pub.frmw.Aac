@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.invocation.aic_invocation_output
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_invocation_output
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_invocation_output.AIcInvocationOutput
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcInvocationOutput
+
+   .. py:attribute:: success
+      :type:  bool
+
+
+   .. py:attribute:: result
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: error
+      :type:  Mapping[str, object] | None
+      :value: None
+
+
+

@@ -1,0 +1,62 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_persistent_schema
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_persistent_schema
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_persistent_schema.AIcCatalogPersistentSchema
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogPersistentSchema
+
+   .. py:attribute:: kind
+      :type:  python.eu.algites.frmw.aac.core.catalog.ain_catalog_persistent_schema_kind.AInCatalogPersistentSchemaKind
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: write_version
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: provider_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: writable_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: preferred_write_version
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:property:: identity
+      :type: tuple[str, str | None]
+
+
+

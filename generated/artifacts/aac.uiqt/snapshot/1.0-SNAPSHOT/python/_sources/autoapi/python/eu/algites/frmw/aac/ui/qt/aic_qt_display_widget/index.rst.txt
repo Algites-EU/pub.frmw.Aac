@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.ui.qt.aic_qt_display_widget
+======================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.qt.aic_qt_display_widget
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.qt.aic_qt_display_widget.AIcQtDisplayWidget
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcQtDisplayWidget(display: eu.algites.frmw.aac.ui.api.AIcUiDisplay, parent: PySide6.QtWidgets.QWidget | None = None)
+
+   Bases: :py:obj:`PySide6.QtWidgets.QWidget`
+
+
+   Baseline Qt renderer for toolkit-neutral AAC display content.
+
+

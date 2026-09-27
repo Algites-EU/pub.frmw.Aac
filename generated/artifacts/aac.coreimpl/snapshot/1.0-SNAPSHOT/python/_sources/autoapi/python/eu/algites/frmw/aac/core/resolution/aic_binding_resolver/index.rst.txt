@@ -1,0 +1,46 @@
+python.eu.algites.frmw.aac.core.resolution.aic_binding_resolver
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.resolution.aic_binding_resolver
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.resolution.aic_binding_resolver.ELIGIBLE_STATES
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.resolution.aic_binding_resolver.AIcBindingResolver
+
+
+Module Contents
+---------------
+
+.. py:data:: ELIGIBLE_STATES
+
+.. py:class:: AIcBindingResolver(contract_catalog: eu.algites.frmw.aac.core.capability.catalog.AIcActiveContractCatalog | None = None)
+
+   .. py:attribute:: contract_catalog
+      :value: None
+
+
+
+   .. py:method:: compatible_candidates(consumer_instance_id: str, requirement: eu.algites.frmw.aac.core.descriptor.api.AIcConsumerRequirementDescriptor, candidates: tuple[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, Ellipsis] | list[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance], existing_bindings: tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis] | list[eu.algites.frmw.aac.core.instances.api.AIcBinding] = ()) -> tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis]
+
+
+   .. py:method:: resolve_single(consumer_instance_id: str, requirement: eu.algites.frmw.aac.core.descriptor.api.AIcConsumerRequirementDescriptor, candidates: tuple[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, Ellipsis] | list[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance], existing_bindings: tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis] | list[eu.algites.frmw.aac.core.instances.api.AIcBinding] = ()) -> eu.algites.frmw.aac.core.instances.api.AIcBinding
+
+
+   .. py:method:: resolve_multiple(consumer_instance_id: str, requirement: eu.algites.frmw.aac.core.descriptor.api.AIcConsumerRequirementDescriptor, candidates: tuple[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, Ellipsis] | list[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance], existing_bindings: tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis] | list[eu.algites.frmw.aac.core.instances.api.AIcBinding] = ()) -> tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis]
+
+
+   .. py:method:: resolve(consumer_instance_id: str, requirement: eu.algites.frmw.aac.core.descriptor.api.AIcConsumerRequirementDescriptor, candidates: tuple[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, Ellipsis] | list[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance], existing_bindings: tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis] | list[eu.algites.frmw.aac.core.instances.api.AIcBinding] = ()) -> tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis]
+
+

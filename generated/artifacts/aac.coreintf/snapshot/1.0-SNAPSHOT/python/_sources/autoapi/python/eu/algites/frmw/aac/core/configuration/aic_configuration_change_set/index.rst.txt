@@ -1,0 +1,63 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_change_set
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_change_set
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_change_set.AIcConfigurationChangeSet
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationChangeSet
+
+   .. py:attribute:: configuration_scope
+      :type:  python.eu.algites.frmw.aac.core.context.api.AIcConfigurationScope
+
+
+   .. py:attribute:: configuration_provider_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_target
+      :type:  python.eu.algites.frmw.aac.core.configuration.aic_configuration_target.AIcConfigurationTarget
+
+
+   .. py:attribute:: changes
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_change.AIcConfigurationChange, Ellipsis]
+
+
+   .. py:attribute:: expected_record_revision
+      :type:  str | int | None
+      :value: None
+
+
+
+   .. py:attribute:: configuration_schema_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: configuration_schema_version
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: written_by_component_version
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: actor_context
+      :type:  Mapping[str, object]
+
+

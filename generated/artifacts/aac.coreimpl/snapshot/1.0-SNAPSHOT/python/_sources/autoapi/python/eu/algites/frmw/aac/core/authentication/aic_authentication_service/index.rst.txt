@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.authentication.aic_authentication_service
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aic_authentication_service
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aic_authentication_service.AIcAuthenticationService
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAuthenticationService(secret_providers: python.eu.algites.frmw.aac.core.authentication.aic_secret_provider_registry.AIcSecretProviderRegistry | None = None)
+
+   .. py:attribute:: secret_providers
+
+
+   .. py:attribute:: profiles
+
+
+   .. py:attribute:: handlers
+
+
+   .. py:method:: register_profile(profile: eu.algites.frmw.aac.core.authentication.api.AIcAuthenticationProfile) -> None
+
+
+   .. py:method:: material(profile_id: str | None, *, transport_kind: str, endpoint: str | None = None, context: Mapping[str, object] | None = None) -> eu.algites.frmw.aac.core.authentication.api.AIcAuthenticationMaterial
+
+

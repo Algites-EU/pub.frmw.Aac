@@ -1,0 +1,55 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_licensing_scope_definition
+======================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_licensing_scope_definition
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_licensing_scope_definition.AIcEntitlementLicensingScopeDefinition
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementLicensingScopeDefinition
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: licensing_scope_type
+      :type:  str
+
+
+   .. py:attribute:: licensing_scope_resolver_id
+      :type:  str
+
+
+   .. py:attribute:: entitlement_providers
+      :type:  tuple[python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_provider_binding.AIcEntitlementProviderBinding, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+

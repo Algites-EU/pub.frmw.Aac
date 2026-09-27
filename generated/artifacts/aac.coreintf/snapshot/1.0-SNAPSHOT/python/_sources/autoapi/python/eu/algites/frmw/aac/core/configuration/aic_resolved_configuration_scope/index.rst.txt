@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.configuration.aic_resolved_configuration_scope
+==============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_resolved_configuration_scope
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_resolved_configuration_scope.AIcResolvedConfigurationScope
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcResolvedConfigurationScope
+
+   .. py:attribute:: definition_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_scope
+      :type:  python.eu.algites.frmw.aac.core.context.api.AIcConfigurationScope
+
+
+   .. py:attribute:: configuration_providers
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_binding.AIcConfigurationProviderBinding, Ellipsis]
+
+
+   .. py:attribute:: policy_authority
+      :type:  bool
+      :value: True
+
+
+

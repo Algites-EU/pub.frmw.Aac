@@ -1,0 +1,160 @@
+python.eu.algites.frmw.aac.ui.aii_aac_ui_controller
+===================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aii_aac_ui_controller
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aii_aac_ui_controller.AIiAacUiController
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiAacUiController
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Technology-neutral administration surface over Core-owned AAC state.
+
+
+   .. py:method:: components() -> tuple[python.eu.algites.frmw.aac.ui.models.AIcUiComponent, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: provider_instances(component_id: str | None = None) -> tuple[python.eu.algites.frmw.aac.ui.models.AIcUiProviderInstance, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: create_provider_instance(component_id: str, provider_definition_id: str, name: str = 'default') -> python.eu.algites.frmw.aac.ui.models.AIcUiProviderInstance
+      :abstractmethod:
+
+
+
+   .. py:method:: rename_provider_instance(instance_id: str, name: str) -> python.eu.algites.frmw.aac.ui.models.AIcUiProviderInstance
+      :abstractmethod:
+
+
+
+   .. py:method:: remove_provider_instance(instance_id: str) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: provider_configuration_form(instance_id: str) -> python.eu.algites.frmw.aac.ui.models.AIcUiForm
+      :abstractmethod:
+
+
+
+   .. py:method:: update_provider_scoped_configuration(instance_id: str, configuration_scope_type: str, configuration_scope_id: str | None, configuration_provider_id: str, values: Mapping[str, object], expected_record_revision: str | int | None = None) -> python.eu.algites.frmw.aac.ui.models.AIcUiProviderInstance
+      :abstractmethod:
+
+
+
+   .. py:method:: update_provider_configuration(instance_id: str, values: Mapping[str, object]) -> python.eu.algites.frmw.aac.ui.models.AIcUiProviderInstance
+      :abstractmethod:
+
+
+
+   .. py:method:: bindings() -> tuple[python.eu.algites.frmw.aac.ui.models.AIcUiBinding, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: requirements() -> tuple[python.eu.algites.frmw.aac.ui.models.AIcUiRequirement, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: requirement_editor(consumer_instance_id: str, requirement_id: str) -> python.eu.algites.frmw.aac.ui.models.AIcUiRequirementEditor
+      :abstractmethod:
+
+
+
+   .. py:method:: set_requirement_providers(consumer_instance_id: str, requirement_id: str, provider_instance_ids: tuple[str, Ellipsis]) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: set_requirement_authorizations(consumer_instance_id: str, requirement_id: str, permission_ids: tuple[str, Ellipsis]) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: entitlement_status(component_id: str) -> python.eu.algites.frmw.aac.ui.models.AIcUiEntitlementStatus
+      :abstractmethod:
+
+
+
+   .. py:method:: observation_bindings() -> tuple[python.eu.algites.frmw.aac.ui.models.AIcUiObservationBinding, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: put_observation_binding(binding: python.eu.algites.frmw.aac.ui.models.AIcUiObservationBinding) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: delete_observation_binding(observer_instance_id: str) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: catalog_defaults() -> tuple[str | None, str | None]
+      :abstractmethod:
+
+
+
+   .. py:method:: catalog_packages(product_id: str, technology_id: str, text: str | None = None) -> tuple[python.eu.algites.frmw.aac.ui.models.AIcUiCatalogPackageArtifact, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: solve_catalog_target(application_scope_id: str, identity: tuple[str, str, str, str, int, str]) -> eu.algites.frmw.aac.core.solver.api.AIcTargetStateSolverResult
+      :abstractmethod:
+
+
+
+   .. py:method:: apply_target_state_solution(application_scope_id: str, solution: eu.algites.frmw.aac.core.solver.api.AIcTargetStateSolution) -> eu.algites.frmw.aac.core.solver.api.AIcTargetStateSolution
+      :abstractmethod:
+
+
+
+   .. py:method:: download_catalog_package(identity: tuple[str, str, str, str, int, str]) -> python.eu.algites.frmw.aac.ui.models.AIcUiPackageArtifact
+      :abstractmethod:
+
+
+
+   .. py:method:: install_catalog_package(identity: tuple[str, str, str, str, int, str]) -> python.eu.algites.frmw.aac.ui.models.AIcUiPackageArtifact
+      :abstractmethod:
+
+
+
+   .. py:method:: restore_obsolete_package(identity: tuple[str, int, str]) -> python.eu.algites.frmw.aac.ui.models.AIcUiPackageArtifact
+      :abstractmethod:
+
+
+
+   .. py:method:: package_artifacts() -> tuple[python.eu.algites.frmw.aac.ui.models.AIcUiPackageArtifact, Ellipsis]
+      :abstractmethod:
+
+
+
+   .. py:method:: plan_package_upgrades(application_scope_id: str, package_identities: tuple[tuple[str, int, str], Ellipsis]) -> python.eu.algites.frmw.aac.ui.models.AIcUiUpgradePlan
+      :abstractmethod:
+
+
+
+   .. py:method:: apply_package_upgrades(application_scope_id: str, package_identities: tuple[tuple[str, int, str], Ellipsis]) -> python.eu.algites.frmw.aac.ui.models.AIcUiUpgradePlan
+      :abstractmethod:
+
+
+

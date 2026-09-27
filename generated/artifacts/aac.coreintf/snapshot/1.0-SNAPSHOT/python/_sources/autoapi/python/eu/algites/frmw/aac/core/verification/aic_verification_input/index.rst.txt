@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.verification.aic_verification_input
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.verification.aic_verification_input
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.verification.aic_verification_input.AIcVerificationInput
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcVerificationInput
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: package
+      :type:  str | None
+
+
+   .. py:attribute:: source
+      :type:  str
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: artifact_path
+      :type:  str | None
+      :value: None
+
+
+

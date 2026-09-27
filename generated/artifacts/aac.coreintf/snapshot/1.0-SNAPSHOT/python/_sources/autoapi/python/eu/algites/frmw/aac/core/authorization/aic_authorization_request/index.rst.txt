@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.authorization.aic_authorization_request
+=======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authorization.aic_authorization_request
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authorization.aic_authorization_request.AIcAuthorizationRequest
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAuthorizationRequest
+
+   .. py:attribute:: action
+      :type:  str
+
+
+   .. py:attribute:: resource_type
+      :type:  str
+
+
+   .. py:attribute:: resource_id
+      :type:  str
+
+
+   .. py:attribute:: principal
+      :type:  python.eu.algites.frmw.aac.core.authorization.aic_authorization_principal.AIcAuthorizationPrincipal | None
+      :value: None
+
+
+
+   .. py:attribute:: context
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: attributes
+      :type:  Mapping[str, object]
+
+

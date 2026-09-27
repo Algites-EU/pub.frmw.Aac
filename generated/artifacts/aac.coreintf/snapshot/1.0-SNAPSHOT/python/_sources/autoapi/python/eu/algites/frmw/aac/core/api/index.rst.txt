@@ -1,0 +1,11 @@
+python.eu.algites.frmw.aac.core.api
+===================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.api
+
+.. autoapi-nested-parse::
+
+   Public Python binding for Algites Application Components (AAC).
+
+
+

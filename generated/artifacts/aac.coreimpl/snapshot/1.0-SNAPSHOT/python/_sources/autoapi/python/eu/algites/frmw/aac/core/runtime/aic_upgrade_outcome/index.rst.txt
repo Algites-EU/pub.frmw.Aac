@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.runtime.aic_upgrade_outcome
+===========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.aic_upgrade_outcome
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.aic_upgrade_outcome.AIcUpgradeOutcome
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUpgradeOutcome
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: previous_version
+      :type:  int
+
+
+   .. py:attribute:: current_version
+      :type:  int
+
+
+   .. py:attribute:: graph
+      :type:  eu.algites.frmw.aac.core.graph.orchestrator.AIcResolvedApplicationGraph
+
+

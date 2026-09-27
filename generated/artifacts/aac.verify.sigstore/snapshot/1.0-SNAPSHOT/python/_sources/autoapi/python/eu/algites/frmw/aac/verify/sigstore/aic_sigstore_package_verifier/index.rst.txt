@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.verify.sigstore.aic_sigstore_package_verifier
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.verify.sigstore.aic_sigstore_package_verifier
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.verify.sigstore.aic_sigstore_package_verifier.AIcSigstorePackageVerifier
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSigstorePackageVerifier(policy: python.eu.algites.frmw.aac.verify.sigstore.aic_sigstore_trust_policy.AIcSigstoreTrustPolicy, *, runner: Callable[[Sequence[str]], subprocess.CompletedProcess[str]] | None = None)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.verification.api.AIiPackageVerifier`
+
+
+   Verify an artifact using the official ``sigstore`` Python CLI module.
+
+   The signature proves artifact integrity; the supplied trust policy determines which
+   signer/publisher identity is accepted. The verifier never falls back to "any valid signer".
+
+
+   .. py:attribute:: policy
+
+
+   .. py:method:: verify(verification_input: eu.algites.frmw.aac.core.verification.api.AIcVerificationInput) -> eu.algites.frmw.aac.core.verification.api.AIcVerificationOutput
+
+

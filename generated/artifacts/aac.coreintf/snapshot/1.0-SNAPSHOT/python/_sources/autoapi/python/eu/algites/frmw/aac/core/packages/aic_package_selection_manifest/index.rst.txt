@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_selection_manifest
+=======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_selection_manifest
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_selection_manifest.AIcPackageSelectionManifest
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageSelectionManifest
+
+   .. py:attribute:: record_revision
+      :type:  int
+
+
+   .. py:attribute:: selections
+      :type:  tuple[python.eu.algites.frmw.aac.core.packages.aic_package_selection.AIcPackageSelection, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: last_transaction_id
+      :type:  str | None
+      :value: None
+
+
+

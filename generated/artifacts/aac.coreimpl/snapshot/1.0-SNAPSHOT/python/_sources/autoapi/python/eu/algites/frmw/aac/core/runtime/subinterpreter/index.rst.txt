@@ -1,0 +1,19 @@
+python.eu.algites.frmw.aac.core.runtime.subinterpreter
+======================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.subinterpreter
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.subinterpreter.subinterpreter_available
+
+
+Module Contents
+---------------
+
+.. py:function:: subinterpreter_available() -> bool
+

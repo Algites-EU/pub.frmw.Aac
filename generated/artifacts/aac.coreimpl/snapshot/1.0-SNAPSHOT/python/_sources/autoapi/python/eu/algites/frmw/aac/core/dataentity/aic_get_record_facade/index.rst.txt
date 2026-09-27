@@ -1,0 +1,48 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_get_record_facade
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_get_record_facade
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_get_record_facade.T
+   python.eu.algites.frmw.aac.core.dataentity.aic_get_record_facade.GET_RECORD_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_get_record_facade.AIcGetRecordFacade
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:data:: GET_RECORD_CAPABILITY_ID
+   :value: '_AAC.data-entity.get-record'
+
+
+.. py:class:: AIcGetRecordFacade
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.dataentity.aic_bound_data_entity_capability_facade.AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.get-record'
+
+
+
+   .. py:method:: get_raw(schema_id: str, uid: str) -> eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityEnvelope | None
+
+
+   .. py:method:: get(data_type: eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityType[T], uid: str) -> eu.algites.frmw.aac.core.dataentity.api.AIcTypedDataEntityEnvelope[T] | None
+
+

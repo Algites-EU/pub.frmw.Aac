@@ -1,0 +1,50 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_marshaller
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_marshaller
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_marshaller.T
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_marshaller.AIcDataEntityMarshaller
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:class:: AIcDataEntityMarshaller(schemas: eu.algites.frmw.aac.core.schemas.registry.AIcSchemaRegistry, views: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_view_registry.AIcDataEntityViewRegistry | None = None, implementations: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_implementation_registry.AIcDataEntityImplementationRegistry | None = None)
+
+   Bridge canonical JSON envelopes and current polymorphic implementation objects.
+
+
+   .. py:attribute:: schemas
+
+
+   .. py:attribute:: views
+
+
+   .. py:attribute:: implementations
+
+
+   .. py:method:: validate_registrations(schema_id: str) -> None
+
+
+   .. py:method:: materialize(envelope: eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityEnvelope, requested_type: eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityType[T]) -> eu.algites.frmw.aac.core.dataentity.api.AIcTypedDataEntityEnvelope[T]
+
+
+   .. py:method:: marshal(envelope: eu.algites.frmw.aac.core.dataentity.api.AIcTypedDataEntityEnvelope[object]) -> eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityEnvelope
+
+

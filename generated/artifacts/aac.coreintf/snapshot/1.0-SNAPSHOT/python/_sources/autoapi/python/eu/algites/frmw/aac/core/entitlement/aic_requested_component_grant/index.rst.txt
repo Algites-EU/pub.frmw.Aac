@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_requested_component_grant
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_requested_component_grant
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_requested_component_grant.AIcRequestedComponentGrant
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcRequestedComponentGrant
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: requested_grants
+      :type:  tuple[python.eu.algites.frmw.aac.core.entitlement.aic_requested_capability_grant.AIcRequestedCapabilityGrant, Ellipsis]
+
+

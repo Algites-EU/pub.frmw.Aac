@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.runtime.provider_instantiation
+==============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.provider_instantiation
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.provider_instantiation.instantiate_provider
+
+
+Module Contents
+---------------
+
+.. py:function:: instantiate_provider(application_scope_id: str, instance: eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, provider_definition: eu.algites.frmw.aac.core.descriptor.api.AIcProviderDefinitionDescriptor, entitlement: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementContext, *, component_configuration: eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration, provider_instance_configuration: eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration) -> eu.algites.frmw.aac.core.runtime.api.AIiProviderRuntime
+
+   Instantiate one provider runtime for one Core-managed provider instance.
+
+

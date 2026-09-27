@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.observation.aic_observation_output
+==================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.observation.aic_observation_output
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.observation.aic_observation_output.AIcObservationOutput
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcObservationOutput
+
+   .. py:attribute:: accepted
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: diagnostic
+      :type:  str | None
+      :value: None
+
+
+

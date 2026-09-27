@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.authentication.aii_authentication_handler
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aii_authentication_handler
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aii_authentication_handler.AIiAuthenticationHandler
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiAuthenticationHandler
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: authenticate(request: python.eu.algites.frmw.aac.core.authentication.models.AIcAuthenticationRequest, secret_resolver: python.eu.algites.frmw.aac.core.authentication.aii_secret_resolver.AIiSecretResolver) -> python.eu.algites.frmw.aac.core.authentication.models.AIcAuthenticationMaterial
+      :abstractmethod:
+
+
+      Produce transport-neutral authentication material for a connection attempt.
+
+
+

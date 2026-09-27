@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_view
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_view
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_view.AIiDataEntityView
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiDataEntityView
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Marker base for generated versioned Data Entity view interfaces.
+
+

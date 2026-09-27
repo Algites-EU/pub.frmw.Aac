@@ -1,0 +1,43 @@
+python.check_conventions
+========================
+
+.. py:module:: python.check_conventions
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.check_conventions.ROOT
+   python.check_conventions.ALLOWED
+   python.check_conventions.PUBLIC_TYPE_PATTERN
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.check_conventions.type_module_name
+   python.check_conventions.validate_public_type_modules
+   python.check_conventions.main
+
+
+Module Contents
+---------------
+
+.. py:data:: ROOT
+
+.. py:data:: ALLOWED
+   :value: ('AIi', 'AIc', 'AIn', 'AIx', 'AIig', 'AIcg', 'AIigd', 'AIcgd', 'AIr')
+
+
+.. py:data:: PUBLIC_TYPE_PATTERN
+
+.. py:function:: type_module_name(type_name: str) -> str
+
+.. py:function:: validate_public_type_modules(paths: list[pathlib.Path]) -> list[str]
+
+.. py:function:: main() -> int
+

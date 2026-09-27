@@ -1,0 +1,98 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_provider_definition_descriptor
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_provider_definition_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_provider_definition_descriptor.AIcProviderDefinitionDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProviderDefinitionDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: capabilities
+      :type:  tuple[python.eu.algites.frmw.aac.core.capability.api.AIcProvidedCapability, Ellipsis]
+
+
+   .. py:attribute:: implementation_classes
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_provider_implementation_class_descriptor.AIcProviderImplementationClassDescriptor, Ellipsis]
+
+
+   .. py:attribute:: configuration_schema
+      :type:  python.eu.algites.frmw.aac.core.descriptor.aic_persisted_schema_descriptor.AIcPersistedSchemaDescriptor | None
+      :value: None
+
+
+
+   .. py:attribute:: initial_instances
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_initial_provider_instance_descriptor.AIcInitialProviderInstanceDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: requirements
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_consumer_requirement_descriptor.AIcConsumerRequirementDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: operations
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_capability_provider_operation_descriptor.AIcCapabilityProviderOperationDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: readiness_requirements
+      :type:  tuple[python.eu.algites.frmw.aac.core.readiness.api.AIcReadinessRequirementDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: runtime_factory_class
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: runtime
+      :type:  python.eu.algites.frmw.aac.core.descriptor.aic_provider_runtime_descriptor.AIcProviderRuntimeDescriptor
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:method:: implementation_class_for(technology_kind: str) -> str
+
+
+   .. py:method:: capability(capability_id: str) -> python.eu.algites.frmw.aac.core.capability.api.AIcProvidedCapability
+
+
+   .. py:method:: supports_capability(capability_id: str) -> bool
+
+
+   .. py:method:: operation_definition(capability_id: str, capability_version: int, operation_id: str) -> python.eu.algites.frmw.aac.core.descriptor.aic_capability_provider_operation_descriptor.AIcCapabilityProviderOperationDescriptor | None
+
+
+   .. py:method:: operation_parameter_definition(capability_id: str, capability_version: int, operation_id: str) -> python.eu.algites.frmw.aac.core.descriptor.aic_capability_provider_operation_descriptor.AIcCapabilityProviderOperationDescriptor | None
+
+

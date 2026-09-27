@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.runtime.aic_python_candidate_import_snapshot
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.aic_python_candidate_import_snapshot
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.aic_python_candidate_import_snapshot.AIcPythonCandidateImportSnapshot
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPythonCandidateImportSnapshot
+
+   .. py:attribute:: sys_path
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: modules
+      :type:  dict[str, object]
+
+
+   .. py:attribute:: package_prefixes
+      :type:  tuple[str, Ellipsis]
+
+

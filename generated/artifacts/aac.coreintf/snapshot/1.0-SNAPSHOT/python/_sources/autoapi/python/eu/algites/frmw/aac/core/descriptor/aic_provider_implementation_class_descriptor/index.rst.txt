@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_provider_implementation_class_descriptor
+=======================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_provider_implementation_class_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_provider_implementation_class_descriptor.AIcProviderImplementationClassDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProviderImplementationClassDescriptor
+
+   .. py:attribute:: technology_kind
+      :type:  str
+
+
+   .. py:attribute:: class_name
+      :type:  str
+
+

@@ -1,0 +1,59 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_consumer_requirement_descriptor
+==============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_consumer_requirement_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_consumer_requirement_descriptor.AIcConsumerRequirementDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConsumerRequirementDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: cardinality
+      :type:  python.eu.algites.frmw.aac.core.capability.api.AInConsumerCardinality
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: requested_authorizations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+

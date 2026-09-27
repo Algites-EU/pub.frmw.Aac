@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.upgrade.aic_persistence_convergence_outcome
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.upgrade.aic_persistence_convergence_outcome
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.upgrade.aic_persistence_convergence_outcome.AIcPersistenceConvergenceOutcome
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPersistenceConvergenceOutcome
+
+   Best-effort persistence convergence performed outside the component transaction.
+
+
+   .. py:attribute:: configuration_persisted
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: configuration_deferred
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:property:: complete
+      :type: bool
+
+
+

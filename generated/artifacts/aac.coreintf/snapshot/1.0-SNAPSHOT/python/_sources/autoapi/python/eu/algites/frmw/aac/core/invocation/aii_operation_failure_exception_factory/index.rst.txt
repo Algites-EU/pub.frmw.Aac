@@ -1,0 +1,41 @@
+python.eu.algites.frmw.aac.core.invocation.aii_operation_failure_exception_factory
+==================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aii_operation_failure_exception_factory
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aii_operation_failure_exception_factory.AIxOperationFailureT
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aii_operation_failure_exception_factory.AIiOperationFailureExceptionFactory
+
+
+Module Contents
+---------------
+
+.. py:data:: AIxOperationFailureT
+
+.. py:class:: AIiOperationFailureExceptionFactory
+
+   Bases: :py:obj:`Generic`\ [\ :py:obj:`AIxOperationFailureT`\ ], :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: create(failure: python.eu.algites.frmw.aac.core.invocation.aic_operation_failure.AIcOperationFailure) -> AIxOperationFailureT
+      :abstractmethod:
+
+
+

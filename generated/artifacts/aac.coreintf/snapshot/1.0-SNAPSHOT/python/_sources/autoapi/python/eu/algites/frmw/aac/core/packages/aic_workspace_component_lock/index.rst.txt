@@ -1,0 +1,30 @@
+python.eu.algites.frmw.aac.core.packages.aic_workspace_component_lock
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_workspace_component_lock
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_workspace_component_lock.AIcWorkspaceComponentLock
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcWorkspaceComponentLock
+
+   .. py:attribute:: workspace_id
+      :type:  str
+
+
+   .. py:attribute:: entries
+      :type:  tuple[python.eu.algites.frmw.aac.core.packages.aic_workspace_component_lock_entry.AIcWorkspaceComponentLockEntry, Ellipsis]
+
+
+   .. py:method:: entry(component_id: str) -> python.eu.algites.frmw.aac.core.packages.aic_workspace_component_lock_entry.AIcWorkspaceComponentLockEntry | None
+
+

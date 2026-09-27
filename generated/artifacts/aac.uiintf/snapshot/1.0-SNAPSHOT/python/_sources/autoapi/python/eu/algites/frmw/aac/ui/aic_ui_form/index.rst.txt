@@ -1,0 +1,60 @@
+python.eu.algites.frmw.aac.ui.aic_ui_form
+=========================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_form
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_form.AIcUiForm
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiForm
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: title
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText
+
+
+   .. py:attribute:: groups
+      :type:  tuple[python.eu.algites.frmw.aac.ui.aic_ui_field_group.AIcUiFieldGroup, Ellipsis]
+
+
+   .. py:attribute:: configuration_scopes
+      :type:  tuple[python.eu.algites.frmw.aac.ui.aic_ui_configuration_scope.AIcUiConfigurationScope, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: active_configuration_profile_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: configuration_provider_options
+      :type:  tuple[python.eu.algites.frmw.aac.ui.aic_ui_configuration_provider_option.AIcUiConfigurationProviderOption, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: description
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:property:: fields
+      :type: tuple[python.eu.algites.frmw.aac.ui.aic_ui_field.AIcUiField, Ellipsis]
+
+
+

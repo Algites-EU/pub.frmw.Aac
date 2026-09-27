@@ -1,0 +1,18 @@
+python.eu.algites.frmw.aac.dataentity.yamlfsdes
+===============================================
+
+.. py:module:: python.eu.algites.frmw.aac.dataentity.yamlfsdes
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/python/eu/algites/frmw/aac/dataentity/yamlfsdes/aic_operation_progress/index
+   /autoapi/python/eu/algites/frmw/aac/dataentity/yamlfsdes/aic_operation_state_result_publisher/index
+   /autoapi/python/eu/algites/frmw/aac/dataentity/yamlfsdes/aic_yaml_fs_data_entity_storage_provider/index
+   /autoapi/python/eu/algites/frmw/aac/dataentity/yamlfsdes/provider/index
+
+

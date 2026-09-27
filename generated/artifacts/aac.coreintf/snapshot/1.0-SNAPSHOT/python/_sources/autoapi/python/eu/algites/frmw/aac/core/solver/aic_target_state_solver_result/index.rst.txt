@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.solver.aic_target_state_solver_result
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.solver.aic_target_state_solver_result
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.solver.aic_target_state_solver_result.AIcTargetStateSolverResult
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcTargetStateSolverResult
+
+   .. py:attribute:: requests
+      :type:  tuple[python.eu.algites.frmw.aac.core.solver.aic_target_state_request.AIcTargetStateRequest, Ellipsis]
+
+
+   .. py:attribute:: primary
+      :type:  python.eu.algites.frmw.aac.core.solver.aic_target_state_solution.AIcTargetStateSolution | None
+
+
+   .. py:attribute:: alternatives
+      :type:  tuple[python.eu.algites.frmw.aac.core.solver.aic_target_state_solution.AIcTargetStateSolution, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[python.eu.algites.frmw.aac.core.solver.aic_solver_explanation.AIcSolverExplanation, Ellipsis]
+      :value: ()
+
+
+

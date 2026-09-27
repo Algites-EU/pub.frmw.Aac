@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.ui.aic_ui_observation_selector
+=========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_observation_selector
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_observation_selector.AIcUiObservationSelector
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiObservationSelector
+
+   .. py:attribute:: capability
+      :type:  str
+      :value: '*'
+
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: operations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: phases
+      :type:  tuple[str, Ellipsis]
+      :value: ('PRE', 'POST')
+
+
+

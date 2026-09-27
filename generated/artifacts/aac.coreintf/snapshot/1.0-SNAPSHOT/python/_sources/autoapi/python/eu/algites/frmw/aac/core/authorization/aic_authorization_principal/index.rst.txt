@@ -1,0 +1,33 @@
+python.eu.algites.frmw.aac.core.authorization.aic_authorization_principal
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authorization.aic_authorization_principal
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authorization.aic_authorization_principal.AIcAuthorizationPrincipal
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAuthorizationPrincipal
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+      :value: 'USER'
+
+
+
+   .. py:attribute:: attributes
+      :type:  Mapping[str, object]
+
+

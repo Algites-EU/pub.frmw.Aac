@@ -1,0 +1,23 @@
+python.eu.algites.frmw.aac.core.namespace.aic_reserved_namespace
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.namespace.aic_reserved_namespace
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.namespace.aic_reserved_namespace.AIcReservedNamespace
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcReservedNamespace
+
+   .. py:attribute:: prefix
+      :type:  str
+
+

@@ -1,0 +1,40 @@
+python.eu.algites.frmw.aac.core.configuration.aic_effective_configuration
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_effective_configuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_effective_configuration.AIcEffectiveConfiguration
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEffectiveConfiguration
+
+   .. py:attribute:: configuration_target
+      :type:  python.eu.algites.frmw.aac.core.configuration.aic_configuration_target.AIcConfigurationTarget
+
+
+   .. py:attribute:: values
+      :type:  Mapping[str, python.eu.algites.frmw.aac.core.configuration.aic_effective_configuration_value.AIcEffectiveConfigurationValue]
+
+
+   .. py:attribute:: configuration_scopes
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.aic_resolved_configuration_scope.AIcResolvedConfigurationScope, Ellipsis]
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: plain_values() -> dict[str, object | None]
+
+

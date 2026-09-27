@@ -1,0 +1,36 @@
+python.eu.algites.frmw.aac.core.bootstrap.aic_bootstrap_resource_loader
+=======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.bootstrap.aic_bootstrap_resource_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.bootstrap.aic_bootstrap_resource_loader.AIcBootstrapResourceLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcBootstrapResourceLoader(authentication=None, timeout_seconds: float = 10.0)
+
+   Read trusted bootstrap/profile bytes from file or HTTP(S).
+
+   Whether a supplied URI is trusted is decided by the product/installation. This class
+   deliberately does not turn a user-supplied URI into an authority by itself.
+
+
+   .. py:attribute:: authentication
+      :value: None
+
+
+
+   .. py:attribute:: timeout_seconds
+
+
+   .. py:method:: read_text(uri: str, *, authentication_profile_id: str | None = None, context=None) -> str
+
+

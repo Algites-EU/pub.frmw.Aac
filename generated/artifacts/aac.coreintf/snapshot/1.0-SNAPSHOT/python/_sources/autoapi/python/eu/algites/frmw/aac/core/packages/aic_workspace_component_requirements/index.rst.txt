@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.packages.aic_workspace_component_requirements
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_workspace_component_requirements
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_workspace_component_requirements.AIcWorkspaceComponentRequirements
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcWorkspaceComponentRequirements
+
+   .. py:attribute:: workspace_id
+      :type:  str
+
+
+   .. py:attribute:: requirements
+      :type:  tuple[python.eu.algites.frmw.aac.core.packages.aic_workspace_component_requirement.AIcWorkspaceComponentRequirement, Ellipsis]
+
+
+   .. py:attribute:: update_policy
+      :type:  python.eu.algites.frmw.aac.core.packages.ain_package_update_policy.AInPackageUpdatePolicy
+
+

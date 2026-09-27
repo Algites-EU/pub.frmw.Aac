@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_migration_result
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_migration_result
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_migration_result.AIcDataEntityMigrationResult
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDataEntityMigrationResult
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: payload
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

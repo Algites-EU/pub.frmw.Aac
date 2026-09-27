@@ -1,0 +1,60 @@
+python.eu.algites.frmw.aac.core.invocation.aic_invocation_dispatcher
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_invocation_dispatcher
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_invocation_dispatcher.AIcInvocationDispatcher
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcInvocationDispatcher(contracts: eu.algites.frmw.aac.core.capability.catalog.AIcActiveContractCatalog, observations: eu.algites.frmw.aac.core.observation.dispatcher.AIcObservationDispatcher | None = None, component_authorizations: eu.algites.frmw.aac.core.authorization.implementation.AIcComponentAuthorizationGrantStore | None = None, principal_authorization_provider: eu.algites.frmw.aac.core.authorization.api.AIiAuthorizationProvider | None = None, *, entitlement_remediator: eu.algites.frmw.aac.core.entitlement.api.AIiEntitlementRemediator | None = None, entitlement_refresh_callback: Callable[[], None] | None = None, operation_parameter_resolver: Callable[[eu.algites.frmw.aac.core.invocation.api.AIcInvocationInput], Mapping[str, object]] | None = None, provider_operation_resolver: Callable[[eu.algites.frmw.aac.core.invocation.api.AIcInvocationInput], eu.algites.frmw.aac.core.descriptor.api.AIcCapabilityProviderOperationDescriptor] | None = None)
+
+   .. py:attribute:: contracts
+
+
+   .. py:attribute:: observations
+      :value: None
+
+
+
+   .. py:attribute:: component_authorizations
+      :value: None
+
+
+
+   .. py:attribute:: principal_authorization_provider
+      :value: None
+
+
+
+   .. py:attribute:: entitlement_remediator
+      :value: None
+
+
+
+   .. py:attribute:: entitlement_refresh_callback
+      :value: None
+
+
+
+   .. py:attribute:: operation_parameter_resolver
+      :value: None
+
+
+
+   .. py:attribute:: provider_operation_resolver
+      :value: None
+
+
+
+   .. py:method:: invoke(endpoint: eu.algites.frmw.aac.core.invocation.api.AIiCapabilityEndpoint, invocation_input: eu.algites.frmw.aac.core.invocation.api.AIcInvocationInput, operation_interaction: eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionProviderToCaller | None = None) -> eu.algites.frmw.aac.core.invocation.api.AIcInvocationOutput
+
+

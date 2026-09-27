@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.instances.aic_binding_preference
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.instances.aic_binding_preference
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.instances.aic_binding_preference.AIcBindingPreference
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcBindingPreference
+
+   Core-owned topology preference; references stable instance IDs, never names.
+
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: requirement_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_ids
+      :type:  tuple[str, Ellipsis]
+
+

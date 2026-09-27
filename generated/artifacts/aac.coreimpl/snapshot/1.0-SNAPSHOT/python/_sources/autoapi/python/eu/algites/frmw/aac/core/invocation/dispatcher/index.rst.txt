@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.invocation.dispatcher
+=====================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.dispatcher
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.dispatcher.authorization_principal_context
+   python.eu.algites.frmw.aac.core.invocation.dispatcher.invoke_handle_with_parent_context
+
+
+Module Contents
+---------------
+
+.. py:function:: authorization_principal_context(principal: eu.algites.frmw.aac.core.authorization.api.AIcAuthorizationPrincipal | None)
+
+.. py:function:: invoke_handle_with_parent_context(handle: eu.algites.frmw.aac.core.invocation.api.AIiCapabilityHandle, parent_invocation_id: str | None, operation_id: str, arguments: Mapping[str, object] | None = None, operation_parameters: Mapping[str, object] | None = None, operation_interaction: eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionProviderToCaller | None = None, locale: str | None = None) -> eu.algites.frmw.aac.core.invocation.api.AIcInvocationOutput
+
+   Invoke a Core handle while restoring causal context received over a runtime boundary.
+
+

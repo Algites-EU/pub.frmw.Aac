@@ -1,0 +1,47 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_ensure_storage_support_facade
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_ensure_storage_support_facade
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_ensure_storage_support_facade.ENSURE_STORAGE_SUPPORT_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_ensure_storage_support_facade.AIcEnsureStorageSupportFacade
+
+
+Module Contents
+---------------
+
+.. py:data:: ENSURE_STORAGE_SUPPORT_CAPABILITY_ID
+   :value: '_AAC.data-entity.ensure-storage-support'
+
+
+.. py:class:: AIcEnsureStorageSupportFacade(invoker: python.eu.algites.frmw.aac.core.dataentity.aic_provider_capability_invoker.AIcProviderCapabilityInvoker, marshaller: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_marshaller.AIcDataEntityMarshaller | None = None)
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.dataentity.aic_bound_data_entity_capability_facade.AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.ensure-storage-support'
+
+
+
+   .. py:attribute:: write_operation
+      :value: True
+
+
+
+   .. py:method:: ensure(schema_id: str, schema_version: int, canonical_schema: Mapping[str, object], references=()) -> Mapping[str, object]
+
+

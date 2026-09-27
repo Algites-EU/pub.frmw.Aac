@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.codegen.aic_python_data_entity_binding_generator
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.codegen.aic_python_data_entity_binding_generator
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.codegen.aic_python_data_entity_binding_generator.AIcPythonDataEntityBindingGenerator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPythonDataEntityBindingGenerator(schemas: eu.algites.frmw.aac.core.schemas.registry.AIcSchemaRegistry)
+
+   Generate one versioned Python Data Entity view interface and codec from canonical JSON Schema.
+
+   Version suffixes are part of the generated method names so one current implementation object
+   can implement several historical schema views without method-signature collisions.
+
+
+   .. py:attribute:: schemas
+
+
+   .. py:method:: generate(schema_id: str, version: int) -> str
+
+

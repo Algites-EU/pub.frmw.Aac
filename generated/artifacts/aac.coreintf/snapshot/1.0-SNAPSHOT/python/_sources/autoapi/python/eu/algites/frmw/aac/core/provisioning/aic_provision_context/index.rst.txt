@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.provisioning.aic_provision_context
+==================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.provisioning.aic_provision_context
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.provisioning.aic_provision_context.AIcProvisionContext
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProvisionContext
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: component
+      :type:  python.eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor
+
+
+   .. py:attribute:: existing_state
+      :type:  Mapping[str, object]
+
+

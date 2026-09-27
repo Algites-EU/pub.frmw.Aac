@@ -1,0 +1,16 @@
+python.eu.algites.frmw.aac.observation.simpleaudit
+==================================================
+
+.. py:module:: python.eu.algites.frmw.aac.observation.simpleaudit
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/python/eu/algites/frmw/aac/observation/simpleaudit/aic_simple_audit_observer/index
+   /autoapi/python/eu/algites/frmw/aac/observation/simpleaudit/provider/index
+
+

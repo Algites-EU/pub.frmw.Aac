@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_mutation_service
+================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_mutation_service
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_mutation_service.AIcConfigurationMutationService
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationMutationService(providers: python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_registry.AIcConfigurationProviderRegistry, authorizer: eu.algites.frmw.aac.core.configuration.api.AIiConfigurationMutationAuthorizer)
+
+   .. py:attribute:: providers
+
+
+   .. py:attribute:: authorizer
+
+
+   .. py:method:: access(request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest, actor_context: Mapping[str, object] | None = None) -> eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderAccess
+
+
+   .. py:method:: access_for(configuration_provider_id: str, request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest, actor_context: Mapping[str, object] | None = None) -> eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderAccess
+
+
+   .. py:method:: apply(change_set: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationChangeSet) -> eu.algites.frmw.aac.core.configuration.api.AIcConfigurationMutationResult
+
+

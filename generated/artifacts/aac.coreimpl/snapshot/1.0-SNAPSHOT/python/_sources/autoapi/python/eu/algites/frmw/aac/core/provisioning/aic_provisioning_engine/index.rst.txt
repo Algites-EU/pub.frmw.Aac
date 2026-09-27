@@ -1,0 +1,48 @@
+python.eu.algites.frmw.aac.core.provisioning.aic_provisioning_engine
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.provisioning.aic_provisioning_engine
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.provisioning.aic_provisioning_engine.AIcProvisioningEngine
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProvisioningEngine(registry: eu.algites.frmw.aac.core.instances.registry.AIcProviderInstanceRegistry | None = None, *, schema_registry: eu.algites.frmw.aac.core.schemas.registry.AIcSchemaRegistry | None = None, store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore | None = None, binding_store: eu.algites.frmw.aac.core.bindings.store.AIcBindingStore | None = None)
+
+   Core-controlled declarative provisioning with optional statically declared callback.
+
+
+   .. py:attribute:: store
+
+
+   .. py:attribute:: registry
+
+
+   .. py:attribute:: schemas
+
+
+   .. py:attribute:: bindings
+      :value: None
+
+
+
+   .. py:method:: provision(application_scope_id: str, descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor) -> python.eu.algites.frmw.aac.core.provisioning.aic_provisioning_outcome.AIcProvisioningOutcome
+
+
+   .. py:method:: validate_instances(descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor) -> tuple[str, Ellipsis]
+
+
+   .. py:method:: state(application_scope_id: str, component_id: str) -> Mapping[str, object]
+
+
+   .. py:method:: unprovision(application_scope_id: str, descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor) -> None
+
+

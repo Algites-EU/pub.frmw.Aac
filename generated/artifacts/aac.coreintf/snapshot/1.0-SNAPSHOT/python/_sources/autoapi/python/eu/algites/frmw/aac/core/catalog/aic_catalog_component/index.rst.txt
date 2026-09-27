@@ -1,0 +1,91 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_component
+=============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_component
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_component.AIcCatalogComponent
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogComponent
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: releases
+      :type:  tuple[python.eu.algites.frmw.aac.core.catalog.aic_catalog_release.AIcCatalogRelease, Ellipsis]
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: publisher
+      :type:  python.eu.algites.frmw.aac.core.catalog.aic_catalog_publisher.AIcCatalogPublisher | None
+      :value: None
+
+
+
+   .. py:attribute:: homepage_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: documentation_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: support_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: entitlement_info_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: icon
+      :type:  python.eu.algites.frmw.aac.core.catalog.aic_catalog_icon.AIcCatalogIcon | None
+      :value: None
+
+
+
+   .. py:attribute:: categories
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: tags
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

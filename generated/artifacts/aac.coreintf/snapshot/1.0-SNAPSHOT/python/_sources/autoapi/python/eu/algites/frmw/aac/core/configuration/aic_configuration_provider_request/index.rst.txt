@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_request
+================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_request
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_request.AIcConfigurationProviderRequest
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationProviderRequest
+
+   .. py:attribute:: configuration_target
+      :type:  python.eu.algites.frmw.aac.core.configuration.aic_configuration_target.AIcConfigurationTarget
+
+
+   .. py:attribute:: configuration_scope
+      :type:  python.eu.algites.frmw.aac.core.context.api.AIcConfigurationScope
+
+
+   .. py:attribute:: context
+      :type:  Mapping[str, object]
+
+

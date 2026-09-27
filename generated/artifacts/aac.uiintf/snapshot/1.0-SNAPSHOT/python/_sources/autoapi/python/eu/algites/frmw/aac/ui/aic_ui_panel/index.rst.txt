@@ -1,0 +1,57 @@
+python.eu.algites.frmw.aac.ui.aic_ui_panel
+==========================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_panel
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_panel.AIcUiPanel
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiPanel
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: title
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: displays
+      :type:  tuple[python.eu.algites.frmw.aac.ui.aic_ui_display.AIcUiDisplay, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: forms
+      :type:  tuple[python.eu.algites.frmw.aac.ui.aic_ui_form.AIcUiForm, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: panels
+      :type:  tuple[AIcUiPanel, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

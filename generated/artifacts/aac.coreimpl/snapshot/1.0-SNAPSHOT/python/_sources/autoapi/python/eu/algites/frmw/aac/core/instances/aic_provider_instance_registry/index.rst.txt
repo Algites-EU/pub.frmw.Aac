@@ -1,0 +1,58 @@
+python.eu.algites.frmw.aac.core.instances.aic_provider_instance_registry
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.instances.aic_provider_instance_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.instances.aic_provider_instance_registry.AIcProviderInstanceRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProviderInstanceRegistry(store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore | None = None)
+
+   .. py:attribute:: store
+
+
+   .. py:method:: reload() -> None
+
+
+   .. py:method:: all() -> tuple[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, Ellipsis]
+
+
+   .. py:method:: get(instance_id: str) -> eu.algites.frmw.aac.core.instances.api.AIcProviderInstance
+
+
+   .. py:method:: find(*, component_id: str | None = None, provider_definition_id: str | None = None, name: str | None = None, capability_id: str | None = None, states: tuple[eu.algites.frmw.aac.core.instances.api.AInProviderInstanceState, Ellipsis] | None = None) -> tuple[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, Ellipsis]
+
+
+   .. py:method:: build(component_id: str, provider: eu.algites.frmw.aac.core.descriptor.api.AIcProviderDefinitionDescriptor, *, name: str = 'default', configuration: dict[str, object] | None = None, access_mode: eu.algites.frmw.aac.core.instances.api.AInProviderAccessMode = AInProviderAccessMode.READ_WRITE, state: eu.algites.frmw.aac.core.instances.api.AInProviderInstanceState = AInProviderInstanceState.CONFIGURED) -> eu.algites.frmw.aac.core.instances.api.AIcProviderInstance
+
+
+   .. py:method:: commit(instances: tuple[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, Ellipsis], extra_mutations: tuple[eu.algites.frmw.aac.core.persistence.api.AIcStateMutation, Ellipsis] = ()) -> None
+
+
+   .. py:method:: create(component_id: str, provider: eu.algites.frmw.aac.core.descriptor.api.AIcProviderDefinitionDescriptor, *, name: str = 'default', configuration: dict[str, object] | None = None, access_mode: eu.algites.frmw.aac.core.instances.api.AInProviderAccessMode = AInProviderAccessMode.READ_WRITE, state: eu.algites.frmw.aac.core.instances.api.AInProviderInstanceState = AInProviderInstanceState.CONFIGURED) -> eu.algites.frmw.aac.core.instances.api.AIcProviderInstance
+
+
+   .. py:method:: update(instance_id: str, **changes: object) -> eu.algites.frmw.aac.core.instances.api.AIcProviderInstance
+
+
+   .. py:method:: reconcile_descriptor(descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor) -> tuple[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, Ellipsis]
+
+
+   .. py:method:: reconcile_initial_instances(descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor) -> tuple[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, Ellipsis]
+
+
+   .. py:method:: remove_ids(instance_ids: tuple[str, Ellipsis], extra_mutations: tuple[eu.algites.frmw.aac.core.persistence.api.AIcStateMutation, Ellipsis] = ()) -> tuple[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, Ellipsis]
+
+
+   .. py:method:: remove_component(component_id: str) -> tuple[eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, Ellipsis]
+
+

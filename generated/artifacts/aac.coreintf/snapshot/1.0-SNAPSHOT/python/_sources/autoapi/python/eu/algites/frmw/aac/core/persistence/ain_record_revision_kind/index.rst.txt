@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.persistence.ain_record_revision_kind
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.ain_record_revision_kind
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.ain_record_revision_kind.AInRecordRevisionKind
+
+
+Module Contents
+---------------
+
+.. py:class:: AInRecordRevisionKind
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Schema/persistence-contract declaration for record revision representation.
+
+
+   .. py:attribute:: MONOTONIC_INTEGER
+      :value: 'MONOTONIC_INTEGER'
+
+
+
+   .. py:attribute:: OPAQUE_STRING
+      :value: 'OPAQUE_STRING'
+
+
+

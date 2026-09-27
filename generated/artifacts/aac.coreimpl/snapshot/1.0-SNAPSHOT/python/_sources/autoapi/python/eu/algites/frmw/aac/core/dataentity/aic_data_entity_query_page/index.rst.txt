@@ -1,0 +1,40 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_query_page
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_query_page
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_query_page.T
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_query_page.AIcDataEntityQueryPage
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:class:: AIcDataEntityQueryPage
+
+   Bases: :py:obj:`Generic`\ [\ :py:obj:`T`\ ]
+
+
+   .. py:attribute:: records
+      :type:  tuple[eu.algites.frmw.aac.core.dataentity.api.AIcTypedDataEntityEnvelope[T], Ellipsis]
+
+
+   .. py:attribute:: continuation_token
+      :type:  str | None
+
+

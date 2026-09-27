@@ -1,0 +1,32 @@
+python.eu.algites.frmw.aac.core.bootstrap.aic_catalog_bootstrap_loader
+======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.bootstrap.aic_catalog_bootstrap_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.bootstrap.aic_catalog_bootstrap_loader.AIcCatalogBootstrapLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogBootstrapLoader
+
+   Load product/technology-scoped AAC catalog source registrations.
+
+
+   .. py:method:: load_file(path: str | pathlib.Path)
+      :staticmethod:
+
+
+
+   .. py:method:: load_text(text: str, source: str = '<memory>')
+      :staticmethod:
+
+
+

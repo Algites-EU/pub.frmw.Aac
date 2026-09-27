@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.authentication.aic_authentication_parameter
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aic_authentication_parameter
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aic_authentication_parameter.AIcAuthenticationParameter
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAuthenticationParameter
+
+   .. py:attribute:: value
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: secret_reference
+      :type:  python.eu.algites.frmw.aac.core.authentication.aic_secret_reference.AIcSecretReference | None
+      :value: None
+
+
+

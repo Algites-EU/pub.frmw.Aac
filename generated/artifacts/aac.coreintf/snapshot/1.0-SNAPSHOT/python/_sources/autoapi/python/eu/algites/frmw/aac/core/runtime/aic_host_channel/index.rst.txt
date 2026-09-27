@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.runtime.aic_host_channel
+========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.aic_host_channel
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.aic_host_channel.AIcHostChannel
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcHostChannel
+
+   .. py:method:: read() -> dict[str, object] | None
+
+
+   .. py:method:: write(frame: Mapping[str, object]) -> None
+
+
+   .. py:method:: respond(request_id: str, *, success: bool, result: object | None = None, error: Mapping[str, object] | None = None) -> None
+
+
+   .. py:method:: core_invoke(requirement_id: str, handle_index: int, operation_id: str, arguments: Mapping[str, object], operation_parameters: Mapping[str, object], parent_invocation_id: str | None, locale: str | None) -> Mapping[str, object]
+
+
+   .. py:method:: operation_interaction_caller_snapshot(invocation_id: str) -> python.eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionCallerToProviderMessage
+
+

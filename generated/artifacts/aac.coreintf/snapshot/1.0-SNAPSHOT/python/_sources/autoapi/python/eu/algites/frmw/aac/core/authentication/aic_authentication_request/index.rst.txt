@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.authentication.aic_authentication_request
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aic_authentication_request
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aic_authentication_request.AIcAuthenticationRequest
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAuthenticationRequest
+
+   .. py:attribute:: profile
+      :type:  python.eu.algites.frmw.aac.core.authentication.aic_authentication_profile.AIcAuthenticationProfile
+
+
+   .. py:attribute:: transport_kind
+      :type:  str
+
+
+   .. py:attribute:: endpoint
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: context
+      :type:  Mapping[str, object]
+
+

@@ -1,0 +1,138 @@
+python.eu.algites.frmw.aac.ui.aic_ui_catalog_package_artifact
+=============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_catalog_package_artifact
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_catalog_package_artifact.AIcUiCatalogPackageArtifact
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiCatalogPackageArtifact
+
+   .. py:attribute:: source_id
+      :type:  str
+
+
+   .. py:attribute:: product_id
+      :type:  str
+
+
+   .. py:attribute:: technology_id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: artifact_id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: publisher
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: package_format
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: artifact_uri
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: sha256
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: provides
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: requires
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: entitlement_summary
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: entitlement_info_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: homepage_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: documentation_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: icon_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: downloaded
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: installed
+      :type:  bool
+      :value: False
+
+
+
+   .. py:property:: identity
+      :type: tuple[str, str, str, str, int, str]
+
+
+

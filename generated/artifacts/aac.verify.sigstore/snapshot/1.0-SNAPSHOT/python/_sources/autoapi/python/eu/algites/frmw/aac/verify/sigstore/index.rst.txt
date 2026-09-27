@@ -1,0 +1,19 @@
+python.eu.algites.frmw.aac.verify.sigstore
+==========================================
+
+.. py:module:: python.eu.algites.frmw.aac.verify.sigstore
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/python/eu/algites/frmw/aac/verify/sigstore/aic_sigstore_entitlement_evidence_verifier/index
+   /autoapi/python/eu/algites/frmw/aac/verify/sigstore/aic_sigstore_package_verifier/index
+   /autoapi/python/eu/algites/frmw/aac/verify/sigstore/aic_sigstore_trust_policy/index
+   /autoapi/python/eu/algites/frmw/aac/verify/sigstore/ain_sigstore_verification_mode/index
+   /autoapi/python/eu/algites/frmw/aac/verify/sigstore/verifier/index
+
+

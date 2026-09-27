@@ -1,0 +1,50 @@
+python.eu.algites.frmw.aac.core.aix_authorization_denied
+========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.aix_authorization_denied
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.aix_authorization_denied.AIxAuthorizationDenied
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxAuthorizationDenied(message: str = 'authorization for operation is missing', *, capability_id: str | None = None, capability_version: int | None = None, operation_id: str | None = None, required_all_of: tuple[str, Ellipsis] = (), required_any_of: tuple[str, Ellipsis] = ())
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.aix_aac_error.AIxAACError`
+
+
+   Core bridge rejected a capability invocation before provider execution.
+
+
+   .. py:attribute:: capability_id
+      :value: None
+
+
+
+   .. py:attribute:: capability_version
+      :value: None
+
+
+
+   .. py:attribute:: operation_id
+      :value: None
+
+
+
+   .. py:attribute:: required_all_of
+      :value: ()
+
+
+
+   .. py:attribute:: required_any_of
+      :value: ()
+
+
+

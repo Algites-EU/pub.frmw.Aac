@@ -1,0 +1,51 @@
+python.eu.algites.frmw.aac.core.invocation.aic_operation_completion
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_operation_completion
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_operation_completion.AIcOperationSuccessT
+   python.eu.algites.frmw.aac.core.invocation.aic_operation_completion.AIcOperationCancelledT
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_operation_completion.AIcOperationCompletion
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcOperationSuccessT
+
+.. py:data:: AIcOperationCancelledT
+
+.. py:class:: AIcOperationCompletion
+
+   Bases: :py:obj:`Generic`\ [\ :py:obj:`AIcOperationSuccessT`\ , :py:obj:`AIcOperationCancelledT`\ ]
+
+
+   .. py:attribute:: state
+      :type:  python.eu.algites.frmw.aac.core.invocation.ain_operation_completion_state.AInOperationCompletionState
+
+
+   .. py:attribute:: success_result
+      :type:  AIcOperationSuccessT | None
+      :value: None
+
+
+
+   .. py:attribute:: cancelled_result
+      :type:  AIcOperationCancelledT | None
+      :value: None
+
+
+

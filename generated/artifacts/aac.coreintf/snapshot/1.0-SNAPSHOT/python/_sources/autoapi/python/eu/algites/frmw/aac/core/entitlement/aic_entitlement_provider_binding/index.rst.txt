@@ -1,0 +1,23 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_provider_binding
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_provider_binding
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_provider_binding.AIcEntitlementProviderBinding
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementProviderBinding
+
+   .. py:attribute:: entitlement_provider_id
+      :type:  str
+
+

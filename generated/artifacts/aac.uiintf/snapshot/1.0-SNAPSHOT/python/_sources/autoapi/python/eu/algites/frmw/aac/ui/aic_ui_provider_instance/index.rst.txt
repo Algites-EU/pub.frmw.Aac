@@ -1,0 +1,71 @@
+python.eu.algites.frmw.aac.ui.aic_ui_provider_instance
+======================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_provider_instance
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_provider_instance.AIcUiProviderInstance
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiProviderInstance
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: provider_definition_id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText
+
+
+   .. py:attribute:: capabilities
+      :type:  tuple[tuple[str, tuple[int, Ellipsis]], Ellipsis]
+
+
+   .. py:attribute:: access_mode
+      :type:  str
+
+
+   .. py:attribute:: state
+      :type:  str
+
+
+   .. py:attribute:: configuration_schema
+      :type:  str | None
+
+
+   .. py:attribute:: readiness_state
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: readiness_reasons
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: supports_capability(capability_id: str) -> bool
+
+
+   .. py:property:: capabilities_text
+      :type: str
+
+
+

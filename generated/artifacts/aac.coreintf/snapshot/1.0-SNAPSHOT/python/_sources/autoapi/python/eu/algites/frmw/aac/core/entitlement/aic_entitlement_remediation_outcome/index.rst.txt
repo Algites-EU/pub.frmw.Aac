@@ -1,0 +1,29 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_remediation_outcome
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_remediation_outcome
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_remediation_outcome.AIcEntitlementRemediationOutcome
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementRemediationOutcome
+
+   .. py:attribute:: changed
+      :type:  bool
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

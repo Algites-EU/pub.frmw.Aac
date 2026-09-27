@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_profile
+=======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_profile
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_profile.AIcConfigurationProfile
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationProfile
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: configuration_scopes
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_scope_definition.AIcConfigurationScopeDefinition, Ellipsis]
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+

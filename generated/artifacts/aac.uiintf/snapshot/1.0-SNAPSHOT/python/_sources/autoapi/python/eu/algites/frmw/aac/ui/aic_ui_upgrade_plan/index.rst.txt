@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.ui.aic_ui_upgrade_plan
+=================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_upgrade_plan
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_upgrade_plan.AIcUiUpgradePlan
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiUpgradePlan
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: replacements
+      :type:  tuple[python.eu.algites.frmw.aac.ui.aic_ui_upgrade_replacement.AIcUiUpgradeReplacement, Ellipsis]
+
+
+   .. py:attribute:: compatible
+      :type:  bool
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[python.eu.algites.frmw.aac.ui.aic_ui_upgrade_diagnostic.AIcUiUpgradeDiagnostic, Ellipsis]
+      :value: ()
+
+
+

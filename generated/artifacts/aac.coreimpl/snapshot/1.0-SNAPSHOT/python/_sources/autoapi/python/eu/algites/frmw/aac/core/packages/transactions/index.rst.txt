@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.packages.transactions
+=====================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.transactions
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.transactions.manifest_to_raw
+   python.eu.algites.frmw.aac.core.packages.transactions.manifest_from_raw
+
+
+Module Contents
+---------------
+
+.. py:function:: manifest_to_raw(manifest: eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest) -> dict[str, object]
+
+.. py:function:: manifest_from_raw(raw: Mapping[str, object]) -> eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest
+

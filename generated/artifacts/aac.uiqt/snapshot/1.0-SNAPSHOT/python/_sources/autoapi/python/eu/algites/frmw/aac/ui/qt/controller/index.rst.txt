@@ -1,0 +1,6 @@
+python.eu.algites.frmw.aac.ui.qt.controller
+===========================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.qt.controller
+
+

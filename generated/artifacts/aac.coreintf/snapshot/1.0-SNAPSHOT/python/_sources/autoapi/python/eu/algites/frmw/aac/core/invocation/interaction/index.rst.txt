@@ -1,0 +1,19 @@
+python.eu.algites.frmw.aac.core.invocation.interaction
+======================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.interaction
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.interaction.AIxOperationFailureT
+
+
+Module Contents
+---------------
+
+.. py:data:: AIxOperationFailureT
+

@@ -1,0 +1,60 @@
+python.eu.algites.frmw.aac.core.packages.aic_manifest_package_source
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_manifest_package_source
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_manifest_package_source.AIcManifestPackageSource
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcManifestPackageSource(source_id: str, manifest_uri: str, *, authentication: eu.algites.frmw.aac.core.authentication.implementation.AIcAuthenticationService | None = None, authentication_profile_id: str | None = None, verifier_id: str | None = None, priority: int = 0, timeout_seconds: float = 30.0, context: Mapping[str, object] | None = None)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.packages.api.AIiPackageSource`
+
+
+   Reference file/HTTP package source backed by a small json/YAML manifest.
+
+
+   .. py:attribute:: source_id
+
+
+   .. py:attribute:: manifest_uri
+
+
+   .. py:attribute:: authentication
+      :value: None
+
+
+
+   .. py:attribute:: authentication_profile_id
+      :value: None
+
+
+
+   .. py:attribute:: verifier_id
+      :value: None
+
+
+
+   .. py:attribute:: priority
+      :value: 0
+
+
+
+   .. py:attribute:: timeout_seconds
+
+
+   .. py:attribute:: context
+
+
+   .. py:method:: candidates(requirement: eu.algites.frmw.aac.core.packages.api.AIcWorkspaceComponentRequirement) -> tuple[eu.algites.frmw.aac.core.packages.api.AIcPackageCandidate, Ellipsis]
+
+

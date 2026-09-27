@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.invocation.aic_null_operation_interaction
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_null_operation_interaction
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_null_operation_interaction.AIcNullOperationInteraction
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcNullOperationInteraction
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.invocation.aii_operation_interaction_provider_to_caller.AIiOperationInteractionProviderToCaller`
+
+
+   No-op interaction used by simple synchronous invocations without a caller callback.
+
+
+   .. py:method:: declare_features(features: python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_features.AIcOperationInteractionFeatures) -> None
+
+
+   .. py:method:: report_events(events: tuple[python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_event.AIcOperationInteractionEvent, Ellipsis]) -> None
+
+
+   .. py:method:: state_result_changed() -> int
+
+
+   .. py:method:: update_state_result(state_result: object) -> int
+
+
+   .. py:method:: deliver_state_result(state_result: object, *, revision: int | None = None) -> None
+
+
+   .. py:method:: caller_snapshot() -> python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message.AIcOperationInteractionCallerToProviderMessage
+
+

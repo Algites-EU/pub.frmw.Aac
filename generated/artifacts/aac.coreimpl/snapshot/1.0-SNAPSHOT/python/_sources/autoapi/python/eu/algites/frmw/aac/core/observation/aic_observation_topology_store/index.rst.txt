@@ -1,0 +1,51 @@
+python.eu.algites.frmw.aac.core.observation.aic_observation_topology_store
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.observation.aic_observation_topology_store
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.observation.aic_observation_topology_store.OBSERVATION_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.observation.aic_observation_topology_store.AIcObservationTopologyStore
+
+
+Module Contents
+---------------
+
+.. py:data:: OBSERVATION_CAPABILITY_ID
+   :value: '_AAC.capability.observation'
+
+
+.. py:class:: AIcObservationTopologyStore(store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore | None = None, contracts: eu.algites.frmw.aac.core.capability.catalog.AIcActiveContractCatalog | None = None)
+
+   .. py:attribute:: store
+
+
+   .. py:attribute:: contracts
+      :value: None
+
+
+
+   .. py:method:: put(binding: eu.algites.frmw.aac.core.observation.api.AIcObservationBinding) -> None
+
+
+   .. py:method:: get(observer_instance_id: str) -> eu.algites.frmw.aac.core.observation.api.AIcObservationBinding | None
+
+
+   .. py:method:: all() -> tuple[eu.algites.frmw.aac.core.observation.api.AIcObservationBinding, Ellipsis]
+
+
+   .. py:method:: delete(observer_instance_id: str) -> None
+
+

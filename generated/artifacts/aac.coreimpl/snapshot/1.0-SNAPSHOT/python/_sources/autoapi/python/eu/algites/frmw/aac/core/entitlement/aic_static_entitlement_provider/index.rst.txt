@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_static_entitlement_provider
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_static_entitlement_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_static_entitlement_provider.AIcStaticEntitlementProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcStaticEntitlementProvider(evidence: Mapping[str, Iterable[eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementEvidence | eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementDocument]])
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.entitlement.api.AIiEntitlementProvider`
+
+
+   In-memory evidence provider for tests/trusted bootstrap configuration.
+
+
+   .. py:method:: evidence(request: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementProviderRequest) -> tuple[eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementEvidence, Ellipsis]
+
+

@@ -1,0 +1,66 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_bootstrap
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_bootstrap
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_bootstrap.AIcConfigurationBootstrap
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationBootstrap
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: default_configuration_profile_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_profiles
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_profile.AIcConfigurationProfile, Ellipsis]
+
+
+   .. py:attribute:: configuration_providers
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_registration.AIcConfigurationProviderRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: configuration_scope_resolvers
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_scope_resolver_registration.AIcConfigurationScopeResolverRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: configuration_profile_sources
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_profile_source_registration.AIcConfigurationProfileSourceRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: workspace_configuration_profiles
+      :type:  python.eu.algites.frmw.aac.core.configuration.ain_workspace_configuration_profile_policy.AInWorkspaceConfigurationProfilePolicy
+
+
+   .. py:attribute:: mandatory_configuration_scope_definition_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:method:: profile(profile_id: str | None = None) -> python.eu.algites.frmw.aac.core.configuration.aic_configuration_profile.AIcConfigurationProfile
+
+

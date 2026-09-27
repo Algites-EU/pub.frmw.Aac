@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.invocation.context
+==================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.context
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.context.current_operation_parameters
+   python.eu.algites.frmw.aac.core.invocation.context.current_operation_interaction
+   python.eu.algites.frmw.aac.core.invocation.context.current_invocation_locale
+   python.eu.algites.frmw.aac.core.invocation.context.operation_parameter_context
+   python.eu.algites.frmw.aac.core.invocation.context.operation_interaction_context
+   python.eu.algites.frmw.aac.core.invocation.context.invocation_locale_context
+
+
+Module Contents
+---------------
+
+.. py:function:: current_operation_parameters() -> Mapping[str, object]
+
+   Return effective provider-specific parameters for the current capability invocation.
+
+
+.. py:function:: current_operation_interaction() -> python.eu.algites.frmw.aac.core.invocation.interaction.AIiOperationInteractionProviderToCaller
+
+   Return the provider-facing interaction channel for the current capability invocation.
+
+
+.. py:function:: current_invocation_locale() -> str | None
+
+   Return the BCP-47 locale requested for the current capability invocation, if any.
+
+
+.. py:function:: operation_parameter_context(parameters: Mapping[str, object])
+
+.. py:function:: operation_interaction_context(interaction: python.eu.algites.frmw.aac.core.invocation.interaction.AIiOperationInteractionProviderToCaller | None)
+
+.. py:function:: invocation_locale_context(locale: str | None)
+

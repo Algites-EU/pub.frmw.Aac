@@ -1,0 +1,107 @@
+python.eu.algites.frmw.aac.ui.aic_ui_field
+==========================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_field
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_field.AIcUiField
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiField
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: label
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText
+
+
+   .. py:attribute:: field_type
+      :type:  python.eu.algites.frmw.aac.ui.ain_ui_field_type.AInUiFieldType
+
+
+   .. py:attribute:: value
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: required
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: read_only
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: description
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: choices
+      :type:  tuple[python.eu.algites.frmw.aac.ui.aic_ui_choice.AIcUiChoice, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: multiple
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: secret
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: accepted_configuration_scope_types
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: effective_configuration_scope
+      :type:  python.eu.algites.frmw.aac.ui.aic_ui_configuration_scope.AIcUiConfigurationScope | None
+      :value: None
+
+
+
+   .. py:attribute:: effective_configuration_provider_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: value_source_kind
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: policy_modes
+      :type:  tuple[Mapping[str, object], Ellipsis]
+      :value: ()
+
+
+

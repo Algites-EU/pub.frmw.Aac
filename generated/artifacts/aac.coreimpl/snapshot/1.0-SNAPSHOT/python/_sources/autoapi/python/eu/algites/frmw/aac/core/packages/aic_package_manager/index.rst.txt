@@ -1,0 +1,111 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_manager
+============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_manager
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_manager.AIcPackageManager
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageManager(layout: eu.algites.frmw.aac.core.packages.api.AIcPackageStoreLayout, *, authentication: eu.algites.frmw.aac.core.authentication.implementation.AIcAuthenticationService | None = None, store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore | None = None, automation_policy: eu.algites.frmw.aac.core.packages.api.AIcPackageAutomationPolicy = AIcPackageAutomationPolicy())
+
+   .. py:attribute:: authentication
+
+
+   .. py:attribute:: package_store
+
+
+   .. py:attribute:: sources
+
+
+   .. py:attribute:: verifiers
+
+
+   .. py:attribute:: state_store
+
+
+   .. py:attribute:: selection_manifest_store
+
+
+   .. py:attribute:: selections
+
+
+   .. py:attribute:: transactions
+
+
+   .. py:attribute:: transaction_recovery
+
+
+   .. py:attribute:: automation_policy
+
+
+   .. py:method:: register_source(source_id: str, source: eu.algites.frmw.aac.core.packages.api.AIiPackageSource, *, priority: int = 0) -> None
+
+
+   .. py:method:: register_verifier(verifier_id: str, verifier: eu.algites.frmw.aac.core.verification.api.AIiPackageVerifier) -> None
+
+
+   .. py:method:: download(candidate: eu.algites.frmw.aac.core.packages.api.AIcPackageCandidate, *, fallback_verifier: eu.algites.frmw.aac.core.verification.api.AIiPackageVerifier | None = None, context: Mapping[str, object] | None = None) -> eu.algites.frmw.aac.core.packages.api.AIcStoredPackage
+
+
+   .. py:method:: install(candidate: eu.algites.frmw.aac.core.packages.api.AIcPackageCandidate, downloaded: eu.algites.frmw.aac.core.packages.api.AIcStoredPackage, *, fallback_verifier: eu.algites.frmw.aac.core.verification.api.AIiPackageVerifier | None = None) -> eu.algites.frmw.aac.core.packages.api.AIcStoredPackage
+
+
+   .. py:method:: descriptor_from_artifact(package: eu.algites.frmw.aac.core.packages.api.AIcStoredPackage) -> eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor
+
+
+   .. py:method:: automatic_entitlement_allows(descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor, effective_permission_ids: set[tuple[str, int, str]]) -> bool
+      :staticmethod:
+
+
+
+   .. py:method:: mark_obsolete(package: eu.algites.frmw.aac.core.packages.api.AIcStoredPackage) -> eu.algites.frmw.aac.core.packages.api.AIcStoredPackage
+
+
+   .. py:method:: restore_obsolete(package: eu.algites.frmw.aac.core.packages.api.AIcStoredPackage) -> eu.algites.frmw.aac.core.packages.api.AIcStoredPackage
+
+
+   .. py:method:: begin_replacement_transaction(application_scope_id: str, packages: tuple[eu.algites.frmw.aac.core.packages.api.AIcStoredPackage, Ellipsis], core_state_snapshot: Mapping[str, Mapping[str, Mapping[str, object]]])
+
+
+   .. py:method:: mark_replacement_cutover_started(transaction) -> None
+
+
+   .. py:method:: commit_replacement_selections(transaction) -> tuple[eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest, tuple[str, Ellipsis]]
+
+
+   .. py:method:: complete_replacement_transaction(transaction, packages: tuple[eu.algites.frmw.aac.core.packages.api.AIcStoredPackage, Ellipsis]) -> tuple[tuple[eu.algites.frmw.aac.core.packages.api.AIcStoredPackage, Ellipsis], tuple[str, Ellipsis]]
+
+
+   .. py:method:: rollback_replacement_transaction(transaction, diagnostics: tuple[str, Ellipsis] = ()) -> None
+
+
+   .. py:method:: release_replacement_cutover_lock() -> None
+
+
+   .. py:method:: activate_replacements(application_scope_id: str, packages: tuple[eu.algites.frmw.aac.core.packages.api.AIcStoredPackage, Ellipsis]) -> tuple[dict[str, eu.algites.frmw.aac.core.packages.api.AIcStoredPackage | None], tuple[eu.algites.frmw.aac.core.packages.api.AIcStoredPackage, Ellipsis]]
+
+      Atomically select a replacement set and retire unselected old artifacts.
+
+      Core replacement code uses the explicit durable transaction methods above.  This convenience
+      method remains for package-only callers and still commits the full selection set atomically.
+
+
+
+   .. py:method:: rollback_replacements(application_scope_id: str, previous: Mapping[str, eu.algites.frmw.aac.core.packages.api.AIcStoredPackage | None], targets: tuple[eu.algites.frmw.aac.core.packages.api.AIcStoredPackage, Ellipsis]) -> None
+
+      Legacy in-process compensation helper for package-only callers.
+
+
+
+   .. py:method:: plan_workspace(requirements: eu.algites.frmw.aac.core.packages.api.AIcWorkspaceComponentRequirements, lock: eu.algites.frmw.aac.core.packages.api.AIcWorkspaceComponentLock | None = None) -> eu.algites.frmw.aac.core.packages.api.AIcPackageReconciliationPlan
+
+

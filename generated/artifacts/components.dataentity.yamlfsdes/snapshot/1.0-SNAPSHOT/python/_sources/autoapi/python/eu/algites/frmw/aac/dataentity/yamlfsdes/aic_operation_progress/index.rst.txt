@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.dataentity.yamlfsdes.aic_operation_progress
+======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.dataentity.yamlfsdes.aic_operation_progress
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.dataentity.yamlfsdes.aic_operation_progress.AIcOperationProgress
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationProgress
+
+   .. py:method:: checkpoint() -> None
+
+
+   .. py:method:: report(phase_id: str, text: str, *, current: int | float | None = None, total: int | float | None = None, unit: str | None = None, force: bool = False) -> None
+
+

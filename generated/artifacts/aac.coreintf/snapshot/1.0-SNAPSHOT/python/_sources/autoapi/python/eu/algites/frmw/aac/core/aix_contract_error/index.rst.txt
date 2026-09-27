@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.aix_contract_error
+==================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.aix_contract_error
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.aix_contract_error.AIxContractError
+
+
+Module Contents
+---------------
+
+.. py:exception:: AIxContractError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.aix_aac_error.AIxAACError`
+
+
+   Raised for an invalid capability contract.
+
+

@@ -1,0 +1,55 @@
+python.eu.algites.frmw.aac.core.invocation.aic_operation_failure
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_operation_failure
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_operation_failure.AIcOperationFailure
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationFailure
+
+   .. py:attribute:: system_message
+      :type:  str
+
+
+   .. py:attribute:: exception_type
+      :type:  str
+
+
+   .. py:attribute:: user_message
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: error_code
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: stack_trace
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: details
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: extension
+      :type:  object | None
+      :value: None
+
+
+

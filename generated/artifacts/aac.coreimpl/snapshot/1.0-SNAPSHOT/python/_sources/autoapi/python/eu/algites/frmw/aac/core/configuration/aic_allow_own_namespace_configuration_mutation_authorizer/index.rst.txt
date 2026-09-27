@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.configuration.aic_allow_own_namespace_configuration_mutation_authorizer
+=======================================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_allow_own_namespace_configuration_mutation_authorizer
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_allow_own_namespace_configuration_mutation_authorizer.AIcAllowOwnNamespaceConfigurationMutationAuthorizer
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAllowOwnNamespaceConfigurationMutationAuthorizer
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.configuration.api.AIiConfigurationMutationAuthorizer`
+
+
+   Baseline Core authorizer: caller may mutate only its own component namespace.
+
+   Product profiles can replace this with principal/role-aware authorization.  The actor
+   component id is supplied as ``actor_context['ComponentId']``; product/UI administrative
+   principals may set ``configuration_admin=True``.
+
+
+   .. py:method:: authorized_capabilities(request, actor_context, provider_capabilities)
+
+
+   .. py:method:: authorize(change_set: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationChangeSet) -> tuple[bool, tuple[str, Ellipsis]]
+
+

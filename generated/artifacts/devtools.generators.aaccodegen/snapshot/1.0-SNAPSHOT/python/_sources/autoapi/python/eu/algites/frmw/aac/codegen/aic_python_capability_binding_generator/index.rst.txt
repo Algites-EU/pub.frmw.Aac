@@ -1,0 +1,32 @@
+python.eu.algites.frmw.aac.codegen.aic_python_capability_binding_generator
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.codegen.aic_python_capability_binding_generator
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.codegen.aic_python_capability_binding_generator.AIcPythonCapabilityBindingGenerator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPythonCapabilityBindingGenerator(schemas: eu.algites.frmw.aac.core.schemas.registry.AIcSchemaRegistry)
+
+   Generate Python provider/caller bindings from one canonical capability contract.
+
+   Portable interaction schemas remain the source of truth.  Data types are projected
+   deterministically from schema identity; operation-specific failure exception names
+   are projected deterministically from capability/operation identity.
+
+
+   .. py:attribute:: schemas
+
+
+   .. py:method:: generate(contract: eu.algites.frmw.aac.core.capability.api.AIcCapabilityContract, *, canonical_resource: str | None = None) -> str
+
+

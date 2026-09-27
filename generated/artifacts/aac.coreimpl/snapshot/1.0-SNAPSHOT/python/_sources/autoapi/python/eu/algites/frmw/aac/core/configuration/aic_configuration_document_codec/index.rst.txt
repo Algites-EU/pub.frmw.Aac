@@ -1,0 +1,44 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_document_codec
+==============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_document_codec
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_document_codec.AIcConfigurationDocumentCodec
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationDocumentCodec
+
+   .. py:attribute:: FORMAT_VERSION
+      :value: 1
+
+
+
+   .. py:method:: encode_snapshot(snapshot: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderSnapshot) -> dict[str, object]
+      :staticmethod:
+
+
+
+   .. py:method:: decode_snapshot(raw: Mapping[str, object]) -> eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderSnapshot
+      :staticmethod:
+
+
+
+   .. py:method:: encode_change_set(change_set: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationChangeSet) -> dict[str, object]
+      :staticmethod:
+
+
+
+   .. py:method:: contributions(snapshot: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderSnapshot) -> tuple[eu.algites.frmw.aac.core.configuration.api.AIcConfigurationContribution, Ellipsis]
+      :staticmethod:
+
+
+

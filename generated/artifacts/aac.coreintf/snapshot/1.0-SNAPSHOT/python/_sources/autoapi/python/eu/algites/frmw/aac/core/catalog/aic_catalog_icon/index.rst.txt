@@ -1,0 +1,23 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_icon
+========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_icon
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_icon.AIcCatalogIcon
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogIcon
+
+   .. py:attribute:: url
+      :type:  str
+
+

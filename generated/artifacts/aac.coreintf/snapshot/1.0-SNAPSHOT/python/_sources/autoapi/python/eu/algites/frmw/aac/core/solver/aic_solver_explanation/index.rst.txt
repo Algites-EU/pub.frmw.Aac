@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.solver.aic_solver_explanation
+=============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.solver.aic_solver_explanation
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.solver.aic_solver_explanation.AIcSolverExplanation
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSolverExplanation
+
+   .. py:attribute:: code
+      :type:  str
+
+
+   .. py:attribute:: message
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: caused_by_component_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: capability_id
+      :type:  str | None
+      :value: None
+
+
+

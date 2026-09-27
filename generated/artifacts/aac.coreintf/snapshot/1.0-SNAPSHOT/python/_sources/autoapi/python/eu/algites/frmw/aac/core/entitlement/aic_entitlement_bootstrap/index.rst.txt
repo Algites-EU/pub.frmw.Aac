@@ -1,0 +1,56 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_bootstrap
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_bootstrap
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_bootstrap.AIcEntitlementBootstrap
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementBootstrap
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: default_entitlement_profile_id
+      :type:  str
+
+
+   .. py:attribute:: entitlement_profiles
+      :type:  tuple[python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_profile.AIcEntitlementProfile, Ellipsis]
+
+
+   .. py:attribute:: entitlement_providers
+      :type:  tuple[python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_provider_registration.AIcEntitlementProviderRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: licensing_scope_resolvers
+      :type:  tuple[python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_licensing_scope_resolver_registration.AIcEntitlementLicensingScopeResolverRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: trusted_issuers
+      :type:  tuple[python.eu.algites.frmw.aac.core.entitlement.aic_trusted_entitlement_issuer_rule.AIcTrustedEntitlementIssuerRule, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:method:: profile(profile_id: str | None = None) -> python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_profile.AIcEntitlementProfile
+
+

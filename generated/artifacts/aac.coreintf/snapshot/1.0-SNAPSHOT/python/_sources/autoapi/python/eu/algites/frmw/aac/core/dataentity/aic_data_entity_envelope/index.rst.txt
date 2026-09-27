@@ -1,0 +1,48 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_envelope
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_envelope
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_envelope.AIcDataEntityEnvelope
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDataEntityEnvelope
+
+   .. py:attribute:: uid
+      :type:  str
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: record_revision
+      :type:  int | str
+
+
+   .. py:attribute:: state
+      :type:  python.eu.algites.frmw.aac.core.dataentity.ain_data_entity_state.AInDataEntityState
+
+
+   .. py:attribute:: payload
+      :type:  Mapping[str, object]
+
+
+   .. py:property:: identity
+      :type: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_identity.AIcDataEntityIdentity
+
+
+

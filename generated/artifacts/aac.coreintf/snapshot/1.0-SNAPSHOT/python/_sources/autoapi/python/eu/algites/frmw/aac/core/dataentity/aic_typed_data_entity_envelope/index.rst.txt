@@ -1,0 +1,65 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_typed_data_entity_envelope
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_typed_data_entity_envelope
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_typed_data_entity_envelope.T
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_typed_data_entity_envelope.AIcTypedDataEntityEnvelope
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:class:: AIcTypedDataEntityEnvelope
+
+   Bases: :py:obj:`Generic`\ [\ :py:obj:`T`\ ]
+
+
+   .. py:attribute:: uid
+      :type:  str
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: stored_schema_version
+      :type:  int
+
+
+   .. py:attribute:: canonical_schema_version
+      :type:  int
+
+
+   .. py:attribute:: record_revision
+      :type:  int | str
+
+
+   .. py:attribute:: state
+      :type:  python.eu.algites.frmw.aac.core.dataentity.ain_data_entity_state.AInDataEntityState
+
+
+   .. py:attribute:: entity
+      :type:  T
+
+
+   .. py:property:: identity
+      :type: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_identity.AIcDataEntityIdentity
+
+
+

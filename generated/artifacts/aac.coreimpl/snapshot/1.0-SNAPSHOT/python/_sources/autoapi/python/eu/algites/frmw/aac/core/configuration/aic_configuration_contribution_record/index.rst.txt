@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_contribution_record
+===================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_contribution_record
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_contribution_record.AIcConfigurationContributionRecord
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationContributionRecord
+
+   .. py:attribute:: contribution
+      :type:  eu.algites.frmw.aac.core.configuration.api.AIcConfigurationContribution
+
+
+   .. py:attribute:: provenance
+      :type:  eu.algites.frmw.aac.core.configuration.api.AIcConfigurationContributionProvenance
+
+
+   .. py:attribute:: policy_authority
+      :type:  bool
+
+

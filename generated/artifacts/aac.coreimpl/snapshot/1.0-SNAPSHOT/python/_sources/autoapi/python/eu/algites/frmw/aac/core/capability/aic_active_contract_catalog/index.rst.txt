@@ -1,0 +1,61 @@
+python.eu.algites.frmw.aac.core.capability.aic_active_contract_catalog
+======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.aic_active_contract_catalog
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.capability.aic_active_contract_catalog.AIcActiveContractCatalog
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcActiveContractCatalog(schema_registry: eu.algites.frmw.aac.core.schemas.registry.AIcSchemaRegistry | None = None)
+
+   .. py:attribute:: schema_registry
+
+
+   .. py:attribute:: groups
+
+
+   .. py:method:: admit(contract: eu.algites.frmw.aac.core.capability.api.AIcCapabilityContract, *, source: str = '<memory>') -> python.eu.algites.frmw.aac.core.capability.aic_admitted_contract.AIcAdmittedContract
+
+
+   .. py:method:: admit_text(text: str, *, source: str = '<memory>') -> python.eu.algites.frmw.aac.core.capability.aic_admitted_contract.AIcAdmittedContract
+
+
+   .. py:method:: admit_file(path: str | pathlib.Path) -> python.eu.algites.frmw.aac.core.capability.aic_admitted_contract.AIcAdmittedContract
+
+
+   .. py:method:: admit_package_resource(package: str, resource_name: str) -> python.eu.algites.frmw.aac.core.capability.aic_admitted_contract.AIcAdmittedContract
+
+
+   .. py:method:: admit_builtin_contracts() -> tuple[python.eu.algites.frmw.aac.core.capability.aic_admitted_contract.AIcAdmittedContract, Ellipsis]
+
+
+   .. py:method:: get(capability_id: str, version: int) -> eu.algites.frmw.aac.core.capability.api.AIcCapabilityContract
+
+
+   .. py:method:: contains(capability_id: str, version: int) -> bool
+
+
+   .. py:method:: versions(capability_id: str) -> tuple[int, Ellipsis]
+
+
+   .. py:method:: negotiate(capability_id: str, consumer_versions: tuple[int, Ellipsis] | list[int], provider_versions: tuple[int, Ellipsis] | list[int], lifecycle_allowed_versions: tuple[int, Ellipsis] | list[int] | None = None) -> int
+
+
+   .. py:method:: snapshot()
+
+
+   .. py:method:: restore(snapshot) -> None
+
+
+   .. py:method:: operation(capability_id: str, version: int, operation_id: str) -> eu.algites.frmw.aac.core.capability.api.AIcCapabilityOperation
+
+

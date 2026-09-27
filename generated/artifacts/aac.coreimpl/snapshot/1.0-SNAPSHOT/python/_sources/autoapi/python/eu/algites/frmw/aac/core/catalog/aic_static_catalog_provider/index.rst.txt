@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.catalog.aic_static_catalog_provider
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_static_catalog_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_static_catalog_provider.AIcStaticCatalogProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcStaticCatalogProvider(source_id: str, document: eu.algites.frmw.aac.core.catalog.api.AIcCatalogDocument)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.catalog.api.AIiCatalogProvider`
+
+
+   .. py:attribute:: source_id
+
+
+   .. py:attribute:: document
+
+
+   .. py:method:: query(query: eu.algites.frmw.aac.core.catalog.api.AIcCatalogQuery) -> tuple[eu.algites.frmw.aac.core.catalog.api.AIcCatalogEntry, Ellipsis]
+
+

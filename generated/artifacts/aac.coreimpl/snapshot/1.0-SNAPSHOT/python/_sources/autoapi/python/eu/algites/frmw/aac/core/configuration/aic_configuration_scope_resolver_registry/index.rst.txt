@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_scope_resolver_registry
+=======================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_scope_resolver_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_scope_resolver_registry.AIcConfigurationScopeResolverRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationScopeResolverRegistry
+
+   .. py:method:: register(configuration_scope_resolver_id: str, resolver: eu.algites.frmw.aac.core.configuration.api.AIiConfigurationScopeResolver) -> None
+
+
+   .. py:method:: contains(configuration_scope_resolver_id: str) -> bool
+
+
+   .. py:method:: get(configuration_scope_resolver_id: str) -> eu.algites.frmw.aac.core.configuration.api.AIiConfigurationScopeResolver
+
+

@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_migration_request
+=================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_migration_request
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_migration_request.AIcConfigurationMigrationRequest
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationMigrationRequest
+
+   .. py:attribute:: source
+      :type:  python.eu.algites.frmw.aac.core.configuration.aic_configuration_persisted_payload.AIcConfigurationPersistedPayload
+
+
+   .. py:attribute:: target_configuration_schema_version
+      :type:  int
+
+

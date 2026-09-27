@@ -1,0 +1,29 @@
+python.eu.algites.frmw.aac.core.bootstrap.aic_entitlement_bootstrap_loader
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.bootstrap.aic_entitlement_bootstrap_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.bootstrap.aic_entitlement_bootstrap_loader.AIcEntitlementBootstrapLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementBootstrapLoader
+
+   .. py:method:: load_file(path: str | pathlib.Path)
+      :staticmethod:
+
+
+
+   .. py:method:: load_text(text: str, source: str = '<memory>')
+      :staticmethod:
+
+
+

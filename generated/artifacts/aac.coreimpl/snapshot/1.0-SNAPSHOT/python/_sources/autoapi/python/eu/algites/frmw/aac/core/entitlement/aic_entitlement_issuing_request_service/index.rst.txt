@@ -1,0 +1,38 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_issuing_request_service
+===================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_issuing_request_service
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_issuing_request_service.AIcEntitlementIssuingRequestService
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementIssuingRequestService
+
+   Generate and track request identities used to correlate returned entitlements.
+
+   This is deliberately not an anti-cloning DRM mechanism. The request id/digest binds a
+   returned entitlement to an exact request; issuer signature/trust still establishes that
+   the granted rights were issued by an authorized vendor.
+
+
+   .. py:method:: create(licensing_scope: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementLicensingScope, subject: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementSubject, components: tuple[eu.algites.frmw.aac.core.entitlement.api.AIcRequestedComponentGrant, Ellipsis], *, request_id: str | None = None, generated_at: str | None = None, metadata: dict[str, object] | None = None) -> eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementIssuingRequest
+
+
+   .. py:method:: put(request: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementIssuingRequest) -> eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementIssuingRequest
+
+
+   .. py:method:: get(request_id: str) -> eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementIssuingRequest
+
+
+   .. py:method:: validate_returned_entitlement(document: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementDocument) -> None
+
+

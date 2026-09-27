@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.ui.qt.aic_qt_form_dialog
+===================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.qt.aic_qt_form_dialog
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.qt.aic_qt_form_dialog.AIcQtFormDialog
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcQtFormDialog(form: eu.algites.frmw.aac.ui.api.AIcUiForm, parent: PySide6.QtWidgets.QWidget | None = None)
+
+   Bases: :py:obj:`PySide6.QtWidgets.QDialog`
+
+
+   .. py:attribute:: form
+
+
+   .. py:method:: selected_configuration_provider_option()
+
+
+   .. py:method:: values() -> dict[str, object]
+
+

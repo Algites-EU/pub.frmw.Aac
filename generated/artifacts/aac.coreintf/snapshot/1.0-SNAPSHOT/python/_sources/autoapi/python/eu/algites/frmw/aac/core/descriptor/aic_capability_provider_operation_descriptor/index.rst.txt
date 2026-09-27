@@ -1,0 +1,44 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_capability_provider_operation_descriptor
+=======================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_capability_provider_operation_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_capability_provider_operation_descriptor.AIcCapabilityProviderOperationDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCapabilityProviderOperationDescriptor
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: operation_id
+      :type:  str
+
+
+   .. py:attribute:: interaction
+      :type:  python.eu.algites.frmw.aac.core.descriptor.aic_capability_provider_operation_interaction_descriptor.AIcCapabilityProviderOperationInteractionDescriptor
+
+
+   .. py:attribute:: parameters
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_operation_parameter_definition_descriptor.AIcOperationParameterDefinitionDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: parameter(parameter_id: str) -> python.eu.algites.frmw.aac.core.descriptor.aic_operation_parameter_definition_descriptor.AIcOperationParameterDefinitionDescriptor
+
+

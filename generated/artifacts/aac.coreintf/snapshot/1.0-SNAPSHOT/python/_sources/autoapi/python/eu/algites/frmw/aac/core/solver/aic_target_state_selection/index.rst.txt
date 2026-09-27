@@ -1,0 +1,71 @@
+python.eu.algites.frmw.aac.core.solver.aic_target_state_selection
+=================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.solver.aic_target_state_selection
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.solver.aic_target_state_selection.AIcTargetStateSelection
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcTargetStateSelection
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: current_version
+      :type:  int | None
+
+
+   .. py:attribute:: target_version
+      :type:  int
+
+
+   .. py:attribute:: direction
+      :type:  python.eu.algites.frmw.aac.core.solver.ain_target_state_change_direction.AInTargetStateChangeDirection
+
+
+   .. py:attribute:: requested
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: source_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: artifact_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: target_sha256
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: download_required
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: install_required
+      :type:  bool
+      :value: False
+
+
+

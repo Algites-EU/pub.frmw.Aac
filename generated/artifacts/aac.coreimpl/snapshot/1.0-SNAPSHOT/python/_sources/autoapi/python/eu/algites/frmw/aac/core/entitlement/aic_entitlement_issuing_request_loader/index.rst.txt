@@ -1,0 +1,24 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_issuing_request_loader
+==================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_issuing_request_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_issuing_request_loader.AIcEntitlementIssuingRequestLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementIssuingRequestLoader
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementIssuingRequest
+      :staticmethod:
+
+
+

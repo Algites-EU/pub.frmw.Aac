@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../../../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine &#8212; aac.coreimpl  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <script src="../../../../../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../../../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../../../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine">
+<span id="python-eu-algites-frmw-aac-core-lifecycle-aic-lifecycle-engine"></span><h1>python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine<a class="headerlink" href="#module-python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine" title="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcLifecycleEngine</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.</span></span><span class="sig-name descname"><span class="pre">AIcLifecycleEngine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">contract_catalog</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.capability.catalog.AIcActiveContractCatalog</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provisioning</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.provisioning.engine.AIcProvisioningEngine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entitlement</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.entitlement.runtime.AIcEntitlementManager</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.persistence.api.AIiStateStore</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endpoints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.invocation.dispatcher.AIcEndpointRegistry</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.invocation.dispatcher.AIcCapabilityHandleFactory</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.observation.dispatcher.AIcObservationDispatcher</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.verification.api.AIiPackageVerifier</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.contract_catalog">
+<span class="sig-name descname"><span class="pre">contract_catalog</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.contract_catalog" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.provisioning">
+<span class="sig-name descname"><span class="pre">provisioning</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.provisioning" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.entitlement">
+<span class="sig-name descname"><span class="pre">entitlement</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.entitlement" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.store">
+<span class="sig-name descname"><span class="pre">store</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.store" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.endpoints">
+<span class="sig-name descname"><span class="pre">endpoints</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.endpoints" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.handles">
+<span class="sig-name descname"><span class="pre">handles</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.handles" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.observations">
+<span class="sig-name descname"><span class="pre">observations</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.observations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.verifier">
+<span class="sig-name descname"><span class="pre">verifier</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.verifier" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.licensing_scopes">
+<span class="sig-name descname"><span class="pre">licensing_scopes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">eu.algites.frmw.aac.core.entitlement.api.AIcResolvedEntitlementLicensingScope</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.licensing_scopes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.entitlement_context">
+<span class="sig-name descname"><span class="pre">entitlement_context</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.entitlement_context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.status">
+<span class="sig-name descname"><span class="pre">status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">eu.algites.frmw.aac.core.lifecycle.api.AIcLifecycleStatus</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.status" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.prepare_component">
+<span class="sig-name descname"><span class="pre">prepare_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.descriptor.loader.AIcDiscoveredComponent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">eu.algites.frmw.aac.core.lifecycle.api.AIcLifecycleStatus</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.prepare_component" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.mark_resolved">
+<span class="sig-name descname"><span class="pre">mark_resolved</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descriptor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">eu.algites.frmw.aac.core.lifecycle.api.AIcLifecycleStatus</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.mark_resolved" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.activate_instance">
+<span class="sig-name descname"><span class="pre">activate_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descriptor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bindings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">eu.algites.frmw.aac.core.instances.api.AIcBinding</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">component_configuration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider_instance_configuration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">eu.algites.frmw.aac.core.runtime.api.AIiProviderRuntime</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.activate_instance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.activate">
+<span class="sig-name descname"><span class="pre">activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.descriptor.loader.AIcDiscoveredComponent</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">bindings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">eu.algites.frmw.aac.core.instances.api.AIcBinding</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../aic_activation_outcome/index.html#python.eu.algites.frmw.aac.core.lifecycle.aic_activation_outcome.AIcActivationOutcome" title="python.eu.algites.frmw.aac.core.lifecycle.aic_activation_outcome.AIcActivationOutcome"><span class="pre">python.eu.algites.frmw.aac.core.lifecycle.aic_activation_outcome.AIcActivationOutcome</span></a></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.activate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.provider_readiness">
+<span class="sig-name descname"><span class="pre">provider_readiness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider_instance_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">eu.algites.frmw.aac.core.readiness.api.AIcProviderReadiness</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.provider_readiness" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.component_readiness">
+<span class="sig-name descname"><span class="pre">component_readiness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">eu.algites.frmw.aac.core.readiness.api.AIcComponentReadiness</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.component_readiness" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.capability_readiness">
+<span class="sig-name descname"><span class="pre">capability_readiness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">eu.algites.frmw.aac.core.readiness.api.AIcCapabilityReadiness</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.capability_readiness" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.refresh_instance_readiness">
+<span class="sig-name descname"><span class="pre">refresh_instance_readiness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descriptor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">component_configuration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider_configuration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">eu.algites.frmw.aac.core.readiness.api.AIcProviderReadiness</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.refresh_instance_readiness" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.suspend_instance">
+<span class="sig-name descname"><span class="pre">suspend_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.suspend_instance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.deactivate_instance">
+<span class="sig-name descname"><span class="pre">deactivate_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.deactivate_instance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.suspend">
+<span class="sig-name descname"><span class="pre">suspend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descriptor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">eu.algites.frmw.aac.core.lifecycle.api.AIcLifecycleStatus</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.suspend" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.deactivate">
+<span class="sig-name descname"><span class="pre">deactivate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descriptor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">eu.algites.frmw.aac.core.lifecycle.api.AIcLifecycleStatus</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.deactivate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.revalidate_entitlements">
+<span class="sig-name descname"><span class="pre">revalidate_entitlements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">application_scope_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descriptor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.revalidate_entitlements" title="Link to this definition">¶</a></dt>
+<dd><p>Refresh effective permission contexts without rebuilding the binding graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.runtime">
+<span class="sig-name descname"><span class="pre">runtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">eu.algites.frmw.aac.core.runtime.api.AIiProviderRuntime</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.runtime" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.runtime_instance_ids">
+<span class="sig-name descname"><span class="pre">runtime_instance_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.runtime_instance_ids" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.deactivate_all_runtimes">
+<span class="sig-name descname"><span class="pre">deactivate_all_runtimes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_engine.AIcLifecycleEngine.deactivate_all_runtimes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../../../../../index.html">aac.coreimpl</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../../index.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../../../../../../../../_sources/autoapi/python/eu/algites/frmw/aac/core/lifecycle/aic_lifecycle_engine/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

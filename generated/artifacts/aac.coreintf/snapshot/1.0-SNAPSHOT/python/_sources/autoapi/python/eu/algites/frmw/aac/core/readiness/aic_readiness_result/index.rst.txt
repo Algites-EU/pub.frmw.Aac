@@ -1,0 +1,29 @@
+python.eu.algites.frmw.aac.core.readiness.aic_readiness_result
+==============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.readiness.aic_readiness_result
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.readiness.aic_readiness_result.AIcReadinessResult
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcReadinessResult
+
+   .. py:attribute:: state
+      :type:  python.eu.algites.frmw.aac.core.readiness.ain_readiness_state.AInReadinessState
+
+
+   .. py:attribute:: reasons
+      :type:  tuple[python.eu.algites.frmw.aac.core.readiness.aic_readiness_reason.AIcReadinessReason, Ellipsis]
+      :value: ()
+
+
+

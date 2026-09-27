@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.implementation.aix_persisted_payload_migration_error
+====================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.implementation.aix_persisted_payload_migration_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.implementation.aix_persisted_payload_migration_error.AIxPersistedPayloadMigrationError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxPersistedPayloadMigrationError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.implementation.aix_core_implementation_error.AIxCoreImplementationError`
+
+

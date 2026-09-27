@@ -1,0 +1,30 @@
+python.eu.algites.frmw.aac.core.runtime.aii_provider_runtime_factory
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.aii_provider_runtime_factory
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.aii_provider_runtime_factory.AIiProviderRuntimeFactory
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiProviderRuntimeFactory
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Optional statically declared factory for providers requiring custom construction.
+
+
+   .. py:method:: create(context: python.eu.algites.frmw.aac.core.runtime.aic_provider_runtime_context.AIcProviderRuntimeContext) -> python.eu.algites.frmw.aac.core.runtime.aii_provider_runtime.AIiProviderRuntime
+      :abstractmethod:
+
+
+

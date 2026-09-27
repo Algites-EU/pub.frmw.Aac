@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.invocation.models
+=================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.models
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.models.AIcOperationSuccessT
+   python.eu.algites.frmw.aac.core.invocation.models.AIcOperationCancelledT
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcOperationSuccessT
+
+.. py:data:: AIcOperationCancelledT
+

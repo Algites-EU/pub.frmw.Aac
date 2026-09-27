@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.catalog.aic_filesystem_catalog_provider
+=======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_filesystem_catalog_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_filesystem_catalog_provider.AIcFilesystemCatalogProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcFilesystemCatalogProvider(source_id: str, uri: str, *, authentication: eu.algites.frmw.aac.core.authentication.implementation.AIcAuthenticationService | None = None, authentication_profile_id: str | None = None, timeout_seconds: float = 30.0, context: Mapping[str, object] | None = None)
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.catalog.aic_document_catalog_provider.AIcDocumentCatalogProvider`
+
+

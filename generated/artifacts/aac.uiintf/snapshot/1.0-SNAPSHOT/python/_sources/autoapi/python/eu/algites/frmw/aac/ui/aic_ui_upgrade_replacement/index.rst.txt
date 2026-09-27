@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.ui.aic_ui_upgrade_replacement
+========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_upgrade_replacement
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_upgrade_replacement.AIcUiUpgradeReplacement
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiUpgradeReplacement
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: previous_version
+      :type:  int
+
+
+   .. py:attribute:: target_version
+      :type:  int
+
+

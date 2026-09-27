@@ -1,0 +1,6 @@
+python.eu.algites.frmw.aac.core.configuration.provider
+======================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.provider
+
+

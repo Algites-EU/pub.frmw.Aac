@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_change
+======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_change
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_change.AIcConfigurationChange
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationChange
+
+   .. py:attribute:: property_id
+      :type:  str
+
+
+   .. py:attribute:: operation
+      :type:  python.eu.algites.frmw.aac.core.configuration.ain_configuration_mutation_operation.AInConfigurationMutationOperation
+
+
+   .. py:attribute:: value
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: has_value
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: policy_modes
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_policy.AIcConfigurationPolicy, Ellipsis]
+      :value: ()
+
+
+

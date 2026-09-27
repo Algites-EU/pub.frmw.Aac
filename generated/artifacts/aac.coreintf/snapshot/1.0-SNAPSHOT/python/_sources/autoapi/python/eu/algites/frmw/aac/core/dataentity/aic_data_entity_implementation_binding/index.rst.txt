@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_implementation_binding
+=================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_implementation_binding
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_implementation_binding.AIcDataEntityImplementationBinding
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDataEntityImplementationBinding
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: canonical_schema_version
+      :type:  int
+
+
+   .. py:attribute:: implementation_type
+      :type:  type[object]
+
+
+   .. py:attribute:: factory
+      :type:  Callable[[], object]
+
+
+   .. py:attribute:: supported_view_versions
+      :type:  tuple[int, Ellipsis]
+
+

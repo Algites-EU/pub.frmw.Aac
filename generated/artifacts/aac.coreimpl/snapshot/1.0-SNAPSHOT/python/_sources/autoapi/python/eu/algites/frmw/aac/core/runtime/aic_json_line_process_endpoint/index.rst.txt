@@ -1,0 +1,47 @@
+python.eu.algites.frmw.aac.core.runtime.aic_json_line_process_endpoint
+======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.aic_json_line_process_endpoint
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.aic_json_line_process_endpoint.AIcJsonLineProcessEndpoint
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcJsonLineProcessEndpoint(command: Sequence[str], *, cwd: str | None = None, env: Mapping[str, str] | None = None, timeout: float = 30.0)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.invocation.api.AIiCapabilityEndpoint`
+
+
+   Legacy one-invocation-per-process endpoint retained for explicit utility use.
+
+   Normal AAC process provider runtimes use AIcProcessProviderRuntime below, which owns
+   one persistent process per provider instance for the full runtime lifecycle.
+
+
+   .. py:attribute:: command
+
+
+   .. py:attribute:: cwd
+      :value: None
+
+
+
+   .. py:attribute:: env
+
+
+   .. py:attribute:: timeout
+      :value: 30.0
+
+
+
+   .. py:method:: invoke(invocation_input: eu.algites.frmw.aac.core.invocation.api.AIcInvocationInput) -> eu.algites.frmw.aac.core.invocation.api.AIcInvocationOutput
+
+

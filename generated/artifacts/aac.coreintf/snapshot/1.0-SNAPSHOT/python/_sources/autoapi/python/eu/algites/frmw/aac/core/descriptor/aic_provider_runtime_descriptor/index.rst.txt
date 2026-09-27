@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_provider_runtime_descriptor
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_provider_runtime_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_provider_runtime_descriptor.AIcProviderRuntimeDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProviderRuntimeDescriptor
+
+   .. py:attribute:: profile
+      :type:  python.eu.algites.frmw.aac.core.descriptor.ain_provider_runtime_profile.AInProviderRuntimeProfile
+
+
+   .. py:attribute:: command
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: cwd
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: environment
+      :type:  Mapping[str, str]
+
+
+   .. py:attribute:: timeout_seconds
+      :type:  float
+      :value: 30.0
+
+
+

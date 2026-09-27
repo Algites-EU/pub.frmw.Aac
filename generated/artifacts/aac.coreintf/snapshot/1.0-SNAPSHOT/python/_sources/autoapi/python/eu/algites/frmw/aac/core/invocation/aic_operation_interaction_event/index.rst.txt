@@ -1,0 +1,85 @@
+python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_event
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_event
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_event.AIcOperationInteractionEvent
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationInteractionEvent
+
+   .. py:attribute:: event_type
+      :type:  python.eu.algites.frmw.aac.core.invocation.ain_operation_interaction_event_type.AInOperationInteractionEventType
+
+
+   .. py:attribute:: progress_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: parent_progress_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: phase_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: current
+      :type:  int | float | None
+      :value: None
+
+
+
+   .. py:attribute:: total
+      :type:  int | float | None
+      :value: None
+
+
+
+   .. py:attribute:: unit
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: severity
+      :type:  python.eu.algites.frmw.aac.core.invocation.ain_operation_interaction_severity.AInOperationInteractionSeverity
+
+
+   .. py:attribute:: code
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: details
+      :type:  Mapping[str, object]
+
+

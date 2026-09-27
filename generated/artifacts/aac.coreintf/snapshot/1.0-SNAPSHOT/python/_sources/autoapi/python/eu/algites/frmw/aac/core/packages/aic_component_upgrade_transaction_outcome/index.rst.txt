@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.packages.aic_component_upgrade_transaction_outcome
+==================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_component_upgrade_transaction_outcome
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_component_upgrade_transaction_outcome.AIcComponentUpgradeTransactionOutcome
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcComponentUpgradeTransactionOutcome
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: replacements
+      :type:  tuple[python.eu.algites.frmw.aac.core.packages.aic_component_upgrade_replacement.AIcComponentUpgradeReplacement, Ellipsis]
+
+
+   .. py:attribute:: rolled_back
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

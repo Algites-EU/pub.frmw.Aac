@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_data_entity_requirement_descriptor
+=================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_data_entity_requirement_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_data_entity_requirement_descriptor.AIcDataEntityRequirementDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDataEntityRequirementDescriptor
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: access
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.ain_data_entity_access.AInDataEntityAccess, Ellipsis]
+
+
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: writable_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: required
+      :type:  bool
+      :value: True
+
+
+

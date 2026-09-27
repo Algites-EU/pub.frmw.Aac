@@ -1,0 +1,75 @@
+python.eu.algites.frmw.aac.ui.aic_ui_upgrade_diagnostic
+=======================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_upgrade_diagnostic
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_upgrade_diagnostic.AIcUiUpgradeDiagnostic
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiUpgradeDiagnostic
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: message
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText
+
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: requirement_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: capability_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: consumer_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: provider_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: available_provider_component_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: blocking
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: code
+      :type:  str | None
+      :value: None
+
+
+

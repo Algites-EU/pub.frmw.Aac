@@ -1,0 +1,40 @@
+python.eu.algites.frmw.aac.core.entitlement.aii_entitlement_licensing_scope_resolver
+====================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aii_entitlement_licensing_scope_resolver
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aii_entitlement_licensing_scope_resolver.AIiEntitlementLicensingScopeResolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiEntitlementLicensingScopeResolver
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: resolve(request: python.eu.algites.frmw.aac.core.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest) -> python.eu.algites.frmw.aac.core.entitlement.models.AIcEntitlementLicensingScope | None
+      :abstractmethod:
+
+
+      Resolve one entitlement-profile definition to a trusted concrete scope identity.
+
+
+
+   .. py:method:: resolve_subject(request: python.eu.algites.frmw.aac.core.entitlement.models.AIcEntitlementLicensingScopeResolutionRequest) -> python.eu.algites.frmw.aac.core.entitlement.models.AIcEntitlementSubject | None
+
+      Resolve trusted subject metadata; default uses the resolved scope id only.
+
+
+

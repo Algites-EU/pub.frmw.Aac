@@ -1,0 +1,63 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_contribution
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_contribution
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_contribution.AIcConfigurationContribution
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationContribution
+
+   .. py:attribute:: property_id
+      :type:  str
+
+
+   .. py:attribute:: value
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: has_value
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: policy_modes
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_policy.AIcConfigurationPolicy, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: configuration_schema_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: configuration_schema_version
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: written_by_component_version
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

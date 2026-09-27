@@ -1,0 +1,18 @@
+python.eu.algites.frmw.aac.codegen
+==================================
+
+.. py:module:: python.eu.algites.frmw.aac.codegen
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/python/eu/algites/frmw/aac/codegen/aic_python_capability_binding_generator/index
+   /autoapi/python/eu/algites/frmw/aac/codegen/aic_python_data_entity_binding_generator/index
+   /autoapi/python/eu/algites/frmw/aac/codegen/cli/index
+   /autoapi/python/eu/algites/frmw/aac/codegen/generators/index
+
+

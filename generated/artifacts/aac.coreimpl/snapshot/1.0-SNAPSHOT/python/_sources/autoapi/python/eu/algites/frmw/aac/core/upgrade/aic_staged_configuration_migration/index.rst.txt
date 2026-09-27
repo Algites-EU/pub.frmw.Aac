@@ -1,0 +1,50 @@
+python.eu.algites.frmw.aac.core.upgrade.aic_staged_configuration_migration
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.upgrade.aic_staged_configuration_migration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.upgrade.aic_staged_configuration_migration.AIcStagedConfigurationMigration
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcStagedConfigurationMigration
+
+   Validated in-memory migration candidate discovered during target-state preflight.
+
+   The object is *not* a transaction write-set.  It records enough information for an
+   independent post-upgrade convergence attempt.  Component cutover never depends on that
+   persistence attempt succeeding.
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_provider_id
+      :type:  str
+
+
+   .. py:attribute:: request
+      :type:  eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest
+
+
+   .. py:attribute:: source_revision
+      :type:  str | int | None
+
+
+   .. py:attribute:: source_payload
+      :type:  eu.algites.frmw.aac.core.configuration.api.AIcConfigurationPersistedPayload
+
+
+   .. py:attribute:: target_payload
+      :type:  eu.algites.frmw.aac.core.configuration.api.AIcConfigurationPersistedPayload
+
+

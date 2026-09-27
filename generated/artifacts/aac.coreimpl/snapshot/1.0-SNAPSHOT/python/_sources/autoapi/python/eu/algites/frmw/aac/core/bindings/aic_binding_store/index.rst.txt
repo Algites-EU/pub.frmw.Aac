@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.bindings.aic_binding_store
+==========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.bindings.aic_binding_store
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.bindings.aic_binding_store.AIcBindingStore
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcBindingStore(store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore | None = None)
+
+   .. py:attribute:: store
+
+
+   .. py:method:: key(binding: eu.algites.frmw.aac.core.instances.api.AIcBinding) -> str
+      :staticmethod:
+
+
+
+   .. py:method:: all() -> tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis]
+
+
+   .. py:method:: put(binding: eu.algites.frmw.aac.core.instances.api.AIcBinding) -> None
+
+
+   .. py:method:: replace_requirement(consumer_instance_id: str, requirement_id: str, bindings: tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis]) -> None
+
+
+   .. py:method:: replace_all(bindings: tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis]) -> None
+
+
+   .. py:method:: for_consumer(consumer_instance_id: str) -> tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis]
+
+
+   .. py:method:: references_instance(provider_instance_id: str) -> tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis]
+
+

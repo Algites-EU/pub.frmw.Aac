@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_migration_request
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_migration_request
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_migration_request.AIcDataEntityMigrationRequest
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDataEntityMigrationRequest
+
+   .. py:attribute:: source
+      :type:  python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_envelope.AIcDataEntityEnvelope
+
+
+   .. py:attribute:: target_schema_version
+      :type:  int
+
+

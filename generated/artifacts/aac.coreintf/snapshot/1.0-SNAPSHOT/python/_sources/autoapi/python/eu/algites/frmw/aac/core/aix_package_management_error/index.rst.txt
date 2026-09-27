@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.aix_package_management_error
+============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.aix_package_management_error
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.aix_package_management_error.AIxPackageManagementError
+
+
+Module Contents
+---------------
+
+.. py:exception:: AIxPackageManagementError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.aix_aac_error.AIxAACError`
+
+
+   Base error for package-store/source/install operations.
+
+

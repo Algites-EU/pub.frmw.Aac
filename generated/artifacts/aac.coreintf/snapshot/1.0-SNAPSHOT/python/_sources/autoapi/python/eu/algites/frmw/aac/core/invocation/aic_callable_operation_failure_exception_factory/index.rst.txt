@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.invocation.aic_callable_operation_failure_exception_factory
+===========================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_callable_operation_failure_exception_factory
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_callable_operation_failure_exception_factory.AIxOperationFailureT
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_callable_operation_failure_exception_factory.AIcCallableOperationFailureExceptionFactory
+
+
+Module Contents
+---------------
+
+.. py:data:: AIxOperationFailureT
+
+.. py:class:: AIcCallableOperationFailureExceptionFactory(factory: Callable[[python.eu.algites.frmw.aac.core.invocation.aic_operation_failure.AIcOperationFailure], AIxOperationFailureT])
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.invocation.aii_operation_failure_exception_factory.AIiOperationFailureExceptionFactory`\ [\ :py:obj:`AIxOperationFailureT`\ ]
+
+
+   .. py:method:: create(failure: python.eu.algites.frmw.aac.core.invocation.aic_operation_failure.AIcOperationFailure) -> AIxOperationFailureT
+
+

@@ -1,0 +1,41 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_bootstrap
+=============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_bootstrap
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_bootstrap.AIcCatalogBootstrap
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogBootstrap
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: product_id
+      :type:  str
+
+
+   .. py:attribute:: technology_id
+      :type:  str
+
+
+   .. py:attribute:: sources
+      :type:  tuple[python.eu.algites.frmw.aac.core.catalog.aic_catalog_source_registration.AIcCatalogSourceRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

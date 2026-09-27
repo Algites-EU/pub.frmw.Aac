@@ -1,0 +1,53 @@
+python.eu.algites.frmw.aac.core.authentication.aic_file_secret_provider
+=======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aic_file_secret_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aic_file_secret_provider.AIcFileSecretProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcFileSecretProvider(root: str | pathlib.Path, *, read_only: bool = True, encoding: str = 'utf-8')
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.authentication.api.AIiSecretProvider`
+
+
+   Small filesystem secret provider.
+
+   It is intentionally policy-neutral: filesystem ownership/permissions protect the bytes;
+   AAC authorization still controls which application operations may request/use them.
+
+
+   .. py:attribute:: root
+
+
+   .. py:attribute:: read_only
+      :value: True
+
+
+
+   .. py:attribute:: encoding
+      :value: 'utf-8'
+
+
+
+   .. py:method:: capabilities(context: Mapping[str, object] | None = None)
+
+
+   .. py:method:: resolve(reference: eu.algites.frmw.aac.core.authentication.api.AIcSecretReference, context: Mapping[str, object] | None = None) -> str
+
+
+   .. py:method:: put(key: str, value: str | bytes, context: Mapping[str, object] | None = None) -> None
+
+
+   .. py:method:: delete(key: str, context: Mapping[str, object] | None = None) -> None
+
+

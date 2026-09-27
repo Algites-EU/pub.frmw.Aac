@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.authentication.aic_authentication_handler_registry
+==================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aic_authentication_handler_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aic_authentication_handler_registry.AIcAuthenticationHandlerRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAuthenticationHandlerRegistry
+
+   .. py:method:: register(mechanism: str, handler: eu.algites.frmw.aac.core.authentication.api.AIiAuthenticationHandler) -> None
+
+
+   .. py:method:: get(mechanism: str) -> eu.algites.frmw.aac.core.authentication.api.AIiAuthenticationHandler
+
+

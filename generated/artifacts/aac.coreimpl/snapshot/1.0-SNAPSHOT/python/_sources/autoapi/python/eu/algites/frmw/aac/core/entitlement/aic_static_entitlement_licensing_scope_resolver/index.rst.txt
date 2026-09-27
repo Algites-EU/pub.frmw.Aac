@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_static_entitlement_licensing_scope_resolver
+===========================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_static_entitlement_licensing_scope_resolver
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_static_entitlement_licensing_scope_resolver.AIcStaticEntitlementLicensingScopeResolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcStaticEntitlementLicensingScopeResolver
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.entitlement.api.AIiEntitlementLicensingScopeResolver`
+
+
+   .. py:method:: resolve(request: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementLicensingScopeResolutionRequest) -> eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementLicensingScope | None
+
+
+   .. py:method:: resolve_subject(request: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementLicensingScopeResolutionRequest) -> eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementSubject | None
+
+

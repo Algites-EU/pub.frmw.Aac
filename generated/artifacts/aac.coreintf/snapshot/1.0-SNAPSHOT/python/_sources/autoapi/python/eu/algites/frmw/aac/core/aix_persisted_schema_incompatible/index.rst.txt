@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.aix_persisted_schema_incompatible
+=================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.aix_persisted_schema_incompatible
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.aix_persisted_schema_incompatible.AIxPersistedSchemaIncompatible
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxPersistedSchemaIncompatible(schema_id: str, source_version: int, target_version: int, message: str | None = None)
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.aix_aac_error.AIxAACError`
+
+
+   Stored component-owned payload cannot be interpreted/migrated by the installed component.
+
+
+   .. py:attribute:: schema_id
+
+
+   .. py:attribute:: source_version
+
+
+   .. py:attribute:: target_version
+
+

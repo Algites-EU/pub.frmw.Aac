@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.entitlement.aii_entitlement_provider
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aii_entitlement_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aii_entitlement_provider.AIiEntitlementProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiEntitlementProvider
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: evidence(request: python.eu.algites.frmw.aac.core.entitlement.models.AIcEntitlementProviderRequest) -> tuple[python.eu.algites.frmw.aac.core.entitlement.models.AIcEntitlementEvidence, Ellipsis]
+      :abstractmethod:
+
+
+      Return entitlement evidence applicable to one concrete entitlement licensing-scope subject.
+
+
+

@@ -1,0 +1,67 @@
+python.eu.algites.frmw.aac.ui.aic_ui_component
+==============================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_component
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_component.AIcUiComponent
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiComponent
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: provider_definition_ids
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: permission_count
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: name
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: origin
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: readiness_state
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: readiness_reasons
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

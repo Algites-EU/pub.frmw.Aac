@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.aix_lifecycle_error
+===================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.aix_lifecycle_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.aix_lifecycle_error.AIxLifecycleError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxLifecycleError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.aix_aac_error.AIxAACError`
+
+
+   Raised for a lifecycle contract failure.
+
+

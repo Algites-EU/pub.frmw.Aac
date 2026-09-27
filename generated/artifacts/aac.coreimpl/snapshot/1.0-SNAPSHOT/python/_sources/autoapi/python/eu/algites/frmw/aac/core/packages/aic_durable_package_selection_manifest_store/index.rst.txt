@@ -1,0 +1,47 @@
+python.eu.algites.frmw.aac.core.packages.aic_durable_package_selection_manifest_store
+=====================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_durable_package_selection_manifest_store
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_durable_package_selection_manifest_store.AIcDurablePackageSelectionManifestStore
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_durable_package_selection_manifest_store.manifest_to_raw
+   python.eu.algites.frmw.aac.core.packages.aic_durable_package_selection_manifest_store.manifest_from_raw
+
+
+Module Contents
+---------------
+
+.. py:function:: manifest_to_raw(manifest: eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest) -> dict[str, object]
+
+.. py:function:: manifest_from_raw(raw: Mapping[str, object]) -> eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest
+
+.. py:class:: AIcDurablePackageSelectionManifestStore(path: pathlib.Path, *, mutation_lock_path: pathlib.Path | None = None)
+
+   Authoritative revisioned active package-set record.
+
+
+   .. py:attribute:: path
+
+
+   .. py:attribute:: mutation_lock_path
+
+
+   .. py:method:: read() -> eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest
+
+
+   .. py:method:: write(manifest: eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest, *, expected_record_revision: int | None = None) -> None
+
+
