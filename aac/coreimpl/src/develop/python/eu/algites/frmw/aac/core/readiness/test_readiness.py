@@ -47,7 +47,7 @@ def _write_component(root: Path, package: str, *, version: int = 1, dynamic: str
         "      Capabilities:\n"
         "        - Id: com.example.ready\n"
         "          Versions: [1]\n"
-        f"      ImplementationClasses:\n        - TechnologyKind: python\n          ClassName: {package}.provider:Provider\n"
+        f"      ImplementationClasses:\n        - TechnologyKind: python\n          ProviderClassName: {package}.provider:Provider\n"
         "      Operations:\n"
         "        - Capability: com.example.ready\n"
         "          CapabilityVersion: 1\n"

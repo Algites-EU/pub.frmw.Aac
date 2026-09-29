@@ -7,6 +7,7 @@ from ..presentation.api import AIcDisplayText
 from .aic_authorization_permission_descriptor import AIcAuthorizationPermissionDescriptor
 from .aic_capability_operation import AIcCapabilityOperation
 from .aic_capability_ref import AIcCapabilityRef
+from .aic_schema_ref import AIcSchemaRef
 
 @dataclass(frozen=True, slots=True)
 class AIcCapabilityContract:
@@ -17,6 +18,7 @@ class AIcCapabilityContract:
     name: AIcDisplayText | None = None
     description: AIcDisplayText | None = None
     metadata: Mapping[str, object] = field(default_factory=dict)
+    binding_qualifiers_schema: AIcSchemaRef | None = None
 
     def __post_init__(self) -> None:
         if not self.group_id:

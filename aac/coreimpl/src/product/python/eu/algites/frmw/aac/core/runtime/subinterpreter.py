@@ -14,6 +14,7 @@ from eu.algites.frmw.aac.core.invocation.api import (
     AIxOperationCancelled,
     current_operation_interaction,
     invocation_locale_context,
+    binding_qualifier_profiles_context,
     operation_interaction_context,
     operation_parameter_context,
 )
@@ -43,7 +44,7 @@ def _invoke_entrypoint(entrypoint: str, payload: Mapping[str, object], provider_
         if not isinstance(parameters, Mapping):
             raise TypeError("effective_operation_parameters must be an object")
         locale = str(payload["Locale"]) if payload.get("Locale") is not None else None
-        with operation_parameter_context(parameters), operation_interaction_context(interaction), invocation_locale_context(locale):
+        with binding_qualifier_profiles_context(invocation_input.binding_qualifier_profiles), operation_parameter_context(parameters), operation_interaction_context(interaction), invocation_locale_context(locale):
             result = target(str(payload["OperationId"]), dict(payload.get("Arguments", {})))
         provider_to_core.put(("final", 0, AIcInvocationOutput(True, result=result)))
     except AIxOperationCancelled as exc:

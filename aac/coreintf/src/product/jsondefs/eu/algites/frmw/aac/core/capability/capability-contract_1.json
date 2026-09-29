@@ -221,6 +221,10 @@
     },
     "Metadata": {
       "type": "object"
+    },
+    "BindingQualifiersSchema": {
+      "$ref": "#/$defs/schemaRef",
+      "description": "Optional schema reference defining one provider BindingQualifierProfile for this exact capability-contract version. When present, every provider BindingQualifierProfiles item MUST validate against the referenced schema; consumers evaluate the normalized provider profiles through their technology-specific CapabilityProfileMatcherClassName during RESOLVE."
     }
   },
   "x-aac-schema-id": "_AAC.schema.capability-contract",

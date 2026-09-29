@@ -30,7 +30,7 @@ from ..invocation.api import (
     AIiCapabilityHandle, AIiOperationInteractionProviderToCaller, AIiOperationInteractionCallerToProvider, AIcInvocationInput,
     AIcInvocationOutput, AIcOperationInteractionCallerToProviderMessage, AIcOperationInteractionEvent,
     AIcOperationInteractionFeatures, AIxCapabilityOperationFailed, AIxOperationCancelled, current_invocation_locale,
-    current_operation_interaction, invocation_locale_context, operation_interaction_context, operation_parameter_context,
+    binding_qualifier_profiles_context, current_operation_interaction, invocation_locale_context, operation_interaction_context, operation_parameter_context,
 )
 from .provider import AIcProviderRuntimeContext, AIiProviderRuntime, AIiProviderRuntimeFactory
 
@@ -168,7 +168,7 @@ def _invoke_runtime(
                 AIcProcessOperationInteraction(invocation.invocation_id, channel)
                 if channel is not None else current_operation_interaction()
             )
-            with operation_interaction_context(interaction), operation_parameter_context(
+            with binding_qualifier_profiles_context(invocation.binding_qualifier_profiles), operation_interaction_context(interaction), operation_parameter_context(
                 invocation.effective_operation_parameters
             ), invocation_locale_context(invocation.locale):
                 if generated_invoke is not None:

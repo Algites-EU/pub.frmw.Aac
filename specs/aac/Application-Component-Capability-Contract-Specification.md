@@ -139,6 +139,49 @@ Technology bindings MUST make coexisting contract versions unambiguous. For gene
 
 One runtime provider object MAY implement several versions of the same capability and several different capabilities at once. The Core bridge MUST dispatch against the exact `(capability id, capability version)` interface rather than relying on language method-resolution order.
 
+## II.3.1 Binding qualifier profiles
+
+A capability contract version MAY define one `BindingQualifiersSchema`. The schema describes one portable provider capability qualifier profile for that exact capability version. The schema is part of the canonical capability contract; changing it incompatibly requires a new capability contract version.
+
+A provider capability declaration MAY expose `BindingQualifierProfiles`, an ordered list of concrete profiles supported by that provider. Every declared profile MUST validate against the `BindingQualifiersSchema` of the resolved capability-contract version. If the capability-contract version has no `BindingQualifiersSchema`, `BindingQualifierProfiles` MUST NOT be declared. Required fields are determined solely by that schema.
+
+Consumers do not declare qualifier requirements in descriptors. When a consumer requires a capability whose resolved contract version defines `BindingQualifiersSchema`, the technology-specific consumer implementation MUST provide `CapabilityProfileMatcherClassName`. Core instantiates this matcher independently during `RESOLVE`, before runtime provider instances are wired. The matcher receives the consumer requirement, effective consumer configuration, and all normalized qualifier profiles offered by one provider candidate. It returns zero or more indexes into that provider profile list. An empty result rejects the candidate; a non-empty result accepts the candidate and identifies the exact subset of provider profiles relevant to that binding. The matcher MUST NOT invent or modify profiles.
+
+The matcher is resolution-time support code, not an AAC provider and not a normal runtime component instance. It MUST be deterministic for the same descriptors/configuration, MUST NOT invoke capabilities or depend on the partially resolved runtime graph, and MUST have no externally visible side effects. Provider preference and final provider selection remain Core responsibilities and are applied only after capability-profile compatibility has been established.
+
+Conceptually, qualifier-aware compatibility resolution is:
+
+```text
+consumer requirement
+    capability + accepted contract version(s)
+                         |
+                         v
+consumer CapabilityProfileMatcher
+    + effective consumer configuration
+                         |
+                         v
+Core compatibility filtering
+                         |
+          provider BindingQualifierProfiles
+                         |
+                         v
+compatible provider instances
+```
+
+The subset of provider qualifier profiles selected for a resolved binding is stored with the binding and is propagated into invocation context. This allows a provider implementation to observe the binding context that selected it without duplicating those values into every portable operation input schema. An individual capability operation MAY still define equivalent domain data in its own input when that data is part of the portable business request rather than provider-selection context.
+
+### II.3.2 Binding qualifier profiles and operation context
+
+Binding qualifier profiles are resolved before operation invocation and are therefore not automatically part of an operation's portable `INPUT` interaction schema. They answer **which parts of this provider's declared capability profile offer made the provider compatible with this consumer requirement**, not **what business payload this operation receives**.
+
+Core MUST propagate the normalized subset of provider profiles attached to the resolved binding through the technology profile's invocation context. The reference Python profile exposes that subset through `current_binding_qualifier_profiles()` and carries it in `AIcInvocationInput.binding_qualifier_profiles`; other technology profiles MUST preserve the same logical information even when their physical representation differs.
+
+A capability operation MAY explicitly include the same or related fields in its own input schema when those values are semantically part of the operation request. Such duplication is contract-defined business data and MUST NOT be treated as an implicit replacement for the binding qualifier profile snapshot. Conversely, a provider MUST NOT require callers to duplicate binding qualifier profile data in every operation input merely so that provider code can discover the binding context selected by Core.
+
+This distinction allows, for example, a single provider to advertise several disjoint profile combinations, a consumer matcher to accept several of those profiles for one binding, and several operations to share that same resolved binding while receiving different operation-specific request schemas.
+
+Technology-specific implementation declarations use `ProviderClassName` for the normal provider runtime class and optional `CapabilityProfileMatcherClassName` for the independently instantiated resolution-time matcher.
+
 ## II.4 Capability operations
 
 A capability contract contains one or more **operations**.
@@ -389,6 +432,8 @@ Operation parameters do **not** have their own version axis. Operations are vers
 An incompatible change to an operation-parameter definition MUST, however, be delivered as a newer component version. If persisted component-level or provider-instance-level values may no longer be valid or retain the same meaning, that component version MUST migrate its own operation-parameter configuration during upgrade before the new provider implementation becomes active. A component MUST NOT silently reinterpret persisted values written for an older parameter definition.
 
 Provider implementations receive the **effective operation-parameter map** through Core invocation context separately from the canonical operation input. Consequently a technology binding MUST NOT add provider-specific parameters to the generated canonical capability method signature.
+
+Resolved **binding qualifier profiles**, when the capability version defines them, are likewise available through Core invocation context separately from the canonical operation input. Binding qualifier profiles explain the compatibility context of the selected provider binding; they are not provider-specific operation parameters and do not need to be repeated in every operation schema.
 
 # III. Invocation Model
 

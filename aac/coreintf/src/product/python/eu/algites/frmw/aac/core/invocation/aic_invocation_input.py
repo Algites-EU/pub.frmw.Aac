@@ -14,6 +14,7 @@ class AIcInvocationInput:
     arguments: Mapping[str, object] = field(default_factory=dict)
     operation_parameter_overrides: Mapping[str, object] = field(default_factory=dict)
     effective_operation_parameters: Mapping[str, object] = field(default_factory=dict)
+    binding_qualifier_profiles: tuple[Mapping[str, object], ...] = ()
     consumer_instance_id: str | None = None
     requirement_id: str | None = None
     locale: str | None = None
@@ -28,6 +29,7 @@ class AIcInvocationInput:
             "Arguments": dict(self.arguments),
             "OperationParameterOverrides": dict(self.operation_parameter_overrides),
             "EffectiveOperationParameters": dict(self.effective_operation_parameters),
+            "BindingQualifierProfiles": [dict(profile) for profile in self.binding_qualifier_profiles],
             "ConsumerInstanceId": self.consumer_instance_id,
             "RequirementId": self.requirement_id,
             "Locale": self.locale,
@@ -47,6 +49,7 @@ class AIcInvocationInput:
             arguments=dict(aValue.get("Arguments", {})),
             operation_parameter_overrides=dict(aValue.get("OperationParameterOverrides", {})),
             effective_operation_parameters=dict(aValue.get("EffectiveOperationParameters", {})),
+            binding_qualifier_profiles=tuple(dict(profile) for profile in aValue.get("BindingQualifierProfiles", ())),
             consumer_instance_id=(
                 str(aValue["ConsumerInstanceId"]) if aValue.get("ConsumerInstanceId") is not None else None
             ),

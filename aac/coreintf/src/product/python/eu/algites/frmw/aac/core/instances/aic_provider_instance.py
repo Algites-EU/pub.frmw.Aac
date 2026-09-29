@@ -15,6 +15,7 @@ class AIcProviderInstance:
     name: str
     capabilities: tuple[AIcProvidedCapability, ...]
     implementation_class: str
+    capability_profile_matcher_class: str | None = None
     access_mode: AInProviderAccessMode = AInProviderAccessMode.READ_WRITE
     configuration: Mapping[str, object] = field(default_factory=dict)
     configuration_schema: str | None = None

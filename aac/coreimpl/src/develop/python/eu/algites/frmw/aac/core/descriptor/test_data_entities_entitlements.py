@@ -25,7 +25,7 @@ Component:
           Versions: [1]
       ImplementationClasses:
       - TechnologyKind: python
-        ClassName: vendor.foo:Provider
+        ProviderClassName: vendor.foo:Provider
       ConfigurationSchema:
         Id: foo-instance-config
         WriteVersion: 1

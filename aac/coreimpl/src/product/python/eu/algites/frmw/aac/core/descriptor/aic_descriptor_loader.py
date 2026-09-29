@@ -96,6 +96,7 @@ def _parse_component(component: Mapping[str, Any]) -> AIcComponentDescriptor:
             AIcProvidedCapability(
                 id=str(item["Id"]),
                 versions=tuple(sorted({int(version) for version in item["Versions"]})),
+                binding_qualifier_profiles=tuple(dict(value) for value in item.get("BindingQualifierProfiles", ())),
             )
             for item in raw_provider["Capabilities"]
         )
@@ -173,7 +174,11 @@ def _parse_component(component: Mapping[str, Any]) -> AIcComponentDescriptor:
             implementation_classes=tuple(
                 AIcProviderImplementationClassDescriptor(
                     technology_kind=str(item["TechnologyKind"]),
-                    class_name=str(item["ClassName"]),
+                    provider_class_name=str(item["ProviderClassName"]),
+                    capability_profile_matcher_class_name=(
+                        str(item["CapabilityProfileMatcherClassName"])
+                        if item.get("CapabilityProfileMatcherClassName") is not None else None
+                    ),
                 )
                 for item in raw_provider["ImplementationClasses"]
             ),

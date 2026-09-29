@@ -667,7 +667,7 @@ consumer-instance override
 workspace binding
 user binding
 organization/system binding
-qualifier-based rule
+qualifier-based compatibility filtering
 sole compatible provider
 platform default
 user/admin selection
@@ -709,6 +709,16 @@ If only `Corporate Vault` existed, the rule would be identical.
 Provider version does not rank provider quality.
 
 Core selects provider first, then contract.
+
+### VI.4.1 Binding qualifier profiles
+
+Binding qualifier profiles refine technical compatibility inside a capability contract version. They are not a global AAC tag system and they are not a preference score. The owning capability version defines the qualifier schema; providers declare concrete supported profiles; consumers declare the profile required by the binding; Core validates both sides and filters non-matching provider instances before preference/default selection.
+
+This is useful whenever one stable capability has several provider implementations that are valid only for particular portable contexts. For example, a build-output capability may define qualifier fields such as `TechnologyKind` and `BuildOutputType` without teaching AAC what either field means. A provider may advertise a `java-bin-jar` profile and another a `python-wheel` profile; the consumer matcher decides which advertised profiles satisfy its effective configuration, while multiple accepted provider instances remain subject to ordinary binding policy.
+
+AAC Core intentionally does not define a wildcard/range qualifier language. Provider declarations expose validated concrete `BindingQualifierProfiles`, while the consumer implementation supplies technology-specific `CapabilityProfileMatcherClassName` resolution support. The matcher may interpret the provider profiles using consumer configuration and returns only indexes of accepted profiles; it cannot invent or modify profiles and does not choose or rank provider instances.
+
+The resolved qualifier snapshot is stored on the binding and propagated with invocation context. It is not automatically copied into every operation input schema. A provider can therefore inspect the context that selected it while operation contracts remain focused on their portable business inputs.
 
 ## VI.5 Provider-instance multiplicity is not consumer cardinality
 
@@ -907,6 +917,7 @@ Foreground/background is caller-owned presentation/attention state; it is not an
 Interaction events remain failure-isolated telemetry. Multiple events can be published atomically, and progress events carry stable IDs plus optional parent IDs for hierarchical progress. Cancellation is cooperative. Locale is immutable invocation context so providers, including remote providers, can localize user-facing failure/status text when they own the relevant resources.
 
 
+
 # VII. Resolution, Wiring, and Cycles
 
 ## VII.1 Read all descriptors first
@@ -952,6 +963,7 @@ consumer identity
 capability id
 contract version
 provider instance id
+optional resolved binding-qualifier snapshot
 invocation endpoint/reference
 ```
 
@@ -1053,10 +1065,21 @@ CapabilityProviders:
         Versions: [1]
     ImplementationClasses:
     - TechnologyKind: python
-      ClassName: example.audit:AIcAuditProvider
+      ProviderClassName: example.audit:AIcAuditProvider
     Runtime:
       Profile: process
 ```
+
+For a consumer implementation that must evaluate provider capability profiles during `RESOLVE`, the technology-specific implementation item additionally declares `CapabilityProfileMatcherClassName`. This is only valid for consumption of capability-contract versions that define `BindingQualifiersSchema`; it MUST NOT be added merely because a provider implementation class exists. For example:
+
+```yaml
+ImplementationClasses:
+  - TechnologyKind: python
+    ProviderClassName: example.build:AIcBuildProvider
+    CapabilityProfileMatcherClassName: example.build:AIcBuildCapabilityProfileMatcher
+```
+
+`ProviderClassName` names the normal runtime provider implementation. `CapabilityProfileMatcherClassName` names independent resolution-time consumer support code and is instantiated before normal runtime wiring.
 
 For the reference Python binding, omission of `runtime.command` means that Core starts the standard AAC Python process host using the selected Python executable. A profile may instead declare an explicit command/environment to enter a component-private Python environment or a different executable implementing the AAC process protocol.
 

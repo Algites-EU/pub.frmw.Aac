@@ -80,10 +80,19 @@ def _parse_contract(raw: Mapping[str, Any], source: str) -> AIcCapabilityContrac
                 sensitive_output_paths=tuple(str(v) for v in item.get("SensitiveOutputPaths", ())),
                 metadata=dict(item.get("Metadata", {})),
             ))
+        raw_binding_qualifiers_schema = raw.get("BindingQualifiersSchema")
+        binding_qualifiers_schema = None
+        if raw_binding_qualifiers_schema is not None:
+            if not isinstance(raw_binding_qualifiers_schema, Mapping):
+                raise TypeError("binding qualifiers schema must be a mapping")
+            binding_qualifiers_schema = AIcSchemaRef(
+                str(raw_binding_qualifiers_schema["Id"]), int(raw_binding_qualifiers_schema["Version"])
+            )
         return AIcCapabilityContract(
             capability=AIcCapabilityRef(str(capability["Id"]), int(capability["Version"])),
             group_id=str(capability["GroupId"]),
             operations=tuple(parsed_ops),
+            binding_qualifiers_schema=binding_qualifiers_schema,
             authorization_permissions=permissions,
             name=normalize_display_text(capability.get("Name")),
             description=normalize_display_text(capability.get("Description")),

@@ -185,7 +185,7 @@ def test_catalog_browse_download_install_ui_flow(tmp_path):
           Versions: [1]
       ImplementationClasses:
       - TechnologyKind: python
-        ClassName: demo:Provider
+        ProviderClassName: demo:Provider
   EntitlementLicensingScopes:
     - Type: USER
       Name: User

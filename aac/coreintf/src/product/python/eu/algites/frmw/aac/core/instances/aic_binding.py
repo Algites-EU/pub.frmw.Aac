@@ -1,8 +1,6 @@
 from __future__ import annotations
-from dataclasses import dataclass, field
-from enum import Enum
+from dataclasses import dataclass
 from typing import Mapping
-from ..capability.api import AIcProvidedCapability
 
 @dataclass(frozen=True, slots=True)
 class AIcBinding:
@@ -11,3 +9,4 @@ class AIcBinding:
     provider_instance_id: str
     capability_id: str
     capability_version: int
+    binding_qualifier_profiles: tuple[Mapping[str, object], ...] = ()

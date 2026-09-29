@@ -27,7 +27,7 @@ Component:
           Versions: [1, 3, 2]
       ImplementationClasses:
       - TechnologyKind: python
-        ClassName: example:Provider
+        ProviderClassName: example:Provider
 ''')
     assert descriptor.capability_providers[0].capability("x.cap").versions == (1, 2, 3)
 
@@ -46,7 +46,7 @@ Component:
           Versions: [1]
       ImplementationClasses:
       - TechnologyKind: python
-        ClassName: example:Provider
+        ProviderClassName: example:Provider
       ReadinessRequirements:
         - Id: endpoint
           Source: component_configuration
@@ -90,7 +90,7 @@ Component:
           Versions: [1]
       ImplementationClasses:
       - TechnologyKind: python
-        ClassName: example:Store
+        ProviderClassName: example:Store
       InitialInstances:
         - Name: external
           AccessMode: read_only
@@ -114,7 +114,7 @@ Component:
           Versions: [1]
       ImplementationClasses:
       - TechnologyKind: python
-        ClassName: example:Provider
+        ProviderClassName: example:Provider
 ''')
 
 
@@ -130,7 +130,7 @@ Component:
           Versions: [1]
       ImplementationClasses:
       - TechnologyKind: python
-        ClassName: example:GitProvider
+        ProviderClassName: example:GitProvider
       Operations:
         - Capability: x.sync
           CapabilityVersion: 1
@@ -190,12 +190,47 @@ Component:
           Versions: [1]
       ImplementationClasses:
         - TechnologyKind: python
-          ClassName: example.python:Provider
+          ProviderClassName: example.python:Provider
         - TechnologyKind: java
-          ClassName: eu.example.Provider
+          ProviderClassName: eu.example.Provider
 ''')
     provider = descriptor.capability_providers[0]
     assert provider.implementation_class_for("python") == "example.python:Provider"
     assert provider.implementation_class_for("java") == "eu.example.Provider"
     with pytest.raises(KeyError):
         provider.implementation_class_for("mps")
+
+
+def test_binding_qualifier_profiles_and_matcher_class_are_loaded():
+    descriptor = AIcDescriptorLoader.load_text('''
+Component:
+  Id: x.qualifiers
+  Version: 1
+  CapabilityProviders:
+    - Id: p
+      Capabilities:
+        - Id: x.output
+          Versions: [1]
+          BindingQualifierProfiles:
+            - TechnologyKind: java
+              BuildOutputType: java-bin-jar
+            - TechnologyKind: java
+              BuildOutputType: java-source-jar
+      ImplementationClasses:
+        - TechnologyKind: python
+          ProviderClassName: example:Provider
+          CapabilityProfileMatcherClassName: example:OutputProfileMatcher
+      Requirements:
+        - Id: output
+          Capability: x.output
+          Versions: [1]
+''')
+    provider = descriptor.capability_providers[0]
+    assert provider.capabilities[0].binding_qualifier_profiles == (
+        {"TechnologyKind": "java", "BuildOutputType": "java-bin-jar"},
+        {"TechnologyKind": "java", "BuildOutputType": "java-source-jar"},
+    )
+    assert provider.implementation_class_for("python") == "example:Provider"
+    assert provider.capability_profile_matcher_class_for("python") == "example:OutputProfileMatcher"
+    assert not hasattr(provider.requirements[0], "binding_qualifiers")
+

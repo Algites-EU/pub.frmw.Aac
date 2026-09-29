@@ -63,7 +63,14 @@ class AIcProviderDefinitionDescriptor:
     def implementation_class_for(self, technology_kind: str) -> str:
         for implementation in self.implementation_classes:
             if implementation.technology_kind == technology_kind:
-                return implementation.class_name
+                return implementation.provider_class_name
+        raise KeyError(technology_kind)
+
+
+    def capability_profile_matcher_class_for(self, technology_kind: str) -> str | None:
+        for implementation in self.implementation_classes:
+            if implementation.technology_kind == technology_kind:
+                return implementation.capability_profile_matcher_class_name
         raise KeyError(technology_kind)
 
     def capability(self, capability_id: str) -> AIcProvidedCapability:

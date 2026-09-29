@@ -24,7 +24,7 @@ from eu.algites.frmw.aac.core.invocation.api import (
     AIcInvocationInput, AIcInvocationOutput, AIcNullOperationInteraction, AIcOperationCompletion, AIcOperationFailure, AIcOperationInteractionFeatures,
     AIiOperationFailureExceptionFactory, AIxCapabilityOperationFailed, AIxOperationCancelled,
     current_invocation_locale, current_operation_interaction, invocation_locale_context,
-    operation_interaction_context, operation_parameter_context,
+    binding_qualifier_profiles_context, operation_interaction_context, operation_parameter_context,
 )
 from eu.algites.frmw.aac.core.observation.api import AIcObservationInput, AInObservationOutcome, AInObservationPhase
 from eu.algites.frmw.aac.core.capability.catalog import AIcActiveContractCatalog

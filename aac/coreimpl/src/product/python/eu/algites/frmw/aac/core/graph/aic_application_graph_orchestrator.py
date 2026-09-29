@@ -31,7 +31,11 @@ class AIcApplicationGraphOrchestrator:
             for requirement in provider.requirements:
                 selected = self._candidates_for_preference(consumer, requirement, candidates)
                 try:
-                    bindings = self.resolver.resolve(consumer.id, requirement, selected, tuple(resolved))
+                    bindings = self.resolver.resolve(
+                        consumer.id, requirement, selected, tuple(resolved),
+                        capability_profile_matcher_class_name=consumer.capability_profile_matcher_class,
+                        consumer_configuration=dict(consumer.configuration),
+                    )
                 except AIxBindingResolutionError:
                     if requirement.mandatory:
                         raise

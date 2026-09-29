@@ -372,6 +372,14 @@
                         "type": "integer",
                         "minimum": 1
                       }
+                    },
+                    "BindingQualifierProfiles": {
+                      "type": "array",
+                      "minItems": 1,
+                      "description": "Concrete binding-qualifier profiles offered by this provider capability declaration. Each profile MUST validate against BindingQualifiersSchema of the resolved Capability Contract version. If that contract version has no BindingQualifiersSchema, BindingQualifierProfiles MUST NOT be declared.",
+                      "items": {
+                        "type": "object"
+                      }
                     }
                   }
                 }
@@ -682,7 +690,7 @@
                   "type": "object",
                   "required": [
                     "TechnologyKind",
-                    "ClassName"
+                    "ProviderClassName"
                   ],
                   "additionalProperties": false,
                   "properties": {
@@ -690,9 +698,15 @@
                       "type": "string",
                       "minLength": 1
                     },
-                    "ClassName": {
+                    "ProviderClassName": {
                       "type": "string",
-                      "minLength": 1
+                      "minLength": 1,
+                      "description": "Technology-specific provider runtime implementation class name."
+                    },
+                    "CapabilityProfileMatcherClassName": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Optional technology-specific resolution-time matcher class used by this consumer implementation to select zero or more provider BindingQualifierProfiles for qualified capability requirements. The matcher is instantiated independently during RESOLVE and is not a provider runtime instance."
                     }
                   }
                 }

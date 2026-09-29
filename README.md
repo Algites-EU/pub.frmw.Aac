@@ -184,7 +184,7 @@ Component descriptors are packaged YAML resources loaded without executing arbit
 
 The active capability-contract catalog is Core-owned. Built-in contracts and validated dynamically supplied contract resources are admitted into one canonical catalog. The same `(capability id, version)` cannot silently resolve to two different definitions.
 
-Provider selection and contract-version negotiation are separate. A binding is valid only for versions in the finite intersection of consumer support, provider support, the Core active catalog and lifecycle policy.
+Provider selection and contract-version negotiation are separate. A binding is valid only for versions in the finite intersection of consumer support, provider support, the Core active catalog and lifecycle policy. A capability contract version may additionally define a canonical binding-qualifier schema. Providers of that version declare the concrete `BindingQualifierProfiles` they support. Consumers do not declare qualifier requirements in descriptors; their technology-specific `CapabilityProfileMatcherClassName` evaluates each provider candidate against effective consumer configuration during `RESOLVE`. Core removes candidates for which the matcher returns no accepted profiles before ordinary preference/default selection. The selected profile subset is part of the binding and is propagated in invocation context, so provider code can inspect the selection context without requiring every operation input schema to duplicate it.
 
 The normalized invocation layer validates contract-declared inputs and outputs and carries invocation correlation metadata. Every operation also declares its supported Operation Interaction state-result delivery modes. Simple synchronous calls use an invocation-local `ON_DEMAND_COMPLETE` no-op interaction; interactive/non-blocking calls may exchange directional provider-to-caller and caller-to-provider messages carrying lifecycle state, revisions, partial/complete operation-specific results, progress/diagnostic events, cancellation and foreground/background preferences. Core routes the protocol and owns `PENDING -> RUNNING -> COMPLETED|FAILED|CANCELLED`, but does not interpret complete/delta result semantics, replay policy or provider buffering. PRE/POST observation is dispatched by Core; observation delivery cannot recursively observe itself.
 
@@ -435,3 +435,8 @@ See:
 ---
 
 **© Algites**
+
+
+### Qualified capability bindings
+
+Capability contracts may define `BindingQualifiersSchema`. Providers then advertise concrete `BindingQualifierProfiles`. Consumers do not duplicate qualifier requirements in descriptors; their technology-specific `CapabilityProfileMatcherClassName` evaluates provider profiles during `RESOLVE` using effective configuration. The selected subset is retained on the binding and exposed through invocation context. `ProviderClassName` names the normal technology-specific provider runtime implementation.

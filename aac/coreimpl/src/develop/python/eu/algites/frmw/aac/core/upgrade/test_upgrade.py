@@ -26,7 +26,7 @@ def _write_candidate(root: Path, package: str, *, version: int, broken: bool = F
     (pkg / "schemas" / "simpleaudit-config_1.json").write_text(schema_text, encoding="utf-8")
     impl = f"{package}.missing:Nope" if broken else f"{package}.provider:AIcCandidateObserver"
     (pkg / "component.yml").write_text(
-        f'''Component:\n  Id: _AAC.component.simpleaudit\n  Version: {version}\n  CapabilityProviders:\n    - Id: observation\n      Capabilities:\n        - Id: _AAC.capability.observation\n          Versions: [1]\n      ImplementationClasses:\n        - TechnologyKind: python\n          ClassName: {impl}\n      Operations:\n        - Capability: _AAC.capability.observation\n          CapabilityVersion: 1\n          Operation: observe\n          Interaction:\n            SupportedStateResultDeliveryModes: [on_demand_complete]\n      ConfigurationSchema:\n        Id: simpleaudit-config\n        WriteVersion: 1\n        ReadableVersions: [1]\n        Resource: simpleaudit-config_1.json\n      InitialInstances:\n        - Name: default\n          Configuration: {{}}\n''',
+        f'''Component:\n  Id: _AAC.component.simpleaudit\n  Version: {version}\n  CapabilityProviders:\n    - Id: observation\n      Capabilities:\n        - Id: _AAC.capability.observation\n          Versions: [1]\n      ImplementationClasses:\n        - TechnologyKind: python\n          ProviderClassName: {impl}\n      Operations:\n        - Capability: _AAC.capability.observation\n          CapabilityVersion: 1\n          Operation: observe\n          Interaction:\n            SupportedStateResultDeliveryModes: [on_demand_complete]\n      ConfigurationSchema:\n        Id: simpleaudit-config\n        WriteVersion: 1\n        ReadableVersions: [1]\n        Resource: simpleaudit-config_1.json\n      InitialInstances:\n        - Name: default\n          Configuration: {{}}\n''',
         encoding="utf-8",
     )
 
@@ -106,7 +106,7 @@ def _write_graph_component(root: Path, package: str, *, component_id: str, versi
         + "  CapabilityProviders:\n"
           "    - Id: main\n"
         + f"      Capabilities:\n        - Id: {provided_capability}\n          Versions: [{provided_version}]\n"
-          f"      ImplementationClasses:\n        - TechnologyKind: python\n          ClassName: {package}.provider:Provider\n"
+          f"      ImplementationClasses:\n        - TechnologyKind: python\n          ProviderClassName: {package}.provider:Provider\n"
         + (
             "      Operations:\n"
             "        - Capability: com.example.x\n"
@@ -214,7 +214,7 @@ def _write_migrating_component(root: Path, package: str, *, version: int, broken
           "      Capabilities:\n"
           "        - Id: _AAC.capability.observation\n"
           "          Versions: [1]\n"
-        + f"      ImplementationClasses:\n        - TechnologyKind: python\n          ClassName: {implementation}\n"
+        + f"      ImplementationClasses:\n        - TechnologyKind: python\n          ProviderClassName: {implementation}\n"
           "      Operations:\n"
           "        - Capability: _AAC.capability.observation\n"
           "          CapabilityVersion: 1\n"
@@ -326,7 +326,7 @@ def _write_same_namespace_wheel(path: Path, *, version: int, broken: bool = Fals
           Versions: [1]
       ImplementationClasses:
       - TechnologyKind: python
-        ClassName: sameupgrade.{"missing" if broken else "provider"}:{"Nope" if broken else "Provider"}
+        ProviderClassName: sameupgrade.{"missing" if broken else "provider"}:{"Nope" if broken else "Provider"}
       Operations:
         - Capability: com.example.same.capability
           CapabilityVersion: 1

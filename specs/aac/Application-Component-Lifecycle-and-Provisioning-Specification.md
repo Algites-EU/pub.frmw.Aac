@@ -84,6 +84,8 @@ EVALUATE ENTITLEMENT
         |
         v
 RESOLVE GRAPH
+
+During `RESOLVE`, after component/provider configuration is available but before runtime wiring, Core MAY instantiate the technology-specific `CapabilityProfileMatcherClassName` declared for a consumer implementation. For qualified capabilities the matcher evaluates each provider candidate's normalized `BindingQualifierProfiles` and returns the accepted subset. Matcher execution is resolution-time only and MUST NOT depend on runtime capability calls.
         |
         v
 INSTANTIATE
@@ -146,7 +148,7 @@ Core evaluates contextual entitlement before/around activation so the provider r
 
 ## III.8 Graph resolution
 
-Core computes provider candidates, applies compatibility, lifecycle/configuration validity and binding policy, selects provider instances, negotiates contract versions, and validates the resulting concrete extension-instance binding graph. Ordinary component-owned permission tiers are not provider-selection criteria. Resolution MUST fail if the concrete graph contains any directed cycle; direct self-binding is the one-node special case of that rule.
+Core computes provider candidates, applies capability/contract-version compatibility, validates and applies contract-owned binding qualifier profiles where defined, applies lifecycle/configuration validity and binding policy, selects provider instances, negotiates contract versions, and validates the resulting concrete extension-instance binding graph. Qualifier filtering is a compatibility step: an explicit preference or default cannot make a qualifier-incompatible provider valid. Ordinary component-owned permission tiers are not provider-selection criteria. The resolved qualifier profile is retained on the binding for later invocation-context propagation. Resolution MUST fail if the concrete graph contains any directed cycle; direct self-binding is the one-node special case of that rule.
 
 ## III.9 Runtime construction and activation
 
@@ -193,7 +195,7 @@ The baseline stages map to technology-neutral hooks as follows:
 | `PROVISION` | optional `provision(context)` | Core creates or reconciles persistent Core-owned component/provider state. Declarative provisioning is preferred; a hook is used only when additional component-specific initialization is required. |
 | `VALIDATE CONFIGURATION / DATA` | optional `validate(context)` | Core performs generic schema/version validation and may invoke component-specific semantic validation. This stage does **not** decide licensing/entitlement and does not select providers. |
 | `EVALUATE ENTITLEMENT` | no ordinary component hook | Trusted Core facilities validate scoped entitlement evidence and compute the effective permission/constraint context grouped by provided capability/version and delivered to the provider instance. Ordinary permission tiers do not redefine the capability binding graph. |
-| `RESOLVE GRAPH` | none | Core selects concrete provider instances, negotiates contract versions, validates bindings, and verifies that the resolved extension-instance graph satisfies the DAG invariant. Components do not choose their own providers here. |
+| `RESOLVE GRAPH` | none | Core selects concrete provider instances, validates contract-owned binding qualifier profiles, negotiates contract versions, persists the resolved qualifier snapshot on each qualified binding, validates bindings, and verifies that the resolved extension-instance graph satisfies the DAG invariant. Components do not choose their own providers here. |
 | `INSTANTIATE` | optional `instantiate(context)` | The runtime representation of the component/provider instance is constructed, but normal business activity has not started. |
 | `WIRE` | optional `wire(bindings)` | Core supplies the already-resolved capability bindings/proxies/handles and other wiring required by the runtime instance. Wiring does not permit the component to replace Core-selected bindings. |
 | `ACTIVATABLE` | optional `prepare_activation()` | The component performs local post-wiring activation preparation that requires bindings to exist but does not require peers to already be active. Successful return means the instance is safe to activate. |

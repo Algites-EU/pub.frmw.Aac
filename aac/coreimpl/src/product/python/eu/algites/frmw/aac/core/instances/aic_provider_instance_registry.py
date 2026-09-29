@@ -21,6 +21,7 @@ def _instance_to_dict(instance: AIcProviderInstance) -> dict[str, object]:
             for capability in instance.capabilities
         ],
         "ImplementationClass": instance.implementation_class,
+        "CapabilityProfileMatcherClass": instance.capability_profile_matcher_class,
         "AccessMode": instance.access_mode.value,
         "Configuration": dict(instance.configuration),
         "ConfigurationSchema": instance.configuration_schema,
@@ -40,6 +41,7 @@ def _instance_from_dict(raw: dict[str, object] | object) -> AIcProviderInstance:
             for item in raw["Capabilities"]
         ),
         implementation_class=str(raw["ImplementationClass"]),
+        capability_profile_matcher_class=(str(raw["CapabilityProfileMatcherClass"]) if raw.get("CapabilityProfileMatcherClass") is not None else None),
         access_mode=AInProviderAccessMode(str(raw.get("AccessMode", AInProviderAccessMode.READ_WRITE.value))),
         configuration=dict(raw.get("Configuration", {})),
         configuration_schema=str(raw["ConfigurationSchema"]) if raw.get("ConfigurationSchema") is not None else None,
@@ -108,6 +110,7 @@ class AIcProviderInstanceRegistry:
             name=name,
             capabilities=provider.capabilities,
             implementation_class=provider.implementation_class_for("python"),
+            capability_profile_matcher_class=provider.capability_profile_matcher_class_for("python"),
             access_mode=access_mode,
             configuration=dict(configuration or {}),
             configuration_schema=provider.configuration_schema.resource_name if provider.configuration_schema is not None else None,
@@ -156,6 +159,7 @@ class AIcProviderInstanceRegistry:
                 instance,
                 capabilities=provider.capabilities,
                 implementation_class=provider.implementation_class_for("python"),
+            capability_profile_matcher_class=provider.capability_profile_matcher_class_for("python"),
                 configuration_schema=provider.configuration_schema.resource_name if provider.configuration_schema is not None else None,
                 state=AInProviderInstanceState.INACTIVE,
             ))

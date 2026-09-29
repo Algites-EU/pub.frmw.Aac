@@ -24,7 +24,7 @@ from eu.algites.frmw.aac.core.invocation.api import (
     AIcInvocationInput, AIcInvocationOutput, AIcNullOperationInteraction, AIcOperationCompletion, AIcOperationFailure, AIcOperationInteractionFeatures,
     AIiOperationFailureExceptionFactory, AIxCapabilityOperationFailed, AIxOperationCancelled,
     current_invocation_locale, current_operation_interaction, invocation_locale_context,
-    operation_interaction_context, operation_parameter_context,
+    binding_qualifier_profiles_context, operation_interaction_context, operation_parameter_context,
 )
 from eu.algites.frmw.aac.core.observation.api import AIcObservationInput, AInObservationOutcome, AInObservationPhase
 from eu.algites.frmw.aac.core.capability.catalog import AIcActiveContractCatalog
@@ -264,6 +264,7 @@ class AIcInvocationDispatcher:
                     arguments=dict(invocation_input.arguments),
                     operation_parameter_overrides=dict(invocation_input.operation_parameter_overrides),
                     effective_operation_parameters=effective_operation_parameters,
+                    binding_qualifier_profiles=tuple(dict(profile) for profile in invocation_input.binding_qualifier_profiles),
                     consumer_instance_id=invocation_input.consumer_instance_id,
                     requirement_id=invocation_input.requirement_id,
                     locale=invocation_input.locale,
@@ -285,7 +286,7 @@ class AIcInvocationDispatcher:
 
         token = _CURRENT_INVOCATION_ID.set(invocation_input.invocation_id)
         try:
-            with operation_interaction_context(operation_interaction), operation_parameter_context(
+            with binding_qualifier_profiles_context(invocation_input.binding_qualifier_profiles), operation_interaction_context(operation_interaction), operation_parameter_context(
                 invocation_input.effective_operation_parameters
             ), invocation_locale_context(invocation_input.locale):
                 output = endpoint.invoke(invocation_input)
@@ -312,7 +313,7 @@ class AIcInvocationDispatcher:
                 if remediation.changed:
                     if self.entitlement_refresh_callback is not None:
                         self.entitlement_refresh_callback()
-                    with operation_interaction_context(operation_interaction), operation_parameter_context(
+                    with binding_qualifier_profiles_context(invocation_input.binding_qualifier_profiles), operation_interaction_context(operation_interaction), operation_parameter_context(
                         invocation_input.effective_operation_parameters
                     ), invocation_locale_context(invocation_input.locale):
                         output = endpoint.invoke(invocation_input)

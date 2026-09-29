@@ -8,6 +8,7 @@ from ..presentation.api import AIcDisplayText
 class AIcProvidedCapability:
     id: str
     versions: tuple[int, ...]
+    binding_qualifier_profiles: tuple[Mapping[str, object], ...] = ()
 
     def __post_init__(self) -> None:
         if not self.id:
@@ -16,6 +17,8 @@ class AIcProvidedCapability:
             raise ValueError("provided capability must declare at least one version >= 1")
         if len(self.versions) != len(set(self.versions)):
             raise ValueError("provided capability versions must be unique")
+        if any(not isinstance(item, Mapping) for item in self.binding_qualifier_profiles):
+            raise ValueError("provided capability binding qualifier profiles must be mappings")
 
     @property
     def latest_version(self) -> int:

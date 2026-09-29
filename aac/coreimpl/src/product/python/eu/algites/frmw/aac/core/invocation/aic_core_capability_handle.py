@@ -98,6 +98,7 @@ class AIcCoreCapabilityHandle(AIiCapabilityHandle):
             provider_instance_id=self._binding.provider_instance_id,
             arguments=dict(arguments or {}),
             operation_parameter_overrides=dict(operation_parameters or {}),
+            binding_qualifier_profiles=tuple(dict(profile) for profile in self._binding.binding_qualifier_profiles),
             consumer_instance_id=self._binding.consumer_instance_id,
             requirement_id=self._binding.requirement_id,
             locale=effective_locale,

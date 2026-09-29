@@ -9,6 +9,9 @@ from .interaction import AIcNullOperationInteraction, AIiOperationInteractionPro
 _CURRENT_OPERATION_PARAMETERS: ContextVar[Mapping[str, object]] = ContextVar(
     "aac_current_operation_parameters", default={}
 )
+_CURRENT_BINDING_QUALIFIER_PROFILES: ContextVar[tuple[Mapping[str, object], ...]] = ContextVar(
+    "aac_current_binding_qualifier_profiles", default=()
+)
 _NULL_OPERATION_INTERACTION = AIcNullOperationInteraction()
 _CURRENT_OPERATION_INTERACTION: ContextVar[AIiOperationInteractionProviderToCaller] = ContextVar(
     "aac_current_operation_interaction", default=_NULL_OPERATION_INTERACTION
@@ -21,6 +24,11 @@ _CURRENT_INVOCATION_LOCALE: ContextVar[str | None] = ContextVar(
 def current_operation_parameters() -> Mapping[str, object]:
     """Return effective provider-specific parameters for the current capability invocation."""
     return dict(_CURRENT_OPERATION_PARAMETERS.get())
+
+
+def current_binding_qualifier_profiles() -> tuple[Mapping[str, object], ...]:
+    """Return the provider qualifier profiles selected for the current binding."""
+    return tuple(dict(profile) for profile in _CURRENT_BINDING_QUALIFIER_PROFILES.get())
 
 
 def current_operation_interaction() -> AIiOperationInteractionProviderToCaller:
@@ -40,6 +48,15 @@ def operation_parameter_context(parameters: Mapping[str, object]):
         yield
     finally:
         _CURRENT_OPERATION_PARAMETERS.reset(token)
+
+
+@contextmanager
+def binding_qualifier_profiles_context(binding_qualifier_profiles: tuple[Mapping[str, object], ...]):
+    token = _CURRENT_BINDING_QUALIFIER_PROFILES.set(tuple(dict(profile) for profile in binding_qualifier_profiles))
+    try:
+        yield
+    finally:
+        _CURRENT_BINDING_QUALIFIER_PROFILES.reset(token)
 
 
 @contextmanager

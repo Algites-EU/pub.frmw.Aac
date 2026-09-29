@@ -2,9 +2,11 @@ from .endpoint import AIiCapabilityEndpoint
 from .handle import AIiCapabilityHandle
 from .models import AInOperationCompletionState, AIcInvocationInput, AIcInvocationOutput, AIcOperationCompletion
 from .context import (
+    current_binding_qualifier_profiles,
     current_invocation_locale,
     current_operation_interaction,
     current_operation_parameters,
+    binding_qualifier_profiles_context,
     invocation_locale_context,
     operation_interaction_context,
     operation_parameter_context,

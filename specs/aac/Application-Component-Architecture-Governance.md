@@ -647,6 +647,26 @@ The sequence is:
 
 A provider MUST NOT win merely because it supports a numerically higher contract version.
 
+### V.2.1 Binding qualifier profiles are compatibility, not preference
+
+A capability contract version MAY define a canonical `BindingQualifiersSchema`. The schema belongs to that exact contract version and defines one portable provider capability qualifier profile. An incompatible change to that schema therefore requires a new capability contract version.
+
+When a qualifier schema exists:
+
+- provider capability declarations MAY expose one or more `BindingQualifierProfiles`; every profile MUST validate against the contract-owned `BindingQualifiersSchema`;
+- if the capability contract has no `BindingQualifiersSchema`, providers MUST NOT declare `BindingQualifierProfiles`;
+- consumers do not declare qualifier requirements in descriptors;
+- the technology-specific consumer implementation MUST provide `CapabilityProfileMatcherClassName` when it consumes a qualified capability;
+- during `RESOLVE`, Core instantiates that matcher independently from the runtime provider class and supplies the consumer requirement, effective consumer configuration, and the normalized provider profile list for one provider candidate;
+- the matcher returns zero or more indexes into the provider profile list. Empty means incompatible; non-empty means compatible and identifies the exact subset retained on the binding;
+- the matcher MUST NOT invent, alter, rank, or score provider profiles. Provider preference and final selection remain Core responsibilities.
+
+The matcher is resolution-time support code. It MUST be deterministic for identical descriptors/configuration, MUST NOT invoke AAC capabilities or depend on a partially wired runtime graph, and MUST have no externally visible side effects.
+
+The selected profile subset is persisted as `BindingQualifierProfiles` on the binding and propagated to invocation context. It remains distinct from portable operation business input. An operation MAY independently contain equivalent domain data when that data belongs to the business request, but operation schemas are not required to duplicate binding qualifier profiles.
+
+Technology-specific implementation declarations use `ProviderClassName` for the normal provider runtime implementation and optional `CapabilityProfileMatcherClassName` for the independently instantiated resolution-time matcher.
+
 ## V.3 Consumer cardinality
 
 A capability specification SHOULD define how a consumer binds providers.

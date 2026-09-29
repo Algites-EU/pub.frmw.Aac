@@ -36,7 +36,7 @@ def _wheel(root: Path) -> tuple[Path, str, str]:
           Versions: [1, 2]
       ImplementationClasses:
       - TechnologyKind: python
-        ClassName: demo:Provider
+        ProviderClassName: demo:Provider
       Requirements:
         - Id: storage
           Capability: com.example.storage
