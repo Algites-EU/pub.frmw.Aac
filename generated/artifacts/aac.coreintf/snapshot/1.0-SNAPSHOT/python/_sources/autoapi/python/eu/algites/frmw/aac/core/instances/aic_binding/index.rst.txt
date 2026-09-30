@@ -37,3 +37,9 @@ Module Contents
       :type:  int
 
 
+   .. py:attribute:: binding_qualifier_profiles
+      :type:  tuple[Mapping[str, object], Ellipsis]
+      :value: ()
+
+
+

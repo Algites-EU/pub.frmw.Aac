@@ -41,6 +41,12 @@ Module Contents
       :type:  str
 
 
+   .. py:attribute:: capability_profile_matcher_class
+      :type:  str | None
+      :value: None
+
+
+
    .. py:attribute:: access_mode
       :type:  python.eu.algites.frmw.aac.core.instances.ain_provider_access_mode.AInProviderAccessMode
 

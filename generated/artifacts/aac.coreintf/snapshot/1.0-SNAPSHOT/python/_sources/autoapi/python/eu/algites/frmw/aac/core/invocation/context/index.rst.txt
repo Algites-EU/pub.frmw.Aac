@@ -10,9 +10,11 @@ Functions
 .. autoapisummary::
 
    python.eu.algites.frmw.aac.core.invocation.context.current_operation_parameters
+   python.eu.algites.frmw.aac.core.invocation.context.current_binding_qualifier_profiles
    python.eu.algites.frmw.aac.core.invocation.context.current_operation_interaction
    python.eu.algites.frmw.aac.core.invocation.context.current_invocation_locale
    python.eu.algites.frmw.aac.core.invocation.context.operation_parameter_context
+   python.eu.algites.frmw.aac.core.invocation.context.binding_qualifier_profiles_context
    python.eu.algites.frmw.aac.core.invocation.context.operation_interaction_context
    python.eu.algites.frmw.aac.core.invocation.context.invocation_locale_context
 
@@ -23,6 +25,11 @@ Module Contents
 .. py:function:: current_operation_parameters() -> Mapping[str, object]
 
    Return effective provider-specific parameters for the current capability invocation.
+
+
+.. py:function:: current_binding_qualifier_profiles() -> tuple[Mapping[str, object], Ellipsis]
+
+   Return the provider qualifier profiles selected for the current binding.
 
 
 .. py:function:: current_operation_interaction() -> python.eu.algites.frmw.aac.core.invocation.interaction.AIiOperationInteractionProviderToCaller
@@ -36,6 +43,8 @@ Module Contents
 
 
 .. py:function:: operation_parameter_context(parameters: Mapping[str, object])
+
+.. py:function:: binding_qualifier_profiles_context(binding_qualifier_profiles: tuple[Mapping[str, object], Ellipsis])
 
 .. py:function:: operation_interaction_context(interaction: python.eu.algites.frmw.aac.core.invocation.interaction.AIiOperationInteractionProviderToCaller | None)
 

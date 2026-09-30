@@ -53,6 +53,12 @@ Module Contents
       :type:  Mapping[str, object]
 
 
+   .. py:attribute:: binding_qualifier_profiles
+      :type:  tuple[Mapping[str, object], Ellipsis]
+      :value: ()
+
+
+
    .. py:attribute:: consumer_instance_id
       :type:  str | None
       :value: None

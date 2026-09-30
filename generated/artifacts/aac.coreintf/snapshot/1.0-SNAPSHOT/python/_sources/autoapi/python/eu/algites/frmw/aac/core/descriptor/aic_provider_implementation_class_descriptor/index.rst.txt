@@ -21,7 +21,13 @@ Module Contents
       :type:  str
 
 
-   .. py:attribute:: class_name
+   .. py:attribute:: provider_class_name
       :type:  str
+
+
+   .. py:attribute:: capability_profile_matcher_class_name
+      :type:  str | None
+      :value: None
+
 
 

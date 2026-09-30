@@ -41,13 +41,19 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.core.invocation.context.current_operation_parameters" title="python.eu.algites.frmw.aac.core.invocation.context.current_operation_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_operation_parameters</span></code></a>(→ Mapping[str, object])</p></td>
 <td><p>Return effective provider-specific parameters for the current capability invocation.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.core.invocation.context.current_operation_interaction" title="python.eu.algites.frmw.aac.core.invocation.context.current_operation_interaction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_operation_interaction</span></code></a>(...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.core.invocation.context.current_binding_qualifier_profiles" title="python.eu.algites.frmw.aac.core.invocation.context.current_binding_qualifier_profiles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_binding_qualifier_profiles</span></code></a>(...)</p></td>
+<td><p>Return the provider qualifier profiles selected for the current binding.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.core.invocation.context.current_operation_interaction" title="python.eu.algites.frmw.aac.core.invocation.context.current_operation_interaction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_operation_interaction</span></code></a>(...)</p></td>
 <td><p>Return the provider-facing interaction channel for the current capability invocation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.core.invocation.context.current_invocation_locale" title="python.eu.algites.frmw.aac.core.invocation.context.current_invocation_locale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_invocation_locale</span></code></a>(→ str | None)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.core.invocation.context.current_invocation_locale" title="python.eu.algites.frmw.aac.core.invocation.context.current_invocation_locale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_invocation_locale</span></code></a>(→ str | None)</p></td>
 <td><p>Return the BCP-47 locale requested for the current capability invocation, if any.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.core.invocation.context.operation_parameter_context" title="python.eu.algites.frmw.aac.core.invocation.context.operation_parameter_context"><code class="xref py py-obj docutils literal notranslate"><span class="pre">operation_parameter_context</span></code></a>(parameters)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.core.invocation.context.operation_parameter_context" title="python.eu.algites.frmw.aac.core.invocation.context.operation_parameter_context"><code class="xref py py-obj docutils literal notranslate"><span class="pre">operation_parameter_context</span></code></a>(parameters)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.core.invocation.context.binding_qualifier_profiles_context" title="python.eu.algites.frmw.aac.core.invocation.context.binding_qualifier_profiles_context"><code class="xref py py-obj docutils literal notranslate"><span class="pre">binding_qualifier_profiles_context</span></code></a>(...)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.core.invocation.context.operation_interaction_context" title="python.eu.algites.frmw.aac.core.invocation.context.operation_interaction_context"><code class="xref py py-obj docutils literal notranslate"><span class="pre">operation_interaction_context</span></code></a>(interaction)</p></td>
@@ -68,6 +74,12 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.invocation.context.current_binding_qualifier_profiles">
+<span class="sig-prename descclassname"><span class="pre">python.eu.algites.frmw.aac.core.invocation.context.</span></span><span class="sig-name descname"><span class="pre">current_binding_qualifier_profiles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.invocation.context.current_binding_qualifier_profiles" title="Link to this definition">¶</a></dt>
+<dd><p>Return the provider qualifier profiles selected for the current binding.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.invocation.context.current_operation_interaction">
 <span class="sig-prename descclassname"><span class="pre">python.eu.algites.frmw.aac.core.invocation.context.</span></span><span class="sig-name descname"><span class="pre">current_operation_interaction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">python.eu.algites.frmw.aac.core.invocation.interaction.AIiOperationInteractionProviderToCaller</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.invocation.context.current_operation_interaction" title="Link to this definition">¶</a></dt>
 <dd><p>Return the provider-facing interaction channel for the current capability invocation.</p>
@@ -82,6 +94,11 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.invocation.context.operation_parameter_context">
 <span class="sig-prename descclassname"><span class="pre">python.eu.algites.frmw.aac.core.invocation.context.</span></span><span class="sig-name descname"><span class="pre">operation_parameter_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.invocation.context.operation_parameter_context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.core.invocation.context.binding_qualifier_profiles_context">
+<span class="sig-prename descclassname"><span class="pre">python.eu.algites.frmw.aac.core.invocation.context.</span></span><span class="sig-name descname"><span class="pre">binding_qualifier_profiles_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binding_qualifier_profiles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.eu.algites.frmw.aac.core.invocation.context.binding_qualifier_profiles_context" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">

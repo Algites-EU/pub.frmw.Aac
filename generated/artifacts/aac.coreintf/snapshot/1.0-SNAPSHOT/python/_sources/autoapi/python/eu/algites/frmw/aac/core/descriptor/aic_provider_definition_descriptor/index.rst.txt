@@ -84,6 +84,9 @@ Module Contents
    .. py:method:: implementation_class_for(technology_kind: str) -> str
 
 
+   .. py:method:: capability_profile_matcher_class_for(technology_kind: str) -> str | None
+
+
    .. py:method:: capability(capability_id: str) -> python.eu.algites.frmw.aac.core.capability.api.AIcProvidedCapability
 
 
