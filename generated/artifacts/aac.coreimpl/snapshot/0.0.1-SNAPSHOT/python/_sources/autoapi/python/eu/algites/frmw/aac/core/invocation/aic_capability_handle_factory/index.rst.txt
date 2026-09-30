@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.invocation.aic_capability_handle_factory
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_capability_handle_factory
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_capability_handle_factory.AIcCapabilityHandleFactory
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCapabilityHandleFactory(endpoints: python.eu.algites.frmw.aac.core.invocation.aic_endpoint_registry.AIcEndpointRegistry, dispatcher: python.eu.algites.frmw.aac.core.invocation.aic_invocation_dispatcher.AIcInvocationDispatcher)
+
+   .. py:attribute:: endpoints
+
+
+   .. py:attribute:: dispatcher
+
+
+   .. py:method:: for_consumer(consumer_instance_id: str, bindings: tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis]) -> dict[str, tuple[eu.algites.frmw.aac.core.invocation.api.AIiCapabilityHandle, Ellipsis]]
+
+

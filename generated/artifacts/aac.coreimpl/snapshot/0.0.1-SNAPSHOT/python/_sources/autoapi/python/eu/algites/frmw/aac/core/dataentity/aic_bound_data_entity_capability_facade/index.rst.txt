@@ -1,0 +1,41 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_bound_data_entity_capability_facade
+==================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_bound_data_entity_capability_facade
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_bound_data_entity_capability_facade.AIcBoundDataEntityCapabilityFacade
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcBoundDataEntityCapabilityFacade(invoker: python.eu.algites.frmw.aac.core.dataentity.aic_provider_capability_invoker.AIcProviderCapabilityInvoker, marshaller: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_marshaller.AIcDataEntityMarshaller | None = None)
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :value: 1
+
+
+
+   .. py:attribute:: write_operation
+      :value: False
+
+
+
+   .. py:attribute:: invoker
+
+
+   .. py:attribute:: marshaller
+      :value: None
+
+
+

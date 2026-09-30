@@ -1,0 +1,95 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_component_descriptor
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_component_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_component_descriptor.AIcComponentDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcComponentDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: capability_providers
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_provider_definition_descriptor.AIcProviderDefinitionDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: capability_group_resources
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: contract_resources
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: component_configuration_schema
+      :type:  python.eu.algites.frmw.aac.core.descriptor.aic_persisted_schema_descriptor.AIcPersistedSchemaDescriptor | None
+      :value: None
+
+
+
+   .. py:attribute:: entitlement_licensing_scopes
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_entitlement_licensing_scope_descriptor.AIcEntitlementLicensingScopeDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: provided_capability_entitlements
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_capability_entitlement_descriptor.AIcCapabilityEntitlementDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: data_entity_support
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_data_entity_support_descriptor.AIcDataEntitySupportDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: lifecycle
+      :type:  python.eu.algites.frmw.aac.core.descriptor.aic_lifecycle_hooks_descriptor.AIcLifecycleHooksDescriptor
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:method:: provider(provider_definition_id: str) -> python.eu.algites.frmw.aac.core.descriptor.aic_provider_definition_descriptor.AIcProviderDefinitionDescriptor
+
+
+   .. py:method:: capability_entitlement(capability_id: str, capability_version: int) -> python.eu.algites.frmw.aac.core.descriptor.aic_capability_entitlement_descriptor.AIcCapabilityEntitlementDescriptor | None
+
+

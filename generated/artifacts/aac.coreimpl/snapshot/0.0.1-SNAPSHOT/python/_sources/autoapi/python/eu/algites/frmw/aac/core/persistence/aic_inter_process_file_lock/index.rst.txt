@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.persistence.aic_inter_process_file_lock
+=======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.aic_inter_process_file_lock
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.aic_inter_process_file_lock.AIcInterProcessFileLock
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcInterProcessFileLock(path: pathlib.Path)
+
+   Reentrant-in-process, exclusive cross-process filesystem-domain lock.
+
+
+   .. py:attribute:: path
+
+

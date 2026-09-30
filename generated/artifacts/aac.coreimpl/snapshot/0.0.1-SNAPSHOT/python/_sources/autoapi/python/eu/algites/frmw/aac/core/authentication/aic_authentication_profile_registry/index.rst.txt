@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.authentication.aic_authentication_profile_registry
+==================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aic_authentication_profile_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aic_authentication_profile_registry.AIcAuthenticationProfileRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAuthenticationProfileRegistry
+
+   .. py:method:: register(profile: eu.algites.frmw.aac.core.authentication.api.AIcAuthenticationProfile) -> None
+
+
+   .. py:method:: contains(profile_id: str) -> bool
+
+
+   .. py:method:: get(profile_id: str) -> eu.algites.frmw.aac.core.authentication.api.AIcAuthenticationProfile
+
+

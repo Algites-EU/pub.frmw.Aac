@@ -1,0 +1,42 @@
+python.eu.algites.frmw.aac.core.authentication.aic_security_bootstrap
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aic_security_bootstrap
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aic_security_bootstrap.AIcSecurityBootstrap
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSecurityBootstrap
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: secret_providers
+      :type:  tuple[python.eu.algites.frmw.aac.core.authentication.aic_secret_provider_registration.AIcSecretProviderRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: authentication_profiles
+      :type:  tuple[python.eu.algites.frmw.aac.core.authentication.aic_authentication_profile.AIcAuthenticationProfile, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:method:: authentication_profile(profile_id: str) -> python.eu.algites.frmw.aac.core.authentication.aic_authentication_profile.AIcAuthenticationProfile
+
+

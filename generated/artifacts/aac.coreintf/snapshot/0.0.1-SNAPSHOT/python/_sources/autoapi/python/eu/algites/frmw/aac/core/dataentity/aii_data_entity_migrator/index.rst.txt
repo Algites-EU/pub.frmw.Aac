@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_migrator
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_migrator
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_migrator.AIiDataEntityMigrator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiDataEntityMigrator
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: migrate(request: python.eu.algites.frmw.aac.core.dataentity.models.AIcDataEntityMigrationRequest) -> python.eu.algites.frmw.aac.core.dataentity.models.AIcDataEntityMigrationResult
+      :abstractmethod:
+
+
+      Transform one data entity payload without directly mutating persistence.
+
+
+

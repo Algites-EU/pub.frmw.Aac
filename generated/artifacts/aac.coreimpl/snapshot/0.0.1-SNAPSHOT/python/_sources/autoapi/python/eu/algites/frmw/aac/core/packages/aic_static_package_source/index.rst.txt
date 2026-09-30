@@ -1,0 +1,33 @@
+python.eu.algites.frmw.aac.core.packages.aic_static_package_source
+==================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_static_package_source
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_static_package_source.AIcStaticPackageSource
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcStaticPackageSource(source_id: str, candidates: tuple[eu.algites.frmw.aac.core.packages.api.AIcPackageCandidate, Ellipsis], *, priority: int = 0)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.packages.api.AIiPackageSource`
+
+
+   .. py:attribute:: source_id
+
+
+   .. py:attribute:: priority
+      :value: 0
+
+
+
+   .. py:method:: candidates(requirement: eu.algites.frmw.aac.core.packages.api.AIcWorkspaceComponentRequirement) -> tuple[eu.algites.frmw.aac.core.packages.api.AIcPackageCandidate, Ellipsis]
+
+

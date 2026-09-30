@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.ui.aic_ui_entitlement_status
+=======================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_entitlement_status
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_entitlement_status.AIcUiEntitlementStatus
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiEntitlementStatus
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: permissions
+      :type:  tuple[python.eu.algites.frmw.aac.ui.aic_ui_entitlement_permission.AIcUiEntitlementPermission, Ellipsis]
+
+
+   .. py:attribute:: next_transition_at
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

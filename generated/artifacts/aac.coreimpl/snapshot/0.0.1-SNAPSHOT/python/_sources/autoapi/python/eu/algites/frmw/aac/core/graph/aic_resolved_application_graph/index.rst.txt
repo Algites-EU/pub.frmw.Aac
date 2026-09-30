@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.graph.aic_resolved_application_graph
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.graph.aic_resolved_application_graph
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.graph.aic_resolved_application_graph.AIcResolvedApplicationGraph
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcResolvedApplicationGraph
+
+   .. py:attribute:: bindings
+      :type:  tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis]
+
+
+   .. py:attribute:: provider_first_order
+      :type:  tuple[str, Ellipsis]
+
+

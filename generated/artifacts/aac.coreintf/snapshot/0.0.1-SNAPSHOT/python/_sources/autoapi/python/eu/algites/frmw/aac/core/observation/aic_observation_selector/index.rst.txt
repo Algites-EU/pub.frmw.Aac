@@ -1,0 +1,44 @@
+python.eu.algites.frmw.aac.core.observation.aic_observation_selector
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.observation.aic_observation_selector
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.observation.aic_observation_selector.AIcObservationSelector
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcObservationSelector
+
+   .. py:attribute:: capability
+      :type:  str
+      :value: '*'
+
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: operations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: phases
+      :type:  tuple[python.eu.algites.frmw.aac.core.observation.ain_observation_phase.AInObservationPhase, Ellipsis]
+
+
+   .. py:method:: matches(value: python.eu.algites.frmw.aac.core.observation.aic_observation_input.AIcObservationInput) -> bool
+
+

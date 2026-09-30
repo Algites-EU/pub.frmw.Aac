@@ -1,0 +1,50 @@
+python.eu.algites.frmw.aac.core.authorization.aic_component_authorization_grant
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authorization.aic_component_authorization_grant
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authorization.aic_component_authorization_grant.AIcComponentAuthorizationGrant
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcComponentAuthorizationGrant
+
+   Core-owned authorization grant for one consumer requirement.
+
+   The grant is intentionally independent from entitlement. Permission IDs are
+   defined by the consumed canonical capability contract and are meaningful to
+   both Core and the capability provider.
+
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: requirement_id
+      :type:  str
+
+
+   .. py:attribute:: permission_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: approved_by
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

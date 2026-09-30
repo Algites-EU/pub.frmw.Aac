@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_reference_definition
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_reference_definition
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_reference_definition.AIcDataEntityReferenceDefinition
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDataEntityReferenceDefinition
+
+   .. py:attribute:: source_schema_id
+      :type:  str
+
+
+   .. py:attribute:: source_schema_version
+      :type:  int
+
+
+   .. py:attribute:: schema_path
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: target_schema_id
+      :type:  str
+
+

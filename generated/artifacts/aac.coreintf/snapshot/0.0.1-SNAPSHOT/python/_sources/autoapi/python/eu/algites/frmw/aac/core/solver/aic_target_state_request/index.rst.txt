@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.solver.aic_target_state_request
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.solver.aic_target_state_request
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.solver.aic_target_state_request.AIcTargetStateRequest
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcTargetStateRequest
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: mode
+      :type:  python.eu.algites.frmw.aac.core.solver.ain_target_state_request_mode.AInTargetStateRequestMode
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: exact(component_id: str, version: int) -> AIcTargetStateRequest
+      :classmethod:
+
+
+
+   .. py:method:: latest(component_id: str) -> AIcTargetStateRequest
+      :classmethod:
+
+
+

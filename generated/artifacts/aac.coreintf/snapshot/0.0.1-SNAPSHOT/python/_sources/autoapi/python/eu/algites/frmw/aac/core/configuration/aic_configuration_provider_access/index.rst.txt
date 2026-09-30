@@ -1,0 +1,48 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_access
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_access
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_access.AIcConfigurationProviderAccess
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationProviderAccess
+
+   .. py:attribute:: configuration_scope
+      :type:  python.eu.algites.frmw.aac.core.context.api.AIcConfigurationScope
+
+
+   .. py:attribute:: configuration_provider_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_target
+      :type:  python.eu.algites.frmw.aac.core.configuration.aic_configuration_target.AIcConfigurationTarget
+
+
+   .. py:attribute:: technical_capabilities
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.ain_configuration_provider_capability.AInConfigurationProviderCapability, Ellipsis]
+
+
+   .. py:attribute:: authorized_capabilities
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.ain_configuration_provider_capability.AInConfigurationProviderCapability, Ellipsis]
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: allows(capability: python.eu.algites.frmw.aac.core.configuration.ain_configuration_provider_capability.AInConfigurationProviderCapability) -> bool
+
+

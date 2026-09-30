@@ -1,0 +1,49 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_entry
+=========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_entry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_entry.AIcCatalogEntry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogEntry
+
+   .. py:attribute:: source_id
+      :type:  str
+
+
+   .. py:attribute:: product_id
+      :type:  str
+
+
+   .. py:attribute:: technology_id
+      :type:  str
+
+
+   .. py:attribute:: component
+      :type:  python.eu.algites.frmw.aac.core.catalog.aic_catalog_component.AIcCatalogComponent
+
+
+   .. py:attribute:: release
+      :type:  python.eu.algites.frmw.aac.core.catalog.aic_catalog_release.AIcCatalogRelease
+
+
+   .. py:property:: component_id
+      :type: str
+
+
+
+   .. py:property:: component_version
+      :type: int
+
+
+

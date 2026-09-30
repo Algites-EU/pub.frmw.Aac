@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.implementation.aix_plugin_load_error
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.implementation.aix_plugin_load_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.implementation.aix_plugin_load_error.AIxPluginLoadError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxPluginLoadError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.implementation.aix_core_implementation_error.AIxCoreImplementationError`
+
+

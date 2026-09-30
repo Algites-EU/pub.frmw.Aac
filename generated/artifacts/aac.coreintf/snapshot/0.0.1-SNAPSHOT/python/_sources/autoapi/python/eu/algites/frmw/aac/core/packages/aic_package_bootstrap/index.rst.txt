@@ -1,0 +1,41 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_bootstrap
+==============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_bootstrap
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_bootstrap.AIcPackageBootstrap
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageBootstrap
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: layout
+      :type:  python.eu.algites.frmw.aac.core.packages.aic_package_store_layout.AIcPackageStoreLayout
+
+
+   .. py:attribute:: sources
+      :type:  tuple[python.eu.algites.frmw.aac.core.packages.aic_package_source_registration.AIcPackageSourceRegistration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: automation_policy
+      :type:  python.eu.algites.frmw.aac.core.packages.aic_package_automation_policy.AIcPackageAutomationPolicy
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

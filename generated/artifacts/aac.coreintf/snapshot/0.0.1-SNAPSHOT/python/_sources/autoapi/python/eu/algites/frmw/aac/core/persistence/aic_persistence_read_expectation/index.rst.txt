@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.persistence.aic_persistence_read_expectation
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.aic_persistence_read_expectation
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.aic_persistence_read_expectation.AIcPersistenceReadExpectation
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPersistenceReadExpectation
+
+   .. py:attribute:: namespace
+      :type:  str
+
+
+   .. py:attribute:: key
+      :type:  str
+
+
+   .. py:attribute:: expected_record_revision
+      :type:  int | str | None
+      :value: None
+
+
+
+   .. py:attribute:: expect_absent
+      :type:  bool
+      :value: False
+
+
+

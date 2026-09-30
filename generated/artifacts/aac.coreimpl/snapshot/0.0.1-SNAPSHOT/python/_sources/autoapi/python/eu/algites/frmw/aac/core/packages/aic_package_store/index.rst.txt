@@ -1,0 +1,55 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_store
+==========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_store
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_store.AIcPackageStore
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageStore(layout: eu.algites.frmw.aac.core.packages.api.AIcPackageStoreLayout)
+
+   Filesystem artifact store. Installed artifacts are immutable; active state is metadata elsewhere.
+
+
+   .. py:attribute:: layout
+
+
+   .. py:attribute:: root
+
+
+   .. py:attribute:: downloaded_root
+
+
+   .. py:attribute:: installed_root
+
+
+   .. py:attribute:: obsolete_root
+
+
+   .. py:method:: store_downloaded(candidate: eu.algites.frmw.aac.core.packages.api.AIcPackageCandidate, *, authentication: eu.algites.frmw.aac.core.authentication.implementation.AIcAuthenticationService | None = None, context: Mapping[str, object] | None = None) -> eu.algites.frmw.aac.core.packages.api.AIcStoredPackage
+
+
+   .. py:method:: install(downloaded: eu.algites.frmw.aac.core.packages.api.AIcStoredPackage, verifier: eu.algites.frmw.aac.core.verification.api.AIiPackageVerifier, *, verifier_id: str | None = None) -> eu.algites.frmw.aac.core.packages.api.AIcStoredPackage
+
+
+   .. py:method:: mark_obsolete(installed: eu.algites.frmw.aac.core.packages.api.AIcStoredPackage) -> eu.algites.frmw.aac.core.packages.api.AIcStoredPackage
+
+
+   .. py:method:: restore_obsolete(obsolete: eu.algites.frmw.aac.core.packages.api.AIcStoredPackage) -> eu.algites.frmw.aac.core.packages.api.AIcStoredPackage
+
+
+   .. py:method:: records(state: eu.algites.frmw.aac.core.packages.api.AInStoredPackageState | None = None, component_id: str | None = None) -> tuple[eu.algites.frmw.aac.core.packages.api.AIcStoredPackage, Ellipsis]
+
+
+   .. py:method:: find(component_id: str, version: int, sha256: str, state: eu.algites.frmw.aac.core.packages.api.AInStoredPackageState = AInStoredPackageState.INSTALLED) -> eu.algites.frmw.aac.core.packages.api.AIcStoredPackage | None
+
+

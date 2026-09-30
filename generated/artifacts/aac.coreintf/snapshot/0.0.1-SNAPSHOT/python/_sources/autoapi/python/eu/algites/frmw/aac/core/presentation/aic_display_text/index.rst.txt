@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.presentation.aic_display_text
+=============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.presentation.aic_display_text
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.presentation.aic_display_text.AIcDisplayText
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDisplayText
+
+   Technology-neutral user-visible short text metadata.
+
+   `text` is the immediate/fallback rendering. `resource_key` is an opaque
+   localization key for a future/product-provided localization engine.
+   AAC Core does not resolve resource keys itself.
+
+
+   .. py:attribute:: text
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: resource_key
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: fallback
+      :type: str
+
+
+

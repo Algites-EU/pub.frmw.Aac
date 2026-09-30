@@ -1,0 +1,49 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_remediation_request
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_remediation_request
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_remediation_request.AIcEntitlementRemediationRequest
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementRemediationRequest
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str | None
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permission_id
+      :type:  str | None
+
+
+   .. py:attribute:: remediation_hint
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: context
+      :type:  Mapping[str, object]
+
+

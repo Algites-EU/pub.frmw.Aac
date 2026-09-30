@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.configuration.aic_static_configuration_scope_resolver
+=====================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_static_configuration_scope_resolver
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_static_configuration_scope_resolver.AIcStaticConfigurationScopeResolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcStaticConfigurationScopeResolver
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.configuration.api.AIiConfigurationScopeResolver`
+
+
+   Simple bootstrap/test resolver using a type->id mapping from the request context.
+
+   SYSTEM commonly resolves without an id. Other configuration-scope types are present
+   only when the supplied context contains an identity for that type.
+
+
+   .. py:method:: resolve(request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationScopeResolutionRequest) -> eu.algites.frmw.aac.core.context.api.AIcConfigurationScope | None
+
+

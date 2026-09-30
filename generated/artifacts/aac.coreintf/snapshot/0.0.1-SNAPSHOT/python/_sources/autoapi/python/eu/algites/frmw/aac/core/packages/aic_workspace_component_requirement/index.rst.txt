@@ -1,0 +1,56 @@
+python.eu.algites.frmw.aac.core.packages.aic_workspace_component_requirement
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_workspace_component_requirement
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_workspace_component_requirement.AIcWorkspaceComponentRequirement
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcWorkspaceComponentRequirement
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: required
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: source_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:method:: accepts(version: int) -> bool
+
+

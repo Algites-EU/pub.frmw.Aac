@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.entitlement.aii_entitlement_remediator
+======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aii_entitlement_remediator
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aii_entitlement_remediator.AIiEntitlementRemediator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiEntitlementRemediator
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: remediate(request: python.eu.algites.frmw.aac.core.entitlement.models.AIcEntitlementRemediationRequest) -> python.eu.algites.frmw.aac.core.entitlement.models.AIcEntitlementRemediationOutcome
+      :abstractmethod:
+
+
+      Attempt to obtain/refresh entitlement evidence for one denied permission.
+
+
+

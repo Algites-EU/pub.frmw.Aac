@@ -1,0 +1,65 @@
+python.eu.algites.frmw.aac.core.persistence.aic_durable_transaction_journal
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.aic_durable_transaction_journal
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.aic_durable_transaction_journal.AIcDurableTransactionJournal
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDurableTransactionJournal(state_root: pathlib.Path, transactions_subdirectory: str = 'transactions', *, mutation_lock_path: pathlib.Path | None = None)
+
+   Generic durable journal for one Core-owned persistence domain.
+
+   The journal records intent and recovery material. The transaction-specific authoritative commit
+   marker remains a record owned by that transaction type. Recovery code MUST decide forward versus
+   backward recovery from that marker rather than trusting a possibly stale journal phase alone.
+
+
+   .. py:attribute:: state_root
+
+
+   .. py:attribute:: transactions_root
+
+
+   .. py:attribute:: active_pointer
+
+
+   .. py:attribute:: mutation_lock_path
+
+
+   .. py:method:: recovery_payload_path(transaction_id: str, name: str) -> pathlib.Path
+
+
+   .. py:method:: active_transaction_id() -> str | None
+
+
+   .. py:method:: begin(transaction_type: str, *, read_set: tuple[eu.algites.frmw.aac.core.persistence.api.AIcPersistenceTransactionRead, Ellipsis] = (), write_set: tuple[eu.algites.frmw.aac.core.persistence.api.AIcPersistenceTransactionWrite, Ellipsis] = (), metadata: Mapping[str, object] | None = None, recovery_payloads: Mapping[str, Mapping[str, object]] | None = None, validate_under_lock: Callable[[], None] | None = None) -> eu.algites.frmw.aac.core.persistence.api.AIcPersistenceTransactionDescriptor
+
+
+   .. py:method:: write_phase(transaction_id: str, phase: eu.algites.frmw.aac.core.persistence.api.AInPersistenceTransactionPhase, diagnostics: tuple[str, Ellipsis] = ()) -> None
+
+
+   .. py:method:: read_plan(transaction_id: str) -> Mapping[str, object]
+
+
+   .. py:method:: read_phase(transaction_id: str) -> eu.algites.frmw.aac.core.persistence.api.AInPersistenceTransactionPhase
+
+
+   .. py:method:: read_recovery_payload(transaction_id: str, name: str) -> Mapping[str, object]
+
+
+   .. py:method:: remove_recovery_payload(transaction_id: str, name: str) -> None
+
+
+   .. py:method:: finish(transaction_id: str) -> None
+
+

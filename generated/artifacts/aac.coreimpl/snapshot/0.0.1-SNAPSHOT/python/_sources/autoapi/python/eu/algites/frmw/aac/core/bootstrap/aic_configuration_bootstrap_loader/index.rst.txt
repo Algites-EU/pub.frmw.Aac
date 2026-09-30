@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.bootstrap.aic_configuration_bootstrap_loader
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.bootstrap.aic_configuration_bootstrap_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.bootstrap.aic_configuration_bootstrap_loader.AIcConfigurationBootstrapLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationBootstrapLoader
+
+   Load the non-recursive fixed-schema configuration bootstrap contract.
+
+   Products may package an equivalent fixed schema of their own; this generic AAC
+   implementation ships schema version 1 as the baseline contract.
+
+
+   .. py:method:: load_file(path: str | pathlib.Path) -> eu.algites.frmw.aac.core.configuration.api.AIcConfigurationBootstrap
+      :staticmethod:
+
+
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> eu.algites.frmw.aac.core.configuration.api.AIcConfigurationBootstrap
+      :staticmethod:
+
+
+

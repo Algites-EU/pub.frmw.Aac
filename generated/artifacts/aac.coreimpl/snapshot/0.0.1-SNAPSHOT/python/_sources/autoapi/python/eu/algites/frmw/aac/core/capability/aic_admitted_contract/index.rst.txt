@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.capability.aic_admitted_contract
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.aic_admitted_contract
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.capability.aic_admitted_contract.AIcAdmittedContract
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAdmittedContract
+
+   .. py:attribute:: contract
+      :type:  eu.algites.frmw.aac.core.capability.api.AIcCapabilityContract
+
+
+   .. py:attribute:: source
+      :type:  str
+
+
+   .. py:attribute:: fingerprint
+      :type:  str
+
+

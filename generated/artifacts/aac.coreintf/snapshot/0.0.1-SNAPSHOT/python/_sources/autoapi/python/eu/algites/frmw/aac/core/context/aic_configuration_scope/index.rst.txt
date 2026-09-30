@@ -1,0 +1,41 @@
+python.eu.algites.frmw.aac.core.context.aic_configuration_scope
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.context.aic_configuration_scope
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.context.aic_configuration_scope.AIcConfigurationScope
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationScope
+
+   Concrete configuration-scope identity.
+
+   ``type`` is intentionally an extensible string rather than an AAC enum. SYSTEM,
+   USER and WORKSPACE are well-known names; deployments may add CUSTOMER, TEAM,
+   ORGANIZATION, TENANT or domain-specific types without changing AAC.
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: key
+      :type: str
+
+
+

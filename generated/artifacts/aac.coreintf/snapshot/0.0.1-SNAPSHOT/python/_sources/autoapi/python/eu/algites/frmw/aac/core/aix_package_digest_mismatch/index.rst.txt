@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.aix_package_digest_mismatch
+===========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.aix_package_digest_mismatch
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.aix_package_digest_mismatch.AIxPackageDigestMismatch
+
+
+Module Contents
+---------------
+
+.. py:exception:: AIxPackageDigestMismatch
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.aix_package_management_error.AIxPackageManagementError`
+
+
+   Downloaded or copied package bytes do not match the expected digest.
+
+

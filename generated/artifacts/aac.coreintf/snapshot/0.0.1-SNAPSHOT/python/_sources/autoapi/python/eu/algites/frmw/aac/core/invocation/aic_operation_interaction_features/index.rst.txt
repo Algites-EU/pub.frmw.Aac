@@ -1,0 +1,47 @@
+python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_features
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_features
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_features.AIcOperationInteractionFeatures
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationInteractionFeatures
+
+   .. py:attribute:: progress_reporting
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: cancellation
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: detail_level
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: reporting_interval
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: supported_state_result_delivery_modes
+      :type:  tuple[python.eu.algites.frmw.aac.core.interaction_types.AInStateResultDeliveryMode, Ellipsis]
+
+

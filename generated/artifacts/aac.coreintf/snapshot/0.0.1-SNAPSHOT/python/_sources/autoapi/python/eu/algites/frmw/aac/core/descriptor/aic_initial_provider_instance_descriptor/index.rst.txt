@@ -1,0 +1,33 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_initial_provider_instance_descriptor
+===================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_initial_provider_instance_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_initial_provider_instance_descriptor.AIcInitialProviderInstanceDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcInitialProviderInstanceDescriptor
+
+   .. py:attribute:: name
+      :type:  str
+      :value: 'default'
+
+
+
+   .. py:attribute:: configuration
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: access_mode
+      :type:  python.eu.algites.frmw.aac.core.instances.api.AInProviderAccessMode
+
+

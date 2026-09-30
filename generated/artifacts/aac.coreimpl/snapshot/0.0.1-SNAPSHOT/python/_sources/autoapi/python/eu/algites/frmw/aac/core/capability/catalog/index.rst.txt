@@ -1,0 +1,6 @@
+python.eu.algites.frmw.aac.core.capability.catalog
+==================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.catalog
+
+

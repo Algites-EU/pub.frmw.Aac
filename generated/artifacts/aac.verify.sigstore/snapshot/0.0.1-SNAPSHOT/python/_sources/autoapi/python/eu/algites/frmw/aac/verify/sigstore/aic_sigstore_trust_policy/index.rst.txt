@@ -1,0 +1,59 @@
+python.eu.algites.frmw.aac.verify.sigstore.aic_sigstore_trust_policy
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.verify.sigstore.aic_sigstore_trust_policy
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.verify.sigstore.aic_sigstore_trust_policy.AIcSigstoreTrustPolicy
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSigstoreTrustPolicy
+
+   .. py:attribute:: mode
+      :type:  python.eu.algites.frmw.aac.verify.sigstore.ain_sigstore_verification_mode.AInSigstoreVerificationMode
+
+
+   .. py:attribute:: cert_identity
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: oidc_issuer
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: repository
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: offline
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: bundle_suffix
+      :type:  str
+      :value: '.sigstore.json'
+
+
+
+   .. py:attribute:: trust_config
+      :type:  str | None
+      :value: None
+
+
+

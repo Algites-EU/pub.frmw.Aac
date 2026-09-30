@@ -1,0 +1,19 @@
+python.eu.algites.frmw.aac.core.runtime.process_host
+====================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.process_host
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.process_host.main
+
+
+Module Contents
+---------------
+
+.. py:function:: main() -> int
+

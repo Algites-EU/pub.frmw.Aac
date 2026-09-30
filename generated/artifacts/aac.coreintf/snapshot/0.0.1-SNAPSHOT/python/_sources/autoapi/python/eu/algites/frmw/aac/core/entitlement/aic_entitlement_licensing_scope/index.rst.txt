@@ -1,0 +1,40 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_licensing_scope
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_licensing_scope
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_licensing_scope.AIcEntitlementLicensingScope
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementLicensingScope
+
+   Concrete entitlement licensing-scope identity.
+
+   The type is an extensible component-declared licensing contract identifier,
+   not a configuration-scope enum.
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: key
+      :type: str
+
+
+

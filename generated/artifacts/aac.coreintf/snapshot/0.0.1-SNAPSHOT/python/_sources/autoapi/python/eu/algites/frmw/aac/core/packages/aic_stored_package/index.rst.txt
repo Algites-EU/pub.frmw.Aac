@@ -1,0 +1,68 @@
+python.eu.algites.frmw.aac.core.packages.aic_stored_package
+===========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_stored_package
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_stored_package.AIcStoredPackage
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcStoredPackage
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: state
+      :type:  python.eu.algites.frmw.aac.core.packages.ain_stored_package_state.AInStoredPackageState
+
+
+   .. py:attribute:: artifact_path
+      :type:  str
+
+
+   .. py:attribute:: package_format
+      :type:  str
+
+
+   .. py:attribute:: descriptor_path
+      :type:  str
+
+
+   .. py:attribute:: runtime_package
+      :type:  str | None
+
+
+   .. py:attribute:: provenance
+      :type:  python.eu.algites.frmw.aac.core.packages.aic_package_provenance.AIcPackageProvenance
+
+
+   .. py:attribute:: sidecar_paths
+      :type:  Mapping[str, str]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:property:: identity
+      :type: tuple[str, int, str]
+
+
+

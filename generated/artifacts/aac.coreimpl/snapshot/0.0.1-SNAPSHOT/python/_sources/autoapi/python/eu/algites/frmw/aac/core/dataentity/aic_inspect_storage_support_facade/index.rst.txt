@@ -1,0 +1,42 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_inspect_storage_support_facade
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_inspect_storage_support_facade
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_inspect_storage_support_facade.INSPECT_STORAGE_SUPPORT_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_inspect_storage_support_facade.AIcInspectStorageSupportFacade
+
+
+Module Contents
+---------------
+
+.. py:data:: INSPECT_STORAGE_SUPPORT_CAPABILITY_ID
+   :value: '_AAC.data-entity.inspect-storage-support'
+
+
+.. py:class:: AIcInspectStorageSupportFacade
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.dataentity.aic_bound_data_entity_capability_facade.AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.inspect-storage-support'
+
+
+
+   .. py:method:: inspect(schema_id: str, schema_version: int) -> Mapping[str, object]
+
+

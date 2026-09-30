@@ -1,0 +1,47 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_persisted_payload
+=================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_persisted_payload
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_persisted_payload.AIcConfigurationPersistedPayload
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationPersistedPayload
+
+   .. py:attribute:: configuration_target
+      :type:  python.eu.algites.frmw.aac.core.configuration.aic_configuration_target.AIcConfigurationTarget
+
+
+   .. py:attribute:: configuration_schema_id
+      :type:  str
+
+
+   .. py:attribute:: configuration_schema_version
+      :type:  int
+
+
+   .. py:attribute:: written_by_component_version
+      :type:  int
+
+
+   .. py:attribute:: values
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: policies
+      :type:  Mapping[str, tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_policy.AIcConfigurationPolicy, Ellipsis]]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

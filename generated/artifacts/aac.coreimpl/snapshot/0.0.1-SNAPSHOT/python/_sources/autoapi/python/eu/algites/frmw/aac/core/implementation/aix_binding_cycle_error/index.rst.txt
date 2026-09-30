@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.implementation.aix_binding_cycle_error
+======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.implementation.aix_binding_cycle_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.implementation.aix_binding_cycle_error.AIxBindingCycleError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxBindingCycleError(cycle: tuple[str, Ellipsis])
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.implementation.aix_binding_resolution_error.AIxBindingResolutionError`
+
+
+   .. py:attribute:: cycle
+
+

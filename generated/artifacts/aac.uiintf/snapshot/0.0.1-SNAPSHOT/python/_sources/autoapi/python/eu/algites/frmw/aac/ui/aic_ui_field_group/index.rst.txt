@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.ui.aic_ui_field_group
+================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_field_group
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_field_group.AIcUiFieldGroup
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiFieldGroup
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: label
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+
+
+   .. py:attribute:: fields
+      :type:  tuple[python.eu.algites.frmw.aac.ui.aic_ui_field.AIcUiField, Ellipsis]
+
+
+   .. py:attribute:: description
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+

@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_automation_policy
+======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_automation_policy
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_automation_policy.AIcPackageAutomationPolicy
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageAutomationPolicy
+
+   .. py:attribute:: verify_on_download
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: require_entitlement_for_automatic_paid_component
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: allow_automatic_download
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: allow_automatic_install
+      :type:  bool
+      :value: True
+
+
+

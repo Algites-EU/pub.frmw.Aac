@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.observation.aic_observation_binding
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.observation.aic_observation_binding
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.observation.aic_observation_binding.AIcObservationBinding
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcObservationBinding
+
+   .. py:attribute:: observer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: selectors
+      :type:  tuple[python.eu.algites.frmw.aac.core.observation.aic_observation_selector.AIcObservationSelector, Ellipsis]
+
+

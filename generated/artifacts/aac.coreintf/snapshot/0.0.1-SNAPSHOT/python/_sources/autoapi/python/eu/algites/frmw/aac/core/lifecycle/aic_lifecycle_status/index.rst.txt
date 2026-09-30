@@ -1,0 +1,41 @@
+python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_status
+==============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_status
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.lifecycle.aic_lifecycle_status.AIcLifecycleStatus
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcLifecycleStatus
+
+   .. py:attribute:: state
+      :type:  python.eu.algites.frmw.aac.core.lifecycle.ain_lifecycle_state.AInLifecycleState
+
+
+   .. py:attribute:: completed_stages
+      :type:  tuple[python.eu.algites.frmw.aac.core.lifecycle.ain_lifecycle_stage.AInLifecycleStage, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: last_failure_stage
+      :type:  python.eu.algites.frmw.aac.core.lifecycle.ain_lifecycle_stage.AInLifecycleStage | None
+      :value: None
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

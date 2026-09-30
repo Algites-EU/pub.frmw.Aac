@@ -1,0 +1,42 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_inspect_storage_backup_facade
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_inspect_storage_backup_facade
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_inspect_storage_backup_facade.INSPECT_STORAGE_BACKUP_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_inspect_storage_backup_facade.AIcInspectStorageBackupFacade
+
+
+Module Contents
+---------------
+
+.. py:data:: INSPECT_STORAGE_BACKUP_CAPABILITY_ID
+   :value: '_AAC.data-entity.inspect-storage-backup'
+
+
+.. py:class:: AIcInspectStorageBackupFacade(invoker: python.eu.algites.frmw.aac.core.dataentity.aic_provider_capability_invoker.AIcProviderCapabilityInvoker, marshaller: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_marshaller.AIcDataEntityMarshaller | None = None)
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.dataentity.aic_bound_data_entity_capability_facade.AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.inspect-storage-backup'
+
+
+
+   .. py:method:: inspect_backup(backup_file: str) -> Mapping[str, object]
+
+

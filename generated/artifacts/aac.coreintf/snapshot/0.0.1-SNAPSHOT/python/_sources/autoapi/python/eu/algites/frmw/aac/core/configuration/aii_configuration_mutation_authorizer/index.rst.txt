@@ -1,0 +1,42 @@
+python.eu.algites.frmw.aac.core.configuration.aii_configuration_mutation_authorizer
+===================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aii_configuration_mutation_authorizer
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aii_configuration_mutation_authorizer.AIiConfigurationMutationAuthorizer
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiConfigurationMutationAuthorizer
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: authorized_capabilities(request: python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationProviderRequest, actor_context, provider_capabilities: tuple[python.eu.algites.frmw.aac.core.configuration.models.AInConfigurationProviderCapability, Ellipsis]) -> tuple[python.eu.algites.frmw.aac.core.configuration.models.AInConfigurationProviderCapability, Ellipsis]
+
+      Return mutation capabilities the current application principal may use.
+
+      The safe default exposes only READ. Concrete product authorizers should override.
+
+
+
+   .. py:method:: authorize(change_set: python.eu.algites.frmw.aac.core.configuration.models.AIcConfigurationChangeSet) -> tuple[bool, tuple[str, Ellipsis]]
+      :abstractmethod:
+
+
+      Authorize one Core-mediated configuration mutation for the current principal/context.
+
+
+

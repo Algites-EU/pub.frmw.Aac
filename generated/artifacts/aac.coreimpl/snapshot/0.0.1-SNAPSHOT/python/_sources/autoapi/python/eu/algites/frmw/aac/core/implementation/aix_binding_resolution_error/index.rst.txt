@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.implementation.aix_binding_resolution_error
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.implementation.aix_binding_resolution_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.implementation.aix_binding_resolution_error.AIxBindingResolutionError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxBindingResolutionError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.implementation.aix_core_implementation_error.AIxCoreImplementationError`
+
+

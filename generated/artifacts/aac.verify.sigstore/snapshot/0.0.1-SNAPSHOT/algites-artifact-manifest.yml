@@ -1,0 +1,13 @@
+ManifestVersion: 1
+Artifact:
+  RepositoryId: pub.frmw.Aac
+  LocalArtifactId: aac.verify.sigstore
+  ArtifactCoordinateId: pub.frmw.Aac_aac.verify.sigstore
+  GroupId: eu.algites.frmw.aac
+  Version: ""
+  SourcePath: aac/verify/sigstore
+  StructureKind: artifact
+  Name: "AAC Sigstore Package Verifier"
+  Description: "Sigstore package verification provider for Algites Application"
+SourceMetadata:
+  DescriptorHierarchy:

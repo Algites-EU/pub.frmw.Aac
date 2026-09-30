@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.aix_package_revision_conflict
+=============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.aix_package_revision_conflict
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.aix_package_revision_conflict.AIxPackageRevisionConflict
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxPackageRevisionConflict
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.aix_package_management_error.AIxPackageManagementError`
+
+
+   Requested package selection/lock cannot be reconciled deterministically.
+
+

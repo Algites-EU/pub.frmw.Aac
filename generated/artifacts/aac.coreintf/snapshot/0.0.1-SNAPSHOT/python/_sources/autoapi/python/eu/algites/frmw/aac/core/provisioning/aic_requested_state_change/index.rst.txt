@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.provisioning.aic_requested_state_change
+=======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.provisioning.aic_requested_state_change
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.provisioning.aic_requested_state_change.AIcRequestedStateChange
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcRequestedStateChange
+
+   .. py:attribute:: key
+      :type:  str
+
+
+   .. py:attribute:: value
+      :type:  object
+
+

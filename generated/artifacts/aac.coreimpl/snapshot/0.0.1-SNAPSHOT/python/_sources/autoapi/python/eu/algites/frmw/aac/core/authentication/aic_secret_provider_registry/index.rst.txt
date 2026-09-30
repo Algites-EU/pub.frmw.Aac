@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.authentication.aic_secret_provider_registry
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aic_secret_provider_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aic_secret_provider_registry.AIcSecretProviderRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSecretProviderRegistry
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.authentication.api.AIiSecretResolver`
+
+
+   .. py:method:: register(secret_provider_id: str, provider: eu.algites.frmw.aac.core.authentication.api.AIiSecretProvider) -> None
+
+
+   .. py:method:: contains(secret_provider_id: str) -> bool
+
+
+   .. py:method:: get(secret_provider_id: str) -> eu.algites.frmw.aac.core.authentication.api.AIiSecretProvider
+
+
+   .. py:method:: resolve_secret(reference: eu.algites.frmw.aac.core.authentication.api.AIcSecretReference, context: Mapping[str, object] | None = None) -> str | bytes
+
+

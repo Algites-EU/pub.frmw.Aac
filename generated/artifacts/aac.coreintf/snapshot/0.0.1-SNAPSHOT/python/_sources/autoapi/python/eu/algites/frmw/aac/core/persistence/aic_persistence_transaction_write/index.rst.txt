@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.persistence.aic_persistence_transaction_write
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.aic_persistence_transaction_write
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.aic_persistence_transaction_write.AIcPersistenceTransactionWrite
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPersistenceTransactionWrite
+
+   .. py:attribute:: record_id
+      :type:  str
+
+
+   .. py:attribute:: operation
+      :type:  str
+
+
+   .. py:attribute:: target_record_revision
+      :type:  int | str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

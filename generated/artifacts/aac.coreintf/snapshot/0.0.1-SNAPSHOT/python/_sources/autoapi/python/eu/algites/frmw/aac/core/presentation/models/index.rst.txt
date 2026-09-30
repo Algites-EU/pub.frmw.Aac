@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.presentation.models
+===================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.presentation.models
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.presentation.models.normalize_display_text
+   python.eu.algites.frmw.aac.core.presentation.models.normalize_display_content
+
+
+Module Contents
+---------------
+
+.. py:function:: normalize_display_text(value: object | None) -> python.eu.algites.frmw.aac.core.presentation.aic_display_text.AIcDisplayText | None
+
+   Normalize a descriptor/contract display-text value.
+
+
+.. py:function:: normalize_display_content(value: object | None) -> python.eu.algites.frmw.aac.core.presentation.aic_display_content.AIcDisplayContent | None
+
+   Normalize display-content metadata without rendering it.
+
+

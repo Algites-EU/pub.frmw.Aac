@@ -1,0 +1,71 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_store_layout
+=================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_store_layout
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_store_layout.AIcPackageStoreLayout
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageStoreLayout
+
+   Product-supplied filesystem layout for AAC-managed package artifacts.
+
+   AAC recommends ``plugins/downloaded``, ``plugins/installed`` and ``plugins/obsolete``
+   below the product-owned root, but every relative name remains product-overridable.
+
+
+   .. py:attribute:: product_root
+      :type:  str
+
+
+   .. py:attribute:: package_store_subdirectory
+      :type:  str
+      :value: 'plugins'
+
+
+
+   .. py:attribute:: downloaded_subdirectory
+      :type:  str
+      :value: 'downloaded'
+
+
+
+   .. py:attribute:: installed_subdirectory
+      :type:  str
+      :value: 'installed'
+
+
+
+   .. py:attribute:: obsolete_subdirectory
+      :type:  str
+      :value: 'obsolete'
+
+
+
+   .. py:attribute:: core_state_subdirectory
+      :type:  str
+      :value: 'aac-state'
+
+
+
+   .. py:attribute:: transactions_subdirectory
+      :type:  str
+      :value: 'transactions'
+
+
+
+   .. py:attribute:: core_lock_filename
+      :type:  str
+      :value: 'core.lock'
+
+
+

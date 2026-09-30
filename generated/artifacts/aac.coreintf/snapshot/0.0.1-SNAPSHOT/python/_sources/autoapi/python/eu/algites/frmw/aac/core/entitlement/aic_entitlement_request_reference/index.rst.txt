@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_request_reference
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_request_reference
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_request_reference.AIcEntitlementRequestReference
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementRequestReference
+
+   .. py:attribute:: request_id
+      :type:  str
+
+
+   .. py:attribute:: request_digest
+      :type:  str
+
+

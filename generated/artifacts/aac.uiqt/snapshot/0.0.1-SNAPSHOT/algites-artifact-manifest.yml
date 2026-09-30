@@ -1,0 +1,13 @@
+ManifestVersion: 1
+Artifact:
+  RepositoryId: pub.frmw.Aac
+  LocalArtifactId: aac.uiqt
+  ArtifactCoordinateId: pub.frmw.Aac_aac.uiqt
+  GroupId: eu.algites.frmw.aac
+  Version: ""
+  SourcePath: aac/uiqt
+  StructureKind: artifact
+  Name: "Algites Application Components Qt UI"
+  Description: "Administration UI implementation for AAC in specified"
+SourceMetadata:
+  DescriptorHierarchy:

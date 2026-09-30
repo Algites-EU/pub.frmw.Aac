@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.implementation.aix_schema_validation_error
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.implementation.aix_schema_validation_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.implementation.aix_schema_validation_error.AIxSchemaValidationError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxSchemaValidationError(schema_name: str, diagnostics: tuple[str, Ellipsis])
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.implementation.aix_core_implementation_error.AIxCoreImplementationError`
+
+
+   .. py:attribute:: schema_name
+
+
+   .. py:attribute:: diagnostics
+
+

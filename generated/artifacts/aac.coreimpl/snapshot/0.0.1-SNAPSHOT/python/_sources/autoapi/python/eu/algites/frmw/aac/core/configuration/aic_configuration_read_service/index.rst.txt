@@ -1,0 +1,49 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_read_service
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_read_service
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_read_service.AIcConfigurationReadService
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationReadService(providers, migrations, schema_declaration_resolver, schema_registry, *, persist_migrations: bool = True)
+
+   Normalize versioned provider snapshots before they enter configuration resolution.
+
+   Unsupported persisted representations are preserved by their provider and treated as an
+   unavailable contribution.  They do not abort resolution; diagnostics explain why the
+   contribution was omitted.
+
+
+   .. py:attribute:: providers
+
+
+   .. py:attribute:: migrations
+
+
+   .. py:attribute:: schema_declaration_resolver
+
+
+   .. py:attribute:: schema_registry
+
+
+   .. py:attribute:: persist_migrations
+      :value: True
+
+
+
+   .. py:method:: read(configuration_provider_id: str, request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest) -> python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_read_result.AIcConfigurationProviderReadResult
+
+
+   .. py:method:: contributions(configuration_provider_id: str, request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest)
+
+

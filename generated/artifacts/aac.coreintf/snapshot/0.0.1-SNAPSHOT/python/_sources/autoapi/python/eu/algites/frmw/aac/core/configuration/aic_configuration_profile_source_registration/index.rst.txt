@@ -1,0 +1,51 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_profile_source_registration
+===========================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_profile_source_registration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_profile_source_registration.AIcConfigurationProfileSourceRegistration
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationProfileSourceRegistration
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: uri
+      :type:  str
+
+
+   .. py:attribute:: authentication_profile_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: required
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+

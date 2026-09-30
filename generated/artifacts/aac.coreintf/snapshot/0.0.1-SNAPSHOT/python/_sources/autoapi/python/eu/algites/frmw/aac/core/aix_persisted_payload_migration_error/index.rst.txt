@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.aix_persisted_payload_migration_error
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.aix_persisted_payload_migration_error
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.aix_persisted_payload_migration_error.AIxPersistedPayloadMigrationError
+
+
+Module Contents
+---------------
+
+.. py:exception:: AIxPersistedPayloadMigrationError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.aix_aac_error.AIxAACError`
+
+
+   A component-owned persisted payload migration failed contract validation.
+
+

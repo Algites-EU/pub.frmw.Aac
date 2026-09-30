@@ -1,0 +1,79 @@
+python.eu.algites.frmw.aac.core.configuration.aic_http_configuration_provider
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_http_configuration_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_http_configuration_provider.AIcHttpConfigurationProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcHttpConfigurationProvider(base_url: str, *, authentication: eu.algites.frmw.aac.core.authentication.implementation.AIcAuthenticationService | None = None, authentication_profile_id: str | None = None, read_only: bool = False, allow_policy_write: bool = True, timeout_seconds: float = 10.0, mutation_method: str = 'PATCH')
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.configuration.api.AIiConfigurationProvider`
+
+
+   Reference HTTP provider using GET plus PATCH change-set or PUT full-document semantics.
+
+
+   .. py:property:: revision_kind
+      :type: eu.algites.frmw.aac.core.persistence.api.AInRecordRevisionKind
+
+
+
+   .. py:method:: persistence_capabilities(request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest) -> tuple[eu.algites.frmw.aac.core.persistence.api.AInPersistenceCapability, Ellipsis]
+
+
+   .. py:attribute:: base_url
+
+
+   .. py:attribute:: authentication
+      :value: None
+
+
+
+   .. py:attribute:: authentication_profile_id
+      :value: None
+
+
+
+   .. py:attribute:: read_only
+      :value: False
+
+
+
+   .. py:attribute:: allow_policy_write
+      :value: True
+
+
+
+   .. py:attribute:: timeout_seconds
+
+
+   .. py:attribute:: mutation_method
+      :value: ''
+
+
+
+   .. py:method:: snapshot(request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest) -> eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderSnapshot | None
+
+
+   .. py:method:: contributions(request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest)
+
+
+   .. py:method:: capabilities(request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest)
+
+
+   .. py:method:: apply_changes(change_set: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationChangeSet) -> eu.algites.frmw.aac.core.configuration.api.AIcConfigurationMutationResult
+
+
+   .. py:method:: replace_payload(request, payload, expected_record_revision=None)
+
+

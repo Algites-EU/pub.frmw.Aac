@@ -1,0 +1,32 @@
+python.eu.algites.frmw.aac.core.persistence.aic_inter_process_lock_state
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.aic_inter_process_lock_state
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.aic_inter_process_lock_state.AIcInterProcessLockState
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcInterProcessLockState
+
+   .. py:attribute:: thread_lock
+
+
+   .. py:attribute:: depth
+      :value: 0
+
+
+
+   .. py:attribute:: stream
+      :value: None
+
+
+

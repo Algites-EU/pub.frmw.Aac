@@ -1,0 +1,115 @@
+python.eu.algites.frmw.aac.core.schemas.aic_schema_registry
+===========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.schemas.aic_schema_registry
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.schemas.aic_schema_registry.AAC_SCHEMA_ID_KEY
+   python.eu.algites.frmw.aac.core.schemas.aic_schema_registry.AAC_SCHEMA_VERSION_KEY
+   python.eu.algites.frmw.aac.core.schemas.aic_schema_registry.AAC_DATA_ENTITY_REFERENCE_KEY
+   python.eu.algites.frmw.aac.core.schemas.aic_schema_registry.DefaultingDraft202012Validator
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.schemas.aic_schema_registry.AIcSchemaRegistry
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.schemas.aic_schema_registry.schema_identity
+
+
+Module Contents
+---------------
+
+.. py:data:: AAC_SCHEMA_ID_KEY
+   :value: 'x-aac-schema-id'
+
+
+.. py:data:: AAC_SCHEMA_VERSION_KEY
+   :value: 'x-aac-schema-version'
+
+
+.. py:data:: AAC_DATA_ENTITY_REFERENCE_KEY
+   :value: 'x-aac-data-entity-reference'
+
+
+.. py:function:: schema_identity(schema: Mapping[str, object]) -> tuple[str, int]
+
+.. py:data:: DefaultingDraft202012Validator
+
+.. py:class:: AIcSchemaRegistry
+
+   .. py:method:: register(resource_name: str, schema: Mapping[str, object], *, source: str = '<memory>') -> python.eu.algites.frmw.aac.core.schemas.aic_registered_schema.AIcRegisteredSchema
+
+
+   .. py:method:: register_text(resource_name: str, text: str, *, source: str = '<memory>') -> python.eu.algites.frmw.aac.core.schemas.aic_registered_schema.AIcRegisteredSchema
+
+
+   .. py:method:: register_file(path: str | pathlib.Path) -> python.eu.algites.frmw.aac.core.schemas.aic_registered_schema.AIcRegisteredSchema
+
+
+   .. py:method:: register_package_resource(package: str, resource_name: str) -> python.eu.algites.frmw.aac.core.schemas.aic_registered_schema.AIcRegisteredSchema
+
+
+   .. py:method:: get(resource_name: str) -> python.eu.algites.frmw.aac.core.schemas.aic_registered_schema.AIcRegisteredSchema
+
+
+   .. py:method:: get_identity(schema_id: str, version: int) -> python.eu.algites.frmw.aac.core.schemas.aic_registered_schema.AIcRegisteredSchema
+
+
+   .. py:method:: contains_identity(schema_id: str, version: int) -> bool
+
+
+   .. py:method:: versions(schema_id: str) -> tuple[int, Ellipsis]
+
+
+   .. py:method:: data_entity_references(schema_id: str, version: int)
+
+
+   .. py:method:: normalize(resource_name: str, value: Mapping[str, object] | None, *, apply_defaults: bool = True) -> dict[str, object]
+
+
+   .. py:method:: normalize_value(resource_name: str, value: object, *, apply_defaults: bool = True) -> object
+
+
+   .. py:method:: normalize_identity(schema_id: str, version: int, value: Mapping[str, object] | None, *, apply_defaults: bool = True) -> dict[str, object]
+
+
+   .. py:method:: normalize_value_identity(schema_id: str, version: int, value: object, *, apply_defaults: bool = True) -> object
+
+
+   .. py:method:: validate_resolved_configuration(resource_name: str, value: Mapping[str, object] | None) -> tuple[str, Ellipsis]
+
+      Validate a resolved runtime configuration without treating top-level ``required`` as availability.
+
+      AAC multi-provider resolution may legitimately yield missing/UNDEFINED top-level values.
+      ``required`` remains meaningful inside concrete nested structures that are present, but
+      runtime availability/readiness is not inferred from top-level json Schema requiredness.
+
+
+
+   .. py:method:: configuration_property_metadata(resource_name: str) -> tuple[tuple[str, Ellipsis], dict[str, tuple[str, Ellipsis]], dict[str, object]]
+
+
+   .. py:method:: snapshot()
+
+
+   .. py:method:: restore(snapshot) -> None
+
+
+   .. py:method:: validate(resource_name: str, value: Mapping[str, object] | None) -> tuple[str, Ellipsis]
+
+

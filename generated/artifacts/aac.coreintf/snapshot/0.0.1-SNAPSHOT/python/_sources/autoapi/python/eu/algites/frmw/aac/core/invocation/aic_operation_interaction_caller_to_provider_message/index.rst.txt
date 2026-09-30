@@ -1,0 +1,59 @@
+python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message
+===============================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message.AIcOperationInteractionCallerToProviderMessage
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationInteractionCallerToProviderMessage
+
+   .. py:attribute:: last_accepted_state_result_revision
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: interaction_mode
+      :type:  python.eu.algites.frmw.aac.core.invocation.ain_operation_interaction_mode.AInOperationInteractionMode
+
+
+   .. py:attribute:: cancellation_requested
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: detail_level
+      :type:  python.eu.algites.frmw.aac.core.invocation.ain_operation_interaction_detail_level.AInOperationInteractionDetailLevel
+
+
+   .. py:attribute:: reporting_interval_ms
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: failure_detail_level
+      :type:  python.eu.algites.frmw.aac.core.invocation.ain_operation_interaction_failure_detail_level.AInOperationInteractionFailureDetailLevel
+
+
+   .. py:attribute:: state_result_delivery_mode
+      :type:  python.eu.algites.frmw.aac.core.interaction_types.AInStateResultDeliveryMode
+
+
+   .. py:attribute:: state_result_request_id
+      :type:  int
+      :value: 0
+
+
+

@@ -1,0 +1,13 @@
+ManifestVersion: 1
+Artifact:
+  RepositoryId: pub.frmw.Aac
+  LocalArtifactId: devtools.aacbuilding
+  ArtifactCoordinateId: pub.frmw.Aac_devtools.aacbuilding
+  GroupId: eu.algites.frmw.aac
+  Version: ""
+  SourcePath: devtools/aacbuilding
+  StructureKind: artifact
+  Name: "AAC Development Tools"
+  Description: "Repository development, verification and build tools"
+SourceMetadata:
+  DescriptorHierarchy:

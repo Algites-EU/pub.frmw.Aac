@@ -1,0 +1,30 @@
+python.eu.algites.frmw.aac.core.upgrade.aic_target_state_upgrade_analyzer
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.upgrade.aic_target_state_upgrade_analyzer
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.upgrade.aic_target_state_upgrade_analyzer.AIcTargetStateUpgradeAnalyzer
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcTargetStateUpgradeAnalyzer
+
+   Build and validate one complete hypothetical component target state.
+
+   The analyzer is deliberately side-effect free with respect to the live Core state.  It
+   rebuilds the active contract catalog from the complete target component set and projects
+   provider instances onto the target descriptors before resolving mandatory requirements.
+   No intermediate one-component-at-a-time state is required to be valid.
+
+
+   .. py:method:: analyze(core, application_scope_id: str, replacements: tuple[eu.algites.frmw.aac.core.descriptor.loader.AIcDiscoveredComponent, Ellipsis]) -> eu.algites.frmw.aac.core.packages.api.AIcComponentUpgradePlan
+
+

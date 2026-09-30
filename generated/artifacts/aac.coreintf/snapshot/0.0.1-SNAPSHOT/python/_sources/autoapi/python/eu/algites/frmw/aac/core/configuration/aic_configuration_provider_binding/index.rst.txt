@@ -1,0 +1,29 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_binding
+================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_binding
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_binding.AIcConfigurationProviderBinding
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationProviderBinding
+
+   .. py:attribute:: configuration_provider_id
+      :type:  str
+
+
+   .. py:attribute:: priority
+      :type:  int
+      :value: 0
+
+
+

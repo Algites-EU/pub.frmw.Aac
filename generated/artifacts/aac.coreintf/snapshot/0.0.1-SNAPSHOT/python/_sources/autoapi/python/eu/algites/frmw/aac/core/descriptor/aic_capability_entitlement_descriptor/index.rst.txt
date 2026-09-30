@@ -1,0 +1,46 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_capability_entitlement_descriptor
+================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_capability_entitlement_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_capability_entitlement_descriptor.AIcCapabilityEntitlementDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCapabilityEntitlementDescriptor
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permissions
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_permission_descriptor.AIcPermissionDescriptor, Ellipsis]
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:method:: permission(permission_id: str) -> python.eu.algites.frmw.aac.core.descriptor.aic_permission_descriptor.AIcPermissionDescriptor
+
+

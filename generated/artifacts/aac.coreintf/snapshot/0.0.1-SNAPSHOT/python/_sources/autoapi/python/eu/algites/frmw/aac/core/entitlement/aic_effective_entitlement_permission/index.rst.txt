@@ -1,0 +1,53 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_effective_entitlement_permission
+================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_effective_entitlement_permission
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_effective_entitlement_permission.AIcEffectiveEntitlementPermission
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEffectiveEntitlementPermission
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: effective_from
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: effective_until
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: constraints
+      :type:  tuple[Mapping[str, object], Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: provenance
+      :type:  tuple[python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_grant_provenance.AIcEntitlementGrantProvenance, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: implicit
+      :type:  bool
+      :value: False
+
+
+

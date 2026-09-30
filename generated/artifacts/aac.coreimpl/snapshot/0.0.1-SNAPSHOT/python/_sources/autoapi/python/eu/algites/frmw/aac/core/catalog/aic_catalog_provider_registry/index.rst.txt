@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_provider_registry
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_provider_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_provider_registry.AIcCatalogProviderRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogProviderRegistry
+
+   .. py:method:: register(source_id: str, provider: eu.algites.frmw.aac.core.catalog.api.AIiCatalogProvider, *, priority: int = 0) -> None
+
+
+   .. py:method:: get(source_id: str) -> eu.algites.frmw.aac.core.catalog.api.AIiCatalogProvider
+
+
+   .. py:method:: query(query: eu.algites.frmw.aac.core.catalog.api.AIcCatalogQuery) -> tuple[eu.algites.frmw.aac.core.catalog.api.AIcCatalogEntry, Ellipsis]
+
+

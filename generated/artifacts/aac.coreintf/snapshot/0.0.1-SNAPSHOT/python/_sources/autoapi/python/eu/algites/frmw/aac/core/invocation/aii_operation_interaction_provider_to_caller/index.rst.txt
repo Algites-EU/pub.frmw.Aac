@@ -1,0 +1,67 @@
+python.eu.algites.frmw.aac.core.invocation.aii_operation_interaction_provider_to_caller
+=======================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aii_operation_interaction_provider_to_caller
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aii_operation_interaction_provider_to_caller.AIiOperationInteractionProviderToCaller
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiOperationInteractionProviderToCaller
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Provider-facing half of one bidirectional, UI-neutral operation interaction.
+
+
+   .. py:method:: declare_features(features: python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_features.AIcOperationInteractionFeatures) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: report_events(events: tuple[python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_event.AIcOperationInteractionEvent, Ellipsis]) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: report(event: python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_event.AIcOperationInteractionEvent) -> None
+
+
+   .. py:method:: state_result_changed() -> int
+      :abstractmethod:
+
+
+      Publish a new logical result revision without attaching its payload.
+
+
+
+   .. py:method:: update_state_result(state_result: object) -> int
+      :abstractmethod:
+
+
+      Publish a new immutable result revision, attaching payload when the selected delivery mode requires it.
+
+
+
+   .. py:method:: deliver_state_result(state_result: object, *, revision: int | None = None) -> None
+      :abstractmethod:
+
+
+      Deliver an existing result revision without creating another logical result revision.
+
+
+
+   .. py:method:: caller_snapshot() -> python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message.AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+

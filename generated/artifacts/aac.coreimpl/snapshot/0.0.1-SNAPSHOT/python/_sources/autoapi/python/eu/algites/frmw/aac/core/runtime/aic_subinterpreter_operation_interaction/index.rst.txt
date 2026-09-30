@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.runtime.aic_subinterpreter_operation_interaction
+================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.aic_subinterpreter_operation_interaction
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.aic_subinterpreter_operation_interaction.AIcSubinterpreterOperationInteraction
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSubinterpreterOperationInteraction(provider_to_core, core_to_provider)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionProviderToCaller`
+
+
+   Provider-side proxy over cross-interpreter queues.
+
+
+   .. py:method:: declare_features(features: eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionFeatures) -> None
+
+
+   .. py:method:: report_events(events: tuple[eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionEvent, Ellipsis]) -> None
+
+
+   .. py:method:: state_result_changed() -> int
+
+
+   .. py:method:: update_state_result(state_result: object) -> int
+
+
+   .. py:method:: deliver_state_result(state_result: object, *, revision: int | None = None) -> None
+
+
+   .. py:method:: caller_snapshot() -> eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionCallerToProviderMessage
+
+

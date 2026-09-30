@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.aix_aac_error
+=============================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.aix_aac_error
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.aix_aac_error.AIxAACError
+
+
+Module Contents
+---------------
+
+.. py:exception:: AIxAACError
+
+   Bases: :py:obj:`Exception`
+
+
+   Base error for the public AAC Python binding.
+
+

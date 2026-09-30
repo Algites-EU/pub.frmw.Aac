@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.capability.aic_operation_authorization_requirement
+==================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.aic_operation_authorization_requirement
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.capability.aic_operation_authorization_requirement.AIcOperationAuthorizationRequirement
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationAuthorizationRequirement
+
+   .. py:attribute:: all_of
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: any_of
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:property:: permission_ids
+      :type: tuple[str, Ellipsis]
+
+
+
+   .. py:method:: is_satisfied_by(permissions: set[str] | frozenset[str] | tuple[str, Ellipsis]) -> bool
+
+

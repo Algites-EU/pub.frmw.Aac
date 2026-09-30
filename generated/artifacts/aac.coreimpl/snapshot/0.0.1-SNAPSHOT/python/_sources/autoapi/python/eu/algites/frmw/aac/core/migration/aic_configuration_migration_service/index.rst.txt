@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.migration.aic_configuration_migration_service
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.migration.aic_configuration_migration_service
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.migration.aic_configuration_migration_service.AIcConfigurationMigrationService
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationMigrationService(migrators: Mapping[str, eu.algites.frmw.aac.core.configuration.api.AIiConfigurationMigrator] | None = None)
+
+   .. py:attribute:: compatibility
+
+
+   .. py:method:: register(migrator_id: str, migrator: eu.algites.frmw.aac.core.configuration.api.AIiConfigurationMigrator) -> None
+
+
+   .. py:method:: migrate_to_write_version(payload: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationPersistedPayload, declaration: eu.algites.frmw.aac.core.descriptor.api.AIcPersistedSchemaDescriptor, *, written_by_component_version: int) -> eu.algites.frmw.aac.core.configuration.api.AIcConfigurationPersistedPayload
+
+

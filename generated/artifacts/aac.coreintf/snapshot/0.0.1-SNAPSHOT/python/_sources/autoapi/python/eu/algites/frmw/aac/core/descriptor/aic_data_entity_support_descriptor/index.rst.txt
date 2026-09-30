@@ -1,0 +1,75 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_data_entity_support_descriptor
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_data_entity_support_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_data_entity_support_descriptor.AIcDataEntitySupportDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDataEntitySupportDescriptor
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: writable_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: preferred_write_version
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: migrations
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_schema_migration_step_descriptor.AIcSchemaMigrationStepDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: data_entity_requirements
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_data_entity_requirement_descriptor.AIcDataEntityRequirementDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:method:: can_read(schema_version: int) -> bool
+
+
+   .. py:method:: can_write(schema_version: int) -> bool
+
+

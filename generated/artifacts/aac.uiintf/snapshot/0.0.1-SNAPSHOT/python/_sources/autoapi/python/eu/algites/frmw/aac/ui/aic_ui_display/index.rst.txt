@@ -1,0 +1,33 @@
+python.eu.algites.frmw.aac.ui.aic_ui_display
+============================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_display
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_display.AIcUiDisplay
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiDisplay
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: content
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayContent
+
+
+   .. py:attribute:: title
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+

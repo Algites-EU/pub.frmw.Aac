@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_create_storage_backup_1
+==================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_create_storage_backup_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_create_storage_backup_1.AIiDataEntityCreateStorageBackup_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiDataEntityCreateStorageBackup_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: create_backup_1(request: Mapping[str, object]) -> Mapping[str, object]
+      :abstractmethod:
+
+
+

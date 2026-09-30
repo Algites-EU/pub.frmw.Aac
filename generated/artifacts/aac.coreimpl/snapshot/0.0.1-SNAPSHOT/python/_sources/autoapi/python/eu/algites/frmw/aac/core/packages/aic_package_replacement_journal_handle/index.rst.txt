@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_replacement_journal_handle
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_replacement_journal_handle
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_replacement_journal_handle.AIcPackageReplacementJournalHandle
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageReplacementJournalHandle
+
+   .. py:attribute:: transaction_id
+      :type:  str
+
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: source_manifest
+      :type:  eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest
+
+
+   .. py:attribute:: target_manifest
+      :type:  eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest
+
+
+   .. py:attribute:: target_packages
+      :type:  tuple[tuple[str, int, str], Ellipsis]
+
+
+   .. py:attribute:: core_state_snapshot
+      :type:  object
+
+

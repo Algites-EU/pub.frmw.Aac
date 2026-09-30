@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.operation_parameters.aic_configured_operation_parameter_value
+=============================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.operation_parameters.aic_configured_operation_parameter_value
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.operation_parameters.aic_configured_operation_parameter_value.AIcConfiguredOperationParameterValue
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfiguredOperationParameterValue
+
+   .. py:attribute:: value
+      :type:  object
+
+
+   .. py:attribute:: written_by_component_version
+      :type:  int
+
+

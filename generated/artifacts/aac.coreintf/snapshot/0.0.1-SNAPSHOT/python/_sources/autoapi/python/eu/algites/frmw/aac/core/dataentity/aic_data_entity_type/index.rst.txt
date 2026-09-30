@@ -1,0 +1,44 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_type
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_type
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_type.T
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_type.AIcDataEntityType
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:class:: AIcDataEntityType
+
+   Bases: :py:obj:`Generic`\ [\ :py:obj:`T`\ ]
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: view_version
+      :type:  int
+
+
+   .. py:attribute:: interface_type
+      :type:  type[T]
+
+

@@ -1,0 +1,51 @@
+python.eu.algites.frmw.aac.core.persistence.aic_json_file_state_store
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.aic_json_file_state_store
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.aic_json_file_state_store.AIcJsonFileStateStore
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcJsonFileStateStore(path: str | pathlib.Path, *, mutation_lock_path: str | pathlib.Path | None = None)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.persistence.api.AIiStateStore`
+
+
+   Revisioned atomic json persistence adapter for Core-owned normalized state.
+
+
+   .. py:attribute:: path
+
+
+   .. py:attribute:: mutation_lock_path
+
+
+   .. py:property:: revision_kind
+      :type: eu.algites.frmw.aac.core.persistence.api.AInRecordRevisionKind
+
+
+
+   .. py:method:: get_record(namespace: str, key: str) -> eu.algites.frmw.aac.core.persistence.api.AIcPersistedRecord | None
+
+
+   .. py:method:: list_records(namespace: str) -> Mapping[str, eu.algites.frmw.aac.core.persistence.api.AIcPersistedRecord]
+
+
+   .. py:method:: apply(mutations: tuple[eu.algites.frmw.aac.core.persistence.api.AIcStateMutation, Ellipsis], *, read_expectations: tuple[eu.algites.frmw.aac.core.persistence.api.AIcPersistenceReadExpectation, Ellipsis] = ()) -> tuple[eu.algites.frmw.aac.core.persistence.api.AIcPersistedRecord, Ellipsis]
+
+
+   .. py:method:: snapshot() -> Mapping[str, Mapping[str, eu.algites.frmw.aac.core.persistence.api.AIcPersistedRecord]]
+
+
+   .. py:method:: restore(snapshot: Mapping[str, Mapping[str, eu.algites.frmw.aac.core.persistence.api.AIcPersistedRecord]]) -> None
+
+

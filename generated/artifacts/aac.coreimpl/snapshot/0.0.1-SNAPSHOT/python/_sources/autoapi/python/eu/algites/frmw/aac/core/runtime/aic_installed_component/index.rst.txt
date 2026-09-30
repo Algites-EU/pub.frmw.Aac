@@ -1,0 +1,30 @@
+python.eu.algites.frmw.aac.core.runtime.aic_installed_component
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.aic_installed_component
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.aic_installed_component.AIcInstalledComponent
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcInstalledComponent
+
+   .. py:attribute:: discovered
+      :type:  eu.algites.frmw.aac.core.descriptor.loader.AIcDiscoveredComponent
+
+
+   .. py:attribute:: origin
+      :type:  eu.algites.frmw.aac.core.descriptor.api.AInComponentOrigin
+
+
+   .. py:property:: descriptor
+
+

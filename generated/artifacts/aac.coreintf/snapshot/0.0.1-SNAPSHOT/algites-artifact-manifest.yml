@@ -1,0 +1,13 @@
+ManifestVersion: 1
+Artifact:
+  RepositoryId: pub.frmw.Aac
+  LocalArtifactId: aac.coreintf
+  ArtifactCoordinateId: pub.frmw.Aac_aac.coreintf
+  GroupId: eu.algites.frmw.aac
+  Version: ""
+  SourcePath: aac/coreintf
+  StructureKind: artifact
+  Name: "Algites Application Components Core Interfaces"
+  Description: "Public bindings for Algites Application Components contracts and"
+SourceMetadata:
+  DescriptorHierarchy:

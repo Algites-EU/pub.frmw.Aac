@@ -1,0 +1,69 @@
+python.eu.algites.frmw.aac.ui.aic_ui_requirement_editor
+=======================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_requirement_editor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_requirement_editor.AIcUiRequirementEditor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiRequirementEditor
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: requirement_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: cardinality
+      :type:  str
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+
+
+   .. py:attribute:: selected_provider_instance_ids
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: provider_choices
+      :type:  tuple[python.eu.algites.frmw.aac.ui.aic_ui_choice.AIcUiChoice, Ellipsis]
+
+
+   .. py:attribute:: requested_authorizations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: granted_authorizations
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: authorization_choices
+      :type:  tuple[python.eu.algites.frmw.aac.ui.aic_ui_choice.AIcUiChoice, Ellipsis]
+      :value: ()
+
+
+

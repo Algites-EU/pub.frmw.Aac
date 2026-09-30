@@ -1,0 +1,43 @@
+python.test_all
+===============
+
+.. py:module:: python.test_all
+
+.. autoapi-nested-parse::
+
+   Run AAC tests in bounded functional blocks using repository-central derived state.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.test_all.ROOT
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.test_all.run_directory
+   python.test_all.staged_product_path
+   python.test_all.run_pytest
+   python.test_all.main
+
+
+Module Contents
+---------------
+
+.. py:data:: ROOT
+
+.. py:function:: run_directory(artifact: pathlib.Path) -> pathlib.Path
+
+.. py:function:: staged_product_path(artifact: pathlib.Path) -> pathlib.Path
+
+.. py:function:: run_pytest(cwd: pathlib.Path, product_paths: list[pathlib.Path], targets: list[str]) -> None
+
+.. py:function:: main() -> int
+

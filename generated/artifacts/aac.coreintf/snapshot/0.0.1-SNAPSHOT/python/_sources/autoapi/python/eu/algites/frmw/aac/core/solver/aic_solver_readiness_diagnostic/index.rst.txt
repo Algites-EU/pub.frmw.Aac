@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.solver.aic_solver_readiness_diagnostic
+======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.solver.aic_solver_readiness_diagnostic
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.solver.aic_solver_readiness_diagnostic.AIcSolverReadinessDiagnostic
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSolverReadinessDiagnostic
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: state
+      :type:  python.eu.algites.frmw.aac.core.readiness.api.AInReadinessState
+
+
+   .. py:attribute:: message
+      :type:  str
+
+

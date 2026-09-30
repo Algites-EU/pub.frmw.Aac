@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.upgrade.aic_upgrade_migration_stage
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.upgrade.aic_upgrade_migration_stage
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.upgrade.aic_upgrade_migration_stage.AIcUpgradeMigrationStage
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUpgradeMigrationStage
+
+   Side-effect-free persisted-data compatibility result for a target component set.
+
+
+   .. py:attribute:: configuration
+      :type:  tuple[python.eu.algites.frmw.aac.core.upgrade.aic_staged_configuration_migration.AIcStagedConfigurationMigration, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[eu.algites.frmw.aac.core.packages.api.AIcUpgradeCompatibilityDiagnostic, Ellipsis]
+      :value: ()
+
+
+
+   .. py:property:: compatible
+      :type: bool
+
+
+

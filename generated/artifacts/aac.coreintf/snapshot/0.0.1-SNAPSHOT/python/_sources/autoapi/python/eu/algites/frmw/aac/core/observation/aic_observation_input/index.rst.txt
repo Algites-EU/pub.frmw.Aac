@@ -1,0 +1,81 @@
+python.eu.algites.frmw.aac.core.observation.aic_observation_input
+=================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.observation.aic_observation_input
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.observation.aic_observation_input.AIcObservationInput
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcObservationInput
+
+   .. py:attribute:: invocation_id
+      :type:  str
+
+
+   .. py:attribute:: parent_invocation_id
+      :type:  str | None
+
+
+   .. py:attribute:: phase
+      :type:  python.eu.algites.frmw.aac.core.observation.ain_observation_phase.AInObservationPhase
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: operation_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str
+
+
+   .. py:attribute:: arguments
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: outcome
+      :type:  python.eu.algites.frmw.aac.core.observation.ain_observation_outcome.AInObservationOutcome | None
+      :value: None
+
+
+
+   .. py:attribute:: result
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: error
+      :type:  Mapping[str, object] | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:method:: to_mapping() -> dict[str, object]
+
+
+   .. py:method:: from_mapping(aValue: Mapping[str, object]) -> AIcObservationInput
+      :classmethod:
+
+
+

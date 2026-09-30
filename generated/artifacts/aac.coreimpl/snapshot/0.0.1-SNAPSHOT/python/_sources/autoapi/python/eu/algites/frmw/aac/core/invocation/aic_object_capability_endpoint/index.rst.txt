@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.invocation.aic_object_capability_endpoint
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_object_capability_endpoint
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_object_capability_endpoint.AIcObjectCapabilityEndpoint
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcObjectCapabilityEndpoint(provider: object)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.invocation.api.AIiCapabilityEndpoint`
+
+
+   In-process Python profile adapter using operation id -> method name mapping.
+
+
+   .. py:attribute:: provider
+
+
+   .. py:method:: invoke(invocation_input: eu.algites.frmw.aac.core.invocation.api.AIcInvocationInput) -> eu.algites.frmw.aac.core.invocation.api.AIcInvocationOutput
+
+

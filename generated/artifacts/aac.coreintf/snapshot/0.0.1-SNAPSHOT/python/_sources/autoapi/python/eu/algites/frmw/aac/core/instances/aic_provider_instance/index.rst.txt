@@ -1,0 +1,73 @@
+python.eu.algites.frmw.aac.core.instances.aic_provider_instance
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.instances.aic_provider_instance
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.instances.aic_provider_instance.AIcProviderInstance
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProviderInstance
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: provider_definition_id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  str
+
+
+   .. py:attribute:: capabilities
+      :type:  tuple[python.eu.algites.frmw.aac.core.capability.api.AIcProvidedCapability, Ellipsis]
+
+
+   .. py:attribute:: implementation_class
+      :type:  str
+
+
+   .. py:attribute:: capability_profile_matcher_class
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: access_mode
+      :type:  python.eu.algites.frmw.aac.core.instances.ain_provider_access_mode.AInProviderAccessMode
+
+
+   .. py:attribute:: configuration
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: configuration_schema
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: state
+      :type:  python.eu.algites.frmw.aac.core.instances.ain_provider_instance_state.AInProviderInstanceState
+
+
+   .. py:method:: capability(capability_id: str) -> python.eu.algites.frmw.aac.core.capability.api.AIcProvidedCapability
+
+
+   .. py:method:: supports_capability(capability_id: str) -> bool
+
+

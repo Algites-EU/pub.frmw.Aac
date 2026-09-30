@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.packages.aic_component_upgrade_replacement
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_component_upgrade_replacement
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_component_upgrade_replacement.AIcComponentUpgradeReplacement
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcComponentUpgradeReplacement
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: previous_version
+      :type:  int
+
+
+   .. py:attribute:: target_version
+      :type:  int
+
+
+   .. py:attribute:: previous_sha256
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: target_sha256
+      :type:  str | None
+      :value: None
+
+
+

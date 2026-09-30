@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.ui.aic_ui_binding
+============================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_binding
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_binding.AIcUiBinding
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiBinding
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: requirement_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+

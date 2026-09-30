@@ -1,0 +1,94 @@
+python.eu.algites.frmw.aac.core.runtime.aic_process_provider_runtime
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.aic_process_provider_runtime
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.aic_process_provider_runtime.AIcProcessProviderRuntime
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProcessProviderRuntime(application_scope_id: str, instance: eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, provider_definition: eu.algites.frmw.aac.core.descriptor.api.AIcProviderDefinitionDescriptor, entitlement: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementContext | None = None, *, component_configuration: eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration | None = None, provider_instance_configuration: eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration | None = None)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.runtime.api.AIiProviderRuntime`, :py:obj:`eu.algites.frmw.aac.core.invocation.api.AIiCapabilityEndpoint`
+
+
+   Persistent AAC process Runtime: exactly one child process per provider instance.
+
+   Core owns the Popen handle, process lifetime and json-lines IPC channel.  Provider
+   configuration and module state are therefore naturally instance-local.  Requests are
+   serialized per instance; nested calls to already resolved consumed capabilities travel
+   back to Core using `core_invoke` frames and are safe because the resolved instance graph
+   is acyclic.
+
+
+   .. py:attribute:: application_scope_id
+
+
+   .. py:attribute:: instance
+
+
+   .. py:attribute:: provider_definition
+
+
+   .. py:attribute:: command
+
+
+   .. py:attribute:: cwd
+
+
+   .. py:attribute:: timeout
+
+
+   .. py:attribute:: environment
+
+
+   .. py:property:: process_id
+      :type: int
+
+
+
+   .. py:property:: is_running
+      :type: bool
+
+
+
+   .. py:property:: stderr_tail
+      :type: tuple[str, Ellipsis]
+
+
+
+   .. py:method:: invoke(invocation_input: eu.algites.frmw.aac.core.invocation.api.AIcInvocationInput) -> eu.algites.frmw.aac.core.invocation.api.AIcInvocationOutput
+
+
+   .. py:method:: entitlement_changed(entitlement: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementContext) -> None
+
+
+   .. py:method:: wire(bindings: Mapping[str, tuple[eu.algites.frmw.aac.core.invocation.api.AIiCapabilityHandle, Ellipsis]]) -> None
+
+
+   .. py:method:: prepare_activation() -> None
+
+
+   .. py:method:: readiness() -> eu.algites.frmw.aac.core.readiness.api.AIcReadinessResult
+
+
+   .. py:method:: activate() -> None
+
+
+   .. py:method:: suspend(reason: str) -> None
+
+
+   .. py:method:: deactivate(reason: str) -> None
+
+
+   .. py:method:: close() -> None
+
+

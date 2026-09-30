@@ -1,0 +1,24 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_bootstrap_loader
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_bootstrap_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_bootstrap_loader.AIcPackageBootstrapLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageBootstrapLoader
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> eu.algites.frmw.aac.core.packages.api.AIcPackageBootstrap
+      :staticmethod:
+
+
+

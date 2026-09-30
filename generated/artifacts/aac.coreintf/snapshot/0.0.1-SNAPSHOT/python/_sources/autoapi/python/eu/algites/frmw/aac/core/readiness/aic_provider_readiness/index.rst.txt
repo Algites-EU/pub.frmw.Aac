@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.readiness.aic_provider_readiness
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.readiness.aic_provider_readiness
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.readiness.aic_provider_readiness.AIcProviderReadiness
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProviderReadiness
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str
+
+
+   .. py:attribute:: capability_ids
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: state
+      :type:  python.eu.algites.frmw.aac.core.readiness.ain_readiness_state.AInReadinessState
+
+
+   .. py:attribute:: reasons
+      :type:  tuple[python.eu.algites.frmw.aac.core.readiness.aic_readiness_reason.AIcReadinessReason, Ellipsis]
+      :value: ()
+
+
+

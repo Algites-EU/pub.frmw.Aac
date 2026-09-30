@@ -1,0 +1,76 @@
+python.eu.algites.frmw.aac.ui.qt.aic_aac_administration_widget
+==============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.qt.aic_aac_administration_widget
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.qt.aic_aac_administration_widget.AIcAacAdministrationWidget
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAacAdministrationWidget(controller: eu.algites.frmw.aac.ui.api.AIiAacUiController, parent: PySide6.QtWidgets.QWidget | None = None)
+
+   Bases: :py:obj:`PySide6.QtWidgets.QWidget`
+
+
+   Reusable baseline AAC administration widget.
+
+   Product code owns the QApplication/event loop.  This widget edits only Core-owned
+   configuration/topology through AIiAacUiController.
+
+
+   .. py:attribute:: controller
+
+
+   .. py:attribute:: tabs
+
+
+   .. py:attribute:: components_table
+
+
+   .. py:attribute:: catalog_table
+
+
+   .. py:attribute:: catalog_product
+
+
+   .. py:attribute:: catalog_technology
+
+
+   .. py:attribute:: catalog_search
+
+
+   .. py:attribute:: packages_table
+
+
+   .. py:attribute:: package_scope
+
+
+   .. py:attribute:: solver_solutions
+
+
+   .. py:attribute:: package_result
+
+
+   .. py:attribute:: instances_table
+
+
+   .. py:attribute:: bindings_table
+
+
+   .. py:attribute:: observation_table
+
+
+   .. py:attribute:: entitlement_table
+
+
+   .. py:method:: refresh() -> None
+
+

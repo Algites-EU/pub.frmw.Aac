@@ -1,0 +1,19 @@
+python.eu.algites.frmw.aac.core.dataentity.models
+=================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.models
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.models.T
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+

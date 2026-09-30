@@ -1,0 +1,46 @@
+python.eu.algites.frmw.aac.core.presentation.aic_display_content
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.presentation.aic_display_content
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.presentation.aic_display_content.AIcDisplayContent
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDisplayContent
+
+   Technology-neutral multi-line or formatted display content.
+
+   Renderers decide how MARKDOWN and HTML are presented. HTML is content, not
+   executable UI; host policy is responsible for sanitization and active-content restrictions.
+
+
+   .. py:attribute:: content
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: resource_key
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: format
+      :type:  python.eu.algites.frmw.aac.core.presentation.ain_display_content_format.AInDisplayContentFormat
+
+
+   .. py:property:: fallback
+      :type: str
+
+
+

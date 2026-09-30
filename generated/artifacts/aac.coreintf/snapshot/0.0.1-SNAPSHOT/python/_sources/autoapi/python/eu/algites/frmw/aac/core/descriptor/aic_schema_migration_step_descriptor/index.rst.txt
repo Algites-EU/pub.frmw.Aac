@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_schema_migration_step_descriptor
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_schema_migration_step_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_schema_migration_step_descriptor.AIcSchemaMigrationStepDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSchemaMigrationStepDescriptor
+
+   .. py:attribute:: from_version
+      :type:  int
+
+
+   .. py:attribute:: to_version
+      :type:  int
+
+
+   .. py:attribute:: migrator_id
+      :type:  str
+
+

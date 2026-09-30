@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.runtime.aic_subinterpreter_capability_endpoint
+==============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.aic_subinterpreter_capability_endpoint
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.aic_subinterpreter_capability_endpoint.AIcSubinterpreterCapabilityEndpoint
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSubinterpreterCapabilityEndpoint(entrypoint: str)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.invocation.api.AIiCapabilityEndpoint`
+
+
+   CPython 3.14+ capability endpoint using one private interpreter and live interaction queues.
+
+
+   .. py:attribute:: entrypoint
+
+
+   .. py:method:: invoke(invocation_input: eu.algites.frmw.aac.core.invocation.api.AIcInvocationInput) -> eu.algites.frmw.aac.core.invocation.api.AIcInvocationOutput
+
+
+   .. py:method:: close() -> None
+
+

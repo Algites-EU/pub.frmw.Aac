@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_source_registry
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_source_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_source_registry.AIcPackageSourceRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageSourceRegistry
+
+   .. py:method:: register(source_id: str, source: eu.algites.frmw.aac.core.packages.api.AIiPackageSource, *, priority: int = 0) -> None
+
+
+   .. py:method:: get(source_id: str) -> eu.algites.frmw.aac.core.packages.api.AIiPackageSource
+
+
+   .. py:method:: candidates(requirement: eu.algites.frmw.aac.core.packages.api.AIcWorkspaceComponentRequirement) -> tuple[eu.algites.frmw.aac.core.packages.api.AIcPackageCandidate, Ellipsis]
+
+

@@ -1,0 +1,33 @@
+python.eu.algites.frmw.aac.core.observation.aic_observation_delivery
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.observation.aic_observation_delivery
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.observation.aic_observation_delivery.AIcObservationDelivery
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcObservationDelivery
+
+   .. py:attribute:: observer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: output
+      :type:  eu.algites.frmw.aac.core.observation.api.AIcObservationOutput | None
+
+
+   .. py:attribute:: error
+      :type:  str | None
+      :value: None
+
+
+

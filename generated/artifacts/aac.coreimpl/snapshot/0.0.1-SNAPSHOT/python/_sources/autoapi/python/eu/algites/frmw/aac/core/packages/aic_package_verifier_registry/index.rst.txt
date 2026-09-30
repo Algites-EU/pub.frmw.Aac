@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_verifier_registry
+======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_verifier_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_verifier_registry.AIcPackageVerifierRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageVerifierRegistry
+
+   .. py:method:: register(verifier_id: str, verifier: eu.algites.frmw.aac.core.verification.api.AIiPackageVerifier) -> None
+
+
+   .. py:method:: get(verifier_id: str) -> eu.algites.frmw.aac.core.verification.api.AIiPackageVerifier
+
+
+   .. py:method:: contains(verifier_id: str) -> bool
+
+

@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.entitlement.aii_entitlement_evidence_verifier
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aii_entitlement_evidence_verifier
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aii_entitlement_evidence_verifier.AIiEntitlementEvidenceVerifier
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiEntitlementEvidenceVerifier
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: verify(evidence: python.eu.algites.frmw.aac.core.entitlement.models.AIcEntitlementEvidence) -> python.eu.algites.frmw.aac.core.entitlement.models.AIcEntitlementEvidenceVerification
+      :abstractmethod:
+
+
+      Verify entitlement evidence without interpreting component-owned permission semantics.
+
+
+

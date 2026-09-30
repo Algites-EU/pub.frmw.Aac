@@ -1,0 +1,48 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_query_records_facade
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_query_records_facade
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_query_records_facade.T
+   python.eu.algites.frmw.aac.core.dataentity.aic_query_records_facade.QUERY_RECORDS_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_query_records_facade.AIcQueryRecordsFacade
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:data:: QUERY_RECORDS_CAPABILITY_ID
+   :value: '_AAC.data-entity.query-records'
+
+
+.. py:class:: AIcQueryRecordsFacade
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.dataentity.aic_bound_data_entity_capability_facade.AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.query-records'
+
+
+
+   .. py:method:: query_raw(request: Mapping[str, object]) -> tuple[tuple[eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityEnvelope, Ellipsis], str | None]
+
+
+   .. py:method:: query(data_type: eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityType[T], *, stored_schema_version_filter: tuple[int, Ellipsis] = (), states: tuple[eu.algites.frmw.aac.core.dataentity.api.AInDataEntityState, Ellipsis] = (AInDataEntityState.ACTIVE, ), uids: tuple[str, Ellipsis] = (), limit: int = 100, continuation_token: str | None = None) -> python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_query_page.AIcDataEntityQueryPage[T]
+
+

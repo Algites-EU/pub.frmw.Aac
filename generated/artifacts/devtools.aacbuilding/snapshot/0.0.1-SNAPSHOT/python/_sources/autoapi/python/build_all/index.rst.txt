@@ -1,0 +1,46 @@
+python.build_all
+================
+
+.. py:module:: python.build_all
+
+.. autoapi-nested-parse::
+
+   Build all AAC Python artifacts into repository-central build/run state.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.build_all.ROOT
+   python.build_all.ARTIFACTS
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.build_all.run
+   python.build_all.artifact_run_directory
+   python.build_all.copy_source_project
+   python.build_all.main
+
+
+Module Contents
+---------------
+
+.. py:data:: ROOT
+
+.. py:data:: ARTIFACTS
+
+.. py:function:: run(command: list[str], cwd: pathlib.Path) -> None
+
+.. py:function:: artifact_run_directory(artifact: pathlib.Path) -> pathlib.Path
+
+.. py:function:: copy_source_project(artifact: pathlib.Path, target: pathlib.Path) -> None
+
+.. py:function:: main() -> int
+

@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_capability_entitlement_context
+==============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_capability_entitlement_context
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_capability_entitlement_context.AIcCapabilityEntitlementContext
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCapabilityEntitlementContext
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permissions
+      :type:  Mapping[str, python.eu.algites.frmw.aac.core.entitlement.aic_effective_entitlement_permission.AIcEffectiveEntitlementPermission]
+
+
+   .. py:method:: has_permission(permission_id: str) -> bool
+
+

@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.runtime.aic_provider_runtime_context
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.runtime.aic_provider_runtime_context
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.runtime.aic_provider_runtime_context.AIcProviderRuntimeContext
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcProviderRuntimeContext
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance
+      :type:  python.eu.algites.frmw.aac.core.instances.api.AIcProviderInstance
+
+
+   .. py:attribute:: entitlement
+      :type:  python.eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementContext
+
+
+   .. py:attribute:: component_configuration
+      :type:  python.eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration
+
+
+   .. py:attribute:: provider_instance_configuration
+      :type:  python.eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration
+
+

@@ -1,0 +1,51 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_selection_store
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_selection_store
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_selection_store.AIcPackageSelectionStore
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageSelectionStore(store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore | None = None, manifest_store: eu.algites.frmw.aac.core.packages.transactions.AIcDurablePackageSelectionManifestStore | None = None)
+
+   .. py:attribute:: store
+
+
+   .. py:attribute:: manifest_store
+      :value: None
+
+
+
+   .. py:method:: manifest() -> eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest
+
+
+   .. py:method:: get(application_scope_id: str, component_id: str) -> eu.algites.frmw.aac.core.packages.api.AIcPackageSelection | None
+
+
+   .. py:method:: all() -> tuple[eu.algites.frmw.aac.core.packages.api.AIcPackageSelection, Ellipsis]
+
+
+   .. py:method:: plan_replacements(application_scope_id: str, packages: tuple[eu.algites.frmw.aac.core.packages.api.AIcStoredPackage, Ellipsis]) -> tuple[eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest, eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest]
+
+
+   .. py:method:: commit_planned(source: eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest, target: eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest, *, transaction_id: str | None = None) -> eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest
+
+
+   .. py:method:: select(application_scope_id: str, package: eu.algites.frmw.aac.core.packages.api.AIcStoredPackage) -> eu.algites.frmw.aac.core.packages.api.AIcPackageSelection
+
+
+   .. py:method:: references(package: eu.algites.frmw.aac.core.packages.api.AIcStoredPackage) -> tuple[eu.algites.frmw.aac.core.packages.api.AIcPackageSelection, Ellipsis]
+
+
+   .. py:method:: rollback(application_scope_id: str, component_id: str, package_store: python.eu.algites.frmw.aac.core.packages.aic_package_store.AIcPackageStore) -> eu.algites.frmw.aac.core.packages.api.AIcPackageSelection
+
+

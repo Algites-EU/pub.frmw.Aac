@@ -1,0 +1,61 @@
+python.eu.algites.frmw.aac.core.configuration.aic_file_system_configuration_provider
+====================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_file_system_configuration_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_file_system_configuration_provider.AIcFileSystemConfigurationProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcFileSystemConfigurationProvider(root: str | pathlib.Path, *, read_only: bool = False, allow_policy_write: bool = True)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.configuration.api.AIiConfigurationProvider`
+
+
+   .. py:property:: revision_kind
+      :type: eu.algites.frmw.aac.core.persistence.api.AInRecordRevisionKind
+
+
+
+   .. py:method:: persistence_capabilities(request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest) -> tuple[eu.algites.frmw.aac.core.persistence.api.AInPersistenceCapability, Ellipsis]
+
+
+   .. py:attribute:: root
+
+
+   .. py:attribute:: read_only
+      :value: False
+
+
+
+   .. py:attribute:: allow_policy_write
+      :value: True
+
+
+
+   .. py:attribute:: mutation_lock_path
+
+
+   .. py:method:: snapshot(request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest) -> eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderSnapshot | None
+
+
+   .. py:method:: contributions(request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest) -> tuple[eu.algites.frmw.aac.core.configuration.api.AIcConfigurationContribution, Ellipsis]
+
+
+   .. py:method:: capabilities(request: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationProviderRequest)
+
+
+   .. py:method:: apply_changes(change_set: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationChangeSet) -> eu.algites.frmw.aac.core.configuration.api.AIcConfigurationMutationResult
+
+
+   .. py:method:: replace_payload(request, payload, expected_record_revision=None)
+
+

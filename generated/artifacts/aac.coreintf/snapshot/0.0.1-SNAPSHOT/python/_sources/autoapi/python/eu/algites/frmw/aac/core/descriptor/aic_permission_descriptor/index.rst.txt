@@ -1,0 +1,52 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_permission_descriptor
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_permission_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_permission_descriptor.AIcPermissionDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPermissionDescriptor
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: possible_licensing_scope_types
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:property:: implicit
+      :type: bool
+
+
+      Permission is included/scope-free when no external entitlement licensing scope is possible.
+
+

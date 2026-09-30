@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.migration.aic_data_entity_migration_service
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.migration.aic_data_entity_migration_service
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.migration.aic_data_entity_migration_service.AIcDataEntityMigrationService
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDataEntityMigrationService(migrators: Mapping[str, eu.algites.frmw.aac.core.dataentity.api.AIiDataEntityMigrator] | None = None)
+
+   .. py:method:: register(migrator_id: str, migrator: eu.algites.frmw.aac.core.dataentity.api.AIiDataEntityMigrator) -> None
+
+
+   .. py:method:: assess(envelope: eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityEnvelope, support: eu.algites.frmw.aac.core.descriptor.api.AIcDataEntitySupportDescriptor) -> eu.algites.frmw.aac.core.migration.api.AIcSchemaCompatibilityAssessment
+
+
+   .. py:method:: migrate_to_preferred_write_version(envelope: eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityEnvelope, support: eu.algites.frmw.aac.core.descriptor.api.AIcDataEntitySupportDescriptor) -> eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityEnvelope
+
+

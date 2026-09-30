@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.lifecycle.aii_unprovisioning_hook
+=================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.lifecycle.aii_unprovisioning_hook
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.lifecycle.aii_unprovisioning_hook.AIiUnprovisioningHook
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiUnprovisioningHook
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: unprovision(context: python.eu.algites.frmw.aac.core.provisioning.api.AIcProvisionContext) -> python.eu.algites.frmw.aac.core.provisioning.api.AIcProvisioningResult
+      :abstractmethod:
+
+
+

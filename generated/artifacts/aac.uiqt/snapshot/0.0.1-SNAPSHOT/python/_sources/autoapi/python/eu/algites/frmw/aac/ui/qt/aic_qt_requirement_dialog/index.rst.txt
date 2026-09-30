@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.ui.qt.aic_qt_requirement_dialog
+==========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.qt.aic_qt_requirement_dialog
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.qt.aic_qt_requirement_dialog.AIcQtRequirementDialog
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcQtRequirementDialog(editor: eu.algites.frmw.aac.ui.api.AIcUiRequirementEditor, parent: PySide6.QtWidgets.QWidget | None = None)
+
+   Bases: :py:obj:`PySide6.QtWidgets.QDialog`
+
+
+   .. py:attribute:: editor
+
+
+   .. py:attribute:: list
+
+
+   .. py:method:: selected_provider_instance_ids() -> tuple[str, Ellipsis]
+
+

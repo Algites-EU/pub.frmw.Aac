@@ -1,0 +1,34 @@
+python.eu.algites.frmw.aac.core.authorization.aii_authorization_provider
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authorization.aii_authorization_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authorization.aii_authorization_provider.AIiAuthorizationProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiAuthorizationProvider
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: authorize(request: python.eu.algites.frmw.aac.core.authorization.models.AIcAuthorizationRequest) -> python.eu.algites.frmw.aac.core.authorization.models.AIcAuthorizationDecision
+      :abstractmethod:
+
+
+      Return an application authorization decision independent of transport credentials.
+
+
+

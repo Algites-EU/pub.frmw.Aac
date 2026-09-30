@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.ui.qt.aic_qt_observation_dialog
+==========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.qt.aic_qt_observation_dialog
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.qt.aic_qt_observation_dialog.AIcQtObservationDialog
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcQtObservationDialog(binding: eu.algites.frmw.aac.ui.api.AIcUiObservationBinding, parent: PySide6.QtWidgets.QWidget | None = None)
+
+   Bases: :py:obj:`PySide6.QtWidgets.QDialog`
+
+
+   .. py:attribute:: binding
+
+
+   .. py:attribute:: capability
+
+
+   .. py:attribute:: versions
+
+
+   .. py:attribute:: operations
+
+
+   .. py:attribute:: pre
+
+
+   .. py:attribute:: post
+
+
+   .. py:method:: value() -> eu.algites.frmw.aac.ui.api.AIcUiObservationBinding
+
+

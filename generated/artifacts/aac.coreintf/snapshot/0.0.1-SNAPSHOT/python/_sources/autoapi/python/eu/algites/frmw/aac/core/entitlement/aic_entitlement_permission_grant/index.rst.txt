@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_permission_grant
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_permission_grant
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_permission_grant.AIcEntitlementPermissionGrant
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementPermissionGrant
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: valid_from
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: valid_until
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: constraints
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

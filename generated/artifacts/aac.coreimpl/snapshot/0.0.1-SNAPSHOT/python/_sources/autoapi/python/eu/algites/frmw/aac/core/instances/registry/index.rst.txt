@@ -1,0 +1,19 @@
+python.eu.algites.frmw.aac.core.instances.registry
+==================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.instances.registry
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.instances.registry.instance_to_dict
+
+
+Module Contents
+---------------
+
+.. py:function:: instance_to_dict(instance: eu.algites.frmw.aac.core.instances.api.AIcProviderInstance) -> dict[str, object]
+

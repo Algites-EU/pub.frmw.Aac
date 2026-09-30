@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.invocation.aic_endpoint_registry
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_endpoint_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_endpoint_registry.AIcEndpointRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEndpointRegistry
+
+   .. py:method:: register(provider_instance_id: str, endpoint: eu.algites.frmw.aac.core.invocation.api.AIiCapabilityEndpoint) -> None
+
+
+   .. py:method:: register_object(provider_instance_id: str, runtime: object) -> None
+
+
+   .. py:method:: unregister(provider_instance_id: str) -> None
+
+
+   .. py:method:: get(provider_instance_id: str) -> eu.algites.frmw.aac.core.invocation.api.AIiCapabilityEndpoint
+
+

@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.core.namespace.aic_namespace_policy
+==============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.namespace.aic_namespace_policy
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.namespace.aic_namespace_policy.AIcNamespacePolicy
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcNamespacePolicy
+
+   .. py:method:: reserve(prefix: str) -> None
+
+
+   .. py:method:: validate(descriptor: eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor, trusted_prefixes: tuple[str, Ellipsis] = ()) -> None
+
+

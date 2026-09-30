@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.invocation.aix_capability_operation_failed
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aix_capability_operation_failed
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aix_capability_operation_failed.AIxCapabilityOperationFailed
+
+
+Module Contents
+---------------
+
+.. py:exception:: AIxCapabilityOperationFailed(failure: python.eu.algites.frmw.aac.core.invocation.aic_operation_failure.AIcOperationFailure)
+
+   Bases: :py:obj:`RuntimeError`
+
+
+   Caller-side AAC exception representing a FAILED capability-operation execution.
+
+
+   .. py:attribute:: failure
+
+
+   .. py:attribute:: additional_data
+
+

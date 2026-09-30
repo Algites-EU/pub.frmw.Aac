@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.loading.symbols
+===============================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.loading.symbols
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.loading.symbols.T
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.loading.symbols.load_symbol
+   python.eu.algites.frmw.aac.core.loading.symbols.load_class
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:function:: load_symbol(reference: str) -> object
+
+   Load `module:qualname` without probing component classes for undeclared hooks.
+
+
+.. py:function:: load_class(reference: str, expected_base: type[T] | None = None) -> type[T]
+

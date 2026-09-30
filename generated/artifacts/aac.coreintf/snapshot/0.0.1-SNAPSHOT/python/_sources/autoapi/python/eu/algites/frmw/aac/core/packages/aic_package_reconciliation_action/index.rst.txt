@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_reconciliation_action
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_reconciliation_action
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_reconciliation_action.AIcPackageReconciliationAction
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageReconciliationAction
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: action
+      :type:  str
+
+
+   .. py:attribute:: candidate
+      :type:  python.eu.algites.frmw.aac.core.packages.aic_package_candidate.AIcPackageCandidate | None
+      :value: None
+
+
+
+   .. py:attribute:: reason
+      :type:  str | None
+      :value: None
+
+
+

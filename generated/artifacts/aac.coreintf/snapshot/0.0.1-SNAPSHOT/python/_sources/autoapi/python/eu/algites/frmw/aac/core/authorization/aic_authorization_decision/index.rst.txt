@@ -1,0 +1,29 @@
+python.eu.algites.frmw.aac.core.authorization.aic_authorization_decision
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authorization.aic_authorization_decision
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authorization.aic_authorization_decision.AIcAuthorizationDecision
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAuthorizationDecision
+
+   .. py:attribute:: allowed
+      :type:  bool
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

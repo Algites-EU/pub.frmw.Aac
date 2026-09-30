@@ -1,0 +1,33 @@
+python.eu.algites.frmw.aac.core.solver.aic_compatible_target_state_solver
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.solver.aic_compatible_target_state_solver
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.solver.aic_compatible_target_state_solver.AIcCompatibleTargetStateSolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCompatibleTargetStateSolver(core)
+
+   Find catalog-backed compatible upgrade sets for the current component population.
+
+   The solver deliberately does not add entirely new component ids.  It changes versions of
+   components already present in the active target population.  This keeps Build 19 focused on
+   automatic multi-component upgrade closure; topology-expanding installation can be layered on
+   later without weakening replacement transaction semantics.
+
+
+   .. py:attribute:: core
+
+
+   .. py:method:: solve(application_scope_id: str, requests: tuple[eu.algites.frmw.aac.core.solver.api.AIcTargetStateRequest, Ellipsis], *, workspace_requirements: eu.algites.frmw.aac.core.packages.api.AIcWorkspaceComponentRequirements | None = None, workspace_lock: eu.algites.frmw.aac.core.packages.api.AIcWorkspaceComponentLock | None = None, max_alternatives: int = 3, max_combinations: int = 20000) -> eu.algites.frmw.aac.core.solver.api.AIcTargetStateSolverResult
+
+

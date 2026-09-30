@@ -1,0 +1,55 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_issuing_request
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_issuing_request
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_issuing_request.AIcEntitlementIssuingRequest
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementIssuingRequest
+
+   .. py:attribute:: format_version
+      :type:  int
+
+
+   .. py:attribute:: request_id
+      :type:  str
+
+
+   .. py:attribute:: requested_licensing_scope
+      :type:  python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_licensing_scope.AIcEntitlementLicensingScope
+
+
+   .. py:attribute:: subject
+      :type:  python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_subject.AIcEntitlementSubject
+
+
+   .. py:attribute:: components
+      :type:  tuple[python.eu.algites.frmw.aac.core.entitlement.aic_requested_component_grant.AIcRequestedComponentGrant, Ellipsis]
+
+
+   .. py:attribute:: generated_at
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: request_digest
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

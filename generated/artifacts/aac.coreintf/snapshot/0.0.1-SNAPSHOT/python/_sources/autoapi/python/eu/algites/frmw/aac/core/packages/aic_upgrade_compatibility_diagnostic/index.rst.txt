@@ -1,0 +1,75 @@
+python.eu.algites.frmw.aac.core.packages.aic_upgrade_compatibility_diagnostic
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_upgrade_compatibility_diagnostic
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_upgrade_compatibility_diagnostic.AIcUpgradeCompatibilityDiagnostic
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUpgradeCompatibilityDiagnostic
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: message
+      :type:  str
+
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: requirement_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: capability_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: consumer_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: provider_versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: available_provider_component_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: blocking
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: code
+      :type:  str | None
+      :value: None
+
+
+

@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.namespace.aix_namespace_policy_error
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.namespace.aix_namespace_policy_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.namespace.aix_namespace_policy_error.AIxNamespacePolicyError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxNamespacePolicyError
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.implementation.errors.AIxCoreImplementationError`
+
+

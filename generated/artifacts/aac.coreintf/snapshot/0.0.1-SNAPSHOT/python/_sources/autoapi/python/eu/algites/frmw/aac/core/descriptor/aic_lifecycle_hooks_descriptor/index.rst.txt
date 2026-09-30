@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_lifecycle_hooks_descriptor
+=========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_lifecycle_hooks_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_lifecycle_hooks_descriptor.AIcLifecycleHooksDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcLifecycleHooksDescriptor
+
+   .. py:attribute:: provision
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: validate
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: unprovision
+      :type:  str | None
+      :value: None
+
+
+

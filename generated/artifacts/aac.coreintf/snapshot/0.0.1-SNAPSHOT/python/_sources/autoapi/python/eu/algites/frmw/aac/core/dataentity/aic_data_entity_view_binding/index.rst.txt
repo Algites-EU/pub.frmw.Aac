@@ -1,0 +1,40 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_view_binding
+=======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_view_binding
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_view_binding.T
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_view_binding.AIcDataEntityViewBinding
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:class:: AIcDataEntityViewBinding
+
+   Bases: :py:obj:`Generic`\ [\ :py:obj:`T`\ ]
+
+
+   .. py:attribute:: data_type
+      :type:  python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_type.AIcDataEntityType[T]
+
+
+   .. py:attribute:: codec
+      :type:  python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_codec.AIiDataEntityCodec[T]
+
+

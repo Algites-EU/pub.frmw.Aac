@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.persistence.durable
+===================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.durable
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.durable.fsync_directory
+   python.eu.algites.frmw.aac.core.persistence.durable.fsync_file
+   python.eu.algites.frmw.aac.core.persistence.durable.atomic_write_json
+   python.eu.algites.frmw.aac.core.persistence.durable.atomic_write_text
+   python.eu.algites.frmw.aac.core.persistence.durable.durable_replace
+   python.eu.algites.frmw.aac.core.persistence.durable.durable_unlink
+
+
+Module Contents
+---------------
+
+.. py:function:: fsync_directory(path: pathlib.Path) -> None
+
+   Best-effort directory sync after durable namespace changes.
+
+
+.. py:function:: fsync_file(path: pathlib.Path) -> None
+
+.. py:function:: atomic_write_json(path: pathlib.Path, value: Mapping[str, Any]) -> None
+
+.. py:function:: atomic_write_text(path: pathlib.Path, value: str) -> None
+
+.. py:function:: durable_replace(source: pathlib.Path, target: pathlib.Path) -> None
+
+.. py:function:: durable_unlink(path: pathlib.Path) -> None
+

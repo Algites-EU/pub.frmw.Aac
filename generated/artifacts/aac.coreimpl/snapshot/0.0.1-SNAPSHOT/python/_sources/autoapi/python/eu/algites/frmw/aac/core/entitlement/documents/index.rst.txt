@@ -1,0 +1,24 @@
+python.eu.algites.frmw.aac.core.entitlement.documents
+=====================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.documents
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.documents.entitlement_request_digest
+
+
+Module Contents
+---------------
+
+.. py:function:: entitlement_request_digest(request: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementIssuingRequest) -> str
+
+   Return a stable SHA-256 digest of the technology-neutral request content.
+
+   The embedded request_digest field is excluded from the digest itself.
+
+

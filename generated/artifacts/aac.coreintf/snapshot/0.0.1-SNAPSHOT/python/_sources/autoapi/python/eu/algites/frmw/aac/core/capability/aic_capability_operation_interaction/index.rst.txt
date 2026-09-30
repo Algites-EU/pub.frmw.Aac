@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.capability.aic_capability_operation_interaction
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.aic_capability_operation_interaction
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.capability.aic_capability_operation_interaction.AIcCapabilityOperationInteraction
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCapabilityOperationInteraction
+
+   .. py:attribute:: kind
+      :type:  python.eu.algites.frmw.aac.core.capability.ain_capability_operation_interaction_kind.AInCapabilityOperationInteractionKind
+
+
+   .. py:attribute:: schema
+      :type:  python.eu.algites.frmw.aac.core.capability.aic_schema_ref.AIcSchemaRef
+
+

@@ -1,0 +1,69 @@
+python.eu.algites.frmw.aac.core.capability.aic_capability_operation
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.aic_capability_operation
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.capability.aic_capability_operation.AIcCapabilityOperation
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCapabilityOperation
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: interactions
+      :type:  tuple[python.eu.algites.frmw.aac.core.capability.aic_capability_operation_interaction.AIcCapabilityOperationInteraction, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: authorization
+      :type:  python.eu.algites.frmw.aac.core.capability.aic_operation_authorization_requirement.AIcOperationAuthorizationRequirement | None
+      :value: None
+
+
+
+   .. py:attribute:: sensitive_input_paths
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: sensitive_output_paths
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:method:: interaction(kind: python.eu.algites.frmw.aac.core.capability.ain_capability_operation_interaction_kind.AInCapabilityOperationInteractionKind) -> python.eu.algites.frmw.aac.core.capability.aic_capability_operation_interaction.AIcCapabilityOperationInteraction | None
+
+
+   .. py:method:: schema_ref(kind: python.eu.algites.frmw.aac.core.capability.ain_capability_operation_interaction_kind.AInCapabilityOperationInteractionKind) -> python.eu.algites.frmw.aac.core.capability.aic_schema_ref.AIcSchemaRef | None
+
+

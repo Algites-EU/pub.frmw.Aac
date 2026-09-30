@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.persistence.aic_persistence_transaction_read
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.aic_persistence_transaction_read
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.aic_persistence_transaction_read.AIcPersistenceTransactionRead
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPersistenceTransactionRead
+
+   .. py:attribute:: record_id
+      :type:  str
+
+
+   .. py:attribute:: expected_record_revision
+      :type:  int | str | None
+      :value: None
+
+
+
+   .. py:attribute:: expect_absent
+      :type:  bool
+      :value: False
+
+
+

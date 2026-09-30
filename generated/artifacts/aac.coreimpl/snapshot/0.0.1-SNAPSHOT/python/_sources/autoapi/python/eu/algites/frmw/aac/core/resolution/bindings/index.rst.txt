@@ -1,0 +1,32 @@
+python.eu.algites.frmw.aac.core.resolution.bindings
+===================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.resolution.bindings
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.resolution.bindings.ELIGIBLE_STATES
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.resolution.bindings.validate_instance_dag
+
+
+Module Contents
+---------------
+
+.. py:data:: ELIGIBLE_STATES
+
+.. py:function:: validate_instance_dag(bindings: tuple[eu.algites.frmw.aac.core.instances.api.AIcBinding, Ellipsis] | list[eu.algites.frmw.aac.core.instances.api.AIcBinding]) -> tuple[str, Ellipsis]
+
+   Validate the *resolved provider-instance* graph, not the declarative component graph.
+
+

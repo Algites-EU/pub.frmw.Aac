@@ -1,0 +1,19 @@
+python.eu.algites.frmw.aac.codegen.cli
+======================================
+
+.. py:module:: python.eu.algites.frmw.aac.codegen.cli
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.codegen.cli.main
+
+
+Module Contents
+---------------
+
+.. py:function:: main() -> int
+

@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.authentication.aii_secret_provider
+==================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authentication.aii_secret_provider
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authentication.aii_secret_provider.AIiSecretProvider
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiSecretProvider
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: capabilities(context: Mapping[str, object] | None = None) -> tuple[python.eu.algites.frmw.aac.core.authentication.models.AInSecretProviderCapability, Ellipsis]
+
+
+   .. py:method:: resolve(reference: python.eu.algites.frmw.aac.core.authentication.models.AIcSecretReference, context: Mapping[str, object] | None = None) -> str | bytes
+      :abstractmethod:
+
+
+      Resolve one secret reference.
+
+
+
+   .. py:method:: put(key: str, value: str | bytes, context: Mapping[str, object] | None = None) -> None
+
+
+   .. py:method:: delete(key: str, context: Mapping[str, object] | None = None) -> None
+
+

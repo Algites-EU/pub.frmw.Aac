@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.invocation.aix_operation_cancelled
+==================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aix_operation_cancelled
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aix_operation_cancelled.AIxOperationCancelled
+
+
+Module Contents
+---------------
+
+.. py:exception:: AIxOperationCancelled(message: str = 'operation cancelled', *, state_result: object = None, has_state_result: bool = False)
+
+   Bases: :py:obj:`RuntimeError`
+
+
+   Raised by a cooperative provider after observing cancellation_requested.
+
+
+   .. py:attribute:: state_result
+      :value: None
+
+
+
+   .. py:attribute:: has_state_result
+      :value: False
+
+
+

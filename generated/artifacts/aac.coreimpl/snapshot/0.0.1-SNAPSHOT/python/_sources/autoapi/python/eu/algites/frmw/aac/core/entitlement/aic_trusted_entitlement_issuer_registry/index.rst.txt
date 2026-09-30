@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_trusted_entitlement_issuer_registry
+===================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_trusted_entitlement_issuer_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_trusted_entitlement_issuer_registry.AIcTrustedEntitlementIssuerRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcTrustedEntitlementIssuerRegistry
+
+   .. py:method:: register(rule: eu.algites.frmw.aac.core.entitlement.api.AIcTrustedEntitlementIssuerRule) -> None
+
+
+   .. py:method:: is_trusted(issuer_id: str, component_id: str, evidence_type: str, verification: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementEvidenceVerification) -> bool
+
+
+   .. py:method:: has_rules() -> bool
+
+

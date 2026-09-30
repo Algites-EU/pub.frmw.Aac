@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.capability.aic_schema_ref
+=========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.aic_schema_ref
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.capability.aic_schema_ref.AIcSchemaRef
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSchemaRef
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+

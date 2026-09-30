@@ -1,0 +1,22 @@
+python.versioning
+=================
+
+.. py:module:: python.versioning
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.versioning.repository_context
+   python.versioning.artifact_context
+
+
+Module Contents
+---------------
+
+.. py:function:: repository_context(root: pathlib.Path) -> aic_version.AIcVersion
+
+.. py:function:: artifact_context(root: pathlib.Path, artifact: pathlib.Path) -> aic_version.AIcVersion
+

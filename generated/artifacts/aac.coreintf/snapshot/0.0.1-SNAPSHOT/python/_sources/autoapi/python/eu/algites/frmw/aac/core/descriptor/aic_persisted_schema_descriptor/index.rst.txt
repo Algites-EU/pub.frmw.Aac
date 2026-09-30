@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_persisted_schema_descriptor
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_persisted_schema_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_persisted_schema_descriptor.AIcPersistedSchemaDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPersistedSchemaDescriptor
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: write_version
+      :type:  int
+
+
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: migrations
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.aic_schema_migration_step_descriptor.AIcSchemaMigrationStepDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: resource_name
+      :type:  str | None
+      :value: None
+
+
+

@@ -1,0 +1,33 @@
+python.eu.algites.frmw.aac.core.lifecycle.aic_activation_outcome
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.lifecycle.aic_activation_outcome
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.lifecycle.aic_activation_outcome.AIcActivationOutcome
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcActivationOutcome
+
+   .. py:attribute:: status
+      :type:  eu.algites.frmw.aac.core.lifecycle.api.AIcLifecycleStatus
+
+
+   .. py:attribute:: runtime_instance_ids
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

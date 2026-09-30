@@ -1,0 +1,44 @@
+python.eu.algites.frmw.aac.core.descriptor.aic_descriptor_loader
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.descriptor.aic_descriptor_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.descriptor.aic_descriptor_loader.AIcDescriptorLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDescriptorLoader
+
+   .. py:method:: load_file(path: str | pathlib.Path) -> eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor
+      :staticmethod:
+
+
+
+   .. py:method:: load_package(package: str, resource_name: str = 'component.yml') -> eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor
+      :staticmethod:
+
+
+
+   .. py:method:: discover_package(package: str, resource_name: str = 'component.yml', *, artifact_path: str | None = None) -> python.eu.algites.frmw.aac.core.descriptor.aic_discovered_component.AIcDiscoveredComponent
+      :staticmethod:
+
+
+
+   .. py:method:: discover_wheel(wheel_path: str | pathlib.Path, package: str, resource_name: str = 'component.yml') -> python.eu.algites.frmw.aac.core.descriptor.aic_discovered_component.AIcDiscoveredComponent
+      :staticmethod:
+
+
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor
+      :staticmethod:
+
+
+

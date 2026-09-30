@@ -1,0 +1,74 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_document
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_document
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_document.AIcEntitlementDocument
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementDocument
+
+   .. py:attribute:: format_version
+      :type:  int
+
+
+   .. py:attribute:: entitlement_id
+      :type:  str
+
+
+   .. py:attribute:: issuer
+      :type:  python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_issuer.AIcEntitlementIssuer
+
+
+   .. py:attribute:: licensing_scope
+      :type:  python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_licensing_scope.AIcEntitlementLicensingScope
+
+
+   .. py:attribute:: subject
+      :type:  python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_subject.AIcEntitlementSubject
+
+
+   .. py:attribute:: components
+      :type:  tuple[python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_component_grant.AIcEntitlementComponentGrant, Ellipsis]
+
+
+   .. py:attribute:: issued_for_request
+      :type:  python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_request_reference.AIcEntitlementRequestReference | None
+      :value: None
+
+
+
+   .. py:attribute:: issued_at
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: valid_from
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: valid_until
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:method:: component(component_id: str) -> python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_component_grant.AIcEntitlementComponentGrant | None
+
+

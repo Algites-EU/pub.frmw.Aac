@@ -1,0 +1,24 @@
+python.eu.algites.frmw.aac.core.packages.aic_workspace_component_lock_loader
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_workspace_component_lock_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_workspace_component_lock_loader.AIcWorkspaceComponentLockLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcWorkspaceComponentLockLoader
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> eu.algites.frmw.aac.core.packages.api.AIcWorkspaceComponentLock
+      :staticmethod:
+
+
+

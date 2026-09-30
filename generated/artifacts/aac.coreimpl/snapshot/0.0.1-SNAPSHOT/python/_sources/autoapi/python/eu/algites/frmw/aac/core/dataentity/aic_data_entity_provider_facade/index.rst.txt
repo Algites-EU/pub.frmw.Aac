@@ -1,0 +1,113 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_provider_facade
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_provider_facade
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_provider_facade.GET_RECORD_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_provider_facade.QUERY_RECORDS_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_provider_facade.APPLY_DIRECT_RECORD_CHANGES_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_provider_facade.INSPECT_STORAGE_SUPPORT_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_provider_facade.ENSURE_STORAGE_SUPPORT_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_provider_facade.RETIRE_STORAGE_SUPPORT_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_provider_facade.CREATE_STORAGE_BACKUP_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_provider_facade.INSPECT_STORAGE_BACKUP_CAPABILITY_ID
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_provider_facade.RESTORE_STORAGE_BACKUP_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_provider_facade.AIcDataEntityProviderFacade
+
+
+Module Contents
+---------------
+
+.. py:data:: GET_RECORD_CAPABILITY_ID
+   :value: '_AAC.data-entity.get-record'
+
+
+.. py:data:: QUERY_RECORDS_CAPABILITY_ID
+   :value: '_AAC.data-entity.query-records'
+
+
+.. py:data:: APPLY_DIRECT_RECORD_CHANGES_CAPABILITY_ID
+   :value: '_AAC.data-entity.apply-direct-record-changes'
+
+
+.. py:data:: INSPECT_STORAGE_SUPPORT_CAPABILITY_ID
+   :value: '_AAC.data-entity.inspect-storage-support'
+
+
+.. py:data:: ENSURE_STORAGE_SUPPORT_CAPABILITY_ID
+   :value: '_AAC.data-entity.ensure-storage-support'
+
+
+.. py:data:: RETIRE_STORAGE_SUPPORT_CAPABILITY_ID
+   :value: '_AAC.data-entity.retire-storage-support'
+
+
+.. py:data:: CREATE_STORAGE_BACKUP_CAPABILITY_ID
+   :value: '_AAC.data-entity.create-storage-backup'
+
+
+.. py:data:: INSPECT_STORAGE_BACKUP_CAPABILITY_ID
+   :value: '_AAC.data-entity.inspect-storage-backup'
+
+
+.. py:data:: RESTORE_STORAGE_BACKUP_CAPABILITY_ID
+   :value: '_AAC.data-entity.restore-storage-backup'
+
+
+.. py:class:: AIcDataEntityProviderFacade(provider: eu.algites.frmw.aac.core.instances.api.AIcProviderInstance, endpoints: eu.algites.frmw.aac.core.invocation.dispatcher.AIcEndpointRegistry, dispatcher: eu.algites.frmw.aac.core.invocation.dispatcher.AIcInvocationDispatcher, marshaller: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_marshaller.AIcDataEntityMarshaller)
+
+   Typed Data Entity API bound to exactly one provider instance.
+
+   No operation is routed across provider instances.  The instance's access mode constrains
+   mutating facades while its declared capability set determines which subfacades are available.
+
+
+   .. py:attribute:: provider
+
+
+   .. py:attribute:: marshaller
+
+
+   .. py:attribute:: invoker
+
+
+   .. py:attribute:: get_record
+
+
+   .. py:attribute:: query_records
+
+
+   .. py:attribute:: apply_changes
+
+
+   .. py:attribute:: inspect_storage_support
+
+
+   .. py:attribute:: ensure_storage_support
+
+
+   .. py:attribute:: retire_storage_support
+
+
+   .. py:attribute:: create_storage_backup
+
+
+   .. py:attribute:: inspect_storage_backup
+
+
+   .. py:attribute:: restore_storage_backup
+
+

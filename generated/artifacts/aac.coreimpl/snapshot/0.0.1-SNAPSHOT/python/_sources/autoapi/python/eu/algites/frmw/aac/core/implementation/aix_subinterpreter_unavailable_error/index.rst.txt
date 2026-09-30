@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.implementation.aix_subinterpreter_unavailable_error
+===================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.implementation.aix_subinterpreter_unavailable_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.implementation.aix_subinterpreter_unavailable_error.AIxSubinterpreterUnavailableError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxSubinterpreterUnavailableError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.implementation.aix_core_implementation_error.AIxCoreImplementationError`
+
+

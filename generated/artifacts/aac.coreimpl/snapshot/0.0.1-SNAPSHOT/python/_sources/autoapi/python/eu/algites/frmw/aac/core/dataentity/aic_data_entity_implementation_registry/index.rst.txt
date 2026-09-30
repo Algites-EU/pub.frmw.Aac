@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_implementation_registry
+==================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_implementation_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_data_entity_implementation_registry.AIcDataEntityImplementationRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcDataEntityImplementationRegistry
+
+   .. py:method:: register(binding: eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityImplementationBinding) -> None
+
+
+   .. py:method:: get(schema_id: str) -> eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityImplementationBinding
+
+
+   .. py:method:: for_object(value: object) -> eu.algites.frmw.aac.core.dataentity.api.AIcDataEntityImplementationBinding
+
+

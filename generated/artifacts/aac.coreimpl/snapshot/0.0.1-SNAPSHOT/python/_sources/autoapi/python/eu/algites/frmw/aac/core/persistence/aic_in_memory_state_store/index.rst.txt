@@ -1,0 +1,42 @@
+python.eu.algites.frmw.aac.core.persistence.aic_in_memory_state_store
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.aic_in_memory_state_store
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.aic_in_memory_state_store.AIcInMemoryStateStore
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcInMemoryStateStore
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.persistence.api.AIiStateStore`
+
+
+   .. py:property:: revision_kind
+      :type: eu.algites.frmw.aac.core.persistence.api.AInRecordRevisionKind
+
+
+
+   .. py:method:: get_record(namespace: str, key: str) -> eu.algites.frmw.aac.core.persistence.api.AIcPersistedRecord | None
+
+
+   .. py:method:: list_records(namespace: str) -> Mapping[str, eu.algites.frmw.aac.core.persistence.api.AIcPersistedRecord]
+
+
+   .. py:method:: apply(mutations: tuple[eu.algites.frmw.aac.core.persistence.api.AIcStateMutation, Ellipsis], *, read_expectations: tuple[eu.algites.frmw.aac.core.persistence.api.AIcPersistenceReadExpectation, Ellipsis] = ()) -> tuple[eu.algites.frmw.aac.core.persistence.api.AIcPersistedRecord, Ellipsis]
+
+
+   .. py:method:: snapshot() -> Mapping[str, Mapping[str, eu.algites.frmw.aac.core.persistence.api.AIcPersistedRecord]]
+
+
+   .. py:method:: restore(snapshot: Mapping[str, Mapping[str, eu.algites.frmw.aac.core.persistence.api.AIcPersistedRecord]]) -> None
+
+

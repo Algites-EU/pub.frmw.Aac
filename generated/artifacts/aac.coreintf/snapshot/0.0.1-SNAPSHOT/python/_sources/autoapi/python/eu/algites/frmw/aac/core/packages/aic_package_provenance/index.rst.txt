@@ -1,0 +1,55 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_provenance
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_provenance
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_provenance.AIcPackageProvenance
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageProvenance
+
+   .. py:attribute:: source_id
+      :type:  str
+
+
+   .. py:attribute:: source_uri
+      :type:  str | None
+
+
+   .. py:attribute:: artifact_uri
+      :type:  str
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: downloaded_at
+      :type:  str
+
+
+   .. py:attribute:: verifier_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: signer_identity
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: verification_metadata
+      :type:  Mapping[str, object]
+
+

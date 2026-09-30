@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.implementation.aix_persistence_error
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.implementation.aix_persistence_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.implementation.aix_persistence_error.AIxPersistenceError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxPersistenceError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.implementation.aix_core_implementation_error.AIxCoreImplementationError`
+
+

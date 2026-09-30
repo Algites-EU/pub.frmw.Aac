@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.instances.aic_binding
+=====================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.instances.aic_binding
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.instances.aic_binding.AIcBinding
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcBinding
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str
+
+
+   .. py:attribute:: requirement_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: binding_qualifier_profiles
+      :type:  tuple[Mapping[str, object], Ellipsis]
+      :value: ()
+
+
+

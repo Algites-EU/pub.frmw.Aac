@@ -1,0 +1,45 @@
+python.eu.algites.frmw.aac.core.configuration.aic_effective_configuration_value
+===============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_effective_configuration_value
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_effective_configuration_value.AIcEffectiveConfigurationValue
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEffectiveConfigurationValue
+
+   .. py:attribute:: property_id
+      :type:  str
+
+
+   .. py:attribute:: value
+      :type:  object | None
+
+
+   .. py:attribute:: source_kind
+      :type:  python.eu.algites.frmw.aac.core.configuration.ain_configuration_value_source_kind.AInConfigurationValueSourceKind
+
+
+   .. py:attribute:: provenance
+      :type:  python.eu.algites.frmw.aac.core.configuration.aic_configuration_contribution_provenance.AIcConfigurationContributionProvenance | None
+
+
+   .. py:attribute:: effective_policy
+      :type:  python.eu.algites.frmw.aac.core.configuration.aic_effective_configuration_policy.AIcEffectiveConfigurationPolicy
+
+
+   .. py:attribute:: shadowed_provenance
+      :type:  tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_contribution_provenance.AIcConfigurationContributionProvenance, Ellipsis]
+      :value: ()
+
+
+

@@ -1,0 +1,75 @@
+python.eu.algites.frmw.aac.core.packages.aic_workspace_component_lock_entry
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_workspace_component_lock_entry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_workspace_component_lock_entry.AIcWorkspaceComponentLockEntry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcWorkspaceComponentLockEntry
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: source_id
+      :type:  str
+
+
+   .. py:attribute:: artifact_uri
+      :type:  str
+
+
+   .. py:attribute:: artifact_filename
+      :type:  str
+
+
+   .. py:attribute:: package_format
+      :type:  str
+
+
+   .. py:attribute:: descriptor_path
+      :type:  str
+
+
+   .. py:attribute:: source_uri
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: runtime_package
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: verifier_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: sidecars
+      :type:  tuple[python.eu.algites.frmw.aac.core.packages.aic_package_sidecar.AIcPackageSidecar, Ellipsis]
+      :value: ()
+
+
+

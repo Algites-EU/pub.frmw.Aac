@@ -1,0 +1,25 @@
+python.eu.algites.frmw.aac.ui.qt.aic_qt_panel_widget
+====================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.qt.aic_qt_panel_widget
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.qt.aic_qt_panel_widget.AIcQtPanelWidget
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcQtPanelWidget(panel: eu.algites.frmw.aac.ui.api.AIcUiPanel, parent: PySide6.QtWidgets.QWidget | None = None)
+
+   Bases: :py:obj:`PySide6.QtWidgets.QGroupBox`
+
+
+   Baseline recursive Qt renderer for AAC panels/display blocks.
+
+

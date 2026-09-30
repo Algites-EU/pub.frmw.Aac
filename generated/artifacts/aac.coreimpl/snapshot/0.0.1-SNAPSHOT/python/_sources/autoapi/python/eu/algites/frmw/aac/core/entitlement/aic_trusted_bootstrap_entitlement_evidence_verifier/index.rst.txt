@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_trusted_bootstrap_entitlement_evidence_verifier
+===============================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_trusted_bootstrap_entitlement_evidence_verifier
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_trusted_bootstrap_entitlement_evidence_verifier.AIcTrustedBootstrapEntitlementEvidenceVerifier
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcTrustedBootstrapEntitlementEvidenceVerifier
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.entitlement.api.AIiEntitlementEvidenceVerifier`
+
+
+   Reference verifier for evidence already authenticated by a trusted bootstrap provider.
+
+   This is intentionally not a cryptographic file verifier. Signed-file/Sigstore evidence can
+   register a different AIiEntitlementEvidenceVerifier without changing entitlement semantics.
+
+
+   .. py:method:: verify(evidence: eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementEvidence) -> eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementEvidenceVerification
+
+

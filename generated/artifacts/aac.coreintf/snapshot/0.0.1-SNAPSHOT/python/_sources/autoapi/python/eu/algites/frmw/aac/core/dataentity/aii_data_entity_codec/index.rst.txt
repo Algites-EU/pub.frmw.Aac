@@ -1,0 +1,63 @@
+python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_codec
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_codec
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_codec.T
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aii_data_entity_codec.AIiDataEntityCodec
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+
+.. py:class:: AIiDataEntityCodec
+
+   Bases: :py:obj:`abc.ABC`, :py:obj:`Generic`\ [\ :py:obj:`T`\ ]
+
+
+   Version-specific codec between one schema view and the canonical JSON object representation.
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: view_type
+      :type:  type[T]
+
+
+   .. py:method:: serialize(value: T) -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Serialize exactly this codec's versioned view.
+
+
+
+   .. py:method:: deserialize_into(payload: Mapping[str, object], target: T) -> None
+      :abstractmethod:
+
+
+      Apply one stored schema-version payload through this view onto a current implementation object.
+
+
+

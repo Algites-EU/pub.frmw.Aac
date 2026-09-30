@@ -1,0 +1,69 @@
+python.eu.algites.frmw.aac.core.migration.aic_schema_compatibility_assessment
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.migration.aic_schema_compatibility_assessment
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.migration.aic_schema_compatibility_assessment.AIcSchemaCompatibilityAssessment
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSchemaCompatibilityAssessment
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: source_version
+      :type:  int
+
+
+   .. py:attribute:: target_write_version
+      :type:  int
+
+
+   .. py:attribute:: at_target_write_version
+      :type:  bool
+
+
+   .. py:attribute:: runtime_interpretation
+      :type:  python.eu.algites.frmw.aac.core.migration.ain_schema_runtime_interpretation.AInSchemaRuntimeInterpretation
+
+
+   .. py:attribute:: migration_path
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.api.AIcSchemaMigrationStepDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:property:: directly_readable
+      :type: bool
+
+
+
+   .. py:property:: requires_runtime_transformation
+      :type: bool
+
+
+
+   .. py:property:: runtime_supported
+      :type: bool
+
+
+
+   .. py:method:: persistence_convergence_status(*, safe_persistence_available: bool) -> python.eu.algites.frmw.aac.core.migration.ain_persistence_convergence_status.AInPersistenceConvergenceStatus
+
+

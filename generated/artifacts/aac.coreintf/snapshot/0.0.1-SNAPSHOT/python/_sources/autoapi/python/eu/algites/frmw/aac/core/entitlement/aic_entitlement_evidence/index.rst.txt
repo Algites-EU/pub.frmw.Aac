@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_evidence
+====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_evidence
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_evidence.AIcEntitlementEvidence
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementEvidence
+
+   .. py:attribute:: document
+      :type:  python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_document.AIcEntitlementDocument
+
+
+   .. py:attribute:: evidence_type
+      :type:  str
+
+
+   .. py:attribute:: source
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: verification_material
+      :type:  Mapping[str, object]
+
+

@@ -1,0 +1,24 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_document_loader
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_document_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_document_loader.AIcCatalogDocumentLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogDocumentLoader
+
+   .. py:method:: load_text(text: str, *, source: str = '<memory>', source_uri: str | None = None) -> eu.algites.frmw.aac.core.catalog.api.AIcCatalogDocument
+      :staticmethod:
+
+
+

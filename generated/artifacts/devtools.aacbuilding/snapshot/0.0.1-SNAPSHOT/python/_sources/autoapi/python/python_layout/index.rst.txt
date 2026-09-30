@@ -1,0 +1,71 @@
+python.python_layout
+====================
+
+.. py:module:: python.python_layout
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.python_layout.PYTHON_SOURCE_KIND
+   python.python_layout.NEUTRAL_RESOURCE_SOURCE_KINDS
+   python.python_layout.PYTHON_PACKAGE_SOURCE_KINDS
+   python.python_layout.GENERATION_SUFFIXES
+   python.python_layout.FORBIDDEN_PYTHON_RESOURCE_SUFFIXES
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.python_layout.source_kind_base
+   python.python_layout.is_repository_build_path
+   python.python_layout.iter_source_roots
+   python.python_layout.iter_python_artifacts
+   python.python_layout.merge_source_root
+   python.python_layout.stage_python_product_tree
+   python.python_layout.merge_neutral_product_roots_into_python_tree
+   python.python_layout.validate_repository_source_layout
+   python.python_layout.validate_python_distribution_paths
+
+
+Module Contents
+---------------
+
+.. py:data:: PYTHON_SOURCE_KIND
+   :value: 'python'
+
+
+.. py:data:: NEUTRAL_RESOURCE_SOURCE_KINDS
+   :value: ('jsondefs', 'yamldefs', 'xmldefs', 'config')
+
+
+.. py:data:: PYTHON_PACKAGE_SOURCE_KINDS
+
+.. py:data:: GENERATION_SUFFIXES
+   :value: ('', '.gen', '.extgen')
+
+
+.. py:data:: FORBIDDEN_PYTHON_RESOURCE_SUFFIXES
+
+.. py:function:: source_kind_base(directory_name: str) -> str
+
+.. py:function:: is_repository_build_path(path: pathlib.Path, repository: pathlib.Path) -> bool
+
+.. py:function:: iter_source_roots(artifact: pathlib.Path, scope: str, source_kinds: Iterable[str] = PYTHON_PACKAGE_SOURCE_KINDS) -> tuple[pathlib.Path, Ellipsis]
+
+.. py:function:: iter_python_artifacts(repository: pathlib.Path) -> tuple[pathlib.Path, Ellipsis]
+
+.. py:function:: merge_source_root(source_root: pathlib.Path, target_root: pathlib.Path) -> None
+
+.. py:function:: stage_python_product_tree(artifact: pathlib.Path, target_root: pathlib.Path) -> pathlib.Path
+
+.. py:function:: merge_neutral_product_roots_into_python_tree(artifact: pathlib.Path, python_tree: pathlib.Path) -> None
+
+.. py:function:: validate_repository_source_layout(repository: pathlib.Path) -> list[str]
+
+.. py:function:: validate_python_distribution_paths(repository: pathlib.Path) -> list[str]
+

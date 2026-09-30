@@ -1,0 +1,19 @@
+python.eu.algites.frmw.aac.core.dataentity.binding
+==================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.binding
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.binding.T
+
+
+Module Contents
+---------------
+
+.. py:data:: T
+

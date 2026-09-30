@@ -1,0 +1,87 @@
+python.eu.algites.frmw.aac.core.invocation.aic_invocation_input
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_invocation_input
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_invocation_input.AIcInvocationInput
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcInvocationInput
+
+   .. py:attribute:: invocation_id
+      :type:  str
+
+
+   .. py:attribute:: parent_invocation_id
+      :type:  str | None
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: operation_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str
+
+
+   .. py:attribute:: arguments
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: operation_parameter_overrides
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: effective_operation_parameters
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: binding_qualifier_profiles
+      :type:  tuple[Mapping[str, object], Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: consumer_instance_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: requirement_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: locale
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:method:: to_mapping() -> dict[str, object]
+
+
+   .. py:method:: from_mapping(aValue: Mapping[str, object]) -> AIcInvocationInput
+      :classmethod:
+
+
+

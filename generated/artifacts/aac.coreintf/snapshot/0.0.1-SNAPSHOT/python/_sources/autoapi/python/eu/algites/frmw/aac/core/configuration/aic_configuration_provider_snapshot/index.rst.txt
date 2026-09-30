@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_snapshot
+=================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_snapshot
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_snapshot.AIcConfigurationProviderSnapshot
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationProviderSnapshot
+
+   .. py:attribute:: configuration_scope
+      :type:  python.eu.algites.frmw.aac.core.context.api.AIcConfigurationScope
+
+
+   .. py:attribute:: configuration_target
+      :type:  python.eu.algites.frmw.aac.core.configuration.aic_configuration_target.AIcConfigurationTarget
+
+
+   .. py:attribute:: record_revision
+      :type:  str | int | None
+
+
+   .. py:attribute:: payload
+      :type:  AIcConfigurationPersistedPayload
+
+

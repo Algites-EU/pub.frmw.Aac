@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.graph.aic_application_graph_orchestrator
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.graph.aic_application_graph_orchestrator
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.graph.aic_application_graph_orchestrator.AIcApplicationGraphOrchestrator
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcApplicationGraphOrchestrator(registry: eu.algites.frmw.aac.core.instances.registry.AIcProviderInstanceRegistry, resolver: eu.algites.frmw.aac.core.resolution.bindings.AIcBindingResolver, bindings: eu.algites.frmw.aac.core.bindings.store.AIcBindingStore, preferences: eu.algites.frmw.aac.core.bindings.store.AIcBindingPreferenceStore)
+
+   .. py:attribute:: registry
+
+
+   .. py:attribute:: resolver
+
+
+   .. py:attribute:: bindings
+
+
+   .. py:attribute:: preferences
+
+
+   .. py:method:: resolve(descriptors: dict[str, eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor]) -> python.eu.algites.frmw.aac.core.graph.aic_resolved_application_graph.AIcResolvedApplicationGraph
+
+
+   .. py:method:: set_preference(preference: eu.algites.frmw.aac.core.instances.api.AIcBindingPreference) -> None
+
+

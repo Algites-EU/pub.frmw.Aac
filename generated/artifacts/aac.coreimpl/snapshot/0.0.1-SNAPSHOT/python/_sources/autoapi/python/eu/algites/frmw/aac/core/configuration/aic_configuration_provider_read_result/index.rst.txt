@@ -1,0 +1,29 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_read_result
+====================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_read_result
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_read_result.AIcConfigurationProviderReadResult
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationProviderReadResult
+
+   .. py:attribute:: contributions
+      :type:  tuple[eu.algites.frmw.aac.core.configuration.api.AIcConfigurationContribution, Ellipsis]
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

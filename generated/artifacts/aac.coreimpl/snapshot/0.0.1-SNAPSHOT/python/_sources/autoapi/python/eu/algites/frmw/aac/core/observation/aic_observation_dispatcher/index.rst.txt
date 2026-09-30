@@ -1,0 +1,49 @@
+python.eu.algites.frmw.aac.core.observation.aic_observation_dispatcher
+======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.observation.aic_observation_dispatcher
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.observation.aic_observation_dispatcher.OBSERVATION_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.observation.aic_observation_dispatcher.AIcObservationDispatcher
+
+
+Module Contents
+---------------
+
+.. py:data:: OBSERVATION_CAPABILITY_ID
+   :value: '_AAC.capability.observation'
+
+
+.. py:class:: AIcObservationDispatcher(topology: python.eu.algites.frmw.aac.core.observation.aic_observation_topology_store.AIcObservationTopologyStore | None = None)
+
+   .. py:attribute:: topology
+
+
+   .. py:method:: register_provider(instance_id: str, provider: eu.algites.frmw.aac.core.observation.api.AIiObservationProvider) -> None
+
+
+   .. py:method:: unregister_provider(instance_id: str) -> None
+
+
+   .. py:method:: register(instance_id: str, provider: eu.algites.frmw.aac.core.observation.api.AIiObservationProvider, selectors: tuple[eu.algites.frmw.aac.core.observation.api.AIcObservationSelector, Ellipsis]) -> None
+
+
+   .. py:method:: unregister(instance_id: str) -> None
+
+
+   .. py:method:: dispatch(observation_input: eu.algites.frmw.aac.core.observation.api.AIcObservationInput) -> tuple[python.eu.algites.frmw.aac.core.observation.aic_observation_delivery.AIcObservationDelivery, Ellipsis]
+
+

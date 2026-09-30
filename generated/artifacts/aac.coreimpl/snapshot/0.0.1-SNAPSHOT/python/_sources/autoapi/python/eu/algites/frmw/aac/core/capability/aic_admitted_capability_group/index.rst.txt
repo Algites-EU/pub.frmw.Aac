@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.capability.aic_admitted_capability_group
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.aic_admitted_capability_group
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.capability.aic_admitted_capability_group.AIcAdmittedCapabilityGroup
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcAdmittedCapabilityGroup
+
+   .. py:attribute:: group
+      :type:  eu.algites.frmw.aac.core.capability.api.AIcCapabilityGroup
+
+
+   .. py:attribute:: source
+      :type:  str
+
+
+   .. py:attribute:: fingerprint
+      :type:  str
+
+

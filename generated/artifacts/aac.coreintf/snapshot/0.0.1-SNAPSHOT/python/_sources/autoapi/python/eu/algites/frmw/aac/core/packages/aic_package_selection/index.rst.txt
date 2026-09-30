@@ -1,0 +1,51 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_selection
+==============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_selection
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_selection.AIcPackageSelection
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageSelection
+
+   .. py:attribute:: application_scope_id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: selected_at
+      :type:  str
+
+
+   .. py:attribute:: previous_sha256
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: previous_version
+      :type:  int | None
+      :value: None
+
+
+

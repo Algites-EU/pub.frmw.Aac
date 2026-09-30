@@ -1,0 +1,75 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_query
+=========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_query
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_query.AIcCatalogQuery
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogQuery
+
+   Technology-scoped catalog query.
+
+   ``product_id`` and ``technology_id`` are mandatory AAC catalog dimensions.
+   Component ids and versions are interpreted only inside that scope.
+
+
+   .. py:attribute:: product_id
+      :type:  str
+
+
+   .. py:attribute:: technology_id
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: text
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: provides_capability_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: requires_capability_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: categories
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: tags
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

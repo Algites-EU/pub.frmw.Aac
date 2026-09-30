@@ -1,0 +1,13 @@
+ManifestVersion: 1
+Artifact:
+  RepositoryId: pub.frmw.Aac
+  LocalArtifactId: components.observation.simpleaudit
+  ArtifactCoordinateId: pub.frmw.Aac_components.observation.simpleaudit
+  GroupId: eu.algites.frmw.aac
+  Version: ""
+  SourcePath: components/observation/simpleaudit
+  StructureKind: artifact
+  Name: "Algites Application Components Simple Audit"
+  Description: "Minimal AAC observation provider writing normalized observation"
+SourceMetadata:
+  DescriptorHierarchy:

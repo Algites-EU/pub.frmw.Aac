@@ -1,0 +1,83 @@
+python.eu.algites.frmw.aac.ui.aic_ui_entitlement_permission
+===========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_entitlement_permission
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_entitlement_permission.AIcUiEntitlementPermission
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiEntitlementPermission
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permission_id
+      :type:  str
+
+
+   .. py:attribute:: effective_from
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: effective_until
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: licensing_scope
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: entitlement_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: issuer_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: name
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: implicit
+      :type:  bool
+      :value: False
+
+
+

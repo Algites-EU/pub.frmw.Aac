@@ -1,0 +1,41 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_capability_requirement
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_capability_requirement
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_capability_requirement.AIcCatalogCapabilityRequirement
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogCapabilityRequirement
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: cardinality
+      :type:  python.eu.algites.frmw.aac.core.capability.api.AInConsumerCardinality
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+      :value: True
+
+
+

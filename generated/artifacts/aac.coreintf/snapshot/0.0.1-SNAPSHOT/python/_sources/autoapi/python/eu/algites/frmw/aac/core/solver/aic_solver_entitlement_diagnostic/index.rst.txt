@@ -1,0 +1,53 @@
+python.eu.algites.frmw.aac.core.solver.aic_solver_entitlement_diagnostic
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.solver.aic_solver_entitlement_diagnostic
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.solver.aic_solver_entitlement_diagnostic.AIcSolverEntitlementDiagnostic
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSolverEntitlementDiagnostic
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: capability_id
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: permission_id
+      :type:  str
+
+
+   .. py:attribute:: possible_licensing_scopes
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: granted
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: entitlement_info_url
+      :type:  str | None
+      :value: None
+
+
+

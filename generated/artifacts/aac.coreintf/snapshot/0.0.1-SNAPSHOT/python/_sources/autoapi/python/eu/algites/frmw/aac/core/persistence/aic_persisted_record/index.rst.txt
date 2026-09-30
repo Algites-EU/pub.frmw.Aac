@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.persistence.aic_persisted_record
+================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.aic_persisted_record
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.aic_persisted_record.AIcPersistedRecord
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPersistedRecord
+
+   .. py:attribute:: namespace
+      :type:  str
+
+
+   .. py:attribute:: key
+      :type:  str
+
+
+   .. py:attribute:: record_revision
+      :type:  int | str
+
+
+   .. py:attribute:: payload
+      :type:  Mapping[str, object]
+
+

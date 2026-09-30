@@ -1,0 +1,103 @@
+python.eu.algites.frmw.aac.core.invocation.aii_operation_interaction_caller_to_provider
+=======================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aii_operation_interaction_caller_to_provider
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aii_operation_interaction_caller_to_provider.AIxOperationFailureT
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aii_operation_interaction_caller_to_provider.AIiOperationInteractionCallerToProvider
+
+
+Module Contents
+---------------
+
+.. py:data:: AIxOperationFailureT
+
+.. py:class:: AIiOperationInteractionCallerToProvider
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.invocation.aii_operation_interaction_provider_to_caller.AIiOperationInteractionProviderToCaller`, :py:obj:`Generic`\ [\ :py:obj:`AIxOperationFailureT`\ ], :py:obj:`abc.ABC`
+
+
+   Caller-facing controller for an interactive or asynchronous capability invocation.
+
+
+   .. py:method:: set_exception_factory(factory: python.eu.algites.frmw.aac.core.invocation.aii_operation_failure_exception_factory.AIiOperationFailureExceptionFactory[AIxOperationFailureT] | None) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: exception_factory() -> python.eu.algites.frmw.aac.core.invocation.aii_operation_failure_exception_factory.AIiOperationFailureExceptionFactory[AIxOperationFailureT] | None
+      :abstractmethod:
+
+
+
+   .. py:method:: provider_snapshot() -> python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_provider_to_caller_message.AIcOperationInteractionProviderToCallerMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: request_cancellation() -> python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message.AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: set_interaction_mode(mode: python.eu.algites.frmw.aac.core.invocation.ain_operation_interaction_mode.AInOperationInteractionMode) -> python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message.AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: set_detail_level(level: python.eu.algites.frmw.aac.core.invocation.ain_operation_interaction_detail_level.AInOperationInteractionDetailLevel) -> python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message.AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: set_reporting_interval_ms(value: int | None) -> python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message.AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: set_failure_detail_level(level: python.eu.algites.frmw.aac.core.invocation.ain_operation_interaction_failure_detail_level.AInOperationInteractionFailureDetailLevel) -> python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message.AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: set_state_result_delivery_mode(mode: python.eu.algites.frmw.aac.core.interaction_types.AInStateResultDeliveryMode) -> python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message.AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: request_state_result() -> python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message.AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: accept_state_result_revision(revision: int) -> python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_caller_to_provider_message.AIcOperationInteractionCallerToProviderMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: wait_for_terminal_state(timeout: float | None = None) -> python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_provider_to_caller_message.AIcOperationInteractionProviderToCallerMessage
+      :abstractmethod:
+
+
+
+   .. py:method:: core_transition(state: python.eu.algites.frmw.aac.core.invocation.ain_operation_execution_state.AInOperationExecutionState, *, state_result: object = None, has_state_result: bool = False) -> None
+      :abstractmethod:
+
+
+      Apply a Core-owned lifecycle transition atomically with its optional terminal state result.
+
+
+

@@ -1,0 +1,29 @@
+python.eu.algites.frmw.aac.core.lifecycle.aic_validation_result
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.lifecycle.aic_validation_result
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.lifecycle.aic_validation_result.AIcValidationResult
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcValidationResult
+
+   .. py:attribute:: valid
+      :type:  bool
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+

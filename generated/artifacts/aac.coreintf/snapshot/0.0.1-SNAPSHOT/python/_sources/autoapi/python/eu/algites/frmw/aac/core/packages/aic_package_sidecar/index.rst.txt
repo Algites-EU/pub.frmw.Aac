@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_sidecar
+============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_sidecar
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_sidecar.AIcPackageSidecar
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageSidecar
+
+   .. py:attribute:: uri
+      :type:  str
+
+
+   .. py:attribute:: suffix
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+

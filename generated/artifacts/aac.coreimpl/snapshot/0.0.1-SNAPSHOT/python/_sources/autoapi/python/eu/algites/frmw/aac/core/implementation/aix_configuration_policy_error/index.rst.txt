@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.implementation.aix_configuration_policy_error
+=============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.implementation.aix_configuration_policy_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.implementation.aix_configuration_policy_error.AIxConfigurationPolicyError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxConfigurationPolicyError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.implementation.aix_configuration_error.AIxConfigurationError`
+
+

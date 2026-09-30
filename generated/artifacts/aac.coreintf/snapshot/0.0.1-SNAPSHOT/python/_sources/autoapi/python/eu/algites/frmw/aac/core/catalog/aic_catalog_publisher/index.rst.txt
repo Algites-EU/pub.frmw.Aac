@@ -1,0 +1,29 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_publisher
+=============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_publisher
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_publisher.AIcCatalogPublisher
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogPublisher
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+

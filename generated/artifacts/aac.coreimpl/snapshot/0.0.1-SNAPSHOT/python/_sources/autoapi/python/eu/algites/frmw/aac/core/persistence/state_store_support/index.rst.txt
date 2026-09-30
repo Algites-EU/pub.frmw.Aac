@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.persistence.state_store_support
+===============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.state_store_support
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.state_store_support.state_snapshot_to_raw
+   python.eu.algites.frmw.aac.core.persistence.state_store_support.state_snapshot_from_raw
+   python.eu.algites.frmw.aac.core.persistence.state_store_support.state_put_mutation
+   python.eu.algites.frmw.aac.core.persistence.state_store_support.state_delete_mutation
+
+
+Module Contents
+---------------
+
+.. py:function:: state_snapshot_to_raw(snapshot: Mapping[str, Mapping[str, eu.algites.frmw.aac.core.persistence.api.AIcPersistedRecord]]) -> dict[str, object]
+
+.. py:function:: state_snapshot_from_raw(raw: Mapping[str, object]) -> Mapping[str, Mapping[str, eu.algites.frmw.aac.core.persistence.api.AIcPersistedRecord]]
+
+.. py:function:: state_put_mutation(store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore, namespace: str, key: str, value: Mapping[str, object]) -> eu.algites.frmw.aac.core.persistence.api.AIcStateMutation
+
+.. py:function:: state_delete_mutation(store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore, namespace: str, key: str) -> eu.algites.frmw.aac.core.persistence.api.AIcStateMutation
+

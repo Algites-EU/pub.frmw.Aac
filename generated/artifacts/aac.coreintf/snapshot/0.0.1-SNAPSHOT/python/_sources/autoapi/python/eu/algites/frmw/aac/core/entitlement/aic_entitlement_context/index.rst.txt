@@ -1,0 +1,47 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_context
+===================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_context
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_context.AIcEntitlementContext
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementContext
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: capabilities
+      :type:  tuple[python.eu.algites.frmw.aac.core.entitlement.aic_capability_entitlement_context.AIcCapabilityEntitlementContext, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: next_transition_at
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:method:: capability(capability_id: str, capability_version: int) -> python.eu.algites.frmw.aac.core.entitlement.aic_capability_entitlement_context.AIcCapabilityEntitlementContext | None
+
+
+   .. py:method:: has_permission(capability_id: str, capability_version: int, permission_id: str) -> bool
+
+

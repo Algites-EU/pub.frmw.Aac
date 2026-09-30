@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_scope_resolution_request
+========================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_scope_resolution_request
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_scope_resolution_request.AIcConfigurationScopeResolutionRequest
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationScopeResolutionRequest
+
+   .. py:attribute:: configuration_scope_type
+      :type:  str
+
+
+   .. py:attribute:: definition_id
+      :type:  str
+
+
+   .. py:attribute:: context
+      :type:  Mapping[str, object]
+
+

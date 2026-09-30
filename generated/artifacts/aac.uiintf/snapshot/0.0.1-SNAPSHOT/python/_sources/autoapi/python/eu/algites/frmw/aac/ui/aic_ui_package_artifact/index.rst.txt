@@ -1,0 +1,69 @@
+python.eu.algites.frmw.aac.ui.aic_ui_package_artifact
+=====================================================
+
+.. py:module:: python.eu.algites.frmw.aac.ui.aic_ui_package_artifact
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.ui.aic_ui_package_artifact.AIcUiPackageArtifact
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcUiPackageArtifact
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: state
+      :type:  str
+
+
+   .. py:attribute:: selected_application_scope_ids
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: source_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: signer_identity
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: artifact_path
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: identity
+      :type: tuple[str, int, str]
+
+
+
+   .. py:property:: selected
+      :type: bool
+
+
+

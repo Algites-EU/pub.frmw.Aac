@@ -1,0 +1,83 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_artifact
+============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_artifact
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_artifact.AIcCatalogArtifact
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogArtifact
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: locator
+      :type:  python.eu.algites.frmw.aac.core.catalog.aic_catalog_artifact_locator.AIcCatalogArtifactLocator
+
+
+   .. py:attribute:: artifact_filename
+      :type:  str
+
+
+   .. py:attribute:: package_format
+      :type:  str
+
+
+   .. py:attribute:: descriptor_path
+      :type:  str
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: runtime_package
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: verifier_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: authentication_profile_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: sidecars
+      :type:  tuple[python.eu.algites.frmw.aac.core.packages.api.AIcPackageSidecar, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: platforms
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: architectures
+      :type:  tuple[str, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

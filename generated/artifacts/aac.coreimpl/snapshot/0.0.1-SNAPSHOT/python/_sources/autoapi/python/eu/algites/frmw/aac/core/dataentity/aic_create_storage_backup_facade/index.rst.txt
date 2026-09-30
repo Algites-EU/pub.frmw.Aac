@@ -1,0 +1,42 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_create_storage_backup_facade
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_create_storage_backup_facade
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_create_storage_backup_facade.CREATE_STORAGE_BACKUP_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_create_storage_backup_facade.AIcCreateStorageBackupFacade
+
+
+Module Contents
+---------------
+
+.. py:data:: CREATE_STORAGE_BACKUP_CAPABILITY_ID
+   :value: '_AAC.data-entity.create-storage-backup'
+
+
+.. py:class:: AIcCreateStorageBackupFacade
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.dataentity.aic_bound_data_entity_capability_facade.AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.create-storage-backup'
+
+
+
+   .. py:method:: create_backup(backup_file: str, *, overwrite: bool = False) -> Mapping[str, object]
+
+

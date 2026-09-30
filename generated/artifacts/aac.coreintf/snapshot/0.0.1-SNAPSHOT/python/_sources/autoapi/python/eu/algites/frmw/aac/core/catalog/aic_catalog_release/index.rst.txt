@@ -1,0 +1,75 @@
+python.eu.algites.frmw.aac.core.catalog.aic_catalog_release
+===========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.catalog.aic_catalog_release
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.catalog.aic_catalog_release.AIcCatalogRelease
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCatalogRelease
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: provides
+      :type:  tuple[python.eu.algites.frmw.aac.core.catalog.aic_catalog_capability_offer.AIcCatalogCapabilityOffer, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: requires
+      :type:  tuple[python.eu.algites.frmw.aac.core.catalog.aic_catalog_capability_requirement.AIcCatalogCapabilityRequirement, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: entitlement_licensing_scopes
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.api.AIcEntitlementLicensingScopeDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: provided_capability_entitlements
+      :type:  tuple[python.eu.algites.frmw.aac.core.descriptor.api.AIcCapabilityEntitlementDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: persistent_schemas
+      :type:  tuple[python.eu.algites.frmw.aac.core.catalog.aic_catalog_persistent_schema.AIcCatalogPersistentSchema, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: artifacts
+      :type:  tuple[python.eu.algites.frmw.aac.core.catalog.aic_catalog_artifact.AIcCatalogArtifact, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: published_at
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: release_notes_url
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

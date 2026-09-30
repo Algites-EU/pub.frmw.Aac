@@ -1,0 +1,49 @@
+python.eu.algites.frmw.aac.core.capability.aic_capability_group_catalog
+=======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.aic_capability_group_catalog
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.capability.aic_capability_group_catalog.AIcCapabilityGroupCatalog
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCapabilityGroupCatalog(schema_registry: eu.algites.frmw.aac.core.schemas.registry.AIcSchemaRegistry | None = None)
+
+   .. py:attribute:: schema_registry
+
+
+   .. py:method:: admit(group: eu.algites.frmw.aac.core.capability.api.AIcCapabilityGroup, *, source: str = '<memory>') -> python.eu.algites.frmw.aac.core.capability.aic_admitted_capability_group.AIcAdmittedCapabilityGroup
+
+
+   .. py:method:: admit_text(text: str, *, source: str = '<memory>') -> python.eu.algites.frmw.aac.core.capability.aic_admitted_capability_group.AIcAdmittedCapabilityGroup
+
+
+   .. py:method:: admit_package_resource(package: str, resource_name: str) -> python.eu.algites.frmw.aac.core.capability.aic_admitted_capability_group.AIcAdmittedCapabilityGroup
+
+
+   .. py:method:: admit_builtin_groups() -> tuple[python.eu.algites.frmw.aac.core.capability.aic_admitted_capability_group.AIcAdmittedCapabilityGroup, Ellipsis]
+
+
+   .. py:method:: get(group_id: str) -> eu.algites.frmw.aac.core.capability.api.AIcCapabilityGroup
+
+
+   .. py:method:: contains(group_id: str) -> bool
+
+
+   .. py:method:: all() -> tuple[eu.algites.frmw.aac.core.capability.api.AIcCapabilityGroup, Ellipsis]
+
+
+   .. py:method:: snapshot()
+
+
+   .. py:method:: restore(snapshot) -> None
+
+

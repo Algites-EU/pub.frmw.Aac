@@ -1,0 +1,61 @@
+python.eu.algites.frmw.aac.core.configuration.aic_effective_configuration_policy
+================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_effective_configuration_policy
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_effective_configuration_policy.AIcEffectiveConfigurationPolicy
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEffectiveConfigurationPolicy
+
+   .. py:attribute:: lock
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: has_lock
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: minimum
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: maximum
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: in_set
+      :type:  tuple[object, Ellipsis] | None
+      :value: None
+
+
+
+   .. py:attribute:: not_in_set
+      :type:  tuple[object, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: provenance
+      :type:  tuple[tuple[python.eu.algites.frmw.aac.core.configuration.aic_configuration_policy.AIcConfigurationPolicy, python.eu.algites.frmw.aac.core.configuration.aic_configuration_contribution_provenance.AIcConfigurationContributionProvenance], Ellipsis]
+      :value: ()
+
+
+

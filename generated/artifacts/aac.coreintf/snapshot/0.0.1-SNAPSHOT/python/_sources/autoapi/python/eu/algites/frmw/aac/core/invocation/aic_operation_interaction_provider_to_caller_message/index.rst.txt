@@ -1,0 +1,62 @@
+python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_provider_to_caller_message
+===============================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_provider_to_caller_message
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_provider_to_caller_message.AIcOperationInteractionProviderToCallerMessage
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationInteractionProviderToCallerMessage
+
+   .. py:attribute:: interaction_revision
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: execution_state
+      :type:  python.eu.algites.frmw.aac.core.invocation.ain_operation_execution_state.AInOperationExecutionState
+
+
+   .. py:attribute:: state_result_revision
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: state_result_payload_revision
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: state_result
+      :type:  object | None
+      :value: None
+
+
+
+   .. py:attribute:: events
+      :type:  tuple[python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_event.AIcOperationInteractionEvent, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: features
+      :type:  python.eu.algites.frmw.aac.core.invocation.aic_operation_interaction_features.AIcOperationInteractionFeatures
+
+
+   .. py:property:: state_result_included
+      :type: bool
+
+
+

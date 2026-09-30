@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.persistence.aic_persistence_transaction_descriptor
+==================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.aic_persistence_transaction_descriptor
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.aic_persistence_transaction_descriptor.AIcPersistenceTransactionDescriptor
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPersistenceTransactionDescriptor
+
+   .. py:attribute:: transaction_id
+      :type:  str
+
+
+   .. py:attribute:: transaction_type
+      :type:  str
+
+
+   .. py:attribute:: read_set
+      :type:  tuple[python.eu.algites.frmw.aac.core.persistence.aic_persistence_transaction_read.AIcPersistenceTransactionRead, Ellipsis]
+
+
+   .. py:attribute:: write_set
+      :type:  tuple[python.eu.algites.frmw.aac.core.persistence.aic_persistence_transaction_write.AIcPersistenceTransactionWrite, Ellipsis]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+

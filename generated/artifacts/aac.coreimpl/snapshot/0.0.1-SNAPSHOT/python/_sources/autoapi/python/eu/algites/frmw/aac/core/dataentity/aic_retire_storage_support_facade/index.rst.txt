@@ -1,0 +1,47 @@
+python.eu.algites.frmw.aac.core.dataentity.aic_retire_storage_support_facade
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.dataentity.aic_retire_storage_support_facade
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_retire_storage_support_facade.RETIRE_STORAGE_SUPPORT_CAPABILITY_ID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.dataentity.aic_retire_storage_support_facade.AIcRetireStorageSupportFacade
+
+
+Module Contents
+---------------
+
+.. py:data:: RETIRE_STORAGE_SUPPORT_CAPABILITY_ID
+   :value: '_AAC.data-entity.retire-storage-support'
+
+
+.. py:class:: AIcRetireStorageSupportFacade
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.dataentity.aic_bound_data_entity_capability_facade.AIcBoundDataEntityCapabilityFacade`
+
+
+   .. py:attribute:: capability_id
+      :value: '_AAC.data-entity.retire-storage-support'
+
+
+
+   .. py:attribute:: write_operation
+      :value: True
+
+
+
+   .. py:method:: retire(schema_id: str, schema_version: int) -> Mapping[str, object]
+
+

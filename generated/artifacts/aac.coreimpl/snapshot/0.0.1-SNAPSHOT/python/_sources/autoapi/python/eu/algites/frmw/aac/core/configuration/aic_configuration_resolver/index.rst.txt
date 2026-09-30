@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_resolver
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_resolver
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_resolver.AIcConfigurationResolver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationResolver(providers: python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_registry.AIcConfigurationProviderRegistry, read_service: python.eu.algites.frmw.aac.core.configuration.aic_configuration_read_service.AIcConfigurationReadService | None = None)
+
+   Resolve provider contributions for a concrete ordered configuration-scope chain.
+
+   This class intentionally owns no persistence. It consumes normalized contributions
+   from registered configuration-providers and implements deterministic policy/value
+   semantics from the generic AAC specification.
+
+
+   .. py:attribute:: providers
+
+
+   .. py:attribute:: read_service
+      :value: None
+
+
+
+   .. py:method:: resolve(*, configuration_target: eu.algites.frmw.aac.core.configuration.api.AIcConfigurationTarget, configuration_scopes: tuple[eu.algites.frmw.aac.core.configuration.api.AIcResolvedConfigurationScope, Ellipsis], property_ids: Iterable[str], accepted_configuration_scope_types: Mapping[str, tuple[str, Ellipsis]] | None = None, schema_defaults: Mapping[str, object] | None = None, context: Mapping[str, object] | None = None) -> eu.algites.frmw.aac.core.configuration.api.AIcEffectiveConfiguration
+
+

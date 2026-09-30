@@ -1,0 +1,22 @@
+python.eu.algites.frmw.aac.core.implementation.aix_contract_conflict_error
+==========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.implementation.aix_contract_conflict_error
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.implementation.aix_contract_conflict_error.AIxContractConflictError
+
+
+Module Contents
+---------------
+
+.. py:class:: AIxContractConflictError
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.implementation.aix_contract_admission_error.AIxContractAdmissionError`
+
+

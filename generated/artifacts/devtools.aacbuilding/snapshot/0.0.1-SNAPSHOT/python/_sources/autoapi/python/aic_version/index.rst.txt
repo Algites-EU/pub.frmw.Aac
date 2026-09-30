@@ -1,0 +1,45 @@
+python.aic_version
+==================
+
+.. py:module:: python.aic_version
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.aic_version.AIcVersion
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcVersion
+
+   .. py:attribute:: release_line
+      :type:  str
+
+
+   .. py:attribute:: revision
+      :type:  int
+
+
+   .. py:attribute:: qualifier_kind
+      :type:  str
+
+
+   .. py:attribute:: qualifier_label
+      :type:  str
+
+
+   .. py:property:: algites
+      :type: str
+
+
+
+   .. py:property:: pep440
+      :type: str
+
+
+

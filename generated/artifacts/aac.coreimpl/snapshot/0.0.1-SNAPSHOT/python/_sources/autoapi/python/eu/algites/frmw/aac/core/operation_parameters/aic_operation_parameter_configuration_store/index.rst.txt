@@ -1,0 +1,43 @@
+python.eu.algites.frmw.aac.core.operation_parameters.aic_operation_parameter_configuration_store
+================================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.operation_parameters.aic_operation_parameter_configuration_store
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.operation_parameters.aic_operation_parameter_configuration_store.AIcOperationParameterConfigurationStore
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationParameterConfigurationStore(store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore)
+
+   Core-owned persisted component/instance defaults for provider operation parameters.
+
+
+   .. py:attribute:: store
+
+
+   .. py:method:: set_component_value(component_id: str, provider_definition_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str, value: object, *, component_version: int) -> None
+
+
+   .. py:method:: set_instance_value(component_id: str, provider_definition_id: str, provider_instance_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str, value: object, *, component_version: int) -> None
+
+
+   .. py:method:: delete_component_value(component_id: str, provider_definition_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str) -> None
+
+
+   .. py:method:: delete_instance_value(component_id: str, provider_definition_id: str, provider_instance_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str) -> None
+
+
+   .. py:method:: component_value(component_id: str, provider_definition_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str) -> python.eu.algites.frmw.aac.core.operation_parameters.aic_configured_operation_parameter_value.AIcConfiguredOperationParameterValue | None
+
+
+   .. py:method:: instance_value(component_id: str, provider_definition_id: str, provider_instance_id: str, capability_id: str, capability_version: int, operation_id: str, parameter_id: str) -> python.eu.algites.frmw.aac.core.operation_parameters.aic_configured_operation_parameter_value.AIcConfiguredOperationParameterValue | None
+
+

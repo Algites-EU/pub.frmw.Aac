@@ -1,0 +1,44 @@
+python.eu.algites.frmw.aac.core.schemas.registry
+================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.schemas.registry
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.schemas.registry.AAC_SCHEMA_ID_KEY
+   python.eu.algites.frmw.aac.core.schemas.registry.AAC_SCHEMA_VERSION_KEY
+   python.eu.algites.frmw.aac.core.schemas.registry.AAC_DATA_ENTITY_REFERENCE_KEY
+   python.eu.algites.frmw.aac.core.schemas.registry.DefaultingDraft202012Validator
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.schemas.registry.schema_identity
+
+
+Module Contents
+---------------
+
+.. py:data:: AAC_SCHEMA_ID_KEY
+   :value: 'x-aac-schema-id'
+
+
+.. py:data:: AAC_SCHEMA_VERSION_KEY
+   :value: 'x-aac-schema-version'
+
+
+.. py:data:: AAC_DATA_ENTITY_REFERENCE_KEY
+   :value: 'x-aac-data-entity-reference'
+
+
+.. py:function:: schema_identity(schema: Mapping[str, object]) -> tuple[str, int]
+
+.. py:data:: DefaultingDraft202012Validator
+

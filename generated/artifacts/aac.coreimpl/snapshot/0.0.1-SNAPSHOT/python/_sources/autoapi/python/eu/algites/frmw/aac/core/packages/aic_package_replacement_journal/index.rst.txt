@@ -1,0 +1,87 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_replacement_journal
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_replacement_journal
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_replacement_journal.AIcPackageReplacementJournal
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_replacement_journal.manifest_to_raw
+   python.eu.algites.frmw.aac.core.packages.aic_package_replacement_journal.manifest_from_raw
+
+
+Module Contents
+---------------
+
+.. py:function:: manifest_to_raw(manifest: eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest) -> dict[str, object]
+
+.. py:function:: manifest_from_raw(raw: Mapping[str, object]) -> eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest
+
+.. py:class:: AIcPackageReplacementJournal(layout: eu.algites.frmw.aac.core.packages.api.AIcPackageStoreLayout, selection_manifest_store: python.eu.algites.frmw.aac.core.packages.aic_durable_package_selection_manifest_store.AIcDurablePackageSelectionManifestStore, core_state_store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore)
+
+   Package-replacement binding of the generic durable persistence transaction journal.
+
+
+   .. py:attribute:: layout
+
+
+   .. py:attribute:: state_root
+
+
+   .. py:attribute:: selection_manifest_store
+
+
+   .. py:attribute:: core_state_store
+
+
+   .. py:attribute:: journal
+
+
+   .. py:property:: transactions_root
+      :type: pathlib.Path
+
+
+
+   .. py:property:: active_pointer
+      :type: pathlib.Path
+
+
+
+   .. py:method:: active_transaction_id() -> str | None
+
+
+   .. py:method:: begin(application_scope_id: str, source_manifest: eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest, target_manifest: eu.algites.frmw.aac.core.packages.api.AIcPackageSelectionManifest, packages: tuple[eu.algites.frmw.aac.core.packages.api.AIcStoredPackage, Ellipsis], core_state_snapshot) -> python.eu.algites.frmw.aac.core.packages.aic_package_replacement_journal_handle.AIcPackageReplacementJournalHandle
+
+
+   .. py:method:: mark_cutover_started(transaction_id: str, source_snapshot=None) -> None
+
+
+   .. py:method:: release_cutover_lock() -> None
+
+
+   .. py:method:: mark_target_committed(transaction_id: str) -> None
+
+
+   .. py:method:: mark_rolled_back(transaction_id: str, diagnostics: tuple[str, Ellipsis] = ()) -> None
+
+
+   .. py:method:: mark_cleanup_completed(transaction_id: str, diagnostics: tuple[str, Ellipsis] = ()) -> None
+
+
+   .. py:method:: finish(transaction_id: str) -> None
+
+
+   .. py:method:: recover(package_store) -> eu.algites.frmw.aac.core.packages.api.AIcPackageTransactionRecovery | None
+
+

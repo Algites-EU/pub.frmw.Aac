@@ -1,0 +1,27 @@
+python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_refresh_planner
+===========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_refresh_planner
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.entitlement.aic_entitlement_refresh_planner.AIcEntitlementRefreshPlanner
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcEntitlementRefreshPlanner
+
+   Find the earliest effective-entitlement transition cached by Core.
+
+
+   .. py:method:: due(contexts: tuple[eu.algites.frmw.aac.core.entitlement.api.AIcEntitlementContext, Ellipsis], now: datetime.datetime | None = None) -> bool
+      :staticmethod:
+
+
+

@@ -1,0 +1,104 @@
+python.eu.algites.frmw.aac.core.lifecycle.ain_lifecycle_stage
+=============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.lifecycle.ain_lifecycle_stage
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.lifecycle.ain_lifecycle_stage.AInLifecycleStage
+
+
+Module Contents
+---------------
+
+.. py:class:: AInLifecycleStage
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   str(object='') -> str
+   str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+   Create a new string object from the given object. If encoding or
+   errors is specified, then the object must expose a data buffer
+   that will be decoded using the given encoding and error handler.
+   Otherwise, returns the result of object.__str__() (if defined)
+   or repr(object).
+   encoding defaults to 'utf-8'.
+   errors defaults to 'strict'.
+
+
+   .. py:attribute:: DISCOVER
+      :value: 'DISCOVER'
+
+
+
+   .. py:attribute:: VERIFY
+      :value: 'VERIFY'
+
+
+
+   .. py:attribute:: ADMIT_CONTRACTS
+      :value: 'ADMIT_CONTRACTS'
+
+
+
+   .. py:attribute:: PROVISION
+      :value: 'PROVISION'
+
+
+
+   .. py:attribute:: VALIDATE
+      :value: 'VALIDATE'
+
+
+
+   .. py:attribute:: EVALUATE_ENTITLEMENT
+      :value: 'EVALUATE_ENTITLEMENT'
+
+
+
+   .. py:attribute:: RESOLVE
+      :value: 'RESOLVE'
+
+
+
+   .. py:attribute:: INSTANTIATE
+      :value: 'INSTANTIATE'
+
+
+
+   .. py:attribute:: WIRE
+      :value: 'WIRE'
+
+
+
+   .. py:attribute:: ACTIVATABLE
+      :value: 'ACTIVATABLE'
+
+
+
+   .. py:attribute:: ACTIVATE
+      :value: 'ACTIVATE'
+
+
+
+   .. py:attribute:: SUSPEND
+      :value: 'SUSPEND'
+
+
+
+   .. py:attribute:: DEACTIVATE
+      :value: 'DEACTIVATE'
+
+
+
+   .. py:attribute:: UNPROVISION
+      :value: 'UNPROVISION'
+
+
+

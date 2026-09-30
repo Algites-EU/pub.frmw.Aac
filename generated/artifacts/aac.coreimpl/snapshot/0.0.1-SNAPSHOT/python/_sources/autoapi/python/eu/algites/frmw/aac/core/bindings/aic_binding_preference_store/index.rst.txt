@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.bindings.aic_binding_preference_store
+=====================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.bindings.aic_binding_preference_store
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.bindings.aic_binding_preference_store.AIcBindingPreferenceStore
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcBindingPreferenceStore(store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore | None = None)
+
+   .. py:attribute:: store
+
+
+   .. py:method:: key(consumer_instance_id: str, requirement_id: str) -> str
+      :staticmethod:
+
+
+
+   .. py:method:: put(preference: eu.algites.frmw.aac.core.instances.api.AIcBindingPreference) -> None
+
+
+   .. py:method:: get(consumer_instance_id: str, requirement_id: str) -> eu.algites.frmw.aac.core.instances.api.AIcBindingPreference | None
+
+
+   .. py:method:: delete(consumer_instance_id: str, requirement_id: str) -> None
+
+
+   .. py:method:: all() -> tuple[eu.algites.frmw.aac.core.instances.api.AIcBindingPreference, Ellipsis]
+
+

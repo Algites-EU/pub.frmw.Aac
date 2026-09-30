@@ -1,0 +1,39 @@
+python.eu.algites.frmw.aac.core.authorization.aic_component_authorization_grant_store
+=====================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.authorization.aic_component_authorization_grant_store
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.authorization.aic_component_authorization_grant_store.AIcComponentAuthorizationGrantStore
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcComponentAuthorizationGrantStore(store: eu.algites.frmw.aac.core.persistence.api.AIiStateStore | None = None)
+
+   .. py:attribute:: store
+
+
+   .. py:method:: key(consumer_instance_id: str, requirement_id: str) -> str
+      :staticmethod:
+
+
+
+   .. py:method:: put(grant: eu.algites.frmw.aac.core.authorization.api.AIcComponentAuthorizationGrant) -> None
+
+
+   .. py:method:: get(consumer_instance_id: str, requirement_id: str) -> eu.algites.frmw.aac.core.authorization.api.AIcComponentAuthorizationGrant | None
+
+
+   .. py:method:: delete(consumer_instance_id: str, requirement_id: str) -> None
+
+
+   .. py:method:: all() -> tuple[eu.algites.frmw.aac.core.authorization.api.AIcComponentAuthorizationGrant, Ellipsis]
+
+

@@ -1,0 +1,48 @@
+python.eu.algites.frmw.aac.core.aix_permission_denied
+=====================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.aix_permission_denied
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.aix_permission_denied.AIxPermissionDenied
+
+
+Module Contents
+---------------
+
+.. py:exception:: AIxPermissionDenied(message: str = 'permission for operation is missing', *, capability_id: str | None = None, capability_version: int | None = None, permission_id: str | None = None, retry_disposition=None, remediation_hint: str | None = None)
+
+   Bases: :py:obj:`python.eu.algites.frmw.aac.core.aix_aac_error.AIxAACError`
+
+
+   Standard provider operation denial based on the current entitlement context.
+
+
+   .. py:attribute:: capability_id
+      :value: None
+
+
+
+   .. py:attribute:: capability_version
+      :value: None
+
+
+
+   .. py:attribute:: permission_id
+      :value: None
+
+
+
+   .. py:attribute:: retry_disposition
+
+
+   .. py:attribute:: remediation_hint
+      :value: None
+
+
+

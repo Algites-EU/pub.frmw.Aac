@@ -1,0 +1,13 @@
+ManifestVersion: 1
+Artifact:
+  RepositoryId: pub.frmw.Aac
+  LocalArtifactId: aac.coreimpl
+  ArtifactCoordinateId: pub.frmw.Aac_aac.coreimpl
+  GroupId: eu.algites.frmw.aac
+  Version: ""
+  SourcePath: aac/coreimpl
+  StructureKind: artifact
+  Name: "Algites Application Components Core Implementation"
+  Description: "Reusable implementations of the Algites Application Components"
+SourceMetadata:
+  DescriptorHierarchy:

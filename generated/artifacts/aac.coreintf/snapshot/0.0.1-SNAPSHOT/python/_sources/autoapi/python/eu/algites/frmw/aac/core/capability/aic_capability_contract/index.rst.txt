@@ -1,0 +1,65 @@
+python.eu.algites.frmw.aac.core.capability.aic_capability_contract
+==================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.capability.aic_capability_contract
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.capability.aic_capability_contract.AIcCapabilityContract
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcCapabilityContract
+
+   .. py:attribute:: capability
+      :type:  python.eu.algites.frmw.aac.core.capability.aic_capability_ref.AIcCapabilityRef
+
+
+   .. py:attribute:: group_id
+      :type:  str
+
+
+   .. py:attribute:: operations
+      :type:  tuple[python.eu.algites.frmw.aac.core.capability.aic_capability_operation.AIcCapabilityOperation, Ellipsis]
+
+
+   .. py:attribute:: authorization_permissions
+      :type:  tuple[python.eu.algites.frmw.aac.core.capability.aic_authorization_permission_descriptor.AIcAuthorizationPermissionDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: name
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: description
+      :type:  python.eu.algites.frmw.aac.core.presentation.api.AIcDisplayText | None
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: binding_qualifiers_schema
+      :type:  python.eu.algites.frmw.aac.core.capability.aic_schema_ref.AIcSchemaRef | None
+      :value: None
+
+
+
+   .. py:method:: operation(operation_id: str) -> python.eu.algites.frmw.aac.core.capability.aic_capability_operation.AIcCapabilityOperation
+
+
+   .. py:method:: authorization_permission(permission_id: str) -> python.eu.algites.frmw.aac.core.capability.aic_authorization_permission_descriptor.AIcAuthorizationPermissionDescriptor
+
+

@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.verification.aic_python_package_verifier
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.verification.aic_python_package_verifier
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.verification.aic_python_package_verifier.AIcPythonPackageVerifier
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPythonPackageVerifier
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.verification.api.AIiPackageVerifier`
+
+
+   Baseline Python-profile verifier.
+
+   It verifies that a package-backed component resolves to an importable module. Signature/trust
+   verification can be supplied by replacing this Core-owned verifier.
+
+
+   .. py:method:: verify(verification_input: eu.algites.frmw.aac.core.verification.api.AIcVerificationInput) -> eu.algites.frmw.aac.core.verification.api.AIcVerificationOutput
+
+

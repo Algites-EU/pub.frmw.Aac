@@ -1,0 +1,35 @@
+python.eu.algites.frmw.aac.core.bootstrap.aic_security_bootstrap_loader
+=======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.bootstrap.aic_security_bootstrap_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.bootstrap.aic_security_bootstrap_loader.AIcSecurityBootstrapLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSecurityBootstrapLoader
+
+   Load the product-supplied fixed-schema security bootstrap.
+
+   The source itself is an external trust boundary. This loader validates structure; a
+   product/installation decides which source path/bytes are trusted before calling it.
+
+
+   .. py:method:: load_file(path: str | pathlib.Path) -> eu.algites.frmw.aac.core.authentication.api.AIcSecurityBootstrap
+      :staticmethod:
+
+
+
+   .. py:method:: load_text(text: str, source: str = '<memory>') -> eu.algites.frmw.aac.core.authentication.api.AIcSecurityBootstrap
+      :staticmethod:
+
+
+

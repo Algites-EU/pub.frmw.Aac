@@ -1,0 +1,82 @@
+python.eu.algites.frmw.aac.core.interaction.aic_operation_interaction_controller
+================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.interaction.aic_operation_interaction_controller
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.interaction.aic_operation_interaction_controller.AIcOperationInteractionController
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcOperationInteractionController(listener: Callable[[eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionProviderToCallerMessage], None] | None = None, *, caller_state: eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionCallerToProviderMessage | None = None)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.invocation.api.AIiOperationInteractionCallerToProvider`
+
+
+   Thread-safe caller controller and provider interaction endpoint for one invocation.
+
+
+   .. py:method:: set_exception_factory(factory: eu.algites.frmw.aac.core.invocation.api.AIiOperationFailureExceptionFactory | None) -> None
+
+
+   .. py:method:: exception_factory() -> eu.algites.frmw.aac.core.invocation.api.AIiOperationFailureExceptionFactory | None
+
+
+   .. py:method:: declare_features(features: eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionFeatures) -> None
+
+
+   .. py:method:: report_events(events: tuple[eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionEvent, Ellipsis]) -> None
+
+
+   .. py:method:: state_result_changed() -> int
+
+
+   .. py:method:: update_state_result(state_result: object) -> int
+
+
+   .. py:method:: deliver_state_result(state_result: object, *, revision: int | None = None) -> None
+
+
+   .. py:method:: caller_snapshot() -> eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: provider_snapshot() -> eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionProviderToCallerMessage
+
+
+   .. py:method:: request_cancellation() -> eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: set_interaction_mode(mode: eu.algites.frmw.aac.core.invocation.api.AInOperationInteractionMode) -> eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: set_detail_level(level: eu.algites.frmw.aac.core.invocation.api.AInOperationInteractionDetailLevel) -> eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: set_reporting_interval_ms(value: int | None) -> eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: set_failure_detail_level(level: eu.algites.frmw.aac.core.invocation.api.AInOperationInteractionFailureDetailLevel) -> eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: set_state_result_delivery_mode(mode: eu.algites.frmw.aac.core.invocation.api.AInStateResultDeliveryMode) -> eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: request_state_result() -> eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: accept_state_result_revision(revision: int) -> eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionCallerToProviderMessage
+
+
+   .. py:method:: wait_for_terminal_state(timeout: float | None = None) -> eu.algites.frmw.aac.core.invocation.api.AIcOperationInteractionProviderToCallerMessage
+
+
+   .. py:method:: core_transition(state: eu.algites.frmw.aac.core.invocation.api.AInOperationExecutionState, *, state_result: object = None, has_state_result: bool = False) -> None
+
+

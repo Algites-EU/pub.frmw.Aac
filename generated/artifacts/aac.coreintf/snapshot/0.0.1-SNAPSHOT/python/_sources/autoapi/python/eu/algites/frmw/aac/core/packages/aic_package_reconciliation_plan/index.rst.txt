@@ -1,0 +1,31 @@
+python.eu.algites.frmw.aac.core.packages.aic_package_reconciliation_plan
+========================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.packages.aic_package_reconciliation_plan
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.packages.aic_package_reconciliation_plan.AIcPackageReconciliationPlan
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcPackageReconciliationPlan
+
+   .. py:attribute:: workspace_id
+      :type:  str
+
+
+   .. py:attribute:: policy
+      :type:  python.eu.algites.frmw.aac.core.packages.ain_package_update_policy.AInPackageUpdatePolicy
+
+
+   .. py:attribute:: actions
+      :type:  tuple[python.eu.algites.frmw.aac.core.packages.aic_package_reconciliation_action.AIcPackageReconciliationAction, Ellipsis]
+
+

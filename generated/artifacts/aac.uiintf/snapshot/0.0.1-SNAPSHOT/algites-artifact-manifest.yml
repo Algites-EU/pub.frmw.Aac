@@ -1,0 +1,13 @@
+ManifestVersion: 1
+Artifact:
+  RepositoryId: pub.frmw.Aac
+  LocalArtifactId: aac.uiintf
+  ArtifactCoordinateId: pub.frmw.Aac_aac.uiintf
+  GroupId: eu.algites.frmw.aac
+  Version: ""
+  SourcePath: aac/uiintf
+  StructureKind: artifact
+  Name: "Algites Application Components UI Interfaces"
+  Description: "Technology-neutral UI contracts and view models for AAC"
+SourceMetadata:
+  DescriptorHierarchy:

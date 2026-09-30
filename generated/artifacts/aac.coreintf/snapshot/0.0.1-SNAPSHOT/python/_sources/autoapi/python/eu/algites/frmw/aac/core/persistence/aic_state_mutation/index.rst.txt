@@ -1,0 +1,59 @@
+python.eu.algites.frmw.aac.core.persistence.aic_state_mutation
+==============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.persistence.aic_state_mutation
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.persistence.aic_state_mutation.AIcStateMutation
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcStateMutation
+
+   .. py:attribute:: kind
+      :type:  python.eu.algites.frmw.aac.core.persistence.ain_state_mutation_kind.AInStateMutationKind
+
+
+   .. py:attribute:: namespace
+      :type:  str
+
+
+   .. py:attribute:: key
+      :type:  str
+
+
+   .. py:attribute:: value
+      :type:  Mapping[str, object] | None
+      :value: None
+
+
+
+   .. py:attribute:: expected_record_revision
+      :type:  int | str | None
+      :value: None
+
+
+
+   .. py:attribute:: expect_absent
+      :type:  bool
+      :value: False
+
+
+
+   .. py:method:: put(namespace: str, key: str, value: Mapping[str, object], *, expected_record_revision: int | str | None = None, expect_absent: bool = False) -> AIcStateMutation
+      :staticmethod:
+
+
+
+   .. py:method:: delete(namespace: str, key: str, *, expected_record_revision: int | str | None = None) -> AIcStateMutation
+      :staticmethod:
+
+
+

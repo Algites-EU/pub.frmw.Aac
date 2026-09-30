@@ -1,0 +1,88 @@
+python.eu.algites.frmw.aac.core.solver.aic_solver_candidate
+===========================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.solver.aic_solver_candidate
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.solver.aic_solver_candidate.AIcSolverCandidate
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSolverCandidate
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: provides
+      :type:  tuple[tuple[str, tuple[int, Ellipsis]], Ellipsis]
+
+
+   .. py:attribute:: requires
+      :type:  tuple[python.eu.algites.frmw.aac.core.solver.aic_solver_requirement.AIcSolverRequirement, Ellipsis]
+
+
+   .. py:attribute:: persistent_schemas
+      :type:  tuple[eu.algites.frmw.aac.core.catalog.api.AIcCatalogPersistentSchema, Ellipsis]
+
+
+   .. py:attribute:: entitlements
+      :type:  tuple[eu.algites.frmw.aac.core.descriptor.api.AIcCapabilityEntitlementDescriptor, Ellipsis]
+
+
+   .. py:attribute:: entitlement_licensing_scopes
+      :type:  tuple[eu.algites.frmw.aac.core.descriptor.api.AIcEntitlementLicensingScopeDescriptor, Ellipsis]
+      :value: ()
+
+
+
+   .. py:attribute:: descriptor
+      :type:  eu.algites.frmw.aac.core.descriptor.api.AIcComponentDescriptor | None
+      :value: None
+
+
+
+   .. py:attribute:: stored_package
+      :type:  eu.algites.frmw.aac.core.packages.api.AIcStoredPackage | None
+      :value: None
+
+
+
+   .. py:attribute:: catalog_entry
+      :type:  eu.algites.frmw.aac.core.catalog.api.AIcCatalogEntry | None
+      :value: None
+
+
+
+   .. py:attribute:: catalog_artifact_id
+      :type:  str | None
+      :value: None
+
+
+
+   .. py:property:: source_id
+      :type: str | None
+
+
+
+   .. py:property:: local_state
+      :type: eu.algites.frmw.aac.core.packages.api.AInStoredPackageState | None
+
+
+
+   .. py:property:: entropy_key
+      :type: tuple
+
+
+

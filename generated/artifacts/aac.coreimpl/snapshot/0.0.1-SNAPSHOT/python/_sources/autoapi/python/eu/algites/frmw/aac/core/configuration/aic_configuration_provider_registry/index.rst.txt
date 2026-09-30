@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_registry
+=================================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_registry
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.configuration.aic_configuration_provider_registry.AIcConfigurationProviderRegistry
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcConfigurationProviderRegistry
+
+   .. py:method:: register(configuration_provider_id: str, provider: eu.algites.frmw.aac.core.configuration.api.AIiConfigurationProvider) -> None
+
+
+   .. py:method:: contains(configuration_provider_id: str) -> bool
+
+
+   .. py:method:: get(configuration_provider_id: str) -> eu.algites.frmw.aac.core.configuration.api.AIiConfigurationProvider
+
+

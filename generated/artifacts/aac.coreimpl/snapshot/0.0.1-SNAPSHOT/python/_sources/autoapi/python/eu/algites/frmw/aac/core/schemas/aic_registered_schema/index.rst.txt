@@ -1,0 +1,44 @@
+python.eu.algites.frmw.aac.core.schemas.aic_registered_schema
+=============================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.schemas.aic_registered_schema
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.schemas.aic_registered_schema.AIcRegisteredSchema
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcRegisteredSchema
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: resource_name
+      :type:  str
+
+
+   .. py:attribute:: schema
+      :type:  Mapping[str, object]
+
+
+   .. py:attribute:: source
+      :type:  str
+
+
+   .. py:property:: key
+      :type: str
+
+
+

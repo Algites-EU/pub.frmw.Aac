@@ -1,0 +1,28 @@
+python.eu.algites.frmw.aac.observation.simpleaudit.aic_simple_audit_observer
+============================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.observation.simpleaudit.aic_simple_audit_observer
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.observation.simpleaudit.aic_simple_audit_observer.AIcSimpleAuditObserver
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcSimpleAuditObserver(configuration: Mapping[str, object] | None = None)
+
+   Bases: :py:obj:`eu.algites.frmw.aac.core.runtime.api.AIiProviderRuntime`, :py:obj:`eu.algites.frmw.aac.core.observation.api.AIiObservationProvider`
+
+
+   Reference observer that writes one record per received observation input.
+
+
+   .. py:method:: observe_1(observation_input: eu.algites.frmw.aac.core.observation.api.AIcObservationInput) -> eu.algites.frmw.aac.core.observation.api.AIcObservationOutput
+
+
