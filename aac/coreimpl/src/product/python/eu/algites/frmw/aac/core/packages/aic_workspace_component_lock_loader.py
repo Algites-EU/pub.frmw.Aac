@@ -36,7 +36,7 @@ def _load_yaml(text: str, schema_name: str, source: str) -> Mapping[str, Any]:
 class AIcWorkspaceComponentLockLoader:
     @staticmethod
     def load_text(text: str, source: str = "<memory>") -> AIcWorkspaceComponentLock:
-        raw = _load_yaml(text, "workspace-component-lock_1.json", source)["WorkspaceComponentLock"]
+        raw = _load_yaml(text, "workspace-component-lock_1.jsondef.schema.json", source)["WorkspaceComponentLock"]
         return AIcWorkspaceComponentLock(
             workspace_id=str(raw["WorkspaceId"]),
             entries=tuple(

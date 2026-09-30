@@ -31,7 +31,7 @@ class AIcConfigurationProfileLoader:
             raise AIxDescriptorError(f"invalid YAML in configuration profile {source}: {exc}") from exc
         if not isinstance(raw, Mapping):
             raise AIxDescriptorError(f"{source}: configuration profile root must be a mapping")
-        schema_text = read_core_schema("configuration-profile_1.json")
+        schema_text = read_core_schema("configuration-profile_1.jsondef.schema.json")
         errors = sorted(Draft202012Validator(json.loads(schema_text)).iter_errors(raw), key=lambda error: list(error.absolute_path))
         if errors:
             rendered = []

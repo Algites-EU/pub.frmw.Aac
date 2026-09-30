@@ -108,10 +108,10 @@ class AIcActiveContractCatalog:
         self.groups = AIcCapabilityGroupCatalog(self.schema_registry)
         self._contracts: dict[tuple[str, int], AIcAdmittedContract] = {}
         try:
-            self.schema_registry.get("capability-contract_1.json")
+            self.schema_registry.get("capability-contract_1.jsondef.schema.json")
         except KeyError:
             self.schema_registry.register_text(
-                "capability-contract_1.json", read_core_schema("capability-contract_1.json"), source="AAC core schema"
+                "capability-contract_1.jsondef.schema.json", read_core_schema("capability-contract_1.jsondef.schema.json"), source="AAC core schema"
             )
 
     def admit(self, contract: AIcCapabilityContract, *, source: str = "<memory>") -> AIcAdmittedContract:
@@ -161,7 +161,7 @@ class AIcActiveContractCatalog:
         if not isinstance(raw, Mapping):
             raise AIxContractAdmissionError(f"contract {source} must be a mapping")
         try:
-            self.schema_registry.normalize("capability-contract_1.json", raw, apply_defaults=False)
+            self.schema_registry.normalize("capability-contract_1.jsondef.schema.json", raw, apply_defaults=False)
         except Exception as exc:
             raise AIxContractAdmissionError(f"contract schema validation failed for {source}: {exc}") from exc
         return self.admit(_parse_contract(raw, source), source=source)
@@ -180,27 +180,27 @@ class AIcActiveContractCatalog:
     def admit_builtin_contracts(self) -> tuple[AIcAdmittedContract, ...]:
         self.groups.admit_builtin_groups()
         schema_resources = (
-            "observation-input_1.json", "observation-output_1.json",
-            "data-entity-get-record-request_1.json", "data-entity-get-record-result_1.json",
-            "data-entity-query-records-request_1.json", "data-entity-query-records-result_1.json",
-            "data-entity-query-records-running-complete-result_1.json",
-            "data-entity-query-records-running-delta-result_1.json",
-            "data-entity-apply-direct-record-changes-request_1.json",
-            "data-entity-apply-direct-record-changes-result_1.json",
-            "data-entity-apply-direct-record-changes-running-complete-result_1.json",
-            "data-entity-apply-direct-record-changes-running-delta-result_1.json",
-            "data-entity-inspect-storage-support-request_1.json",
-            "data-entity-inspect-storage-support-result_1.json",
-            "data-entity-ensure-storage-support-request_1.json",
-            "data-entity-ensure-storage-support-result_1.json",
-            "data-entity-retire-storage-support-request_1.json",
-            "data-entity-retire-storage-support-result_1.json",
-            "data-entity-create-storage-backup-request_1.json",
-            "data-entity-create-storage-backup-result_1.json",
-            "data-entity-inspect-storage-backup-request_1.json",
-            "data-entity-inspect-storage-backup-result_1.json",
-            "data-entity-restore-storage-backup-request_1.json",
-            "data-entity-restore-storage-backup-result_1.json",
+            "observation-input_1.jsondef.schema.json", "observation-output_1.jsondef.schema.json",
+            "data-entity-get-record-request_1.jsondef.schema.json", "data-entity-get-record-result_1.jsondef.schema.json",
+            "data-entity-query-records-request_1.jsondef.schema.json", "data-entity-query-records-result_1.jsondef.schema.json",
+            "data-entity-query-records-running-complete-result_1.jsondef.schema.json",
+            "data-entity-query-records-running-delta-result_1.jsondef.schema.json",
+            "data-entity-apply-direct-record-changes-request_1.jsondef.schema.json",
+            "data-entity-apply-direct-record-changes-result_1.jsondef.schema.json",
+            "data-entity-apply-direct-record-changes-running-complete-result_1.jsondef.schema.json",
+            "data-entity-apply-direct-record-changes-running-delta-result_1.jsondef.schema.json",
+            "data-entity-inspect-storage-support-request_1.jsondef.schema.json",
+            "data-entity-inspect-storage-support-result_1.jsondef.schema.json",
+            "data-entity-ensure-storage-support-request_1.jsondef.schema.json",
+            "data-entity-ensure-storage-support-result_1.jsondef.schema.json",
+            "data-entity-retire-storage-support-request_1.jsondef.schema.json",
+            "data-entity-retire-storage-support-result_1.jsondef.schema.json",
+            "data-entity-create-storage-backup-request_1.jsondef.schema.json",
+            "data-entity-create-storage-backup-result_1.jsondef.schema.json",
+            "data-entity-inspect-storage-backup-request_1.jsondef.schema.json",
+            "data-entity-inspect-storage-backup-result_1.jsondef.schema.json",
+            "data-entity-restore-storage-backup-request_1.jsondef.schema.json",
+            "data-entity-restore-storage-backup-result_1.jsondef.schema.json",
         )
         for resource_name in schema_resources:
             try:

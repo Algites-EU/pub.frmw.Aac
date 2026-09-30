@@ -55,7 +55,7 @@ Component:
       WriteVersion: 1
       ReadableVersions:
       - 1
-      Resource: schemas/yamlfsdes-config_1.json
+      Resource: schemas/yamlfsdes-config_1.jsondef.schema.json
     Operations:
     - Capability: _AAC.data-entity.get-record
       CapabilityVersion: 1

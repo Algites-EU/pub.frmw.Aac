@@ -13,5 +13,5 @@ def test_descriptor_and_versioned_schema_are_technology_neutral_sources():
     ).is_file()
     assert (
         artifact
-        / "src/product/jsondefs/eu/algites/frmw/aac/observation/simpleaudit/schemas/simpleaudit-config_1.json"
+        / "src/product/jsondefs/eu/algites/frmw/aac/observation/simpleaudit/schemas/simpleaudit-config_1.jsondef.schema.json"
     ).is_file()

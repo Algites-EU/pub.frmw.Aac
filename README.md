@@ -157,9 +157,9 @@ Generated types expose canonical-source ID/version metadata and, where available
 Versioned Algites-controlled schema/resource files use the `<name>_<version>` form, for example:
 
 ```text
-component-descriptor_1.json
-configuration-persisted-payload_1.json
-capability-contract_1.json
+component-descriptor_1.jsondef.schema.json
+configuration-persisted-payload_1.jsondef.schema.json
+capability-contract_1.jsondef.schema.json
 ```
 
 A schema version is independent of a component release version. Persisted configuration and Data Entities use explicit canonical schema identity/version metadata. Data Entity support separately declares readable versions, writable versions, a preferred write version and migration paths.

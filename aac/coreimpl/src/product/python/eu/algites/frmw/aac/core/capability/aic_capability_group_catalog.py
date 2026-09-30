@@ -30,10 +30,10 @@ class AIcCapabilityGroupCatalog:
         self.schema_registry = schema_registry or AIcSchemaRegistry()
         self._groups: dict[str, AIcAdmittedCapabilityGroup] = {}
         try:
-            self.schema_registry.get("capability-group_1.json")
+            self.schema_registry.get("capability-group_1.jsondef.schema.json")
         except KeyError:
             self.schema_registry.register_text(
-                "capability-group_1.json", read_core_schema("capability-group_1.json"), source="AAC core schema"
+                "capability-group_1.jsondef.schema.json", read_core_schema("capability-group_1.jsondef.schema.json"), source="AAC core schema"
             )
 
     def admit(self, group: AIcCapabilityGroup, *, source: str = "<memory>") -> AIcAdmittedCapabilityGroup:
@@ -63,7 +63,7 @@ class AIcCapabilityGroupCatalog:
         if not isinstance(raw, Mapping):
             raise AIxContractAdmissionError(f"capability-group {source} must be a mapping")
         try:
-            self.schema_registry.normalize("capability-group_1.json", raw, apply_defaults=False)
+            self.schema_registry.normalize("capability-group_1.jsondef.schema.json", raw, apply_defaults=False)
             item = raw["Group"]
             group = AIcCapabilityGroup(
                 id=str(item["Id"]),

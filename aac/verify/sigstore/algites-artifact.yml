@@ -1,6 +1,25 @@
+# yaml-language-server: $schema=https://defs.dev.algites.eu/api/yamldefs/eu/algites/tool/build/yamldefs/algites-artifact_1.yamldef.schema.json
+# $schema: https://defs.dev.algites.eu/api/yamldefs/eu/algites/tool/build/yamldefs/algites-artifact_1.yamldef.schema.json
+$schema: https://defs.dev.algites.eu/api/yamldefs/eu/algites/tool/build/yamldefs/algites-artifact_1.yamldef.schema.json
+
 Artifact:
   TechnologyKinds:
   - python
   Name: AAC Sigstore Package Verifier
   Description: Sigstore package verification provider for Algites Application 
     Components in specified technologies
+
+Dependencies:
+  - DependencyKind: modustro
+    Items:
+      - GroupId: eu.algites.frmw.aac
+        ArtifactId: pub.frmw.Aac_aac.coreintf
+        Usages: [product_implementation]
+        VersionRequirement:
+          Exact: "1.0-SNAPSHOT"
+  - DependencyKind: python
+    Items:
+      - ArtifactId: sigstore
+        Usages: [product_implementation]
+        VersionRequirement:
+          Minimum: ">=4"

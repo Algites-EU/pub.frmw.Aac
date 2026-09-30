@@ -41,7 +41,7 @@
     "Events": {
       "type": "array",
       "items": {
-        "$ref": "operation-interaction-event_1.json"
+        "$ref": "operation-interaction-event_1.jsondef.schema.json"
       }
     },
     "Features": {

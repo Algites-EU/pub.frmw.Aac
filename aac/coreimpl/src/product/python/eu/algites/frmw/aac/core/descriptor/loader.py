@@ -42,7 +42,7 @@ from .aic_descriptor_loader import AIcDescriptorLoader
 
 def _validate_raw_descriptor(raw: Mapping[str, Any], source: str) -> None:
     try:
-        schema_text = read_core_schema("component-descriptor_1.json")
+        schema_text = read_core_schema("component-descriptor_1.jsondef.schema.json")
         schema = json.loads(schema_text)
         errors = sorted(Draft202012Validator(schema).iter_errors(raw), key=lambda error: list(error.absolute_path))
     except Exception as exc:

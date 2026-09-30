@@ -9,7 +9,7 @@ def test_loads_simpleaudit_descriptor_from_package():
     descriptor = AIcDescriptorLoader.load_package("eu.algites.frmw.aac.observation.simpleaudit")
     assert descriptor.id == "_AAC.component.simpleaudit"
     assert descriptor.capability_providers[0].capabilities[0].id == "_AAC.capability.observation"
-    assert descriptor.capability_providers[0].configuration_schema.resource_name == "simpleaudit-config_1.json"
+    assert descriptor.capability_providers[0].configuration_schema.resource_name == "simpleaudit-config_1.jsondef.schema.json"
     assert descriptor.capability_providers[0].configuration_schema.schema_id == "simpleaudit-config"
     assert descriptor.capability_providers[0].configuration_schema.write_version == 1
     assert descriptor.capability_providers[0].runtime.profile is AInProviderRuntimeProfile.PROCESS

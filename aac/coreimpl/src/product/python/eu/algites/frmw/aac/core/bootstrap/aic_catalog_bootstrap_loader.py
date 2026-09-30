@@ -39,7 +39,7 @@ class AIcCatalogBootstrapLoader:
             raise AIxDescriptorError(f"invalid YAML in catalog bootstrap {source}: {exc}") from exc
         if not isinstance(raw, Mapping):
             raise AIxDescriptorError(f"{source}: catalog bootstrap root must be a mapping")
-        schema_text = read_core_schema("catalog-bootstrap_1.json")
+        schema_text = read_core_schema("catalog-bootstrap_1.jsondef.schema.json")
         schema = json.loads(schema_text)
         errors = sorted(Draft202012Validator(schema).iter_errors(raw), key=lambda error: list(error.absolute_path))
         if errors:

@@ -42,7 +42,7 @@ class AIcSecurityBootstrapLoader:
             raise AIxDescriptorError(f"invalid YAML in security bootstrap {source}: {exc}") from exc
         if not isinstance(raw, Mapping):
             raise AIxDescriptorError(f"{source}: security bootstrap root must be a mapping")
-        schema_text = read_core_schema("security-bootstrap_1.json")
+        schema_text = read_core_schema("security-bootstrap_1.jsondef.schema.json")
         schema = json.loads(schema_text)
         errors = sorted(Draft202012Validator(schema).iter_errors(raw), key=lambda error: list(error.absolute_path))
         if errors:

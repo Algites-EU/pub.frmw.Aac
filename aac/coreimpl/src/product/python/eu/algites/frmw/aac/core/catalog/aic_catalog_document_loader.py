@@ -65,7 +65,7 @@ class AIcCatalogDocumentLoader:
         format_version = int(body_probe.get("FormatVersion", 0))
         if format_version != 1:
             raise AIxPackageManagementError(f"catalog document {source} has unsupported format_version {format_version}; expected 1")
-        schema_text = read_core_schema("catalog_1.json")
+        schema_text = read_core_schema("catalog_1.jsondef.schema.json")
         schema = json.loads(schema_text)
         errors = sorted(Draft202012Validator(schema).iter_errors(raw), key=lambda error: list(error.absolute_path))
         if errors:

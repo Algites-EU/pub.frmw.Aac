@@ -29,7 +29,7 @@
           "additionalProperties": false,
           "properties": {
             "RecordRevision": {
-              "$ref": "../common/persistence/record-revision-monotonic-integer_1.json"
+              "$ref": "../common/persistence/record-revision-monotonic-integer_1.jsondef.schema.json"
             },
             "Payload": {
               "type": "object"

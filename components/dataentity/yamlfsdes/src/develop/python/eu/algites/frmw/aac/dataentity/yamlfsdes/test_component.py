@@ -27,7 +27,7 @@ def test_component_descriptor_declares_one_provider_with_all_nine_data_entity_ca
 def test_component_descriptor_and_configuration_schema_are_packaged_resources():
     package = resources.files("eu.algites.frmw.aac.dataentity.yamlfsdes")
     assert package.joinpath("component.yml").is_file()
-    assert package.joinpath("schemas/yamlfsdes-config_1.json").is_file()
+    assert package.joinpath("schemas/yamlfsdes-config_1.jsondef.schema.json").is_file()
 
 
 def test_provider_results_conform_to_builtin_capability_contract_schemas(tmp_path):

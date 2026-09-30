@@ -47,7 +47,7 @@ class AIcEntitlementBootstrapLoader:
         schema_version = int(body_probe.get("SchemaVersion", 0))
         if schema_version != 1:
             raise AIxDescriptorError(f"{source}: unsupported entitlement bootstrap schema_version {schema_version}; expected 1")
-        schema_text = read_core_schema("entitlement-bootstrap_1.json")
+        schema_text = read_core_schema("entitlement-bootstrap_1.jsondef.schema.json")
         schema = json.loads(schema_text)
         errors = sorted(Draft202012Validator(schema).iter_errors(raw), key=lambda error: list(error.absolute_path))
         if errors:

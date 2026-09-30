@@ -32,7 +32,7 @@ Component:
       WriteVersion: 1
       ReadableVersions:
       - 1
-      Resource: simpleaudit-config_1.json
+      Resource: simpleaudit-config_1.jsondef.schema.json
     InitialInstances:
     - Name: default
       Configuration:

@@ -42,7 +42,7 @@ class AIcPackageBootstrapLoader:
         schema_version = int(initial["PackageBootstrap"].get("SchemaVersion", 0))
         if schema_version != 1:
             raise ValueError(f"{source}: unsupported package bootstrap schema_version {schema_version}; expected 1")
-        raw = _load_yaml(text, "package-bootstrap_1.json", source)
+        raw = _load_yaml(text, "package-bootstrap_1.jsondef.schema.json", source)
         root = raw["PackageBootstrap"]
         layout_raw = root["Layout"]
         policy_raw = root.get("AutomationPolicy", {})

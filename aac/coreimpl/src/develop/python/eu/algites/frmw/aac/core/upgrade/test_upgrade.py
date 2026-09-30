@@ -22,11 +22,11 @@ def _write_candidate(root: Path, package: str, *, version: int, broken: bool = F
         "    def observe_1(self, observation_input): return AIcObservationOutput(accepted=True)\n",
         encoding="utf-8",
     )
-    schema_text = resources.files("eu.algites.frmw.aac.observation.simpleaudit").joinpath("schemas/simpleaudit-config_1.json").read_text(encoding="utf-8")
-    (pkg / "schemas" / "simpleaudit-config_1.json").write_text(schema_text, encoding="utf-8")
+    schema_text = resources.files("eu.algites.frmw.aac.observation.simpleaudit").joinpath("schemas/simpleaudit-config_1.jsondef.schema.json").read_text(encoding="utf-8")
+    (pkg / "schemas" / "simpleaudit-config_1.jsondef.schema.json").write_text(schema_text, encoding="utf-8")
     impl = f"{package}.missing:Nope" if broken else f"{package}.provider:AIcCandidateObserver"
     (pkg / "component.yml").write_text(
-        f'''Component:\n  Id: _AAC.component.simpleaudit\n  Version: {version}\n  CapabilityProviders:\n    - Id: observation\n      Capabilities:\n        - Id: _AAC.capability.observation\n          Versions: [1]\n      ImplementationClasses:\n        - TechnologyKind: python\n          ProviderClassName: {impl}\n      Operations:\n        - Capability: _AAC.capability.observation\n          CapabilityVersion: 1\n          Operation: observe\n          Interaction:\n            SupportedStateResultDeliveryModes: [on_demand_complete]\n      ConfigurationSchema:\n        Id: simpleaudit-config\n        WriteVersion: 1\n        ReadableVersions: [1]\n        Resource: simpleaudit-config_1.json\n      InitialInstances:\n        - Name: default\n          Configuration: {{}}\n''',
+        f'''Component:\n  Id: _AAC.component.simpleaudit\n  Version: {version}\n  CapabilityProviders:\n    - Id: observation\n      Capabilities:\n        - Id: _AAC.capability.observation\n          Versions: [1]\n      ImplementationClasses:\n        - TechnologyKind: python\n          ProviderClassName: {impl}\n      Operations:\n        - Capability: _AAC.capability.observation\n          CapabilityVersion: 1\n          Operation: observe\n          Interaction:\n            SupportedStateResultDeliveryModes: [on_demand_complete]\n      ConfigurationSchema:\n        Id: simpleaudit-config\n        WriteVersion: 1\n        ReadableVersions: [1]\n        Resource: simpleaudit-config_1.jsondef.schema.json\n      InitialInstances:\n        - Name: default\n          Configuration: {{}}\n''',
         encoding="utf-8",
     )
 

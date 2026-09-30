@@ -36,7 +36,7 @@ def _load_yaml(text: str, schema_name: str, source: str) -> Mapping[str, Any]:
 class AIcWorkspaceComponentRequirementsLoader:
     @staticmethod
     def load_text(text: str, source: str = "<memory>") -> AIcWorkspaceComponentRequirements:
-        raw = _load_yaml(text, "workspace-component-requirements_1.json", source)["WorkspaceComponentRequirements"]
+        raw = _load_yaml(text, "workspace-component-requirements_1.jsondef.schema.json", source)["WorkspaceComponentRequirements"]
         return AIcWorkspaceComponentRequirements(
             workspace_id=str(raw["WorkspaceId"]),
             update_policy=AInPackageUpdatePolicy(str(raw.get("UpdatePolicy", "manual"))),

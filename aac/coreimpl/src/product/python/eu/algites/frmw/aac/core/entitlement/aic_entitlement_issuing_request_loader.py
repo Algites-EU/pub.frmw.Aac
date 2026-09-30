@@ -70,7 +70,7 @@ class AIcEntitlementIssuingRequestLoader:
         format_version = int(data.get("FormatVersion", 0))
         if format_version != 1:
             raise AIxEntitlementError(f"{source}: unsupported entitlement issuing request format_version {format_version}; expected 1")
-        _validate(raw, "entitlement-issuing-request_1.json", source)
+        _validate(raw, "entitlement-issuing-request_1.jsondef.schema.json", source)
         scope_data = _mapping(data["RequestedLicensingScope"])
         subject_data = _mapping(data["Subject"])
         subject = AIcEntitlementSubject(

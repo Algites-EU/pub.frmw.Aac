@@ -1,9 +1,13 @@
+# yaml-language-server: $schema=https://defs.dev.algites.eu/api/yamldefs/eu/algites/tool/build/yamldefs/algites-source-repository_1.yamldef.schema.json
+# $schema: https://defs.dev.algites.eu/api/yamldefs/eu/algites/tool/build/yamldefs/algites-source-repository_1.yamldef.schema.json
+$schema: https://defs.dev.algites.eu/api/yamldefs/eu/algites/tool/build/yamldefs/algites-source-repository_1.yamldef.schema.json
+
 SourceRepository:
   Id: pub.frmw.Aac
   Name: Algites Application Components framework public repository
   Visibility: pub
 GroupId: eu.algites.frmw.aac
 Version:
-  ReleaseLine: '1'
+  ReleaseLineVersion: '1'
   Revision: 0
   QualifierKind: snapshot

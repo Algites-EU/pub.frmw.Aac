@@ -56,7 +56,7 @@ Operations:
 def test_direct_changes_schema_enforces_expected_revision_for_replace_and_delete():
     catalog = AIcActiveContractCatalog()
     catalog.admit_builtin_contracts()
-    schema = "data-entity-apply-direct-record-changes-request_1.json"
+    schema = "data-entity-apply-direct-record-changes-request_1.jsondef.schema.json"
     valid = {"Changes": [{
         "ChangeId": "c1", "Type": "replace_record", "SchemaId": "x", "Uid": "u1",
         "SchemaVersion": 2, "State": "active", "Payload": {"v": 1}, "ExpectedRecordRevision": 4
@@ -72,7 +72,7 @@ def test_direct_changes_schema_enforces_expected_revision_for_replace_and_delete
 def test_query_schema_applies_portable_defaults():
     catalog = AIcActiveContractCatalog()
     catalog.admit_builtin_contracts()
-    value = catalog.schema_registry.normalize("data-entity-query-records-request_1.json", {"SchemaId": "x"})
+    value = catalog.schema_registry.normalize("data-entity-query-records-request_1.jsondef.schema.json", {"SchemaId": "x"})
     assert value["States"] == ["active"]
     assert value["ReferenceMatch"] == "all"
     assert value["Order"] == "uid_asc"

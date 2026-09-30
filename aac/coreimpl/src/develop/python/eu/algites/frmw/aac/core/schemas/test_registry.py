@@ -6,8 +6,8 @@ from eu.algites.frmw.aac.core.schemas.registry import AIcSchemaRegistry
 
 def test_simpleaudit_defaults_are_applied():
     registry = AIcSchemaRegistry()
-    registry.register_package_resource("eu.algites.frmw.aac.observation.simpleaudit", "schemas/simpleaudit-config_1.json")
-    assert registry.normalize("simpleaudit-config_1.json", {}) == {
+    registry.register_package_resource("eu.algites.frmw.aac.observation.simpleaudit", "schemas/simpleaudit-config_1.jsondef.schema.json")
+    assert registry.normalize("simpleaudit-config_1.jsondef.schema.json", {}) == {
         "Output": {"Type": "stdout"},
         "Format": "json",
     }
@@ -15,9 +15,9 @@ def test_simpleaudit_defaults_are_applied():
 
 def test_file_output_requires_path():
     registry = AIcSchemaRegistry()
-    registry.register_package_resource("eu.algites.frmw.aac.observation.simpleaudit", "schemas/simpleaudit-config_1.json")
+    registry.register_package_resource("eu.algites.frmw.aac.observation.simpleaudit", "schemas/simpleaudit-config_1.jsondef.schema.json")
     with pytest.raises(AIxSchemaValidationError):
-        registry.normalize("simpleaudit-config_1.json", {"Output": {"Type": "file"}})
+        registry.normalize("simpleaudit-config_1.jsondef.schema.json", {"Output": {"Type": "file"}})
 
 
 def test_schema_identity_is_explicit_and_independent_from_filename():

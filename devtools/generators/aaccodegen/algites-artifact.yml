@@ -1,6 +1,34 @@
+# yaml-language-server: $schema=https://defs.dev.algites.eu/api/yamldefs/eu/algites/tool/build/yamldefs/algites-artifact_1.yamldef.schema.json
+# $schema: https://defs.dev.algites.eu/api/yamldefs/eu/algites/tool/build/yamldefs/algites-artifact_1.yamldef.schema.json
+$schema: https://defs.dev.algites.eu/api/yamldefs/eu/algites/tool/build/yamldefs/algites-artifact_1.yamldef.schema.json
+
 Artifact:
   TechnologyKinds:
   - python
   Name: Algites AAC Code Generator
   Description: Public shared generators for canonical AAC capability and Data 
     Entity technology bindings
+
+Dependencies:
+  - DependencyKind: modustro
+    Items:
+      - GroupId: eu.algites.frmw.aac
+        ArtifactId: pub.frmw.Aac_aac.coreintf
+        Usages: [product_implementation]
+        VersionRequirement:
+          Exact: "1.0-SNAPSHOT"
+      - GroupId: eu.algites.frmw.aac
+        ArtifactId: pub.frmw.Aac_aac.coreimpl
+        Usages: [product_implementation]
+        VersionRequirement:
+          Exact: "1.0-SNAPSHOT"
+  - DependencyKind: python
+    Items:
+      - ArtifactId: PyYAML
+        Usages: [product_implementation]
+        VersionRequirement:
+          Minimum: ">=6"
+      - ArtifactId: jsonschema
+        Usages: [product_implementation]
+        VersionRequirement:
+          Minimum: ">=4.20"
