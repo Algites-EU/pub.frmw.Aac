@@ -9,6 +9,7 @@
   "properties": {
     "PackageBootstrap": {
       "type": "object",
+      "description": "Package-management bootstrap configuration.",
       "required": [
         "SchemaVersion",
         "Layout"
@@ -16,10 +17,12 @@
       "additionalProperties": false,
       "properties": {
         "SchemaVersion": {
-          "const": 1
+          "const": 1,
+          "description": "Canonical schema version."
         },
         "Layout": {
           "type": "object",
+          "description": "Structured layout associated with this package bootstrap.",
           "required": [
             "ProductRoot"
           ],
@@ -27,40 +30,48 @@
           "properties": {
             "ProductRoot": {
               "type": "string",
+              "description": "Specifies the product root for this layout.",
               "minLength": 1
             },
             "PackageStoreSubdirectory": {
               "type": "string",
+              "description": "Filesystem or logical package store subdirectory used by this layout.",
               "minLength": 1,
               "default": "plugins"
             },
             "DownloadedSubdirectory": {
               "type": "string",
+              "description": "Filesystem or logical downloaded subdirectory used by this layout.",
               "minLength": 1,
               "default": "downloaded"
             },
             "InstalledSubdirectory": {
               "type": "string",
+              "description": "Filesystem or logical installed subdirectory used by this layout.",
               "minLength": 1,
               "default": "installed"
             },
             "ObsoleteSubdirectory": {
               "type": "string",
+              "description": "Filesystem or logical obsolete subdirectory used by this layout.",
               "minLength": 1,
               "default": "obsolete"
             },
             "CoreStateSubdirectory": {
               "type": "string",
+              "description": "Filesystem or logical core state subdirectory used by this layout.",
               "minLength": 1,
               "default": "aac-state"
             },
             "TransactionsSubdirectory": {
               "type": "string",
+              "description": "Filesystem or logical transactions subdirectory used by this layout.",
               "minLength": 1,
               "default": "transactions"
             },
             "CoreLockFilename": {
               "type": "string",
+              "description": "Specifies the core lock filename for this layout.",
               "minLength": 1,
               "default": "core.lock"
             }
@@ -68,6 +79,7 @@
         },
         "Sources": {
           "type": "array",
+          "description": "Lists the sources associated with this package bootstrap.",
           "items": {
             "type": "object",
             "required": [
@@ -78,69 +90,88 @@
             "properties": {
               "Id": {
                 "type": "string",
+                "description": "Stable identifier of this source.",
                 "minLength": 1
               },
               "Type": {
                 "type": "string",
+                "description": "Type discriminator for this source.",
                 "minLength": 1,
                 "default": "MANIFEST"
               },
               "Uri": {
                 "type": "string",
+                "description": "URI or URL identifying the uri associated with this source.",
                 "minLength": 1
               },
               "AuthenticationProfileId": {
                 "type": [
                   "string",
                   "null"
-                ]
+                ],
+                "description": "Stable identifier of the authentication profile associated with this source."
               },
               "VerifierId": {
                 "type": [
                   "string",
                   "null"
-                ]
+                ],
+                "description": "Stable identifier of the verifier associated with this source."
               },
               "Priority": {
                 "type": "integer",
+                "description": "Specifies the priority for this source.",
                 "default": 0
               },
               "Settings": {
-                "type": "object"
+                "type": "object",
+                "description": "Structured settings associated with this source."
               },
-              "Name": {},
-              "Description": {}
+              "Name": {
+                "description": "Human-readable name of this source."
+              },
+              "Description": {
+                "description": "Human-readable description of this source."
+              }
             }
           }
         },
         "AutomationPolicy": {
           "type": "object",
+          "description": "Structured automation policy associated with this package bootstrap.",
           "additionalProperties": false,
           "properties": {
             "VerifyOnDownload": {
               "type": "boolean",
+              "description": "Indicates whether verify on download applies to this automation policy.",
               "default": true
             },
             "RequireEntitlementForAutomaticPaidComponent": {
               "type": "boolean",
+              "description": "Indicates whether require entitlement for automatic paid component applies to this automation policy.",
               "default": true
             },
             "AllowAutomaticDownload": {
               "type": "boolean",
+              "description": "Indicates whether allow automatic download applies to this automation policy.",
               "default": true
             },
             "AllowAutomaticInstall": {
               "type": "boolean",
+              "description": "Indicates whether allow automatic install applies to this automation policy.",
               "default": true
             }
           }
         },
         "Metadata": {
-          "type": "object"
+          "type": "object",
+          "description": "Additional structured metadata associated with this package bootstrap."
         }
       }
     }
   },
   "x-aac-schema-id": "_AAC.schema.package-bootstrap",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "title": "AAC Package Bootstrap 1",
+  "description": "Defines the canonical AAC Package Bootstrap schema and its serialized data contract."
 }

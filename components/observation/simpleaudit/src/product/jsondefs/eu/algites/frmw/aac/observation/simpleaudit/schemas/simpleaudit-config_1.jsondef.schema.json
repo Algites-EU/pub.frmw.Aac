@@ -1,11 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AAC Simple Audit Configuration 1",
+  "description": "Defines the canonical AAC Simple Audit Configuration schema and its serialized data contract.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
     "Output": {
       "type": "object",
+      "description": "Structured output associated with this AAC simple audit configuration.",
       "default": {
         "Type": "stdout"
       },
@@ -24,6 +26,7 @@
             "stdout",
             "file"
           ],
+          "description": "Type discriminator for this output.",
           "default": "stdout",
           "x-aac-name": {
             "Text": "Output type",
@@ -32,6 +35,7 @@
         },
         "Path": {
           "type": "string",
+          "description": "Filesystem or logical path used by this output.",
           "minLength": 1,
           "x-aac-name": {
             "Text": "File path",
@@ -47,7 +51,8 @@
           "if": {
             "properties": {
               "Type": {
-                "const": "file"
+                "const": "file",
+                "description": "Discriminator identifying the concrete variant represented by this value."
               }
             },
             "required": [
@@ -67,6 +72,7 @@
         "json",
         "text"
       ],
+      "description": "Serialization or presentation format of this AAC simple audit configuration.",
       "default": "json",
       "x-aac-name": {
         "Text": "Format",

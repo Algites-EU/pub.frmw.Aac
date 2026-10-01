@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "_AAC.schema.persistence-transaction-plan/1",
   "title": "AAC Persistence Transaction Plan 1",
+  "description": "Defines the canonical AAC Persistence Transaction Plan schema and its serialized data contract.",
   "type": "object",
   "required": [
     "FormatVersion",
@@ -15,21 +16,26 @@
   "additionalProperties": false,
   "properties": {
     "FormatVersion": {
-      "const": 1
+      "const": 1,
+      "description": "Version of the persisted or exchanged document format."
     },
     "TransactionId": {
       "type": "string",
+      "description": "Stable identifier of the transaction associated with this AAC persistence transaction plan.",
       "minLength": 1
     },
     "TransactionType": {
       "type": "string",
+      "description": "Specifies the transaction type for this AAC persistence transaction plan.",
       "minLength": 1
     },
     "CreatedAt": {
-      "type": "string"
+      "type": "string",
+      "description": "Specifies the created at for this AAC persistence transaction plan."
     },
     "ReadSet": {
       "type": "array",
+      "description": "Lists the read set associated with this AAC persistence transaction plan.",
       "items": {
         "type": "object",
         "required": [
@@ -40,6 +46,7 @@
         "properties": {
           "RecordId": {
             "type": "string",
+            "description": "Stable identifier of the record associated with this read set.",
             "minLength": 1
           },
           "ExpectedRecordRevision": {
@@ -47,16 +54,19 @@
               "integer",
               "string",
               "null"
-            ]
+            ],
+            "description": "Record revision that must still be current for the requested mutation to succeed."
           },
           "ExpectAbsent": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Indicates whether expect absent applies to this read set."
           }
         }
       }
     },
     "WriteSet": {
       "type": "array",
+      "description": "Lists the write set associated with this AAC persistence transaction plan.",
       "items": {
         "type": "object",
         "required": [
@@ -68,10 +78,12 @@
         "properties": {
           "RecordId": {
             "type": "string",
+            "description": "Stable identifier of the record associated with this write set.",
             "minLength": 1
           },
           "Operation": {
             "type": "string",
+            "description": "Specifies the operation for this write set.",
             "minLength": 1
           },
           "TargetRecordRevision": {
@@ -79,16 +91,19 @@
               "integer",
               "string",
               "null"
-            ]
+            ],
+            "description": "Record revision expected after the planned write completes."
           },
           "Metadata": {
-            "type": "object"
+            "type": "object",
+            "description": "Additional structured metadata associated with this write set."
           }
         }
       }
     },
     "Metadata": {
-      "type": "object"
+      "type": "object",
+      "description": "Additional structured metadata associated with this AAC persistence transaction plan."
     }
   },
   "x-aac-schema-id": "_AAC.schema.persistence-transaction-plan",

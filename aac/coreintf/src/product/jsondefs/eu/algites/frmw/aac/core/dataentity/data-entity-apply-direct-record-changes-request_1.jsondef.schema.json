@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.data-entity-apply-direct-record-changes-request",
   "x-aac-schema-version": 1,
   "title": "Data Entity Apply Direct Record Changes Request 1",
+  "description": "Defines the canonical Data Entity Apply Direct Record Changes Request schema and its serialized data contract.",
   "type": "object",
   "required": [
     "Changes"
@@ -11,6 +12,7 @@
   "properties": {
     "Changes": {
       "type": "array",
+      "description": "Ordered record changes processed by this operation.",
       "minItems": 1,
       "items": {
         "oneOf": [
@@ -29,31 +31,38 @@
             "properties": {
               "ChangeId": {
                 "type": "string",
+                "description": "Caller-supplied identifier used to correlate this individual change and its result.",
                 "minLength": 1
               },
               "SchemaId": {
                 "type": "string",
+                "description": "Canonical schema identifier.",
                 "minLength": 1
               },
               "Uid": {
                 "type": "string",
+                "description": "Stable logical UID of the Data Entity record.",
                 "minLength": 1
               },
               "Type": {
-                "const": "create_record"
+                "const": "create_record",
+                "description": "Type discriminator for this change."
               },
               "SchemaVersion": {
                 "type": "integer",
+                "description": "Canonical schema version.",
                 "minimum": 1
               },
               "State": {
                 "enum": [
                   "active",
                   "tombstone"
-                ]
+                ],
+                "description": "Lifecycle or storage state of this change."
               },
               "Payload": {
-                "type": "object"
+                "type": "object",
+                "description": "Canonical payload carried by this change."
               }
             }
           },
@@ -73,31 +82,38 @@
             "properties": {
               "ChangeId": {
                 "type": "string",
+                "description": "Caller-supplied identifier used to correlate this individual change and its result.",
                 "minLength": 1
               },
               "SchemaId": {
                 "type": "string",
+                "description": "Canonical schema identifier.",
                 "minLength": 1
               },
               "Uid": {
                 "type": "string",
+                "description": "Stable logical UID of the Data Entity record.",
                 "minLength": 1
               },
               "Type": {
-                "const": "replace_record"
+                "const": "replace_record",
+                "description": "Type discriminator for this change."
               },
               "SchemaVersion": {
                 "type": "integer",
+                "description": "Canonical schema version.",
                 "minimum": 1
               },
               "State": {
                 "enum": [
                   "active",
                   "tombstone"
-                ]
+                ],
+                "description": "Lifecycle or storage state of this change."
               },
               "Payload": {
-                "type": "object"
+                "type": "object",
+                "description": "Canonical payload carried by this change."
               },
               "ExpectedRecordRevision": {
                 "oneOf": [
@@ -109,7 +125,8 @@
                     "type": "string",
                     "minLength": 1
                   }
-                ]
+                ],
+                "description": "Record revision that must still be current for the requested mutation to succeed."
               }
             }
           },
@@ -126,18 +143,22 @@
             "properties": {
               "ChangeId": {
                 "type": "string",
+                "description": "Caller-supplied identifier used to correlate this individual change and its result.",
                 "minLength": 1
               },
               "SchemaId": {
                 "type": "string",
+                "description": "Canonical schema identifier.",
                 "minLength": 1
               },
               "Uid": {
                 "type": "string",
+                "description": "Stable logical UID of the Data Entity record.",
                 "minLength": 1
               },
               "Type": {
-                "const": "delete_record"
+                "const": "delete_record",
+                "description": "Type discriminator for this change."
               },
               "ExpectedRecordRevision": {
                 "oneOf": [
@@ -149,7 +170,8 @@
                     "type": "string",
                     "minLength": 1
                   }
-                ]
+                ],
+                "description": "Record revision that must still be current for the requested mutation to succeed."
               }
             }
           }

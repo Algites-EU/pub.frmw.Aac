@@ -10,7 +10,11 @@ def test_generated_python_binding_contains_dtos_authorization_and_is_invokable()
     catalog.schema_registry.register("site-edit-input_1.json", {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "x-aac-schema-id": "_AO.schema.site-edit-input", "x-aac-schema-version": 1, "type": "object",
-        "properties": {"site_id": {"type": "string"}, "DisplayName": {"type": "string"}},
+        "description": "Request data used to edit one site.",
+        "properties": {
+            "site_id": {"type": "string", "description": "Stable site identifier."},
+            "DisplayName": {"type": "string", "description": "New human-readable site name."},
+        },
         "required": ["site_id", "display_name"],
     })
     catalog.schema_registry.register("site-edit-output_1.json", {
@@ -47,9 +51,11 @@ Operations:
     input_dto = namespace["AIcgdSiteEditInput_1"]
     assert interface.__aac_source_id__ == "_AO.core.siteManagement"
     assert interface.__aac_source_version__ == 1
-    assert input_dto.__aac_source_id__ == "_AO.schema.site-edit-input"
-    assert input_dto.__aac_source_version__ == 1
-    assert input_dto.__aac_source_resource__ == "site-edit-input_1.json"
+    assert input_dto.__canonical_source_id__ == "_AO.schema.site-edit-input"
+    assert input_dto.__canonical_source_version__ == 1
+    assert input_dto.__canonical_source_resource__ == "site-edit-input_1.json"
+    assert "Request data used to edit one site." in input_dto.__doc__
+    assert "site_id: Stable site identifier." in input_dto.__doc__
     assert getattr(interface.edit_site_1, "__aac_authorization_all_of__") == ("EDIT_SITE",)
     assert getattr(interface.edit_site_1, "__aac_authorization_any_of__") == ("STANDARD_EDITOR", "ADVANCED_EDITOR")
 
@@ -103,9 +109,9 @@ Operations:
     interface = namespace["AIigSourceRepositoryIdentification_1"]
     dto = namespace["AIcgdRepositoryIdentity_1"]
     assert interface.__aac_source_resource__ == "source-repository-identification_1.yml"
-    assert dto.__aac_source_id__ == "_AAC.schema.repository-identity"
-    assert dto.__aac_source_version__ == 1
-    assert dto.__aac_source_resource__ == "repository-identity_1.json"
+    assert dto.__canonical_source_id__ == "_AAC.schema.repository-identity"
+    assert dto.__canonical_source_version__ == 1
+    assert dto.__canonical_source_resource__ == "repository-identity_1.json"
 
 
 def test_data_entity_binding_generator_uses_versioned_view_methods_and_codec():
@@ -117,8 +123,9 @@ def test_data_entity_binding_generator_uses_versioned_view_methods_and_codec():
         "x-aac-schema-id": "_AO.entity.site",
         "x-aac-schema-version": 2,
         "type": "object",
+        "description": "Canonical site data stored by the Data Entity provider.",
         "required": ["Name"],
-        "properties": {"Name": {"type": "string"}},
+        "properties": {"Name": {"type": "string", "description": "Human-readable site name."}},
         "additionalProperties": False,
     })
     from eu.algites.frmw.aac.codegen import AIcPythonDataEntityBindingGenerator
@@ -129,6 +136,8 @@ def test_data_entity_binding_generator_uses_versioned_view_methods_and_codec():
     assert "def set_name_2" in source
     assert "class AIcgSiteCodec_2" in source
     assert "__aac_source_id__ = '_AO.entity.site'" in source
+    assert "Canonical site data stored by the Data Entity provider." in source
+    assert "Human-readable site name." in source
 
 
 def test_generated_caller_materializes_operation_specific_failure_exception_and_allows_typed_override():
@@ -216,6 +225,7 @@ def test_generated_binding_rejects_ambiguous_schema_name_projection():
             "$schema": "https://json-schema.org/draft/2020-12/schema",
             "x-aac-schema-id": schema_id,
             "x-aac-schema-version": 1,
+            "x-jsondefs-name": "same-name",
             "type": "object",
         })
     admitted = catalog.admit_text('''

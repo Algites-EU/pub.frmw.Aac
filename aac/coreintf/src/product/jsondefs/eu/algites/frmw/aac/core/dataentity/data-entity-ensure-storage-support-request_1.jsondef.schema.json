@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.data-entity-ensure-storage-support-request",
   "x-aac-schema-version": 1,
   "title": "Data Entity Ensure Storage Support Request 1",
+  "description": "Defines the canonical Data Entity Ensure Storage Support Request schema and its serialized data contract.",
   "type": "object",
   "required": [
     "SchemaId",
@@ -13,17 +14,21 @@
   "properties": {
     "SchemaId": {
       "type": "string",
+      "description": "Canonical schema identifier.",
       "minLength": 1
     },
     "SchemaVersion": {
       "type": "integer",
+      "description": "Canonical schema version.",
       "minimum": 1
     },
     "CanonicalSchema": {
-      "type": "object"
+      "type": "object",
+      "description": "Canonical schema document whose storage support is being ensured."
     },
     "References": {
       "type": "array",
+      "description": "Reference definitions or filters associated with this data entity ensure storage support request.",
       "items": {
         "type": "object",
         "required": [
@@ -34,6 +39,7 @@
         "properties": {
           "SchemaPath": {
             "type": "array",
+            "description": "Path within the canonical schema that contains the reference.",
             "minItems": 1,
             "items": {
               "type": "string",
@@ -42,6 +48,7 @@
           },
           "TargetSchemaId": {
             "type": "string",
+            "description": "Canonical schema identifier targeted by the reference.",
             "minLength": 1
           }
         }

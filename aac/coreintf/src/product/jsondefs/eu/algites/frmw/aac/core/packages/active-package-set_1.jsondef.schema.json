@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "_AAC.schema.active-package-set/1",
   "title": "AAC Active Package Set 1",
+  "description": "Defines the canonical AAC Active Package Set schema and its serialized data contract.",
   "type": "object",
   "required": [
     "FormatVersion",
@@ -11,20 +12,24 @@
   "additionalProperties": false,
   "properties": {
     "FormatVersion": {
-      "const": 1
+      "const": 1,
+      "description": "Version of the persisted or exchanged document format."
     },
     "RecordRevision": {
       "type": "integer",
+      "description": "Storage-provider record revision used for optimistic concurrency and change tracking.",
       "minimum": 0
     },
     "LastTransactionId": {
       "type": [
         "string",
         "null"
-      ]
+      ],
+      "description": "Stable identifier of the last transaction associated with this AAC active package set."
     },
     "Selections": {
       "type": "array",
+      "description": "Lists the selections associated with this AAC active package set.",
       "items": {
         "type": "object",
         "required": [
@@ -38,34 +43,41 @@
         "properties": {
           "ApplicationScopeId": {
             "type": "string",
+            "description": "Stable identifier of the application scope associated with this selection.",
             "minLength": 1
           },
           "ComponentId": {
             "type": "string",
+            "description": "Stable identifier of the AAC component associated with this selection.",
             "minLength": 1
           },
           "ComponentVersion": {
             "type": "integer",
+            "description": "Version of the AAC component associated with this selection.",
             "minimum": 1
           },
           "Sha256": {
             "type": "string",
+            "description": "Specifies the sha256 for this selection.",
             "minLength": 1
           },
           "SelectedAt": {
-            "type": "string"
+            "type": "string",
+            "description": "Specifies the selected at for this selection."
           },
           "PreviousSha256": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "Specifies the previous sha256 for this selection."
           },
           "PreviousVersion": {
             "type": [
               "integer",
               "null"
             ],
+            "description": "Version of the previous associated with this selection.",
             "minimum": 1
           }
         }

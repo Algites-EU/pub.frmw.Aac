@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.yamlfsdes-config",
   "x-aac-schema-version": 1,
   "title": "YAML File-System Data Entity Storage Configuration 1",
+  "description": "Defines the canonical YAML File-System Data Entity Storage Configuration schema and its serialized data contract.",
   "type": "object",
   "required": [
     "RootDirectory"

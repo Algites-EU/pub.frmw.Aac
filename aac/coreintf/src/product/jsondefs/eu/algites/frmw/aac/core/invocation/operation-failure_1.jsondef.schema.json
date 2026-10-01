@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.operation-failure",
   "x-aac-schema-version": 1,
   "title": "Operation Failure 1",
+  "description": "Defines the canonical Operation Failure schema and its serialized data contract.",
   "type": "object",
   "required": [
     "SystemMessage",
@@ -16,10 +17,12 @@
       "properties": {
         "Text": {
           "type": "string",
+          "description": "Human-readable display text.",
           "minLength": 1
         },
         "ResourceKey": {
           "type": "string",
+          "description": "Optional localization resource key for the human-readable text.",
           "minLength": 1
         }
       },
@@ -34,12 +37,14 @@
             "ResourceKey"
           ]
         }
-      ]
+      ],
+      "description": "Defines the reusable display text structure used by this canonical schema."
     }
   },
   "properties": {
     "SystemMessage": {
       "type": "string",
+      "description": "Technical failure message intended for diagnostics and operators.",
       "minLength": 1
     },
     "UserMessage": {
@@ -50,10 +55,12 @@
         {
           "type": "null"
         }
-      ]
+      ],
+      "description": "Optional human-facing failure message suitable for presentation to a user."
     },
     "ExceptionType": {
       "type": "string",
+      "description": "Technology-level exception type or class name associated with the failure.",
       "minLength": 1
     },
     "ErrorCode": {
@@ -61,17 +68,22 @@
         "string",
         "null"
       ],
+      "description": "Stable machine-readable error code when one is available.",
       "minLength": 1
     },
     "StackTrace": {
       "type": [
         "string",
         "null"
-      ]
+      ],
+      "description": "Optional diagnostic stack trace associated with the failure."
     },
-    "Extension": {},
+    "Extension": {
+      "description": "Operation-specific structured failure extension payload."
+    },
     "Details": {
-      "type": "object"
+      "type": "object",
+      "description": "Additional structured details associated with this operation failure."
     }
   }
 }

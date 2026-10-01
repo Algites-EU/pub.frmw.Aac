@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.data-entity-envelope",
   "x-aac-schema-version": 1,
   "title": "AAC Data Entity Envelope 1",
+  "description": "Defines the canonical AAC Data Entity Envelope schema and its serialized data contract.",
   "type": "object",
   "required": [
     "Uid",
@@ -16,14 +17,17 @@
   "properties": {
     "Uid": {
       "type": "string",
+      "description": "Stable logical UID of the Data Entity record.",
       "minLength": 1
     },
     "SchemaId": {
       "type": "string",
+      "description": "Canonical schema identifier.",
       "minLength": 1
     },
     "SchemaVersion": {
       "type": "integer",
+      "description": "Canonical schema version.",
       "minimum": 1
     },
     "RecordRevision": {
@@ -36,16 +40,19 @@
           "type": "string",
           "minLength": 1
         }
-      ]
+      ],
+      "description": "Storage-provider record revision used for optimistic concurrency and change tracking."
     },
     "State": {
       "enum": [
         "active",
         "tombstone"
-      ]
+      ],
+      "description": "Lifecycle or storage state of this AAC data entity envelope."
     },
     "Payload": {
-      "type": "object"
+      "type": "object",
+      "description": "Canonical payload carried by this AAC data entity envelope."
     }
   }
 }

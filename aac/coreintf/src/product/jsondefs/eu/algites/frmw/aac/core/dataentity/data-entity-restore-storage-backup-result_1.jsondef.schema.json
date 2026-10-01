@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.data-entity-restore-storage-backup-result",
   "x-aac-schema-version": 1,
   "title": "Data Entity Restore Storage Backup Result 1",
+  "description": "Defines the canonical Data Entity Restore Storage Backup Result schema and its serialized data contract.",
   "type": "object",
   "required": [
     "Restored",
@@ -14,28 +15,34 @@
   "additionalProperties": false,
   "properties": {
     "Restored": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates whether restore processing completed successfully."
     },
     "BackupFile": {
       "type": "string",
+      "description": "Path or resource identifying the storage backup file.",
       "minLength": 1
     },
     "Mode": {
       "enum": [
         "empty_only",
         "replace_all"
-      ]
+      ],
+      "description": "Selects the operation mode for this request."
     },
     "SchemaVersionCount": {
       "type": "integer",
+      "description": "Number of distinct canonical schema versions represented by the backup.",
       "minimum": 0
     },
     "RecordCount": {
       "type": "integer",
+      "description": "Number of Data Entity records represented by the backup.",
       "minimum": 0
     },
     "Metadata": {
-      "type": "object"
+      "type": "object",
+      "description": "Additional structured metadata associated with this data entity restore storage backup result."
     }
   }
 }

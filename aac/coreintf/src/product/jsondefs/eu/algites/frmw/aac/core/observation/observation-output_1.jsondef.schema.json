@@ -1,19 +1,22 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AAC Observation Output 1",
+  "description": "Defines the canonical AAC Observation Output schema and its serialized data contract.",
   "type": "object",
   "required": [
     "accepted"
   ],
   "properties": {
     "accepted": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates whether the observation or request was accepted."
     },
     "diagnostic": {
       "type": [
         "string",
         "null"
-      ]
+      ],
+      "description": "Diagnostic information produced while processing this operation."
     }
   },
   "x-aac-schema-id": "_AAC.schema.observation-output",

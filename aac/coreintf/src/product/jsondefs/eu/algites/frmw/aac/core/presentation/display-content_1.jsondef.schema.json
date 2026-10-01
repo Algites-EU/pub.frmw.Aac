@@ -3,15 +3,18 @@
   "x-aac-schema-id": "_AAC.schema.display-content",
   "x-aac-schema-version": 1,
   "title": "Display Content 1",
+  "description": "Defines the canonical Display Content schema and its serialized data contract.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
     "Content": {
       "type": "string",
+      "description": "Human-readable display content.",
       "minLength": 1
     },
     "ResourceKey": {
       "type": "string",
+      "description": "Optional localization resource key for the human-readable text.",
       "minLength": 1
     },
     "Format": {
@@ -20,6 +23,7 @@
         "markdown",
         "html"
       ],
+      "description": "Serialization or presentation format of this display content.",
       "default": "plain_text"
     }
   },

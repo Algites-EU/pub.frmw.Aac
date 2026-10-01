@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.operation-interaction-event",
   "x-aac-schema-version": 1,
   "title": "Operation Interaction Event 1",
+  "description": "Defines the canonical Operation Interaction Event schema and its serialized data contract.",
   "type": "object",
   "required": [
     "EventType"
@@ -15,10 +16,12 @@
       "properties": {
         "Text": {
           "type": "string",
+          "description": "Human-readable display text.",
           "minLength": 1
         },
         "ResourceKey": {
           "type": "string",
+          "description": "Optional localization resource key for the human-readable text.",
           "minLength": 1
         }
       },
@@ -33,7 +36,8 @@
             "ResourceKey"
           ]
         }
-      ]
+      ],
+      "description": "Defines the reusable display text structure used by this canonical schema."
     }
   },
   "properties": {
@@ -43,13 +47,15 @@
         "progress",
         "detail",
         "diagnostic"
-      ]
+      ],
+      "description": "Kind of interaction event represented by this entry."
     },
     "ProgressId": {
       "type": [
         "string",
         "null"
       ],
+      "description": "Identifier of the progress item represented by this event.",
       "minLength": 1
     },
     "ParentProgressId": {
@@ -57,6 +63,7 @@
         "string",
         "null"
       ],
+      "description": "Identifier of the parent progress item for nested progress reporting.",
       "minLength": 1
     },
     "PhaseId": {
@@ -64,6 +71,7 @@
         "string",
         "null"
       ],
+      "description": "Identifier of the execution phase associated with this event.",
       "minLength": 1
     },
     "Name": {
@@ -74,7 +82,8 @@
         {
           "type": "null"
         }
-      ]
+      ],
+      "description": "Human-readable name of this operation interaction event."
     },
     "Description": {
       "anyOf": [
@@ -84,13 +93,15 @@
         {
           "type": "null"
         }
-      ]
+      ],
+      "description": "Human-readable description of this operation interaction event."
     },
     "Current": {
       "type": [
         "number",
         "null"
       ],
+      "description": "Current progress value.",
       "minimum": 0
     },
     "Total": {
@@ -98,6 +109,7 @@
         "number",
         "null"
       ],
+      "description": "Expected total progress value when known.",
       "minimum": 0
     },
     "Unit": {
@@ -105,6 +117,7 @@
         "string",
         "null"
       ],
+      "description": "Unit used for progress values.",
       "minLength": 1
     },
     "Severity": {
@@ -112,17 +125,20 @@
         "info",
         "warning",
         "error"
-      ]
+      ],
+      "description": "Severity level associated with this event or diagnostic."
     },
     "Code": {
       "type": [
         "string",
         "null"
       ],
+      "description": "Stable machine-readable code associated with this event or diagnostic.",
       "minLength": 1
     },
     "Details": {
-      "type": "object"
+      "type": "object",
+      "description": "Additional structured details associated with this operation interaction event."
     }
   },
   "allOf": [
@@ -130,7 +146,8 @@
       "if": {
         "properties": {
           "EventType": {
-            "const": "progress"
+            "const": "progress",
+            "description": "Identifies the kind of operation-interaction event."
           }
         },
         "required": [

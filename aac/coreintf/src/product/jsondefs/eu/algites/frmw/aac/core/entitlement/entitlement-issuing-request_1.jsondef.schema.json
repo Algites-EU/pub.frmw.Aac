@@ -1,6 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AAC Entitlement Issuing Request 1",
+  "description": "Defines the canonical AAC Entitlement Issuing Request schema and its serialized data contract.",
   "type": "object",
   "required": [
     "EntitlementRequest"
@@ -9,6 +10,7 @@
   "properties": {
     "EntitlementRequest": {
       "type": "object",
+      "description": "Requested entitlement data supplied to an entitlement issuer.",
       "required": [
         "FormatVersion",
         "RequestId",
@@ -19,14 +21,17 @@
       "additionalProperties": false,
       "properties": {
         "FormatVersion": {
-          "const": 1
+          "const": 1,
+          "description": "Version of the persisted or exchanged document format."
         },
         "RequestId": {
           "type": "string",
+          "description": "Stable identifier of the request associated with this entitlement request.",
           "minLength": 1
         },
         "Subject": {
           "type": "object",
+          "description": "Structured subject associated with this entitlement request.",
           "required": [
             "Id"
           ],
@@ -34,18 +39,22 @@
           "properties": {
             "Id": {
               "type": "string",
+              "description": "Stable identifier of this subject.",
               "minLength": 1
             },
             "DisplayName": {
-              "type": "string"
+              "type": "string",
+              "description": "Specifies the display name for this subject."
             },
             "Attributes": {
-              "type": "object"
+              "type": "object",
+              "description": "Structured attributes associated with this subject."
             }
           }
         },
         "Components": {
           "type": "array",
+          "description": "Lists the components associated with this entitlement request.",
           "items": {
             "type": "object",
             "required": [
@@ -56,10 +65,12 @@
             "properties": {
               "Id": {
                 "type": "string",
+                "description": "Stable identifier of this component.",
                 "minLength": 1
               },
               "RequestedGrants": {
                 "type": "array",
+                "description": "Lists the requested grants associated with this component.",
                 "items": {
                   "type": "object",
                   "required": [
@@ -70,6 +81,7 @@
                   "properties": {
                     "Capability": {
                       "type": "object",
+                      "description": "Identity and human-facing metadata of the capability contract.",
                       "required": [
                         "Id",
                         "Version"
@@ -78,16 +90,19 @@
                       "properties": {
                         "Id": {
                           "type": "string",
+                          "description": "Stable identifier of this capability.",
                           "minLength": 1
                         },
                         "Version": {
                           "type": "integer",
+                          "description": "Version of this capability.",
                           "minimum": 1
                         }
                       }
                     },
                     "Permissions": {
                       "type": "array",
+                      "description": "Authorization or entitlement permissions associated with this requested grant.",
                       "uniqueItems": true,
                       "items": {
                         "type": "string",
@@ -101,17 +116,21 @@
           }
         },
         "GeneratedAt": {
-          "type": "string"
+          "type": "string",
+          "description": "Specifies the generated at for this entitlement request."
         },
         "Metadata": {
-          "type": "object"
+          "type": "object",
+          "description": "Additional structured metadata associated with this entitlement request."
         },
         "RequestDigest": {
           "type": "string",
+          "description": "Specifies the request digest for this entitlement request.",
           "minLength": 1
         },
         "RequestedLicensingScope": {
           "type": "object",
+          "description": "Structured requested licensing scope associated with this entitlement request.",
           "required": [
             "Type"
           ],
@@ -119,6 +138,7 @@
           "properties": {
             "Type": {
               "type": "string",
+              "description": "Type discriminator for this requested licensing scope.",
               "minLength": 1
             }
           }

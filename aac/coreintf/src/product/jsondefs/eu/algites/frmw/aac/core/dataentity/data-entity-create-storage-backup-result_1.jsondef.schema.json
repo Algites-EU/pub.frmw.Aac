@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.data-entity-create-storage-backup-result",
   "x-aac-schema-version": 1,
   "title": "Data Entity Create Storage Backup Result 1",
+  "description": "Defines the canonical Data Entity Create Storage Backup Result schema and its serialized data contract.",
   "type": "object",
   "required": [
     "BackupFile",
@@ -14,21 +15,26 @@
   "properties": {
     "BackupFile": {
       "type": "string",
+      "description": "Path or resource identifying the storage backup file.",
       "minLength": 1
     },
     "Format": {
-      "const": "zip"
+      "const": "zip",
+      "description": "Serialization or presentation format of this data entity create storage backup result."
     },
     "SchemaVersionCount": {
       "type": "integer",
+      "description": "Number of distinct canonical schema versions represented by the backup.",
       "minimum": 0
     },
     "RecordCount": {
       "type": "integer",
+      "description": "Number of Data Entity records represented by the backup.",
       "minimum": 0
     },
     "Metadata": {
-      "type": "object"
+      "type": "object",
+      "description": "Additional structured metadata associated with this data entity create storage backup result."
     }
   }
 }

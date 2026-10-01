@@ -124,7 +124,7 @@ The repository currently publishes nine AAC artifacts:
 - `aac/uiintf` — technology-neutral administration controller contract and normalized UI models.
 - `aac/uiqt` — PySide6 administration widget and Core-backed controller.
 - `devtools/aacbuilding` — repository build/test/version/convention tooling.
-- `devtools/generators/aaccodegen` — public AAC code-generation tool for capability bindings and Data Entity bindings/codecs.
+- `devtools/generators/aaccodegen` — public AAC-specific capability and Data Entity binding generator; canonical definition parsing/normalization and DTO projection are delegated to the general `pub.tool.General` defs-codegen implementation.
 
 Authoritative source lives below each artifact's `src/` tree. Generated/runtime/build output is repository-central under `build/run/<artifact-relative-path>/run/` and is not authoritative source; ordinary build/test/package/codegen work must not write derived state into artifact directories.
 
@@ -152,7 +152,7 @@ Production Python types follow the Algites naming convention:
 - `AIcg..._N` — generated non-data class;
 - `AIcgd..._N` — generated data-object/DTO class (`d` is used only when the class is explicitly a data object).
 
-Generated types expose canonical-source ID/version metadata and, where available, the canonical resource path; the same provenance is repeated in their docstring. DTO names are derived from the canonical schema identity, not merely from the operation position that references the schema, so one shared schema yields one generated type identity. `devtools/aacbuilding/src/product/python/check_conventions.py` checks the production tree.
+Generated types expose canonical-source ID/version metadata and, where available, the canonical resource path; the same provenance is repeated in their docstring. DTO names are derived by the shared canonical-definition naming profile, not from the operation position that references a schema, so one canonical definition yields one generated type identity. `devtools/aacbuilding/src/product/python/check_conventions.py` checks the production tree.
 
 Versioned Algites-controlled schema/resource files use the `<name>_<version>` form, for example:
 
@@ -370,7 +370,7 @@ The host product owns the `QApplication` and event loop. AAC supplies reusable w
 
 ### XIII. Generated bindings and presentation metadata
 
-Canonical capability contracts may define operation request/result schemas and authorization requirements. The public `devtools/generators/aaccodegen` artifact provides `AIcPythonCapabilityBindingGenerator` and `AIcPythonDataEntityBindingGenerator` plus the `aaccodegen` CLI. It generates Python capability interfaces/DTOs and versioned Data Entity view interfaces/codecs while retaining canonical source identity/version/provenance. Generated behavioral interfaces and their methods are capability-version-qualified (`AIig..._N`, `operation_N(...)`) so one provider object can safely implement several versions/capabilities at once.
+Canonical capability contracts may define operation request/result schemas and authorization requirements. The public `devtools/generators/aaccodegen` artifact provides `AIcPythonCapabilityBindingGenerator` and `AIcPythonDataEntityBindingGenerator` plus the `aaccodegen` CLI. AAC-specific capability interfaces/callers and versioned Data Entity view interfaces/codecs remain generated there, while canonical DTO projection is delegated to the general `pub.tool.General_generators.code.defscodegen` implementation so canonical documentation, names, and source provenance are governed once. Generated behavioral interfaces and their methods are capability-version-qualified (`AIig..._N`, `operation_N(...)`) so one provider object can safely implement several versions/capabilities at once.
 
 `AIcDisplayText` provides localization-ready presentation metadata with fallback text, opaque resource key, or both. JSON Schema-driven fields can use AAC presentation extensions with standard JSON Schema title/description as fallback.
 

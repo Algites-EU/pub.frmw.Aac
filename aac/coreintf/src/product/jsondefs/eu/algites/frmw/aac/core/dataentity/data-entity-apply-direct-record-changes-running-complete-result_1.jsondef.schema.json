@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.data-entity-apply-direct-record-changes-running-complete-result",
   "x-aac-schema-version": 1,
   "title": "Data Entity Apply Direct Record Changes Running Complete Result 1",
+  "description": "Defines the canonical Data Entity Apply Direct Record Changes Running Complete Result schema and its serialized data contract.",
   "type": "object",
   "required": [
     "Changes"
@@ -11,6 +12,7 @@
   "properties": {
     "Changes": {
       "type": "array",
+      "description": "Ordered record changes processed by this operation.",
       "minItems": 1,
       "items": {
         "oneOf": [
@@ -27,18 +29,22 @@
             "properties": {
               "ChangeId": {
                 "type": "string",
+                "description": "Caller-supplied identifier used to correlate this individual change and its result.",
                 "minLength": 1
               },
               "SchemaId": {
                 "type": "string",
+                "description": "Canonical schema identifier.",
                 "minLength": 1
               },
               "Uid": {
                 "type": "string",
+                "description": "Stable logical UID of the Data Entity record.",
                 "minLength": 1
               },
               "Type": {
-                "const": "create_record"
+                "const": "create_record",
+                "description": "Type discriminator for this change."
               },
               "RecordRevision": {
                 "oneOf": [
@@ -50,7 +56,8 @@
                     "type": "string",
                     "minLength": 1
                   }
-                ]
+                ],
+                "description": "Storage-provider record revision used for optimistic concurrency and change tracking."
               }
             }
           },
@@ -67,18 +74,22 @@
             "properties": {
               "ChangeId": {
                 "type": "string",
+                "description": "Caller-supplied identifier used to correlate this individual change and its result.",
                 "minLength": 1
               },
               "SchemaId": {
                 "type": "string",
+                "description": "Canonical schema identifier.",
                 "minLength": 1
               },
               "Uid": {
                 "type": "string",
+                "description": "Stable logical UID of the Data Entity record.",
                 "minLength": 1
               },
               "Type": {
-                "const": "replace_record"
+                "const": "replace_record",
+                "description": "Type discriminator for this change."
               },
               "RecordRevision": {
                 "oneOf": [
@@ -90,7 +101,8 @@
                     "type": "string",
                     "minLength": 1
                   }
-                ]
+                ],
+                "description": "Storage-provider record revision used for optimistic concurrency and change tracking."
               }
             }
           },
@@ -106,18 +118,22 @@
             "properties": {
               "ChangeId": {
                 "type": "string",
+                "description": "Caller-supplied identifier used to correlate this individual change and its result.",
                 "minLength": 1
               },
               "SchemaId": {
                 "type": "string",
+                "description": "Canonical schema identifier.",
                 "minLength": 1
               },
               "Uid": {
                 "type": "string",
+                "description": "Stable logical UID of the Data Entity record.",
                 "minLength": 1
               },
               "Type": {
-                "const": "delete_record"
+                "const": "delete_record",
+                "description": "Type discriminator for this change."
               }
             }
           }

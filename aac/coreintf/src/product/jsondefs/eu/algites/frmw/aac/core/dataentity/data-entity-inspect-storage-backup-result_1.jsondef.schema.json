@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.data-entity-inspect-storage-backup-result",
   "x-aac-schema-version": 1,
   "title": "Data Entity Inspect Storage Backup Result 1",
+  "description": "Defines the canonical Data Entity Inspect Storage Backup Result schema and its serialized data contract.",
   "type": "object",
   "required": [
     "status"
@@ -14,16 +15,19 @@
         "VALID",
         "INVALID",
         "NOT_FOUND"
-      ]
+      ],
+      "description": "Outcome status reported by this operation."
     },
     "diagnostics": {
       "type": "array",
+      "description": "Diagnostic messages produced while processing this operation.",
       "items": {
         "type": "string"
       }
     },
     "metadata": {
-      "type": "object"
+      "type": "object",
+      "description": "Additional structured metadata associated with this data entity inspect storage backup result."
     }
   }
 }

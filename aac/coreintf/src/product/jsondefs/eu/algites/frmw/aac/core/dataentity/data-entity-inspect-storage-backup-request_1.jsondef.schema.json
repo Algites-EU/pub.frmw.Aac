@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.data-entity-inspect-storage-backup-request",
   "x-aac-schema-version": 1,
   "title": "Data Entity Inspect Storage Backup Request 1",
+  "description": "Defines the canonical Data Entity Inspect Storage Backup Request schema and its serialized data contract.",
   "type": "object",
   "required": [
     "BackupFile"
@@ -11,6 +12,7 @@
   "properties": {
     "BackupFile": {
       "type": "string",
+      "description": "Path or resource identifying the storage backup file.",
       "minLength": 1
     },
     "ValidationLevel": {
@@ -18,6 +20,7 @@
         "integrity",
         "full"
       ],
+      "description": "Selects the depth of backup validation to perform.",
       "default": "integrity"
     }
   }

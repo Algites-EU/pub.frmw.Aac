@@ -22,6 +22,16 @@ Dependencies:
         Usages: [product_implementation]
         VersionRequirement:
           Exact: "1.0-SNAPSHOT"
+      - GroupId: eu.algites.tool.codegen
+        ArtifactId: pub.tool.General_generators.code.defscodegen.coreimpl
+        Usages: [product_implementation]
+        VersionRequirement:
+          Exact: "1.0-SNAPSHOT"
+      - GroupId: eu.algites.lib.naming
+        ArtifactId: pub.lib.General_naming.convention.coreimpl
+        Usages: [product_implementation]
+        VersionRequirement:
+          Exact: "1.0-SNAPSHOT"
   - DependencyKind: python
     Items:
       - ArtifactId: PyYAML

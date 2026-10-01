@@ -1,6 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AAC Configuration Provider Document 1",
+  "description": "Defines the canonical AAC Configuration Provider Document schema and its serialized data contract.",
   "type": "object",
   "required": [
     "FormatVersion",
@@ -12,10 +13,12 @@
   "additionalProperties": false,
   "properties": {
     "FormatVersion": {
-      "const": 1
+      "const": 1,
+      "description": "Version of the persisted or exchanged document format."
     },
     "ConfigurationScope": {
       "type": "object",
+      "description": "Scope within which this configuration document applies.",
       "required": [
         "Type"
       ],
@@ -23,18 +26,21 @@
       "properties": {
         "Type": {
           "type": "string",
+          "description": "Type discriminator for this configuration scope.",
           "minLength": 1
         },
         "Id": {
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "description": "Stable identifier of this configuration scope."
         }
       }
     },
     "ConfigurationTarget": {
       "type": "object",
+      "description": "Identifies the component, provider, or scope targeted by this persisted configuration.",
       "required": [
         "Kind",
         "ComponentId"
@@ -45,20 +51,24 @@
           "enum": [
             "component",
             "provider_instance"
-          ]
+          ],
+          "description": "Kind of this configuration target."
         },
         "ComponentId": {
           "type": "string",
+          "description": "Stable identifier of the AAC component associated with this configuration target.",
           "minLength": 1
         },
         "ProviderInstanceId": {
           "type": "string",
+          "description": "Stable identifier of the provider instance associated with this configuration target.",
           "minLength": 1
         }
       }
     },
     "Payload": {
       "type": "object",
+      "description": "Canonical payload carried by this AAC configuration provider document.",
       "required": [
         "ConfigurationSchemaId",
         "ConfigurationSchemaVersion",
@@ -70,29 +80,36 @@
       "properties": {
         "ConfigurationSchemaId": {
           "type": "string",
+          "description": "Stable identifier of the configuration schema associated with this payload.",
           "minLength": 1
         },
         "ConfigurationSchemaVersion": {
           "type": "integer",
+          "description": "Version of the configuration schema associated with this payload.",
           "minimum": 1
         },
         "WrittenByComponentVersion": {
           "type": "integer",
+          "description": "Component version that last wrote this persisted configuration payload.",
           "minimum": 1
         },
         "Values": {
-          "type": "object"
+          "type": "object",
+          "description": "Configuration values stored for the target."
         },
         "Policies": {
-          "type": "object"
+          "type": "object",
+          "description": "Configuration policies stored with the effective values."
         },
         "Metadata": {
-          "type": "object"
+          "type": "object",
+          "description": "Additional structured metadata associated with this payload."
         }
       }
     },
     "RecordRevision": {
       "type": "integer",
+      "description": "Storage-provider record revision used for optimistic concurrency and change tracking.",
       "minimum": 1
     }
   },

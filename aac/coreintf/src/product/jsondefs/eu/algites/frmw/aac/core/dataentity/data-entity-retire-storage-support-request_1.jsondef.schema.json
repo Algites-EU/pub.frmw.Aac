@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.data-entity-retire-storage-support-request",
   "x-aac-schema-version": 1,
   "title": "Data Entity Retire Storage Support Request 1",
+  "description": "Defines the canonical Data Entity Retire Storage Support Request schema and its serialized data contract.",
   "type": "object",
   "required": [
     "SchemaId",
@@ -12,10 +13,12 @@
   "properties": {
     "SchemaId": {
       "type": "string",
+      "description": "Canonical schema identifier.",
       "minLength": 1
     },
     "SchemaVersion": {
       "type": "integer",
+      "description": "Canonical schema version.",
       "minimum": 1
     }
   }

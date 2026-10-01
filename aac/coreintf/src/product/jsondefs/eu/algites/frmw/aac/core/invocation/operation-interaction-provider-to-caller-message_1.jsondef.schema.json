@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.operation-interaction-provider-to-caller-message",
   "x-aac-schema-version": 1,
   "title": "Operation Interaction Provider To Caller Message 1",
+  "description": "Defines the canonical Operation Interaction Provider To Caller Message schema and its serialized data contract.",
   "type": "object",
   "required": [
     "InteractionRevision",
@@ -15,6 +16,7 @@
   "properties": {
     "InteractionRevision": {
       "type": "integer",
+      "description": "Specifies the interaction revision for this operation interaction provider to caller message.",
       "minimum": 0
     },
     "ExecutionState": {
@@ -24,10 +26,12 @@
         "completed",
         "failed",
         "cancelled"
-      ]
+      ],
+      "description": "Specifies the execution state for this operation interaction provider to caller message."
     },
     "StateResultRevision": {
       "type": "integer",
+      "description": "Specifies the state result revision for this operation interaction provider to caller message.",
       "minimum": 0
     },
     "StateResultPayloadRevision": {
@@ -35,17 +39,22 @@
         "integer",
         "null"
       ],
+      "description": "Specifies the state result payload revision for this operation interaction provider to caller message.",
       "minimum": 1
     },
-    "StateResult": {},
+    "StateResult": {
+      "description": "Specifies the state result for this operation interaction provider to caller message."
+    },
     "Events": {
       "type": "array",
+      "description": "Interaction events emitted since the previous provider-to-caller update.",
       "items": {
         "$ref": "operation-interaction-event_1.jsondef.schema.json"
       }
     },
     "Features": {
       "type": "object",
+      "description": "Feature flags or negotiated interaction capabilities reported by the provider.",
       "required": [
         "ProgressReporting",
         "Cancellation",
@@ -56,19 +65,24 @@
       "additionalProperties": false,
       "properties": {
         "ProgressReporting": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates whether progress reporting applies to this feature."
         },
         "Cancellation": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates whether cancellation applies to this feature."
         },
         "DetailLevel": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates whether detail level applies to this feature."
         },
         "ReportingInterval": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates whether reporting interval applies to this feature."
         },
         "SupportedStateResultDeliveryModes": {
           "type": "array",
+          "description": "Lists the supported state result delivery modes associated with this feature.",
           "minItems": 1,
           "uniqueItems": true,
           "items": {

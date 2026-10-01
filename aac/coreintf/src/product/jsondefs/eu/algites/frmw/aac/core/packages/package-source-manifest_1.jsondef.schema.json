@@ -9,12 +9,16 @@
   "additionalProperties": false,
   "properties": {
     "FormatVersion": {
-      "const": 1
+      "const": 1,
+      "description": "Version of the persisted or exchanged document format."
     },
     "Packages": {
-      "type": "array"
+      "type": "array",
+      "description": "Lists the packages associated with this AAC package source manifest."
     }
   },
   "x-aac-schema-id": "_AAC.schema.package-source-manifest",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "title": "AAC Package Source Manifest 1",
+  "description": "Defines the canonical AAC Package Source Manifest schema and its serialized data contract."
 }

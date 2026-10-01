@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.data-entity-ensure-storage-support-result",
   "x-aac-schema-version": 1,
   "title": "Data Entity Ensure Storage Support Result 1",
+  "description": "Defines the canonical Data Entity Ensure Storage Support Result schema and its serialized data contract.",
   "type": "object",
   "required": [
     "status",
@@ -16,19 +17,23 @@
         "READY",
         "RETIRED",
         "INCOMPATIBLE"
-      ]
+      ],
+      "description": "Outcome status reported by this operation."
     },
     "changed": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Indicates whether the operation changed persistent storage state."
     },
     "diagnostics": {
       "type": "array",
+      "description": "Diagnostic messages produced while processing this operation.",
       "items": {
         "type": "string"
       }
     },
     "metadata": {
-      "type": "object"
+      "type": "object",
+      "description": "Additional structured metadata associated with this data entity ensure storage support result."
     }
   }
 }

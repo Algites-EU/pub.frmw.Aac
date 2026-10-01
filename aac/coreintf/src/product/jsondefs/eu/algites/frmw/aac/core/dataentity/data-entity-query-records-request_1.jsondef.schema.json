@@ -3,6 +3,7 @@
   "x-aac-schema-id": "_AAC.schema.data-entity-query-records-request",
   "x-aac-schema-version": 1,
   "title": "Data Entity Query Records Request 1",
+  "description": "Defines the canonical Data Entity Query Records Request schema and its serialized data contract.",
   "type": "object",
   "required": [
     "SchemaId"
@@ -11,10 +12,12 @@
   "properties": {
     "SchemaId": {
       "type": "string",
+      "description": "Canonical schema identifier.",
       "minLength": 1
     },
     "States": {
       "type": "array",
+      "description": "Record states included by the query.",
       "minItems": 1,
       "uniqueItems": true,
       "items": {
@@ -29,6 +32,7 @@
     },
     "Uids": {
       "type": "array",
+      "description": "Logical record UIDs included by the query.",
       "uniqueItems": true,
       "items": {
         "type": "string",
@@ -38,6 +42,7 @@
     },
     "References": {
       "type": "array",
+      "description": "Reference definitions or filters associated with this data entity query records request.",
       "items": {
         "type": "object",
         "required": [
@@ -47,6 +52,7 @@
         "properties": {
           "Target": {
             "type": "object",
+            "description": "Structured target associated with this reference.",
             "required": [
               "SchemaId",
               "Uid"
@@ -55,16 +61,19 @@
             "properties": {
               "SchemaId": {
                 "type": "string",
+                "description": "Canonical schema identifier.",
                 "minLength": 1
               },
               "Uid": {
                 "type": "string",
+                "description": "Stable logical UID of the Data Entity record.",
                 "minLength": 1
               }
             }
           },
           "SchemaPath": {
             "type": "array",
+            "description": "Path within the canonical schema that contains the reference.",
             "minItems": 1,
             "items": {
               "type": "string",
@@ -80,6 +89,7 @@
         "all",
         "any"
       ],
+      "description": "Selects how multiple reference filters are combined.",
       "default": "all"
     },
     "Order": {
@@ -87,18 +97,22 @@
         "uid_asc",
         "uid_desc"
       ],
+      "description": "Deterministic ordering requested for returned records.",
       "default": "uid_asc"
     },
     "Limit": {
       "type": "integer",
+      "description": "Maximum number of records requested in this result segment.",
       "minimum": 1
     },
     "ContinuationToken": {
       "type": "string",
+      "description": "Opaque continuation token used to resume a paged or streamed query.",
       "minLength": 1
     },
     "StoredSchemaVersionFilter": {
       "type": "array",
+      "description": "Optional filter restricting records by their physically stored schema version.",
       "uniqueItems": true,
       "items": {
         "type": "integer",

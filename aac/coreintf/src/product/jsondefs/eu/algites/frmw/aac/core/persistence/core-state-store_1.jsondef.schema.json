@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "_AAC.schema.core-state-store/1",
   "title": "AAC Core State Store 1",
+  "description": "Defines the canonical AAC Core State Store schema and its serialized data contract.",
   "type": "object",
   "required": [
     "FormatVersion",
@@ -11,13 +12,16 @@
   "additionalProperties": false,
   "properties": {
     "FormatVersion": {
-      "const": 1
+      "const": 1,
+      "description": "Version of the persisted or exchanged document format."
     },
     "RevisionKind": {
-      "const": "monotonic_integer"
+      "const": "monotonic_integer",
+      "description": "Specifies the revision kind for this AAC core state store."
     },
     "Records": {
       "type": "object",
+      "description": "Data Entity records returned or persisted by this AAC core state store.",
       "additionalProperties": {
         "type": "object",
         "additionalProperties": {
@@ -29,10 +33,12 @@
           "additionalProperties": false,
           "properties": {
             "RecordRevision": {
-              "$ref": "../common/persistence/record-revision-monotonic-integer_1.jsondef.schema.json"
+              "$ref": "../common/persistence/record-revision-monotonic-integer_1.jsondef.schema.json",
+              "description": "Revision identifier associated with the stored record."
             },
             "Payload": {
-              "type": "object"
+              "type": "object",
+              "description": "Canonical data payload stored for the record."
             }
           }
         }

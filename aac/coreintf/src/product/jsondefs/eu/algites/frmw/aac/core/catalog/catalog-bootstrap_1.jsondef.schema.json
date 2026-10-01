@@ -8,6 +8,7 @@
   "properties": {
     "CatalogBootstrap": {
       "type": "object",
+      "description": "Structured catalog bootstrap associated with this AAC catalog bootstrap.",
       "required": [
         "SchemaVersion",
         "ProductId",
@@ -16,18 +17,22 @@
       "additionalProperties": false,
       "properties": {
         "SchemaVersion": {
-          "const": 1
+          "const": 1,
+          "description": "Canonical schema version."
         },
         "ProductId": {
           "type": "string",
+          "description": "Stable identifier of the product associated with this catalog bootstrap.",
           "minLength": 1
         },
         "TechnologyId": {
           "type": "string",
+          "description": "Stable identifier of the technology associated with this catalog bootstrap.",
           "minLength": 1
         },
         "Sources": {
           "type": "array",
+          "description": "Lists the sources associated with this catalog bootstrap.",
           "items": {
             "type": "object",
             "required": [
@@ -39,37 +44,46 @@
             "properties": {
               "Id": {
                 "type": "string",
+                "description": "Stable identifier of this source.",
                 "minLength": 1
               },
               "Type": {
                 "type": "string",
+                "description": "Type discriminator for this source.",
                 "minLength": 1
               },
               "Uri": {
                 "type": "string",
+                "description": "URI or URL identifying the uri associated with this source.",
                 "minLength": 1
               },
               "AuthenticationProfileId": {
                 "type": "string",
+                "description": "Stable identifier of the authentication profile associated with this source.",
                 "minLength": 1
               },
               "Priority": {
-                "type": "integer"
+                "type": "integer",
+                "description": "Specifies the priority for this source."
               },
               "Settings": {
-                "type": "object"
+                "type": "object",
+                "description": "Structured settings associated with this source."
               },
               "Name": {
-                "$ref": "#/$defs/displayText"
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this source."
               },
               "Description": {
-                "$ref": "#/$defs/displayText"
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this source."
               }
             }
           }
         },
         "Metadata": {
-          "type": "object"
+          "type": "object",
+          "description": "Additional structured metadata associated with this catalog bootstrap."
         }
       }
     }
@@ -88,17 +102,22 @@
           "properties": {
             "Text": {
               "type": "string",
+              "description": "Human-readable display text.",
               "minLength": 1
             },
             "ResourceKey": {
               "type": "string",
+              "description": "Optional localization resource key for the human-readable text.",
               "minLength": 1
             }
           }
         }
-      ]
+      ],
+      "description": "Defines the reusable display text structure used by this canonical schema."
     }
   },
   "x-aac-schema-id": "_AAC.schema.catalog-bootstrap",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "title": "AAC Catalog Bootstrap 1",
+  "description": "Defines the canonical AAC Catalog Bootstrap schema and its serialized data contract."
 }
