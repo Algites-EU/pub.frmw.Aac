@@ -57,7 +57,7 @@ def iter_source_roots(
 
 def iter_python_artifacts(repository: Path) -> tuple[Path, ...]:
     artifacts: list[Path] = []
-    for descriptor in sorted(repository.rglob("algites-artifact.yml")):
+    for descriptor in sorted(repository.rglob("modustro-artifact.yml")):
         if is_repository_build_path(descriptor, repository):
             continue
         artifact = descriptor.parent

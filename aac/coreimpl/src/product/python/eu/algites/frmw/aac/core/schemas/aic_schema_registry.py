@@ -194,6 +194,8 @@ class AIcSchemaRegistry:
         defaults: dict[str, object] = {}
         if isinstance(properties, Mapping):
             for property_id, raw in properties.items():
+                if property_id == "$schema":
+                    continue
                 if not isinstance(raw, Mapping):
                     continue
                 key = str(property_id)

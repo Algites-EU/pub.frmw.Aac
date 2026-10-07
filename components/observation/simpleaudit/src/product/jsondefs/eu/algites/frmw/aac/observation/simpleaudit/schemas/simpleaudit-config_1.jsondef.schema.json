@@ -1,5 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/components/observation/simpleaudit/src/product/jsondefs/eu/algites/frmw/aac/observation/simpleaudit/schemas/simpleaudit-config_1.jsondef.schema.json",
   "title": "AAC Simple Audit Configuration 1",
   "description": "Defines the canonical AAC Simple Audit Configuration schema and its serialized data contract.",
   "type": "object",
@@ -82,6 +83,11 @@
         "Text": "Selects the serialized audit-record format.",
         "ResourceKey": "aac.simpleaudit.config.format.description"
       }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
     }
   },
   "x-aac-schema-id": "simpleaudit-config",

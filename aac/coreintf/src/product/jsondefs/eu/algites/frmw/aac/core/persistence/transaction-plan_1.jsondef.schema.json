@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "_AAC.schema.persistence-transaction-plan/1",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/persistence/transaction-plan_1.jsondef.schema.json",
   "title": "AAC Persistence Transaction Plan 1",
   "description": "Defines the canonical AAC Persistence Transaction Plan schema and its serialized data contract.",
   "type": "object",
@@ -104,6 +104,11 @@
     "Metadata": {
       "type": "object",
       "description": "Additional structured metadata associated with this AAC persistence transaction plan."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
     }
   },
   "x-aac-schema-id": "_AAC.schema.persistence-transaction-plan",

@@ -16,7 +16,7 @@ jobs:
   publish-docs:
     uses: Algites-EU/pub.gov.Algites/.github/workflows/algites-universal-docs-site.yml@main
     with:
-      gradle-task: generateAlgitesDocsSite
+      gradle-task: generateModustroDocsSite
       java-version: "21"
       publication-kind: preview
       publication-id: ${{ github.ref_name }}

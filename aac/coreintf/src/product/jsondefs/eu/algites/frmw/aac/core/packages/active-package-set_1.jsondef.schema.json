@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "_AAC.schema.active-package-set/1",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/active-package-set_1.jsondef.schema.json",
   "title": "AAC Active Package Set 1",
   "description": "Defines the canonical AAC Active Package Set schema and its serialized data contract.",
   "type": "object",
@@ -82,6 +82,11 @@
           }
         }
       }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
     }
   },
   "x-aac-schema-id": "_AAC.schema.active-package-set",

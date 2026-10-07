@@ -1,5 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/presentation/display-content_1.jsondef.schema.json",
   "x-aac-schema-id": "_AAC.schema.display-content",
   "x-aac-schema-version": 1,
   "title": "Display Content 1",
@@ -25,6 +26,11 @@
       ],
       "description": "Serialization or presentation format of this display content.",
       "default": "plain_text"
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
     }
   },
   "anyOf": [

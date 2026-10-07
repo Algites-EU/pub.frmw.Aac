@@ -1,63 +1,14 @@
-pluginManagement {
+/* The single build-domain bootstrap; all initialization is compiled in gradleinit. */
+buildscript {
     repositories {
-        val locIsCi =
-                providers.gradleProperty("CI")
-                .orElse(providers.environmentVariable("CI"))
-                .map { it.equals("true", ignoreCase = true) }
-                .orElse(false)
-                .get()
-
-        gradlePluginPortal()
-        if (!locIsCi) {
-            mavenLocal()
-        }
+        if (providers.gradleProperty("modustro.useMavenLocalForResolution")
+                .orElse(providers.environmentVariable("MODUSTRO_USE_MAVEN_LOCAL_FOR_RESOLUTION"))
+                .orNull.equals("true", ignoreCase = true)) mavenLocal()
         mavenCentral()
-        maven {
-            name = "algites-public-releases"
-            url = uri("https://repo1.maven.org/maven2")
-            mavenContent {
-                releasesOnly()
-            }
-        }
-        maven {
-            name = "algites-public-snapshots"
-            url = uri("https://dl.cloudsmith.io/public/algites/maven-snapshots-pub/")
-            mavenContent {
-                snapshotsOnly()
-            }
-        }
+        maven { url = uri("https://dl.cloudsmith.io/public/algites/java-snapshots-pub/maven/") }
+    }
+    dependencies {
+        classpath("eu.algites.pltf.modustro.builder:pub.gov.Algites_devops.build.modustro.builder.gradleinit:1.0-SNAPSHOT")
     }
 }
-
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        val locIsCi =
-                providers.gradleProperty("CI")
-                .orElse(providers.environmentVariable("CI"))
-                .map { it.equals("true", ignoreCase = true) }
-                .orElse(false)
-                .get()
-
-        if (!locIsCi) {
-            mavenLocal()
-        }
-        mavenCentral()
-        maven {
-            name = "algites-public-releases"
-            url = uri("https://repo1.maven.org/maven2")
-            mavenContent {
-                releasesOnly()
-            }
-        }
-        maven {
-            name = "algites-public-snapshots"
-            url = uri("https://dl.cloudsmith.io/public/algites/maven-snapshots-pub/maven/")
-            mavenContent {
-                snapshotsOnly()
-            }
-        }
-    }
-}
-
-apply(from = uri("https://raw.githubusercontent.com/Algites-EU/pub.gov.Algites/main/gradle/tool/repository/algites-root-settings-discovery.gradle.kts"))
+apply(plugin = "eu.algites.pltf.modustro.builder.settings")

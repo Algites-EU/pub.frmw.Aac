@@ -1,3 +1,7 @@
+# yaml-language-server: $schema=https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json
+# $schema: https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json
+$schema: https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json
+
 Capability:
   Id: _AAC.data-entity.retire-storage-support
   Version: 1

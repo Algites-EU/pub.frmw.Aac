@@ -136,7 +136,7 @@ The source layout is intentionally multi-technology capable. An artifact may car
 
 Within Python product code, each main public `AI*` type lives in its own deterministic snake_case module named from that type; private helper types may remain beside it. Separate AAC distributions may contribute to the same business namespace only through PEP 420, and no two distributions may publish the same module or resource path.
 
-The repository version is defined by `algites-source-repository.yml`. `devtools/aacbuilding/src/product/python/sync_versions.py` maps the Algites repository version to PEP 440 versions and checks internal dependency pins. The current `1.0-SNAPSHOT` context maps to `1.0.dev0`.
+The repository version is defined by `modustro-source-repository.yml`. `devtools/aacbuilding/src/product/python/sync_versions.py` maps the Algites repository version to PEP 440 versions and checks internal dependency pins. The current `1.0-SNAPSHOT` context maps to `1.0.dev0`.
 
 All artifacts require Python 3.13 or newer. The optional CPython subinterpreter profile requires CPython 3.14+ because it uses `concurrent.interpreters`.
 

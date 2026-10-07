@@ -1,3 +1,7 @@
+# yaml-language-server: $schema=https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json
+# $schema: https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json
+$schema: https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json
+
 Component:
   Id: _AAC.component.simpleaudit
   Version: 1
@@ -23,7 +27,7 @@ Component:
       - 1
     ImplementationClasses:
     - TechnologyKind: python
-      ClassName: 
+      ProviderClassName: 
         eu.algites.frmw.aac.observation.simpleaudit.provider:AIcSimpleAuditObserver
     Runtime:
       Profile: process

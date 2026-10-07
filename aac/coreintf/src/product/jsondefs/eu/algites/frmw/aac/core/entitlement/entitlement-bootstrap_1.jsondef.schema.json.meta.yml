@@ -1,7 +1,5 @@
-# yaml-language-server: $schema=https://defs.dev.algites.eu/api/yamldefs/eu/algites/pltf/modustro/builder/publication/global-publication-metadata_1.yamldef.schema.json
-# $schema: https://defs.dev.algites.eu/api/yamldefs/eu/algites/pltf/modustro/builder/publication/global-publication-metadata_1.yamldef.schema.json
-$schema: https://defs.dev.algites.eu/api/yamldefs/eu/algites/pltf/modustro/builder/publication/global-publication-metadata_1.yamldef.schema.json
+# yaml-language-server: $schema=https://defs.dev.algites.eu/api/yamldefs/eu/algites/pltf/modustro/builder/publication/global-publication-user-metadata_1.yamldef.schema.json
+# $schema: https://defs.dev.algites.eu/api/yamldefs/eu/algites/pltf/modustro/builder/publication/global-publication-user-metadata_1.yamldef.schema.json
+$schema: https://defs.dev.algites.eu/api/yamldefs/eu/algites/pltf/modustro/builder/publication/global-publication-user-metadata_1.yamldef.schema.json
 
-MetadataVersion: 1
-DefinitionVersion: 1
 GlobalPublicationPathId: eu/algites/frmw/aac/core/entitlement/entitlement-bootstrap_1.jsondef.schema.json

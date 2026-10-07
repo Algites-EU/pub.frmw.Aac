@@ -20,6 +20,25 @@ def test_file_output_requires_path():
         registry.normalize("simpleaudit-config_1.jsondef.schema.json", {"Output": {"Type": "file"}})
 
 
+def test_root_schema_hint_is_technical_metadata_and_preserves_configuration_defaults():
+    registry = AIcSchemaRegistry()
+    resource = "schemas/simpleaudit-config_1.jsondef.schema.json"
+    registry.register_package_resource("eu.algites.frmw.aac.observation.simpleaudit", resource)
+    schema_uri = "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/observation/simpleaudit/schemas/simpleaudit-config_1.jsondef.schema.json"
+    assert registry.normalize(resource, {"$schema": schema_uri}) == {
+        "$schema": schema_uri,
+        "Output": {"Type": "stdout"},
+        "Format": "json",
+    }
+    properties, _, _ = registry.configuration_property_metadata(resource)
+    assert "$schema" not in properties
+    assert set(properties) == {"Output", "Format"}
+    with pytest.raises(AIxSchemaValidationError):
+        registry.normalize(resource, {"$schema": 4})
+    with pytest.raises(AIxSchemaValidationError):
+        registry.normalize(resource, {"UnexpectedConfiguration": True})
+
+
 def test_schema_identity_is_explicit_and_independent_from_filename():
     registry = AIcSchemaRegistry()
     registered = registry.register(

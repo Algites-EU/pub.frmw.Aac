@@ -1,5 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-ensure-storage-support-request_1.jsondef.schema.json",
   "x-aac-schema-id": "_AAC.schema.data-entity-ensure-storage-support-request",
   "x-aac-schema-version": 1,
   "title": "Data Entity Ensure Storage Support Request 1",
@@ -53,6 +54,11 @@
           }
         }
       }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
     }
   }
 }
