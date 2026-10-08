@@ -1,4 +1,5 @@
 from __future__ import annotations
+from eu.algites.frmw.aac.core.observation.aicgd_observation_input_1 import AIcgdObservationInput_1
 
 from eu.algites.frmw.aac.core.invocation.aiig_operation_failure_1 import AIigOperationFailure_1
 import copy
@@ -28,7 +29,7 @@ from eu.algites.frmw.aac.core.invocation.api import (
     current_invocation_locale, current_operation_interaction, invocation_locale_context,
     binding_qualifier_profiles_context, operation_interaction_context, operation_parameter_context,
 )
-from eu.algites.frmw.aac.core.observation.api import AIcObservationInput, AInObservationOutcome, AInObservationPhase
+from eu.algites.frmw.aac.core.observation.api import AIigObservationInput_1, AIngObservationInputOutcome_1, AIngObservationInputPhase_1
 from eu.algites.frmw.aac.core.capability.catalog import AIcActiveContractCatalog
 from eu.algites.frmw.aac.core.interaction.controller import AIcOperationInteractionController
 from eu.algites.frmw.aac.core.observation.dispatcher import AIcObservationDispatcher
@@ -275,10 +276,10 @@ class AIcInvocationDispatcher:
                 return AIcInvocationOutput(False, error={"Type": type(exc).__name__, "Message": str(exc)})
 
         if self.observations is not None:
-            self.observations.dispatch(AIcObservationInput(
+            self.observations.dispatch(AIcgdObservationInput_1(
                 invocation_id=invocation_input.invocation_id,
                 parent_invocation_id=invocation_input.parent_invocation_id,
-                phase=AInObservationPhase.PRE,
+                phase=AIngObservationInputPhase_1.PRE.value,
                 capability_id=invocation_input.capability_id,
                 capability_version=invocation_input.capability_version,
                 operation_id=invocation_input.operation_id,
@@ -374,18 +375,18 @@ class AIcInvocationDispatcher:
 
         if self.observations is not None:
             result = _redact_value(output.result, operation.sensitive_output_paths)
-            self.observations.dispatch(AIcObservationInput(
+            self.observations.dispatch(AIcgdObservationInput_1(
                 invocation_id=invocation_input.invocation_id,
                 parent_invocation_id=invocation_input.parent_invocation_id,
-                phase=AInObservationPhase.POST,
+                phase=AIngObservationInputPhase_1.POST.value,
                 capability_id=invocation_input.capability_id,
                 capability_version=invocation_input.capability_version,
                 operation_id=invocation_input.operation_id,
                 provider_instance_id=invocation_input.provider_instance_id,
                 arguments={},
-                outcome=AInObservationOutcome.SUCCESS if output.success else AInObservationOutcome.ERROR,
-                result=result if output.success else None,
-                error=output.error if not output.success else None,
+                outcome=AIngObservationInputOutcome_1.SUCCESS.value if output.success else AIngObservationInputOutcome_1.ERROR.value,
+                **({"result": result} if output.success and result is not None else {}),
+                **({"error": output.error} if not output.success and output.error is not None else {}),
             ))
         return output
 

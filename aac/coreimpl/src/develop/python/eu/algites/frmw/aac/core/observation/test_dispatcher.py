@@ -1,8 +1,9 @@
+from eu.algites.frmw.aac.core.observation.aicgd_observation_input_1 import AIcgdObservationInput_1
 from eu.algites.frmw.aac.core.observation.api import (
     AIcObservationBinding,
-    AIcObservationInput,
+    AIigObservationInput_1,
     AIcObservationSelector,
-    AInObservationPhase,
+    AIngObservationInputPhase_1,
 )
 from eu.algites.frmw.aac.core.runtime.application import AIcApplicationComponentCore
 
@@ -13,8 +14,8 @@ def test_end_to_end_simpleaudit_plugin_is_loaded_through_coreintf():
     core.activate_application("app")
     instance = core.instances.find(component_id="_AAC.component.simpleaudit")[0]
     core.configure_observer(AIcObservationBinding(instance.id, (AIcObservationSelector(capability="_AO.vcs.*"),)))
-    deliveries = core.observations.dispatch(AIcObservationInput(
-        invocation_id="1", parent_invocation_id=None, phase=AInObservationPhase.PRE,
+    deliveries = core.observations.dispatch(AIcgdObservationInput_1(
+        invocation_id="1", parent_invocation_id=None, phase=AIngObservationInputPhase_1.PRE.value,
         capability_id="_AO.vcs.repository", capability_version=1, operation_id="status",
         provider_instance_id="vcs-1", arguments={"repository": "x"},
     ))
@@ -31,8 +32,8 @@ def test_observation_capability_never_observes_itself():
     instance = core.instances.find(component_id="_AAC.component.simpleaudit")[0]
     # Self-observation is forbidden at topology validation level, so use a wildcard selector.
     core.configure_observer(AIcObservationBinding(instance.id, (AIcObservationSelector(capability="*"),)))
-    deliveries = core.observations.dispatch(AIcObservationInput(
-        invocation_id="1", parent_invocation_id=None, phase=AInObservationPhase.PRE,
+    deliveries = core.observations.dispatch(AIcgdObservationInput_1(
+        invocation_id="1", parent_invocation_id=None, phase=AIngObservationInputPhase_1.PRE.value,
         capability_id="_AAC.capability.observation", capability_version=1, operation_id="observe",
         provider_instance_id=instance.id,
     ))

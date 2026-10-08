@@ -4,9 +4,9 @@ from uuid import uuid4
 from dataclasses import asdict, dataclass
 from eu.algites.frmw.aac.core.observation.api import (
     AIcObservationBinding,
-    AIcObservationInput,
-    AIcObservationOutput,
-    AInObservationPhase,
+    AIigObservationInput_1,
+    AIigObservationOutput_1,
+    AIngObservationInputPhase_1,
     AIiObservationProvider,
     AIcObservationSelector,
 )
@@ -41,7 +41,7 @@ def _binding_from_dict(raw) -> AIcObservationBinding:
                 capability=str(item.get("capability", "*")),
                 versions=tuple(int(value) for value in item.get("versions", ())),
                 operations=tuple(str(value) for value in item.get("operations", ())),
-                phases=tuple(AInObservationPhase(str(value)) for value in item.get("phases", (AInObservationPhase.PRE.value, AInObservationPhase.POST.value))),
+                phases=tuple(AIngObservationInputPhase_1(str(value)) for value in item.get("phases", (AIngObservationInputPhase_1.PRE.value, AIngObservationInputPhase_1.POST.value))),
             )
             for item in raw.get("selectors", ())
         ),

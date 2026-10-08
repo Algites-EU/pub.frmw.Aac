@@ -180,7 +180,10 @@ def _invoke_runtime(
                     if len(parameters) == 1 and parameters[0].name not in invocation.arguments:
                         parameter = parameters[0]
                         annotation = hints.get(parameter.name)
-                        if parameter.name == "request" or (inspect.isclass(annotation) and dataclasses.is_dataclass(annotation)):
+                        if parameter.name == "request" or (inspect.isclass(annotation) and (
+                            dataclasses.is_dataclass(annotation) or
+                            (annotation.__name__.startswith("AIig") and hasattr(annotation, "__canonical_source_resource__"))
+                        )):
                             result = method(_coerce_value(annotation, dict(invocation.arguments)))
                         else:
                             kwargs = {
@@ -262,6 +265,18 @@ def _coerce_value(annotation: object | None, value: object) -> object:
         return value
     if inspect.isclass(annotation) and issubclass(annotation, Enum):
         return annotation(value)
+    if (inspect.isclass(annotation) and annotation.__name__.startswith("AIig")
+            and hasattr(annotation, "__canonical_source_resource__")):
+        # Resolve the generated implementation by convention at the runtime boundary.
+        # Core interfaces never import or depend on CoreImpl directly.
+        locTypeStem = annotation.__name__[4:]
+        locImplementationName = "AIcgd" + locTypeStem
+        locImplementationModule = "aicgd_" + _python_identifier(locTypeStem)
+        locModule = importlib.import_module(annotation.__module__.rsplit(".", 1)[0] + "." + locImplementationModule)
+        locType = getattr(locModule, locImplementationName)
+        if not issubclass(locType, annotation):
+            raise TypeError("Generated schema implementation does not implement " + annotation.__name__)
+        return locType.from_mapping(_as_mapping(value))
     if inspect.isclass(annotation) and dataclasses.is_dataclass(annotation):
         raw = _as_mapping(value)
         hints = get_type_hints(annotation)
@@ -434,6 +449,8 @@ def _as_mapping(value: object) -> Mapping[str, object]:
     return value
 
 def _jsonable(value: object) -> object:
+    if hasattr(type(value), "__canonical_source_resource__") and callable(getattr(value, "to_mapping", None)):
+        return _jsonable(value.to_mapping())
     if dataclasses.is_dataclass(value) and not isinstance(value, type):
         return {"".join(part[:1].upper() + part[1:] for part in field.name.split("_")): _jsonable(getattr(value, field.name)) for field in dataclasses.fields(value)}
     if isinstance(value, Enum):

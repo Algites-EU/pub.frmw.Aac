@@ -4,9 +4,9 @@ from enum import Enum
 from fnmatch import fnmatchcase
 from typing import Mapping
 
-from .ain_observation_phase import AInObservationPhase
-from .ain_observation_outcome import AInObservationOutcome
-from .aic_observation_input import AIcObservationInput
-from .aic_observation_output import AIcObservationOutput
+from .aing_observation_input_phase_1 import AIngObservationInputPhase_1
+from .aing_observation_input_outcome_1 import AIngObservationInputOutcome_1
+from .aiig_observation_input_1 import AIigObservationInput_1
+from .aiig_observation_output_1 import AIigObservationOutput_1
 from .aic_observation_selector import AIcObservationSelector
 from .aic_observation_binding import AIcObservationBinding

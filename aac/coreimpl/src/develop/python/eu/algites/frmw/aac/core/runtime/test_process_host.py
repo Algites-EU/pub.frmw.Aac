@@ -1,8 +1,10 @@
+from eu.algites.frmw.aac.core.observation.aicgd_observation_output_1 import AIcgdObservationOutput_1
+from eu.algites.frmw.aac.core.observation.aicgd_observation_input_1 import AIcgdObservationInput_1
 from eu.algites.frmw.aac.core.invocation.api import AIcInvocationInput
 from eu.algites.frmw.aac.core.observation.api import (
-    AIcObservationInput,
-    AIcObservationOutput,
-    AInObservationPhase,
+    AIigObservationInput_1,
+    AIigObservationOutput_1,
+    AIngObservationInputPhase_1,
 )
 from eu.algites.frmw.aac.core.runtime.process_host import _invoke_runtime
 
@@ -11,9 +13,9 @@ class ObserverRuntime:
     def __init__(self):
         self.received = None
 
-    def observe_1(self, observation_input: AIcObservationInput) -> AIcObservationOutput:
+    def observe_1(self, observation_input: AIigObservationInput_1) -> AIigObservationOutput_1:
         self.received = observation_input
-        return AIcObservationOutput(accepted=True)
+        return AIcgdObservationOutput_1(accepted=True)
 
 
 def test_process_runtime_coerces_direct_operation_object_to_typed_dataclass():
@@ -34,9 +36,6 @@ def test_process_runtime_coerces_direct_operation_object_to_typed_dataclass():
             "OperationId": "run",
             "ProviderInstanceId": "provider",
             "Arguments": {"Value": 7},
-            "Outcome": None,
-            "Result": None,
-            "Error": None,
             "Metadata": {},
         },
     )
@@ -45,6 +44,7 @@ def test_process_runtime_coerces_direct_operation_object_to_typed_dataclass():
 
     assert output.success
     assert output.result["Accepted"] is True
-    assert isinstance(runtime.received, AIcObservationInput)
-    assert runtime.received.phase is AInObservationPhase.PRE
+    assert isinstance(runtime.received, AIigObservationInput_1)
+    assert isinstance(runtime.received, AIcgdObservationInput_1)
+    assert runtime.received.phase == AIngObservationInputPhase_1.PRE.value
     assert runtime.received.arguments == {"Value": 7}

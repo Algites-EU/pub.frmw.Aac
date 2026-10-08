@@ -4,9 +4,9 @@ from uuid import uuid4
 from dataclasses import asdict, dataclass
 from eu.algites.frmw.aac.core.observation.api import (
     AIcObservationBinding,
-    AIcObservationInput,
-    AIcObservationOutput,
-    AInObservationPhase,
+    AIigObservationInput_1,
+    AIigObservationOutput_1,
+    AIngObservationInputPhase_1,
     AIiObservationProvider,
     AIcObservationSelector,
 )
@@ -18,5 +18,5 @@ from eu.algites.frmw.aac.core.persistence.aic_in_memory_state_store import AIcIn
 @dataclass(frozen=True, slots=True)
 class AIcObservationDelivery:
     observer_instance_id: str
-    output: AIcObservationOutput | None
+    output: AIigObservationOutput_1 | None
     error: str | None = None

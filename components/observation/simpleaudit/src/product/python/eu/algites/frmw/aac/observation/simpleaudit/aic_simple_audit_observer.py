@@ -1,11 +1,11 @@
 from __future__ import annotations
+from eu.algites.frmw.aac.core.observation.aicgd_observation_output_1 import AIcgdObservationOutput_1
 import json
 import sys
-from dataclasses import asdict
 from enum import Enum
 from pathlib import Path
 from typing import Mapping, TextIO
-from eu.algites.frmw.aac.core.observation.api import AIcObservationInput, AIcObservationOutput, AIiObservationProvider
+from eu.algites.frmw.aac.core.observation.api import AIigObservationInput_1, AIigObservationOutput_1, AIiObservationProvider
 from eu.algites.frmw.aac.core.runtime.api import AIiProviderRuntime
 
 def _jsonable(value: object) -> object:
@@ -35,7 +35,7 @@ class AIcSimpleAuditObserver(AIiProviderRuntime, AIiObservationProvider):
         if self._output_type == "file" and not self._path:
             raise ValueError("output.path is required for file output")
 
-    def observe_1(self, observation_input: AIcObservationInput) -> AIcObservationOutput:
+    def observe_1(self, observation_input: AIigObservationInput_1) -> AIigObservationOutput_1:
         line = self._serialize(observation_input)
         if self._output_type == "stdout":
             print(line, file=sys.stdout, flush=True)
@@ -44,17 +44,17 @@ class AIcSimpleAuditObserver(AIiProviderRuntime, AIiObservationProvider):
             path.parent.mkdir(parents=True, exist_ok=True)
             with path.open("a", encoding="utf-8") as stream:
                 print(line, file=stream)
-        return AIcObservationOutput(accepted=True)
+        return AIcgdObservationOutput_1(accepted=True)
 
-    def _serialize(self, value: AIcObservationInput) -> str:
+    def _serialize(self, value: AIigObservationInput_1) -> str:
         if self._format == "json":
-            raw = asdict(value)
-            canonical = {"".join(part[:1].upper() + part[1:] for part in key.split("_")): item for key, item in raw.items()}
-            return json.dumps(_jsonable(canonical), sort_keys=True, separators=(",", ":"))
-        outcome = value.outcome.value if value.outcome is not None else "-"
+            return json.dumps(_jsonable(value.to_mapping()), sort_keys=True, separators=(",", ":"))
+        locWire = value.to_mapping()
+        outcome = locWire.get(AIigObservationInput_1.SCHEMA_FIELD_NAME__OUTCOME) or "-"
+        phase = locWire[AIigObservationInput_1.SCHEMA_FIELD_NAME__PHASE]
         return (
-            f"{value.phase.value} {value.capability_id}/{value.capability_version} "
+            f"{phase} {value.capability_id}/{value.capability_version} "
             f"{value.operation_id} provider={value.provider_instance_id} "
             f"invocation={value.invocation_id} outcome={outcome} "
-            f"arguments={json.dumps(_jsonable(dict(value.arguments)), sort_keys=True)}"
+            f"arguments={json.dumps(_jsonable(locWire.get(AIigObservationInput_1.SCHEMA_FIELD_NAME__ARGUMENTS, {})), sort_keys=True)}"
         )

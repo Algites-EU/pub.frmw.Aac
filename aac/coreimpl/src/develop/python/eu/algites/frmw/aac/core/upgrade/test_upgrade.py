@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 import sys
 from pathlib import Path
 from importlib import resources
@@ -16,10 +15,11 @@ def _write_candidate(root: Path, package: str, *, version: int, broken: bool = F
     (pkg / "__init__.py").write_text("", encoding="utf-8")
     (pkg / "provider.py").write_text(
         "from eu.algites.frmw.aac.core.runtime.api import AIiProviderRuntime\n"
-        "from eu.algites.frmw.aac.core.observation.api import AIiObservationProvider, AIcObservationOutput\n"
+        "from eu.algites.frmw.aac.core.observation.api import AIiObservationProvider, AIigObservationOutput_1\n"
+        "from eu.algites.frmw.aac.core.observation.aicgd_observation_output_1 import AIcgdObservationOutput_1\n"
         "class AIcCandidateObserver(AIiProviderRuntime, AIiObservationProvider):\n"
         "    def __init__(self, configuration): self.configuration = configuration\n"
-        "    def observe_1(self, observation_input): return AIcObservationOutput(accepted=True)\n",
+        "    def observe_1(self, observation_input): return AIcgdObservationOutput_1(accepted=True)\n",
         encoding="utf-8",
     )
     schema_text = resources.files("eu.algites.frmw.aac.observation.simpleaudit").joinpath("schemas/simpleaudit-config_1.jsondef.schema.json").read_text(encoding="utf-8")
@@ -171,10 +171,11 @@ def _write_migrating_component(root: Path, package: str, *, version: int, broken
     (pkg / "__init__.py").write_text("", encoding="utf-8")
     (pkg / "provider.py").write_text(
         "from eu.algites.frmw.aac.core.runtime.api import AIiProviderRuntime\n"
-        "from eu.algites.frmw.aac.core.observation.api import AIiObservationProvider, AIcObservationOutput\n"
+        "from eu.algites.frmw.aac.core.observation.api import AIiObservationProvider, AIigObservationOutput_1\n"
+        "from eu.algites.frmw.aac.core.observation.aicgd_observation_output_1 import AIcgdObservationOutput_1\n"
         "class Provider(AIiProviderRuntime, AIiObservationProvider):\n"
         "    def __init__(self, configuration): pass\n"
-        "    def observe_1(self, observation_input): return AIcObservationOutput(accepted=True)\n",
+        "    def observe_1(self, observation_input): return AIcgdObservationOutput_1(accepted=True)\n",
         encoding="utf-8",
     )
     if version == 1:

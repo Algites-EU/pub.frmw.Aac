@@ -1,6 +1,7 @@
 import pytest
+from unittest.mock import Mock
 
-from eu.algites.frmw.aac.core.observation.api import AIcObservationInput, AIcObservationOutput, AInObservationPhase, AIiObservationProvider
+from eu.algites.frmw.aac.core.observation.api import AIigObservationInput_1, AIigObservationOutput_1, AIngObservationInputPhase_1, AIiObservationProvider
 
 
 class BrokenObserver(AIiObservationProvider):
@@ -8,8 +9,8 @@ class BrokenObserver(AIiObservationProvider):
 
 
 class GoodObserver(AIiObservationProvider):
-    def observe_1(self, observation_input: AIcObservationInput) -> AIcObservationOutput:
-        return AIcObservationOutput()
+    def observe_1(self, observation_input: AIigObservationInput_1) -> AIigObservationOutput_1:
+        return Mock(spec=AIigObservationOutput_1, accepted=True)
 
 
 def test_observation_provider_is_abstract():
@@ -19,8 +20,5 @@ def test_observation_provider_is_abstract():
 
 def test_observation_provider_can_be_implemented():
     provider = GoodObserver()
-    value = provider.observe_1(AIcObservationInput(
-        invocation_id="i", parent_invocation_id=None, phase=AInObservationPhase.PRE,
-        capability_id="x", capability_version=1, operation_id="op", provider_instance_id="p",
-    ))
+    value = provider.observe_1(Mock(spec=AIigObservationInput_1))
     assert value.accepted

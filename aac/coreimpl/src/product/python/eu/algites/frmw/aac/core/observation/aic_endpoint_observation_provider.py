@@ -1,12 +1,13 @@
 from __future__ import annotations
+from eu.algites.frmw.aac.core.observation.aicgd_observation_output_1 import AIcgdObservationOutput_1
 from contextvars import ContextVar
 from uuid import uuid4
 from dataclasses import asdict, dataclass
 from eu.algites.frmw.aac.core.observation.api import (
     AIcObservationBinding,
-    AIcObservationInput,
-    AIcObservationOutput,
-    AInObservationPhase,
+    AIigObservationInput_1,
+    AIigObservationOutput_1,
+    AIngObservationInputPhase_1,
     AIiObservationProvider,
     AIcObservationSelector,
 )
@@ -25,7 +26,7 @@ class AIcEndpointObservationProvider(AIiObservationProvider):
         self.endpoint = endpoint
         self.invocation_dispatcher = invocation_dispatcher
 
-    def observe_1(self, observation_input: AIcObservationInput) -> AIcObservationOutput:
+    def observe_1(self, observation_input: AIigObservationInput_1) -> AIigObservationOutput_1:
         invocation = AIcInvocationInput(
             invocation_id=str(uuid4()),
             parent_invocation_id=observation_input.invocation_id,
@@ -39,11 +40,8 @@ class AIcEndpointObservationProvider(AIiObservationProvider):
         if not output.success:
             raise RuntimeError(str(output.error))
         raw = output.result
-        if isinstance(raw, AIcObservationOutput):
+        if isinstance(raw, AIigObservationOutput_1):
             return raw
         if isinstance(raw, dict):
-            return AIcObservationOutput(
-                accepted=bool(raw.get("Accepted", True)),
-                diagnostic=str(raw["Diagnostic"]) if raw.get("Diagnostic") is not None else None,
-            )
+            return AIcgdObservationOutput_1.from_mapping(raw)
         raise TypeError("observation endpoint returned an invalid output")

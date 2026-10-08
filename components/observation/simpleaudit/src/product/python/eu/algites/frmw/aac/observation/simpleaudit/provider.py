@@ -5,7 +5,7 @@ from dataclasses import asdict
 from enum import Enum
 from pathlib import Path
 from typing import Mapping, TextIO
-from eu.algites.frmw.aac.core.observation.api import AIcObservationInput, AIcObservationOutput, AIiObservationProvider
+from eu.algites.frmw.aac.core.observation.api import AIigObservationInput_1, AIigObservationOutput_1, AIiObservationProvider
 from eu.algites.frmw.aac.core.runtime.api import AIiProviderRuntime
 
 from .aic_simple_audit_observer import AIcSimpleAuditObserver

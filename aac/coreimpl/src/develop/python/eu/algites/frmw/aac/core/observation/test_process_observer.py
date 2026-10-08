@@ -1,8 +1,9 @@
+from eu.algites.frmw.aac.core.observation.aicgd_observation_input_1 import AIcgdObservationInput_1
 from eu.algites.frmw.aac.core.observation.api import (
     AIcObservationBinding,
-    AIcObservationInput,
+    AIigObservationInput_1,
     AIcObservationSelector,
-    AInObservationPhase,
+    AIngObservationInputPhase_1,
 )
 from eu.algites.frmw.aac.core.runtime.application import AIcApplicationComponentCore
 from eu.algites.frmw.aac.core.runtime.process import AIcProcessProviderRuntime
@@ -17,10 +18,10 @@ def test_simpleaudit_observer_runs_in_persistent_process():
     assert isinstance(runtime, AIcProcessProviderRuntime)
     pid = runtime.process_id
     core.configure_observer(AIcObservationBinding(instance.id, (AIcObservationSelector(capability="example.*"),)))
-    deliveries = core.observations.dispatch(AIcObservationInput(
+    deliveries = core.observations.dispatch(AIcgdObservationInput_1(
         invocation_id="inv-1",
         parent_invocation_id=None,
-        phase=AInObservationPhase.PRE,
+        phase=AIngObservationInputPhase_1.PRE.value,
         capability_id="example.demo",
         capability_version=1,
         operation_id="run",

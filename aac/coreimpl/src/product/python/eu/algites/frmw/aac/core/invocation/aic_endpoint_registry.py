@@ -26,7 +26,7 @@ from eu.algites.frmw.aac.core.invocation.api import (
     current_invocation_locale, current_operation_interaction, invocation_locale_context,
     operation_interaction_context, operation_parameter_context,
 )
-from eu.algites.frmw.aac.core.observation.api import AIcObservationInput, AInObservationOutcome, AInObservationPhase
+from eu.algites.frmw.aac.core.observation.api import AIigObservationInput_1, AIngObservationInputOutcome_1, AIngObservationInputPhase_1
 from eu.algites.frmw.aac.core.capability.catalog import AIcActiveContractCatalog
 from eu.algites.frmw.aac.core.interaction.controller import AIcOperationInteractionController
 from eu.algites.frmw.aac.core.observation.dispatcher import AIcObservationDispatcher

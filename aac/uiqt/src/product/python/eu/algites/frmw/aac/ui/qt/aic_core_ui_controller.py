@@ -17,7 +17,7 @@ from eu.algites.frmw.aac.core.solver.api import AIcTargetStateRequest, AIcTarget
 from eu.algites.frmw.aac.core.observation.api import (
     AIcObservationBinding,
     AIcObservationSelector,
-    AInObservationPhase,
+    AIngObservationInputPhase_1,
 )
 from eu.algites.frmw.aac.core.runtime.application import AIcApplicationComponentCore
 from eu.algites.frmw.aac.ui.api import (
@@ -356,7 +356,7 @@ class AIcCoreUiController(AIiAacUiController):
             binding.observer_instance_id,
             tuple(AIcObservationSelector(
                 selector.capability, selector.versions, selector.operations,
-                tuple(AInObservationPhase(value) for value in selector.phases),
+                tuple(AIngObservationInputPhase_1(value) for value in selector.phases),
             ) for selector in binding.selectors),
         ))
 

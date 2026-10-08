@@ -1,3 +1,5 @@
+from eu.algites.frmw.aac.core.observation.aicgd_observation_output_1 import AIcgdObservationOutput_1
+from eu.algites.frmw.aac.core.observation.aicgd_observation_input_1 import AIcgdObservationInput_1
 from eu.algites.frmw.aac.core.capability.api import (
     AInCapabilityOperationInteractionKind,
     AIcCapabilityContract,
@@ -7,7 +9,7 @@ from eu.algites.frmw.aac.core.capability.api import (
     AIcSchemaRef,
 )
 from eu.algites.frmw.aac.core.invocation.api import AIcInvocationInput
-from eu.algites.frmw.aac.core.observation.api import AIcObservationOutput, AIiObservationProvider
+from eu.algites.frmw.aac.core.observation.api import AIigObservationOutput_1, AIiObservationProvider
 from eu.algites.frmw.aac.core.capability.catalog import AIcActiveContractCatalog
 from eu.algites.frmw.aac.core.invocation.dispatcher import AIcInvocationDispatcher, AIcObjectCapabilityEndpoint
 from eu.algites.frmw.aac.core.observation.dispatcher import AIcObservationDispatcher, AIcObservationSelector
@@ -65,7 +67,7 @@ class Collector(AIiObservationProvider):
         self.values = []
     def observe_1(self, observation_input):
         self.values.append(observation_input)
-        return AIcObservationOutput()
+        return AIcgdObservationOutput_1(accepted=True)
 
 
 def test_invocation_generates_pre_post_and_redacts_contract_sensitive_paths():
@@ -197,7 +199,7 @@ def test_safe_permission_denial_can_remediate_refresh_and_retry_once():
 
 def test_observation_contract_uses_direct_input_object_without_transport_wrapper():
     from dataclasses import asdict
-    from eu.algites.frmw.aac.core.observation.api import AIcObservationInput, AInObservationPhase
+    from eu.algites.frmw.aac.core.observation.api import AIigObservationInput_1, AIngObservationInputPhase_1
 
     catalog = AIcActiveContractCatalog()
     catalog.admit_builtin_contracts()
@@ -206,14 +208,14 @@ def test_observation_contract_uses_direct_input_object_without_transport_wrapper
         def __init__(self):
             self.received = None
 
-        def observe_1(self, observation_input: AIcObservationInput):
+        def observe_1(self, observation_input: AIigObservationInput_1):
             self.received = observation_input
             return {"Accepted": True}
 
-    event = AIcObservationInput(
+    event = AIcgdObservationInput_1(
         invocation_id="observed",
         parent_invocation_id=None,
-        phase=AInObservationPhase.PRE,
+        phase=AIngObservationInputPhase_1.PRE.value,
         capability_id="x.cap",
         capability_version=1,
         operation_id="run",
@@ -229,7 +231,7 @@ def test_observation_contract_uses_direct_input_object_without_transport_wrapper
     )
 
     assert output.success and output.result["Accepted"] is True
-    assert isinstance(provider.received, AIcObservationInput)
+    assert isinstance(provider.received, AIigObservationInput_1)
     assert provider.received.invocation_id == "observed"
     assert provider.received.arguments == {"Value": 7}
 

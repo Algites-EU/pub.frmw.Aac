@@ -28,3 +28,35 @@ def test_config_move_keeps_the_packaged_resource_path(tmp_path):
     assert validate_repository_source_layout(tmp_path / "repo") == []
     staged = stage_python_product_tree(artifact, tmp_path / "staged")
     assert (staged / "eu/example/definitions/capability_1.yml").read_text() == content
+
+
+def test_public_python_types_have_one_type_per_deterministically_named_module():
+    import ast
+    import re
+    from pathlib import Path
+
+    repository = Path(__file__).resolve().parents[5]
+    violations = []
+    checked = 0
+    for source_file in sorted(repository.glob("**/src/product/python/**/*.py")):
+        if "build" in source_file.relative_to(repository).parts:
+            continue
+        source = ast.parse(source_file.read_text(encoding="utf-8"), filename=str(source_file))
+        public_classes = [
+            statement.name for statement in source.body
+            if isinstance(statement, ast.ClassDef)
+            and statement.name.startswith(("AIc", "AId", "AIi", "AIn", "AIx", "AIg"))
+        ]
+        if not public_classes:
+            continue
+        checked += len(public_classes)
+        if len(public_classes) > 1:
+            violations.append(f"{source_file}: more than one public Algites class: {public_classes}")
+        for name in public_classes:
+            suffix = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1_\2", name[3:])
+            suffix = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", suffix).lower()
+            expected = name[:3].lower() + "_" + suffix
+            if source_file.stem != expected:
+                violations.append(f"{source_file}: {name} requires {expected}.py")
+    assert checked > 0, "Expected to inspect public Algites classes"
+    assert violations == [], "\n".join(violations)

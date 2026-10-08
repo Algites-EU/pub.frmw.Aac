@@ -4,9 +4,9 @@ from uuid import uuid4
 from dataclasses import asdict, dataclass
 from eu.algites.frmw.aac.core.observation.api import (
     AIcObservationBinding,
-    AIcObservationInput,
-    AIcObservationOutput,
-    AInObservationPhase,
+    AIigObservationInput_1,
+    AIigObservationOutput_1,
+    AIngObservationInputPhase_1,
     AIiObservationProvider,
     AIcObservationSelector,
 )
@@ -42,7 +42,7 @@ class AIcObservationDispatcher:
         self.unregister_provider(instance_id)
         self.topology.delete(instance_id)
 
-    def dispatch(self, observation_input: AIcObservationInput) -> tuple[AIcObservationDelivery, ...]:
+    def dispatch(self, observation_input: AIigObservationInput_1) -> tuple[AIcObservationDelivery, ...]:
         if observation_input.capability_id == OBSERVATION_CAPABILITY_ID:
             return ()
         active = _ACTIVE_OBSERVERS.get()
@@ -59,8 +59,8 @@ class AIcObservationDispatcher:
             token = _ACTIVE_OBSERVERS.set(active | {binding.observer_instance_id})
             try:
                 output = provider.observe_1(observation_input)
-                if not isinstance(output, AIcObservationOutput):
-                    raise TypeError("observer returned a non-AIcObservationOutput value")
+                if not isinstance(output, AIigObservationOutput_1):
+                    raise TypeError("observer returned a non-AIigObservationOutput_1 value")
                 deliveries.append(AIcObservationDelivery(binding.observer_instance_id, output))
             except Exception as exc:
                 deliveries.append(AIcObservationDelivery(binding.observer_instance_id, None, f"{type(exc).__name__}: {exc}"))
