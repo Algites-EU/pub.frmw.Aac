@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typing import Iterable, Mapping
 from eu.algites.frmw.aac.core.configuration.api import (
     AInConfigurationPolicyMode,
+    AInConfigurationMutationOperation,
     AInConfigurationProviderCapability,
     AInConfigurationValueSourceKind,
     AIcConfigurationChangeSet,
@@ -64,13 +65,13 @@ class AIcConfigurationMutationService:
         capabilities = set(provider.capabilities(request))
         required = {AInConfigurationProviderCapability.READ}
         for change in change_set.changes:
-            if change.operation.value == "SET_VALUE":
+            if change.operation.value == AInConfigurationMutationOperation.SET_VALUE.value:
                 required.add(AInConfigurationProviderCapability.WRITE_VALUE)
-            elif change.operation.value == "DELETE_VALUE":
+            elif change.operation.value == AInConfigurationMutationOperation.DELETE_VALUE.value:
                 required.add(AInConfigurationProviderCapability.DELETE_VALUE)
-            elif change.operation.value == "SET_POLICY":
+            elif change.operation.value == AInConfigurationMutationOperation.SET_POLICY.value:
                 required.add(AInConfigurationProviderCapability.WRITE_POLICY)
-            elif change.operation.value == "DELETE_POLICY":
+            elif change.operation.value == AInConfigurationMutationOperation.DELETE_POLICY.value:
                 required.add(AInConfigurationProviderCapability.DELETE_POLICY)
         missing = required - capabilities
         if missing:

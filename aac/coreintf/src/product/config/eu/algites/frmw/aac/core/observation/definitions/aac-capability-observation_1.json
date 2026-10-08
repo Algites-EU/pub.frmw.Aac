@@ -1,0 +1,45 @@
+{
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json",
+  "Capability": {
+    "Id": "_AAC.capability.observation",
+    "Version": 1,
+    "GroupId": "_AAC.runtime.observation",
+    "Name": {
+      "Text": "Capability invocation observation",
+      "ResourceKey": "aac.capability.observation.name"
+    },
+    "Description": {
+      "Text": "Observes normalized capability invocations before and after provider execution.",
+      "ResourceKey": "aac.capability.observation.description"
+    }
+  },
+  "Operations": [
+    {
+      "Id": "observe",
+      "Name": {
+        "Text": "Observe invocation",
+        "ResourceKey": "aac.capability.observation.operation.observe.name"
+      },
+      "Description": {
+        "Text": "Delivers one normalized PRE or POST capability invocation observation to the observer.",
+        "ResourceKey": "aac.capability.observation.operation.observe.description"
+      },
+      "Interactions": [
+        {
+          "Kind": "input",
+          "Schema": {
+            "Id": "_AAC.schema.observation-input",
+            "Version": 1
+          }
+        },
+        {
+          "Kind": "final_success_state_result",
+          "Schema": {
+            "Id": "_AAC.schema.observation-output",
+            "Version": 1
+          }
+        }
+      ]
+    }
+  ]
+}

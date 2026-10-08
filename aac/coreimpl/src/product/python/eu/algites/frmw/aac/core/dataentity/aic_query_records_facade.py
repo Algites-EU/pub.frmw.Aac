@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.dataentity.aiig_data_entity_envelope_1 import AIigDataEntityEnvelope_1
+from eu.algites.frmw.aac.core.dataentity.aiig_data_entity_query_records_request_1 import AIigDataEntityQueryRecordsRequest_1
 from dataclasses import dataclass
 from typing import Generic, Mapping, TypeVar
 from uuid import uuid4
@@ -26,15 +29,15 @@ QUERY_RECORDS_CAPABILITY_ID = "_AAC.data-entity.query-records"
 def _raw_envelope(raw: object) -> AIcDataEntityEnvelope:
     if not isinstance(raw, Mapping):
         raise TypeError("Data Entity provider returned a non-object record")
-    payload = raw.get("Payload")
+    payload = raw.get(AIigDataEntityEnvelope_1.SCHEMA_FIELD_NAME__PAYLOAD)
     if not isinstance(payload, Mapping):
         raise TypeError("Data Entity provider returned a non-object payload")
     return AIcDataEntityEnvelope(
-        uid=str(raw["Uid"]),
-        schema_id=str(raw["SchemaId"]),
-        schema_version=int(raw["SchemaVersion"]),
-        record_revision=raw["RecordRevision"],
-        state=AInDataEntityState(str(raw["State"])),
+        uid=str(raw[AIigDataEntityEnvelope_1.SCHEMA_FIELD_NAME__UID]),
+        schema_id=str(raw[AIigDataEntityEnvelope_1.SCHEMA_FIELD_NAME__SCHEMA_ID]),
+        schema_version=int(raw[AIigDataEntityEnvelope_1.SCHEMA_FIELD_NAME__SCHEMA_VERSION]),
+        record_revision=raw[AIigDataEntityEnvelope_1.SCHEMA_FIELD_NAME__RECORD_REVISION],
+        state=AInDataEntityState(str(raw[AIigDataEntityEnvelope_1.SCHEMA_FIELD_NAME__STATE])),
         payload=dict(payload),
     )
 
@@ -58,16 +61,16 @@ class AIcQueryRecordsFacade(AIcBoundDataEntityCapabilityFacade):
         continuation_token: str | None = None,
     ) -> AIcDataEntityQueryPage[T]:
         request: dict[str, object] = {
-            "SchemaId": data_type.schema_id,
-            "States": [state.value for state in states],
-            "Limit": limit,
+            AIigDataEntityQueryRecordsRequest_1.SCHEMA_FIELD_NAME__SCHEMA_ID: data_type.schema_id,
+            AIigDataEntityQueryRecordsRequest_1.SCHEMA_FIELD_NAME__STATES: [state.value for state in states],
+            AIigDataEntityQueryRecordsRequest_1.SCHEMA_FIELD_NAME__LIMIT: limit,
         }
         if stored_schema_version_filter:
-            request["StoredSchemaVersionFilter"] = list(stored_schema_version_filter)
+            request[AIigDataEntityQueryRecordsRequest_1.SCHEMA_FIELD_NAME__STORED_SCHEMA_VERSION_FILTER] = list(stored_schema_version_filter)
         if uids:
-            request["Uids"] = list(uids)
+            request[AIigDataEntityQueryRecordsRequest_1.SCHEMA_FIELD_NAME__UIDS] = list(uids)
         if continuation_token is not None:
-            request["ContinuationToken"] = continuation_token
+            request[AIigDataEntityQueryRecordsRequest_1.SCHEMA_FIELD_NAME__CONTINUATION_TOKEN] = continuation_token
         if self.marshaller is None:
             raise RuntimeError("typed Data Entity access requires a marshaller")
         records, token = self.query_raw(request)

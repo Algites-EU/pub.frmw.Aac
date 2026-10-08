@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<CapabilityContract xmlns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd" schemaRef="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd">
+  <Capability>
+    <Id>_AAC.data-entity.restore-storage-backup</Id>
+    <Version>1</Version>
+    <Name>
+      <MapEntry key="Text">
+        <Value>"Restore Data Entity storage backup"</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.data.entity.restore.storage.backup.name"</Value>
+      </MapEntry>
+    </Name>
+    <Description>
+      <MapEntry key="Text">
+        <Value>"Restores one provider-specific physical backup into the explicitly selected provider instance."</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.data.entity.restore.storage.backup.description"</Value>
+      </MapEntry>
+    </Description>
+    <GroupId>_AAC.data-entity.storage-backup-restore</GroupId>
+  </Capability>
+  <Operations>
+    <Item>
+      <Id>restore_backup</Id>
+      <Name>
+        <MapEntry key="Text">
+          <Value>"Restore storage backup"</Value>
+        </MapEntry>
+        <MapEntry key="ResourceKey">
+          <Value>"aac.data.entity.restore.storage.backup.operation.restore.backup.name"</Value>
+        </MapEntry>
+      </Name>
+      <Description>
+        <MapEntry key="Text">
+          <Value>"Restores one provider-specific physical backup into the explicitly selected provider instance."</Value>
+        </MapEntry>
+        <MapEntry key="ResourceKey">
+          <Value>"aac.data.entity.restore.storage.backup.operation.restore.backup.description"</Value>
+        </MapEntry>
+      </Description>
+      <Interactions>
+        <Item>
+          <Kind>input</Kind>
+          <Schema>
+            <Id>_AAC.schema.data-entity-restore-storage-backup-request</Id>
+            <Version>1</Version>
+          </Schema>
+        </Item>
+        <Item>
+          <Kind>final_success_state_result</Kind>
+          <Schema>
+            <Id>_AAC.schema.data-entity-restore-storage-backup-result</Id>
+            <Version>1</Version>
+          </Schema>
+        </Item>
+      </Interactions>
+    </Item>
+  </Operations>
+</CapabilityContract>

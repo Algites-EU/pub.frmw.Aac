@@ -1,0 +1,260 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Package Bootstrap schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Package Bootstrap schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"PackageBootstrap":{"additionalProperties":false,"description":"Package-management bootstrap configuration.","properties":{"AutomationPolicy":{"additionalProperties":false,"description":"Structured automation policy associated with this package bootstrap.","properties":{"AllowAutomaticDownload":{"default":true,"description":"Indicates whether allow automatic download applies to this automation policy.","type":"boolean"},"AllowAutomaticInstall":{"default":true,"description":"Indicates whether allow automatic install applies to this automation policy.","type":"boolean"},"RequireEntitlementForAutomaticPaidComponent":{"default":true,"description":"Indicates whether require entitlement for automatic paid component applies to this automation policy.","type":"boolean"},"VerifyOnDownload":{"default":true,"description":"Indicates whether verify on download applies to this automation policy.","type":"boolean"}},"type":"object"},"Layout":{"additionalProperties":false,"description":"Structured layout associated with this package bootstrap.","properties":{"CoreLockFilename":{"default":"core.lock","description":"Specifies the core lock filename for this layout.","minLength":1,"type":"string"},"CoreStateSubdirectory":{"default":"aac-state","description":"Filesystem or logical core state subdirectory used by this layout.","minLength":1,"type":"string"},"DownloadedSubdirectory":{"default":"downloaded","description":"Filesystem or logical downloaded subdirectory used by this layout.","minLength":1,"type":"string"},"InstalledSubdirectory":{"default":"installed","description":"Filesystem or logical installed subdirectory used by this layout.","minLength":1,"type":"string"},"ObsoleteSubdirectory":{"default":"obsolete","description":"Filesystem or logical obsolete subdirectory used by this layout.","minLength":1,"type":"string"},"PackageStoreSubdirectory":{"default":"plugins","description":"Filesystem or logical package store subdirectory used by this layout.","minLength":1,"type":"string"},"ProductRoot":{"description":"Specifies the product root for this layout.","minLength":1,"type":"string"},"TransactionsSubdirectory":{"default":"transactions","description":"Filesystem or logical transactions subdirectory used by this layout.","minLength":1,"type":"string"}},"required":["ProductRoot"],"type":"object"},"Metadata":{"description":"Additional structured metadata associated with this package bootstrap.","type":"object"},"SchemaVersion":{"const":1,"description":"Canonical schema version."},"Sources":{"description":"Lists the sources associated with this package bootstrap.","items":{"additionalProperties":false,"properties":{"AuthenticationProfileId":{"description":"Stable identifier of the authentication profile associated with this source.","type":["string","null"]},"Description":{"description":"Human-readable description of this source."},"Id":{"description":"Stable identifier of this source.","minLength":1,"type":"string"},"Name":{"description":"Human-readable name of this source."},"Priority":{"default":0,"description":"Specifies the priority for this source.","type":"integer"},"Settings":{"description":"Structured settings associated with this source.","type":"object"},"Type":{"default":"MANIFEST","description":"Type discriminator for this source.","minLength":1,"type":"string"},"Uri":{"description":"URI or URL identifying the uri associated with this source.","minLength":1,"type":"string"},"VerifierId":{"description":"Stable identifier of the verifier associated with this source.","type":["string","null"]}},"required":["Id","Uri"],"type":"object"},"type":"array"}},"required":["SchemaVersion","Layout"],"type":"object"}},"required":["PackageBootstrap"],"title":"AAC Package Bootstrap 1","type":"object","x-aac-schema-id":"_AAC.schema.package-bootstrap","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PackageBootstrap">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Package Bootstrap schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="PackageBootstrap">
+          <xs:annotation>
+            <xs:documentation>Package-management bootstrap configuration.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SchemaVersion" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Canonical schema version.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Layout">
+                <xs:annotation>
+                  <xs:documentation>Structured layout associated with this package bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ProductRoot">
+                      <xs:annotation>
+                        <xs:documentation>Specifies the product root for this layout.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="PackageStoreSubdirectory" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Filesystem or logical package store subdirectory used by this layout.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DownloadedSubdirectory" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Filesystem or logical downloaded subdirectory used by this layout.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="InstalledSubdirectory" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Filesystem or logical installed subdirectory used by this layout.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ObsoleteSubdirectory" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Filesystem or logical obsolete subdirectory used by this layout.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="CoreStateSubdirectory" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Filesystem or logical core state subdirectory used by this layout.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="TransactionsSubdirectory" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Filesystem or logical transactions subdirectory used by this layout.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="CoreLockFilename" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Specifies the core lock filename for this layout.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Sources" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Lists the sources associated with this package bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Id">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of this source.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Type" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Type discriminator for this source.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Uri">
+                            <xs:annotation>
+                              <xs:documentation>URI or URL identifying the uri associated with this source.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="AuthenticationProfileId" minOccurs="0" nillable="true" type="xs:string">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of the authentication profile associated with this source.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="VerifierId" minOccurs="0" nillable="true" type="xs:string">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of the verifier associated with this source.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Priority" minOccurs="0" type="xs:integer">
+                            <xs:annotation>
+                              <xs:documentation>Specifies the priority for this source.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Settings" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Structured settings associated with this source.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="key" type="xs:string" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable name of this source.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable description of this source.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="AutomationPolicy" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Structured automation policy associated with this package bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="VerifyOnDownload" minOccurs="0" type="xs:boolean">
+                      <xs:annotation>
+                        <xs:documentation>Indicates whether verify on download applies to this automation policy.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="RequireEntitlementForAutomaticPaidComponent" minOccurs="0" type="xs:boolean">
+                      <xs:annotation>
+                        <xs:documentation>Indicates whether require entitlement for automatic paid component applies to this automation policy.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="AllowAutomaticDownload" minOccurs="0" type="xs:boolean">
+                      <xs:annotation>
+                        <xs:documentation>Indicates whether allow automatic download applies to this automation policy.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="AllowAutomaticInstall" minOccurs="0" type="xs:boolean">
+                      <xs:annotation>
+                        <xs:documentation>Indicates whether allow automatic install applies to this automation policy.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Metadata" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Additional structured metadata associated with this package bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                        </xs:sequence>
+                        <xs:attribute name="key" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

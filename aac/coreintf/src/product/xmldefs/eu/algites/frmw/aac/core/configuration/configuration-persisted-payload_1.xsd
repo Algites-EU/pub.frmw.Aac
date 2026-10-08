@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/configuration/configuration-persisted-payload_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/configuration/configuration-persisted-payload_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Configuration Persisted Payload schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-persisted-payload_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Configuration Persisted Payload schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"ConfigurationSchema":{"additionalProperties":false,"description":"Canonical schema reference used to validate this configuration.","properties":{"Id":{"description":"Stable identifier of this configuration schema.","minLength":1,"type":"string"},"Version":{"description":"Version of this configuration schema.","minimum":1,"type":"integer"}},"required":["Id","Version"],"type":"object"},"ConfigurationTarget":{"additionalProperties":false,"allOf":[{"if":{"properties":{"Kind":{"const":"provider_instance","description":"Discriminator identifying the semantic kind represented by this value."}}},"then":{"required":["ProviderInstanceId"]}}],"description":"Identifies the component, provider, or scope targeted by this persisted configuration.","properties":{"ComponentId":{"description":"Stable identifier of the AAC component associated with this configuration target.","minLength":1,"type":"string"},"Kind":{"description":"Kind of this configuration target.","enum":["component","provider_instance"]},"ProviderInstanceId":{"description":"Stable identifier of the provider instance associated with this configuration target.","minLength":1,"type":"string"}},"required":["Kind","ComponentId"],"type":"object"},"Metadata":{"description":"Additional structured metadata associated with this AAC configuration persisted payload.","type":"object"},"Policies":{"description":"Configuration policies stored with the effective values.","type":"object"},"Values":{"description":"Configuration values stored for the target.","type":"object"},"WrittenByComponentVersion":{"description":"Component version that last wrote this persisted configuration payload.","minimum":1,"type":"integer"}},"required":["ConfigurationTarget","ConfigurationSchema","WrittenByComponentVersion","Values","Policies"],"title":"AAC Configuration Persisted Payload 1","type":"object","x-aac-schema-id":"_AAC.schema.configuration-persisted-payload","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ConfigurationPersistedPayload">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Configuration Persisted Payload schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ConfigurationTarget">
+          <xs:annotation>
+            <xs:documentation>Identifies the component, provider, or scope targeted by this persisted configuration.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Kind" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Kind of this configuration target.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="ComponentId">
+                <xs:annotation>
+                  <xs:documentation>Stable identifier of the AAC component associated with this configuration target.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ProviderInstanceId" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Stable identifier of the provider instance associated with this configuration target.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ConfigurationSchema">
+          <xs:annotation>
+            <xs:documentation>Canonical schema reference used to validate this configuration.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id">
+                <xs:annotation>
+                  <xs:documentation>Stable identifier of this configuration schema.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Version">
+                <xs:annotation>
+                  <xs:documentation>Version of this configuration schema.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:integer">
+                    <xs:minInclusive value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="WrittenByComponentVersion">
+          <xs:annotation>
+            <xs:documentation>Component version that last wrote this persisted configuration payload.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+              <xs:minInclusive value="1"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="Values">
+          <xs:annotation>
+            <xs:documentation>Configuration values stored for the target.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                  </xs:sequence>
+                  <xs:attribute name="key" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Policies">
+          <xs:annotation>
+            <xs:documentation>Configuration policies stored with the effective values.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                  </xs:sequence>
+                  <xs:attribute name="key" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Metadata" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Additional structured metadata associated with this AAC configuration persisted payload.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                  </xs:sequence>
+                  <xs:attribute name="key" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

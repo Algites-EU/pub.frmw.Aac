@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.yamldef.schema.json",
+  "title": "AAC Entitlement Document 1",
+  "description": "Defines the canonical AAC Entitlement Document schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "Entitlement"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "Entitlement": {
+      "type": "object",
+      "description": "Entitlement document represented by this schema.",
+      "required": [
+        "FormatVersion",
+        "EntitlementId",
+        "Issuer",
+        "LicensingScope",
+        "Subject",
+        "Components"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "FormatVersion": {
+          "const": 1,
+          "description": "Version of the persisted or exchanged document format."
+        },
+        "EntitlementId": {
+          "type": "string",
+          "description": "Stable identifier of the entitlement associated with this entitlement.",
+          "minLength": 1
+        },
+        "Issuer": {
+          "type": "object",
+          "description": "Structured issuer associated with this entitlement.",
+          "required": [
+            "Id"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "Id": {
+              "type": "string",
+              "description": "Stable identifier of this issuer.",
+              "minLength": 1
+            }
+          }
+        },
+        "Subject": {
+          "type": "object",
+          "description": "Structured subject associated with this entitlement.",
+          "required": [
+            "Id"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "Id": {
+              "type": "string",
+              "description": "Stable identifier of this subject.",
+              "minLength": 1
+            },
+            "DisplayName": {
+              "type": "string",
+              "description": "Specifies the display name for this subject."
+            },
+            "Attributes": {
+              "type": "object",
+              "description": "Structured attributes associated with this subject."
+            }
+          }
+        },
+        "Components": {
+          "type": "array",
+          "description": "Lists the components associated with this entitlement.",
+          "items": {
+            "type": "object",
+            "required": [
+              "Id",
+              "Grants"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string",
+                "description": "Stable identifier of this component.",
+                "minLength": 1
+              },
+              "Grants": {
+                "type": "array",
+                "description": "Lists the grants associated with this component.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "Capability",
+                    "Permissions"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "Capability": {
+                      "type": "object",
+                      "description": "Identity and human-facing metadata of the capability contract.",
+                      "required": [
+                        "Id",
+                        "Version"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "Id": {
+                          "type": "string",
+                          "description": "Stable identifier of this capability.",
+                          "minLength": 1
+                        },
+                        "Version": {
+                          "type": "integer",
+                          "description": "Version of this capability.",
+                          "minimum": 1
+                        }
+                      }
+                    },
+                    "Permissions": {
+                      "type": "array",
+                      "description": "Authorization or entitlement permissions associated with this grant.",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "Id"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "Id": {
+                            "type": "string",
+                            "description": "Stable identifier of this permission.",
+                            "minLength": 1
+                          },
+                          "ValidFrom": {
+                            "type": "string",
+                            "description": "Specifies the valid from for this permission."
+                          },
+                          "ValidUntil": {
+                            "type": "string",
+                            "description": "Specifies the valid until for this permission."
+                          },
+                          "Constraints": {
+                            "type": "object",
+                            "description": "Structured constraints associated with this permission."
+                          },
+                          "Metadata": {
+                            "type": "object",
+                            "description": "Additional structured metadata associated with this permission."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "IssuedAt": {
+          "type": "string",
+          "description": "Specifies the issued at for this entitlement."
+        },
+        "ValidFrom": {
+          "type": "string",
+          "description": "Specifies the valid from for this entitlement."
+        },
+        "ValidUntil": {
+          "type": "string",
+          "description": "Specifies the valid until for this entitlement."
+        },
+        "Metadata": {
+          "type": "object",
+          "description": "Additional structured metadata associated with this entitlement."
+        },
+        "IssuedForRequest": {
+          "type": "object",
+          "description": "Structured issued for request associated with this entitlement.",
+          "required": [
+            "RequestId",
+            "RequestDigest"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "RequestId": {
+              "type": "string",
+              "description": "Stable identifier of the request associated with this issued for request.",
+              "minLength": 1
+            },
+            "RequestDigest": {
+              "type": "string",
+              "description": "Specifies the request digest for this issued for request.",
+              "minLength": 1
+            }
+          }
+        },
+        "LicensingScope": {
+          "type": "object",
+          "description": "Structured licensing scope associated with this entitlement.",
+          "required": [
+            "Type"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "Type": {
+              "type": "string",
+              "description": "Type discriminator for this licensing scope.",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.entitlement-document",
+  "x-aac-schema-version": 1
+}

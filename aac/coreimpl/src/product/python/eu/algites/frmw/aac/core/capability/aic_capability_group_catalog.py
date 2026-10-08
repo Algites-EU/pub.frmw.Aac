@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.capability.aiig_capability_group_1 import AIigCapabilityGroup_1
+from eu.algites.frmw.aac.core.capability.aiig_capability_group_group_1 import AIigCapabilityGroupGroup_1
 import copy
 import hashlib
 import json
@@ -64,13 +67,13 @@ class AIcCapabilityGroupCatalog:
             raise AIxContractAdmissionError(f"capability-group {source} must be a mapping")
         try:
             self.schema_registry.normalize("capability-group_1.jsondef.schema.json", raw, apply_defaults=False)
-            item = raw["Group"]
+            item = raw[AIigCapabilityGroup_1.SCHEMA_FIELD_NAME__GROUP]
             group = AIcCapabilityGroup(
-                id=str(item["Id"]),
-                parent_group_id=str(item["ParentGroupId"]) if item.get("ParentGroupId") is not None else None,
-                name=normalize_display_text(item.get("Name")),
-                description=normalize_display_text(item.get("Description")),
-                metadata=dict(item.get("Metadata", {})),
+                id=str(item[AIigCapabilityGroupGroup_1.SCHEMA_FIELD_NAME__ID]),
+                parent_group_id=str(item[AIigCapabilityGroupGroup_1.SCHEMA_FIELD_NAME__PARENT_GROUP_ID]) if item.get(AIigCapabilityGroupGroup_1.SCHEMA_FIELD_NAME__PARENT_GROUP_ID) is not None else None,
+                name=normalize_display_text(item.get(AIigCapabilityGroupGroup_1.SCHEMA_FIELD_NAME__NAME)),
+                description=normalize_display_text(item.get(AIigCapabilityGroupGroup_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
+                metadata=dict(item.get(AIigCapabilityGroupGroup_1.SCHEMA_FIELD_NAME__METADATA, {})),
             )
         except Exception as exc:
             raise AIxContractAdmissionError(f"capability-group schema validation failed for {source}: {exc}") from exc

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json",
+  "Component": {
+    "Id": "_AAC.component.simpleaudit",
+    "Version": 1,
+    "Name": {
+      "Text": "Simple audit observer",
+      "ResourceKey": "aac.simpleaudit.component.name"
+    },
+    "Description": {
+      "Text": "Reference AAC observer that writes normalized capability invocation records to standard output or a file.",
+      "ResourceKey": "aac.simpleaudit.component.description"
+    },
+    "CapabilityProviders": [
+      {
+        "Id": "observation",
+        "Name": {
+          "Text": "Simple audit observation provider",
+          "ResourceKey": "aac.simpleaudit.provider.observation.name"
+        },
+        "Description": {
+          "Text": "Observes capability invocations and emits JSON or text audit records.",
+          "ResourceKey": "aac.simpleaudit.provider.observation.description"
+        },
+        "Capabilities": [
+          {
+            "Id": "_AAC.capability.observation",
+            "Versions": [
+              1
+            ]
+          }
+        ],
+        "ImplementationClasses": [
+          {
+            "TechnologyKind": "python",
+            "ProviderClassName": "eu.algites.frmw.aac.observation.simpleaudit.provider:AIcSimpleAuditObserver"
+          }
+        ],
+        "Runtime": {
+          "Profile": "process"
+        },
+        "ConfigurationSchema": {
+          "Id": "simpleaudit-config",
+          "WriteVersion": 1,
+          "ReadableVersions": [
+            1
+          ],
+          "Resource": "simpleaudit-config_1.jsondef.schema.json"
+        },
+        "InitialInstances": [
+          {
+            "Name": "default",
+            "Configuration": {
+              "Output": {
+                "Type": "stdout"
+              },
+              "Format": "json"
+            }
+          }
+        ],
+        "Operations": [
+          {
+            "Capability": "_AAC.capability.observation",
+            "CapabilityVersion": 1,
+            "Operation": "observe",
+            "Interaction": {
+              "SupportedStateResultDeliveryModes": [
+                "on_demand_complete"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

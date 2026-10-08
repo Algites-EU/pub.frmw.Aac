@@ -64,10 +64,10 @@ def _compose_policy(property_id: str, records: list[AIcConfigurationContribution
                 if maximum is None or _compare(policy.value, maximum) < 0:
                     maximum = policy.value
             elif policy.mode is AInConfigurationPolicyMode.IN_SET:
-                incoming = _as_values(policy.value, property_id, "IN_SET")
+                incoming = _as_values(policy.value, property_id, AInConfigurationPolicyMode.IN_SET.value)
                 in_set = incoming if in_set is None else [value for value in in_set if _contains(incoming, value)]
             elif policy.mode is AInConfigurationPolicyMode.NOT_IN_SET:
-                for value in _as_values(policy.value, property_id, "NOT_IN_SET"):
+                for value in _as_values(policy.value, property_id, AInConfigurationPolicyMode.NOT_IN_SET.value):
                     if not _contains(not_in_set, value):
                         not_in_set.append(value)
 

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/observation/observation-input_1.yamldef.schema.json",
+  "title": "AAC Observation Input 1",
+  "description": "Defines the canonical AAC Observation Input schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "InvocationId",
+    "Phase",
+    "CapabilityId",
+    "CapabilityVersion",
+    "OperationId",
+    "ProviderInstanceId"
+  ],
+  "properties": {
+    "InvocationId": {
+      "type": "string",
+      "description": "Stable identifier of this capability invocation."
+    },
+    "ParentInvocationId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Identifier of the parent invocation when this invocation is nested."
+    },
+    "Phase": {
+      "enum": [
+        "pre",
+        "post"
+      ],
+      "description": "Specifies the phase for this AAC observation input."
+    },
+    "CapabilityId": {
+      "type": "string",
+      "description": "Canonical capability identifier."
+    },
+    "CapabilityVersion": {
+      "type": "integer",
+      "description": "Canonical capability-contract version.",
+      "minimum": 1
+    },
+    "OperationId": {
+      "type": "string",
+      "description": "Identifier of the capability operation."
+    },
+    "ProviderInstanceId": {
+      "type": "string",
+      "description": "Stable identifier of the provider instance associated with this AAC observation input."
+    },
+    "Arguments": {
+      "type": "object",
+      "description": "Canonical operation arguments supplied to the provider."
+    },
+    "Outcome": {
+      "enum": [
+        "success",
+        "error",
+        null
+      ],
+      "description": "Final or observed outcome of the invocation."
+    },
+    "Result": {
+      "description": "Operation result payload observed for the invocation."
+    },
+    "Error": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Structured failure information observed for the invocation."
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "Additional structured metadata associated with this AAC observation input."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.observation-input",
+  "x-aac-schema-version": 1
+}

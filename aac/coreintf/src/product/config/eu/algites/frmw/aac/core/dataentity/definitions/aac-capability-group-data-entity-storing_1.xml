@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<CapabilityGroup xmlns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd" schemaRef="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd">
+  <Group>
+    <Id>_AAC.data-entity.storing</Id>
+    <ParentGroupId>_AAC.data-entity</ParentGroupId>
+    <Name>
+      <MapEntry key="Text">
+        <Value>"Data Entity Storing"</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.data.entity.storing.name"</Value>
+      </MapEntry>
+    </Name>
+    <Description>
+      <MapEntry key="Text">
+        <Value>"Capabilities that directly mutate stored Data Entity records."</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.data.entity.storing.description"</Value>
+      </MapEntry>
+    </Description>
+  </Group>
+</CapabilityGroup>

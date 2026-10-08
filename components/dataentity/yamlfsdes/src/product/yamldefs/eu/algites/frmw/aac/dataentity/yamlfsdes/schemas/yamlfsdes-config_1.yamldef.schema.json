@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/components/dataentity/yamlfsdes/src/product/yamldefs/eu/algites/frmw/aac/dataentity/yamlfsdes/schemas/yamlfsdes-config_1.yamldef.schema.json",
+  "x-aac-schema-id": "_AAC.schema.yamlfsdes-config",
+  "x-aac-schema-version": 1,
+  "title": "YAML File-System Data Entity Storage Configuration 1",
+  "description": "Defines the canonical YAML File-System Data Entity Storage Configuration schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "RootDirectory"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "RootDirectory": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Root directory containing schema/version/UID YAML Data Entity records."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  }
+}

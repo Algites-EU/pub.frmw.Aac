@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/package-source-manifest_1.yamldef.schema.json",
+  "type": "object",
+  "required": [
+    "FormatVersion",
+    "Packages"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "FormatVersion": {
+      "const": 1,
+      "description": "Version of the persisted or exchanged document format."
+    },
+    "Packages": {
+      "type": "array",
+      "description": "Lists the packages associated with this AAC package source manifest."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.package-source-manifest",
+  "x-aac-schema-version": 1,
+  "title": "AAC Package Source Manifest 1",
+  "description": "Defines the canonical AAC Package Source Manifest schema and its serialized data contract."
+}

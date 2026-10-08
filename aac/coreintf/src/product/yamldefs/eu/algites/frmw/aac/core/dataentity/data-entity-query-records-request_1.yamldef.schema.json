@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.yamldef.schema.json",
+  "x-aac-schema-id": "_AAC.schema.data-entity-query-records-request",
+  "x-aac-schema-version": 1,
+  "title": "Data Entity Query Records Request 1",
+  "description": "Defines the canonical Data Entity Query Records Request schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "SchemaId"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "SchemaId": {
+      "type": "string",
+      "description": "Canonical schema identifier.",
+      "minLength": 1
+    },
+    "States": {
+      "type": "array",
+      "description": "Record states included by the query.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "active",
+          "tombstone"
+        ]
+      },
+      "default": [
+        "active"
+      ]
+    },
+    "Uids": {
+      "type": "array",
+      "description": "Logical record UIDs included by the query.",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "References": {
+      "type": "array",
+      "description": "Reference definitions or filters associated with this data entity query records request.",
+      "items": {
+        "type": "object",
+        "required": [
+          "Target"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "Target": {
+            "type": "object",
+            "description": "Structured target associated with this reference.",
+            "required": [
+              "SchemaId",
+              "Uid"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "SchemaId": {
+                "type": "string",
+                "description": "Canonical schema identifier.",
+                "minLength": 1
+              },
+              "Uid": {
+                "type": "string",
+                "description": "Stable logical UID of the Data Entity record.",
+                "minLength": 1
+              }
+            }
+          },
+          "SchemaPath": {
+            "type": "array",
+            "description": "Path within the canonical schema that contains the reference.",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "ReferenceMatch": {
+      "enum": [
+        "all",
+        "any"
+      ],
+      "description": "Selects how multiple reference filters are combined.",
+      "default": "all"
+    },
+    "Order": {
+      "enum": [
+        "uid_asc",
+        "uid_desc"
+      ],
+      "description": "Deterministic ordering requested for returned records.",
+      "default": "uid_asc"
+    },
+    "Limit": {
+      "type": "integer",
+      "description": "Maximum number of records requested in this result segment.",
+      "minimum": 1
+    },
+    "ContinuationToken": {
+      "type": "string",
+      "description": "Opaque continuation token used to resume a paged or streamed query.",
+      "minLength": 1
+    },
+    "StoredSchemaVersionFilter": {
+      "type": "array",
+      "description": "Optional filter restricting records by their physically stored schema version.",
+      "uniqueItems": true,
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "minItems": 1
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  }
+}

@@ -4,6 +4,22 @@ Short description of the project.
 
 > Public Algites project.
 
+## AAC canonical schema/configuration parity (October 2026)
+
+AAC contains corresponding JSON Schema (`jsondefs`), YAML-schema (`yamldefs`),
+and XSD (`xmldefs`) definitions for 56 logical contracts. The 19 concrete
+configuration examples are available as YAML, JSON, and XML under
+`src/product/config` in their respective artifact trees. YAML schema headers
+reference `yamldefs`, not `jsondefs`. The new `yamldefs`/`xmldefs` schema files
+deliberately have no sidecars yet; test the Modustro generator with:
+
+```bash
+./gradlew generateMissingModustroSchemaSidecars --no-configuration-cache
+```
+
+See [Canonical definition and configuration formats](specs/aac/Canonical-Definition-And-Configuration-Formats.md)
+for the mapping, XSD limitations, verification commands, and runtime loader caveat.
+
 ---
 
 ## 📦 Overview
@@ -440,3 +456,34 @@ See:
 ### Qualified capability bindings
 
 Capability contracts may define `BindingQualifiersSchema`. Providers then advertise concrete `BindingQualifierProfiles`. Consumers do not duplicate qualifier requirements in descriptors; their technology-specific `CapabilityProfileMatcherClassName` evaluates provider profiles during `RESOLVE` using effective configuration. The selected subset is retained on the binding and exposed through invocation context. `ProviderClassName` names the normal technology-specific provider runtime implementation.
+
+
+### Schema field bindings and concrete YAML resources
+
+Concrete built-in capability contracts and capability groups are YAML instances under
+`aac/coreintf/src/product/config/eu/algites/frmw/aac/core/.../definitions/`.
+The `yamldefs` source kind is reserved for `*.yamldef.schema.json` schemas and their
+publication metadata sidecars. A sidecar does not turn a YAML instance into a schema.
+Python package staging preserves the resource path below each source-kind root, so
+moving these instances from `yamldefs` to `config` does not change runtime lookup paths.
+The local source-layout check enforces this distinction before a Gradle publication.
+
+### Generated schema contracts
+
+Schema-owned `SCHEMA_FIELD_NAME__*` constants are declared on generated interface
+contracts in the same package path as the canonical schema. Contracts and enums
+are generated in `coreintf`; concrete dataclasses/records are generated in
+`coreimpl`. Generated `.gen` and `.extgen` trees are ignored by Git and must never
+be copied from another checkout or included in repository source archives.
+
+```bash
+./gradlew generateModustroSchemaBindings
+./gradlew testModustroSchemaBindings
+```
+
+Build preparation and tests depend on generation. The JVM implementation of the
+shared **pub.tool.General Defs Codegen** generator renders both Python and Java;
+its updated version must be published before consuming these repositories.
+See [the generated-source conventions](specs/GENERATED-SOURCES.md) for the
+artifact split, cleanup of formerly tracked outputs, and CI verification.
+

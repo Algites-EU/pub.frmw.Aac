@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Capability Group schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$defs":{"displayText":{"description":"Defines the reusable display text structure used by this canonical schema.","oneOf":[{"minLength":1,"type":"string"},{"additionalProperties":false,"anyOf":[{"required":["Text"]},{"required":["ResourceKey"]}],"properties":{"ResourceKey":{"description":"Optional localization resource key for the human-readable text.","minLength":1,"type":"string"},"Text":{"description":"Human-readable display text.","minLength":1,"type":"string"}},"type":"object"}]}},"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-group_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Capability Group schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"Group":{"additionalProperties":false,"description":"Capability-group definition represented by this document.","properties":{"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this group."},"Id":{"description":"Stable identifier of this group.","minLength":1,"type":"string"},"Metadata":{"description":"Additional structured metadata associated with this group.","type":"object"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this group."},"ParentGroupId":{"description":"Stable identifier of the parent group associated with this group.","minLength":1,"type":"string"}},"required":["Id","Name"],"type":"object"}},"required":["Group"],"title":"AAC Capability Group 1","type":"object","x-aac-schema-id":"_AAC.schema.capability-group","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CapabilityGroup">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Capability Group schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Group">
+          <xs:annotation>
+            <xs:documentation>Capability-group definition represented by this document.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id">
+                <xs:annotation>
+                  <xs:documentation>Stable identifier of this group.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ParentGroupId" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Stable identifier of the parent group associated with this group.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Name" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Human-readable name of this group.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Human-readable description of this group.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Metadata" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Additional structured metadata associated with this group.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                        </xs:sequence>
+                        <xs:attribute name="key" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

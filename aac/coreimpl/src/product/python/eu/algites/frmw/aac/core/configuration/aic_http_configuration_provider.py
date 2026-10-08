@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.configuration.aiig_configuration_provider_document_1 import AIigConfigurationProviderDocument_1
 import copy
 import json
 import os
@@ -87,7 +89,7 @@ def _response_revision(headers, body):
             raw = json.loads(body.decode("utf-8"))
             if isinstance(raw, Mapping):
                 if "RecordRevision" in raw:
-                    return raw["RecordRevision"]
+                    return raw[AIigConfigurationProviderDocument_1.SCHEMA_FIELD_NAME__RECORD_REVISION]
         except Exception:
             pass
     return None

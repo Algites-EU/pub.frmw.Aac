@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<CapabilityContract xmlns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd" schemaRef="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd">
+  <Capability>
+    <Id>_AAC.data-entity.query-records</Id>
+    <Version>1</Version>
+    <Name>
+      <MapEntry key="Text">
+        <Value>"Query Data Entity records"</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.data.entity.query.records.name"</Value>
+      </MapEntry>
+    </Name>
+    <Description>
+      <MapEntry key="Text">
+        <Value>"Queries stored Data Entity records through provider-independent technical selectors."</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.data.entity.query.records.description"</Value>
+      </MapEntry>
+    </Description>
+    <GroupId>_AAC.data-entity.loading</GroupId>
+  </Capability>
+  <Operations>
+    <Item>
+      <Id>query</Id>
+      <Name>
+        <MapEntry key="Text">
+          <Value>"Query records"</Value>
+        </MapEntry>
+        <MapEntry key="ResourceKey">
+          <Value>"aac.data.entity.query.records.operation.query.name"</Value>
+        </MapEntry>
+      </Name>
+      <Description>
+        <MapEntry key="Text">
+          <Value>"Queries stored Data Entity records through provider-independent technical selectors."</Value>
+        </MapEntry>
+        <MapEntry key="ResourceKey">
+          <Value>"aac.data.entity.query.records.operation.query.description"</Value>
+        </MapEntry>
+      </Description>
+      <Interactions>
+        <Item>
+          <Kind>input</Kind>
+          <Schema>
+            <Id>_AAC.schema.data-entity-query-records-request</Id>
+            <Version>1</Version>
+          </Schema>
+        </Item>
+        <Item>
+          <Kind>running_complete_state_result</Kind>
+          <Schema>
+            <Id>_AAC.schema.data-entity-query-records-running-complete-result</Id>
+            <Version>1</Version>
+          </Schema>
+        </Item>
+        <Item>
+          <Kind>running_delta_state_result</Kind>
+          <Schema>
+            <Id>_AAC.schema.data-entity-query-records-running-delta-result</Id>
+            <Version>1</Version>
+          </Schema>
+        </Item>
+        <Item>
+          <Kind>final_success_state_result</Kind>
+          <Schema>
+            <Id>_AAC.schema.data-entity-query-records-result</Id>
+            <Version>1</Version>
+          </Schema>
+        </Item>
+      </Interactions>
+    </Item>
+  </Operations>
+</CapabilityContract>

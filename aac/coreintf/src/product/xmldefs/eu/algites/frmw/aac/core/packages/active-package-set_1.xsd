@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/packages/active-package-set_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/packages/active-package-set_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Active Package Set schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/active-package-set_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Active Package Set schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"FormatVersion":{"const":1,"description":"Version of the persisted or exchanged document format."},"LastTransactionId":{"description":"Stable identifier of the last transaction associated with this AAC active package set.","type":["string","null"]},"RecordRevision":{"description":"Storage-provider record revision used for optimistic concurrency and change tracking.","minimum":0,"type":"integer"},"Selections":{"description":"Lists the selections associated with this AAC active package set.","items":{"additionalProperties":false,"properties":{"ApplicationScopeId":{"description":"Stable identifier of the application scope associated with this selection.","minLength":1,"type":"string"},"ComponentId":{"description":"Stable identifier of the AAC component associated with this selection.","minLength":1,"type":"string"},"ComponentVersion":{"description":"Version of the AAC component associated with this selection.","minimum":1,"type":"integer"},"PreviousSha256":{"description":"Specifies the previous sha256 for this selection.","type":["string","null"]},"PreviousVersion":{"description":"Version of the previous associated with this selection.","minimum":1,"type":["integer","null"]},"SelectedAt":{"description":"Specifies the selected at for this selection.","type":"string"},"Sha256":{"description":"Specifies the sha256 for this selection.","minLength":1,"type":"string"}},"required":["ApplicationScopeId","ComponentId","ComponentVersion","Sha256","SelectedAt"],"type":"object"},"type":"array"}},"required":["FormatVersion","RecordRevision","Selections"],"title":"AAC Active Package Set 1","type":"object","x-aac-schema-id":"_AAC.schema.active-package-set","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ActivePackageSet">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Active Package Set schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FormatVersion" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Version of the persisted or exchanged document format.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="RecordRevision">
+          <xs:annotation>
+            <xs:documentation>Storage-provider record revision used for optimistic concurrency and change tracking.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+              <xs:minInclusive value="0"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="LastTransactionId" minOccurs="0" nillable="true" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Stable identifier of the last transaction associated with this AAC active package set.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Selections">
+          <xs:annotation>
+            <xs:documentation>Lists the selections associated with this AAC active package set.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ApplicationScopeId">
+                      <xs:annotation>
+                        <xs:documentation>Stable identifier of the application scope associated with this selection.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ComponentId">
+                      <xs:annotation>
+                        <xs:documentation>Stable identifier of the AAC component associated with this selection.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ComponentVersion">
+                      <xs:annotation>
+                        <xs:documentation>Version of the AAC component associated with this selection.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                          <xs:minInclusive value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Sha256">
+                      <xs:annotation>
+                        <xs:documentation>Specifies the sha256 for this selection.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="SelectedAt" type="xs:string">
+                      <xs:annotation>
+                        <xs:documentation>Specifies the selected at for this selection.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="PreviousSha256" minOccurs="0" nillable="true" type="xs:string">
+                      <xs:annotation>
+                        <xs:documentation>Specifies the previous sha256 for this selection.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="PreviousVersion" minOccurs="0" nillable="true">
+                      <xs:annotation>
+                        <xs:documentation>Version of the previous associated with this selection.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                          <xs:minInclusive value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.yamldef.schema.json",
+  "title": "AAC Security Bootstrap 1",
+  "description": "Defines the canonical AAC Security Bootstrap schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "SecurityBootstrap"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "SecurityBootstrap": {
+      "type": "object",
+      "description": "Security bootstrap configuration used to initialize trusted authentication and secret-provider facilities.",
+      "required": [
+        "SchemaVersion"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "SchemaVersion": {
+          "const": 1,
+          "description": "Canonical schema version."
+        },
+        "SecretProviders": {
+          "type": "array",
+          "description": "Lists the secret providers associated with this security bootstrap.",
+          "items": {
+            "type": "object",
+            "required": [
+              "Id",
+              "Type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string",
+                "description": "Stable identifier of this secret provider.",
+                "minLength": 1
+              },
+              "Type": {
+                "type": "string",
+                "description": "Type discriminator for this secret provider.",
+                "minLength": 1
+              },
+              "Settings": {
+                "type": "object",
+                "description": "Structured settings associated with this secret provider."
+              },
+              "BootstrapSafe": {
+                "type": "boolean",
+                "description": "Indicates whether bootstrap safe applies to this secret provider."
+              },
+              "Name": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this secret provider."
+              },
+              "Description": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this secret provider."
+              }
+            }
+          }
+        },
+        "AuthenticationProfiles": {
+          "type": "array",
+          "description": "Lists the authentication profiles associated with this security bootstrap.",
+          "items": {
+            "type": "object",
+            "required": [
+              "Id",
+              "Mechanism"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string",
+                "description": "Stable identifier of this authentication profile.",
+                "minLength": 1
+              },
+              "Mechanism": {
+                "type": "string",
+                "description": "Specifies the mechanism for this authentication profile.",
+                "minLength": 1
+              },
+              "Parameters": {
+                "type": "object",
+                "description": "Structured parameters associated with this authentication profile.",
+                "additionalProperties": {
+                  "oneOf": [
+                    {
+                      "type": [
+                        "string",
+                        "number",
+                        "integer",
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "SecretReference"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "SecretReference": {
+                          "type": "object",
+                          "required": [
+                            "SecretProviderId",
+                            "Key"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "SecretProviderId": {
+                              "type": "string",
+                              "minLength": 1,
+                              "description": "Identifier of the secret provider that resolves this reference."
+                            },
+                            "Key": {
+                              "type": "string",
+                              "minLength": 1,
+                              "description": "Provider-specific key identifying the referenced secret."
+                            },
+                            "Version": {
+                              "type": "string",
+                              "minLength": 1,
+                              "description": "Optional provider-specific version of the referenced secret."
+                            },
+                            "Metadata": {
+                              "type": "object",
+                              "description": "Additional structured metadata associated with the referenced value."
+                            }
+                          },
+                          "description": "Reference to secret material managed by an AAC secret provider."
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "Metadata": {
+                "type": "object",
+                "description": "Additional structured metadata associated with this authentication profile."
+              },
+              "Name": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this authentication profile."
+              },
+              "Description": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this authentication profile."
+              }
+            }
+          }
+        },
+        "Metadata": {
+          "type": "object",
+          "description": "Additional structured metadata associated with this security bootstrap."
+        }
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "$defs": {
+    "displayText": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Text": {
+              "type": "string",
+              "description": "Human-readable display text.",
+              "minLength": 1
+            },
+            "ResourceKey": {
+              "type": "string",
+              "description": "Optional localization resource key for the human-readable text.",
+              "minLength": 1
+            }
+          },
+          "anyOf": [
+            {
+              "required": [
+                "Text"
+              ]
+            },
+            {
+              "required": [
+                "ResourceKey"
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "Defines the reusable display text structure used by this canonical schema."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.security-bootstrap",
+  "x-aac-schema-version": 1
+}

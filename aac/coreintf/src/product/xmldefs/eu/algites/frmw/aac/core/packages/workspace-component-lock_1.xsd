@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/packages/workspace-component-lock_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/packages/workspace-component-lock_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Workspace Component Lock schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-lock_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Workspace Component Lock schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"WorkspaceComponentLock":{"additionalProperties":false,"description":"Resolved component selections pinned for one workspace.","properties":{"Entries":{"description":"Lists the entries associated with this workspace component lock.","items":{"additionalProperties":false,"properties":{"ArtifactFilename":{"description":"Specifies the artifact filename for this entry.","minLength":1,"type":"string"},"ArtifactUri":{"description":"URI or URL identifying the artifact associated with this entry.","minLength":1,"type":"string"},"ComponentId":{"description":"Stable identifier of the AAC component associated with this entry.","minLength":1,"type":"string"},"ComponentVersion":{"description":"Version of the AAC component associated with this entry.","minimum":1,"type":"integer"},"DescriptorPath":{"description":"Filesystem or logical descriptor path used by this entry.","minLength":1,"type":"string"},"PackageFormat":{"description":"Specifies the package format for this entry.","minLength":1,"type":"string"},"RuntimePackage":{"description":"Specifies the runtime package for this entry.","type":["string","null"]},"Sha256":{"description":"Specifies the sha256 for this entry.","pattern":"^[0-9a-fA-F]{64}$","type":"string"},"Sidecars":{"description":"Lists the sidecars associated with this entry.","items":{"additionalProperties":false,"properties":{"Suffix":{"description":"Specifies the suffix for this sidecar.","pattern":"^\\..+","type":"string"},"Uri":{"description":"URI or URL identifying the uri associated with this sidecar.","minLength":1,"type":"string"}},"required":["Uri","Suffix"],"type":"object"},"type":"array"},"SourceId":{"description":"Stable identifier of the source associated with this entry.","minLength":1,"type":"string"},"VerifierId":{"description":"Stable identifier of the verifier associated with this entry.","type":["string","null"]}},"required":["ComponentId","ComponentVersion","Sha256","SourceId","ArtifactUri","ArtifactFilename","PackageFormat","DescriptorPath"],"type":"object"},"type":"array"},"WorkspaceId":{"description":"Stable identifier of the workspace associated with this workspace component lock.","minLength":1,"type":"string"}},"required":["WorkspaceId","Entries"],"type":"object"}},"required":["WorkspaceComponentLock"],"title":"AAC Workspace Component Lock 1","type":"object","x-aac-schema-id":"_AAC.schema.workspace-component-lock","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="WorkspaceComponentLock">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Workspace Component Lock schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="WorkspaceComponentLock">
+          <xs:annotation>
+            <xs:documentation>Resolved component selections pinned for one workspace.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="WorkspaceId">
+                <xs:annotation>
+                  <xs:documentation>Stable identifier of the workspace associated with this workspace component lock.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Entries">
+                <xs:annotation>
+                  <xs:documentation>Lists the entries associated with this workspace component lock.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="ComponentId">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of the AAC component associated with this entry.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="ComponentVersion">
+                            <xs:annotation>
+                              <xs:documentation>Version of the AAC component associated with this entry.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:integer">
+                                <xs:minInclusive value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Sha256" type="xs:string">
+                            <xs:annotation>
+                              <xs:documentation>Specifies the sha256 for this entry.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="SourceId">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of the source associated with this entry.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="ArtifactUri">
+                            <xs:annotation>
+                              <xs:documentation>URI or URL identifying the artifact associated with this entry.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="ArtifactFilename">
+                            <xs:annotation>
+                              <xs:documentation>Specifies the artifact filename for this entry.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="PackageFormat">
+                            <xs:annotation>
+                              <xs:documentation>Specifies the package format for this entry.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="DescriptorPath">
+                            <xs:annotation>
+                              <xs:documentation>Filesystem or logical descriptor path used by this entry.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="RuntimePackage" minOccurs="0" nillable="true" type="xs:string">
+                            <xs:annotation>
+                              <xs:documentation>Specifies the runtime package for this entry.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="VerifierId" minOccurs="0" nillable="true" type="xs:string">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of the verifier associated with this entry.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Sidecars" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Lists the sidecars associated with this entry.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Uri">
+                                        <xs:annotation>
+                                          <xs:documentation>URI or URL identifying the uri associated with this sidecar.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="Suffix" type="xs:string">
+                                        <xs:annotation>
+                                          <xs:documentation>Specifies the suffix for this sidecar.</xs:documentation>
+                                        </xs:annotation>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

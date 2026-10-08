@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.packages.aiig_active_package_set_1 import AIigActivePackageSet_1
+from eu.algites.frmw.aac.core.packages.aiig_active_package_set_selections_items_1 import AIigActivePackageSetSelectionsItems_1
 import json
 from dataclasses import dataclass
 from pathlib import Path
@@ -23,46 +26,46 @@ from eu.algites.frmw.aac.core.persistence.transactions import AIcDurableTransact
 
 def _selection_to_raw(item: AIcPackageSelection) -> dict[str, object]:
     return {
-        "ApplicationScopeId": item.application_scope_id,
-        "ComponentId": item.component_id,
-        "ComponentVersion": item.component_version,
-        "Sha256": item.sha256,
-        "SelectedAt": item.selected_at,
-        "PreviousSha256": item.previous_sha256,
-        "PreviousVersion": item.previous_version,
+        AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__APPLICATION_SCOPE_ID: item.application_scope_id,
+        AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__COMPONENT_ID: item.component_id,
+        AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__COMPONENT_VERSION: item.component_version,
+        AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__SHA256: item.sha256,
+        AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__SELECTED_AT: item.selected_at,
+        AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__PREVIOUS_SHA256: item.previous_sha256,
+        AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__PREVIOUS_VERSION: item.previous_version,
     }
 
 def _selection_from_raw(raw: Mapping[str, object]) -> AIcPackageSelection:
     return AIcPackageSelection(
-        str(raw["ApplicationScopeId"]),
-        str(raw["ComponentId"]),
-        int(raw["ComponentVersion"]),
-        str(raw["Sha256"]),
-        str(raw["SelectedAt"]),
-        str(raw["PreviousSha256"]) if raw.get("PreviousSha256") is not None else None,
-        int(raw["PreviousVersion"]) if raw.get("PreviousVersion") is not None else None,
+        str(raw[AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__APPLICATION_SCOPE_ID]),
+        str(raw[AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__COMPONENT_ID]),
+        int(raw[AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__COMPONENT_VERSION]),
+        str(raw[AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__SHA256]),
+        str(raw[AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__SELECTED_AT]),
+        str(raw[AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__PREVIOUS_SHA256]) if raw.get(AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__PREVIOUS_SHA256) is not None else None,
+        int(raw[AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__PREVIOUS_VERSION]) if raw.get(AIigActivePackageSetSelectionsItems_1.SCHEMA_FIELD_NAME__PREVIOUS_VERSION) is not None else None,
     )
 
 def manifest_to_raw(manifest: AIcPackageSelectionManifest) -> dict[str, object]:
     return {
-        "FormatVersion": 1,
-        "RecordRevision": manifest.record_revision,
-        "LastTransactionId": manifest.last_transaction_id,
-        "Selections": [_selection_to_raw(item) for item in manifest.selections],
+        AIigActivePackageSet_1.SCHEMA_FIELD_NAME__FORMAT_VERSION: 1,
+        AIigActivePackageSet_1.SCHEMA_FIELD_NAME__RECORD_REVISION: manifest.record_revision,
+        AIigActivePackageSet_1.SCHEMA_FIELD_NAME__LAST_TRANSACTION_ID: manifest.last_transaction_id,
+        AIigActivePackageSet_1.SCHEMA_FIELD_NAME__SELECTIONS: [_selection_to_raw(item) for item in manifest.selections],
     }
 
 def manifest_from_raw(raw: Mapping[str, object]) -> AIcPackageSelectionManifest:
-    format_version = int(raw.get("FormatVersion", 0))
+    format_version = int(raw.get(AIigActivePackageSet_1.SCHEMA_FIELD_NAME__FORMAT_VERSION, 0))
     if format_version != 1:
         raise AIxPersistenceError("active package set requires format_version 1")
-    values = raw.get("Selections", ())
+    values = raw.get(AIigActivePackageSet_1.SCHEMA_FIELD_NAME__SELECTIONS, ())
     if not isinstance(values, list):
         raise AIxPersistenceError("active package set selections must be an array")
-    revision = raw.get("RecordRevision", 0)
+    revision = raw.get(AIigActivePackageSet_1.SCHEMA_FIELD_NAME__RECORD_REVISION, 0)
     return AIcPackageSelectionManifest(
         int(revision),
         tuple(_selection_from_raw(item) for item in values if isinstance(item, Mapping)),
-        str(raw["LastTransactionId"]) if raw.get("LastTransactionId") is not None else None,
+        str(raw[AIigActivePackageSet_1.SCHEMA_FIELD_NAME__LAST_TRANSACTION_ID]) if raw.get(AIigActivePackageSet_1.SCHEMA_FIELD_NAME__LAST_TRANSACTION_ID) is not None else None,
     )
 
 class AIcDurablePackageSelectionManifestStore:

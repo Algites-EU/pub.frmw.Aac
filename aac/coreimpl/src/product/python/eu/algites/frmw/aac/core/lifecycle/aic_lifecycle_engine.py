@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.capability.ain_consumer_cardinality import AInConsumerCardinality
 from dataclasses import dataclass
 from typing import Mapping
 from eu.algites.frmw.aac.core.descriptor.api import AIcComponentDescriptor
@@ -182,7 +184,7 @@ class AIcLifecycleEngine:
             count = len(handles.get(requirement.id, ()))
             if requirement.mandatory and count == 0:
                 raise AIxLifecycleError(f"mandatory requirement {requirement.id!r} has no resolved capability handle")
-            if requirement.cardinality.value == "SINGLE" and count > 1:
+            if requirement.cardinality.value == AInConsumerCardinality.SINGLE.value and count > 1:
                 raise AIxLifecycleError(f"SINGLE requirement {requirement.id!r} has {count} handles")
         runtime.wire(handles)
         self._advance(application_scope_id, descriptor.id, AInLifecycleState.WIRED, AInLifecycleStage.WIRE)

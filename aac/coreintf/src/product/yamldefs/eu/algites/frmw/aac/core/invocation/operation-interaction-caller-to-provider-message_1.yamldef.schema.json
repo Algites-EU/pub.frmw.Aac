@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.yamldef.schema.json",
+  "x-aac-schema-id": "_AAC.schema.operation-interaction-caller-to-provider-message",
+  "x-aac-schema-version": 1,
+  "title": "Operation Interaction Caller To Provider Message 1",
+  "description": "Defines the canonical Operation Interaction Caller To Provider Message schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "LastAcceptedStateResultRevision",
+    "InteractionMode",
+    "CancellationRequested",
+    "DetailLevel",
+    "FailureDetailLevel",
+    "StateResultDeliveryMode",
+    "StateResultRequestId"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "LastAcceptedStateResultRevision": {
+      "type": "integer",
+      "description": "Specifies the last accepted state result revision for this operation interaction caller to provider message.",
+      "minimum": 0
+    },
+    "InteractionMode": {
+      "enum": [
+        "foreground",
+        "background"
+      ],
+      "description": "Specifies the interaction mode for this operation interaction caller to provider message."
+    },
+    "CancellationRequested": {
+      "type": "boolean",
+      "description": "Indicates whether cancellation requested applies to this operation interaction caller to provider message."
+    },
+    "DetailLevel": {
+      "enum": [
+        "summary",
+        "detailed"
+      ],
+      "description": "Specifies the detail level for this operation interaction caller to provider message."
+    },
+    "ReportingIntervalMs": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Specifies the reporting interval ms for this operation interaction caller to provider message.",
+      "minimum": 0
+    },
+    "FailureDetailLevel": {
+      "enum": [
+        "basic",
+        "stack_trace"
+      ],
+      "description": "Specifies the failure detail level for this operation interaction caller to provider message."
+    },
+    "StateResultDeliveryMode": {
+      "enum": [
+        "on_demand_complete",
+        "on_demand_delta",
+        "on_change_complete",
+        "on_change_delta",
+        "always_complete"
+      ],
+      "description": "Specifies the state result delivery mode for this operation interaction caller to provider message."
+    },
+    "StateResultRequestId": {
+      "type": "integer",
+      "description": "Stable identifier of the state result request associated with this operation interaction caller to provider message.",
+      "minimum": 0
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/workspace-component-lock_1.yamldef.schema.json",
+  "type": "object",
+  "required": [
+    "WorkspaceComponentLock"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "WorkspaceComponentLock": {
+      "type": "object",
+      "description": "Resolved component selections pinned for one workspace.",
+      "required": [
+        "WorkspaceId",
+        "Entries"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "WorkspaceId": {
+          "type": "string",
+          "description": "Stable identifier of the workspace associated with this workspace component lock.",
+          "minLength": 1
+        },
+        "Entries": {
+          "type": "array",
+          "description": "Lists the entries associated with this workspace component lock.",
+          "items": {
+            "type": "object",
+            "required": [
+              "ComponentId",
+              "ComponentVersion",
+              "Sha256",
+              "SourceId",
+              "ArtifactUri",
+              "ArtifactFilename",
+              "PackageFormat",
+              "DescriptorPath"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "ComponentId": {
+                "type": "string",
+                "description": "Stable identifier of the AAC component associated with this entry.",
+                "minLength": 1
+              },
+              "ComponentVersion": {
+                "type": "integer",
+                "description": "Version of the AAC component associated with this entry.",
+                "minimum": 1
+              },
+              "Sha256": {
+                "type": "string",
+                "description": "Specifies the sha256 for this entry.",
+                "pattern": "^[0-9a-fA-F]{64}$"
+              },
+              "SourceId": {
+                "type": "string",
+                "description": "Stable identifier of the source associated with this entry.",
+                "minLength": 1
+              },
+              "ArtifactUri": {
+                "type": "string",
+                "description": "URI or URL identifying the artifact associated with this entry.",
+                "minLength": 1
+              },
+              "ArtifactFilename": {
+                "type": "string",
+                "description": "Specifies the artifact filename for this entry.",
+                "minLength": 1
+              },
+              "PackageFormat": {
+                "type": "string",
+                "description": "Specifies the package format for this entry.",
+                "minLength": 1
+              },
+              "DescriptorPath": {
+                "type": "string",
+                "description": "Filesystem or logical descriptor path used by this entry.",
+                "minLength": 1
+              },
+              "RuntimePackage": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Specifies the runtime package for this entry."
+              },
+              "VerifierId": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Stable identifier of the verifier associated with this entry."
+              },
+              "Sidecars": {
+                "type": "array",
+                "description": "Lists the sidecars associated with this entry.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "Uri",
+                    "Suffix"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "Uri": {
+                      "type": "string",
+                      "description": "URI or URL identifying the uri associated with this sidecar.",
+                      "minLength": 1
+                    },
+                    "Suffix": {
+                      "type": "string",
+                      "description": "Specifies the suffix for this sidecar.",
+                      "pattern": "^\\..+"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.workspace-component-lock",
+  "x-aac-schema-version": 1,
+  "title": "AAC Workspace Component Lock 1",
+  "description": "Defines the canonical AAC Workspace Component Lock schema and its serialized data contract."
+}

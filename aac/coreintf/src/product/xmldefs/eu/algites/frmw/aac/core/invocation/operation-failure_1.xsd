@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/invocation/operation-failure_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/invocation/operation-failure_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical Operation Failure schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$defs":{"display_text":{"additionalProperties":false,"anyOf":[{"required":["Text"]},{"required":["ResourceKey"]}],"description":"Defines the reusable display text structure used by this canonical schema.","properties":{"ResourceKey":{"description":"Optional localization resource key for the human-readable text.","minLength":1,"type":"string"},"Text":{"description":"Human-readable display text.","minLength":1,"type":"string"}},"type":"object"}},"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-failure_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical Operation Failure schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"Details":{"description":"Additional structured details associated with this operation failure.","type":"object"},"ErrorCode":{"description":"Stable machine-readable error code when one is available.","minLength":1,"type":["string","null"]},"ExceptionType":{"description":"Technology-level exception type or class name associated with the failure.","minLength":1,"type":"string"},"Extension":{"description":"Operation-specific structured failure extension payload."},"StackTrace":{"description":"Optional diagnostic stack trace associated with the failure.","type":["string","null"]},"SystemMessage":{"description":"Technical failure message intended for diagnostics and operators.","minLength":1,"type":"string"},"UserMessage":{"anyOf":[{"$ref":"#/$defs/display_text"},{"type":"null"}],"description":"Optional human-facing failure message suitable for presentation to a user."}},"required":["SystemMessage","ExceptionType"],"title":"Operation Failure 1","type":"object","x-aac-schema-id":"_AAC.schema.operation-failure","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="OperationFailure">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical Operation Failure schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="SystemMessage">
+          <xs:annotation>
+            <xs:documentation>Technical failure message intended for diagnostics and operators.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:minLength value="1"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="UserMessage" minOccurs="0" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Optional human-facing failure message suitable for presentation to a user.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="ExceptionType">
+          <xs:annotation>
+            <xs:documentation>Technology-level exception type or class name associated with the failure.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:minLength value="1"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="ErrorCode" minOccurs="0" nillable="true">
+          <xs:annotation>
+            <xs:documentation>Stable machine-readable error code when one is available.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:minLength value="1"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="StackTrace" minOccurs="0" nillable="true" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Optional diagnostic stack trace associated with the failure.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Extension" minOccurs="0" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Operation-specific structured failure extension payload.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Details" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Additional structured details associated with this operation failure.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                  </xs:sequence>
+                  <xs:attribute name="key" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

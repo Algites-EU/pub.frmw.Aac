@@ -1,4 +1,25 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_1 import AIigComponentDescriptorComponent_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_1 import AIigComponentDescriptorComponentCapabilityProvidersItems_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_capabilities_items_1 import AIigComponentDescriptorComponentCapabilityProvidersItemsCapabilitiesItems_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_implementation_classes_items_1 import AIigComponentDescriptorComponentCapabilityProvidersItemsImplementationClassesItems_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_initial_instances_items_1 import AIigComponentDescriptorComponentCapabilityProvidersItemsInitialInstancesItems_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_operations_items_1 import AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_operations_items_interaction_1 import AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsInteraction_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_operations_items_parameters_items_1 import AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItems_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_operations_items_parameters_items_enum_values_items_1 import AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItemsEnumValuesItems_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_readiness_requirements_items_1 import AIigComponentDescriptorComponentCapabilityProvidersItemsReadinessRequirementsItems_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_requirements_items_1 import AIigComponentDescriptorComponentCapabilityProvidersItemsRequirementsItems_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_runtime_1 import AIigComponentDescriptorComponentCapabilityProvidersItemsRuntime_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_entitlement_licensing_scopes_items_1 import AIigComponentDescriptorComponentEntitlementLicensingScopesItems_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_provided_capability_entitlements_items_1 import AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItems_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_provided_capability_entitlements_items_capability_1 import AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItemsCapability_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_provided_capability_entitlements_items_permissions_items_1 import AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItemsPermissionsItems_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_definition_data_entity_requirement_1 import AIigComponentDescriptorDefinitionDataEntityRequirement_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_definition_data_entity_support_1 import AIigComponentDescriptorDefinitionDataEntitySupport_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_definition_persisted_schema_1 import AIigComponentDescriptorDefinitionPersistedSchema_1
+from eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_definition_schema_migration_step_1 import AIigComponentDescriptorDefinitionSchemaMigrationStep_1
 from eu.algites.frmw.aac.core.schemas.resources import read_core_schema
 import json
 from dataclasses import dataclass
@@ -64,223 +85,223 @@ def _parse_persisted_schema(raw_schema: Any) -> AIcPersistedSchemaDescriptor | N
         raise ValueError("persisted schema declaration must be a mapping")
     migrations = tuple(
         AIcSchemaMigrationStepDescriptor(
-            from_version=int(item["From"]),
-            to_version=int(item["To"]),
-            migrator_id=str(item["Migrator"]),
+            from_version=int(item[AIigComponentDescriptorDefinitionSchemaMigrationStep_1.SCHEMA_FIELD_NAME__FROM]),
+            to_version=int(item[AIigComponentDescriptorDefinitionSchemaMigrationStep_1.SCHEMA_FIELD_NAME__TO]),
+            migrator_id=str(item[AIigComponentDescriptorDefinitionSchemaMigrationStep_1.SCHEMA_FIELD_NAME__MIGRATOR]),
         )
-        for item in raw_schema.get("Migrations", ())
+        for item in raw_schema.get(AIigComponentDescriptorDefinitionPersistedSchema_1.SCHEMA_FIELD_NAME__MIGRATIONS, ())
     )
     return AIcPersistedSchemaDescriptor(
-        schema_id=str(raw_schema["Id"]),
-        write_version=int(raw_schema["WriteVersion"]),
-        readable_versions=tuple(int(v) for v in raw_schema["ReadableVersions"]),
+        schema_id=str(raw_schema[AIigComponentDescriptorDefinitionPersistedSchema_1.SCHEMA_FIELD_NAME__ID]),
+        write_version=int(raw_schema[AIigComponentDescriptorDefinitionPersistedSchema_1.SCHEMA_FIELD_NAME__WRITE_VERSION]),
+        readable_versions=tuple(int(v) for v in raw_schema[AIigComponentDescriptorDefinitionPersistedSchema_1.SCHEMA_FIELD_NAME__READABLE_VERSIONS]),
         migrations=migrations,
-        resource_name=str(raw_schema["Resource"]),
+        resource_name=str(raw_schema[AIigComponentDescriptorDefinitionPersistedSchema_1.SCHEMA_FIELD_NAME__RESOURCE]),
     )
 
 def _parse_requirement(raw_requirement: Mapping[str, Any]) -> AIcConsumerRequirementDescriptor:
     return AIcConsumerRequirementDescriptor(
-        id=raw_requirement["Id"],
-        capability_id=raw_requirement["Capability"],
-        versions=tuple(int(v) for v in raw_requirement.get("Versions", ())),
-        cardinality=AInConsumerCardinality(raw_requirement.get("Cardinality", "single")),
-        mandatory=bool(raw_requirement.get("Mandatory", True)),
-        requested_authorizations=tuple(str(v) for v in raw_requirement.get("RequestedAuthorizations", ())),
-        name=normalize_display_text(raw_requirement.get("Name")),
-        description=normalize_display_text(raw_requirement.get("Description")),
+        id=raw_requirement[AIigComponentDescriptorComponentCapabilityProvidersItemsRequirementsItems_1.SCHEMA_FIELD_NAME__ID],
+        capability_id=raw_requirement[AIigComponentDescriptorComponentCapabilityProvidersItemsRequirementsItems_1.SCHEMA_FIELD_NAME__CAPABILITY],
+        versions=tuple(int(v) for v in raw_requirement.get(AIigComponentDescriptorComponentCapabilityProvidersItemsRequirementsItems_1.SCHEMA_FIELD_NAME__VERSIONS, ())),
+        cardinality=AInConsumerCardinality(raw_requirement.get(AIigComponentDescriptorComponentCapabilityProvidersItemsRequirementsItems_1.SCHEMA_FIELD_NAME__CARDINALITY, "single")),
+        mandatory=bool(raw_requirement.get(AIigComponentDescriptorComponentCapabilityProvidersItemsRequirementsItems_1.SCHEMA_FIELD_NAME__MANDATORY, True)),
+        requested_authorizations=tuple(str(v) for v in raw_requirement.get(AIigComponentDescriptorComponentCapabilityProvidersItemsRequirementsItems_1.SCHEMA_FIELD_NAME__REQUESTED_AUTHORIZATIONS, ())),
+        name=normalize_display_text(raw_requirement.get(AIigComponentDescriptorComponentCapabilityProvidersItemsRequirementsItems_1.SCHEMA_FIELD_NAME__NAME)),
+        description=normalize_display_text(raw_requirement.get(AIigComponentDescriptorComponentCapabilityProvidersItemsRequirementsItems_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
     )
 
 def _parse_component(component: Mapping[str, Any]) -> AIcComponentDescriptor:
     capability_providers = []
-    for raw_provider in component.get("CapabilityProviders", ()):
+    for raw_provider in component.get(AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__CAPABILITY_PROVIDERS, ()):
         capabilities = tuple(
             AIcProvidedCapability(
-                id=str(item["Id"]),
-                versions=tuple(sorted({int(version) for version in item["Versions"]})),
-                binding_qualifier_profiles=tuple(dict(value) for value in item.get("BindingQualifierProfiles", ())),
+                id=str(item[AIigComponentDescriptorComponentCapabilityProvidersItemsCapabilitiesItems_1.SCHEMA_FIELD_NAME__ID]),
+                versions=tuple(sorted({int(version) for version in item[AIigComponentDescriptorComponentCapabilityProvidersItemsCapabilitiesItems_1.SCHEMA_FIELD_NAME__VERSIONS]})),
+                binding_qualifier_profiles=tuple(dict(value) for value in item.get(AIigComponentDescriptorComponentCapabilityProvidersItemsCapabilitiesItems_1.SCHEMA_FIELD_NAME__BINDING_QUALIFIER_PROFILES, ())),
             )
-            for item in raw_provider["Capabilities"]
+            for item in raw_provider[AIigComponentDescriptorComponentCapabilityProvidersItems_1.SCHEMA_FIELD_NAME__CAPABILITIES]
         )
         initial_instances = tuple(
             AIcInitialProviderInstanceDescriptor(
-                name=item.get("Name", "default"),
-                configuration=item.get("Configuration", {}),
-                access_mode=AInProviderAccessMode(str(item.get("AccessMode", "read_write"))),
+                name=item.get(AIigComponentDescriptorComponentCapabilityProvidersItemsInitialInstancesItems_1.SCHEMA_FIELD_NAME__NAME, "default"),
+                configuration=item.get(AIigComponentDescriptorComponentCapabilityProvidersItemsInitialInstancesItems_1.SCHEMA_FIELD_NAME__CONFIGURATION, {}),
+                access_mode=AInProviderAccessMode(str(item.get(AIigComponentDescriptorComponentCapabilityProvidersItemsInitialInstancesItems_1.SCHEMA_FIELD_NAME__ACCESS_MODE, "read_write"))),
             )
-            for item in raw_provider.get("InitialInstances", ())
+            for item in raw_provider.get(AIigComponentDescriptorComponentCapabilityProvidersItems_1.SCHEMA_FIELD_NAME__INITIAL_INSTANCES, ())
         )
-        requirements = tuple(_parse_requirement(item) for item in raw_provider.get("Requirements", ()))
+        requirements = tuple(_parse_requirement(item) for item in raw_provider.get(AIigComponentDescriptorComponentCapabilityProvidersItems_1.SCHEMA_FIELD_NAME__REQUIREMENTS, ()))
         provider_operations = tuple(
             AIcCapabilityProviderOperationDescriptor(
-                capability_id=str(item["Capability"]),
-                capability_version=int(item["CapabilityVersion"]),
-                operation_id=str(item["Operation"]),
+                capability_id=str(item[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1.SCHEMA_FIELD_NAME__CAPABILITY]),
+                capability_version=int(item[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1.SCHEMA_FIELD_NAME__CAPABILITY_VERSION]),
+                operation_id=str(item[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1.SCHEMA_FIELD_NAME__OPERATION]),
                 interaction=AIcCapabilityProviderOperationInteractionDescriptor(
                     supported_state_result_delivery_modes=tuple(
                         AInStateResultDeliveryMode(str(value))
-                        for value in item["Interaction"]["SupportedStateResultDeliveryModes"]
+                        for value in item[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1.SCHEMA_FIELD_NAME__INTERACTION][AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsInteraction_1.SCHEMA_FIELD_NAME__SUPPORTED_STATE_RESULT_DELIVERY_MODES]
                     ),
-                    progress_reporting=bool(item["Interaction"].get("ProgressReporting", False)),
-                    cancellation=bool(item["Interaction"].get("Cancellation", False)),
-                    detail_level=bool(item["Interaction"].get("DetailLevel", False)),
-                    reporting_interval=bool(item["Interaction"].get("ReportingInterval", False)),
+                    progress_reporting=bool(item[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1.SCHEMA_FIELD_NAME__INTERACTION].get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsInteraction_1.SCHEMA_FIELD_NAME__PROGRESS_REPORTING, False)),
+                    cancellation=bool(item[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1.SCHEMA_FIELD_NAME__INTERACTION].get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsInteraction_1.SCHEMA_FIELD_NAME__CANCELLATION, False)),
+                    detail_level=bool(item[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1.SCHEMA_FIELD_NAME__INTERACTION].get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsInteraction_1.SCHEMA_FIELD_NAME__DETAIL_LEVEL, False)),
+                    reporting_interval=bool(item[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1.SCHEMA_FIELD_NAME__INTERACTION].get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsInteraction_1.SCHEMA_FIELD_NAME__REPORTING_INTERVAL, False)),
                 ),
                 parameters=tuple(
                     AIcOperationParameterDefinitionDescriptor(
-                        id=str(parameter["Id"]),
-                        name=normalize_display_text(parameter["Name"]),
-                        description=normalize_display_text(parameter["Description"]),
-                        value_schema=dict(parameter["ValueSchema"]),
+                        id=str(parameter[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItems_1.SCHEMA_FIELD_NAME__ID]),
+                        name=normalize_display_text(parameter[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItems_1.SCHEMA_FIELD_NAME__NAME]),
+                        description=normalize_display_text(parameter[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItems_1.SCHEMA_FIELD_NAME__DESCRIPTION]),
+                        value_schema=dict(parameter[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItems_1.SCHEMA_FIELD_NAME__VALUE_SCHEMA]),
                         enum_values=tuple(
                             AIcOperationParameterEnumValueDescriptor(
-                                value=enum_item.get("Value"),
-                                name=normalize_display_text(enum_item["Name"]),
-                                description=normalize_display_text(enum_item.get("Description")),
+                                value=enum_item.get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItemsEnumValuesItems_1.SCHEMA_FIELD_NAME__VALUE),
+                                name=normalize_display_text(enum_item[AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItemsEnumValuesItems_1.SCHEMA_FIELD_NAME__NAME]),
+                                description=normalize_display_text(enum_item.get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItemsEnumValuesItems_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
                             )
-                            for enum_item in parameter.get("EnumValues", ())
+                            for enum_item in parameter.get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItems_1.SCHEMA_FIELD_NAME__ENUM_VALUES, ())
                         ),
-                        required=bool(parameter.get("Required", False)),
-                        default=parameter.get("Default"),
+                        required=bool(parameter.get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItems_1.SCHEMA_FIELD_NAME__REQUIRED, False)),
+                        default=parameter.get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItems_1.SCHEMA_FIELD_NAME__DEFAULT),
                         has_default="Default" in parameter,
-                        component_configurable=bool(parameter.get("ComponentConfigurable", False)),
-                        instance_configurable=bool(parameter.get("InstanceConfigurable", False)),
-                        invocation_overridable=bool(parameter.get("InvocationOverridable", False)),
+                        component_configurable=bool(parameter.get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItems_1.SCHEMA_FIELD_NAME__COMPONENT_CONFIGURABLE, False)),
+                        instance_configurable=bool(parameter.get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItems_1.SCHEMA_FIELD_NAME__INSTANCE_CONFIGURABLE, False)),
+                        invocation_overridable=bool(parameter.get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItemsParametersItems_1.SCHEMA_FIELD_NAME__INVOCATION_OVERRIDABLE, False)),
                     )
-                    for parameter in item.get("Parameters", ())
+                    for parameter in item.get(AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1.SCHEMA_FIELD_NAME__PARAMETERS, ())
                 ),
             )
-            for item in raw_provider.get("Operations", ())
+            for item in raw_provider.get(AIigComponentDescriptorComponentCapabilityProvidersItems_1.SCHEMA_FIELD_NAME__OPERATIONS, ())
         )
-        raw_runtime = raw_provider.get("Runtime", {}) or {}
+        raw_runtime = raw_provider.get(AIigComponentDescriptorComponentCapabilityProvidersItems_1.SCHEMA_FIELD_NAME__RUNTIME, {}) or {}
         runtime = AIcProviderRuntimeDescriptor(
-            profile=AInProviderRuntimeProfile(raw_runtime.get("Profile", "in_process")),
-            command=tuple(str(v) for v in raw_runtime.get("Command", ())),
-            cwd=str(raw_runtime["Cwd"]) if raw_runtime.get("Cwd") is not None else None,
-            environment={str(k): str(v) for k, v in raw_runtime.get("Environment", {}).items()},
-            timeout_seconds=float(raw_runtime.get("TimeoutSeconds", 30.0)),
+            profile=AInProviderRuntimeProfile(raw_runtime.get(AIigComponentDescriptorComponentCapabilityProvidersItemsRuntime_1.SCHEMA_FIELD_NAME__PROFILE, "in_process")),
+            command=tuple(str(v) for v in raw_runtime.get(AIigComponentDescriptorComponentCapabilityProvidersItemsRuntime_1.SCHEMA_FIELD_NAME__COMMAND, ())),
+            cwd=str(raw_runtime[AIigComponentDescriptorComponentCapabilityProvidersItemsRuntime_1.SCHEMA_FIELD_NAME__CWD]) if raw_runtime.get(AIigComponentDescriptorComponentCapabilityProvidersItemsRuntime_1.SCHEMA_FIELD_NAME__CWD) is not None else None,
+            environment={str(k): str(v) for k, v in raw_runtime.get(AIigComponentDescriptorComponentCapabilityProvidersItemsRuntime_1.SCHEMA_FIELD_NAME__ENVIRONMENT, {}).items()},
+            timeout_seconds=float(raw_runtime.get(AIigComponentDescriptorComponentCapabilityProvidersItemsRuntime_1.SCHEMA_FIELD_NAME__TIMEOUT_SECONDS, 30.0)),
         )
         readiness_requirements = tuple(
             AIcReadinessRequirementDescriptor(
-                id=str(item["Id"]),
-                source=AInReadinessRequirementSource(str(item["Source"])),
-                key=str(item["Key"]),
-                missing_state=AInReadinessState(str(item.get("MissingState", "not_ready"))),
-                message=(str(item["Message"]) if item.get("Message") is not None else None),
+                id=str(item[AIigComponentDescriptorComponentCapabilityProvidersItemsReadinessRequirementsItems_1.SCHEMA_FIELD_NAME__ID]),
+                source=AInReadinessRequirementSource(str(item[AIigComponentDescriptorComponentCapabilityProvidersItemsReadinessRequirementsItems_1.SCHEMA_FIELD_NAME__SOURCE])),
+                key=str(item[AIigComponentDescriptorComponentCapabilityProvidersItemsReadinessRequirementsItems_1.SCHEMA_FIELD_NAME__KEY]),
+                missing_state=AInReadinessState(str(item.get(AIigComponentDescriptorComponentCapabilityProvidersItemsReadinessRequirementsItems_1.SCHEMA_FIELD_NAME__MISSING_STATE, "not_ready"))),
+                message=(str(item[AIigComponentDescriptorComponentCapabilityProvidersItemsReadinessRequirementsItems_1.SCHEMA_FIELD_NAME__MESSAGE]) if item.get(AIigComponentDescriptorComponentCapabilityProvidersItemsReadinessRequirementsItems_1.SCHEMA_FIELD_NAME__MESSAGE) is not None else None),
             )
-            for item in raw_provider.get("ReadinessRequirements", ())
+            for item in raw_provider.get(AIigComponentDescriptorComponentCapabilityProvidersItems_1.SCHEMA_FIELD_NAME__READINESS_REQUIREMENTS, ())
         )
         capability_providers.append(AIcProviderDefinitionDescriptor(
-            id=raw_provider["Id"],
+            id=raw_provider[AIigComponentDescriptorComponentCapabilityProvidersItems_1.SCHEMA_FIELD_NAME__ID],
             capabilities=capabilities,
             implementation_classes=tuple(
                 AIcProviderImplementationClassDescriptor(
-                    technology_kind=str(item["TechnologyKind"]),
-                    provider_class_name=str(item["ProviderClassName"]),
+                    technology_kind=str(item[AIigComponentDescriptorComponentCapabilityProvidersItemsImplementationClassesItems_1.SCHEMA_FIELD_NAME__TECHNOLOGY_KIND]),
+                    provider_class_name=str(item[AIigComponentDescriptorComponentCapabilityProvidersItemsImplementationClassesItems_1.SCHEMA_FIELD_NAME__PROVIDER_CLASS_NAME]),
                     capability_profile_matcher_class_name=(
-                        str(item["CapabilityProfileMatcherClassName"])
-                        if item.get("CapabilityProfileMatcherClassName") is not None else None
+                        str(item[AIigComponentDescriptorComponentCapabilityProvidersItemsImplementationClassesItems_1.SCHEMA_FIELD_NAME__CAPABILITY_PROFILE_MATCHER_CLASS_NAME])
+                        if item.get(AIigComponentDescriptorComponentCapabilityProvidersItemsImplementationClassesItems_1.SCHEMA_FIELD_NAME__CAPABILITY_PROFILE_MATCHER_CLASS_NAME) is not None else None
                     ),
                 )
-                for item in raw_provider["ImplementationClasses"]
+                for item in raw_provider[AIigComponentDescriptorComponentCapabilityProvidersItems_1.SCHEMA_FIELD_NAME__IMPLEMENTATION_CLASSES]
             ),
-            name=normalize_display_text(raw_provider.get("Name")),
-            description=normalize_display_text(raw_provider.get("Description")),
-            configuration_schema=_parse_persisted_schema(raw_provider.get("ConfigurationSchema")),
+            name=normalize_display_text(raw_provider.get(AIigComponentDescriptorComponentCapabilityProvidersItems_1.SCHEMA_FIELD_NAME__NAME)),
+            description=normalize_display_text(raw_provider.get(AIigComponentDescriptorComponentCapabilityProvidersItems_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
+            configuration_schema=_parse_persisted_schema(raw_provider.get(AIigComponentDescriptorComponentCapabilityProvidersItems_1.SCHEMA_FIELD_NAME__CONFIGURATION_SCHEMA)),
             initial_instances=initial_instances,
             requirements=requirements,
             operations=provider_operations,
             readiness_requirements=readiness_requirements,
-            runtime_factory_class=raw_provider.get("RuntimeFactoryClass"),
+            runtime_factory_class=raw_provider.get(AIigComponentDescriptorComponentCapabilityProvidersItems_1.SCHEMA_FIELD_NAME__RUNTIME_FACTORY_CLASS),
             runtime=runtime,
         ))
 
     entitlement_licensing_scopes = tuple(
         AIcEntitlementLicensingScopeDescriptor(
-            type=str(item["Type"]),
-            name=normalize_display_text(item.get("Name")),
-            description=normalize_display_text(item.get("Description")),
-            metadata=dict(item.get("Metadata", {})),
+            type=str(item[AIigComponentDescriptorComponentEntitlementLicensingScopesItems_1.SCHEMA_FIELD_NAME__TYPE]),
+            name=normalize_display_text(item.get(AIigComponentDescriptorComponentEntitlementLicensingScopesItems_1.SCHEMA_FIELD_NAME__NAME)),
+            description=normalize_display_text(item.get(AIigComponentDescriptorComponentEntitlementLicensingScopesItems_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
+            metadata=dict(item.get(AIigComponentDescriptorComponentEntitlementLicensingScopesItems_1.SCHEMA_FIELD_NAME__METADATA, {})),
         )
-        for item in component.get("EntitlementLicensingScopes", ())
+        for item in component.get(AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__ENTITLEMENT_LICENSING_SCOPES, ())
     )
 
     provided_capability_entitlements = []
-    for raw_capability in component.get("ProvidedCapabilityEntitlements", ()):
+    for raw_capability in component.get(AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__PROVIDED_CAPABILITY_ENTITLEMENTS, ()):
         permissions = tuple(
             AIcPermissionDescriptor(
-                id=item["Id"],
-                name=normalize_display_text(item.get("Name")),
-                description=normalize_display_text(item.get("Description")),
+                id=item[AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItemsPermissionsItems_1.SCHEMA_FIELD_NAME__ID],
+                name=normalize_display_text(item.get(AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItemsPermissionsItems_1.SCHEMA_FIELD_NAME__NAME)),
+                description=normalize_display_text(item.get(AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItemsPermissionsItems_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
                 possible_licensing_scope_types=tuple(
-                    str(v) for v in item.get("PossibleLicensingScopes", ())
+                    str(v) for v in item.get(AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItemsPermissionsItems_1.SCHEMA_FIELD_NAME__POSSIBLE_LICENSING_SCOPES, ())
                 ),
-                metadata=item.get("Metadata", {}),
+                metadata=item.get(AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItemsPermissionsItems_1.SCHEMA_FIELD_NAME__METADATA, {}),
             )
-            for item in raw_capability.get("Permissions", ())
+            for item in raw_capability.get(AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItems_1.SCHEMA_FIELD_NAME__PERMISSIONS, ())
         )
         provided_capability_entitlements.append(AIcCapabilityEntitlementDescriptor(
-            capability_id=raw_capability["Capability"]["Id"],
-            capability_version=int(raw_capability["Capability"]["Version"]),
+            capability_id=raw_capability[AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItems_1.SCHEMA_FIELD_NAME__CAPABILITY][AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItemsCapability_1.SCHEMA_FIELD_NAME__ID],
+            capability_version=int(raw_capability[AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItems_1.SCHEMA_FIELD_NAME__CAPABILITY][AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItemsCapability_1.SCHEMA_FIELD_NAME__VERSION]),
             permissions=permissions,
-            name=normalize_display_text(raw_capability.get("Name")),
-            description=normalize_display_text(raw_capability.get("Description")),
+            name=normalize_display_text(raw_capability.get(AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItems_1.SCHEMA_FIELD_NAME__NAME)),
+            description=normalize_display_text(raw_capability.get(AIigComponentDescriptorComponentProvidedCapabilityEntitlementsItems_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
         ))
 
 
     data_entity_support = []
-    for raw_support in component.get("DataEntitySupport", ()):
+    for raw_support in component.get(AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__DATA_ENTITY_SUPPORT, ()):
         migrations = tuple(
             AIcSchemaMigrationStepDescriptor(
-                from_version=int(item["From"]),
-                to_version=int(item["To"]),
-                migrator_id=str(item["Migrator"]),
+                from_version=int(item[AIigComponentDescriptorDefinitionSchemaMigrationStep_1.SCHEMA_FIELD_NAME__FROM]),
+                to_version=int(item[AIigComponentDescriptorDefinitionSchemaMigrationStep_1.SCHEMA_FIELD_NAME__TO]),
+                migrator_id=str(item[AIigComponentDescriptorDefinitionSchemaMigrationStep_1.SCHEMA_FIELD_NAME__MIGRATOR]),
             )
-            for item in raw_support.get("Migrations", ())
+            for item in raw_support.get(AIigComponentDescriptorDefinitionDataEntitySupport_1.SCHEMA_FIELD_NAME__MIGRATIONS, ())
         )
         requirements = tuple(
             AIcDataEntityRequirementDescriptor(
-                schema_id=str(item["SchemaId"]),
-                access=tuple(AInDataEntityAccess(str(value)) for value in item.get("Access", ())),
-                readable_versions=tuple(int(value) for value in item.get("ReadableVersions", ())),
-                writable_versions=tuple(int(value) for value in item.get("WritableVersions", ())),
-                required=bool(item.get("Required", True)),
+                schema_id=str(item[AIigComponentDescriptorDefinitionDataEntityRequirement_1.SCHEMA_FIELD_NAME__SCHEMA_ID]),
+                access=tuple(AInDataEntityAccess(str(value)) for value in item.get(AIigComponentDescriptorDefinitionDataEntityRequirement_1.SCHEMA_FIELD_NAME__ACCESS, ())),
+                readable_versions=tuple(int(value) for value in item.get(AIigComponentDescriptorDefinitionDataEntityRequirement_1.SCHEMA_FIELD_NAME__READABLE_VERSIONS, ())),
+                writable_versions=tuple(int(value) for value in item.get(AIigComponentDescriptorDefinitionDataEntityRequirement_1.SCHEMA_FIELD_NAME__WRITABLE_VERSIONS, ())),
+                required=bool(item.get(AIigComponentDescriptorDefinitionDataEntityRequirement_1.SCHEMA_FIELD_NAME__REQUIRED, True)),
             )
-            for item in raw_support.get("DataEntityRequirements", ())
+            for item in raw_support.get(AIigComponentDescriptorDefinitionDataEntitySupport_1.SCHEMA_FIELD_NAME__DATA_ENTITY_REQUIREMENTS, ())
         )
         data_entity_support.append(AIcDataEntitySupportDescriptor(
-            schema_id=str(raw_support["SchemaId"]),
-            readable_versions=tuple(int(value) for value in raw_support.get("ReadableVersions", ())),
-            writable_versions=tuple(int(value) for value in raw_support.get("WritableVersions", ())),
+            schema_id=str(raw_support[AIigComponentDescriptorDefinitionDataEntitySupport_1.SCHEMA_FIELD_NAME__SCHEMA_ID]),
+            readable_versions=tuple(int(value) for value in raw_support.get(AIigComponentDescriptorDefinitionDataEntitySupport_1.SCHEMA_FIELD_NAME__READABLE_VERSIONS, ())),
+            writable_versions=tuple(int(value) for value in raw_support.get(AIigComponentDescriptorDefinitionDataEntitySupport_1.SCHEMA_FIELD_NAME__WRITABLE_VERSIONS, ())),
             preferred_write_version=(
-                int(raw_support["PreferredWriteVersion"])
-                if raw_support.get("PreferredWriteVersion") is not None else None
+                int(raw_support[AIigComponentDescriptorDefinitionDataEntitySupport_1.SCHEMA_FIELD_NAME__PREFERRED_WRITE_VERSION])
+                if raw_support.get(AIigComponentDescriptorDefinitionDataEntitySupport_1.SCHEMA_FIELD_NAME__PREFERRED_WRITE_VERSION) is not None else None
             ),
             migrations=migrations,
             data_entity_requirements=requirements,
-            name=normalize_display_text(raw_support.get("Name")),
-            description=normalize_display_text(raw_support.get("Description")),
-            metadata=dict(raw_support.get("Metadata", {})),
+            name=normalize_display_text(raw_support.get(AIigComponentDescriptorDefinitionDataEntitySupport_1.SCHEMA_FIELD_NAME__NAME)),
+            description=normalize_display_text(raw_support.get(AIigComponentDescriptorDefinitionDataEntitySupport_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
+            metadata=dict(raw_support.get(AIigComponentDescriptorDefinitionDataEntitySupport_1.SCHEMA_FIELD_NAME__METADATA, {})),
         ))
 
-    raw_lifecycle = component.get("Lifecycle", {}) or {}
+    raw_lifecycle = component.get(AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__LIFECYCLE, {}) or {}
     lifecycle = AIcLifecycleHooksDescriptor(**{
         name: raw_lifecycle.get(name)
         for name in ("provision", "validate", "unprovision")
     })
     return AIcComponentDescriptor(
-        id=component["Id"],
-        version=int(component["Version"]),
-        name=normalize_display_text(component.get("Name")),
-        description=normalize_display_text(component.get("Description")),
+        id=component[AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__ID],
+        version=int(component[AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__VERSION]),
+        name=normalize_display_text(component.get(AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__NAME)),
+        description=normalize_display_text(component.get(AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
         capability_providers=tuple(capability_providers),
-        capability_group_resources=tuple(str(v) for v in component.get("CapabilityGroups", ())),
-        contract_resources=tuple(str(v) for v in component.get("Capability", ())),
-        component_configuration_schema=_parse_persisted_schema(component.get("ComponentConfigurationSchema")),
+        capability_group_resources=tuple(str(v) for v in component.get(AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__CAPABILITY_GROUPS, ())),
+        contract_resources=tuple(str(v) for v in component.get(AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__CAPABILITY, ())),
+        component_configuration_schema=_parse_persisted_schema(component.get(AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__COMPONENT_CONFIGURATION_SCHEMA)),
         entitlement_licensing_scopes=entitlement_licensing_scopes,
         provided_capability_entitlements=tuple(provided_capability_entitlements),
         data_entity_support=tuple(data_entity_support),
         lifecycle=lifecycle,
-        metadata=component.get("Metadata", {}),
+        metadata=component.get(AIigComponentDescriptorComponent_1.SCHEMA_FIELD_NAME__METADATA, {}),
     )
 
 def read_discovered_resource(discovered: AIcDiscoveredComponent, resource_name: str) -> tuple[str, str]:

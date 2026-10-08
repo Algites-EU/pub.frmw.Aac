@@ -1,4 +1,12 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_1 import AIigEntitlementIssuingRequest_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_entitlement_request_1 import AIigEntitlementIssuingRequestEntitlementRequest_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_entitlement_request_components_items_1 import AIigEntitlementIssuingRequestEntitlementRequestComponentsItems_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_entitlement_request_components_items_requested_grants_items_1 import AIigEntitlementIssuingRequestEntitlementRequestComponentsItemsRequestedGrantsItems_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_entitlement_request_components_items_requested_grants_items_capability_1 import AIigEntitlementIssuingRequestEntitlementRequestComponentsItemsRequestedGrantsItemsCapability_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_entitlement_request_requested_licensing_scope_1 import AIigEntitlementIssuingRequestEntitlementRequestRequestedLicensingScope_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_entitlement_request_subject_1 import AIigEntitlementIssuingRequestEntitlementRequestSubject_1
 import json
 import hashlib
 from datetime import date, datetime
@@ -66,35 +74,35 @@ class AIcEntitlementIssuingRequestLoader:
     @staticmethod
     def load_text(text: str, source: str = "<memory>") -> AIcEntitlementIssuingRequest:
         raw = _load_yaml(text, source)
-        data = _mapping(raw.get("EntitlementRequest"))
-        format_version = int(data.get("FormatVersion", 0))
+        data = _mapping(raw.get(AIigEntitlementIssuingRequest_1.SCHEMA_FIELD_NAME__ENTITLEMENT_REQUEST))
+        format_version = int(data.get(AIigEntitlementIssuingRequestEntitlementRequest_1.SCHEMA_FIELD_NAME__FORMAT_VERSION, 0))
         if format_version != 1:
             raise AIxEntitlementError(f"{source}: unsupported entitlement issuing request format_version {format_version}; expected 1")
         _validate(raw, "entitlement-issuing-request_1.jsondef.schema.json", source)
-        scope_data = _mapping(data["RequestedLicensingScope"])
-        subject_data = _mapping(data["Subject"])
+        scope_data = _mapping(data[AIigEntitlementIssuingRequestEntitlementRequest_1.SCHEMA_FIELD_NAME__REQUESTED_LICENSING_SCOPE])
+        subject_data = _mapping(data[AIigEntitlementIssuingRequestEntitlementRequest_1.SCHEMA_FIELD_NAME__SUBJECT])
         subject = AIcEntitlementSubject(
-            str(subject_data["Id"]),
-            str(subject_data["DisplayName"]) if subject_data.get("DisplayName") is not None else None,
-            dict(_mapping(subject_data.get("Attributes", {}))),
+            str(subject_data[AIigEntitlementIssuingRequestEntitlementRequestSubject_1.SCHEMA_FIELD_NAME__ID]),
+            str(subject_data[AIigEntitlementIssuingRequestEntitlementRequestSubject_1.SCHEMA_FIELD_NAME__DISPLAY_NAME]) if subject_data.get(AIigEntitlementIssuingRequestEntitlementRequestSubject_1.SCHEMA_FIELD_NAME__DISPLAY_NAME) is not None else None,
+            dict(_mapping(subject_data.get(AIigEntitlementIssuingRequestEntitlementRequestSubject_1.SCHEMA_FIELD_NAME__ATTRIBUTES, {}))),
         )
-        scope = AIcEntitlementLicensingScope(str(scope_data["Type"]), subject.id)
+        scope = AIcEntitlementLicensingScope(str(scope_data[AIigEntitlementIssuingRequestEntitlementRequestRequestedLicensingScope_1.SCHEMA_FIELD_NAME__TYPE]), subject.id)
         components = []
-        for component_raw in data.get("Components", ()):
+        for component_raw in data.get(AIigEntitlementIssuingRequestEntitlementRequest_1.SCHEMA_FIELD_NAME__COMPONENTS, ()):
             component = _mapping(component_raw)
             requested = []
-            for grant_raw in component.get("RequestedGrants", ()):
+            for grant_raw in component.get(AIigEntitlementIssuingRequestEntitlementRequestComponentsItems_1.SCHEMA_FIELD_NAME__REQUESTED_GRANTS, ()):
                 grant = _mapping(grant_raw)
-                capability = _mapping(grant["Capability"])
+                capability = _mapping(grant[AIigEntitlementIssuingRequestEntitlementRequestComponentsItemsRequestedGrantsItems_1.SCHEMA_FIELD_NAME__CAPABILITY])
                 requested.append(AIcRequestedCapabilityGrant(
-                    str(capability["Id"]), int(capability["Version"]),
-                    tuple(str(v) for v in grant.get("Permissions", ())),
+                    str(capability[AIigEntitlementIssuingRequestEntitlementRequestComponentsItemsRequestedGrantsItemsCapability_1.SCHEMA_FIELD_NAME__ID]), int(capability[AIigEntitlementIssuingRequestEntitlementRequestComponentsItemsRequestedGrantsItemsCapability_1.SCHEMA_FIELD_NAME__VERSION]),
+                    tuple(str(v) for v in grant.get(AIigEntitlementIssuingRequestEntitlementRequestComponentsItemsRequestedGrantsItems_1.SCHEMA_FIELD_NAME__PERMISSIONS, ())),
                 ))
-            components.append(AIcRequestedComponentGrant(str(component["Id"]), tuple(requested)))
+            components.append(AIcRequestedComponentGrant(str(component[AIigEntitlementIssuingRequestEntitlementRequestComponentsItems_1.SCHEMA_FIELD_NAME__ID]), tuple(requested)))
         return AIcEntitlementIssuingRequest(
-            format_version=int(data["FormatVersion"]), request_id=str(data["RequestId"]),
+            format_version=int(data[AIigEntitlementIssuingRequestEntitlementRequest_1.SCHEMA_FIELD_NAME__FORMAT_VERSION]), request_id=str(data[AIigEntitlementIssuingRequestEntitlementRequest_1.SCHEMA_FIELD_NAME__REQUEST_ID]),
             requested_licensing_scope=scope, subject=subject, components=tuple(components),
-            generated_at=str(data["GeneratedAt"]) if data.get("GeneratedAt") is not None else None,
-            request_digest=str(data["RequestDigest"]) if data.get("RequestDigest") is not None else None,
-            metadata=dict(_mapping(data.get("Metadata", {}))),
+            generated_at=str(data[AIigEntitlementIssuingRequestEntitlementRequest_1.SCHEMA_FIELD_NAME__GENERATED_AT]) if data.get(AIigEntitlementIssuingRequestEntitlementRequest_1.SCHEMA_FIELD_NAME__GENERATED_AT) is not None else None,
+            request_digest=str(data[AIigEntitlementIssuingRequestEntitlementRequest_1.SCHEMA_FIELD_NAME__REQUEST_DIGEST]) if data.get(AIigEntitlementIssuingRequestEntitlementRequest_1.SCHEMA_FIELD_NAME__REQUEST_DIGEST) is not None else None,
+            metadata=dict(_mapping(data.get(AIigEntitlementIssuingRequestEntitlementRequest_1.SCHEMA_FIELD_NAME__METADATA, {}))),
         )

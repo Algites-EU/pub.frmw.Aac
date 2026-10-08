@@ -1,4 +1,21 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_1 import AIigCatalog_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_artifact_1 import AIigCatalogDefinitionArtifact_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_artifact_locator_1 import AIigCatalogDefinitionArtifactLocator_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_artifact_sidecars_items_1 import AIigCatalogDefinitionArtifactSidecarsItems_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_capability_entitlement_1 import AIigCatalogDefinitionCapabilityEntitlement_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_capability_entitlement_capability_1 import AIigCatalogDefinitionCapabilityEntitlementCapability_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_catalog_1 import AIigCatalogCatalog_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_component_1 import AIigCatalogDefinitionComponent_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_component_icon_1 import AIigCatalogDefinitionComponentIcon_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_component_publisher_1 import AIigCatalogDefinitionComponentPublisher_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_permission_1 import AIigCatalogDefinitionPermission_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_persistent_schema_1 import AIigCatalogDefinitionPersistentSchema_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_1 import AIigCatalogDefinitionRelease_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_entitlement_licensing_scopes_items_1 import AIigCatalogDefinitionReleaseEntitlementLicensingScopesItems_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_provides_items_1 import AIigCatalogDefinitionReleaseProvidesItems_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_requires_items_1 import AIigCatalogDefinitionReleaseRequiresItems_1
 from eu.algites.frmw.aac.core.schemas.resources import read_core_schema
 import json
 from importlib import resources
@@ -59,10 +76,10 @@ class AIcCatalogDocumentLoader:
             raise AIxPackageManagementError(f"invalid catalog document {source}: {exc}") from exc
         if not isinstance(raw, Mapping):
             raise AIxPackageManagementError(f"catalog document {source} root must be an object")
-        body_probe = raw.get("Catalog")
+        body_probe = raw.get(AIigCatalog_1.SCHEMA_FIELD_NAME__CATALOG)
         if not isinstance(body_probe, Mapping):
             raise AIxPackageManagementError(f"catalog document {source} requires catalog object")
-        format_version = int(body_probe.get("FormatVersion", 0))
+        format_version = int(body_probe.get(AIigCatalogCatalog_1.SCHEMA_FIELD_NAME__FORMAT_VERSION, 0))
         if format_version != 1:
             raise AIxPackageManagementError(f"catalog document {source} has unsupported format_version {format_version}; expected 1")
         schema_text = read_core_schema("catalog_1.jsondef.schema.json")
@@ -72,132 +89,132 @@ class AIcCatalogDocumentLoader:
             raise AIxPackageManagementError(
                 f"catalog document {source} schema validation failed: {_render_validation_errors(errors)}"
             )
-        body = raw["Catalog"]
+        body = raw[AIigCatalog_1.SCHEMA_FIELD_NAME__CATALOG]
         components: list[AIcCatalogComponent] = []
-        for raw_component in body.get("Components", ()):
+        for raw_component in body.get(AIigCatalogCatalog_1.SCHEMA_FIELD_NAME__COMPONENTS, ()):
             releases: list[AIcCatalogRelease] = []
-            for raw_release in raw_component.get("Releases", ()):
+            for raw_release in raw_component.get(AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__RELEASES, ()):
                 provides = tuple(AIcCatalogCapabilityOffer(
-                    str(item["Capability"]), tuple(int(version) for version in item.get("Versions", ()))
-                ) for item in raw_release.get("Provides", ()))
+                    str(item[AIigCatalogDefinitionReleaseProvidesItems_1.SCHEMA_FIELD_NAME__CAPABILITY]), tuple(int(version) for version in item.get(AIigCatalogDefinitionReleaseProvidesItems_1.SCHEMA_FIELD_NAME__VERSIONS, ()))
+                ) for item in raw_release.get(AIigCatalogDefinitionRelease_1.SCHEMA_FIELD_NAME__PROVIDES, ()))
                 requires = tuple(AIcCatalogCapabilityRequirement(
-                    id=str(item["Id"]),
-                    capability_id=str(item["Capability"]),
-                    versions=tuple(int(version) for version in item.get("Versions", ())),
-                    cardinality=AInConsumerCardinality(str(item.get("Cardinality", "single"))),
-                    mandatory=bool(item.get("Mandatory", True)),
-                ) for item in raw_release.get("Requires", ()))
+                    id=str(item[AIigCatalogDefinitionReleaseRequiresItems_1.SCHEMA_FIELD_NAME__ID]),
+                    capability_id=str(item[AIigCatalogDefinitionReleaseRequiresItems_1.SCHEMA_FIELD_NAME__CAPABILITY]),
+                    versions=tuple(int(version) for version in item.get(AIigCatalogDefinitionReleaseRequiresItems_1.SCHEMA_FIELD_NAME__VERSIONS, ())),
+                    cardinality=AInConsumerCardinality(str(item.get(AIigCatalogDefinitionReleaseRequiresItems_1.SCHEMA_FIELD_NAME__CARDINALITY, "single"))),
+                    mandatory=bool(item.get(AIigCatalogDefinitionReleaseRequiresItems_1.SCHEMA_FIELD_NAME__MANDATORY, True)),
+                ) for item in raw_release.get(AIigCatalogDefinitionRelease_1.SCHEMA_FIELD_NAME__REQUIRES, ()))
                 entitlement_licensing_scopes = tuple(
                     AIcEntitlementLicensingScopeDescriptor(
-                        type=str(item["Type"]),
-                        name=normalize_display_text(item.get("Name")),
-                        description=normalize_display_text(item.get("Description")),
-                        metadata=dict(item.get("Metadata", {})),
+                        type=str(item[AIigCatalogDefinitionReleaseEntitlementLicensingScopesItems_1.SCHEMA_FIELD_NAME__TYPE]),
+                        name=normalize_display_text(item.get(AIigCatalogDefinitionReleaseEntitlementLicensingScopesItems_1.SCHEMA_FIELD_NAME__NAME)),
+                        description=normalize_display_text(item.get(AIigCatalogDefinitionReleaseEntitlementLicensingScopesItems_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
+                        metadata=dict(item.get(AIigCatalogDefinitionReleaseEntitlementLicensingScopesItems_1.SCHEMA_FIELD_NAME__METADATA, {})),
                     )
-                    for item in raw_release.get("EntitlementLicensingScopes", ())
+                    for item in raw_release.get(AIigCatalogDefinitionRelease_1.SCHEMA_FIELD_NAME__ENTITLEMENT_LICENSING_SCOPES, ())
                 )
                 entitlements = []
-                for raw_entitlement in raw_release.get("ProvidedCapabilityEntitlements", ()):
+                for raw_entitlement in raw_release.get(AIigCatalogDefinitionRelease_1.SCHEMA_FIELD_NAME__PROVIDED_CAPABILITY_ENTITLEMENTS, ()):
                     permissions = tuple(AIcPermissionDescriptor(
-                        id=str(item["Id"]),
-                        name=normalize_display_text(item.get("Name")),
-                        description=normalize_display_text(item.get("Description")),
+                        id=str(item[AIigCatalogDefinitionPermission_1.SCHEMA_FIELD_NAME__ID]),
+                        name=normalize_display_text(item.get(AIigCatalogDefinitionPermission_1.SCHEMA_FIELD_NAME__NAME)),
+                        description=normalize_display_text(item.get(AIigCatalogDefinitionPermission_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
                         possible_licensing_scope_types=tuple(
-                            str(value) for value in item.get("PossibleLicensingScopes", ())
+                            str(value) for value in item.get(AIigCatalogDefinitionPermission_1.SCHEMA_FIELD_NAME__POSSIBLE_LICENSING_SCOPES, ())
                         ),
-                        metadata=dict(item.get("Metadata", {})),
-                    ) for item in raw_entitlement.get("Permissions", ()))
+                        metadata=dict(item.get(AIigCatalogDefinitionPermission_1.SCHEMA_FIELD_NAME__METADATA, {})),
+                    ) for item in raw_entitlement.get(AIigCatalogDefinitionCapabilityEntitlement_1.SCHEMA_FIELD_NAME__PERMISSIONS, ()))
                     entitlements.append(AIcCapabilityEntitlementDescriptor(
-                        capability_id=str(raw_entitlement["Capability"]["Id"]),
-                        capability_version=int(raw_entitlement["Capability"]["Version"]),
+                        capability_id=str(raw_entitlement[AIigCatalogDefinitionCapabilityEntitlement_1.SCHEMA_FIELD_NAME__CAPABILITY][AIigCatalogDefinitionCapabilityEntitlementCapability_1.SCHEMA_FIELD_NAME__ID]),
+                        capability_version=int(raw_entitlement[AIigCatalogDefinitionCapabilityEntitlement_1.SCHEMA_FIELD_NAME__CAPABILITY][AIigCatalogDefinitionCapabilityEntitlementCapability_1.SCHEMA_FIELD_NAME__VERSION]),
                         permissions=permissions,
-                        name=normalize_display_text(raw_entitlement.get("Name")),
-                        description=normalize_display_text(raw_entitlement.get("Description")),
+                        name=normalize_display_text(raw_entitlement.get(AIigCatalogDefinitionCapabilityEntitlement_1.SCHEMA_FIELD_NAME__NAME)),
+                        description=normalize_display_text(raw_entitlement.get(AIigCatalogDefinitionCapabilityEntitlement_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
                     ))
                 artifacts = []
-                for raw_artifact in raw_release.get("Artifacts", ()):
-                    raw_locator = raw_artifact["Locator"]
-                    locator_uri = str(raw_locator["Uri"]) if raw_locator.get("Uri") is not None else None
+                for raw_artifact in raw_release.get(AIigCatalogDefinitionRelease_1.SCHEMA_FIELD_NAME__ARTIFACTS, ()):
+                    raw_locator = raw_artifact[AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__LOCATOR]
+                    locator_uri = str(raw_locator[AIigCatalogDefinitionArtifactLocator_1.SCHEMA_FIELD_NAME__URI]) if raw_locator.get(AIigCatalogDefinitionArtifactLocator_1.SCHEMA_FIELD_NAME__URI) is not None else None
                     if locator_uri is not None and source_uri is not None:
                         locator_uri = _resolve_relative_uri(source_uri, locator_uri)
                     sidecars = tuple(AIcPackageSidecar(
-                        uri=(_resolve_relative_uri(source_uri, str(item["Uri"])) if source_uri is not None else str(item["Uri"])),
-                        suffix=str(item["Suffix"]),
-                        name=normalize_display_text(item.get("Name")),
-                        description=normalize_display_text(item.get("Description")),
-                    ) for item in raw_artifact.get("Sidecars", ()))
+                        uri=(_resolve_relative_uri(source_uri, str(item[AIigCatalogDefinitionArtifactSidecarsItems_1.SCHEMA_FIELD_NAME__URI])) if source_uri is not None else str(item[AIigCatalogDefinitionArtifactSidecarsItems_1.SCHEMA_FIELD_NAME__URI])),
+                        suffix=str(item[AIigCatalogDefinitionArtifactSidecarsItems_1.SCHEMA_FIELD_NAME__SUFFIX]),
+                        name=normalize_display_text(item.get(AIigCatalogDefinitionArtifactSidecarsItems_1.SCHEMA_FIELD_NAME__NAME)),
+                        description=normalize_display_text(item.get(AIigCatalogDefinitionArtifactSidecarsItems_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
+                    ) for item in raw_artifact.get(AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__SIDECARS, ()))
                     artifacts.append(AIcCatalogArtifact(
-                        id=str(raw_artifact["Id"]),
+                        id=str(raw_artifact[AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__ID]),
                         locator=AIcCatalogArtifactLocator(
-                            type=str(raw_locator["Type"]),
+                            type=str(raw_locator[AIigCatalogDefinitionArtifactLocator_1.SCHEMA_FIELD_NAME__TYPE]),
                             uri=locator_uri,
-                            repository_id=(str(raw_locator["RepositoryId"]) if raw_locator.get("RepositoryId") is not None else None),
-                            coordinates=dict(raw_locator.get("Coordinates", {})),
+                            repository_id=(str(raw_locator[AIigCatalogDefinitionArtifactLocator_1.SCHEMA_FIELD_NAME__REPOSITORY_ID]) if raw_locator.get(AIigCatalogDefinitionArtifactLocator_1.SCHEMA_FIELD_NAME__REPOSITORY_ID) is not None else None),
+                            coordinates=dict(raw_locator.get(AIigCatalogDefinitionArtifactLocator_1.SCHEMA_FIELD_NAME__COORDINATES, {})),
                         ),
-                        artifact_filename=str(raw_artifact["ArtifactFilename"]),
-                        package_format=str(raw_artifact["PackageFormat"]),
-                        descriptor_path=str(raw_artifact["DescriptorPath"]),
-                        sha256=str(raw_artifact["Sha256"]),
-                        runtime_package=(str(raw_artifact["RuntimePackage"]) if raw_artifact.get("RuntimePackage") is not None else None),
-                        verifier_id=(str(raw_artifact["VerifierId"]) if raw_artifact.get("VerifierId") is not None else None),
-                        authentication_profile_id=(str(raw_artifact["AuthenticationProfileId"]) if raw_artifact.get("AuthenticationProfileId") is not None else None),
+                        artifact_filename=str(raw_artifact[AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__ARTIFACT_FILENAME]),
+                        package_format=str(raw_artifact[AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__PACKAGE_FORMAT]),
+                        descriptor_path=str(raw_artifact[AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__DESCRIPTOR_PATH]),
+                        sha256=str(raw_artifact[AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__SHA256]),
+                        runtime_package=(str(raw_artifact[AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__RUNTIME_PACKAGE]) if raw_artifact.get(AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__RUNTIME_PACKAGE) is not None else None),
+                        verifier_id=(str(raw_artifact[AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__VERIFIER_ID]) if raw_artifact.get(AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__VERIFIER_ID) is not None else None),
+                        authentication_profile_id=(str(raw_artifact[AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__AUTHENTICATION_PROFILE_ID]) if raw_artifact.get(AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__AUTHENTICATION_PROFILE_ID) is not None else None),
                         sidecars=sidecars,
-                        platforms=tuple(str(value) for value in raw_artifact.get("Platforms", ())),
-                        architectures=tuple(str(value) for value in raw_artifact.get("Architectures", ())),
-                        metadata=dict(raw_artifact.get("Metadata", {})),
+                        platforms=tuple(str(value) for value in raw_artifact.get(AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__PLATFORMS, ())),
+                        architectures=tuple(str(value) for value in raw_artifact.get(AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__ARCHITECTURES, ())),
+                        metadata=dict(raw_artifact.get(AIigCatalogDefinitionArtifact_1.SCHEMA_FIELD_NAME__METADATA, {})),
                     ))
                 persistent_schemas = []
-                for item in raw_release.get("PersistentSchemas", ()):
-                    kind = AInCatalogPersistentSchemaKind(str(item["Kind"]))
+                for item in raw_release.get(AIigCatalogDefinitionRelease_1.SCHEMA_FIELD_NAME__PERSISTENT_SCHEMAS, ()):
+                    kind = AInCatalogPersistentSchemaKind(str(item[AIigCatalogDefinitionPersistentSchema_1.SCHEMA_FIELD_NAME__KIND]))
                     persistent_schemas.append(AIcCatalogPersistentSchema(
                         kind=kind,
-                        schema_id=str(item["SchemaId"]),
-                        write_version=(int(item["WriteVersion"]) if item.get("WriteVersion") is not None else None),
-                        provider_id=(str(item["ProviderId"]) if item.get("ProviderId") is not None else None),
-                        readable_versions=tuple(int(value) for value in item.get("ReadableVersions", ())),
-                        writable_versions=tuple(int(value) for value in item.get("WritableVersions", ())),
+                        schema_id=str(item[AIigCatalogDefinitionPersistentSchema_1.SCHEMA_FIELD_NAME__SCHEMA_ID]),
+                        write_version=(int(item[AIigCatalogDefinitionPersistentSchema_1.SCHEMA_FIELD_NAME__WRITE_VERSION]) if item.get(AIigCatalogDefinitionPersistentSchema_1.SCHEMA_FIELD_NAME__WRITE_VERSION) is not None else None),
+                        provider_id=(str(item[AIigCatalogDefinitionPersistentSchema_1.SCHEMA_FIELD_NAME__PROVIDER_ID]) if item.get(AIigCatalogDefinitionPersistentSchema_1.SCHEMA_FIELD_NAME__PROVIDER_ID) is not None else None),
+                        readable_versions=tuple(int(value) for value in item.get(AIigCatalogDefinitionPersistentSchema_1.SCHEMA_FIELD_NAME__READABLE_VERSIONS, ())),
+                        writable_versions=tuple(int(value) for value in item.get(AIigCatalogDefinitionPersistentSchema_1.SCHEMA_FIELD_NAME__WRITABLE_VERSIONS, ())),
                         preferred_write_version=(
-                            int(item["PreferredWriteVersion"])
-                            if item.get("PreferredWriteVersion") is not None else None
+                            int(item[AIigCatalogDefinitionPersistentSchema_1.SCHEMA_FIELD_NAME__PREFERRED_WRITE_VERSION])
+                            if item.get(AIigCatalogDefinitionPersistentSchema_1.SCHEMA_FIELD_NAME__PREFERRED_WRITE_VERSION) is not None else None
                         ),
                     ))
                 persistent_schemas = tuple(persistent_schemas)
                 releases.append(AIcCatalogRelease(
-                    version=int(raw_release["Version"]),
+                    version=int(raw_release[AIigCatalogDefinitionRelease_1.SCHEMA_FIELD_NAME__VERSION]),
                     provides=provides,
                     requires=requires,
                     entitlement_licensing_scopes=entitlement_licensing_scopes,
                     provided_capability_entitlements=tuple(entitlements),
                     persistent_schemas=persistent_schemas,
                     artifacts=tuple(artifacts),
-                    published_at=(str(raw_release["PublishedAt"]) if raw_release.get("PublishedAt") is not None else None),
-                    release_notes_url=(str(raw_release["ReleaseNotesUrl"]) if raw_release.get("ReleaseNotesUrl") is not None else None),
-                    metadata=dict(raw_release.get("Metadata", {})),
+                    published_at=(str(raw_release[AIigCatalogDefinitionRelease_1.SCHEMA_FIELD_NAME__PUBLISHED_AT]) if raw_release.get(AIigCatalogDefinitionRelease_1.SCHEMA_FIELD_NAME__PUBLISHED_AT) is not None else None),
+                    release_notes_url=(str(raw_release[AIigCatalogDefinitionRelease_1.SCHEMA_FIELD_NAME__RELEASE_NOTES_URL]) if raw_release.get(AIigCatalogDefinitionRelease_1.SCHEMA_FIELD_NAME__RELEASE_NOTES_URL) is not None else None),
+                    metadata=dict(raw_release.get(AIigCatalogDefinitionRelease_1.SCHEMA_FIELD_NAME__METADATA, {})),
                 ))
-            raw_publisher = raw_component.get("Publisher")
-            raw_icon = raw_component.get("Icon")
+            raw_publisher = raw_component.get(AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__PUBLISHER)
+            raw_icon = raw_component.get(AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__ICON)
             components.append(AIcCatalogComponent(
-                component_id=str(raw_component["ComponentId"]),
+                component_id=str(raw_component[AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__COMPONENT_ID]),
                 releases=tuple(releases),
-                name=normalize_display_text(raw_component.get("Name")),
-                description=normalize_display_text(raw_component.get("Description")),
+                name=normalize_display_text(raw_component.get(AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__NAME)),
+                description=normalize_display_text(raw_component.get(AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
                 publisher=(AIcCatalogPublisher(
-                    str(raw_publisher["Id"]), normalize_display_text(raw_publisher.get("Name"))
+                    str(raw_publisher[AIigCatalogDefinitionComponentPublisher_1.SCHEMA_FIELD_NAME__ID]), normalize_display_text(raw_publisher.get(AIigCatalogDefinitionComponentPublisher_1.SCHEMA_FIELD_NAME__NAME))
                 ) if isinstance(raw_publisher, Mapping) else None),
-                homepage_url=(str(raw_component["HomepageUrl"]) if raw_component.get("HomepageUrl") is not None else None),
-                documentation_url=(str(raw_component["DocumentationUrl"]) if raw_component.get("DocumentationUrl") is not None else None),
-                support_url=(str(raw_component["SupportUrl"]) if raw_component.get("SupportUrl") is not None else None),
-                entitlement_info_url=(str(raw_component["EntitlementInfoUrl"]) if raw_component.get("EntitlementInfoUrl") is not None else None),
-                icon=(AIcCatalogIcon(str(raw_icon["Url"])) if isinstance(raw_icon, Mapping) else None),
-                categories=tuple(str(value) for value in raw_component.get("Categories", ())),
-                tags=tuple(str(value) for value in raw_component.get("Tags", ())),
-                metadata=dict(raw_component.get("Metadata", {})),
+                homepage_url=(str(raw_component[AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__HOMEPAGE_URL]) if raw_component.get(AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__HOMEPAGE_URL) is not None else None),
+                documentation_url=(str(raw_component[AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__DOCUMENTATION_URL]) if raw_component.get(AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__DOCUMENTATION_URL) is not None else None),
+                support_url=(str(raw_component[AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__SUPPORT_URL]) if raw_component.get(AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__SUPPORT_URL) is not None else None),
+                entitlement_info_url=(str(raw_component[AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__ENTITLEMENT_INFO_URL]) if raw_component.get(AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__ENTITLEMENT_INFO_URL) is not None else None),
+                icon=(AIcCatalogIcon(str(raw_icon[AIigCatalogDefinitionComponentIcon_1.SCHEMA_FIELD_NAME__URL])) if isinstance(raw_icon, Mapping) else None),
+                categories=tuple(str(value) for value in raw_component.get(AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__CATEGORIES, ())),
+                tags=tuple(str(value) for value in raw_component.get(AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__TAGS, ())),
+                metadata=dict(raw_component.get(AIigCatalogDefinitionComponent_1.SCHEMA_FIELD_NAME__METADATA, {})),
             ))
         return AIcCatalogDocument(
-            format_version=int(body["FormatVersion"]),
-            product_id=str(body["ProductId"]),
-            technology_id=str(body["TechnologyId"]),
+            format_version=int(body[AIigCatalogCatalog_1.SCHEMA_FIELD_NAME__FORMAT_VERSION]),
+            product_id=str(body[AIigCatalogCatalog_1.SCHEMA_FIELD_NAME__PRODUCT_ID]),
+            technology_id=str(body[AIigCatalogCatalog_1.SCHEMA_FIELD_NAME__TECHNOLOGY_ID]),
             components=tuple(components),
-            generated_at=(str(body["GeneratedAt"]) if body.get("GeneratedAt") is not None else None),
-            metadata=dict(body.get("Metadata", {})),
+            generated_at=(str(body[AIigCatalogCatalog_1.SCHEMA_FIELD_NAME__GENERATED_AT]) if body.get(AIigCatalogCatalog_1.SCHEMA_FIELD_NAME__GENERATED_AT) is not None else None),
+            metadata=dict(body.get(AIigCatalogCatalog_1.SCHEMA_FIELD_NAME__METADATA, {})),
         )

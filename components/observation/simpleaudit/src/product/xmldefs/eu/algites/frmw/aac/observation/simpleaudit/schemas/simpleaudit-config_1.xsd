@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/observation/simpleaudit/schemas/simpleaudit-config_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/observation/simpleaudit/schemas/simpleaudit-config_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Simple Audit Configuration schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/components/observation/simpleaudit/src/product/jsondefs/eu/algites/frmw/aac/observation/simpleaudit/schemas/simpleaudit-config_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Simple Audit Configuration schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"Format":{"default":"json","description":"Serialization or presentation format of this AAC simple audit configuration.","enum":["json","text"],"x-aac-description":{"ResourceKey":"aac.simpleaudit.config.format.description","Text":"Selects the serialized audit-record format."},"x-aac-name":{"ResourceKey":"aac.simpleaudit.config.format.name","Text":"Format"}},"Output":{"additionalProperties":false,"allOf":[{"if":{"properties":{"Type":{"const":"file","description":"Discriminator identifying the concrete variant represented by this value."}},"required":["Type"]},"then":{"required":["Path"]}}],"default":{"Type":"stdout"},"description":"Structured output associated with this AAC simple audit configuration.","properties":{"Path":{"description":"Filesystem or logical path used by this output.","minLength":1,"type":"string","x-aac-name":{"ResourceKey":"aac.simpleaudit.config.output.path.name","Text":"File path"}},"Type":{"default":"stdout","description":"Type discriminator for this output.","enum":["stdout","file"],"x-aac-name":{"ResourceKey":"aac.simpleaudit.config.output.type.name","Text":"Output type"}}},"required":["Type"],"type":"object","x-aac-description":{"ResourceKey":"aac.simpleaudit.config.output.description","Text":"Selects where audit records are written."},"x-aac-name":{"ResourceKey":"aac.simpleaudit.config.output.name","Text":"Output"}}},"title":"AAC Simple Audit Configuration 1","type":"object","x-aac-schema-id":"simpleaudit-config","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SimpleauditConfig">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Simple Audit Configuration schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Output" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Structured output associated with this AAC simple audit configuration.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Type" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Type discriminator for this output.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Path" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Filesystem or logical path used by this output.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Format" minOccurs="0" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Serialization or presentation format of this AAC simple audit configuration.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

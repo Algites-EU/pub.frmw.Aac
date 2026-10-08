@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<CapabilityGroup xmlns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd" schemaRef="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd">
+  <Group>
+    <Id>_AAC.runtime.observation</Id>
+    <ParentGroupId>_AAC.runtime</ParentGroupId>
+    <Name>
+      <MapEntry key="Text">
+        <Value>"Runtime Observation"</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.runtime.observation.name"</Value>
+      </MapEntry>
+    </Name>
+    <Description>
+      <MapEntry key="Text">
+        <Value>"Capabilities that observe normalized runtime activity without changing the observed outcome."</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.runtime.observation.description"</Value>
+      </MapEntry>
+    </Description>
+  </Group>
+</CapabilityGroup>

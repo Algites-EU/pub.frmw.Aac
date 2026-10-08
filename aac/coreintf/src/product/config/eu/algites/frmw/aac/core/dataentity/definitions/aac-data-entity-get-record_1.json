@@ -1,0 +1,45 @@
+{
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json",
+  "Capability": {
+    "Id": "_AAC.data-entity.get-record",
+    "Version": 1,
+    "GroupId": "_AAC.data-entity.loading",
+    "Name": {
+      "Text": "Get Data Entity record",
+      "ResourceKey": "aac.data.entity.get.record.name"
+    },
+    "Description": {
+      "Text": "Loads one stored Data Entity record by logical identity.",
+      "ResourceKey": "aac.data.entity.get.record.description"
+    }
+  },
+  "Operations": [
+    {
+      "Id": "get",
+      "Name": {
+        "Text": "Get record",
+        "ResourceKey": "aac.data.entity.get.record.operation.get.name"
+      },
+      "Description": {
+        "Text": "Loads one stored Data Entity record by logical identity.",
+        "ResourceKey": "aac.data.entity.get.record.operation.get.description"
+      },
+      "Interactions": [
+        {
+          "Kind": "input",
+          "Schema": {
+            "Id": "_AAC.schema.data-entity-get-record-request",
+            "Version": 1
+          }
+        },
+        {
+          "Kind": "final_success_state_result",
+          "Schema": {
+            "Id": "_AAC.schema.data-entity-get-record-result",
+            "Version": 1
+          }
+        }
+      ]
+    }
+  ]
+}

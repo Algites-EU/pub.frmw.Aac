@@ -43,6 +43,7 @@ def run_pytest(cwd: Path, product_paths: list[Path], targets: list[str]) -> None
 
 
 def main() -> int:
+    subprocess.run(["bash", str(ROOT / "gradlew"), "--no-daemon", "generateModustroSchemaBindings"], cwd=ROOT, check=True)
     subprocess.run(
         [sys.executable, str(ROOT / "devtools/aacbuilding/src/product/python/sync_versions.py"), "--check"],
         cwd=ROOT,

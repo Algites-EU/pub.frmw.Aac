@@ -1,0 +1,14 @@
+{
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-group_1.jsondef.schema.json",
+  "Group": {
+    "Id": "_AAC.runtime",
+    "Name": {
+      "Text": "Runtime",
+      "ResourceKey": "aac.runtime.name"
+    },
+    "Description": {
+      "Text": "Framework runtime and cross-cutting execution capabilities.",
+      "ResourceKey": "aac.runtime.description"
+    }
+  }
+}

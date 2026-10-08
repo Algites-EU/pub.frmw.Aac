@@ -1,0 +1,15 @@
+{
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-group_1.jsondef.schema.json",
+  "Group": {
+    "Id": "_AAC.runtime.observation",
+    "ParentGroupId": "_AAC.runtime",
+    "Name": {
+      "Text": "Runtime Observation",
+      "ResourceKey": "aac.runtime.observation.name"
+    },
+    "Description": {
+      "Text": "Capabilities that observe normalized runtime activity without changing the observed outcome.",
+      "ResourceKey": "aac.runtime.observation.description"
+    }
+  }
+}

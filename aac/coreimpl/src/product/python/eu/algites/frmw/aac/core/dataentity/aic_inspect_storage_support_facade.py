@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.dataentity.aiig_data_entity_inspect_storage_support_request_1 import AIigDataEntityInspectStorageSupportRequest_1
 from dataclasses import dataclass
 from typing import Generic, Mapping, TypeVar
 from uuid import uuid4
@@ -24,4 +26,4 @@ class AIcInspectStorageSupportFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = INSPECT_STORAGE_SUPPORT_CAPABILITY_ID
 
     def inspect(self, schema_id: str, schema_version: int) -> Mapping[str, object]:
-        return self._invoke("inspect", {"SchemaId": schema_id, "SchemaVersion": schema_version})
+        return self._invoke("inspect", {AIigDataEntityInspectStorageSupportRequest_1.SCHEMA_FIELD_NAME__SCHEMA_ID: schema_id, AIigDataEntityInspectStorageSupportRequest_1.SCHEMA_FIELD_NAME__SCHEMA_VERSION: schema_version})

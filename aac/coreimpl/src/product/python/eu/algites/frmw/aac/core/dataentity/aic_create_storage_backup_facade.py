@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.dataentity.aiig_data_entity_create_storage_backup_request_1 import AIigDataEntityCreateStorageBackupRequest_1
 from dataclasses import dataclass
 from typing import Generic, Mapping, TypeVar
 from uuid import uuid4
@@ -24,7 +26,7 @@ class AIcCreateStorageBackupFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = CREATE_STORAGE_BACKUP_CAPABILITY_ID
 
     def create_backup(self, backup_file: str, *, overwrite: bool = False) -> Mapping[str, object]:
-        arguments: dict[str, object] = {"BackupFile": backup_file}
+        arguments: dict[str, object] = {AIigDataEntityCreateStorageBackupRequest_1.SCHEMA_FIELD_NAME__BACKUP_FILE: backup_file}
         if overwrite:
-            arguments["Overwrite"] = True
+            arguments[AIigDataEntityCreateStorageBackupRequest_1.SCHEMA_FIELD_NAME__OVERWRITE] = True
         return self._invoke("create_backup", arguments)

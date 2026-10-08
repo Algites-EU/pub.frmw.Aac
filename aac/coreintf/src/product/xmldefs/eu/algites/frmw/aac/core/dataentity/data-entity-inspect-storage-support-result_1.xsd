@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-support-result_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-support-result_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical Data Entity Inspect Storage Support Result schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-support-result_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical Data Entity Inspect Storage Support Result schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"diagnostics":{"description":"Diagnostic messages produced while processing this operation.","items":{"type":"string"},"type":"array"},"metadata":{"description":"Additional structured metadata associated with this data entity inspect storage support result.","type":"object"},"status":{"description":"Outcome status reported by this operation.","enum":["NOT_PROVISIONED","READY","RETIRED","INCOMPATIBLE"]}},"required":["status"],"title":"Data Entity Inspect Storage Support Result 1","type":"object","x-aac-schema-id":"_AAC.schema.data-entity-inspect-storage-support-result","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataEntityInspectStorageSupportResult">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical Data Entity Inspect Storage Support Result schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="status" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Outcome status reported by this operation.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="diagnostics" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Diagnostic messages produced while processing this operation.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Item" minOccurs="0" type="xs:string" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="metadata" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Additional structured metadata associated with this data entity inspect storage support result.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                  </xs:sequence>
+                  <xs:attribute name="key" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

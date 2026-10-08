@@ -48,7 +48,7 @@ def _binding_from_dict(raw) -> AIcObservationBinding:
                 capability=str(item.get("capability", "*")),
                 versions=tuple(int(value) for value in item.get("versions", ())),
                 operations=tuple(str(value) for value in item.get("operations", ())),
-                phases=tuple(AInObservationPhase(str(value)) for value in item.get("phases", ("PRE", "POST"))),
+                phases=tuple(AInObservationPhase(str(value)) for value in item.get("phases", (AInObservationPhase.PRE.value, AInObservationPhase.POST.value))),
             )
             for item in raw.get("selectors", ())
         ),

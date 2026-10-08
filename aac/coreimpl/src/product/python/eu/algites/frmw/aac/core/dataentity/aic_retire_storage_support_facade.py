@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.dataentity.aiig_data_entity_retire_storage_support_request_1 import AIigDataEntityRetireStorageSupportRequest_1
 from dataclasses import dataclass
 from typing import Generic, Mapping, TypeVar
 from uuid import uuid4
@@ -25,4 +27,4 @@ class AIcRetireStorageSupportFacade(AIcBoundDataEntityCapabilityFacade):
     write_operation = True
 
     def retire(self, schema_id: str, schema_version: int) -> Mapping[str, object]:
-        return self._invoke("retire", {"SchemaId": schema_id, "SchemaVersion": schema_version})
+        return self._invoke("retire", {AIigDataEntityRetireStorageSupportRequest_1.SCHEMA_FIELD_NAME__SCHEMA_ID: schema_id, AIigDataEntityRetireStorageSupportRequest_1.SCHEMA_FIELD_NAME__SCHEMA_VERSION: schema_version})

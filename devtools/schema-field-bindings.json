@@ -1,0 +1,8 @@
+{
+  "artifact": "aac/coreintf",
+  "languages": [
+    "python"
+  ],
+  "bindings": [],
+  "implementation_artifact": "aac/coreimpl"
+}

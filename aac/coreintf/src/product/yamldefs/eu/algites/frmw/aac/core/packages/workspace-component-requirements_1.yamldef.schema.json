@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.yamldef.schema.json",
+  "type": "object",
+  "required": [
+    "WorkspaceComponentRequirements"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "WorkspaceComponentRequirements": {
+      "type": "object",
+      "description": "Component requirements and update policy declared for one workspace.",
+      "required": [
+        "WorkspaceId",
+        "Requirements"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "WorkspaceId": {
+          "type": "string",
+          "description": "Stable identifier of the workspace associated with this workspace component requirement.",
+          "minLength": 1
+        },
+        "UpdatePolicy": {
+          "enum": [
+            "manual",
+            "notify",
+            "auto_compatible",
+            "auto_locked"
+          ],
+          "description": "Specifies the update policy for this workspace component requirement.",
+          "default": "manual"
+        },
+        "Requirements": {
+          "type": "array",
+          "description": "Indicates whether requirements applies to this workspace component requirement.",
+          "items": {
+            "type": "object",
+            "required": [
+              "ComponentId"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "ComponentId": {
+                "type": "string",
+                "description": "Stable identifier of the AAC component associated with this requirement.",
+                "minLength": 1
+              },
+              "Versions": {
+                "type": "array",
+                "description": "Lists the versions supported or selected by this requirement.",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "uniqueItems": true
+              },
+              "Required": {
+                "type": "boolean",
+                "description": "Indicates whether required applies to this requirement.",
+                "default": true
+              },
+              "SourceIds": {
+                "type": "array",
+                "description": "Lists stable identifiers associated with this requirement.",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "Name": {
+                "description": "Human-readable name of this requirement."
+              },
+              "Description": {
+                "description": "Human-readable description of this requirement."
+              }
+            }
+          }
+        }
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.workspace-component-requirements",
+  "x-aac-schema-version": 1,
+  "title": "AAC Workspace Component Requirements 1",
+  "description": "Defines the canonical AAC Workspace Component Requirements schema and its serialized data contract."
+}

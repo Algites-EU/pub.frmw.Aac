@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ComponentDescriptor xmlns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.xsd https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.xsd" schemaRef="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.xsd">
+  <Component>
+    <Id>_AAC.component.simpleaudit</Id>
+    <Version>1</Version>
+    <CapabilityProviders>
+      <Item>
+        <Id>observation</Id>
+        <Capabilities>
+          <Item>
+            <Id>_AAC.capability.observation</Id>
+            <Versions>
+              <Item>1</Item>
+            </Versions>
+          </Item>
+        </Capabilities>
+        <ConfigurationSchema>
+          <Id>simpleaudit-config</Id>
+          <WriteVersion>1</WriteVersion>
+          <ReadableVersions>
+            <Item>1</Item>
+          </ReadableVersions>
+          <Resource>simpleaudit-config_1.xsd</Resource>
+        </ConfigurationSchema>
+        <InitialInstances>
+          <Item>
+            <Name>default</Name>
+            <Configuration>
+              <MapEntry key="Output">
+                <Value>{"Type": "stdout"}</Value>
+              </MapEntry>
+              <MapEntry key="Format">
+                <Value>"json"</Value>
+              </MapEntry>
+            </Configuration>
+          </Item>
+        </InitialInstances>
+        <Runtime>
+          <Profile>process</Profile>
+        </Runtime>
+        <Name>
+          <MapEntry key="Text">
+            <Value>"Simple audit observation provider"</Value>
+          </MapEntry>
+          <MapEntry key="ResourceKey">
+            <Value>"aac.simpleaudit.provider.observation.name"</Value>
+          </MapEntry>
+        </Name>
+        <Description>
+          <MapEntry key="Text">
+            <Value>"Observes capability invocations and emits JSON or text audit records."</Value>
+          </MapEntry>
+          <MapEntry key="ResourceKey">
+            <Value>"aac.simpleaudit.provider.observation.description"</Value>
+          </MapEntry>
+        </Description>
+        <Operations>
+          <Item>
+            <Capability>_AAC.capability.observation</Capability>
+            <CapabilityVersion>1</CapabilityVersion>
+            <Operation>observe</Operation>
+            <Interaction>
+              <SupportedStateResultDeliveryModes>
+                <Item>on_demand_complete</Item>
+              </SupportedStateResultDeliveryModes>
+            </Interaction>
+          </Item>
+        </Operations>
+        <ImplementationClasses>
+          <Item>
+            <TechnologyKind>python</TechnologyKind>
+            <ProviderClassName>eu.algites.frmw.aac.observation.simpleaudit.provider:AIcSimpleAuditObserver</ProviderClassName>
+          </Item>
+        </ImplementationClasses>
+      </Item>
+    </CapabilityProviders>
+    <Name>
+      <MapEntry key="Text">
+        <Value>"Simple audit observer"</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.simpleaudit.component.name"</Value>
+      </MapEntry>
+    </Name>
+    <Description>
+      <MapEntry key="Text">
+        <Value>"Reference AAC observer that writes normalized capability invocation records to standard output or a file."</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.simpleaudit.component.description"</Value>
+      </MapEntry>
+    </Description>
+  </Component>
+</ComponentDescriptor>

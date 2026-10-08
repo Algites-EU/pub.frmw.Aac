@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-running-delta-result_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-running-delta-result_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical Data Entity Apply Direct Record Changes Running Delta Result schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$comment":"RUNNING delta containing only newly published committed change results represented by this state-result revision.","$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-running-delta-result_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical Data Entity Apply Direct Record Changes Running Delta Result schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"Changes":{"description":"Ordered record changes processed by this operation.","items":{"oneOf":[{"additionalProperties":false,"properties":{"ChangeId":{"description":"Caller-supplied identifier used to correlate this individual change and its result.","minLength":1,"type":"string"},"RecordRevision":{"description":"Storage-provider record revision used for optimistic concurrency and change tracking.","oneOf":[{"minimum":1,"type":"integer"},{"minLength":1,"type":"string"}]},"SchemaId":{"description":"Canonical schema identifier.","minLength":1,"type":"string"},"Type":{"const":"create_record","description":"Type discriminator for this change."},"Uid":{"description":"Stable logical UID of the Data Entity record.","minLength":1,"type":"string"}},"required":["ChangeId","Type","SchemaId","Uid","RecordRevision"],"type":"object"},{"additionalProperties":false,"properties":{"ChangeId":{"description":"Caller-supplied identifier used to correlate this individual change and its result.","minLength":1,"type":"string"},"RecordRevision":{"description":"Storage-provider record revision used for optimistic concurrency and change tracking.","oneOf":[{"minimum":1,"type":"integer"},{"minLength":1,"type":"string"}]},"SchemaId":{"description":"Canonical schema identifier.","minLength":1,"type":"string"},"Type":{"const":"replace_record","description":"Type discriminator for this change."},"Uid":{"description":"Stable logical UID of the Data Entity record.","minLength":1,"type":"string"}},"required":["ChangeId","Type","SchemaId","Uid","RecordRevision"],"type":"object"},{"additionalProperties":false,"properties":{"ChangeId":{"description":"Caller-supplied identifier used to correlate this individual change and its result.","minLength":1,"type":"string"},"SchemaId":{"description":"Canonical schema identifier.","minLength":1,"type":"string"},"Type":{"const":"delete_record","description":"Type discriminator for this change."},"Uid":{"description":"Stable logical UID of the Data Entity record.","minLength":1,"type":"string"}},"required":["ChangeId","Type","SchemaId","Uid"],"type":"object"}]},"minItems":1,"type":"array"}},"required":["Changes"],"title":"Data Entity Apply Direct Record Changes Running Delta Result 1","type":"object","x-aac-schema-id":"_AAC.schema.data-entity-apply-direct-record-changes-running-delta-result","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataEntityApplyDirectRecordChangesRunningDeltaResult">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical Data Entity Apply Direct Record Changes Running Delta Result schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Changes">
+          <xs:annotation>
+            <xs:documentation>Ordered record changes processed by this operation.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Item" minOccurs="1" type="xs:anyType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

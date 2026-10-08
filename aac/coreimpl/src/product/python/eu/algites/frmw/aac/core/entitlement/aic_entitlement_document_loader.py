@@ -1,4 +1,15 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_1 import AIigEntitlementDocument_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_1 import AIigEntitlementDocumentEntitlement_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_components_items_1 import AIigEntitlementDocumentEntitlementComponentsItems_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_components_items_grants_items_1 import AIigEntitlementDocumentEntitlementComponentsItemsGrantsItems_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_components_items_grants_items_capability_1 import AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsCapability_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_components_items_grants_items_permissions_items_1 import AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsPermissionsItems_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_issued_for_request_1 import AIigEntitlementDocumentEntitlementIssuedForRequest_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_issuer_1 import AIigEntitlementDocumentEntitlementIssuer_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_licensing_scope_1 import AIigEntitlementDocumentEntitlementLicensingScope_1
+from eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_subject_1 import AIigEntitlementDocumentEntitlementSubject_1
 import json
 import hashlib
 from datetime import date, datetime
@@ -66,52 +77,52 @@ class AIcEntitlementDocumentLoader:
     @staticmethod
     def load_text(text: str, source: str = "<memory>") -> AIcEntitlementDocument:
         raw = _load_yaml(text, source)
-        data = _mapping(raw.get("Entitlement"))
-        format_version = int(data.get("FormatVersion", 0))
+        data = _mapping(raw.get(AIigEntitlementDocument_1.SCHEMA_FIELD_NAME__ENTITLEMENT))
+        format_version = int(data.get(AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__FORMAT_VERSION, 0))
         if format_version != 1:
             raise AIxEntitlementError(f"{source}: unsupported entitlement document format_version {format_version}; expected 1")
         _validate(raw, "entitlement-document_1.jsondef.schema.json", source)
-        scope_data = _mapping(data["LicensingScope"])
-        subject_data = _mapping(data["Subject"])
+        scope_data = _mapping(data[AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__LICENSING_SCOPE])
+        subject_data = _mapping(data[AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__SUBJECT])
         subject = AIcEntitlementSubject(
-            str(subject_data["Id"]),
-            str(subject_data["DisplayName"]) if subject_data.get("DisplayName") is not None else None,
-            dict(_mapping(subject_data.get("Attributes", {}))),
+            str(subject_data[AIigEntitlementDocumentEntitlementSubject_1.SCHEMA_FIELD_NAME__ID]),
+            str(subject_data[AIigEntitlementDocumentEntitlementSubject_1.SCHEMA_FIELD_NAME__DISPLAY_NAME]) if subject_data.get(AIigEntitlementDocumentEntitlementSubject_1.SCHEMA_FIELD_NAME__DISPLAY_NAME) is not None else None,
+            dict(_mapping(subject_data.get(AIigEntitlementDocumentEntitlementSubject_1.SCHEMA_FIELD_NAME__ATTRIBUTES, {}))),
         )
-        scope = AIcEntitlementLicensingScope(str(scope_data["Type"]), subject.id)
-        issuer_data = _mapping(data["Issuer"])
-        issuer = AIcEntitlementIssuer(str(issuer_data["Id"]), {str(k): v for k, v in issuer_data.items() if k != "id"})
+        scope = AIcEntitlementLicensingScope(str(scope_data[AIigEntitlementDocumentEntitlementLicensingScope_1.SCHEMA_FIELD_NAME__TYPE]), subject.id)
+        issuer_data = _mapping(data[AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__ISSUER])
+        issuer = AIcEntitlementIssuer(str(issuer_data[AIigEntitlementDocumentEntitlementIssuer_1.SCHEMA_FIELD_NAME__ID]), {str(k): v for k, v in issuer_data.items() if k != "id"})
         components = []
-        for component_raw in data.get("Components", ()):
+        for component_raw in data.get(AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__COMPONENTS, ()):
             component = _mapping(component_raw)
             grants = []
-            for grant_raw in component.get("Grants", ()):
+            for grant_raw in component.get(AIigEntitlementDocumentEntitlementComponentsItems_1.SCHEMA_FIELD_NAME__GRANTS, ()):
                 grant = _mapping(grant_raw)
-                capability = _mapping(grant["Capability"])
+                capability = _mapping(grant[AIigEntitlementDocumentEntitlementComponentsItemsGrantsItems_1.SCHEMA_FIELD_NAME__CAPABILITY])
                 permissions = tuple(
                     AIcEntitlementPermissionGrant(
-                        str(_mapping(item)["Id"]),
-                        str(_mapping(item)["ValidFrom"]) if _mapping(item).get("ValidFrom") is not None else None,
-                        str(_mapping(item)["ValidUntil"]) if _mapping(item).get("ValidUntil") is not None else None,
-                        dict(_mapping(_mapping(item).get("Constraints", {}))),
-                        dict(_mapping(_mapping(item).get("Metadata", {}))),
+                        str(_mapping(item)[AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsPermissionsItems_1.SCHEMA_FIELD_NAME__ID]),
+                        str(_mapping(item)[AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsPermissionsItems_1.SCHEMA_FIELD_NAME__VALID_FROM]) if _mapping(item).get(AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsPermissionsItems_1.SCHEMA_FIELD_NAME__VALID_FROM) is not None else None,
+                        str(_mapping(item)[AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsPermissionsItems_1.SCHEMA_FIELD_NAME__VALID_UNTIL]) if _mapping(item).get(AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsPermissionsItems_1.SCHEMA_FIELD_NAME__VALID_UNTIL) is not None else None,
+                        dict(_mapping(_mapping(item).get(AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsPermissionsItems_1.SCHEMA_FIELD_NAME__CONSTRAINTS, {}))),
+                        dict(_mapping(_mapping(item).get(AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsPermissionsItems_1.SCHEMA_FIELD_NAME__METADATA, {}))),
                     )
-                    for item in grant.get("Permissions", ())
+                    for item in grant.get(AIigEntitlementDocumentEntitlementComponentsItemsGrantsItems_1.SCHEMA_FIELD_NAME__PERMISSIONS, ())
                 )
-                grants.append(AIcEntitlementCapabilityGrant(str(capability["Id"]), int(capability["Version"]), permissions))
-            components.append(AIcEntitlementComponentGrant(str(component["Id"]), tuple(grants)))
+                grants.append(AIcEntitlementCapabilityGrant(str(capability[AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsCapability_1.SCHEMA_FIELD_NAME__ID]), int(capability[AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsCapability_1.SCHEMA_FIELD_NAME__VERSION]), permissions))
+            components.append(AIcEntitlementComponentGrant(str(component[AIigEntitlementDocumentEntitlementComponentsItems_1.SCHEMA_FIELD_NAME__ID]), tuple(grants)))
         issued_for_request = None
-        if data.get("IssuedForRequest") is not None:
-            request_ref = _mapping(data["IssuedForRequest"])
+        if data.get(AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__ISSUED_FOR_REQUEST) is not None:
+            request_ref = _mapping(data[AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__ISSUED_FOR_REQUEST])
             issued_for_request = AIcEntitlementRequestReference(
-                str(request_ref["RequestId"]), str(request_ref["RequestDigest"])
+                str(request_ref[AIigEntitlementDocumentEntitlementIssuedForRequest_1.SCHEMA_FIELD_NAME__REQUEST_ID]), str(request_ref[AIigEntitlementDocumentEntitlementIssuedForRequest_1.SCHEMA_FIELD_NAME__REQUEST_DIGEST])
             )
         return AIcEntitlementDocument(
-            format_version=int(data["FormatVersion"]), entitlement_id=str(data["EntitlementId"]),
+            format_version=int(data[AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__FORMAT_VERSION]), entitlement_id=str(data[AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__ENTITLEMENT_ID]),
             issuer=issuer, licensing_scope=scope, subject=subject, components=tuple(components),
             issued_for_request=issued_for_request,
-            issued_at=str(data["IssuedAt"]) if data.get("IssuedAt") is not None else None,
-            valid_from=str(data["ValidFrom"]) if data.get("ValidFrom") is not None else None,
-            valid_until=str(data["ValidUntil"]) if data.get("ValidUntil") is not None else None,
-            metadata=dict(_mapping(data.get("Metadata", {}))),
+            issued_at=str(data[AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__ISSUED_AT]) if data.get(AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__ISSUED_AT) is not None else None,
+            valid_from=str(data[AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__VALID_FROM]) if data.get(AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__VALID_FROM) is not None else None,
+            valid_until=str(data[AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__VALID_UNTIL]) if data.get(AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__VALID_UNTIL) is not None else None,
+            metadata=dict(_mapping(data.get(AIigEntitlementDocumentEntitlement_1.SCHEMA_FIELD_NAME__METADATA, {}))),
         )

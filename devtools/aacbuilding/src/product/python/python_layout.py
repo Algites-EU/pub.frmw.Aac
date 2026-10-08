@@ -106,6 +106,20 @@ def validate_repository_source_layout(repository: Path) -> list[str]:
     problems: list[str] = []
 
     for scope in ("product", "develop"):
+        for kind, suffix in (("jsondefs", ".jsondef.schema.json"),
+                             ("yamldefs", ".yamldef.schema.json"), ("xmldefs", ".xsd")):
+            for definition_root in sorted(repository.rglob(f"src/{scope}/{kind}")):
+                if is_repository_build_path(definition_root, repository):
+                    continue
+                for path in _iter_files(definition_root):
+                    if path.name.startswith("."):
+                        continue
+                    if not path.name.endswith((suffix, ".meta.yml", ".meta.yaml")):
+                        problems.append(
+                            f"{path.relative_to(repository).as_posix()}: unsupported file in canonical {kind} root; "
+                            f"expected '*{suffix}' or metadata sidecars; concrete documents belong in config"
+                        )
+
         for schema_root in sorted(repository.rglob(f"src/{scope}/schema")):
             if is_repository_build_path(schema_root, repository):
                 continue

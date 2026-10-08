@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-profile_1.yamldef.schema.json",
+  "title": "AAC Configuration Profile 1",
+  "description": "Defines the canonical AAC Configuration Profile schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "ConfigurationProfile"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "ConfigurationProfile": {
+      "type": "object",
+      "description": "Configuration profile data represented by this document.",
+      "required": [
+        "Id",
+        "Version",
+        "ConfigurationScopes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "Stable identifier of this configuration profile.",
+          "minLength": 1
+        },
+        "Version": {
+          "type": "integer",
+          "description": "Version of this configuration profile.",
+          "minimum": 1
+        },
+        "ConfigurationScopes": {
+          "type": "array",
+          "description": "Lists the configuration scopes associated with this configuration profile.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "Id",
+              "Type",
+              "Resolver"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string",
+                "description": "Stable identifier of this configuration scope.",
+                "minLength": 1
+              },
+              "Type": {
+                "type": "string",
+                "description": "Type discriminator for this configuration scope.",
+                "minLength": 1
+              },
+              "Resolver": {
+                "type": "string",
+                "description": "Specifies the resolver for this configuration scope.",
+                "minLength": 1
+              },
+              "PolicyAuthority": {
+                "type": "boolean",
+                "description": "Indicates whether policy authority applies to this configuration scope."
+              },
+              "Mandatory": {
+                "type": "boolean",
+                "description": "Indicates whether mandatory applies to this configuration scope."
+              },
+              "ConfigurationProviders": {
+                "type": "array",
+                "description": "Lists the configuration providers associated with this configuration scope.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "Id"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "Id": {
+                      "type": "string",
+                      "description": "Stable identifier of this configuration provider.",
+                      "minLength": 1
+                    },
+                    "Priority": {
+                      "type": "integer",
+                      "description": "Specifies the priority for this configuration provider."
+                    }
+                  }
+                }
+              },
+              "Name": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this configuration scope."
+              },
+              "Description": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this configuration scope."
+              }
+            }
+          }
+        },
+        "Name": {
+          "$ref": "#/$defs/displayText",
+          "description": "Human-readable name of this configuration profile."
+        },
+        "Description": {
+          "$ref": "#/$defs/displayText",
+          "description": "Human-readable description of this configuration profile."
+        }
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "$defs": {
+    "displayText": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Text": {
+              "type": "string",
+              "description": "Human-readable display text.",
+              "minLength": 1
+            },
+            "ResourceKey": {
+              "type": "string",
+              "description": "Optional localization resource key for the human-readable text.",
+              "minLength": 1
+            }
+          },
+          "anyOf": [
+            {
+              "required": [
+                "Text"
+              ]
+            },
+            {
+              "required": [
+                "ResourceKey"
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "Defines the reusable display text structure used by this canonical schema."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.configuration-profile",
+  "x-aac-schema-version": 1
+}

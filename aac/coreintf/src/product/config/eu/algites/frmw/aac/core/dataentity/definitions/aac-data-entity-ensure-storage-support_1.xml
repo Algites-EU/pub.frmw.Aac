@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<CapabilityContract xmlns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd" schemaRef="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd">
+  <Capability>
+    <Id>_AAC.data-entity.ensure-storage-support</Id>
+    <Version>1</Version>
+    <Name>
+      <MapEntry key="Text">
+        <Value>"Ensure Data Entity storage support"</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.data.entity.ensure.storage.support.name"</Value>
+      </MapEntry>
+    </Name>
+    <Description>
+      <MapEntry key="Text">
+        <Value>"Idempotently ensures physical storage support for one canonical Data Entity schema version."</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.data.entity.ensure.storage.support.description"</Value>
+      </MapEntry>
+    </Description>
+    <GroupId>_AAC.data-entity.storage-management</GroupId>
+  </Capability>
+  <Operations>
+    <Item>
+      <Id>ensure</Id>
+      <Name>
+        <MapEntry key="Text">
+          <Value>"Ensure storage support"</Value>
+        </MapEntry>
+        <MapEntry key="ResourceKey">
+          <Value>"aac.data.entity.ensure.storage.support.operation.ensure.name"</Value>
+        </MapEntry>
+      </Name>
+      <Description>
+        <MapEntry key="Text">
+          <Value>"Idempotently ensures physical storage support for one canonical Data Entity schema version."</Value>
+        </MapEntry>
+        <MapEntry key="ResourceKey">
+          <Value>"aac.data.entity.ensure.storage.support.operation.ensure.description"</Value>
+        </MapEntry>
+      </Description>
+      <Interactions>
+        <Item>
+          <Kind>input</Kind>
+          <Schema>
+            <Id>_AAC.schema.data-entity-ensure-storage-support-request</Id>
+            <Version>1</Version>
+          </Schema>
+        </Item>
+        <Item>
+          <Kind>final_success_state_result</Kind>
+          <Schema>
+            <Id>_AAC.schema.data-entity-ensure-storage-support-result</Id>
+            <Version>1</Version>
+          </Schema>
+        </Item>
+      </Interactions>
+    </Item>
+  </Operations>
+</CapabilityContract>

@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.dataentity.aiig_data_entity_inspect_storage_backup_request_1 import AIigDataEntityInspectStorageBackupRequest_1
 from dataclasses import dataclass
 from typing import Generic, Mapping, TypeVar
 from uuid import uuid4
@@ -24,4 +26,4 @@ class AIcInspectStorageBackupFacade(AIcBoundDataEntityCapabilityFacade):
     capability_id = INSPECT_STORAGE_BACKUP_CAPABILITY_ID
 
     def inspect_backup(self, backup_file: str) -> Mapping[str, object]:
-        return self._invoke("inspect_backup", {"BackupFile": backup_file})
+        return self._invoke("inspect_backup", {AIigDataEntityInspectStorageBackupRequest_1.SCHEMA_FIELD_NAME__BACKUP_FILE: backup_file})

@@ -1,0 +1,333 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Capability Contract schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$defs":{"authorizationRequirement":{"additionalProperties":false,"anyOf":[{"required":["AllOf"]},{"required":["AnyOf"]}],"description":"Defines the reusable authorization requirement structure used by this canonical schema.","properties":{"AllOf":{"description":"Lists the all of associated with this authorization requirement.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true},"AnyOf":{"description":"Lists the any of associated with this authorization requirement.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true}},"type":"object"},"displayText":{"description":"Defines the reusable display text structure used by this canonical schema.","oneOf":[{"minLength":1,"type":"string"},{"additionalProperties":false,"anyOf":[{"required":["Text"]},{"required":["ResourceKey"]}],"properties":{"ResourceKey":{"description":"Optional localization resource key for the human-readable text.","minLength":1,"type":"string"},"Text":{"description":"Human-readable display text.","minLength":1,"type":"string"}},"type":"object"}]},"schemaRef":{"additionalProperties":false,"description":"Defines the reusable schema ref structure used by this canonical schema.","properties":{"Id":{"description":"Stable identifier of this schema ref.","minLength":1,"type":"string"},"Version":{"description":"Version of this schema ref.","minimum":1,"type":"integer"}},"required":["Id","Version"],"type":"object"}},"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Capability Contract schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"AuthorizationPermissions":{"description":"Authorization permission definitions declared by this capability contract.","items":{"additionalProperties":false,"properties":{"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this authorization permission."},"Id":{"description":"Stable identifier of this authorization permission.","minLength":1,"type":"string"},"Metadata":{"description":"Additional structured metadata associated with this authorization permission.","type":"object"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this authorization permission."}},"required":["Id"],"type":"object"},"type":"array"},"BindingQualifiersSchema":{"$ref":"#/$defs/schemaRef","description":"Optional schema reference defining one provider BindingQualifierProfile for this exact capability-contract version. When present, every provider BindingQualifierProfiles item MUST validate against the referenced schema; consumers evaluate the normalized provider profiles through their technology-specific CapabilityProfileMatcherClassName during RESOLVE."},"Capability":{"additionalProperties":false,"description":"Identity and human-facing metadata of the capability contract.","properties":{"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this capability."},"GroupId":{"description":"Identifier of the capability group containing this capability.","minLength":1,"type":"string"},"Id":{"description":"Stable identifier of this capability.","minLength":1,"type":"string"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this capability."},"Version":{"description":"Version of this capability.","minimum":1,"type":"integer"}},"required":["Id","Version","GroupId"],"type":"object"},"Metadata":{"description":"Additional structured metadata associated with this AAC capability contract.","type":"object"},"Operations":{"description":"Operations declared by this capability contract or provider.","items":{"additionalProperties":false,"properties":{"Authorization":{"$ref":"#/$defs/authorizationRequirement","description":"Specifies the authorization for this operation."},"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this operation."},"Id":{"description":"Stable identifier of this operation.","minLength":1,"type":"string"},"Interactions":{"description":"Interaction schemas declared for this capability operation.","items":{"additionalProperties":false,"properties":{"Kind":{"description":"Kind of this interaction.","enum":["input","running_complete_state_result","running_delta_state_result","final_success_state_result","final_cancelled_state_result","final_failed_state_result_extension"]},"Schema":{"$ref":"#/$defs/schemaRef","description":"Canonical schema reference used by this interaction."}},"required":["Kind","Schema"],"type":"object"},"type":"array"},"Metadata":{"description":"Additional structured metadata associated with this operation.","type":"object"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this operation."},"SensitiveInputPaths":{"description":"Lists the sensitive input paths associated with this operation.","items":{"type":"string"},"type":"array","uniqueItems":true},"SensitiveOutputPaths":{"description":"Lists the sensitive output paths associated with this operation.","items":{"type":"string"},"type":"array","uniqueItems":true}},"required":["Id"],"type":"object"},"minItems":1,"type":"array"}},"required":["Capability","Operations"],"title":"AAC Capability Contract 1","type":"object","x-aac-schema-id":"_AAC.schema.capability-contract","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CapabilityContract">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Capability Contract schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Capability">
+          <xs:annotation>
+            <xs:documentation>Identity and human-facing metadata of the capability contract.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id">
+                <xs:annotation>
+                  <xs:documentation>Stable identifier of this capability.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Version">
+                <xs:annotation>
+                  <xs:documentation>Version of this capability.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:integer">
+                    <xs:minInclusive value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Human-readable name of this capability.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Human-readable description of this capability.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="GroupId">
+                <xs:annotation>
+                  <xs:documentation>Identifier of the capability group containing this capability.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AuthorizationPermissions" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Authorization permission definitions declared by this capability contract.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Id">
+                      <xs:annotation>
+                        <xs:documentation>Stable identifier of this authorization permission.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                      <xs:annotation>
+                        <xs:documentation>Human-readable name of this authorization permission.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                      <xs:annotation>
+                        <xs:documentation>Human-readable description of this authorization permission.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Metadata" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Additional structured metadata associated with this authorization permission.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                              </xs:sequence>
+                              <xs:attribute name="key" type="xs:string" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Operations">
+          <xs:annotation>
+            <xs:documentation>Operations declared by this capability contract or provider.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Item" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Id">
+                      <xs:annotation>
+                        <xs:documentation>Stable identifier of this operation.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                      <xs:annotation>
+                        <xs:documentation>Human-readable name of this operation.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                      <xs:annotation>
+                        <xs:documentation>Human-readable description of this operation.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Authorization" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Specifies the authorization for this operation.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="AllOf" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Lists the all of associated with this authorization requirement.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="AnyOf" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Lists the any of associated with this authorization requirement.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="SensitiveInputPaths" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Lists the sensitive input paths associated with this operation.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Item" minOccurs="0" type="xs:string" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="SensitiveOutputPaths" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Lists the sensitive output paths associated with this operation.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Item" minOccurs="0" type="xs:string" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Metadata" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Additional structured metadata associated with this operation.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                              </xs:sequence>
+                              <xs:attribute name="key" type="xs:string" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Interactions" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Interaction schemas declared for this capability operation.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Kind" type="xs:anyType">
+                                  <xs:annotation>
+                                    <xs:documentation>Kind of this interaction.</xs:documentation>
+                                  </xs:annotation>
+                                </xs:element>
+                                <xs:element name="Schema">
+                                  <xs:annotation>
+                                    <xs:documentation>Canonical schema reference used by this interaction.</xs:documentation>
+                                  </xs:annotation>
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Id">
+                                        <xs:annotation>
+                                          <xs:documentation>Stable identifier of this schema ref.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="Version">
+                                        <xs:annotation>
+                                          <xs:documentation>Version of this schema ref.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                          <xs:restriction base="xs:integer">
+                                            <xs:minInclusive value="1"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Metadata" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Additional structured metadata associated with this AAC capability contract.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                  </xs:sequence>
+                  <xs:attribute name="key" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BindingQualifiersSchema" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Optional schema reference defining one provider BindingQualifierProfile for this exact capability-contract version. When present, every provider BindingQualifierProfiles item MUST validate against the referenced schema; consumers evaluate the normalized provider profiles through their technology-specific CapabilityProfileMatcherClassName during RESOLVE.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id">
+                <xs:annotation>
+                  <xs:documentation>Stable identifier of this schema ref.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Version">
+                <xs:annotation>
+                  <xs:documentation>Version of this schema ref.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:integer">
+                    <xs:minInclusive value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

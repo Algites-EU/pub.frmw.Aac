@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/components/observation/simpleaudit/src/product/yamldefs/eu/algites/frmw/aac/observation/simpleaudit/schemas/simpleaudit-config_1.yamldef.schema.json",
+  "title": "AAC Simple Audit Configuration 1",
+  "description": "Defines the canonical AAC Simple Audit Configuration schema and its serialized data contract.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "Output": {
+      "type": "object",
+      "description": "Structured output associated with this AAC simple audit configuration.",
+      "default": {
+        "Type": "stdout"
+      },
+      "x-aac-name": {
+        "Text": "Output",
+        "ResourceKey": "aac.simpleaudit.config.output.name"
+      },
+      "x-aac-description": {
+        "Text": "Selects where audit records are written.",
+        "ResourceKey": "aac.simpleaudit.config.output.description"
+      },
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "enum": [
+            "stdout",
+            "file"
+          ],
+          "description": "Type discriminator for this output.",
+          "default": "stdout",
+          "x-aac-name": {
+            "Text": "Output type",
+            "ResourceKey": "aac.simpleaudit.config.output.type.name"
+          }
+        },
+        "Path": {
+          "type": "string",
+          "description": "Filesystem or logical path used by this output.",
+          "minLength": 1,
+          "x-aac-name": {
+            "Text": "File path",
+            "ResourceKey": "aac.simpleaudit.config.output.path.name"
+          }
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "Type": {
+                "const": "file",
+                "description": "Discriminator identifying the concrete variant represented by this value."
+              }
+            },
+            "required": [
+              "Type"
+            ]
+          },
+          "then": {
+            "required": [
+              "Path"
+            ]
+          }
+        }
+      ]
+    },
+    "Format": {
+      "enum": [
+        "json",
+        "text"
+      ],
+      "description": "Serialization or presentation format of this AAC simple audit configuration.",
+      "default": "json",
+      "x-aac-name": {
+        "Text": "Format",
+        "ResourceKey": "aac.simpleaudit.config.format.name"
+      },
+      "x-aac-description": {
+        "Text": "Selects the serialized audit-record format.",
+        "ResourceKey": "aac.simpleaudit.config.format.description"
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "x-aac-schema-id": "simpleaudit-config",
+  "x-aac-schema-version": 1
+}

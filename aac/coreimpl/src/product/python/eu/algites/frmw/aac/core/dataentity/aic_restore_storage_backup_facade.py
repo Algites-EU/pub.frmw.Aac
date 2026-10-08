@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.dataentity.aiig_data_entity_restore_storage_backup_request_1 import AIigDataEntityRestoreStorageBackupRequest_1
 from dataclasses import dataclass
 from typing import Generic, Mapping, TypeVar
 from uuid import uuid4
@@ -25,4 +27,4 @@ class AIcRestoreStorageBackupFacade(AIcBoundDataEntityCapabilityFacade):
     write_operation = True
 
     def restore_backup(self, backup_file: str, *, mode: str = "empty_only") -> Mapping[str, object]:
-        return self._invoke("restore_backup", {"BackupFile": backup_file, "Mode": mode})
+        return self._invoke("restore_backup", {AIigDataEntityRestoreStorageBackupRequest_1.SCHEMA_FIELD_NAME__BACKUP_FILE: backup_file, AIigDataEntityRestoreStorageBackupRequest_1.SCHEMA_FIELD_NAME__MODE: mode})

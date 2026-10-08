@@ -1,0 +1,45 @@
+{
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json",
+  "Capability": {
+    "Id": "_AAC.data-entity.retire-storage-support",
+    "Version": 1,
+    "GroupId": "_AAC.data-entity.storage-management",
+    "Name": {
+      "Text": "Retire Data Entity storage support",
+      "ResourceKey": "aac.data.entity.retire.storage.support.name"
+    },
+    "Description": {
+      "Text": "Marks physical storage support as no longer required for future writes without implying destructive purge.",
+      "ResourceKey": "aac.data.entity.retire.storage.support.description"
+    }
+  },
+  "Operations": [
+    {
+      "Id": "retire",
+      "Name": {
+        "Text": "Retire storage support",
+        "ResourceKey": "aac.data.entity.retire.storage.support.operation.retire.name"
+      },
+      "Description": {
+        "Text": "Marks physical storage support as no longer required for future writes without implying destructive purge.",
+        "ResourceKey": "aac.data.entity.retire.storage.support.operation.retire.description"
+      },
+      "Interactions": [
+        {
+          "Kind": "input",
+          "Schema": {
+            "Id": "_AAC.schema.data-entity-retire-storage-support-request",
+            "Version": 1
+          }
+        },
+        {
+          "Kind": "final_success_state_result",
+          "Schema": {
+            "Id": "_AAC.schema.data-entity-retire-storage-support-result",
+            "Version": 1
+          }
+        }
+      ]
+    }
+  ]
+}

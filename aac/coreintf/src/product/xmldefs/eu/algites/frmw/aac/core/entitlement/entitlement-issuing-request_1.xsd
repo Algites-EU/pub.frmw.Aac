@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Entitlement Issuing Request schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Entitlement Issuing Request schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"EntitlementRequest":{"additionalProperties":false,"description":"Requested entitlement data supplied to an entitlement issuer.","properties":{"Components":{"description":"Lists the components associated with this entitlement request.","items":{"additionalProperties":false,"properties":{"Id":{"description":"Stable identifier of this component.","minLength":1,"type":"string"},"RequestedGrants":{"description":"Lists the requested grants associated with this component.","items":{"additionalProperties":false,"properties":{"Capability":{"additionalProperties":false,"description":"Identity and human-facing metadata of the capability contract.","properties":{"Id":{"description":"Stable identifier of this capability.","minLength":1,"type":"string"},"Version":{"description":"Version of this capability.","minimum":1,"type":"integer"}},"required":["Id","Version"],"type":"object"},"Permissions":{"description":"Authorization or entitlement permissions associated with this requested grant.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true}},"required":["Capability","Permissions"],"type":"object"},"type":"array"}},"required":["Id","RequestedGrants"],"type":"object"},"type":"array"},"FormatVersion":{"const":1,"description":"Version of the persisted or exchanged document format."},"GeneratedAt":{"description":"Specifies the generated at for this entitlement request.","type":"string"},"Metadata":{"description":"Additional structured metadata associated with this entitlement request.","type":"object"},"RequestDigest":{"description":"Specifies the request digest for this entitlement request.","minLength":1,"type":"string"},"RequestId":{"description":"Stable identifier of the request associated with this entitlement request.","minLength":1,"type":"string"},"RequestedLicensingScope":{"additionalProperties":false,"description":"Structured requested licensing scope associated with this entitlement request.","properties":{"Type":{"description":"Type discriminator for this requested licensing scope.","minLength":1,"type":"string"}},"required":["Type"],"type":"object"},"Subject":{"additionalProperties":false,"description":"Structured subject associated with this entitlement request.","properties":{"Attributes":{"description":"Structured attributes associated with this subject.","type":"object"},"DisplayName":{"description":"Specifies the display name for this subject.","type":"string"},"Id":{"description":"Stable identifier of this subject.","minLength":1,"type":"string"}},"required":["Id"],"type":"object"}},"required":["FormatVersion","RequestId","RequestedLicensingScope","Subject","Components"],"type":"object"}},"required":["EntitlementRequest"],"title":"AAC Entitlement Issuing Request 1","type":"object","x-aac-schema-id":"_AAC.schema.entitlement-issuing-request","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="EntitlementIssuingRequest">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Entitlement Issuing Request schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="EntitlementRequest">
+          <xs:annotation>
+            <xs:documentation>Requested entitlement data supplied to an entitlement issuer.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FormatVersion" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Version of the persisted or exchanged document format.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="RequestId">
+                <xs:annotation>
+                  <xs:documentation>Stable identifier of the request associated with this entitlement request.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Subject">
+                <xs:annotation>
+                  <xs:documentation>Structured subject associated with this entitlement request.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Id">
+                      <xs:annotation>
+                        <xs:documentation>Stable identifier of this subject.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DisplayName" minOccurs="0" type="xs:string">
+                      <xs:annotation>
+                        <xs:documentation>Specifies the display name for this subject.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Attributes" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Structured attributes associated with this subject.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                              </xs:sequence>
+                              <xs:attribute name="key" type="xs:string" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Components">
+                <xs:annotation>
+                  <xs:documentation>Lists the components associated with this entitlement request.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Id">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="RequestedGrants">
+                            <xs:annotation>
+                              <xs:documentation>Lists the requested grants associated with this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Capability">
+                                        <xs:annotation>
+                                          <xs:documentation>Identity and human-facing metadata of the capability contract.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Id">
+                                              <xs:annotation>
+                                                <xs:documentation>Stable identifier of this capability.</xs:documentation>
+                                              </xs:annotation>
+                                              <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                </xs:restriction>
+                                              </xs:simpleType>
+                                            </xs:element>
+                                            <xs:element name="Version">
+                                              <xs:annotation>
+                                                <xs:documentation>Version of this capability.</xs:documentation>
+                                              </xs:annotation>
+                                              <xs:simpleType>
+                                                <xs:restriction base="xs:integer">
+                                                  <xs:minInclusive value="1"/>
+                                                </xs:restriction>
+                                              </xs:simpleType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="Permissions">
+                                        <xs:annotation>
+                                          <xs:documentation>Authorization or entitlement permissions associated with this requested grant.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                              <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                </xs:restriction>
+                                              </xs:simpleType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="GeneratedAt" minOccurs="0" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>Specifies the generated at for this entitlement request.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Metadata" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Additional structured metadata associated with this entitlement request.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                        </xs:sequence>
+                        <xs:attribute name="key" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="RequestDigest" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Specifies the request digest for this entitlement request.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RequestedLicensingScope">
+                <xs:annotation>
+                  <xs:documentation>Structured requested licensing scope associated with this entitlement request.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Type">
+                      <xs:annotation>
+                        <xs:documentation>Type discriminator for this requested licensing scope.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

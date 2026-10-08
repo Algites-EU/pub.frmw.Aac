@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-group_1.yamldef.schema.json",
+  "title": "AAC Capability Group 1",
+  "description": "Defines the canonical AAC Capability Group schema and its serialized data contract.",
+  "$defs": {
+    "displayText": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Text": {
+              "type": "string",
+              "description": "Human-readable display text.",
+              "minLength": 1
+            },
+            "ResourceKey": {
+              "type": "string",
+              "description": "Optional localization resource key for the human-readable text.",
+              "minLength": 1
+            }
+          },
+          "anyOf": [
+            {
+              "required": [
+                "Text"
+              ]
+            },
+            {
+              "required": [
+                "ResourceKey"
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "Defines the reusable display text structure used by this canonical schema."
+    }
+  },
+  "type": "object",
+  "required": [
+    "Group"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "Group": {
+      "type": "object",
+      "description": "Capability-group definition represented by this document.",
+      "required": [
+        "Id",
+        "Name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "Stable identifier of this group.",
+          "minLength": 1
+        },
+        "ParentGroupId": {
+          "type": "string",
+          "description": "Stable identifier of the parent group associated with this group.",
+          "minLength": 1
+        },
+        "Name": {
+          "$ref": "#/$defs/displayText",
+          "description": "Human-readable name of this group."
+        },
+        "Description": {
+          "$ref": "#/$defs/displayText",
+          "description": "Human-readable description of this group."
+        },
+        "Metadata": {
+          "type": "object",
+          "description": "Additional structured metadata associated with this group."
+        }
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.capability-group",
+  "x-aac-schema-version": 1
+}

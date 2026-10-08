@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/persistence/transaction-plan_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/persistence/transaction-plan_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Persistence Transaction Plan schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/persistence/transaction-plan_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Persistence Transaction Plan schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"CreatedAt":{"description":"Specifies the created at for this AAC persistence transaction plan.","type":"string"},"FormatVersion":{"const":1,"description":"Version of the persisted or exchanged document format."},"Metadata":{"description":"Additional structured metadata associated with this AAC persistence transaction plan.","type":"object"},"ReadSet":{"description":"Lists the read set associated with this AAC persistence transaction plan.","items":{"additionalProperties":false,"properties":{"ExpectAbsent":{"description":"Indicates whether expect absent applies to this read set.","type":"boolean"},"ExpectedRecordRevision":{"description":"Record revision that must still be current for the requested mutation to succeed.","type":["integer","string","null"]},"RecordId":{"description":"Stable identifier of the record associated with this read set.","minLength":1,"type":"string"}},"required":["RecordId","ExpectAbsent"],"type":"object"},"type":"array"},"TransactionId":{"description":"Stable identifier of the transaction associated with this AAC persistence transaction plan.","minLength":1,"type":"string"},"TransactionType":{"description":"Specifies the transaction type for this AAC persistence transaction plan.","minLength":1,"type":"string"},"WriteSet":{"description":"Lists the write set associated with this AAC persistence transaction plan.","items":{"additionalProperties":false,"properties":{"Metadata":{"description":"Additional structured metadata associated with this write set.","type":"object"},"Operation":{"description":"Specifies the operation for this write set.","minLength":1,"type":"string"},"RecordId":{"description":"Stable identifier of the record associated with this write set.","minLength":1,"type":"string"},"TargetRecordRevision":{"description":"Record revision expected after the planned write completes.","type":["integer","string","null"]}},"required":["RecordId","Operation","Metadata"],"type":"object"},"type":"array"}},"required":["FormatVersion","TransactionId","TransactionType","CreatedAt","ReadSet","WriteSet","Metadata"],"title":"AAC Persistence Transaction Plan 1","type":"object","x-aac-schema-id":"_AAC.schema.persistence-transaction-plan","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TransactionPlan">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Persistence Transaction Plan schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FormatVersion" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Version of the persisted or exchanged document format.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="TransactionId">
+          <xs:annotation>
+            <xs:documentation>Stable identifier of the transaction associated with this AAC persistence transaction plan.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:minLength value="1"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="TransactionType">
+          <xs:annotation>
+            <xs:documentation>Specifies the transaction type for this AAC persistence transaction plan.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:minLength value="1"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="CreatedAt" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specifies the created at for this AAC persistence transaction plan.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="ReadSet">
+          <xs:annotation>
+            <xs:documentation>Lists the read set associated with this AAC persistence transaction plan.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="RecordId">
+                      <xs:annotation>
+                        <xs:documentation>Stable identifier of the record associated with this read set.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ExpectedRecordRevision" minOccurs="0" nillable="true" type="xs:anyType">
+                      <xs:annotation>
+                        <xs:documentation>Record revision that must still be current for the requested mutation to succeed.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="ExpectAbsent" type="xs:boolean">
+                      <xs:annotation>
+                        <xs:documentation>Indicates whether expect absent applies to this read set.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="WriteSet">
+          <xs:annotation>
+            <xs:documentation>Lists the write set associated with this AAC persistence transaction plan.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="RecordId">
+                      <xs:annotation>
+                        <xs:documentation>Stable identifier of the record associated with this write set.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Operation">
+                      <xs:annotation>
+                        <xs:documentation>Specifies the operation for this write set.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="TargetRecordRevision" minOccurs="0" nillable="true" type="xs:anyType">
+                      <xs:annotation>
+                        <xs:documentation>Record revision expected after the planned write completes.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Metadata">
+                      <xs:annotation>
+                        <xs:documentation>Additional structured metadata associated with this write set.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                              </xs:sequence>
+                              <xs:attribute name="key" type="xs:string" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Metadata">
+          <xs:annotation>
+            <xs:documentation>Additional structured metadata associated with this AAC persistence transaction plan.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                  </xs:sequence>
+                  <xs:attribute name="key" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

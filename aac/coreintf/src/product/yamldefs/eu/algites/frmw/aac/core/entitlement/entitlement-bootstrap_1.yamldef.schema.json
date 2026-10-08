@@ -1,0 +1,295 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/entitlement/entitlement-bootstrap_1.yamldef.schema.json",
+  "title": "AAC Entitlement Bootstrap 1",
+  "description": "Defines the canonical AAC Entitlement Bootstrap schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "EntitlementBootstrap"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "EntitlementBootstrap": {
+      "type": "object",
+      "description": "Entitlement bootstrap data used to initialize trusted issuers, verifiers, and licensing facilities.",
+      "required": [
+        "SchemaVersion",
+        "DefaultEntitlementProfile",
+        "EntitlementProfiles"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "SchemaVersion": {
+          "const": 1,
+          "description": "Canonical schema version."
+        },
+        "DefaultEntitlementProfile": {
+          "type": "string",
+          "description": "Specifies the default entitlement profile for this entitlement bootstrap.",
+          "minLength": 1
+        },
+        "EntitlementProfiles": {
+          "type": "array",
+          "description": "Lists the entitlement profiles associated with this entitlement bootstrap.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "Id",
+              "Version",
+              "LicensingScopes"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string",
+                "description": "Stable identifier of this entitlement profile.",
+                "minLength": 1
+              },
+              "Version": {
+                "type": "integer",
+                "description": "Version of this entitlement profile.",
+                "minimum": 1
+              },
+              "Name": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this entitlement profile."
+              },
+              "Description": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this entitlement profile."
+              },
+              "LicensingScopes": {
+                "type": "array",
+                "description": "Lists the licensing scopes associated with this entitlement profile.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "Id",
+                    "Type",
+                    "Resolver"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "Id": {
+                      "type": "string",
+                      "description": "Stable identifier of this licensing scope.",
+                      "minLength": 1
+                    },
+                    "Type": {
+                      "type": "string",
+                      "description": "Type discriminator for this licensing scope.",
+                      "minLength": 1
+                    },
+                    "Resolver": {
+                      "type": "string",
+                      "description": "Specifies the resolver for this licensing scope.",
+                      "minLength": 1
+                    },
+                    "Mandatory": {
+                      "type": "boolean",
+                      "description": "Indicates whether mandatory applies to this licensing scope."
+                    },
+                    "EntitlementProviders": {
+                      "type": "array",
+                      "description": "Lists the entitlement providers associated with this licensing scope.",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "Id"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "Id": {
+                            "type": "string",
+                            "description": "Stable identifier of this entitlement provider.",
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    },
+                    "Name": {
+                      "$ref": "#/$defs/displayText",
+                      "description": "Human-readable name of this licensing scope."
+                    },
+                    "Description": {
+                      "$ref": "#/$defs/displayText",
+                      "description": "Human-readable description of this licensing scope."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "EntitlementProviders": {
+          "type": "array",
+          "description": "Lists the entitlement providers associated with this entitlement bootstrap.",
+          "items": {
+            "type": "object",
+            "required": [
+              "Id",
+              "Type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string",
+                "description": "Stable identifier of this entitlement provider.",
+                "minLength": 1
+              },
+              "Type": {
+                "type": "string",
+                "description": "Type discriminator for this entitlement provider.",
+                "minLength": 1
+              },
+              "Settings": {
+                "type": "object",
+                "description": "Structured settings associated with this entitlement provider."
+              },
+              "Name": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this entitlement provider."
+              },
+              "Description": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this entitlement provider."
+              }
+            }
+          }
+        },
+        "Metadata": {
+          "type": "object",
+          "description": "Additional structured metadata associated with this entitlement bootstrap."
+        },
+        "TrustedIssuers": {
+          "type": "array",
+          "description": "Lists the trusted issuers associated with this entitlement bootstrap.",
+          "items": {
+            "type": "object",
+            "required": [
+              "IssuerId"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "IssuerId": {
+                "type": "string",
+                "description": "Stable identifier of the issuer associated with this trusted issuer.",
+                "minLength": 1
+              },
+              "ComponentIds": {
+                "type": "array",
+                "description": "Lists stable identifiers associated with this trusted issuer.",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "EvidenceTypes": {
+                "type": "array",
+                "description": "Lists the evidence types associated with this trusted issuer.",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "SignerIdentities": {
+                "type": "array",
+                "description": "Lists the signer identities associated with this trusted issuer.",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        },
+        "LicensingScopeResolvers": {
+          "type": "array",
+          "description": "Lists the licensing scope resolvers associated with this entitlement bootstrap.",
+          "items": {
+            "type": "object",
+            "required": [
+              "Id",
+              "Type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string",
+                "description": "Stable identifier of this licensing scope resolver.",
+                "minLength": 1
+              },
+              "Type": {
+                "type": "string",
+                "description": "Type discriminator for this licensing scope resolver.",
+                "minLength": 1
+              },
+              "Settings": {
+                "type": "object",
+                "description": "Structured settings associated with this licensing scope resolver."
+              },
+              "Name": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this licensing scope resolver."
+              },
+              "Description": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this licensing scope resolver."
+              }
+            }
+          }
+        }
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "$defs": {
+    "displayText": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Text": {
+              "type": "string",
+              "description": "Human-readable display text.",
+              "minLength": 1
+            },
+            "ResourceKey": {
+              "type": "string",
+              "description": "Optional localization resource key for the human-readable text.",
+              "minLength": 1
+            }
+          },
+          "anyOf": [
+            {
+              "required": [
+                "Text"
+              ]
+            },
+            {
+              "required": [
+                "ResourceKey"
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "Defines the reusable display text structure used by this canonical schema."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.entitlement-bootstrap",
+  "x-aac-schema-version": 1
+}

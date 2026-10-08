@@ -1,0 +1,15 @@
+{
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-group_1.jsondef.schema.json",
+  "Group": {
+    "Id": "_AAC.data-entity.loading",
+    "ParentGroupId": "_AAC.data-entity",
+    "Name": {
+      "Text": "Data Entity Loading",
+      "ResourceKey": "aac.data.entity.loading.name"
+    },
+    "Description": {
+      "Text": "Capabilities that load Data Entity records without directly mutating storage.",
+      "ResourceKey": "aac.data.entity.loading.description"
+    }
+  }
+}

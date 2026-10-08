@@ -1,0 +1,59 @@
+{
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json",
+  "Capability": {
+    "Id": "_AAC.data-entity.apply-direct-record-changes",
+    "Version": 1,
+    "GroupId": "_AAC.data-entity.storing",
+    "Name": {
+      "Text": "Apply direct Data Entity record changes",
+      "ResourceKey": "aac.data.entity.apply.direct.record.changes.name"
+    },
+    "Description": {
+      "Text": "Atomically applies a direct Data Entity record changeset.",
+      "ResourceKey": "aac.data.entity.apply.direct.record.changes.description"
+    }
+  },
+  "Operations": [
+    {
+      "Id": "apply",
+      "Name": {
+        "Text": "Apply direct record changes",
+        "ResourceKey": "aac.data.entity.apply.direct.record.changes.operation.apply.name"
+      },
+      "Description": {
+        "Text": "Atomically applies a direct Data Entity record changeset.",
+        "ResourceKey": "aac.data.entity.apply.direct.record.changes.operation.apply.description"
+      },
+      "Interactions": [
+        {
+          "Kind": "input",
+          "Schema": {
+            "Id": "_AAC.schema.data-entity-apply-direct-record-changes-request",
+            "Version": 1
+          }
+        },
+        {
+          "Kind": "running_complete_state_result",
+          "Schema": {
+            "Id": "_AAC.schema.data-entity-apply-direct-record-changes-running-complete-result",
+            "Version": 1
+          }
+        },
+        {
+          "Kind": "running_delta_state_result",
+          "Schema": {
+            "Id": "_AAC.schema.data-entity-apply-direct-record-changes-running-delta-result",
+            "Version": 1
+          }
+        },
+        {
+          "Kind": "final_success_state_result",
+          "Schema": {
+            "Id": "_AAC.schema.data-entity-apply-direct-record-changes-result",
+            "Version": 1
+          }
+        }
+      ]
+    }
+  ]
+}

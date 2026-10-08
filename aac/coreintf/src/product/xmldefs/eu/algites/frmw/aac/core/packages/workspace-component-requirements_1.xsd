@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Workspace Component Requirements schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Workspace Component Requirements schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"WorkspaceComponentRequirements":{"additionalProperties":false,"description":"Component requirements and update policy declared for one workspace.","properties":{"Requirements":{"description":"Indicates whether requirements applies to this workspace component requirement.","items":{"additionalProperties":false,"properties":{"ComponentId":{"description":"Stable identifier of the AAC component associated with this requirement.","minLength":1,"type":"string"},"Description":{"description":"Human-readable description of this requirement."},"Name":{"description":"Human-readable name of this requirement."},"Required":{"default":true,"description":"Indicates whether required applies to this requirement.","type":"boolean"},"SourceIds":{"description":"Lists stable identifiers associated with this requirement.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true},"Versions":{"description":"Lists the versions supported or selected by this requirement.","items":{"minimum":1,"type":"integer"},"type":"array","uniqueItems":true}},"required":["ComponentId"],"type":"object"},"type":"array"},"UpdatePolicy":{"default":"manual","description":"Specifies the update policy for this workspace component requirement.","enum":["manual","notify","auto_compatible","auto_locked"]},"WorkspaceId":{"description":"Stable identifier of the workspace associated with this workspace component requirement.","minLength":1,"type":"string"}},"required":["WorkspaceId","Requirements"],"type":"object"}},"required":["WorkspaceComponentRequirements"],"title":"AAC Workspace Component Requirements 1","type":"object","x-aac-schema-id":"_AAC.schema.workspace-component-requirements","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="WorkspaceComponentRequirements">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Workspace Component Requirements schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="WorkspaceComponentRequirements">
+          <xs:annotation>
+            <xs:documentation>Component requirements and update policy declared for one workspace.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="WorkspaceId">
+                <xs:annotation>
+                  <xs:documentation>Stable identifier of the workspace associated with this workspace component requirement.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UpdatePolicy" minOccurs="0" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Specifies the update policy for this workspace component requirement.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Requirements">
+                <xs:annotation>
+                  <xs:documentation>Indicates whether requirements applies to this workspace component requirement.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="ComponentId">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of the AAC component associated with this requirement.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Versions" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Lists the versions supported or selected by this requirement.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:integer">
+                                      <xs:minInclusive value="1"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Required" minOccurs="0" type="xs:boolean">
+                            <xs:annotation>
+                              <xs:documentation>Indicates whether required applies to this requirement.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="SourceIds" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Lists stable identifiers associated with this requirement.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable name of this requirement.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable description of this requirement.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

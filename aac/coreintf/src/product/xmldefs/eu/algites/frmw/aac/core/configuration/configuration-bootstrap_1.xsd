@@ -1,0 +1,420 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Configuration Bootstrap schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$defs":{"displayText":{"description":"Defines the reusable display text structure used by this canonical schema.","oneOf":[{"minLength":1,"type":"string"},{"additionalProperties":false,"anyOf":[{"required":["Text"]},{"required":["ResourceKey"]}],"properties":{"ResourceKey":{"description":"Optional localization resource key for the human-readable text.","minLength":1,"type":"string"},"Text":{"description":"Human-readable display text.","minLength":1,"type":"string"}},"type":"object"}]}},"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Configuration Bootstrap schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"ConfigurationBootstrap":{"additionalProperties":false,"description":"Configuration bootstrap data used to initialize configuration profiles and providers.","properties":{"ConfigurationProfileSources":{"description":"Lists the configuration profile sources associated with this configuration bootstrap.","items":{"additionalProperties":false,"properties":{"AuthenticationProfileId":{"description":"Stable identifier of the authentication profile associated with this configuration profile source.","minLength":1,"type":"string"},"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this configuration profile source."},"Id":{"description":"Stable identifier of this configuration profile source.","minLength":1,"type":"string"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this configuration profile source."},"Required":{"description":"Indicates whether required applies to this configuration profile source.","type":"boolean"},"Uri":{"description":"URI or URL identifying the uri associated with this configuration profile source.","minLength":1,"type":"string"}},"required":["Id","Uri"],"type":"object"},"type":"array"},"ConfigurationProfiles":{"description":"Lists the configuration profiles associated with this configuration bootstrap.","items":{"additionalProperties":false,"properties":{"ConfigurationScopes":{"description":"Lists the configuration scopes associated with this configuration profile.","items":{"additionalProperties":false,"properties":{"ConfigurationProviders":{"description":"Lists the configuration providers associated with this configuration scope.","items":{"additionalProperties":false,"properties":{"Id":{"description":"Stable identifier of this configuration provider.","minLength":1,"type":"string"},"Priority":{"description":"Specifies the priority for this configuration provider.","type":"integer"}},"required":["Id"],"type":"object"},"type":"array"},"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this configuration scope."},"Id":{"description":"Stable identifier of this configuration scope.","minLength":1,"type":"string"},"Mandatory":{"description":"Indicates whether mandatory applies to this configuration scope.","type":"boolean"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this configuration scope."},"PolicyAuthority":{"description":"Indicates whether policy authority applies to this configuration scope.","type":"boolean"},"Resolver":{"description":"Specifies the resolver for this configuration scope.","minLength":1,"type":"string"},"Type":{"description":"Type discriminator for this configuration scope.","minLength":1,"type":"string"}},"required":["Id","Type","Resolver"],"type":"object"},"minItems":1,"type":"array"},"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this configuration profile."},"Id":{"description":"Stable identifier of this configuration profile.","minLength":1,"type":"string"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this configuration profile."},"Version":{"description":"Version of this configuration profile.","minimum":1,"type":"integer"}},"required":["Id","Version","ConfigurationScopes"],"type":"object"},"minItems":1,"type":"array"},"ConfigurationProviders":{"description":"Lists the configuration providers associated with this configuration bootstrap.","items":{"additionalProperties":false,"properties":{"AuthenticationProfileId":{"description":"Stable identifier of the authentication profile associated with this configuration provider.","minLength":1,"type":"string"},"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this configuration provider."},"Id":{"description":"Stable identifier of this configuration provider.","minLength":1,"type":"string"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this configuration provider."},"Settings":{"description":"Structured settings associated with this configuration provider.","type":"object"},"Type":{"description":"Type discriminator for this configuration provider.","minLength":1,"type":"string"}},"required":["Id","Type"],"type":"object"},"type":"array"},"ConfigurationScopeResolvers":{"description":"Lists the configuration scope resolvers associated with this configuration bootstrap.","items":{"additionalProperties":false,"properties":{"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this configuration scope resolver."},"Id":{"description":"Stable identifier of this configuration scope resolver.","minLength":1,"type":"string"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this configuration scope resolver."},"Settings":{"description":"Structured settings associated with this configuration scope resolver.","type":"object"},"Type":{"description":"Type discriminator for this configuration scope resolver.","minLength":1,"type":"string"}},"required":["Id","Type"],"type":"object"},"type":"array"},"DefaultConfigurationProfile":{"description":"Specifies the default configuration profile for this configuration bootstrap.","minLength":1,"type":"string"},"MandatoryConfigurationScopeDefinitionIds":{"description":"Lists stable identifiers associated with this configuration bootstrap.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true},"Metadata":{"description":"Additional structured metadata associated with this configuration bootstrap.","type":"object"},"SchemaVersion":{"const":1,"description":"Canonical schema version."},"WorkspaceConfigurationProfiles":{"description":"Specifies the workspace configuration profiles for this configuration bootstrap.","enum":["forbidden","allowed","allowed_if_signed"]}},"required":["SchemaVersion","DefaultConfigurationProfile","ConfigurationProfiles"],"type":"object"}},"required":["ConfigurationBootstrap"],"title":"AAC Configuration Bootstrap 1","type":"object","x-aac-schema-id":"_AAC.schema.configuration-bootstrap","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ConfigurationBootstrap">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Configuration Bootstrap schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ConfigurationBootstrap">
+          <xs:annotation>
+            <xs:documentation>Configuration bootstrap data used to initialize configuration profiles and providers.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SchemaVersion" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Canonical schema version.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="DefaultConfigurationProfile">
+                <xs:annotation>
+                  <xs:documentation>Specifies the default configuration profile for this configuration bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WorkspaceConfigurationProfiles" minOccurs="0" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Specifies the workspace configuration profiles for this configuration bootstrap.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="MandatoryConfigurationScopeDefinitionIds" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Lists stable identifiers associated with this configuration bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ConfigurationProfiles">
+                <xs:annotation>
+                  <xs:documentation>Lists the configuration profiles associated with this configuration bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="1" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Id">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of this configuration profile.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Version">
+                            <xs:annotation>
+                              <xs:documentation>Version of this configuration profile.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:integer">
+                                <xs:minInclusive value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="ConfigurationScopes">
+                            <xs:annotation>
+                              <xs:documentation>Lists the configuration scopes associated with this configuration profile.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Id">
+                                        <xs:annotation>
+                                          <xs:documentation>Stable identifier of this configuration scope.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="Type">
+                                        <xs:annotation>
+                                          <xs:documentation>Type discriminator for this configuration scope.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="Resolver">
+                                        <xs:annotation>
+                                          <xs:documentation>Specifies the resolver for this configuration scope.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="PolicyAuthority" minOccurs="0" type="xs:boolean">
+                                        <xs:annotation>
+                                          <xs:documentation>Indicates whether policy authority applies to this configuration scope.</xs:documentation>
+                                        </xs:annotation>
+                                      </xs:element>
+                                      <xs:element name="Mandatory" minOccurs="0" type="xs:boolean">
+                                        <xs:annotation>
+                                          <xs:documentation>Indicates whether mandatory applies to this configuration scope.</xs:documentation>
+                                        </xs:annotation>
+                                      </xs:element>
+                                      <xs:element name="ConfigurationProviders" minOccurs="0">
+                                        <xs:annotation>
+                                          <xs:documentation>Lists the configuration providers associated with this configuration scope.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Id">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Stable identifier of this configuration provider.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="Priority" minOccurs="0" type="xs:integer">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Specifies the priority for this configuration provider.</xs:documentation>
+                                                    </xs:annotation>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                                        <xs:annotation>
+                                          <xs:documentation>Human-readable name of this configuration scope.</xs:documentation>
+                                        </xs:annotation>
+                                      </xs:element>
+                                      <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                                        <xs:annotation>
+                                          <xs:documentation>Human-readable description of this configuration scope.</xs:documentation>
+                                        </xs:annotation>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable name of this configuration profile.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable description of this configuration profile.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ConfigurationProviders" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Lists the configuration providers associated with this configuration bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Id">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of this configuration provider.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Type">
+                            <xs:annotation>
+                              <xs:documentation>Type discriminator for this configuration provider.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Settings" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Structured settings associated with this configuration provider.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="key" type="xs:string" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="AuthenticationProfileId" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of the authentication profile associated with this configuration provider.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable name of this configuration provider.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable description of this configuration provider.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ConfigurationScopeResolvers" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Lists the configuration scope resolvers associated with this configuration bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Id">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of this configuration scope resolver.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Type">
+                            <xs:annotation>
+                              <xs:documentation>Type discriminator for this configuration scope resolver.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Settings" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Structured settings associated with this configuration scope resolver.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="key" type="xs:string" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable name of this configuration scope resolver.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable description of this configuration scope resolver.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Metadata" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Additional structured metadata associated with this configuration bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                        </xs:sequence>
+                        <xs:attribute name="key" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ConfigurationProfileSources" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Lists the configuration profile sources associated with this configuration bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Id">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of this configuration profile source.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Uri">
+                            <xs:annotation>
+                              <xs:documentation>URI or URL identifying the uri associated with this configuration profile source.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="AuthenticationProfileId" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of the authentication profile associated with this configuration profile source.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Required" minOccurs="0" type="xs:boolean">
+                            <xs:annotation>
+                              <xs:documentation>Indicates whether required applies to this configuration profile source.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable name of this configuration profile source.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable description of this configuration profile source.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

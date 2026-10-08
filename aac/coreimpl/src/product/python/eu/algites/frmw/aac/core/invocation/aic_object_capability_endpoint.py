@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.invocation.aiig_operation_failure_1 import AIigOperationFailure_1
 import copy
 import dataclasses
 import inspect
@@ -110,15 +112,15 @@ def _exception_error(exc: Exception) -> dict[str, object]:
             "Message": failure.system_message,
         }
         if failure.user_message is not None:
-            error["UserMessage"] = dataclasses.asdict(failure.user_message)
+            error[AIigOperationFailure_1.SCHEMA_FIELD_NAME__USER_MESSAGE] = dataclasses.asdict(failure.user_message)
         if failure.error_code is not None:
-            error["ErrorCode"] = failure.error_code
+            error[AIigOperationFailure_1.SCHEMA_FIELD_NAME__ERROR_CODE] = failure.error_code
         if failure.stack_trace is not None:
-            error["StackTrace"] = failure.stack_trace
+            error[AIigOperationFailure_1.SCHEMA_FIELD_NAME__STACK_TRACE] = failure.stack_trace
         if failure.details:
-            error["Details"] = dict(failure.details)
+            error[AIigOperationFailure_1.SCHEMA_FIELD_NAME__DETAILS] = dict(failure.details)
         if failure.extension is not None:
-            error["Extension"] = copy.deepcopy(failure.extension)
+            error[AIigOperationFailure_1.SCHEMA_FIELD_NAME__EXTENSION] = copy.deepcopy(failure.extension)
         return error
     error: dict[str, object] = {
         "Type": f"{type(exc).__module__}.{type(exc).__qualname__}",
@@ -127,7 +129,7 @@ def _exception_error(exc: Exception) -> dict[str, object]:
     try:
         caller = current_operation_interaction().caller_snapshot()
         if caller.failure_detail_level is AInOperationInteractionFailureDetailLevel.STACK_TRACE:
-            error["StackTrace"] = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
+            error[AIigOperationFailure_1.SCHEMA_FIELD_NAME__STACK_TRACE] = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
     except Exception:
         pass
     return error

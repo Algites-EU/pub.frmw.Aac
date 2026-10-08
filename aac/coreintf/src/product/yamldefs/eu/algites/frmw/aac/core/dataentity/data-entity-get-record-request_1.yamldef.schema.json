@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-get-record-request_1.yamldef.schema.json",
+  "x-aac-schema-id": "_AAC.schema.data-entity-get-record-request",
+  "x-aac-schema-version": 1,
+  "title": "Data Entity Get Record Request 1",
+  "description": "Defines the canonical Data Entity Get Record Request schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "SchemaId",
+    "Uid"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "SchemaId": {
+      "type": "string",
+      "description": "Canonical schema identifier.",
+      "minLength": 1
+    },
+    "Uid": {
+      "type": "string",
+      "description": "Stable logical UID of the Data Entity record.",
+      "minLength": 1
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  }
+}

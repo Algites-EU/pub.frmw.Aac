@@ -1,0 +1,45 @@
+{
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json",
+  "Capability": {
+    "Id": "_AAC.data-entity.ensure-storage-support",
+    "Version": 1,
+    "GroupId": "_AAC.data-entity.storage-management",
+    "Name": {
+      "Text": "Ensure Data Entity storage support",
+      "ResourceKey": "aac.data.entity.ensure.storage.support.name"
+    },
+    "Description": {
+      "Text": "Idempotently ensures physical storage support for one canonical Data Entity schema version.",
+      "ResourceKey": "aac.data.entity.ensure.storage.support.description"
+    }
+  },
+  "Operations": [
+    {
+      "Id": "ensure",
+      "Name": {
+        "Text": "Ensure storage support",
+        "ResourceKey": "aac.data.entity.ensure.storage.support.operation.ensure.name"
+      },
+      "Description": {
+        "Text": "Idempotently ensures physical storage support for one canonical Data Entity schema version.",
+        "ResourceKey": "aac.data.entity.ensure.storage.support.operation.ensure.description"
+      },
+      "Interactions": [
+        {
+          "Kind": "input",
+          "Schema": {
+            "Id": "_AAC.schema.data-entity-ensure-storage-support-request",
+            "Version": 1
+          }
+        },
+        {
+          "Kind": "final_success_state_result",
+          "Schema": {
+            "Id": "_AAC.schema.data-entity-ensure-storage-support-result",
+            "Version": 1
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -8,7 +8,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from python_layout import merge_neutral_product_roots_into_python_tree
+from python_layout import merge_neutral_product_roots_into_python_tree, merge_source_root
 
 ROOT = Path(__file__).resolve().parents[5]
 ARTIFACTS = (
@@ -48,10 +48,15 @@ def copy_source_project(artifact: Path, target: Path) -> None:
             "*.egg-info",
         ),
     )
+    for suffix in (".gen", ".extgen"):
+        generated = artifact / ("src/product/python" + suffix)
+        if generated.is_dir():
+            merge_source_root(generated, target / "src/product/python")
     merge_neutral_product_roots_into_python_tree(artifact, target / "src/product/python")
 
 
 def main() -> int:
+    subprocess.run(["bash", str(ROOT / "gradlew"), "--no-daemon", "generateModustroSchemaBindings"], cwd=ROOT, check=True)
     run([sys.executable, str(ROOT / "devtools/aacbuilding/src/product/python/sync_versions.py")], ROOT)
     run([sys.executable, str(ROOT / "devtools/aacbuilding/src/product/python/check_conventions.py")], ROOT)
     for artifact in ARTIFACTS:

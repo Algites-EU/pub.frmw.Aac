@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.instances.aiig_provider_instance_1 import AIigProviderInstance_1
+from eu.algites.frmw.aac.core.instances.aiig_provider_instance_capabilities_items_1 import AIigProviderInstanceCapabilitiesItems_1
 from dataclasses import replace
 from uuid import uuid4
 from eu.algites.frmw.aac.core.descriptor.api import AIcComponentDescriptor, AIcProviderDefinitionDescriptor
@@ -22,7 +25,7 @@ def _instance_to_dict(instance: AIcProviderInstance) -> dict[str, object]:
         "ProviderDefinitionId": instance.provider_definition_id,
         "Name": instance.name,
         "Capabilities": [
-            {"Id": capability.id, "Versions": list(capability.versions)}
+            {AIigProviderInstanceCapabilitiesItems_1.SCHEMA_FIELD_NAME__ID: capability.id, AIigProviderInstanceCapabilitiesItems_1.SCHEMA_FIELD_NAME__VERSIONS: list(capability.versions)}
             for capability in instance.capabilities
         ],
         "ImplementationClass": instance.implementation_class,
@@ -37,18 +40,18 @@ def _instance_from_dict(raw: dict[str, object] | object) -> AIcProviderInstance:
     if not isinstance(raw, dict):
         raise ValueError("persisted provider instance must be an object")
     return AIcProviderInstance(
-        id=str(raw["Id"]),
-        component_id=str(raw["ComponentId"]),
-        provider_definition_id=str(raw["ProviderDefinitionId"]),
-        name=str(raw["Name"]),
+        id=str(raw[AIigProviderInstance_1.SCHEMA_FIELD_NAME__ID]),
+        component_id=str(raw[AIigProviderInstance_1.SCHEMA_FIELD_NAME__COMPONENT_ID]),
+        provider_definition_id=str(raw[AIigProviderInstance_1.SCHEMA_FIELD_NAME__PROVIDER_DEFINITION_ID]),
+        name=str(raw[AIigProviderInstance_1.SCHEMA_FIELD_NAME__NAME]),
         capabilities=tuple(
-            AIcProvidedCapability(str(item["Id"]), tuple(int(version) for version in item["Versions"]))
-            for item in raw["Capabilities"]
+            AIcProvidedCapability(str(item[AIigProviderInstanceCapabilitiesItems_1.SCHEMA_FIELD_NAME__ID]), tuple(int(version) for version in item[AIigProviderInstanceCapabilitiesItems_1.SCHEMA_FIELD_NAME__VERSIONS]))
+            for item in raw[AIigProviderInstance_1.SCHEMA_FIELD_NAME__CAPABILITIES]
         ),
-        implementation_class=str(raw["ImplementationClass"]),
+        implementation_class=str(raw[AIigProviderInstance_1.SCHEMA_FIELD_NAME__IMPLEMENTATION_CLASS]),
         capability_profile_matcher_class=(str(raw["CapabilityProfileMatcherClass"]) if raw.get("CapabilityProfileMatcherClass") is not None else None),
-        access_mode=AInProviderAccessMode(str(raw.get("AccessMode", AInProviderAccessMode.READ_WRITE.value))),
-        configuration=dict(raw.get("Configuration", {})),
-        configuration_schema=str(raw["ConfigurationSchema"]) if raw.get("ConfigurationSchema") is not None else None,
-        state=AInProviderInstanceState(str(raw.get("State", AInProviderInstanceState.CONFIGURED.value))),
+        access_mode=AInProviderAccessMode(str(raw.get(AIigProviderInstance_1.SCHEMA_FIELD_NAME__ACCESS_MODE, AInProviderAccessMode.READ_WRITE.value))),
+        configuration=dict(raw.get(AIigProviderInstance_1.SCHEMA_FIELD_NAME__CONFIGURATION, {})),
+        configuration_schema=str(raw[AIigProviderInstance_1.SCHEMA_FIELD_NAME__CONFIGURATION_SCHEMA]) if raw.get(AIigProviderInstance_1.SCHEMA_FIELD_NAME__CONFIGURATION_SCHEMA) is not None else None,
+        state=AInProviderInstanceState(str(raw.get(AIigProviderInstance_1.SCHEMA_FIELD_NAME__STATE, AInProviderInstanceState.CONFIGURED.value))),
     )

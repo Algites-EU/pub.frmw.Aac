@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.capability.ain_consumer_cardinality import AInConsumerCardinality
 import json
 from dataclasses import replace
 from typing import Mapping
@@ -299,7 +301,7 @@ class AIcCoreUiController(AIiAacUiController):
 
     def set_requirement_providers(self, consumer_instance_id: str, requirement_id: str, provider_instance_ids: tuple[str, ...]) -> None:
         editor = self.requirement_editor(consumer_instance_id, requirement_id)
-        if editor.cardinality == "SINGLE" and len(provider_instance_ids) > 1:
+        if editor.cardinality == AInConsumerCardinality.SINGLE.value and len(provider_instance_ids) > 1:
             raise ValueError("SINGLE requirement accepts at most one provider instance")
         if editor.mandatory and not provider_instance_ids:
             raise ValueError("mandatory requirement must select a provider instance")

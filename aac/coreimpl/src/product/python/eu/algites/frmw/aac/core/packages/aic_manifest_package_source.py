@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.packages.aiig_package_source_manifest_1 import AIigPackageSourceManifest_1
 import hashlib
 import json
 import os
@@ -109,9 +111,9 @@ class AIcManifestPackageSource(AIiPackageSource):
             timeout_seconds=self.timeout_seconds,
         ).decode("utf-8")
         raw = yaml.safe_load(text)
-        if not isinstance(raw, Mapping) or int(raw.get("FormatVersion", 0)) != 1:
+        if not isinstance(raw, Mapping) or int(raw.get(AIigPackageSourceManifest_1.SCHEMA_FIELD_NAME__FORMAT_VERSION, 0)) != 1:
             raise AIxPackageManagementError("package source manifest requires FormatVersion: 1")
-        raw_items = raw.get("Packages", ())
+        raw_items = raw.get(AIigPackageSourceManifest_1.SCHEMA_FIELD_NAME__PACKAGES, ())
         if not isinstance(raw_items, list):
             raise AIxPackageManagementError("package source manifest packages must be an array")
         result: list[AIcPackageCandidate] = []

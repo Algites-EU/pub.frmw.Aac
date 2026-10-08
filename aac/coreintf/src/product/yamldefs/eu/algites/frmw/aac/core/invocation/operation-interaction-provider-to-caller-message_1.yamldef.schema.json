@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.yamldef.schema.json",
+  "x-aac-schema-id": "_AAC.schema.operation-interaction-provider-to-caller-message",
+  "x-aac-schema-version": 1,
+  "title": "Operation Interaction Provider To Caller Message 1",
+  "description": "Defines the canonical Operation Interaction Provider To Caller Message schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "InteractionRevision",
+    "ExecutionState",
+    "StateResultRevision",
+    "Events",
+    "Features"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "InteractionRevision": {
+      "type": "integer",
+      "description": "Specifies the interaction revision for this operation interaction provider to caller message.",
+      "minimum": 0
+    },
+    "ExecutionState": {
+      "enum": [
+        "pending",
+        "running",
+        "completed",
+        "failed",
+        "cancelled"
+      ],
+      "description": "Specifies the execution state for this operation interaction provider to caller message."
+    },
+    "StateResultRevision": {
+      "type": "integer",
+      "description": "Specifies the state result revision for this operation interaction provider to caller message.",
+      "minimum": 0
+    },
+    "StateResultPayloadRevision": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Specifies the state result payload revision for this operation interaction provider to caller message.",
+      "minimum": 1
+    },
+    "StateResult": {
+      "description": "Specifies the state result for this operation interaction provider to caller message."
+    },
+    "Events": {
+      "type": "array",
+      "description": "Interaction events emitted since the previous provider-to-caller update.",
+      "items": {
+        "$ref": "operation-interaction-event_1.yamldef.schema.json"
+      }
+    },
+    "Features": {
+      "type": "object",
+      "description": "Feature flags or negotiated interaction capabilities reported by the provider.",
+      "required": [
+        "ProgressReporting",
+        "Cancellation",
+        "DetailLevel",
+        "ReportingInterval",
+        "SupportedStateResultDeliveryModes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ProgressReporting": {
+          "type": "boolean",
+          "description": "Indicates whether progress reporting applies to this feature."
+        },
+        "Cancellation": {
+          "type": "boolean",
+          "description": "Indicates whether cancellation applies to this feature."
+        },
+        "DetailLevel": {
+          "type": "boolean",
+          "description": "Indicates whether detail level applies to this feature."
+        },
+        "ReportingInterval": {
+          "type": "boolean",
+          "description": "Indicates whether reporting interval applies to this feature."
+        },
+        "SupportedStateResultDeliveryModes": {
+          "type": "array",
+          "description": "Lists the supported state result delivery modes associated with this feature.",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "on_demand_complete",
+              "on_demand_delta",
+              "on_change_complete",
+              "on_change_delta",
+              "always_complete"
+            ]
+          }
+        }
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  }
+}

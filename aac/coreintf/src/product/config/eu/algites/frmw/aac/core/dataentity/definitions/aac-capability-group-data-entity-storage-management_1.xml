@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<CapabilityGroup xmlns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd" schemaRef="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/capability/capability-group_1.xsd">
+  <Group>
+    <Id>_AAC.data-entity.storage-management</Id>
+    <ParentGroupId>_AAC.data-entity</ParentGroupId>
+    <Name>
+      <MapEntry key="Text">
+        <Value>"Data Entity Storage Management"</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.data.entity.storage.management.name"</Value>
+      </MapEntry>
+    </Name>
+    <Description>
+      <MapEntry key="Text">
+        <Value>"Capabilities that inspect and reconcile physical storage support for canonical Data Entity schemas."</Value>
+      </MapEntry>
+      <MapEntry key="ResourceKey">
+        <Value>"aac.data.entity.storage.management.description"</Value>
+      </MapEntry>
+    </Description>
+  </Group>
+</CapabilityGroup>

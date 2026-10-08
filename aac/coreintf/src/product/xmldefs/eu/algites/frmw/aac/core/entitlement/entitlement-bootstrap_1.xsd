@@ -1,0 +1,392 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/entitlement/entitlement-bootstrap_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/entitlement/entitlement-bootstrap_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Entitlement Bootstrap schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$defs":{"displayText":{"description":"Defines the reusable display text structure used by this canonical schema.","oneOf":[{"minLength":1,"type":"string"},{"additionalProperties":false,"anyOf":[{"required":["Text"]},{"required":["ResourceKey"]}],"properties":{"ResourceKey":{"description":"Optional localization resource key for the human-readable text.","minLength":1,"type":"string"},"Text":{"description":"Human-readable display text.","minLength":1,"type":"string"}},"type":"object"}]}},"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-bootstrap_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Entitlement Bootstrap schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"EntitlementBootstrap":{"additionalProperties":false,"description":"Entitlement bootstrap data used to initialize trusted issuers, verifiers, and licensing facilities.","properties":{"DefaultEntitlementProfile":{"description":"Specifies the default entitlement profile for this entitlement bootstrap.","minLength":1,"type":"string"},"EntitlementProfiles":{"description":"Lists the entitlement profiles associated with this entitlement bootstrap.","items":{"additionalProperties":false,"properties":{"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this entitlement profile."},"Id":{"description":"Stable identifier of this entitlement profile.","minLength":1,"type":"string"},"LicensingScopes":{"description":"Lists the licensing scopes associated with this entitlement profile.","items":{"additionalProperties":false,"properties":{"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this licensing scope."},"EntitlementProviders":{"description":"Lists the entitlement providers associated with this licensing scope.","items":{"additionalProperties":false,"properties":{"Id":{"description":"Stable identifier of this entitlement provider.","minLength":1,"type":"string"}},"required":["Id"],"type":"object"},"type":"array"},"Id":{"description":"Stable identifier of this licensing scope.","minLength":1,"type":"string"},"Mandatory":{"description":"Indicates whether mandatory applies to this licensing scope.","type":"boolean"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this licensing scope."},"Resolver":{"description":"Specifies the resolver for this licensing scope.","minLength":1,"type":"string"},"Type":{"description":"Type discriminator for this licensing scope.","minLength":1,"type":"string"}},"required":["Id","Type","Resolver"],"type":"object"},"type":"array"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this entitlement profile."},"Version":{"description":"Version of this entitlement profile.","minimum":1,"type":"integer"}},"required":["Id","Version","LicensingScopes"],"type":"object"},"minItems":1,"type":"array"},"EntitlementProviders":{"description":"Lists the entitlement providers associated with this entitlement bootstrap.","items":{"additionalProperties":false,"properties":{"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this entitlement provider."},"Id":{"description":"Stable identifier of this entitlement provider.","minLength":1,"type":"string"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this entitlement provider."},"Settings":{"description":"Structured settings associated with this entitlement provider.","type":"object"},"Type":{"description":"Type discriminator for this entitlement provider.","minLength":1,"type":"string"}},"required":["Id","Type"],"type":"object"},"type":"array"},"LicensingScopeResolvers":{"description":"Lists the licensing scope resolvers associated with this entitlement bootstrap.","items":{"additionalProperties":false,"properties":{"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this licensing scope resolver."},"Id":{"description":"Stable identifier of this licensing scope resolver.","minLength":1,"type":"string"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this licensing scope resolver."},"Settings":{"description":"Structured settings associated with this licensing scope resolver.","type":"object"},"Type":{"description":"Type discriminator for this licensing scope resolver.","minLength":1,"type":"string"}},"required":["Id","Type"],"type":"object"},"type":"array"},"Metadata":{"description":"Additional structured metadata associated with this entitlement bootstrap.","type":"object"},"SchemaVersion":{"const":1,"description":"Canonical schema version."},"TrustedIssuers":{"description":"Lists the trusted issuers associated with this entitlement bootstrap.","items":{"additionalProperties":false,"properties":{"ComponentIds":{"description":"Lists stable identifiers associated with this trusted issuer.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true},"EvidenceTypes":{"description":"Lists the evidence types associated with this trusted issuer.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true},"IssuerId":{"description":"Stable identifier of the issuer associated with this trusted issuer.","minLength":1,"type":"string"},"SignerIdentities":{"description":"Lists the signer identities associated with this trusted issuer.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true}},"required":["IssuerId"],"type":"object"},"type":"array"}},"required":["SchemaVersion","DefaultEntitlementProfile","EntitlementProfiles"],"type":"object"}},"required":["EntitlementBootstrap"],"title":"AAC Entitlement Bootstrap 1","type":"object","x-aac-schema-id":"_AAC.schema.entitlement-bootstrap","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="EntitlementBootstrap">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Entitlement Bootstrap schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="EntitlementBootstrap">
+          <xs:annotation>
+            <xs:documentation>Entitlement bootstrap data used to initialize trusted issuers, verifiers, and licensing facilities.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SchemaVersion" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Canonical schema version.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="DefaultEntitlementProfile">
+                <xs:annotation>
+                  <xs:documentation>Specifies the default entitlement profile for this entitlement bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EntitlementProfiles">
+                <xs:annotation>
+                  <xs:documentation>Lists the entitlement profiles associated with this entitlement bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="1" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Id">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of this entitlement profile.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Version">
+                            <xs:annotation>
+                              <xs:documentation>Version of this entitlement profile.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:integer">
+                                <xs:minInclusive value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable name of this entitlement profile.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable description of this entitlement profile.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="LicensingScopes">
+                            <xs:annotation>
+                              <xs:documentation>Lists the licensing scopes associated with this entitlement profile.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Id">
+                                        <xs:annotation>
+                                          <xs:documentation>Stable identifier of this licensing scope.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="Type">
+                                        <xs:annotation>
+                                          <xs:documentation>Type discriminator for this licensing scope.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="Resolver">
+                                        <xs:annotation>
+                                          <xs:documentation>Specifies the resolver for this licensing scope.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="Mandatory" minOccurs="0" type="xs:boolean">
+                                        <xs:annotation>
+                                          <xs:documentation>Indicates whether mandatory applies to this licensing scope.</xs:documentation>
+                                        </xs:annotation>
+                                      </xs:element>
+                                      <xs:element name="EntitlementProviders" minOccurs="0">
+                                        <xs:annotation>
+                                          <xs:documentation>Lists the entitlement providers associated with this licensing scope.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Id">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Stable identifier of this entitlement provider.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                                        <xs:annotation>
+                                          <xs:documentation>Human-readable name of this licensing scope.</xs:documentation>
+                                        </xs:annotation>
+                                      </xs:element>
+                                      <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                                        <xs:annotation>
+                                          <xs:documentation>Human-readable description of this licensing scope.</xs:documentation>
+                                        </xs:annotation>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="EntitlementProviders" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Lists the entitlement providers associated with this entitlement bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Id">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of this entitlement provider.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Type">
+                            <xs:annotation>
+                              <xs:documentation>Type discriminator for this entitlement provider.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Settings" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Structured settings associated with this entitlement provider.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="key" type="xs:string" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable name of this entitlement provider.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable description of this entitlement provider.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Metadata" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Additional structured metadata associated with this entitlement bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                        </xs:sequence>
+                        <xs:attribute name="key" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="TrustedIssuers" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Lists the trusted issuers associated with this entitlement bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="IssuerId">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of the issuer associated with this trusted issuer.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="ComponentIds" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Lists stable identifiers associated with this trusted issuer.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="EvidenceTypes" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Lists the evidence types associated with this trusted issuer.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="SignerIdentities" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Lists the signer identities associated with this trusted issuer.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="LicensingScopeResolvers" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Lists the licensing scope resolvers associated with this entitlement bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Id">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of this licensing scope resolver.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Type">
+                            <xs:annotation>
+                              <xs:documentation>Type discriminator for this licensing scope resolver.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Settings" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Structured settings associated with this licensing scope resolver.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="key" type="xs:string" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable name of this licensing scope resolver.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable description of this licensing scope resolver.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

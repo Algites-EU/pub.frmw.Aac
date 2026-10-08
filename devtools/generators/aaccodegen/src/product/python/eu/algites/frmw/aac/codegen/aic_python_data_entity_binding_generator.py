@@ -82,6 +82,11 @@ class AIcPythonDataEntityBindingGenerator:
         if not definition.properties:
             lines.append("    pass")
         for prop in definition.properties:
+            constant = self._defs.schema_field_name_constant(prop.source_name)
+            lines.append(f"    {constant} = {prop.source_name!r}")
+        if definition.properties:
+            lines.append("")
+        for prop in definition.properties:
             name = self._defs.property_name(prop.source_name)
             value_type = _python_type(prop)
             if not prop.required and "None" not in value_type:
@@ -110,13 +115,14 @@ class AIcPythonDataEntityBindingGenerator:
         ])
         for prop in definition.properties:
             name = self._defs.property_name(prop.source_name)
+            field = f"{interface_name}.{self._defs.schema_field_name_constant(prop.source_name)}"
             if prop.required:
-                lines.append(f"        result[{prop.source_name!r}] = value.get_{name}_{version}()")
+                lines.append(f"        result[{field}] = value.get_{name}_{version}()")
             else:
                 lines.extend([
                     f"        value_{name} = value.get_{name}_{version}()",
                     f"        if value_{name} is not None:",
-                    f"            result[{prop.source_name!r}] = value_{name}",
+                    f"            result[{field}] = value_{name}",
                 ])
         lines.extend([
             "        return result",
@@ -126,7 +132,8 @@ class AIcPythonDataEntityBindingGenerator:
         if definition.properties:
             for prop in definition.properties:
                 name = self._defs.property_name(prop.source_name)
-                lines.append(f"        target.set_{name}_{version}(payload.get({prop.source_name!r}))")
+                field = f"{interface_name}.{self._defs.schema_field_name_constant(prop.source_name)}"
+                lines.append(f"        target.set_{name}_{version}(payload.get({field}))")
         else:
             lines.append("        return None")
         lines.extend([

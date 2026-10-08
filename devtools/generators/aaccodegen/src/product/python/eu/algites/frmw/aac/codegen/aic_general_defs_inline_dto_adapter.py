@@ -53,8 +53,17 @@ class AIcGeneralDefsInlineDtoAdapter:
         """Project a Python property name using the shared Algites naming profile."""
         return self.names.property_name(source_name, self.profile)
 
+    def schema_field_name_constant(self, source_name: str) -> str:
+        """Use the shared generator's canonical field constant naming convention."""
+        return self.names.schema_field_name_constant(source_name, self.profile)
+
     def generate(self, registered: AIcRegisteredSchema) -> tuple[str, str]:
         """Return the generated DTO type name and inlinable class declaration."""
+        type_name, _, declaration = self.generate_with_runtime(registered)
+        return type_name, declaration
+
+    def generate_with_runtime(self, registered: AIcRegisteredSchema) -> tuple[str, str, str]:
+        """Return the primary DTO together with its shared backend runtime preamble."""
         definition = self.normalize(registered)
         generated = self._backend.generate(
             AIcdCodeGenerationRequest(
@@ -64,7 +73,9 @@ class AIcGeneralDefsInlineDtoAdapter:
                 self.profile,
             )
         )
-        marker = "@dataclass(frozen=True, slots=True)\n"
+        # The backend runtime contains dataclasses too. Split at the primary DTO,
+        # rather than accidentally selecting a runtime helper as the declaration.
+        marker = f"@dataclass(frozen=True, slots=True)\nclass {generated.type_name}:"
         if marker not in generated.source:
             raise ValueError(
                 f"AAC interaction schema {registered.id}/{registered.version} must generate a data-object type"
@@ -75,4 +86,5 @@ class AIcGeneralDefsInlineDtoAdapter:
                 f"AAC inline DTO schema {registered.id}/{registered.version} contains an external canonical reference; "
                 "inline reference imports are not supported"
             )
-        return generated.type_name, marker + declaration
+        preamble = preamble.replace("from __future__ import annotations\n", "")
+        return generated.type_name, preamble, marker + declaration

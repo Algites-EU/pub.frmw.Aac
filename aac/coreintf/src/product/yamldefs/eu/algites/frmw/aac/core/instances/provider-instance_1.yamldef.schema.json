@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/instances/provider-instance_1.yamldef.schema.json",
+  "title": "AAC Provider Instance 1",
+  "description": "Defines the canonical AAC Provider Instance schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "Id",
+    "ComponentId",
+    "ProviderDefinitionId",
+    "Name",
+    "Capabilities",
+    "AccessMode",
+    "ImplementationClass"
+  ],
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "Stable identifier of this AAC provider instance.",
+      "minLength": 1
+    },
+    "ComponentId": {
+      "type": "string",
+      "description": "Stable identifier of the AAC component associated with this AAC provider instance.",
+      "minLength": 1
+    },
+    "ProviderDefinitionId": {
+      "type": "string",
+      "description": "Identifier of the provider definition from which this provider instance is created.",
+      "minLength": 1
+    },
+    "Name": {
+      "type": "string",
+      "description": "Human-readable name of this AAC provider instance.",
+      "minLength": 1
+    },
+    "ImplementationClass": {
+      "type": "string",
+      "description": "Technology implementation class used to instantiate this provider.",
+      "minLength": 1
+    },
+    "ConfigurationSchema": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Canonical schema reference used to validate this configuration."
+    },
+    "Configuration": {
+      "type": "object",
+      "description": "Configuration values supplied to this AAC provider instance."
+    },
+    "State": {
+      "type": "string",
+      "description": "Lifecycle or storage state of this AAC provider instance."
+    },
+    "Capabilities": {
+      "type": "array",
+      "description": "Lists the capabilities associated with this AAC provider instance.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "Id",
+          "Versions"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "string",
+            "description": "Stable identifier of this capability.",
+            "minLength": 1
+          },
+          "Versions": {
+            "type": "array",
+            "description": "Lists the versions supported or selected by this capability.",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      }
+    },
+    "AccessMode": {
+      "enum": [
+        "read_only",
+        "read_write"
+      ],
+      "description": "Declares the permitted read/write access mode for this provider instance or resource."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.provider-instance",
+  "x-aac-schema-version": 1
+}

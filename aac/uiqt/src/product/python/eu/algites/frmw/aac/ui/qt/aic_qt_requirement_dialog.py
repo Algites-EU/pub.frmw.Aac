@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.capability.ain_consumer_cardinality import AInConsumerCardinality
 import json
 from typing import Mapping
 from PySide6.QtCore import Qt
@@ -62,7 +64,7 @@ class AIcQtRequirementDialog(QDialog):
         self.list = QListWidget()
         self.list.setSelectionMode(
             QAbstractItemView.SelectionMode.SingleSelection
-            if editor.cardinality == "SINGLE" else QAbstractItemView.SelectionMode.MultiSelection
+            if editor.cardinality == AInConsumerCardinality.SINGLE.value else QAbstractItemView.SelectionMode.MultiSelection
         )
         selected = set(editor.selected_provider_instance_ids)
         for choice in editor.provider_choices:

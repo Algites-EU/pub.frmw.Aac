@@ -138,6 +138,23 @@ def test_data_entity_binding_generator_uses_versioned_view_methods_and_codec():
     assert "__aac_source_id__ = '_AO.entity.site'" in source
     assert "Canonical site data stored by the Data Entity provider." in source
     assert "Human-readable site name." in source
+    namespace = {}
+    exec(source, namespace)
+    interface = namespace["AIigSite_2"]
+    codec = namespace["AIcgSiteCodec_2"]()
+    assert interface.SCHEMA_FIELD_NAME__NAME == "Name"
+
+    class Site(interface):
+        def get_name_2(self):
+            return self.name
+
+        def set_name_2(self, value):
+            self.name = value
+
+    site = Site()
+    codec.deserialize_into({"Name": "Prague"}, site)
+    assert codec.serialize(site) == {"Name": "Prague"}
+    assert site.get_name_2() == "Prague"
 
 
 def test_generated_caller_materializes_operation_specific_failure_exception_and_allows_typed_override():
@@ -243,3 +260,38 @@ Operations:
 ''')
     with pytest.raises(ValueError, match="generated DTO name collision"):
         AIcPythonCapabilityBindingGenerator(catalog.schema_registry).generate(admitted.contract)
+
+
+def test_inline_dtos_share_runtime_and_expose_schema_field_constants():
+    from dataclasses import fields
+    from eu.algites.frmw.aac.core.schemas.registry import AIcSchemaRegistry
+    from eu.algites.frmw.aac.core.capability.api import (
+        AIcCapabilityContract, AIcCapabilityOperation, AIcCapabilityOperationInteraction,
+        AIcCapabilityRef, AIcSchemaRef, AInCapabilityOperationInteractionKind,
+    )
+
+    schemas = AIcSchemaRegistry()
+    for name, field_name in (("request", "Name"), ("result", "Changed")):
+        schemas.register(f"test-{name}_1.json", {
+            "x-aac-schema-id": f"test.{name}", "x-aac-schema-version": 1,
+            "type": "object", "properties": {field_name: {"type": "string"}},
+        })
+    contract = AIcCapabilityContract(AIcCapabilityRef("test.site", 1), "test.group", (
+        AIcCapabilityOperation("edit", (
+            AIcCapabilityOperationInteraction(AInCapabilityOperationInteractionKind.INPUT, AIcSchemaRef("test.request", 1)),
+            AIcCapabilityOperationInteraction(AInCapabilityOperationInteractionKind.FINAL_SUCCESS_STATE_RESULT, AIcSchemaRef("test.result", 1)),
+        )),
+    ))
+    source = AIcPythonCapabilityBindingGenerator(schemas).generate(contract)
+    assert source.count("_AI_UNSET = object()") == 1
+    namespace = {}
+    exec(source, namespace)
+    request = namespace["AIcgdTestRequest_1"]
+    result = namespace["AIcgdTestResult_1"]
+    assert request.SCHEMA_FIELD_NAME__NAME == "Name"
+    assert result.SCHEMA_FIELD_NAME__CHANGED == "Changed"
+    assert [field.name for field in fields(request)] == ["name"]
+    assert request().to_mapping() == {}
+    assert result().to_mapping() == {}
+    assert request.from_mapping({"Name": "Prague"}).to_mapping() == {"Name": "Prague"}
+    assert result.from_mapping({"Changed": "yes"}).to_mapping() == {"Changed": "yes"}

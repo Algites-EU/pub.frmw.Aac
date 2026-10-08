@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.invocation.aiig_operation_interaction_event_1 import AIigOperationInteractionEvent_1
 import json
 import os
 import queue
@@ -44,19 +46,19 @@ def _display_text_from_raw(raw: object) -> AIcDisplayText | None:
     )
 
 def _operation_interaction_event_from_dict(raw: Mapping[str, object]) -> AIcOperationInteractionEvent:
-    details = raw.get("Details", {})
+    details = raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__DETAILS, {})
     return AIcOperationInteractionEvent(
-        event_type=AInOperationInteractionEventType(str(raw["EventType"])),
-        progress_id=str(raw["ProgressId"]) if raw.get("ProgressId") is not None else None,
-        parent_progress_id=str(raw["ParentProgressId"]) if raw.get("ParentProgressId") is not None else None,
-        phase_id=str(raw["PhaseId"]) if raw.get("PhaseId") is not None else None,
-        name=_display_text_from_raw(raw.get("Name")),
-        description=_display_text_from_raw(raw.get("Description")),
-        current=raw.get("Current") if isinstance(raw.get("Current"), (int, float)) else None,
-        total=raw.get("Total") if isinstance(raw.get("Total"), (int, float)) else None,
-        unit=str(raw["Unit"]) if raw.get("Unit") is not None else None,
-        severity=AInOperationInteractionSeverity(str(raw.get("Severity", "info"))),
-        code=str(raw["Code"]) if raw.get("Code") is not None else None,
+        event_type=AInOperationInteractionEventType(str(raw[AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__EVENT_TYPE])),
+        progress_id=str(raw[AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__PROGRESS_ID]) if raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__PROGRESS_ID) is not None else None,
+        parent_progress_id=str(raw[AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__PARENT_PROGRESS_ID]) if raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__PARENT_PROGRESS_ID) is not None else None,
+        phase_id=str(raw[AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__PHASE_ID]) if raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__PHASE_ID) is not None else None,
+        name=_display_text_from_raw(raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__NAME)),
+        description=_display_text_from_raw(raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
+        current=raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__CURRENT) if isinstance(raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__CURRENT), (int, float)) else None,
+        total=raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__TOTAL) if isinstance(raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__TOTAL), (int, float)) else None,
+        unit=str(raw[AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__UNIT]) if raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__UNIT) is not None else None,
+        severity=AInOperationInteractionSeverity(str(raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__SEVERITY, "info"))),
+        code=str(raw[AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__CODE]) if raw.get(AIigOperationInteractionEvent_1.SCHEMA_FIELD_NAME__CODE) is not None else None,
         details=dict(details) if isinstance(details, Mapping) else {},
     )
 

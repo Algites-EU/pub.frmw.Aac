@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-running-delta-result_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-running-delta-result_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical Data Entity Query Records Running Delta Result schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$comment":"RUNNING delta for query-records. records contains only the newly published portion represented by this state-result revision.","$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-running-delta-result_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical Data Entity Query Records Running Delta Result schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"ContinuationToken":{"description":"Opaque continuation token used to resume a paged or streamed query.","oneOf":[{"minLength":1,"type":"string"},{"type":"null"}]},"Records":{"description":"Data Entity records returned or persisted by this data entity query records running delta result.","items":{"additionalProperties":false,"properties":{"Payload":{"description":"Canonical payload carried by this record.","type":"object"},"RecordRevision":{"description":"Storage-provider record revision used for optimistic concurrency and change tracking.","oneOf":[{"minimum":1,"type":"integer"},{"minLength":1,"type":"string"}]},"SchemaId":{"description":"Canonical schema identifier.","minLength":1,"type":"string"},"SchemaVersion":{"description":"Canonical schema version.","minimum":1,"type":"integer"},"State":{"description":"Lifecycle or storage state of this record.","enum":["active","tombstone"]},"Uid":{"description":"Stable logical UID of the Data Entity record.","minLength":1,"type":"string"}},"required":["Uid","SchemaId","SchemaVersion","RecordRevision","State","Payload"],"type":"object"},"type":"array"}},"required":["Records","ContinuationToken"],"title":"Data Entity Query Records Running Delta Result 1","type":"object","x-aac-schema-id":"_AAC.schema.data-entity-query-records-running-delta-result","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataEntityQueryRecordsRunningDeltaResult">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical Data Entity Query Records Running Delta Result schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Records">
+          <xs:annotation>
+            <xs:documentation>Data Entity records returned or persisted by this data entity query records running delta result.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Uid">
+                      <xs:annotation>
+                        <xs:documentation>Stable logical UID of the Data Entity record.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="SchemaId">
+                      <xs:annotation>
+                        <xs:documentation>Canonical schema identifier.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="SchemaVersion">
+                      <xs:annotation>
+                        <xs:documentation>Canonical schema version.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                          <xs:minInclusive value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="RecordRevision" type="xs:anyType">
+                      <xs:annotation>
+                        <xs:documentation>Storage-provider record revision used for optimistic concurrency and change tracking.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="State" type="xs:anyType">
+                      <xs:annotation>
+                        <xs:documentation>Lifecycle or storage state of this record.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Payload">
+                      <xs:annotation>
+                        <xs:documentation>Canonical payload carried by this record.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                              </xs:sequence>
+                              <xs:attribute name="key" type="xs:string" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ContinuationToken" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Opaque continuation token used to resume a paged or streamed query.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

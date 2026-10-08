@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-persisted-payload_1.yamldef.schema.json",
+  "title": "AAC Configuration Persisted Payload 1",
+  "description": "Defines the canonical AAC Configuration Persisted Payload schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "ConfigurationTarget",
+    "ConfigurationSchema",
+    "WrittenByComponentVersion",
+    "Values",
+    "Policies"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "ConfigurationTarget": {
+      "type": "object",
+      "description": "Identifies the component, provider, or scope targeted by this persisted configuration.",
+      "required": [
+        "Kind",
+        "ComponentId"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Kind": {
+          "enum": [
+            "component",
+            "provider_instance"
+          ],
+          "description": "Kind of this configuration target."
+        },
+        "ComponentId": {
+          "type": "string",
+          "description": "Stable identifier of the AAC component associated with this configuration target.",
+          "minLength": 1
+        },
+        "ProviderInstanceId": {
+          "type": "string",
+          "description": "Stable identifier of the provider instance associated with this configuration target.",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "Kind": {
+                "const": "provider_instance",
+                "description": "Discriminator identifying the semantic kind represented by this value."
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ProviderInstanceId"
+            ]
+          }
+        }
+      ]
+    },
+    "ConfigurationSchema": {
+      "type": "object",
+      "description": "Canonical schema reference used to validate this configuration.",
+      "required": [
+        "Id",
+        "Version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "Stable identifier of this configuration schema.",
+          "minLength": 1
+        },
+        "Version": {
+          "type": "integer",
+          "description": "Version of this configuration schema.",
+          "minimum": 1
+        }
+      }
+    },
+    "WrittenByComponentVersion": {
+      "type": "integer",
+      "description": "Component version that last wrote this persisted configuration payload.",
+      "minimum": 1
+    },
+    "Values": {
+      "type": "object",
+      "description": "Configuration values stored for the target."
+    },
+    "Policies": {
+      "type": "object",
+      "description": "Configuration policies stored with the effective values."
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "Additional structured metadata associated with this AAC configuration persisted payload."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.configuration-persisted-payload",
+  "x-aac-schema-version": 1
+}

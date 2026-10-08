@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.persistence.aiig_core_state_store_1 import AIigCoreStateStore_1
+from eu.algites.frmw.aac.core.persistence.aiig_core_state_store_records_additional_properties_additional_properties_1 import AIigCoreStateStoreRecordsAdditionalPropertiesAdditionalProperties_1
 import json
 from pathlib import Path
 from threading import RLock
@@ -116,9 +119,9 @@ class AIcJsonFileStateStore(AIiStateStore):
             raise AIxPersistenceError(f"cannot read state store {self.path}: {exc}") from exc
         if not isinstance(raw, dict):
             raise AIxPersistenceError(f"state store {self.path} root must be an object")
-        if int(raw.get("FormatVersion", 0)) != 1:
+        if int(raw.get(AIigCoreStateStore_1.SCHEMA_FIELD_NAME__FORMAT_VERSION, 0)) != 1:
             raise AIxPersistenceError(f"state store {self.path} requires format_version 1")
-        raw_records = raw.get("Records", {})
+        raw_records = raw.get(AIigCoreStateStore_1.SCHEMA_FIELD_NAME__RECORDS, {})
         if not isinstance(raw_records, Mapping):
             raise AIxPersistenceError(f"state store {self.path} records must be an object")
         result: dict[str, dict[str, AIcPersistedRecord]] = {}
@@ -127,23 +130,23 @@ class AIcJsonFileStateStore(AIiStateStore):
                 raise AIxPersistenceError(f"state store namespace {namespace!r} must be an object")
             target: dict[str, AIcPersistedRecord] = {}
             for key, envelope in values.items():
-                if not isinstance(envelope, Mapping) or not isinstance(envelope.get("Payload"), Mapping):
+                if not isinstance(envelope, Mapping) or not isinstance(envelope.get(AIigCoreStateStoreRecordsAdditionalPropertiesAdditionalProperties_1.SCHEMA_FIELD_NAME__PAYLOAD), Mapping):
                     raise AIxPersistenceError(f"state record {namespace}:{key} is invalid")
                 target[str(key)] = AIcPersistedRecord(
-                    str(namespace), str(key), int(envelope["RecordRevision"]), _clone(dict(envelope["Payload"]))
+                    str(namespace), str(key), int(envelope[AIigCoreStateStoreRecordsAdditionalPropertiesAdditionalProperties_1.SCHEMA_FIELD_NAME__RECORD_REVISION]), _clone(dict(envelope[AIigCoreStateStoreRecordsAdditionalPropertiesAdditionalProperties_1.SCHEMA_FIELD_NAME__PAYLOAD]))
                 )
             result[str(namespace)] = target
         return result
 
     def _write(self, records: Mapping[str, Mapping[str, AIcPersistedRecord]]) -> None:
         raw = {
-            "FormatVersion": 1,
-            "RevisionKind": AInRecordRevisionKind.MONOTONIC_INTEGER.value,
-            "Records": {
+            AIigCoreStateStore_1.SCHEMA_FIELD_NAME__FORMAT_VERSION: 1,
+            AIigCoreStateStore_1.SCHEMA_FIELD_NAME__REVISION_KIND: AInRecordRevisionKind.MONOTONIC_INTEGER.value,
+            AIigCoreStateStore_1.SCHEMA_FIELD_NAME__RECORDS: {
                 namespace: {
                     key: {
-                        "RecordRevision": record.record_revision,
-                        "Payload": _clone(dict(record.payload)),
+                        AIigCoreStateStoreRecordsAdditionalPropertiesAdditionalProperties_1.SCHEMA_FIELD_NAME__RECORD_REVISION: record.record_revision,
+                        AIigCoreStateStoreRecordsAdditionalPropertiesAdditionalProperties_1.SCHEMA_FIELD_NAME__PAYLOAD: _clone(dict(record.payload)),
                     }
                     for key, record in values.items()
                 }

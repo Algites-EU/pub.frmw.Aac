@@ -1,4 +1,9 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.configuration.aiig_configuration_profile_1 import AIigConfigurationProfile_1
+from eu.algites.frmw.aac.core.configuration.aiig_configuration_profile_configuration_profile_1 import AIigConfigurationProfileConfigurationProfile_1
+from eu.algites.frmw.aac.core.configuration.aiig_configuration_profile_configuration_profile_configuration_scopes_items_1 import AIigConfigurationProfileConfigurationProfileConfigurationScopesItems_1
+from eu.algites.frmw.aac.core.configuration.aiig_configuration_profile_configuration_profile_configuration_scopes_items_configuration_providers_items_1 import AIigConfigurationProfileConfigurationProfileConfigurationScopesItemsConfigurationProvidersItems_1
 from eu.algites.frmw.aac.core.schemas.resources import read_core_schema
 import json
 from importlib import resources
@@ -39,14 +44,14 @@ class AIcConfigurationProfileLoader:
                 path = "$" + "".join(f"[{p}]" if isinstance(p, int) else f".{p}" for p in error.absolute_path)
                 rendered.append(f"{path}: {error.message}")
             raise AIxDescriptorError(f"{source}: configuration profile schema validation failed: " + "; ".join(rendered))
-        body = raw["ConfigurationProfile"]
+        body = raw[AIigConfigurationProfile_1.SCHEMA_FIELD_NAME__CONFIGURATION_PROFILE]
         scopes = []
-        for item in body.get("ConfigurationScopes", ()):
+        for item in body.get(AIigConfigurationProfileConfigurationProfile_1.SCHEMA_FIELD_NAME__CONFIGURATION_SCOPES, ()):
             scopes.append(AIcConfigurationScopeDefinition(
-                id=str(item["Id"]), configuration_scope_type=str(item["Type"]),
-                configuration_scope_resolver_id=str(item["Resolver"]),
-                name=normalize_display_text(item.get("Name")), description=normalize_display_text(item.get("Description")),
-                configuration_providers=tuple(AIcConfigurationProviderBinding(str(v["Id"]), int(v.get("Priority", 0))) for v in item.get("ConfigurationProviders", ())),
-                policy_authority=bool(item.get("PolicyAuthority", True)), mandatory=bool(item.get("Mandatory", False)),
+                id=str(item[AIigConfigurationProfileConfigurationProfileConfigurationScopesItems_1.SCHEMA_FIELD_NAME__ID]), configuration_scope_type=str(item[AIigConfigurationProfileConfigurationProfileConfigurationScopesItems_1.SCHEMA_FIELD_NAME__TYPE]),
+                configuration_scope_resolver_id=str(item[AIigConfigurationProfileConfigurationProfileConfigurationScopesItems_1.SCHEMA_FIELD_NAME__RESOLVER]),
+                name=normalize_display_text(item.get(AIigConfigurationProfileConfigurationProfileConfigurationScopesItems_1.SCHEMA_FIELD_NAME__NAME)), description=normalize_display_text(item.get(AIigConfigurationProfileConfigurationProfileConfigurationScopesItems_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
+                configuration_providers=tuple(AIcConfigurationProviderBinding(str(v[AIigConfigurationProfileConfigurationProfileConfigurationScopesItemsConfigurationProvidersItems_1.SCHEMA_FIELD_NAME__ID]), int(v.get(AIigConfigurationProfileConfigurationProfileConfigurationScopesItemsConfigurationProvidersItems_1.SCHEMA_FIELD_NAME__PRIORITY, 0))) for v in item.get(AIigConfigurationProfileConfigurationProfileConfigurationScopesItems_1.SCHEMA_FIELD_NAME__CONFIGURATION_PROVIDERS, ())),
+                policy_authority=bool(item.get(AIigConfigurationProfileConfigurationProfileConfigurationScopesItems_1.SCHEMA_FIELD_NAME__POLICY_AUTHORITY, True)), mandatory=bool(item.get(AIigConfigurationProfileConfigurationProfileConfigurationScopesItems_1.SCHEMA_FIELD_NAME__MANDATORY, False)),
             ))
-        return AIcConfigurationProfile(str(body["Id"]), int(body["Version"]), tuple(scopes), name=normalize_display_text(body.get("Name")), description=normalize_display_text(body.get("Description")))
+        return AIcConfigurationProfile(str(body[AIigConfigurationProfileConfigurationProfile_1.SCHEMA_FIELD_NAME__ID]), int(body[AIigConfigurationProfileConfigurationProfile_1.SCHEMA_FIELD_NAME__VERSION]), tuple(scopes), name=normalize_display_text(body.get(AIigConfigurationProfileConfigurationProfile_1.SCHEMA_FIELD_NAME__NAME)), description=normalize_display_text(body.get(AIigConfigurationProfileConfigurationProfile_1.SCHEMA_FIELD_NAME__DESCRIPTION)))

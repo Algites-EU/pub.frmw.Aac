@@ -61,11 +61,12 @@ class AIcPythonCapabilityBindingGenerator:
         dto_by_operation_kind: dict[tuple[str, AInCapabilityOperationInteractionKind], str] = {}
         identity_by_dto_name: dict[str, tuple[str, int]] = {}
         emitted_schema_types: set[tuple[str, int]] = set()
+        shared_dto_runtime: str | None = None
         for operation in contract.operations:
             for interaction in operation.interactions:
                 registered = self.schemas.get_identity(interaction.schema.id, interaction.schema.version)
                 schema_identity = (registered.id, registered.version)
-                generated_name, generated_source = self._dto_generator.generate(registered)
+                generated_name, runtime_source, generated_source = self._dto_generator.generate_with_runtime(registered)
                 class_name = generated_name
                 existing_identity = identity_by_dto_name.get(class_name)
                 if existing_identity is not None and existing_identity != schema_identity:
@@ -78,6 +79,11 @@ class AIcPythonCapabilityBindingGenerator:
                 dto_by_identity[schema_identity] = class_name
                 dto_by_operation_kind[(operation.id, interaction.kind)] = class_name
                 if schema_identity not in emitted_schema_types:
+                    if shared_dto_runtime is None:
+                        chunks.extend([runtime_source, ""])
+                        shared_dto_runtime = runtime_source
+                    elif shared_dto_runtime != runtime_source:
+                        raise ValueError("AAC inline DTOs require one consistent shared codegen runtime")
                     chunks.extend([generated_source, ""])
                     emitted_schema_types.add(schema_identity)
 

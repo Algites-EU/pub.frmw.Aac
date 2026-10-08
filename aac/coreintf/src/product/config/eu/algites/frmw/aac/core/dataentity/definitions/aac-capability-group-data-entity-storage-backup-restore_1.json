@@ -1,0 +1,15 @@
+{
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-group_1.jsondef.schema.json",
+  "Group": {
+    "Id": "_AAC.data-entity.storage-backup-restore",
+    "ParentGroupId": "_AAC.data-entity",
+    "Name": {
+      "Text": "Data Entity Storage Backup and Restore",
+      "ResourceKey": "aac.data.entity.storage.backup.restore.name"
+    },
+    "Description": {
+      "Text": "Capabilities that create, inspect, and restore provider-specific consistent backups of one Data Entity storage provider instance.",
+      "ResourceKey": "aac.data.entity.storage.backup.restore.description"
+    }
+  }
+}

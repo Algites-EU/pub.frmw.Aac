@@ -1,4 +1,11 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_1 import AIigSecurityBootstrap_1
+from eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_1 import AIigSecurityBootstrapSecurityBootstrap_1
+from eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_authentication_profiles_items_1 import AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItems_1
+from eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_authentication_profiles_items_parameters_additional_properties_one_of_1_1 import AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParametersAdditionalPropertiesOneOf1_1
+from eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_authentication_profiles_items_parameters_additional_properties_one_of_1_secret_reference_1 import AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParametersAdditionalPropertiesOneOf1SecretReference_1
+from eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_secret_providers_items_1 import AIigSecurityBootstrapSecurityBootstrapSecretProvidersItems_1
 from eu.algites.frmw.aac.core.schemas.resources import read_core_schema
 import json
 from importlib import resources
@@ -52,32 +59,32 @@ class AIcSecurityBootstrapLoader:
                 rendered.append(f"{path}: {error.message}")
             raise AIxDescriptorError(f"{source}: security bootstrap schema validation failed: " + "; ".join(rendered))
         try:
-            body = raw["SecurityBootstrap"]
+            body = raw[AIigSecurityBootstrap_1.SCHEMA_FIELD_NAME__SECURITY_BOOTSTRAP]
             secret_providers = tuple(AIcSecretProviderRegistration(
-                id=str(item["Id"]), type=str(item["Type"]),
-                name=normalize_display_text(item.get("Name")), description=normalize_display_text(item.get("Description")),
-                settings=dict(item.get("Settings", {})), bootstrap_safe=bool(item.get("BootstrapSafe", False))
-            ) for item in body.get("SecretProviders", ()))
+                id=str(item[AIigSecurityBootstrapSecurityBootstrapSecretProvidersItems_1.SCHEMA_FIELD_NAME__ID]), type=str(item[AIigSecurityBootstrapSecurityBootstrapSecretProvidersItems_1.SCHEMA_FIELD_NAME__TYPE]),
+                name=normalize_display_text(item.get(AIigSecurityBootstrapSecurityBootstrapSecretProvidersItems_1.SCHEMA_FIELD_NAME__NAME)), description=normalize_display_text(item.get(AIigSecurityBootstrapSecurityBootstrapSecretProvidersItems_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
+                settings=dict(item.get(AIigSecurityBootstrapSecurityBootstrapSecretProvidersItems_1.SCHEMA_FIELD_NAME__SETTINGS, {})), bootstrap_safe=bool(item.get(AIigSecurityBootstrapSecurityBootstrapSecretProvidersItems_1.SCHEMA_FIELD_NAME__BOOTSTRAP_SAFE, False))
+            ) for item in body.get(AIigSecurityBootstrapSecurityBootstrap_1.SCHEMA_FIELD_NAME__SECRET_PROVIDERS, ()))
             profiles = []
-            for item in body.get("AuthenticationProfiles", ()):
+            for item in body.get(AIigSecurityBootstrapSecurityBootstrap_1.SCHEMA_FIELD_NAME__AUTHENTICATION_PROFILES, ()):
                 parameters = {}
-                for key, value in dict(item.get("Parameters", {})).items():
+                for key, value in dict(item.get(AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItems_1.SCHEMA_FIELD_NAME__PARAMETERS, {})).items():
                     if isinstance(value, Mapping) and "SecretReference" in value:
-                        ref = value["SecretReference"]
+                        ref = value[AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParametersAdditionalPropertiesOneOf1_1.SCHEMA_FIELD_NAME__SECRET_REFERENCE]
                         parameters[str(key)] = AIcAuthenticationParameter(secret_reference=AIcSecretReference(
-                            str(ref["SecretProviderId"]), str(ref["Key"]),
-                            str(ref["Version"]) if ref.get("Version") is not None else None,
-                            dict(ref.get("Metadata", {})),
+                            str(ref[AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParametersAdditionalPropertiesOneOf1SecretReference_1.SCHEMA_FIELD_NAME__SECRET_PROVIDER_ID]), str(ref[AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParametersAdditionalPropertiesOneOf1SecretReference_1.SCHEMA_FIELD_NAME__KEY]),
+                            str(ref[AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParametersAdditionalPropertiesOneOf1SecretReference_1.SCHEMA_FIELD_NAME__VERSION]) if ref.get(AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParametersAdditionalPropertiesOneOf1SecretReference_1.SCHEMA_FIELD_NAME__VERSION) is not None else None,
+                            dict(ref.get(AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParametersAdditionalPropertiesOneOf1SecretReference_1.SCHEMA_FIELD_NAME__METADATA, {})),
                         ))
                     else:
                         parameters[str(key)] = AIcAuthenticationParameter(value=value)
                 profiles.append(AIcAuthenticationProfile(
-                    id=str(item["Id"]), mechanism=str(item["Mechanism"]),
-                    name=normalize_display_text(item.get("Name")), description=normalize_display_text(item.get("Description")),
-                    parameters=parameters, metadata=dict(item.get("Metadata", {}))
+                    id=str(item[AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItems_1.SCHEMA_FIELD_NAME__ID]), mechanism=str(item[AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItems_1.SCHEMA_FIELD_NAME__MECHANISM]),
+                    name=normalize_display_text(item.get(AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItems_1.SCHEMA_FIELD_NAME__NAME)), description=normalize_display_text(item.get(AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItems_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
+                    parameters=parameters, metadata=dict(item.get(AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItems_1.SCHEMA_FIELD_NAME__METADATA, {}))
                 ))
             return AIcSecurityBootstrap(
-                int(body["SchemaVersion"]), secret_providers, tuple(profiles), dict(body.get("Metadata", {}))
+                int(body[AIigSecurityBootstrapSecurityBootstrap_1.SCHEMA_FIELD_NAME__SCHEMA_VERSION]), secret_providers, tuple(profiles), dict(body.get(AIigSecurityBootstrapSecurityBootstrap_1.SCHEMA_FIELD_NAME__METADATA, {}))
             )
         except (KeyError, TypeError, ValueError) as exc:
             raise AIxDescriptorError(f"{source}: invalid security bootstrap: {exc}") from exc

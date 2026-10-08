@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/dataentity/data-entity-get-record-result_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/dataentity/data-entity-get-record-result_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical Data Entity Get Record Result schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-get-record-result_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical Data Entity Get Record Result schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"Record":{"description":"Specifies the record for this data entity get record result.","oneOf":[{"additionalProperties":false,"properties":{"Payload":{"description":"Canonical payload carried by this record.","type":"object"},"RecordRevision":{"description":"Storage-provider record revision used for optimistic concurrency and change tracking.","oneOf":[{"minimum":1,"type":"integer"},{"minLength":1,"type":"string"}]},"SchemaId":{"description":"Canonical schema identifier.","minLength":1,"type":"string"},"SchemaVersion":{"description":"Canonical schema version.","minimum":1,"type":"integer"},"State":{"description":"Lifecycle or storage state of this record.","enum":["active","tombstone"]},"Uid":{"description":"Stable logical UID of the Data Entity record.","minLength":1,"type":"string"}},"required":["Uid","SchemaId","SchemaVersion","RecordRevision","State","Payload"],"type":"object"},{"type":"null"}]}},"required":["Record"],"title":"Data Entity Get Record Result 1","type":"object","x-aac-schema-id":"_AAC.schema.data-entity-get-record-result","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataEntityGetRecordResult">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical Data Entity Get Record Result schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Record" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Specifies the record for this data entity get record result.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

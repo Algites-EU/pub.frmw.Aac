@@ -1,4 +1,8 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_bootstrap_1 import AIigCatalogBootstrap_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_bootstrap_catalog_bootstrap_1 import AIigCatalogBootstrapCatalogBootstrap_1
+from eu.algites.frmw.aac.core.catalog.aiig_catalog_bootstrap_catalog_bootstrap_sources_items_1 import AIigCatalogBootstrapCatalogBootstrapSourcesItems_1
 from eu.algites.frmw.aac.core.schemas.resources import read_core_schema
 import json
 from importlib import resources
@@ -49,22 +53,22 @@ class AIcCatalogBootstrapLoader:
                 rendered.append(f"{path}: {error.message}")
             raise AIxDescriptorError(f"{source}: catalog bootstrap schema validation failed: " + "; ".join(rendered))
         try:
-            body = raw["CatalogBootstrap"]
+            body = raw[AIigCatalogBootstrap_1.SCHEMA_FIELD_NAME__CATALOG_BOOTSTRAP]
             return AIcCatalogBootstrap(
-                schema_version=int(body["SchemaVersion"]),
-                product_id=str(body["ProductId"]),
-                technology_id=str(body["TechnologyId"]),
+                schema_version=int(body[AIigCatalogBootstrapCatalogBootstrap_1.SCHEMA_FIELD_NAME__SCHEMA_VERSION]),
+                product_id=str(body[AIigCatalogBootstrapCatalogBootstrap_1.SCHEMA_FIELD_NAME__PRODUCT_ID]),
+                technology_id=str(body[AIigCatalogBootstrapCatalogBootstrap_1.SCHEMA_FIELD_NAME__TECHNOLOGY_ID]),
                 sources=tuple(AIcCatalogSourceRegistration(
-                    id=str(item["Id"]),
-                    type=str(item["Type"]),
-                    uri=str(item["Uri"]),
-                    authentication_profile_id=(str(item["AuthenticationProfileId"]) if item.get("AuthenticationProfileId") is not None else None),
-                    priority=int(item.get("Priority", 0)),
-                    settings=dict(item.get("Settings", {})),
-                    name=normalize_display_text(item.get("Name")),
-                    description=normalize_display_text(item.get("Description")),
-                ) for item in body.get("Sources", ())),
-                metadata=dict(body.get("Metadata", {})),
+                    id=str(item[AIigCatalogBootstrapCatalogBootstrapSourcesItems_1.SCHEMA_FIELD_NAME__ID]),
+                    type=str(item[AIigCatalogBootstrapCatalogBootstrapSourcesItems_1.SCHEMA_FIELD_NAME__TYPE]),
+                    uri=str(item[AIigCatalogBootstrapCatalogBootstrapSourcesItems_1.SCHEMA_FIELD_NAME__URI]),
+                    authentication_profile_id=(str(item[AIigCatalogBootstrapCatalogBootstrapSourcesItems_1.SCHEMA_FIELD_NAME__AUTHENTICATION_PROFILE_ID]) if item.get(AIigCatalogBootstrapCatalogBootstrapSourcesItems_1.SCHEMA_FIELD_NAME__AUTHENTICATION_PROFILE_ID) is not None else None),
+                    priority=int(item.get(AIigCatalogBootstrapCatalogBootstrapSourcesItems_1.SCHEMA_FIELD_NAME__PRIORITY, 0)),
+                    settings=dict(item.get(AIigCatalogBootstrapCatalogBootstrapSourcesItems_1.SCHEMA_FIELD_NAME__SETTINGS, {})),
+                    name=normalize_display_text(item.get(AIigCatalogBootstrapCatalogBootstrapSourcesItems_1.SCHEMA_FIELD_NAME__NAME)),
+                    description=normalize_display_text(item.get(AIigCatalogBootstrapCatalogBootstrapSourcesItems_1.SCHEMA_FIELD_NAME__DESCRIPTION)),
+                ) for item in body.get(AIigCatalogBootstrapCatalogBootstrap_1.SCHEMA_FIELD_NAME__SOURCES, ())),
+                metadata=dict(body.get(AIigCatalogBootstrapCatalogBootstrap_1.SCHEMA_FIELD_NAME__METADATA, {})),
             )
         except (KeyError, TypeError, ValueError) as exc:
             raise AIxDescriptorError(f"{source}: invalid catalog bootstrap: {exc}") from exc

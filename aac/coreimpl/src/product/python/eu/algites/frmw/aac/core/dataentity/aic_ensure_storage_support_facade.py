@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.dataentity.aiig_data_entity_ensure_storage_support_request_1 import AIigDataEntityEnsureStorageSupportRequest_1
 from dataclasses import dataclass
 from typing import Generic, Mapping, TypeVar
 from uuid import uuid4
@@ -26,8 +28,8 @@ class AIcEnsureStorageSupportFacade(AIcBoundDataEntityCapabilityFacade):
 
     def ensure(self, schema_id: str, schema_version: int, canonical_schema: Mapping[str, object], references=()) -> Mapping[str, object]:
         return self._invoke("ensure", {
-            "SchemaId": schema_id,
-            "SchemaVersion": schema_version,
-            "CanonicalSchema": dict(canonical_schema),
-            "References": list(references),
+            AIigDataEntityEnsureStorageSupportRequest_1.SCHEMA_FIELD_NAME__SCHEMA_ID: schema_id,
+            AIigDataEntityEnsureStorageSupportRequest_1.SCHEMA_FIELD_NAME__SCHEMA_VERSION: schema_version,
+            AIigDataEntityEnsureStorageSupportRequest_1.SCHEMA_FIELD_NAME__CANONICAL_SCHEMA: dict(canonical_schema),
+            AIigDataEntityEnsureStorageSupportRequest_1.SCHEMA_FIELD_NAME__REFERENCES: list(references),
         })

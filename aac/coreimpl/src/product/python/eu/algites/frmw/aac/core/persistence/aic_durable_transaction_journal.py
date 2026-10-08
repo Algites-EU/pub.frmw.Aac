@@ -1,4 +1,9 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.persistence.aiig_transaction_plan_1 import AIigTransactionPlan_1
+from eu.algites.frmw.aac.core.persistence.aiig_transaction_plan_read_set_items_1 import AIigTransactionPlanReadSetItems_1
+from eu.algites.frmw.aac.core.persistence.aiig_transaction_plan_write_set_items_1 import AIigTransactionPlanWriteSetItems_1
+from eu.algites.frmw.aac.core.persistence.aiig_transaction_state_1 import AIigTransactionState_1
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -18,17 +23,17 @@ def _now() -> str:
 
 def _read_to_raw(item: AIcPersistenceTransactionRead) -> dict[str, object]:
     return {
-        "RecordId": item.record_id,
-        "ExpectedRecordRevision": item.expected_record_revision,
-        "ExpectAbsent": item.expect_absent,
+        AIigTransactionPlanReadSetItems_1.SCHEMA_FIELD_NAME__RECORD_ID: item.record_id,
+        AIigTransactionPlanReadSetItems_1.SCHEMA_FIELD_NAME__EXPECTED_RECORD_REVISION: item.expected_record_revision,
+        AIigTransactionPlanReadSetItems_1.SCHEMA_FIELD_NAME__EXPECT_ABSENT: item.expect_absent,
     }
 
 def _write_to_raw(item: AIcPersistenceTransactionWrite) -> dict[str, object]:
     return {
-        "RecordId": item.record_id,
-        "Operation": item.operation,
-        "TargetRecordRevision": item.target_record_revision,
-        "Metadata": dict(item.metadata),
+        AIigTransactionPlanWriteSetItems_1.SCHEMA_FIELD_NAME__RECORD_ID: item.record_id,
+        AIigTransactionPlanWriteSetItems_1.SCHEMA_FIELD_NAME__OPERATION: item.operation,
+        AIigTransactionPlanWriteSetItems_1.SCHEMA_FIELD_NAME__TARGET_RECORD_REVISION: item.target_record_revision,
+        AIigTransactionPlanWriteSetItems_1.SCHEMA_FIELD_NAME__METADATA: dict(item.metadata),
     }
 
 class AIcDurableTransactionJournal:
@@ -101,13 +106,13 @@ class AIcDurableTransactionJournal:
             directory.mkdir(parents=True, exist_ok=False)
             fsync_directory(directory.parent)
             plan = {
-                "FormatVersion": 1,
-                "TransactionId": transaction_id,
-                "TransactionType": transaction_type,
-                "CreatedAt": _now(),
-                "ReadSet": [_read_to_raw(item) for item in read_set],
-                "WriteSet": [_write_to_raw(item) for item in write_set],
-                "Metadata": dict(metadata or {}),
+                AIigTransactionPlan_1.SCHEMA_FIELD_NAME__FORMAT_VERSION: 1,
+                AIigTransactionPlan_1.SCHEMA_FIELD_NAME__TRANSACTION_ID: transaction_id,
+                AIigTransactionPlan_1.SCHEMA_FIELD_NAME__TRANSACTION_TYPE: transaction_type,
+                AIigTransactionPlan_1.SCHEMA_FIELD_NAME__CREATED_AT: _now(),
+                AIigTransactionPlan_1.SCHEMA_FIELD_NAME__READ_SET: [_read_to_raw(item) for item in read_set],
+                AIigTransactionPlan_1.SCHEMA_FIELD_NAME__WRITE_SET: [_write_to_raw(item) for item in write_set],
+                AIigTransactionPlan_1.SCHEMA_FIELD_NAME__METADATA: dict(metadata or {}),
             }
             atomic_write_json(self._plan_path(transaction_id), plan)
             for name, payload in (recovery_payloads or {}).items():
@@ -123,11 +128,11 @@ class AIcDurableTransactionJournal:
         diagnostics: tuple[str, ...] = (),
     ) -> None:
         atomic_write_json(self._state_path(transaction_id), {
-            "FormatVersion": 1,
-            "TransactionId": transaction_id,
-            "Phase": phase.value,
-            "UpdatedAt": _now(),
-            "Diagnostics": list(diagnostics),
+            AIigTransactionState_1.SCHEMA_FIELD_NAME__FORMAT_VERSION: 1,
+            AIigTransactionState_1.SCHEMA_FIELD_NAME__TRANSACTION_ID: transaction_id,
+            AIigTransactionState_1.SCHEMA_FIELD_NAME__PHASE: phase.value,
+            AIigTransactionState_1.SCHEMA_FIELD_NAME__UPDATED_AT: _now(),
+            AIigTransactionState_1.SCHEMA_FIELD_NAME__DIAGNOSTICS: list(diagnostics),
         })
 
     def read_plan(self, transaction_id: str) -> Mapping[str, object]:
@@ -135,7 +140,7 @@ class AIcDurableTransactionJournal:
             raw = json.loads(self._plan_path(transaction_id).read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
             raise AIxPersistenceError(f"cannot read transaction plan {transaction_id}: {exc}") from exc
-        if not isinstance(raw, Mapping) or int(raw.get("FormatVersion", 0)) != 1:
+        if not isinstance(raw, Mapping) or int(raw.get(AIigTransactionPlan_1.SCHEMA_FIELD_NAME__FORMAT_VERSION, 0)) != 1:
             raise AIxPersistenceError(f"transaction plan {transaction_id} is invalid")
         return raw
 
@@ -144,7 +149,7 @@ class AIcDurableTransactionJournal:
             raw = json.loads(self._state_path(transaction_id).read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
             raise AIxPersistenceError(f"cannot read transaction state {transaction_id}: {exc}") from exc
-        return AInPersistenceTransactionPhase(str(raw["Phase"]))
+        return AInPersistenceTransactionPhase(str(raw[AIigTransactionState_1.SCHEMA_FIELD_NAME__PHASE]))
 
     def read_recovery_payload(self, transaction_id: str, name: str) -> Mapping[str, object]:
         try:

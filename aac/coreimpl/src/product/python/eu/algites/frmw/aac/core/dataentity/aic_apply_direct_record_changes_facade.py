@@ -1,4 +1,8 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.dataentity.aiig_data_entity_apply_direct_record_changes_request_changes_items_one_of_0_1 import AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf0_1
+from eu.algites.frmw.aac.core.dataentity.aiig_data_entity_apply_direct_record_changes_request_changes_items_one_of_1_1 import AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf1_1
+from eu.algites.frmw.aac.core.dataentity.aiig_data_entity_apply_direct_record_changes_request_changes_items_one_of_2_1 import AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf2_1
 from dataclasses import dataclass
 from typing import Generic, Mapping, TypeVar
 from uuid import uuid4
@@ -32,14 +36,14 @@ class AIcApplyDirectRecordChangesFacade(AIcBoundDataEntityCapabilityFacade):
             raise RuntimeError("typed Data Entity access requires a marshaller")
         raw = self.marshaller.marshal(envelope)
         result = self.apply_raw(({
-            "ChangeId": str(uuid4()),
-            "Type": "replace_record",
-            "SchemaId": raw.schema_id,
-            "Uid": raw.uid,
-            "SchemaVersion": raw.schema_version,
-            "State": raw.state.value,
-            "Payload": dict(raw.payload),
-            "ExpectedRecordRevision": raw.record_revision,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf1_1.SCHEMA_FIELD_NAME__CHANGE_ID: str(uuid4()),
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf1_1.SCHEMA_FIELD_NAME__TYPE: "replace_record",
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf1_1.SCHEMA_FIELD_NAME__SCHEMA_ID: raw.schema_id,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf1_1.SCHEMA_FIELD_NAME__UID: raw.uid,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf1_1.SCHEMA_FIELD_NAME__SCHEMA_VERSION: raw.schema_version,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf1_1.SCHEMA_FIELD_NAME__STATE: raw.state.value,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf1_1.SCHEMA_FIELD_NAME__PAYLOAD: dict(raw.payload),
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf1_1.SCHEMA_FIELD_NAME__EXPECTED_RECORD_REVISION: raw.record_revision,
         },))
         return result
 
@@ -67,20 +71,20 @@ class AIcApplyDirectRecordChangesFacade(AIcBoundDataEntityCapabilityFacade):
             raise TypeError("canonical Data Entity schema must normalize to a json object")
         payload = dict(normalized)
         return self.apply_raw(({
-            "ChangeId": str(uuid4()),
-            "Type": "create_record",
-            "SchemaId": schema_id,
-            "Uid": uid,
-            "SchemaVersion": implementation.canonical_schema_version,
-            "State": state.value,
-            "Payload": payload,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf0_1.SCHEMA_FIELD_NAME__CHANGE_ID: str(uuid4()),
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf0_1.SCHEMA_FIELD_NAME__TYPE: "create_record",
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf0_1.SCHEMA_FIELD_NAME__SCHEMA_ID: schema_id,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf0_1.SCHEMA_FIELD_NAME__UID: uid,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf0_1.SCHEMA_FIELD_NAME__SCHEMA_VERSION: implementation.canonical_schema_version,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf0_1.SCHEMA_FIELD_NAME__STATE: state.value,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf0_1.SCHEMA_FIELD_NAME__PAYLOAD: payload,
         },))
 
     def delete(self, schema_id: str, uid: str, expected_record_revision: int | str) -> Mapping[str, object]:
         return self.apply_raw(({
-            "ChangeId": str(uuid4()),
-            "Type": "delete_record",
-            "SchemaId": schema_id,
-            "Uid": uid,
-            "ExpectedRecordRevision": expected_record_revision,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf2_1.SCHEMA_FIELD_NAME__CHANGE_ID: str(uuid4()),
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf2_1.SCHEMA_FIELD_NAME__TYPE: "delete_record",
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf2_1.SCHEMA_FIELD_NAME__SCHEMA_ID: schema_id,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf2_1.SCHEMA_FIELD_NAME__UID: uid,
+            AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf2_1.SCHEMA_FIELD_NAME__EXPECTED_RECORD_REVISION: expected_record_revision,
         },))

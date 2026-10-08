@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Security Bootstrap schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$defs":{"displayText":{"description":"Defines the reusable display text structure used by this canonical schema.","oneOf":[{"minLength":1,"type":"string"},{"additionalProperties":false,"anyOf":[{"required":["Text"]},{"required":["ResourceKey"]}],"properties":{"ResourceKey":{"description":"Optional localization resource key for the human-readable text.","minLength":1,"type":"string"},"Text":{"description":"Human-readable display text.","minLength":1,"type":"string"}},"type":"object"}]}},"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Security Bootstrap schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"SecurityBootstrap":{"additionalProperties":false,"description":"Security bootstrap configuration used to initialize trusted authentication and secret-provider facilities.","properties":{"AuthenticationProfiles":{"description":"Lists the authentication profiles associated with this security bootstrap.","items":{"additionalProperties":false,"properties":{"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this authentication profile."},"Id":{"description":"Stable identifier of this authentication profile.","minLength":1,"type":"string"},"Mechanism":{"description":"Specifies the mechanism for this authentication profile.","minLength":1,"type":"string"},"Metadata":{"description":"Additional structured metadata associated with this authentication profile.","type":"object"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this authentication profile."},"Parameters":{"additionalProperties":{"oneOf":[{"type":["string","number","integer","boolean","null"]},{"additionalProperties":false,"properties":{"SecretReference":{"additionalProperties":false,"description":"Reference to secret material managed by an AAC secret provider.","properties":{"Key":{"description":"Provider-specific key identifying the referenced secret.","minLength":1,"type":"string"},"Metadata":{"description":"Additional structured metadata associated with the referenced value.","type":"object"},"SecretProviderId":{"description":"Identifier of the secret provider that resolves this reference.","minLength":1,"type":"string"},"Version":{"description":"Optional provider-specific version of the referenced secret.","minLength":1,"type":"string"}},"required":["SecretProviderId","Key"],"type":"object"}},"required":["SecretReference"],"type":"object"}]},"description":"Structured parameters associated with this authentication profile.","type":"object"}},"required":["Id","Mechanism"],"type":"object"},"type":"array"},"Metadata":{"description":"Additional structured metadata associated with this security bootstrap.","type":"object"},"SchemaVersion":{"const":1,"description":"Canonical schema version."},"SecretProviders":{"description":"Lists the secret providers associated with this security bootstrap.","items":{"additionalProperties":false,"properties":{"BootstrapSafe":{"description":"Indicates whether bootstrap safe applies to this secret provider.","type":"boolean"},"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this secret provider."},"Id":{"description":"Stable identifier of this secret provider.","minLength":1,"type":"string"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this secret provider."},"Settings":{"description":"Structured settings associated with this secret provider.","type":"object"},"Type":{"description":"Type discriminator for this secret provider.","minLength":1,"type":"string"}},"required":["Id","Type"],"type":"object"},"type":"array"}},"required":["SchemaVersion"],"type":"object"}},"required":["SecurityBootstrap"],"title":"AAC Security Bootstrap 1","type":"object","x-aac-schema-id":"_AAC.schema.security-bootstrap","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SecurityBootstrap">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Security Bootstrap schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="SecurityBootstrap">
+          <xs:annotation>
+            <xs:documentation>Security bootstrap configuration used to initialize trusted authentication and secret-provider facilities.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SchemaVersion" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Canonical schema version.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="SecretProviders" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Lists the secret providers associated with this security bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Id">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of this secret provider.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Type">
+                            <xs:annotation>
+                              <xs:documentation>Type discriminator for this secret provider.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Settings" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Structured settings associated with this secret provider.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="key" type="xs:string" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="BootstrapSafe" minOccurs="0" type="xs:boolean">
+                            <xs:annotation>
+                              <xs:documentation>Indicates whether bootstrap safe applies to this secret provider.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable name of this secret provider.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable description of this secret provider.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="AuthenticationProfiles" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Lists the authentication profiles associated with this security bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Id">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of this authentication profile.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Mechanism">
+                            <xs:annotation>
+                              <xs:documentation>Specifies the mechanism for this authentication profile.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Parameters" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Structured parameters associated with this authentication profile.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="key" type="xs:string" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Metadata" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Additional structured metadata associated with this authentication profile.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="key" type="xs:string" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable name of this authentication profile.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable description of this authentication profile.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Metadata" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Additional structured metadata associated with this security bootstrap.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                        </xs:sequence>
+                        <xs:attribute name="key" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

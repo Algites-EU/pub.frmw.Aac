@@ -1,0 +1,45 @@
+{
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json",
+  "Capability": {
+    "Id": "_AAC.data-entity.create-storage-backup",
+    "Version": 1,
+    "GroupId": "_AAC.data-entity.storage-backup-restore",
+    "Name": {
+      "Text": "Create Data Entity storage backup",
+      "ResourceKey": "aac.data.entity.create.storage.backup.name"
+    },
+    "Description": {
+      "Text": "Creates a provider-consistent physical backup at the caller-selected backup file.",
+      "ResourceKey": "aac.data.entity.create.storage.backup.description"
+    }
+  },
+  "Operations": [
+    {
+      "Id": "create_backup",
+      "Name": {
+        "Text": "Create storage backup",
+        "ResourceKey": "aac.data.entity.create.storage.backup.operation.create.backup.name"
+      },
+      "Description": {
+        "Text": "Creates a provider-consistent physical backup at the caller-selected backup file.",
+        "ResourceKey": "aac.data.entity.create.storage.backup.operation.create.backup.description"
+      },
+      "Interactions": [
+        {
+          "Kind": "input",
+          "Schema": {
+            "Id": "_AAC.schema.data-entity-create-storage-backup-request",
+            "Version": 1
+          }
+        },
+        {
+          "Kind": "final_success_state_result",
+          "Schema": {
+            "Id": "_AAC.schema.data-entity-create-storage-backup-result",
+            "Version": 1
+          }
+        }
+      ]
+    }
+  ]
+}

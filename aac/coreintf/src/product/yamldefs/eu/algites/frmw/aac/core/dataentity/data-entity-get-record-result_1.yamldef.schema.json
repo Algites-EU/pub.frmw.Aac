@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-get-record-result_1.yamldef.schema.json",
+  "x-aac-schema-id": "_AAC.schema.data-entity-get-record-result",
+  "x-aac-schema-version": 1,
+  "title": "Data Entity Get Record Result 1",
+  "description": "Defines the canonical Data Entity Get Record Result schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "Record"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "Record": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "Uid",
+            "SchemaId",
+            "SchemaVersion",
+            "RecordRevision",
+            "State",
+            "Payload"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "Uid": {
+              "type": "string",
+              "description": "Stable logical UID of the Data Entity record.",
+              "minLength": 1
+            },
+            "SchemaId": {
+              "type": "string",
+              "description": "Canonical schema identifier.",
+              "minLength": 1
+            },
+            "SchemaVersion": {
+              "type": "integer",
+              "description": "Canonical schema version.",
+              "minimum": 1
+            },
+            "RecordRevision": {
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ],
+              "description": "Storage-provider record revision used for optimistic concurrency and change tracking."
+            },
+            "State": {
+              "enum": [
+                "active",
+                "tombstone"
+              ],
+              "description": "Lifecycle or storage state of this record."
+            },
+            "Payload": {
+              "type": "object",
+              "description": "Canonical payload carried by this record."
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Specifies the record for this data entity get record result."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  }
+}

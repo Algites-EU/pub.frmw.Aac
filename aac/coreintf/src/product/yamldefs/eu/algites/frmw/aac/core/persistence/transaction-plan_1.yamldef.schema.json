@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/persistence/transaction-plan_1.yamldef.schema.json",
+  "title": "AAC Persistence Transaction Plan 1",
+  "description": "Defines the canonical AAC Persistence Transaction Plan schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "FormatVersion",
+    "TransactionId",
+    "TransactionType",
+    "CreatedAt",
+    "ReadSet",
+    "WriteSet",
+    "Metadata"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "FormatVersion": {
+      "const": 1,
+      "description": "Version of the persisted or exchanged document format."
+    },
+    "TransactionId": {
+      "type": "string",
+      "description": "Stable identifier of the transaction associated with this AAC persistence transaction plan.",
+      "minLength": 1
+    },
+    "TransactionType": {
+      "type": "string",
+      "description": "Specifies the transaction type for this AAC persistence transaction plan.",
+      "minLength": 1
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "Specifies the created at for this AAC persistence transaction plan."
+    },
+    "ReadSet": {
+      "type": "array",
+      "description": "Lists the read set associated with this AAC persistence transaction plan.",
+      "items": {
+        "type": "object",
+        "required": [
+          "RecordId",
+          "ExpectAbsent"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "RecordId": {
+            "type": "string",
+            "description": "Stable identifier of the record associated with this read set.",
+            "minLength": 1
+          },
+          "ExpectedRecordRevision": {
+            "type": [
+              "integer",
+              "string",
+              "null"
+            ],
+            "description": "Record revision that must still be current for the requested mutation to succeed."
+          },
+          "ExpectAbsent": {
+            "type": "boolean",
+            "description": "Indicates whether expect absent applies to this read set."
+          }
+        }
+      }
+    },
+    "WriteSet": {
+      "type": "array",
+      "description": "Lists the write set associated with this AAC persistence transaction plan.",
+      "items": {
+        "type": "object",
+        "required": [
+          "RecordId",
+          "Operation",
+          "Metadata"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "RecordId": {
+            "type": "string",
+            "description": "Stable identifier of the record associated with this write set.",
+            "minLength": 1
+          },
+          "Operation": {
+            "type": "string",
+            "description": "Specifies the operation for this write set.",
+            "minLength": 1
+          },
+          "TargetRecordRevision": {
+            "type": [
+              "integer",
+              "string",
+              "null"
+            ],
+            "description": "Record revision expected after the planned write completes."
+          },
+          "Metadata": {
+            "type": "object",
+            "description": "Additional structured metadata associated with this write set."
+          }
+        }
+      }
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "Additional structured metadata associated with this AAC persistence transaction plan."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.persistence-transaction-plan",
+  "x-aac-schema-version": 1
+}

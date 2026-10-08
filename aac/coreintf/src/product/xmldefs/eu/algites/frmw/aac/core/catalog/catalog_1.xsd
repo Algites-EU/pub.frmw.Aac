@@ -1,0 +1,912 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aac="urn:algites:aac:xml-schema-compatibility:1" xmlns:tns="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/catalog/catalog_1.xsd" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/catalog/catalog_1.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical AAC Component Catalog schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <aac:canonicalJsonSchema sourceFormat="jsondefs">{"$defs":{"artifact":{"additionalProperties":false,"description":"Defines the reusable artifact structure used by this canonical schema.","properties":{"Architectures":{"description":"Lists the architectures associated with this artifact.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true},"ArtifactFilename":{"description":"Specifies the artifact filename for this artifact.","minLength":1,"type":"string"},"AuthenticationProfileId":{"description":"Stable identifier of the authentication profile associated with this artifact.","minLength":1,"type":"string"},"DescriptorPath":{"description":"Filesystem or logical descriptor path used by this artifact.","minLength":1,"type":"string"},"Id":{"description":"Stable identifier of this artifact.","minLength":1,"type":"string"},"Locator":{"additionalProperties":false,"allOf":[{"if":{"properties":{"Type":{"const":"uri","description":"Discriminator identifying the concrete variant represented by this value."}}},"then":{"required":["Uri"]}},{"if":{"properties":{"Type":{"const":"repository","description":"Discriminator identifying the concrete variant represented by this value."}}},"then":{"required":["RepositoryId"]}}],"description":"Structured locator associated with this artifact.","properties":{"Coordinates":{"description":"Structured coordinates associated with this locator.","type":"object"},"RepositoryId":{"description":"Stable identifier of the repository associated with this locator.","minLength":1,"type":"string"},"Type":{"description":"Type discriminator for this locator.","enum":["uri","repository"]},"Uri":{"description":"URI or URL identifying the uri associated with this locator.","minLength":1,"type":"string"}},"required":["Type"],"type":"object"},"Metadata":{"description":"Additional structured metadata associated with this artifact.","type":"object"},"PackageFormat":{"description":"Specifies the package format for this artifact.","minLength":1,"type":"string"},"Platforms":{"description":"Lists the platforms associated with this artifact.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true},"RuntimePackage":{"description":"Specifies the runtime package for this artifact.","minLength":1,"type":"string"},"Sha256":{"description":"Specifies the sha256 for this artifact.","pattern":"^[0-9a-fA-F]{64}$","type":"string"},"Sidecars":{"description":"Lists the sidecars associated with this artifact.","items":{"additionalProperties":false,"properties":{"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this sidecar."},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this sidecar."},"Suffix":{"description":"Specifies the suffix for this sidecar.","pattern":"^\\..+","type":"string"},"Uri":{"description":"URI or URL identifying the uri associated with this sidecar.","minLength":1,"type":"string"}},"required":["Uri","Suffix"],"type":"object"},"type":"array"},"VerifierId":{"description":"Stable identifier of the verifier associated with this artifact.","minLength":1,"type":"string"}},"required":["Id","Locator","ArtifactFilename","PackageFormat","DescriptorPath","Sha256"],"type":"object"},"capabilityEntitlement":{"additionalProperties":false,"description":"Defines the reusable capability entitlement structure used by this canonical schema.","properties":{"Capability":{"additionalProperties":false,"description":"Identity and human-facing metadata of the capability contract.","properties":{"Id":{"description":"Stable identifier of this capability.","minLength":1,"type":"string"},"Version":{"description":"Version of this capability.","minimum":1,"type":"integer"}},"required":["Id","Version"],"type":"object"},"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this capability entitlement."},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this capability entitlement."},"Permissions":{"description":"Authorization or entitlement permissions associated with this capability entitlement.","items":{"$ref":"#/$defs/permission"},"type":"array"}},"required":["Capability","Permissions"],"type":"object"},"component":{"additionalProperties":false,"description":"Defines the reusable component structure used by this canonical schema.","properties":{"Categories":{"description":"Lists the categories associated with this component.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true},"ComponentId":{"description":"Stable identifier of the AAC component associated with this component.","minLength":1,"type":"string"},"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this component."},"DocumentationUrl":{"description":"URI or URL identifying the documentation associated with this component.","minLength":1,"type":"string"},"EntitlementInfoUrl":{"description":"URI or URL identifying the entitlement info associated with this component.","minLength":1,"type":"string"},"HomepageUrl":{"description":"URI or URL identifying the homepage associated with this component.","minLength":1,"type":"string"},"Icon":{"additionalProperties":false,"description":"Structured icon associated with this component.","properties":{"Url":{"description":"URI or URL identifying the url associated with this icon.","minLength":1,"type":"string"}},"required":["Url"],"type":"object"},"Metadata":{"description":"Additional structured metadata associated with this component.","type":"object"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this component."},"Publisher":{"additionalProperties":false,"description":"Structured publisher associated with this component.","properties":{"Id":{"description":"Stable identifier of this publisher.","minLength":1,"type":"string"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this publisher."}},"required":["Id"],"type":"object"},"Releases":{"description":"Lists the releases associated with this component.","items":{"$ref":"#/$defs/release"},"type":"array"},"SupportUrl":{"description":"URI or URL identifying the support associated with this component.","minLength":1,"type":"string"},"Tags":{"description":"Lists the tags associated with this component.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true}},"required":["ComponentId","Releases"],"type":"object"},"displayText":{"description":"Defines the reusable display text structure used by this canonical schema.","oneOf":[{"minLength":1,"type":"string"},{"additionalProperties":false,"minProperties":1,"properties":{"ResourceKey":{"description":"Optional localization resource key for the human-readable text.","minLength":1,"type":"string"},"Text":{"description":"Human-readable display text.","minLength":1,"type":"string"}},"type":"object"}]},"permission":{"additionalProperties":false,"description":"Defines the reusable permission structure used by this canonical schema.","properties":{"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this permission."},"Id":{"description":"Stable identifier of this permission.","minLength":1,"type":"string"},"Metadata":{"description":"Additional structured metadata associated with this permission.","type":"object"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this permission."},"PossibleLicensingScopes":{"description":"Lists the possible licensing scopes associated with this permission.","items":{"minLength":1,"type":"string"},"type":"array","uniqueItems":true}},"required":["Id"],"type":"object"},"persistentSchema":{"additionalProperties":false,"allOf":[{"if":{"properties":{"Kind":{"const":"component_configuration","description":"Discriminator identifying the semantic kind represented by this value."}}},"then":{"not":{"anyOf":[{"required":["ProviderId"]},{"required":["ReadableVersions"]},{"required":["WritableVersions"]},{"required":["PreferredWriteVersion"]}]},"required":["WriteVersion"]}},{"if":{"properties":{"Kind":{"const":"provider_configuration","description":"Discriminator identifying the semantic kind represented by this value."}}},"then":{"not":{"anyOf":[{"required":["ReadableVersions"]},{"required":["WritableVersions"]},{"required":["PreferredWriteVersion"]}]},"required":["ProviderId","WriteVersion"]}},{"if":{"properties":{"Kind":{"const":"data_entity","description":"Discriminator identifying the semantic kind represented by this value."}}},"then":{"allOf":[{"anyOf":[{"properties":{"ReadableVersions":{"description":"Schema versions that may be read by this declaration.","minItems":1}}},{"properties":{"WritableVersions":{"description":"Schema versions that may be written by this declaration.","minItems":1}}}]},{"else":{"not":{"required":["PreferredWriteVersion"]}},"if":{"properties":{"WritableVersions":{"description":"Schema versions that may be written by this declaration.","minItems":1}},"required":["WritableVersions"]},"then":{"required":["PreferredWriteVersion"]}}],"not":{"anyOf":[{"required":["ProviderId"]},{"required":["WriteVersion"]}]},"required":["ReadableVersions","WritableVersions"]}}],"description":"Defines the reusable persistent schema structure used by this canonical schema.","properties":{"Kind":{"description":"Kind of this persistent schema.","enum":["component_configuration","provider_configuration","data_entity"]},"PreferredWriteVersion":{"description":"Version of the preferred write associated with this persistent schema.","minimum":1,"type":"integer"},"ProviderId":{"description":"Stable identifier of the provider associated with this persistent schema.","minLength":1,"type":"string"},"ReadableVersions":{"description":"Lists the readable versions supported or selected by this persistent schema.","items":{"minimum":1,"type":"integer"},"type":"array","uniqueItems":true},"SchemaId":{"description":"Canonical schema identifier.","minLength":1,"type":"string"},"WritableVersions":{"description":"Lists the writable versions supported or selected by this persistent schema.","items":{"minimum":1,"type":"integer"},"type":"array","uniqueItems":true},"WriteVersion":{"description":"Version of the write associated with this persistent schema.","minimum":1,"type":"integer"}},"required":["Kind","SchemaId"],"type":"object"},"release":{"additionalProperties":false,"description":"Defines the reusable release structure used by this canonical schema.","properties":{"Artifacts":{"description":"Lists the artifacts associated with this release.","items":{"$ref":"#/$defs/artifact"},"minItems":1,"type":"array"},"EntitlementLicensingScopes":{"description":"Lists the entitlement licensing scopes associated with this release.","items":{"additionalProperties":false,"properties":{"Description":{"$ref":"#/$defs/displayText","description":"Human-readable description of this entitlement licensing scope."},"Metadata":{"description":"Additional structured metadata associated with this entitlement licensing scope.","type":"object"},"Name":{"$ref":"#/$defs/displayText","description":"Human-readable name of this entitlement licensing scope."},"Type":{"description":"Type discriminator for this entitlement licensing scope.","minLength":1,"type":"string"}},"required":["Type"],"type":"object"},"type":"array"},"Metadata":{"description":"Additional structured metadata associated with this release.","type":"object"},"PersistentSchemas":{"description":"Lists the persistent schemas associated with this release.","items":{"$ref":"#/$defs/persistentSchema"},"type":"array"},"ProvidedCapabilityEntitlements":{"description":"Lists the provided capability entitlements associated with this release.","items":{"$ref":"#/$defs/capabilityEntitlement"},"type":"array"},"Provides":{"description":"Lists the provides associated with this release.","items":{"additionalProperties":false,"properties":{"Capability":{"description":"Identity and human-facing metadata of the capability contract.","minLength":1,"type":"string"},"Versions":{"description":"Lists the versions supported or selected by this provide.","items":{"minimum":1,"type":"integer"},"minItems":1,"type":"array","uniqueItems":true}},"required":["Capability","Versions"],"type":"object"},"type":"array"},"PublishedAt":{"description":"Specifies the published at for this release.","minLength":1,"type":"string"},"ReleaseNotesUrl":{"description":"URI or URL identifying the release notes associated with this release.","minLength":1,"type":"string"},"Requires":{"description":"Indicates whether requires applies to this release.","items":{"additionalProperties":false,"properties":{"Capability":{"description":"Identity and human-facing metadata of the capability contract.","minLength":1,"type":"string"},"Cardinality":{"description":"Specifies the cardinality for this require.","enum":["single","multiple"]},"Id":{"description":"Stable identifier of this require.","minLength":1,"type":"string"},"Mandatory":{"description":"Indicates whether mandatory applies to this require.","type":"boolean"},"Versions":{"description":"Lists the versions supported or selected by this require.","items":{"minimum":1,"type":"integer"},"type":"array","uniqueItems":true}},"required":["Id","Capability"],"type":"object"},"type":"array"},"Version":{"description":"Version of this release.","minimum":1,"type":"integer"}},"required":["Version","Artifacts"],"type":"object"}},"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical AAC Component Catalog schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"Catalog":{"additionalProperties":false,"description":"Catalog data represented by this document.","properties":{"Components":{"description":"Lists the components associated with this catalog.","items":{"$ref":"#/$defs/component"},"type":"array"},"FormatVersion":{"const":1,"description":"Version of the persisted or exchanged document format."},"GeneratedAt":{"description":"Specifies the generated at for this catalog.","minLength":1,"type":"string"},"Metadata":{"description":"Additional structured metadata associated with this catalog.","type":"object"},"ProductId":{"description":"Stable identifier of the product associated with this catalog.","minLength":1,"type":"string"},"TechnologyId":{"description":"Stable identifier of the technology associated with this catalog.","minLength":1,"type":"string"}},"required":["FormatVersion","ProductId","TechnologyId","Components"],"type":"object"}},"required":["Catalog"],"title":"AAC Component Catalog 1","type":"object","x-aac-schema-id":"_AAC.schema.catalog","x-aac-schema-version":1}</aac:canonicalJsonSchema>
+      <aac:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</aac:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Catalog">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical AAC Component Catalog schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Catalog">
+          <xs:annotation>
+            <xs:documentation>Catalog data represented by this document.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FormatVersion" type="xs:anyType">
+                <xs:annotation>
+                  <xs:documentation>Version of the persisted or exchanged document format.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="ProductId">
+                <xs:annotation>
+                  <xs:documentation>Stable identifier of the product associated with this catalog.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TechnologyId">
+                <xs:annotation>
+                  <xs:documentation>Stable identifier of the technology associated with this catalog.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GeneratedAt" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Specifies the generated at for this catalog.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Metadata" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Additional structured metadata associated with this catalog.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                        </xs:sequence>
+                        <xs:attribute name="key" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Components">
+                <xs:annotation>
+                  <xs:documentation>Lists the components associated with this catalog.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="ComponentId">
+                            <xs:annotation>
+                              <xs:documentation>Stable identifier of the AAC component associated with this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable name of this component.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                            <xs:annotation>
+                              <xs:documentation>Human-readable description of this component.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Publisher" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Structured publisher associated with this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Id">
+                                  <xs:annotation>
+                                    <xs:documentation>Stable identifier of this publisher.</xs:documentation>
+                                  </xs:annotation>
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                                  <xs:annotation>
+                                    <xs:documentation>Human-readable name of this publisher.</xs:documentation>
+                                  </xs:annotation>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="HomepageUrl" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>URI or URL identifying the homepage associated with this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="DocumentationUrl" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>URI or URL identifying the documentation associated with this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="SupportUrl" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>URI or URL identifying the support associated with this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="EntitlementInfoUrl" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>URI or URL identifying the entitlement info associated with this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="Icon" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Structured icon associated with this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Url">
+                                  <xs:annotation>
+                                    <xs:documentation>URI or URL identifying the url associated with this icon.</xs:documentation>
+                                  </xs:annotation>
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Categories" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Lists the categories associated with this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Tags" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Lists the tags associated with this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Releases">
+                            <xs:annotation>
+                              <xs:documentation>Lists the releases associated with this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Version">
+                                        <xs:annotation>
+                                          <xs:documentation>Version of this release.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                          <xs:restriction base="xs:integer">
+                                            <xs:minInclusive value="1"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="PublishedAt" minOccurs="0">
+                                        <xs:annotation>
+                                          <xs:documentation>Specifies the published at for this release.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="ReleaseNotesUrl" minOccurs="0">
+                                        <xs:annotation>
+                                          <xs:documentation>URI or URL identifying the release notes associated with this release.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="Provides" minOccurs="0">
+                                        <xs:annotation>
+                                          <xs:documentation>Lists the provides associated with this release.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Capability">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Identity and human-facing metadata of the capability contract.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="Versions">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Lists the versions supported or selected by this provide.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Item" minOccurs="1" maxOccurs="unbounded">
+                                                          <xs:simpleType>
+                                                            <xs:restriction base="xs:integer">
+                                                            <xs:minInclusive value="1"/>
+                                                            </xs:restriction>
+                                                          </xs:simpleType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="Requires" minOccurs="0">
+                                        <xs:annotation>
+                                          <xs:documentation>Indicates whether requires applies to this release.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Id">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Stable identifier of this require.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="Capability">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Identity and human-facing metadata of the capability contract.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="Versions" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Lists the versions supported or selected by this require.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                                          <xs:simpleType>
+                                                            <xs:restriction base="xs:integer">
+                                                            <xs:minInclusive value="1"/>
+                                                            </xs:restriction>
+                                                          </xs:simpleType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="Cardinality" minOccurs="0" type="xs:anyType">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Specifies the cardinality for this require.</xs:documentation>
+                                                    </xs:annotation>
+                                                  </xs:element>
+                                                  <xs:element name="Mandatory" minOccurs="0" type="xs:boolean">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Indicates whether mandatory applies to this require.</xs:documentation>
+                                                    </xs:annotation>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="Artifacts">
+                                        <xs:annotation>
+                                          <xs:documentation>Lists the artifacts associated with this release.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Item" minOccurs="1" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Id">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Stable identifier of this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="Locator">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Structured locator associated with this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Type" type="xs:anyType">
+                                                          <xs:annotation>
+                                                            <xs:documentation>Type discriminator for this locator.</xs:documentation>
+                                                          </xs:annotation>
+                                                        </xs:element>
+                                                        <xs:element name="Uri" minOccurs="0">
+                                                          <xs:annotation>
+                                                            <xs:documentation>URI or URL identifying the uri associated with this locator.</xs:documentation>
+                                                          </xs:annotation>
+                                                          <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                            <xs:minLength value="1"/>
+                                                            </xs:restriction>
+                                                          </xs:simpleType>
+                                                        </xs:element>
+                                                        <xs:element name="RepositoryId" minOccurs="0">
+                                                          <xs:annotation>
+                                                            <xs:documentation>Stable identifier of the repository associated with this locator.</xs:documentation>
+                                                          </xs:annotation>
+                                                          <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                            <xs:minLength value="1"/>
+                                                            </xs:restriction>
+                                                          </xs:simpleType>
+                                                        </xs:element>
+                                                        <xs:element name="Coordinates" minOccurs="0">
+                                                          <xs:annotation>
+                                                            <xs:documentation>Structured coordinates associated with this locator.</xs:documentation>
+                                                          </xs:annotation>
+                                                          <xs:complexType>
+                                                            <xs:sequence>
+                                                            <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                                            <xs:complexType>
+                                                            <xs:sequence>
+                                                            <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                                            </xs:sequence>
+                                                            <xs:attribute name="key" type="xs:string" use="required"/>
+                                                            </xs:complexType>
+                                                            </xs:element>
+                                                            </xs:sequence>
+                                                          </xs:complexType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="ArtifactFilename">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Specifies the artifact filename for this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="PackageFormat">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Specifies the package format for this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="DescriptorPath">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Filesystem or logical descriptor path used by this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="Sha256" type="xs:string">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Specifies the sha256 for this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                  </xs:element>
+                                                  <xs:element name="RuntimePackage" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Specifies the runtime package for this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="VerifierId" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Stable identifier of the verifier associated with this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="Platforms" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Lists the platforms associated with this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                                          <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                            <xs:minLength value="1"/>
+                                                            </xs:restriction>
+                                                          </xs:simpleType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="Architectures" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Lists the architectures associated with this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                                          <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                            <xs:minLength value="1"/>
+                                                            </xs:restriction>
+                                                          </xs:simpleType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="Metadata" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Additional structured metadata associated with this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                                          <xs:complexType>
+                                                            <xs:sequence>
+                                                            <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                                            </xs:sequence>
+                                                            <xs:attribute name="key" type="xs:string" use="required"/>
+                                                          </xs:complexType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="AuthenticationProfileId" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Stable identifier of the authentication profile associated with this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="Sidecars" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Lists the sidecars associated with this artifact.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                                          <xs:complexType>
+                                                            <xs:sequence>
+                                                            <xs:element name="Uri">
+                                                            <xs:annotation>
+                                                            <xs:documentation>URI or URL identifying the uri associated with this sidecar.</xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                            <xs:minLength value="1"/>
+                                                            </xs:restriction>
+                                                            </xs:simpleType>
+                                                            </xs:element>
+                                                            <xs:element name="Suffix" type="xs:string">
+                                                            <xs:annotation>
+                                                            <xs:documentation>Specifies the suffix for this sidecar.</xs:documentation>
+                                                            </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                                                            <xs:annotation>
+                                                            <xs:documentation>Human-readable name of this sidecar.</xs:documentation>
+                                                            </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                                                            <xs:annotation>
+                                                            <xs:documentation>Human-readable description of this sidecar.</xs:documentation>
+                                                            </xs:annotation>
+                                                            </xs:element>
+                                                            </xs:sequence>
+                                                          </xs:complexType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="Metadata" minOccurs="0">
+                                        <xs:annotation>
+                                          <xs:documentation>Additional structured metadata associated with this release.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                                </xs:sequence>
+                                                <xs:attribute name="key" type="xs:string" use="required"/>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="PersistentSchemas" minOccurs="0">
+                                        <xs:annotation>
+                                          <xs:documentation>Lists the persistent schemas associated with this release.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Kind" type="xs:anyType">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Kind of this persistent schema.</xs:documentation>
+                                                    </xs:annotation>
+                                                  </xs:element>
+                                                  <xs:element name="SchemaId">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Canonical schema identifier.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="WriteVersion" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Version of the write associated with this persistent schema.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:integer">
+                                                        <xs:minInclusive value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="ProviderId" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Stable identifier of the provider associated with this persistent schema.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="ReadableVersions" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Lists the readable versions supported or selected by this persistent schema.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                                          <xs:simpleType>
+                                                            <xs:restriction base="xs:integer">
+                                                            <xs:minInclusive value="1"/>
+                                                            </xs:restriction>
+                                                          </xs:simpleType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="WritableVersions" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Lists the writable versions supported or selected by this persistent schema.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                                          <xs:simpleType>
+                                                            <xs:restriction base="xs:integer">
+                                                            <xs:minInclusive value="1"/>
+                                                            </xs:restriction>
+                                                          </xs:simpleType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="PreferredWriteVersion" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Version of the preferred write associated with this persistent schema.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:integer">
+                                                        <xs:minInclusive value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="EntitlementLicensingScopes" minOccurs="0">
+                                        <xs:annotation>
+                                          <xs:documentation>Lists the entitlement licensing scopes associated with this release.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Type">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Type discriminator for this entitlement licensing scope.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                      <xs:restriction base="xs:string">
+                                                        <xs:minLength value="1"/>
+                                                      </xs:restriction>
+                                                    </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Human-readable name of this entitlement licensing scope.</xs:documentation>
+                                                    </xs:annotation>
+                                                  </xs:element>
+                                                  <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Human-readable description of this entitlement licensing scope.</xs:documentation>
+                                                    </xs:annotation>
+                                                  </xs:element>
+                                                  <xs:element name="Metadata" minOccurs="0">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Additional structured metadata associated with this entitlement licensing scope.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                                          <xs:complexType>
+                                                            <xs:sequence>
+                                                            <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                                            </xs:sequence>
+                                                            <xs:attribute name="key" type="xs:string" use="required"/>
+                                                          </xs:complexType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="ProvidedCapabilityEntitlements" minOccurs="0">
+                                        <xs:annotation>
+                                          <xs:documentation>Lists the provided capability entitlements associated with this release.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Capability">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Identity and human-facing metadata of the capability contract.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Id">
+                                                          <xs:annotation>
+                                                            <xs:documentation>Stable identifier of this capability.</xs:documentation>
+                                                          </xs:annotation>
+                                                          <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                            <xs:minLength value="1"/>
+                                                            </xs:restriction>
+                                                          </xs:simpleType>
+                                                        </xs:element>
+                                                        <xs:element name="Version">
+                                                          <xs:annotation>
+                                                            <xs:documentation>Version of this capability.</xs:documentation>
+                                                          </xs:annotation>
+                                                          <xs:simpleType>
+                                                            <xs:restriction base="xs:integer">
+                                                            <xs:minInclusive value="1"/>
+                                                            </xs:restriction>
+                                                          </xs:simpleType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="Permissions">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Authorization or entitlement permissions associated with this capability entitlement.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                                          <xs:complexType>
+                                                            <xs:sequence>
+                                                            <xs:element name="Id">
+                                                            <xs:annotation>
+                                                            <xs:documentation>Stable identifier of this permission.</xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                            <xs:minLength value="1"/>
+                                                            </xs:restriction>
+                                                            </xs:simpleType>
+                                                            </xs:element>
+                                                            <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                                                            <xs:annotation>
+                                                            <xs:documentation>Human-readable name of this permission.</xs:documentation>
+                                                            </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                                                            <xs:annotation>
+                                                            <xs:documentation>Human-readable description of this permission.</xs:documentation>
+                                                            </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="Metadata" minOccurs="0">
+                                                            <xs:annotation>
+                                                            <xs:documentation>Additional structured metadata associated with this permission.</xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                            <xs:sequence>
+                                                            <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                                            <xs:complexType>
+                                                            <xs:sequence>
+                                                            <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                                            </xs:sequence>
+                                                            <xs:attribute name="key" type="xs:string" use="required"/>
+                                                            </xs:complexType>
+                                                            </xs:element>
+                                                            </xs:sequence>
+                                                            </xs:complexType>
+                                                            </xs:element>
+                                                            <xs:element name="PossibleLicensingScopes" minOccurs="0">
+                                                            <xs:annotation>
+                                                            <xs:documentation>Lists the possible licensing scopes associated with this permission.</xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:complexType>
+                                                            <xs:sequence>
+                                                            <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                                                            <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                            <xs:minLength value="1"/>
+                                                            </xs:restriction>
+                                                            </xs:simpleType>
+                                                            </xs:element>
+                                                            </xs:sequence>
+                                                            </xs:complexType>
+                                                            </xs:element>
+                                                            </xs:sequence>
+                                                          </xs:complexType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Human-readable name of this capability entitlement.</xs:documentation>
+                                                    </xs:annotation>
+                                                  </xs:element>
+                                                  <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Human-readable description of this capability entitlement.</xs:documentation>
+                                                    </xs:annotation>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Metadata" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Additional structured metadata associated with this component.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="key" type="xs:string" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

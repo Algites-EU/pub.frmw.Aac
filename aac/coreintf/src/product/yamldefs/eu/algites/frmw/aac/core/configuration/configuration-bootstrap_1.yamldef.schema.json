@@ -1,0 +1,322 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.yamldef.schema.json",
+  "title": "AAC Configuration Bootstrap 1",
+  "description": "Defines the canonical AAC Configuration Bootstrap schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "ConfigurationBootstrap"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "ConfigurationBootstrap": {
+      "type": "object",
+      "description": "Configuration bootstrap data used to initialize configuration profiles and providers.",
+      "required": [
+        "SchemaVersion",
+        "DefaultConfigurationProfile",
+        "ConfigurationProfiles"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "SchemaVersion": {
+          "const": 1,
+          "description": "Canonical schema version."
+        },
+        "DefaultConfigurationProfile": {
+          "type": "string",
+          "description": "Specifies the default configuration profile for this configuration bootstrap.",
+          "minLength": 1
+        },
+        "WorkspaceConfigurationProfiles": {
+          "enum": [
+            "forbidden",
+            "allowed",
+            "allowed_if_signed"
+          ],
+          "description": "Specifies the workspace configuration profiles for this configuration bootstrap."
+        },
+        "MandatoryConfigurationScopeDefinitionIds": {
+          "type": "array",
+          "description": "Lists stable identifiers associated with this configuration bootstrap.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "ConfigurationProfiles": {
+          "type": "array",
+          "description": "Lists the configuration profiles associated with this configuration bootstrap.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "Id",
+              "Version",
+              "ConfigurationScopes"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string",
+                "description": "Stable identifier of this configuration profile.",
+                "minLength": 1
+              },
+              "Version": {
+                "type": "integer",
+                "description": "Version of this configuration profile.",
+                "minimum": 1
+              },
+              "ConfigurationScopes": {
+                "type": "array",
+                "description": "Lists the configuration scopes associated with this configuration profile.",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "Id",
+                    "Type",
+                    "Resolver"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "Id": {
+                      "type": "string",
+                      "description": "Stable identifier of this configuration scope.",
+                      "minLength": 1
+                    },
+                    "Type": {
+                      "type": "string",
+                      "description": "Type discriminator for this configuration scope.",
+                      "minLength": 1
+                    },
+                    "Resolver": {
+                      "type": "string",
+                      "description": "Specifies the resolver for this configuration scope.",
+                      "minLength": 1
+                    },
+                    "PolicyAuthority": {
+                      "type": "boolean",
+                      "description": "Indicates whether policy authority applies to this configuration scope."
+                    },
+                    "Mandatory": {
+                      "type": "boolean",
+                      "description": "Indicates whether mandatory applies to this configuration scope."
+                    },
+                    "ConfigurationProviders": {
+                      "type": "array",
+                      "description": "Lists the configuration providers associated with this configuration scope.",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "Id"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "Id": {
+                            "type": "string",
+                            "description": "Stable identifier of this configuration provider.",
+                            "minLength": 1
+                          },
+                          "Priority": {
+                            "type": "integer",
+                            "description": "Specifies the priority for this configuration provider."
+                          }
+                        }
+                      }
+                    },
+                    "Name": {
+                      "$ref": "#/$defs/displayText",
+                      "description": "Human-readable name of this configuration scope."
+                    },
+                    "Description": {
+                      "$ref": "#/$defs/displayText",
+                      "description": "Human-readable description of this configuration scope."
+                    }
+                  }
+                }
+              },
+              "Name": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this configuration profile."
+              },
+              "Description": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this configuration profile."
+              }
+            }
+          }
+        },
+        "ConfigurationProviders": {
+          "type": "array",
+          "description": "Lists the configuration providers associated with this configuration bootstrap.",
+          "items": {
+            "type": "object",
+            "required": [
+              "Id",
+              "Type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string",
+                "description": "Stable identifier of this configuration provider.",
+                "minLength": 1
+              },
+              "Type": {
+                "type": "string",
+                "description": "Type discriminator for this configuration provider.",
+                "minLength": 1
+              },
+              "Settings": {
+                "type": "object",
+                "description": "Structured settings associated with this configuration provider."
+              },
+              "AuthenticationProfileId": {
+                "type": "string",
+                "description": "Stable identifier of the authentication profile associated with this configuration provider.",
+                "minLength": 1
+              },
+              "Name": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this configuration provider."
+              },
+              "Description": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this configuration provider."
+              }
+            }
+          }
+        },
+        "ConfigurationScopeResolvers": {
+          "type": "array",
+          "description": "Lists the configuration scope resolvers associated with this configuration bootstrap.",
+          "items": {
+            "type": "object",
+            "required": [
+              "Id",
+              "Type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string",
+                "description": "Stable identifier of this configuration scope resolver.",
+                "minLength": 1
+              },
+              "Type": {
+                "type": "string",
+                "description": "Type discriminator for this configuration scope resolver.",
+                "minLength": 1
+              },
+              "Settings": {
+                "type": "object",
+                "description": "Structured settings associated with this configuration scope resolver."
+              },
+              "Name": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this configuration scope resolver."
+              },
+              "Description": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this configuration scope resolver."
+              }
+            }
+          }
+        },
+        "Metadata": {
+          "type": "object",
+          "description": "Additional structured metadata associated with this configuration bootstrap."
+        },
+        "ConfigurationProfileSources": {
+          "type": "array",
+          "description": "Lists the configuration profile sources associated with this configuration bootstrap.",
+          "items": {
+            "type": "object",
+            "required": [
+              "Id",
+              "Uri"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string",
+                "description": "Stable identifier of this configuration profile source.",
+                "minLength": 1
+              },
+              "Uri": {
+                "type": "string",
+                "description": "URI or URL identifying the uri associated with this configuration profile source.",
+                "minLength": 1
+              },
+              "AuthenticationProfileId": {
+                "type": "string",
+                "description": "Stable identifier of the authentication profile associated with this configuration profile source.",
+                "minLength": 1
+              },
+              "Required": {
+                "type": "boolean",
+                "description": "Indicates whether required applies to this configuration profile source."
+              },
+              "Name": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this configuration profile source."
+              },
+              "Description": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this configuration profile source."
+              }
+            }
+          }
+        }
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "$defs": {
+    "displayText": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Text": {
+              "type": "string",
+              "description": "Human-readable display text.",
+              "minLength": 1
+            },
+            "ResourceKey": {
+              "type": "string",
+              "description": "Optional localization resource key for the human-readable text.",
+              "minLength": 1
+            }
+          },
+          "anyOf": [
+            {
+              "required": [
+                "Text"
+              ]
+            },
+            {
+              "required": [
+                "ResourceKey"
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "Defines the reusable display text structure used by this canonical schema."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.configuration-bootstrap",
+  "x-aac-schema-version": 1
+}

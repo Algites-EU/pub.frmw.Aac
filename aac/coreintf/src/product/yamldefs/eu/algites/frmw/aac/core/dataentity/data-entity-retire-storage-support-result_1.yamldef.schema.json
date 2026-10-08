@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-retire-storage-support-result_1.yamldef.schema.json",
+  "x-aac-schema-id": "_AAC.schema.data-entity-retire-storage-support-result",
+  "x-aac-schema-version": 1,
+  "title": "Data Entity Retire Storage Support Result 1",
+  "description": "Defines the canonical Data Entity Retire Storage Support Result schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "status",
+    "changed"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "enum": [
+        "NOT_PROVISIONED",
+        "READY",
+        "RETIRED",
+        "INCOMPATIBLE"
+      ],
+      "description": "Outcome status reported by this operation."
+    },
+    "changed": {
+      "type": "boolean",
+      "description": "Indicates whether the operation changed persistent storage state."
+    },
+    "diagnostics": {
+      "type": "array",
+      "description": "Diagnostic messages produced while processing this operation.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional structured metadata associated with this data entity retire storage support result."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  }
+}

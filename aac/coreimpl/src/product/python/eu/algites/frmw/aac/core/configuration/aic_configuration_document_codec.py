@@ -1,4 +1,8 @@
 from __future__ import annotations
+
+from eu.algites.frmw.aac.core.configuration.aiig_configuration_provider_document_1 import AIigConfigurationProviderDocument_1
+from eu.algites.frmw.aac.core.configuration.aiig_configuration_provider_document_configuration_scope_1 import AIigConfigurationProviderDocumentConfigurationScope_1
+from eu.algites.frmw.aac.core.configuration.aiig_configuration_provider_document_payload_1 import AIigConfigurationProviderDocumentPayload_1
 import copy
 import json
 import os
@@ -56,35 +60,35 @@ class AIcConfigurationDocumentCodec:
     def encode_snapshot(snapshot: AIcConfigurationProviderSnapshot) -> dict[str, object]:
         payload = snapshot.payload
         return {
-            "FormatVersion": 1,
-            "ConfigurationScope": {"Type": snapshot.configuration_scope.type, "Id": snapshot.configuration_scope.id},
-            "ConfigurationTarget": _encode_target(snapshot.configuration_target),
-            "RecordRevision": snapshot.record_revision,
-            "Payload": {
-                "ConfigurationSchemaId": payload.configuration_schema_id,
-                "ConfigurationSchemaVersion": payload.configuration_schema_version,
-                "WrittenByComponentVersion": payload.written_by_component_version,
-                "Values": copy.deepcopy(dict(payload.values)),
-                "Policies": {
+            AIigConfigurationProviderDocument_1.SCHEMA_FIELD_NAME__FORMAT_VERSION: 1,
+            AIigConfigurationProviderDocument_1.SCHEMA_FIELD_NAME__CONFIGURATION_SCOPE: {AIigConfigurationProviderDocumentConfigurationScope_1.SCHEMA_FIELD_NAME__TYPE: snapshot.configuration_scope.type, AIigConfigurationProviderDocumentConfigurationScope_1.SCHEMA_FIELD_NAME__ID: snapshot.configuration_scope.id},
+            AIigConfigurationProviderDocument_1.SCHEMA_FIELD_NAME__CONFIGURATION_TARGET: _encode_target(snapshot.configuration_target),
+            AIigConfigurationProviderDocument_1.SCHEMA_FIELD_NAME__RECORD_REVISION: snapshot.record_revision,
+            AIigConfigurationProviderDocument_1.SCHEMA_FIELD_NAME__PAYLOAD: {
+                AIigConfigurationProviderDocumentPayload_1.SCHEMA_FIELD_NAME__CONFIGURATION_SCHEMA_ID: payload.configuration_schema_id,
+                AIigConfigurationProviderDocumentPayload_1.SCHEMA_FIELD_NAME__CONFIGURATION_SCHEMA_VERSION: payload.configuration_schema_version,
+                AIigConfigurationProviderDocumentPayload_1.SCHEMA_FIELD_NAME__WRITTEN_BY_COMPONENT_VERSION: payload.written_by_component_version,
+                AIigConfigurationProviderDocumentPayload_1.SCHEMA_FIELD_NAME__VALUES: copy.deepcopy(dict(payload.values)),
+                AIigConfigurationProviderDocumentPayload_1.SCHEMA_FIELD_NAME__POLICIES: {
                     key: [{"Mode": item.mode.value, "Value": copy.deepcopy(item.value)} for item in values]
                     for key, values in payload.policies.items()
                 },
-                "Metadata": copy.deepcopy(dict(payload.metadata)),
+                AIigConfigurationProviderDocumentPayload_1.SCHEMA_FIELD_NAME__METADATA: copy.deepcopy(dict(payload.metadata)),
             },
         }
 
     @staticmethod
     def decode_snapshot(raw: Mapping[str, object]) -> AIcConfigurationProviderSnapshot:
-        format_version = int(raw.get("FormatVersion", 0))
+        format_version = int(raw.get(AIigConfigurationProviderDocument_1.SCHEMA_FIELD_NAME__FORMAT_VERSION, 0))
         if format_version != 1:
             raise ValueError("unsupported configuration provider document format_version; expected 1")
-        raw_scope = _mapping(raw.get("ConfigurationScope"), "configuration_scope")
-        raw_target = _mapping(raw.get("ConfigurationTarget"), "configuration_target")
-        raw_payload = _mapping(raw.get("Payload"), "payload")
-        scope = AIcConfigurationScope(str(raw_scope["Type"]), _optional_str(raw_scope.get("Id")))
+        raw_scope = _mapping(raw.get(AIigConfigurationProviderDocument_1.SCHEMA_FIELD_NAME__CONFIGURATION_SCOPE), "configuration_scope")
+        raw_target = _mapping(raw.get(AIigConfigurationProviderDocument_1.SCHEMA_FIELD_NAME__CONFIGURATION_TARGET), "configuration_target")
+        raw_payload = _mapping(raw.get(AIigConfigurationProviderDocument_1.SCHEMA_FIELD_NAME__PAYLOAD), "payload")
+        scope = AIcConfigurationScope(str(raw_scope[AIigConfigurationProviderDocumentConfigurationScope_1.SCHEMA_FIELD_NAME__TYPE]), _optional_str(raw_scope.get(AIigConfigurationProviderDocumentConfigurationScope_1.SCHEMA_FIELD_NAME__ID)))
         target = _decode_target(raw_target)
         policies = {}
-        for property_id, raw_items in _mapping(raw_payload.get("Policies", {}), "payload.policies").items():
+        for property_id, raw_items in _mapping(raw_payload.get(AIigConfigurationProviderDocumentPayload_1.SCHEMA_FIELD_NAME__POLICIES, {}), "payload.policies").items():
             if not isinstance(raw_items, list):
                 raise ValueError("policy list must be an array")
             policies[str(property_id)] = tuple(
@@ -93,20 +97,20 @@ class AIcConfigurationDocumentCodec:
             )
         payload = AIcConfigurationPersistedPayload(
             configuration_target=target,
-            configuration_schema_id=str(raw_payload["ConfigurationSchemaId"]),
-            configuration_schema_version=int(raw_payload["ConfigurationSchemaVersion"]),
-            written_by_component_version=int(raw_payload["WrittenByComponentVersion"]),
-            values=dict(_mapping(raw_payload.get("Values", {}), "payload.values")),
+            configuration_schema_id=str(raw_payload[AIigConfigurationProviderDocumentPayload_1.SCHEMA_FIELD_NAME__CONFIGURATION_SCHEMA_ID]),
+            configuration_schema_version=int(raw_payload[AIigConfigurationProviderDocumentPayload_1.SCHEMA_FIELD_NAME__CONFIGURATION_SCHEMA_VERSION]),
+            written_by_component_version=int(raw_payload[AIigConfigurationProviderDocumentPayload_1.SCHEMA_FIELD_NAME__WRITTEN_BY_COMPONENT_VERSION]),
+            values=dict(_mapping(raw_payload.get(AIigConfigurationProviderDocumentPayload_1.SCHEMA_FIELD_NAME__VALUES, {}), "payload.values")),
             policies=policies,
-            metadata=dict(_mapping(raw_payload.get("Metadata", {}), "payload.metadata")),
+            metadata=dict(_mapping(raw_payload.get(AIigConfigurationProviderDocumentPayload_1.SCHEMA_FIELD_NAME__METADATA, {}), "payload.metadata")),
         )
-        revision = raw.get("RecordRevision")
+        revision = raw.get(AIigConfigurationProviderDocument_1.SCHEMA_FIELD_NAME__RECORD_REVISION)
         return AIcConfigurationProviderSnapshot(scope, target, revision, payload)
 
     @staticmethod
     def encode_change_set(change_set: AIcConfigurationChangeSet) -> dict[str, object]:
         return {
-            "ConfigurationScope": {"Type": change_set.configuration_scope.type, "Id": change_set.configuration_scope.id},
+            "ConfigurationScope": {AIigConfigurationProviderDocumentConfigurationScope_1.SCHEMA_FIELD_NAME__TYPE: change_set.configuration_scope.type, AIigConfigurationProviderDocumentConfigurationScope_1.SCHEMA_FIELD_NAME__ID: change_set.configuration_scope.id},
             "ConfigurationProviderId": change_set.configuration_provider_id,
             "ConfigurationTarget": _encode_target(change_set.configuration_target),
             "ExpectedRecordRevision": change_set.expected_record_revision,

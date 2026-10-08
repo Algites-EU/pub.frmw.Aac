@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/persistence/transaction-state_1.yamldef.schema.json",
+  "title": "AAC Persistence Transaction State 1",
+  "description": "Defines the canonical AAC Persistence Transaction State schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "FormatVersion",
+    "TransactionId",
+    "Phase",
+    "UpdatedAt",
+    "Diagnostics"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "FormatVersion": {
+      "const": 1,
+      "description": "Version of the persisted or exchanged document format."
+    },
+    "TransactionId": {
+      "type": "string",
+      "description": "Stable identifier of the transaction associated with this AAC persistence transaction state.",
+      "minLength": 1
+    },
+    "Phase": {
+      "enum": [
+        "prepared",
+        "commit_started",
+        "committed",
+        "cleanup_completed",
+        "aborted"
+      ],
+      "description": "Specifies the phase for this AAC persistence transaction state."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "Specifies the updated at for this AAC persistence transaction state."
+    },
+    "Diagnostics": {
+      "type": "array",
+      "description": "Lists the diagnostics associated with this AAC persistence transaction state.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "x-aac-schema-id": "_AAC.schema.persistence-transaction-state",
+  "x-aac-schema-version": 1
+}

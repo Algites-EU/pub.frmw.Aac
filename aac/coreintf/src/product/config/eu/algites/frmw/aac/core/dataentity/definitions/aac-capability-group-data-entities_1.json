@@ -1,0 +1,14 @@
+{
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/frmw/aac/core/capability/capability-group_1.jsondef.schema.json",
+  "Group": {
+    "Id": "_AAC.data-entity",
+    "Name": {
+      "Text": "Data Entities",
+      "ResourceKey": "aac.data.entity.name"
+    },
+    "Description": {
+      "Text": "Persistent domain and system Data Entity capabilities.",
+      "ResourceKey": "aac.data.entity.description"
+    }
+  }
+}

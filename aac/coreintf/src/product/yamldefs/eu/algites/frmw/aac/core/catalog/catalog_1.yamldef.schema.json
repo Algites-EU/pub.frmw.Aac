@@ -1,0 +1,818 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json",
+  "type": "object",
+  "required": [
+    "Catalog"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "Catalog": {
+      "type": "object",
+      "description": "Catalog data represented by this document.",
+      "required": [
+        "FormatVersion",
+        "ProductId",
+        "TechnologyId",
+        "Components"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "FormatVersion": {
+          "const": 1,
+          "description": "Version of the persisted or exchanged document format."
+        },
+        "ProductId": {
+          "type": "string",
+          "description": "Stable identifier of the product associated with this catalog.",
+          "minLength": 1
+        },
+        "TechnologyId": {
+          "type": "string",
+          "description": "Stable identifier of the technology associated with this catalog.",
+          "minLength": 1
+        },
+        "GeneratedAt": {
+          "type": "string",
+          "description": "Specifies the generated at for this catalog.",
+          "minLength": 1
+        },
+        "Metadata": {
+          "type": "object",
+          "description": "Additional structured metadata associated with this catalog."
+        },
+        "Components": {
+          "type": "array",
+          "description": "Lists the components associated with this catalog.",
+          "items": {
+            "$ref": "#/$defs/component"
+          }
+        }
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "$defs": {
+    "displayText": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "Text": {
+              "type": "string",
+              "description": "Human-readable display text.",
+              "minLength": 1
+            },
+            "ResourceKey": {
+              "type": "string",
+              "description": "Optional localization resource key for the human-readable text.",
+              "minLength": 1
+            }
+          }
+        }
+      ],
+      "description": "Defines the reusable display text structure used by this canonical schema."
+    },
+    "permission": {
+      "type": "object",
+      "required": [
+        "Id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "Stable identifier of this permission.",
+          "minLength": 1
+        },
+        "Name": {
+          "$ref": "#/$defs/displayText",
+          "description": "Human-readable name of this permission."
+        },
+        "Description": {
+          "$ref": "#/$defs/displayText",
+          "description": "Human-readable description of this permission."
+        },
+        "Metadata": {
+          "type": "object",
+          "description": "Additional structured metadata associated with this permission."
+        },
+        "PossibleLicensingScopes": {
+          "type": "array",
+          "description": "Lists the possible licensing scopes associated with this permission.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "description": "Defines the reusable permission structure used by this canonical schema."
+    },
+    "capabilityEntitlement": {
+      "type": "object",
+      "required": [
+        "Capability",
+        "Permissions"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Capability": {
+          "type": "object",
+          "description": "Identity and human-facing metadata of the capability contract.",
+          "required": [
+            "Id",
+            "Version"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "Id": {
+              "type": "string",
+              "description": "Stable identifier of this capability.",
+              "minLength": 1
+            },
+            "Version": {
+              "type": "integer",
+              "description": "Version of this capability.",
+              "minimum": 1
+            }
+          }
+        },
+        "Permissions": {
+          "type": "array",
+          "description": "Authorization or entitlement permissions associated with this capability entitlement.",
+          "items": {
+            "$ref": "#/$defs/permission"
+          }
+        },
+        "Name": {
+          "$ref": "#/$defs/displayText",
+          "description": "Human-readable name of this capability entitlement."
+        },
+        "Description": {
+          "$ref": "#/$defs/displayText",
+          "description": "Human-readable description of this capability entitlement."
+        }
+      },
+      "description": "Defines the reusable capability entitlement structure used by this canonical schema."
+    },
+    "artifact": {
+      "type": "object",
+      "required": [
+        "Id",
+        "Locator",
+        "ArtifactFilename",
+        "PackageFormat",
+        "DescriptorPath",
+        "Sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "Stable identifier of this artifact.",
+          "minLength": 1
+        },
+        "Locator": {
+          "type": "object",
+          "description": "Structured locator associated with this artifact.",
+          "required": [
+            "Type"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "Type": {
+              "enum": [
+                "uri",
+                "repository"
+              ],
+              "description": "Type discriminator for this locator."
+            },
+            "Uri": {
+              "type": "string",
+              "description": "URI or URL identifying the uri associated with this locator.",
+              "minLength": 1
+            },
+            "RepositoryId": {
+              "type": "string",
+              "description": "Stable identifier of the repository associated with this locator.",
+              "minLength": 1
+            },
+            "Coordinates": {
+              "type": "object",
+              "description": "Structured coordinates associated with this locator."
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "Type": {
+                    "const": "uri",
+                    "description": "Discriminator identifying the concrete variant represented by this value."
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "Uri"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "Type": {
+                    "const": "repository",
+                    "description": "Discriminator identifying the concrete variant represented by this value."
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "RepositoryId"
+                ]
+              }
+            }
+          ]
+        },
+        "ArtifactFilename": {
+          "type": "string",
+          "description": "Specifies the artifact filename for this artifact.",
+          "minLength": 1
+        },
+        "PackageFormat": {
+          "type": "string",
+          "description": "Specifies the package format for this artifact.",
+          "minLength": 1
+        },
+        "DescriptorPath": {
+          "type": "string",
+          "description": "Filesystem or logical descriptor path used by this artifact.",
+          "minLength": 1
+        },
+        "Sha256": {
+          "type": "string",
+          "description": "Specifies the sha256 for this artifact.",
+          "pattern": "^[0-9a-fA-F]{64}$"
+        },
+        "RuntimePackage": {
+          "type": "string",
+          "description": "Specifies the runtime package for this artifact.",
+          "minLength": 1
+        },
+        "VerifierId": {
+          "type": "string",
+          "description": "Stable identifier of the verifier associated with this artifact.",
+          "minLength": 1
+        },
+        "Platforms": {
+          "type": "array",
+          "description": "Lists the platforms associated with this artifact.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "Architectures": {
+          "type": "array",
+          "description": "Lists the architectures associated with this artifact.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "Metadata": {
+          "type": "object",
+          "description": "Additional structured metadata associated with this artifact."
+        },
+        "AuthenticationProfileId": {
+          "type": "string",
+          "description": "Stable identifier of the authentication profile associated with this artifact.",
+          "minLength": 1
+        },
+        "Sidecars": {
+          "type": "array",
+          "description": "Lists the sidecars associated with this artifact.",
+          "items": {
+            "type": "object",
+            "required": [
+              "Uri",
+              "Suffix"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Uri": {
+                "type": "string",
+                "description": "URI or URL identifying the uri associated with this sidecar.",
+                "minLength": 1
+              },
+              "Suffix": {
+                "type": "string",
+                "description": "Specifies the suffix for this sidecar.",
+                "pattern": "^\\..+"
+              },
+              "Name": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this sidecar."
+              },
+              "Description": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this sidecar."
+              }
+            }
+          }
+        }
+      },
+      "description": "Defines the reusable artifact structure used by this canonical schema."
+    },
+    "release": {
+      "type": "object",
+      "required": [
+        "Version",
+        "Artifacts"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Version": {
+          "type": "integer",
+          "description": "Version of this release.",
+          "minimum": 1
+        },
+        "PublishedAt": {
+          "type": "string",
+          "description": "Specifies the published at for this release.",
+          "minLength": 1
+        },
+        "ReleaseNotesUrl": {
+          "type": "string",
+          "description": "URI or URL identifying the release notes associated with this release.",
+          "minLength": 1
+        },
+        "Provides": {
+          "type": "array",
+          "description": "Lists the provides associated with this release.",
+          "items": {
+            "type": "object",
+            "required": [
+              "Capability",
+              "Versions"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Capability": {
+                "type": "string",
+                "description": "Identity and human-facing metadata of the capability contract.",
+                "minLength": 1
+              },
+              "Versions": {
+                "type": "array",
+                "description": "Lists the versions supported or selected by this provide.",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          }
+        },
+        "Requires": {
+          "type": "array",
+          "description": "Indicates whether requires applies to this release.",
+          "items": {
+            "type": "object",
+            "required": [
+              "Id",
+              "Capability"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string",
+                "description": "Stable identifier of this require.",
+                "minLength": 1
+              },
+              "Capability": {
+                "type": "string",
+                "description": "Identity and human-facing metadata of the capability contract.",
+                "minLength": 1
+              },
+              "Versions": {
+                "type": "array",
+                "description": "Lists the versions supported or selected by this require.",
+                "uniqueItems": true,
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "Cardinality": {
+                "enum": [
+                  "single",
+                  "multiple"
+                ],
+                "description": "Specifies the cardinality for this require."
+              },
+              "Mandatory": {
+                "type": "boolean",
+                "description": "Indicates whether mandatory applies to this require."
+              }
+            }
+          }
+        },
+        "Artifacts": {
+          "type": "array",
+          "description": "Lists the artifacts associated with this release.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifact"
+          }
+        },
+        "Metadata": {
+          "type": "object",
+          "description": "Additional structured metadata associated with this release."
+        },
+        "PersistentSchemas": {
+          "type": "array",
+          "description": "Lists the persistent schemas associated with this release.",
+          "items": {
+            "$ref": "#/$defs/persistentSchema"
+          }
+        },
+        "EntitlementLicensingScopes": {
+          "type": "array",
+          "description": "Lists the entitlement licensing scopes associated with this release.",
+          "items": {
+            "type": "object",
+            "required": [
+              "Type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Type": {
+                "type": "string",
+                "description": "Type discriminator for this entitlement licensing scope.",
+                "minLength": 1
+              },
+              "Name": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable name of this entitlement licensing scope."
+              },
+              "Description": {
+                "$ref": "#/$defs/displayText",
+                "description": "Human-readable description of this entitlement licensing scope."
+              },
+              "Metadata": {
+                "type": "object",
+                "description": "Additional structured metadata associated with this entitlement licensing scope."
+              }
+            }
+          }
+        },
+        "ProvidedCapabilityEntitlements": {
+          "type": "array",
+          "description": "Lists the provided capability entitlements associated with this release.",
+          "items": {
+            "$ref": "#/$defs/capabilityEntitlement"
+          }
+        }
+      },
+      "description": "Defines the reusable release structure used by this canonical schema."
+    },
+    "component": {
+      "type": "object",
+      "required": [
+        "ComponentId",
+        "Releases"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ComponentId": {
+          "type": "string",
+          "description": "Stable identifier of the AAC component associated with this component.",
+          "minLength": 1
+        },
+        "Name": {
+          "$ref": "#/$defs/displayText",
+          "description": "Human-readable name of this component."
+        },
+        "Description": {
+          "$ref": "#/$defs/displayText",
+          "description": "Human-readable description of this component."
+        },
+        "Publisher": {
+          "type": "object",
+          "description": "Structured publisher associated with this component.",
+          "required": [
+            "Id"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "Id": {
+              "type": "string",
+              "description": "Stable identifier of this publisher.",
+              "minLength": 1
+            },
+            "Name": {
+              "$ref": "#/$defs/displayText",
+              "description": "Human-readable name of this publisher."
+            }
+          }
+        },
+        "HomepageUrl": {
+          "type": "string",
+          "description": "URI or URL identifying the homepage associated with this component.",
+          "minLength": 1
+        },
+        "DocumentationUrl": {
+          "type": "string",
+          "description": "URI or URL identifying the documentation associated with this component.",
+          "minLength": 1
+        },
+        "SupportUrl": {
+          "type": "string",
+          "description": "URI or URL identifying the support associated with this component.",
+          "minLength": 1
+        },
+        "EntitlementInfoUrl": {
+          "type": "string",
+          "description": "URI or URL identifying the entitlement info associated with this component.",
+          "minLength": 1
+        },
+        "Icon": {
+          "type": "object",
+          "description": "Structured icon associated with this component.",
+          "required": [
+            "Url"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "Url": {
+              "type": "string",
+              "description": "URI or URL identifying the url associated with this icon.",
+              "minLength": 1
+            }
+          }
+        },
+        "Categories": {
+          "type": "array",
+          "description": "Lists the categories associated with this component.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "Tags": {
+          "type": "array",
+          "description": "Lists the tags associated with this component.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "Releases": {
+          "type": "array",
+          "description": "Lists the releases associated with this component.",
+          "items": {
+            "$ref": "#/$defs/release"
+          }
+        },
+        "Metadata": {
+          "type": "object",
+          "description": "Additional structured metadata associated with this component."
+        }
+      },
+      "description": "Defines the reusable component structure used by this canonical schema."
+    },
+    "persistentSchema": {
+      "type": "object",
+      "required": [
+        "Kind",
+        "SchemaId"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Kind": {
+          "enum": [
+            "component_configuration",
+            "provider_configuration",
+            "data_entity"
+          ],
+          "description": "Kind of this persistent schema."
+        },
+        "SchemaId": {
+          "type": "string",
+          "description": "Canonical schema identifier.",
+          "minLength": 1
+        },
+        "WriteVersion": {
+          "type": "integer",
+          "description": "Version of the write associated with this persistent schema.",
+          "minimum": 1
+        },
+        "ProviderId": {
+          "type": "string",
+          "description": "Stable identifier of the provider associated with this persistent schema.",
+          "minLength": 1
+        },
+        "ReadableVersions": {
+          "type": "array",
+          "description": "Lists the readable versions supported or selected by this persistent schema.",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "WritableVersions": {
+          "type": "array",
+          "description": "Lists the writable versions supported or selected by this persistent schema.",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "PreferredWriteVersion": {
+          "type": "integer",
+          "description": "Version of the preferred write associated with this persistent schema.",
+          "minimum": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "Kind": {
+                "const": "component_configuration",
+                "description": "Discriminator identifying the semantic kind represented by this value."
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "WriteVersion"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "ProviderId"
+                  ]
+                },
+                {
+                  "required": [
+                    "ReadableVersions"
+                  ]
+                },
+                {
+                  "required": [
+                    "WritableVersions"
+                  ]
+                },
+                {
+                  "required": [
+                    "PreferredWriteVersion"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "Kind": {
+                "const": "provider_configuration",
+                "description": "Discriminator identifying the semantic kind represented by this value."
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ProviderId",
+              "WriteVersion"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "ReadableVersions"
+                  ]
+                },
+                {
+                  "required": [
+                    "WritableVersions"
+                  ]
+                },
+                {
+                  "required": [
+                    "PreferredWriteVersion"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "Kind": {
+                "const": "data_entity",
+                "description": "Discriminator identifying the semantic kind represented by this value."
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ReadableVersions",
+              "WritableVersions"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "ProviderId"
+                  ]
+                },
+                {
+                  "required": [
+                    "WriteVersion"
+                  ]
+                }
+              ]
+            },
+            "allOf": [
+              {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "ReadableVersions": {
+                        "minItems": 1,
+                        "description": "Schema versions that may be read by this declaration."
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "WritableVersions": {
+                        "minItems": 1,
+                        "description": "Schema versions that may be written by this declaration."
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "if": {
+                  "properties": {
+                    "WritableVersions": {
+                      "minItems": 1,
+                      "description": "Schema versions that may be written by this declaration."
+                    }
+                  },
+                  "required": [
+                    "WritableVersions"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "PreferredWriteVersion"
+                  ]
+                },
+                "else": {
+                  "not": {
+                    "required": [
+                      "PreferredWriteVersion"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "description": "Defines the reusable persistent schema structure used by this canonical schema."
+    }
+  },
+  "title": "AAC Component Catalog 1",
+  "description": "Defines the canonical AAC Component Catalog schema and its serialized data contract.",
+  "x-aac-schema-id": "_AAC.schema.catalog",
+  "x-aac-schema-version": 1
+}
