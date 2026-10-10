@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_caller_to_provider_message_failure_detail_level_1
+===========================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_caller_to_provider_message_failure_detail_level_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_caller_to_provider_message_failure_detail_level_1.AIngOperationInteractionCallerToProviderMessageFailureDetailLevel_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngOperationInteractionCallerToProviderMessageFailureDetailLevel_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Specifies the failure detail level for this operation interaction caller to provider message. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json#/properties/FailureDetailLevel (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json#/properties/FailureDetailLevel); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.yamldef.schema.json#/properties/FailureDetailLevel (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.yamldef.schema.json#/properties/FailureDetailLevel)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json#/properties/FailureDetailLevel/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json#/properties/FailureDetailLevel. Do not edit manually.
+
+   Values:
+       BASIC: Canonical enum value basic.
+       STACK_TRACE: Canonical enum value stack_trace.
+
+
+   .. py:attribute:: BASIC
+      :value: 'basic'
+
+
+
+   .. py:attribute:: STACK_TRACE
+      :value: 'stack_trace'
+
+
+

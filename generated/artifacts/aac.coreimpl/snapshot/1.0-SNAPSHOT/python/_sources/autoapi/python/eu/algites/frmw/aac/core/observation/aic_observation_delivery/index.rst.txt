@@ -22,7 +22,7 @@ Module Contents
 
 
    .. py:attribute:: output
-      :type:  eu.algites.frmw.aac.core.observation.api.AIcObservationOutput | None
+      :type:  eu.algites.frmw.aac.core.observation.api.AIigObservationOutput_1 | None
 
 
    .. py:attribute:: error

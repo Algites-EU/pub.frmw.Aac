@@ -1,0 +1,53 @@
+python.gen.eu.algites.frmw.aac.core.packages.aing_workspace_component_requirements_workspace_component_requirements_update_policy_1
+===================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.packages.aing_workspace_component_requirements_workspace_component_requirements_update_policy_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.packages.aing_workspace_component_requirements_workspace_component_requirements_update_policy_1.AIngWorkspaceComponentRequirementsWorkspaceComponentRequirementsUpdatePolicy_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngWorkspaceComponentRequirementsWorkspaceComponentRequirementsUpdatePolicy_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Specifies the update policy for this workspace component requirement. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.jsondef.schema.json#/properties/WorkspaceComponentRequirements/properties/UpdatePolicy (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.jsondef.schema.json#/properties/WorkspaceComponentRequirements/properties/UpdatePolicy); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.yamldef.schema.json#/properties/WorkspaceComponentRequirements/properties/UpdatePolicy (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.yamldef.schema.json#/properties/WorkspaceComponentRequirements/properties/UpdatePolicy)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.jsondef.schema.json#/properties/WorkspaceComponentRequirements/properties/UpdatePolicy/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.jsondef.schema.json#/properties/WorkspaceComponentRequirements/properties/UpdatePolicy. Do not edit manually.
+
+   Values:
+       MANUAL: Canonical enum value manual.
+       NOTIFY: Canonical enum value notify.
+       AUTO_COMPATIBLE: Canonical enum value auto_compatible.
+       AUTO_LOCKED: Canonical enum value auto_locked.
+
+
+   .. py:attribute:: MANUAL
+      :value: 'manual'
+
+
+
+   .. py:attribute:: NOTIFY
+      :value: 'notify'
+
+
+
+   .. py:attribute:: AUTO_COMPATIBLE
+      :value: 'auto_compatible'
+
+
+
+   .. py:attribute:: AUTO_LOCKED
+      :value: 'auto_locked'
+
+
+

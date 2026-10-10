@@ -1,0 +1,48 @@
+python.gen.eu.algites.frmw.aac.core.entitlement.aicgd_entitlement_document_entitlement_metadata_1
+=================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.entitlement.aicgd_entitlement_document_entitlement_metadata_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.entitlement.aicgd_entitlement_document_entitlement_metadata_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.entitlement.aicgd_entitlement_document_entitlement_metadata_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.entitlement.aicgd_entitlement_document_entitlement_metadata_1.AIcgdEntitlementDocumentEntitlementMetadata_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdEntitlementDocumentEntitlementMetadata_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_metadata_1.AIigEntitlementDocumentEntitlementMetadata_1`
+
+
+   Additional structured metadata associated with this entitlement. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.jsondef.schema.json#/properties/Entitlement/properties/Metadata (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.jsondef.schema.json#/properties/Entitlement/properties/Metadata); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.yamldef.schema.json#/properties/Entitlement/properties/Metadata (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.yamldef.schema.json#/properties/Entitlement/properties/Metadata)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.jsondef.schema.json#/properties/Entitlement/properties/Metadata/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.jsondef.schema.json#/properties/Entitlement/properties/Metadata. Do not edit manually.
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

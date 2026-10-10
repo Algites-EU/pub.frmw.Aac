@@ -1,0 +1,65 @@
+python.gen.eu.algites.frmw.aac.core.capability.aing_capability_contract_operations_items_interactions_items_kind_1
+==================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.capability.aing_capability_contract_operations_items_interactions_items_kind_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.capability.aing_capability_contract_operations_items_interactions_items_kind_1.AIngCapabilityContractOperationsItemsInteractionsItemsKind_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngCapabilityContractOperationsItemsInteractionsItemsKind_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Kind of this interaction. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/Operations/items/properties/Interactions/items/properties/Kind (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/Operations/items/properties/Interactions/items/properties/Kind); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.yamldef.schema.json#/properties/Operations/items/properties/Interactions/items/properties/Kind (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.yamldef.schema.json#/properties/Operations/items/properties/Interactions/items/properties/Kind)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/Operations/items/properties/Interactions/items/properties/Kind/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/Operations/items/properties/Interactions/items/properties/Kind. Do not edit manually.
+
+   Values:
+       INPUT: Canonical enum value input.
+       RUNNING_COMPLETE_STATE_RESULT: Canonical enum value running_complete_state_result.
+       RUNNING_DELTA_STATE_RESULT: Canonical enum value running_delta_state_result.
+       FINAL_SUCCESS_STATE_RESULT: Canonical enum value final_success_state_result.
+       FINAL_CANCELLED_STATE_RESULT: Canonical enum value final_cancelled_state_result.
+       FINAL_FAILED_STATE_RESULT_EXTENSION: Canonical enum value final_failed_state_result_extension.
+
+
+   .. py:attribute:: INPUT
+      :value: 'input'
+
+
+
+   .. py:attribute:: RUNNING_COMPLETE_STATE_RESULT
+      :value: 'running_complete_state_result'
+
+
+
+   .. py:attribute:: RUNNING_DELTA_STATE_RESULT
+      :value: 'running_delta_state_result'
+
+
+
+   .. py:attribute:: FINAL_SUCCESS_STATE_RESULT
+      :value: 'final_success_state_result'
+
+
+
+   .. py:attribute:: FINAL_CANCELLED_STATE_RESULT
+      :value: 'final_cancelled_state_result'
+
+
+
+   .. py:attribute:: FINAL_FAILED_STATE_RESULT_EXTENSION
+      :value: 'final_failed_state_result_extension'
+
+
+

@@ -1,0 +1,115 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_artifact_sidecars_items_1
+=============================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_artifact_sidecars_items_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_artifact_sidecars_items_1.AIigCatalogDefinitionArtifactSidecarsItems_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigCatalogDefinitionArtifactSidecarsItems_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/artifact/properties/Sidecars/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/artifact/properties/Sidecars/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/artifact/properties/Sidecars/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/artifact/properties/Sidecars/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/artifact/properties/Sidecars/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/artifact/properties/Sidecars/items. Do not edit manually.
+
+   .. attribute:: uri
+
+      URI or URL identifying the uri associated with this sidecar.
+
+   .. attribute:: suffix
+
+      Specifies the suffix for this sidecar.
+
+   .. attribute:: name
+
+      Human-readable name of this sidecar.
+
+   .. attribute:: description
+
+      Human-readable description of this sidecar.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__URI
+      :type:  ClassVar[str]
+      :value: 'Uri'
+
+
+      ** ``Uri``
+
+      **Field Description:** URI or URL identifying the uri associated with this sidecar.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SUFFIX
+      :type:  ClassVar[str]
+      :value: 'Suffix'
+
+
+      ** ``Suffix``
+
+      **Field Description:** Specifies the suffix for this sidecar.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :type:  ClassVar[str]
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this sidecar.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :type:  ClassVar[str]
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this sidecar.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: uri
+      :type:  str
+
+
+   .. py:attribute:: suffix
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  Any
+
+
+   .. py:attribute:: description
+      :type:  Any
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

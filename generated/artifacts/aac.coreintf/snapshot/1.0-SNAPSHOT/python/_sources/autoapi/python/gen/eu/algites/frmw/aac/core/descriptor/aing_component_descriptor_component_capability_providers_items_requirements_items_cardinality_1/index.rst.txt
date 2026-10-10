@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.descriptor.aing_component_descriptor_component_capability_providers_items_requirements_items_cardinality_1
+==============================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.descriptor.aing_component_descriptor_component_capability_providers_items_requirements_items_cardinality_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aing_component_descriptor_component_capability_providers_items_requirements_items_cardinality_1.AIngComponentDescriptorComponentCapabilityProvidersItemsRequirementsItemsCardinality_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngComponentDescriptorComponentCapabilityProvidersItemsRequirementsItemsCardinality_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Specifies the cardinality for this requirement. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Requirements/items/properties/Cardinality (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Requirements/items/properties/Cardinality); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Requirements/items/properties/Cardinality (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Requirements/items/properties/Cardinality)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Requirements/items/properties/Cardinality/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Requirements/items/properties/Cardinality. Do not edit manually.
+
+   Values:
+       SINGLE: Canonical enum value single.
+       MULTIPLE: Canonical enum value multiple.
+
+
+   .. py:attribute:: SINGLE
+      :value: 'single'
+
+
+
+   .. py:attribute:: MULTIPLE
+      :value: 'multiple'
+
+
+

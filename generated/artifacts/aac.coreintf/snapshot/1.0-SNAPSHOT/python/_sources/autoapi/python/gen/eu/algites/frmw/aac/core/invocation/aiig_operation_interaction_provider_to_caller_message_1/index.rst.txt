@@ -1,0 +1,191 @@
+python.gen.eu.algites.frmw.aac.core.invocation.aiig_operation_interaction_provider_to_caller_message_1
+======================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.invocation.aiig_operation_interaction_provider_to_caller_message_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.invocation.aiig_operation_interaction_provider_to_caller_message_1.AIigOperationInteractionProviderToCallerMessage_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigOperationInteractionProviderToCallerMessage_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Defines the canonical Operation Interaction Provider To Caller Message schema and its serialized data contract. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.jsondef.schema.json (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.jsondef.schema.json); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.yamldef.schema.json (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.yamldef.schema.json)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.jsondef.schema.json/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.jsondef.schema.json. Do not edit manually.
+
+   .. attribute:: interaction_revision
+
+      Specifies the interaction revision for this operation interaction provider to caller message.
+
+   .. attribute:: execution_state
+
+      Specifies the execution state for this operation interaction provider to caller message.
+
+   .. attribute:: state_result_revision
+
+      Specifies the state result revision for this operation interaction provider to caller message.
+
+   .. attribute:: events
+
+      Interaction events emitted since the previous provider-to-caller update.
+
+   .. attribute:: features
+
+      Feature flags or negotiated interaction capabilities reported by the provider.
+
+   .. attribute:: state_result_payload_revision
+
+      Specifies the state result payload revision for this operation interaction provider to caller message.
+
+   .. attribute:: state_result
+
+      Specifies the state result for this operation interaction provider to caller message.
+
+   .. attribute:: _schema
+
+      Optional absolute URI of the schema describing this root document.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__INTERACTION_REVISION
+      :type:  ClassVar[str]
+      :value: 'InteractionRevision'
+
+
+      ** ``InteractionRevision``
+
+      **Field Description:** Specifies the interaction revision for this operation interaction provider to caller message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__EXECUTION_STATE
+      :type:  ClassVar[str]
+      :value: 'ExecutionState'
+
+
+      ** ``ExecutionState``
+
+      **Field Description:** Specifies the execution state for this operation interaction provider to caller message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__STATE_RESULT_REVISION
+      :type:  ClassVar[str]
+      :value: 'StateResultRevision'
+
+
+      ** ``StateResultRevision``
+
+      **Field Description:** Specifies the state result revision for this operation interaction provider to caller message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__EVENTS
+      :type:  ClassVar[str]
+      :value: 'Events'
+
+
+      ** ``Events``
+
+      **Field Description:** Interaction events emitted since the previous provider-to-caller update.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__FEATURES
+      :type:  ClassVar[str]
+      :value: 'Features'
+
+
+      ** ``Features``
+
+      **Field Description:** Feature flags or negotiated interaction capabilities reported by the provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__STATE_RESULT_PAYLOAD_REVISION
+      :type:  ClassVar[str]
+      :value: 'StateResultPayloadRevision'
+
+
+      ** ``StateResultPayloadRevision``
+
+      **Field Description:** Specifies the state result payload revision for this operation interaction provider to caller message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__STATE_RESULT
+      :type:  ClassVar[str]
+      :value: 'StateResult'
+
+
+      ** ``StateResult``
+
+      **Field Description:** Specifies the state result for this operation interaction provider to caller message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA
+      :type:  ClassVar[str]
+      :value: '$schema'
+
+
+      ** ``$schema``
+
+      **Field Description:** Optional absolute URI of the schema describing this root document.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: interaction_revision
+      :type:  int
+
+
+   .. py:attribute:: execution_state
+      :type:  str
+
+
+   .. py:attribute:: state_result_revision
+      :type:  int
+
+
+   .. py:attribute:: events
+      :type:  tuple[python.gen.eu.algites.frmw.aac.core.invocation.aiig_operation_interaction_event_1.AIigOperationInteractionEvent_1, Ellipsis]
+
+
+   .. py:attribute:: features
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: state_result_payload_revision
+      :type:  int | None
+
+
+   .. py:attribute:: state_result
+      :type:  Any | None
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

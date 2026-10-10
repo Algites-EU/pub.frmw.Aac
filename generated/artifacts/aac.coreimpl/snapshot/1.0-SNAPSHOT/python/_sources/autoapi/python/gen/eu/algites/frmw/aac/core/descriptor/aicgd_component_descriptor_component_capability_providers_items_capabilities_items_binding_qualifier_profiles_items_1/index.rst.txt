@@ -1,0 +1,48 @@
+python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_capabilities_items_binding_qualifier_profiles_items_1
+====================================================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_capabilities_items_binding_qualifier_profiles_items_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_capabilities_items_binding_qualifier_profiles_items_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_capabilities_items_binding_qualifier_profiles_items_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_capabilities_items_binding_qualifier_profiles_items_1.AIcgdComponentDescriptorComponentCapabilityProvidersItemsCapabilitiesItemsBindingQualifierProfilesItems_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdComponentDescriptorComponentCapabilityProvidersItemsCapabilitiesItemsBindingQualifierProfilesItems_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_capabilities_items_binding_qualifier_profiles_items_1.AIigComponentDescriptorComponentCapabilityProvidersItemsCapabilitiesItemsBindingQualifierProfilesItems_1`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Capabilities/items/properties/BindingQualifierProfiles/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Capabilities/items/properties/BindingQualifierProfiles/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Capabilities/items/properties/BindingQualifierProfiles/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Capabilities/items/properties/BindingQualifierProfiles/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Capabilities/items/properties/BindingQualifierProfiles/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Capabilities/items/properties/BindingQualifierProfiles/items. Do not edit manually.
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

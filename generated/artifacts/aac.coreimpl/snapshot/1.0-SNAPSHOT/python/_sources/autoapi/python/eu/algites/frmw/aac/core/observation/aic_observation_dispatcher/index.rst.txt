@@ -44,6 +44,6 @@ Module Contents
    .. py:method:: unregister(instance_id: str) -> None
 
 
-   .. py:method:: dispatch(observation_input: eu.algites.frmw.aac.core.observation.api.AIcObservationInput) -> tuple[python.eu.algites.frmw.aac.core.observation.aic_observation_delivery.AIcObservationDelivery, Ellipsis]
+   .. py:method:: dispatch(observation_input: eu.algites.frmw.aac.core.observation.api.AIigObservationInput_1) -> tuple[python.eu.algites.frmw.aac.core.observation.aic_observation_delivery.AIcObservationDelivery, Ellipsis]
 
 

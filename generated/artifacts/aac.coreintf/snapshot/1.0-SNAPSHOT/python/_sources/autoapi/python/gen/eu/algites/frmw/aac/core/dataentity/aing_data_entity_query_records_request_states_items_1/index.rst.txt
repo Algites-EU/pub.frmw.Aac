@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_query_records_request_states_items_1
+====================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_query_records_request_states_items_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_query_records_request_states_items_1.AIngDataEntityQueryRecordsRequestStatesItems_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngDataEntityQueryRecordsRequestStatesItems_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/States/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/States/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.yamldef.schema.json#/properties/States/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.yamldef.schema.json#/properties/States/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/States/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/States/items. Do not edit manually.
+
+   Values:
+       ACTIVE: Canonical enum value active.
+       TOMBSTONE: Canonical enum value tombstone.
+
+
+   .. py:attribute:: ACTIVE
+      :value: 'active'
+
+
+
+   .. py:attribute:: TOMBSTONE
+      :value: 'tombstone'
+
+
+

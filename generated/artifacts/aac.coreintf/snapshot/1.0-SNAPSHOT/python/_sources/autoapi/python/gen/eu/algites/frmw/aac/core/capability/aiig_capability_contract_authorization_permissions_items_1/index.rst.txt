@@ -1,0 +1,115 @@
+python.gen.eu.algites.frmw.aac.core.capability.aiig_capability_contract_authorization_permissions_items_1
+=========================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.capability.aiig_capability_contract_authorization_permissions_items_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.capability.aiig_capability_contract_authorization_permissions_items_1.AIigCapabilityContractAuthorizationPermissionsItems_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigCapabilityContractAuthorizationPermissionsItems_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/AuthorizationPermissions/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/AuthorizationPermissions/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.yamldef.schema.json#/properties/AuthorizationPermissions/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.yamldef.schema.json#/properties/AuthorizationPermissions/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/AuthorizationPermissions/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/AuthorizationPermissions/items. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this authorization permission.
+
+   .. attribute:: name
+
+      Human-readable name of this authorization permission.
+
+   .. attribute:: description
+
+      Human-readable description of this authorization permission.
+
+   .. attribute:: metadata
+
+      Additional structured metadata associated with this authorization permission.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :type:  ClassVar[str]
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this authorization permission.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :type:  ClassVar[str]
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this authorization permission.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :type:  ClassVar[str]
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this authorization permission.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__METADATA
+      :type:  ClassVar[str]
+      :value: 'Metadata'
+
+
+      ** ``Metadata``
+
+      **Field Description:** Additional structured metadata associated with this authorization permission.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  Any
+
+
+   .. py:attribute:: description
+      :type:  Any
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

@@ -1,0 +1,47 @@
+python.gen.eu.algites.frmw.aac.core.configuration.aing_configuration_bootstrap_configuration_bootstrap_workspace_configuration_profiles_1
+=========================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.configuration.aing_configuration_bootstrap_configuration_bootstrap_workspace_configuration_profiles_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.configuration.aing_configuration_bootstrap_configuration_bootstrap_workspace_configuration_profiles_1.AIngConfigurationBootstrapConfigurationBootstrapWorkspaceConfigurationProfiles_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngConfigurationBootstrapConfigurationBootstrapWorkspaceConfigurationProfiles_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Specifies the workspace configuration profiles for this configuration bootstrap. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.jsondef.schema.json#/properties/ConfigurationBootstrap/properties/WorkspaceConfigurationProfiles (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.jsondef.schema.json#/properties/ConfigurationBootstrap/properties/WorkspaceConfigurationProfiles); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.yamldef.schema.json#/properties/ConfigurationBootstrap/properties/WorkspaceConfigurationProfiles (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.yamldef.schema.json#/properties/ConfigurationBootstrap/properties/WorkspaceConfigurationProfiles)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.jsondef.schema.json#/properties/ConfigurationBootstrap/properties/WorkspaceConfigurationProfiles/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.jsondef.schema.json#/properties/ConfigurationBootstrap/properties/WorkspaceConfigurationProfiles. Do not edit manually.
+
+   Values:
+       FORBIDDEN: Canonical enum value forbidden.
+       ALLOWED: Canonical enum value allowed.
+       ALLOWED_IF_SIGNED: Canonical enum value allowed_if_signed.
+
+
+   .. py:attribute:: FORBIDDEN
+      :value: 'forbidden'
+
+
+
+   .. py:attribute:: ALLOWED
+      :value: 'allowed'
+
+
+
+   .. py:attribute:: ALLOWED_IF_SIGNED
+      :value: 'allowed_if_signed'
+
+
+

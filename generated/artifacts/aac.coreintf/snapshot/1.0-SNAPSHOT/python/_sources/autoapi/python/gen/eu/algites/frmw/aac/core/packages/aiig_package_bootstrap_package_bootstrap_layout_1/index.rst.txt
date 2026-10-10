@@ -1,0 +1,195 @@
+python.gen.eu.algites.frmw.aac.core.packages.aiig_package_bootstrap_package_bootstrap_layout_1
+==============================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.packages.aiig_package_bootstrap_package_bootstrap_layout_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.packages.aiig_package_bootstrap_package_bootstrap_layout_1.AIigPackageBootstrapPackageBootstrapLayout_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigPackageBootstrapPackageBootstrapLayout_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Structured layout associated with this package bootstrap. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json#/properties/PackageBootstrap/properties/Layout (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json#/properties/PackageBootstrap/properties/Layout); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.yamldef.schema.json#/properties/PackageBootstrap/properties/Layout (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.yamldef.schema.json#/properties/PackageBootstrap/properties/Layout)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json#/properties/PackageBootstrap/properties/Layout/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json#/properties/PackageBootstrap/properties/Layout. Do not edit manually.
+
+   .. attribute:: product_root
+
+      Specifies the product root for this layout.
+
+   .. attribute:: package_store_subdirectory
+
+      Filesystem or logical package store subdirectory used by this layout.
+
+   .. attribute:: downloaded_subdirectory
+
+      Filesystem or logical downloaded subdirectory used by this layout.
+
+   .. attribute:: installed_subdirectory
+
+      Filesystem or logical installed subdirectory used by this layout.
+
+   .. attribute:: obsolete_subdirectory
+
+      Filesystem or logical obsolete subdirectory used by this layout.
+
+   .. attribute:: core_state_subdirectory
+
+      Filesystem or logical core state subdirectory used by this layout.
+
+   .. attribute:: transactions_subdirectory
+
+      Filesystem or logical transactions subdirectory used by this layout.
+
+   .. attribute:: core_lock_filename
+
+      Specifies the core lock filename for this layout.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PRODUCT_ROOT
+      :type:  ClassVar[str]
+      :value: 'ProductRoot'
+
+
+      ** ``ProductRoot``
+
+      **Field Description:** Specifies the product root for this layout.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PACKAGE_STORE_SUBDIRECTORY
+      :type:  ClassVar[str]
+      :value: 'PackageStoreSubdirectory'
+
+
+      ** ``PackageStoreSubdirectory``
+
+      **Field Description:** Filesystem or logical package store subdirectory used by this layout.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DOWNLOADED_SUBDIRECTORY
+      :type:  ClassVar[str]
+      :value: 'DownloadedSubdirectory'
+
+
+      ** ``DownloadedSubdirectory``
+
+      **Field Description:** Filesystem or logical downloaded subdirectory used by this layout.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__INSTALLED_SUBDIRECTORY
+      :type:  ClassVar[str]
+      :value: 'InstalledSubdirectory'
+
+
+      ** ``InstalledSubdirectory``
+
+      **Field Description:** Filesystem or logical installed subdirectory used by this layout.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__OBSOLETE_SUBDIRECTORY
+      :type:  ClassVar[str]
+      :value: 'ObsoleteSubdirectory'
+
+
+      ** ``ObsoleteSubdirectory``
+
+      **Field Description:** Filesystem or logical obsolete subdirectory used by this layout.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CORE_STATE_SUBDIRECTORY
+      :type:  ClassVar[str]
+      :value: 'CoreStateSubdirectory'
+
+
+      ** ``CoreStateSubdirectory``
+
+      **Field Description:** Filesystem or logical core state subdirectory used by this layout.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TRANSACTIONS_SUBDIRECTORY
+      :type:  ClassVar[str]
+      :value: 'TransactionsSubdirectory'
+
+
+      ** ``TransactionsSubdirectory``
+
+      **Field Description:** Filesystem or logical transactions subdirectory used by this layout.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CORE_LOCK_FILENAME
+      :type:  ClassVar[str]
+      :value: 'CoreLockFilename'
+
+
+      ** ``CoreLockFilename``
+
+      **Field Description:** Specifies the core lock filename for this layout.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: product_root
+      :type:  str
+
+
+   .. py:attribute:: package_store_subdirectory
+      :type:  str
+
+
+   .. py:attribute:: downloaded_subdirectory
+      :type:  str
+
+
+   .. py:attribute:: installed_subdirectory
+      :type:  str
+
+
+   .. py:attribute:: obsolete_subdirectory
+      :type:  str
+
+
+   .. py:attribute:: core_state_subdirectory
+      :type:  str
+
+
+   .. py:attribute:: transactions_subdirectory
+      :type:  str
+
+
+   .. py:attribute:: core_lock_filename
+      :type:  str
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

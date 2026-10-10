@@ -1,0 +1,35 @@
+python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_components_items_grants_items_permissions_items_constraints_1
+===================================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_components_items_grants_items_permissions_items_constraints_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_components_items_grants_items_permissions_items_constraints_1.AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsPermissionsItemsConstraints_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsPermissionsItemsConstraints_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Structured constraints associated with this permission. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.jsondef.schema.json#/properties/Entitlement/properties/Components/items/properties/Grants/items/properties/Permissions/items/properties/Constraints (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.jsondef.schema.json#/properties/Entitlement/properties/Components/items/properties/Grants/items/properties/Permissions/items/properties/Constraints); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.yamldef.schema.json#/properties/Entitlement/properties/Components/items/properties/Grants/items/properties/Permissions/items/properties/Constraints (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.yamldef.schema.json#/properties/Entitlement/properties/Components/items/properties/Grants/items/properties/Permissions/items/properties/Constraints)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.jsondef.schema.json#/properties/Entitlement/properties/Components/items/properties/Grants/items/properties/Permissions/items/properties/Constraints/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.jsondef.schema.json#/properties/Entitlement/properties/Components/items/properties/Grants/items/properties/Permissions/items/properties/Constraints. Do not edit manually.
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

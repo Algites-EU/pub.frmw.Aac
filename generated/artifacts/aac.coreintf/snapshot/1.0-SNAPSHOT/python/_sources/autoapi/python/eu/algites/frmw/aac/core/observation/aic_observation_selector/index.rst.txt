@@ -36,9 +36,9 @@ Module Contents
 
 
    .. py:attribute:: phases
-      :type:  tuple[python.eu.algites.frmw.aac.core.observation.ain_observation_phase.AInObservationPhase, Ellipsis]
+      :type:  tuple[python.eu.algites.frmw.aac.core.observation.aing_observation_input_phase_1.AIngObservationInputPhase_1, Ellipsis]
 
 
-   .. py:method:: matches(value: python.eu.algites.frmw.aac.core.observation.aic_observation_input.AIcObservationInput) -> bool
+   .. py:method:: matches(value: python.eu.algites.frmw.aac.core.observation.aiig_observation_input_1.AIigObservationInput_1) -> bool
 
 

@@ -1,0 +1,64 @@
+python.gen.eu.algites.frmw.aac.dataentity.yamlfsdes.schemas.xmldefs.aicgd_yamlfsdes_config_1
+============================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.dataentity.yamlfsdes.schemas.xmldefs.aicgd_yamlfsdes_config_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.dataentity.yamlfsdes.schemas.xmldefs.aicgd_yamlfsdes_config_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.dataentity.yamlfsdes.schemas.xmldefs.aicgd_yamlfsdes_config_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.dataentity.yamlfsdes.schemas.xmldefs.aicgd_yamlfsdes_config_1.AIcgdYamlfsdesConfig_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdYamlfsdesConfig_1
+
+   Defines the canonical YAML File-System Data Entity Storage Configuration schema and its serialized data contract.
+
+   Generated from canonical definition https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/dataentity/yamlfsdes/schemas/yamlfsdes-config_1.xsd/1. Source: src/product/xmldefs/eu/algites/frmw/aac/dataentity/yamlfsdes/schemas/yamlfsdes-config_1.xsd. Do not edit manually.
+
+   .. attribute:: root_directory
+
+      Root directory containing schema/version/UID YAML Data Entity records.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ROOT_DIRECTORY
+      :value: 'RootDirectory'
+
+
+      ** ``RootDirectory``
+
+      **Field Description:** Root directory containing schema/version/UID YAML Data Entity records.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: root_directory
+      :type:  str
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

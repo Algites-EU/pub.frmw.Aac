@@ -1,0 +1,135 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_bootstrap_catalog_bootstrap_1
+======================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_bootstrap_catalog_bootstrap_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_bootstrap_catalog_bootstrap_1.AIigCatalogBootstrapCatalogBootstrap_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigCatalogBootstrapCatalogBootstrap_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Structured catalog bootstrap associated with this AAC catalog bootstrap. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog-bootstrap_1.jsondef.schema.json#/properties/CatalogBootstrap (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog-bootstrap_1.jsondef.schema.json#/properties/CatalogBootstrap); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog-bootstrap_1.yamldef.schema.json#/properties/CatalogBootstrap (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog-bootstrap_1.yamldef.schema.json#/properties/CatalogBootstrap)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog-bootstrap_1.jsondef.schema.json#/properties/CatalogBootstrap/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog-bootstrap_1.jsondef.schema.json#/properties/CatalogBootstrap. Do not edit manually.
+
+   .. attribute:: schema_version
+
+      Canonical schema version.
+
+   .. attribute:: product_id
+
+      Stable identifier of the product associated with this catalog bootstrap.
+
+   .. attribute:: technology_id
+
+      Stable identifier of the technology associated with this catalog bootstrap.
+
+   .. attribute:: sources
+
+      Lists the sources associated with this catalog bootstrap.
+
+   .. attribute:: metadata
+
+      Additional structured metadata associated with this catalog bootstrap.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA_VERSION
+      :type:  ClassVar[str]
+      :value: 'SchemaVersion'
+
+
+      ** ``SchemaVersion``
+
+      **Field Description:** Canonical schema version.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PRODUCT_ID
+      :type:  ClassVar[str]
+      :value: 'ProductId'
+
+
+      ** ``ProductId``
+
+      **Field Description:** Stable identifier of the product associated with this catalog bootstrap.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TECHNOLOGY_ID
+      :type:  ClassVar[str]
+      :value: 'TechnologyId'
+
+
+      ** ``TechnologyId``
+
+      **Field Description:** Stable identifier of the technology associated with this catalog bootstrap.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SOURCES
+      :type:  ClassVar[str]
+      :value: 'Sources'
+
+
+      ** ``Sources``
+
+      **Field Description:** Lists the sources associated with this catalog bootstrap.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__METADATA
+      :type:  ClassVar[str]
+      :value: 'Metadata'
+
+
+      ** ``Metadata``
+
+      **Field Description:** Additional structured metadata associated with this catalog bootstrap.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: product_id
+      :type:  str
+
+
+   .. py:attribute:: technology_id
+      :type:  str
+
+
+   .. py:attribute:: sources
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

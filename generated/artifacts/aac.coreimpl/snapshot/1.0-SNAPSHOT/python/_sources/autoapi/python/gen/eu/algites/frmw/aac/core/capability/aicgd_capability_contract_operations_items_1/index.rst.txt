@@ -1,0 +1,200 @@
+python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_contract_operations_items_1
+===========================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_contract_operations_items_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_contract_operations_items_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_contract_operations_items_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_contract_operations_items_1.AIcgdCapabilityContractOperationsItems_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdCapabilityContractOperationsItems_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.capability.aiig_capability_contract_operations_items_1.AIigCapabilityContractOperationsItems_1`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/Operations/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/Operations/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.yamldef.schema.json#/properties/Operations/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.yamldef.schema.json#/properties/Operations/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/Operations/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/Operations/items. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this operation.
+
+   .. attribute:: name
+
+      Human-readable name of this operation.
+
+   .. attribute:: description
+
+      Human-readable description of this operation.
+
+   .. attribute:: authorization
+
+      Specifies the authorization for this operation.
+
+   .. attribute:: sensitive_input_paths
+
+      Lists the sensitive input paths associated with this operation.
+
+   .. attribute:: sensitive_output_paths
+
+      Lists the sensitive output paths associated with this operation.
+
+   .. attribute:: metadata
+
+      Additional structured metadata associated with this operation.
+
+   .. attribute:: interactions
+
+      Interaction schemas declared for this capability operation.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__AUTHORIZATION
+      :value: 'Authorization'
+
+
+      ** ``Authorization``
+
+      **Field Description:** Specifies the authorization for this operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SENSITIVE_INPUT_PATHS
+      :value: 'SensitiveInputPaths'
+
+
+      ** ``SensitiveInputPaths``
+
+      **Field Description:** Lists the sensitive input paths associated with this operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SENSITIVE_OUTPUT_PATHS
+      :value: 'SensitiveOutputPaths'
+
+
+      ** ``SensitiveOutputPaths``
+
+      **Field Description:** Lists the sensitive output paths associated with this operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__METADATA
+      :value: 'Metadata'
+
+
+      ** ``Metadata``
+
+      **Field Description:** Additional structured metadata associated with this operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__INTERACTIONS
+      :value: 'Interactions'
+
+
+      ** ``Interactions``
+
+      **Field Description:** Interaction schemas declared for this capability operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  Any
+
+
+   .. py:attribute:: description
+      :type:  Any
+
+
+   .. py:attribute:: authorization
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: sensitive_input_paths
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: sensitive_output_paths
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: interactions
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

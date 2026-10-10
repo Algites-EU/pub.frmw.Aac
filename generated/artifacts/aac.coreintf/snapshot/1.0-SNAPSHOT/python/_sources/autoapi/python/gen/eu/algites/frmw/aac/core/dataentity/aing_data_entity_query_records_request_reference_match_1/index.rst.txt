@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_query_records_request_reference_match_1
+=======================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_query_records_request_reference_match_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_query_records_request_reference_match_1.AIngDataEntityQueryRecordsRequestReferenceMatch_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngDataEntityQueryRecordsRequestReferenceMatch_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Selects how multiple reference filters are combined. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/ReferenceMatch (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/ReferenceMatch); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.yamldef.schema.json#/properties/ReferenceMatch (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.yamldef.schema.json#/properties/ReferenceMatch)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/ReferenceMatch/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/ReferenceMatch. Do not edit manually.
+
+   Values:
+       ALL: Canonical enum value all.
+       ANY: Canonical enum value any.
+
+
+   .. py:attribute:: ALL
+      :value: 'all'
+
+
+
+   .. py:attribute:: ANY
+      :value: 'any'
+
+
+

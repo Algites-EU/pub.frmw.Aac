@@ -39,7 +39,7 @@
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.codegen.aic_python_data_entity_binding_generator.AIcPythonDataEntityBindingGenerator" title="python.eu.algites.frmw.aac.codegen.aic_python_data_entity_binding_generator.AIcPythonDataEntityBindingGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcPythonDataEntityBindingGenerator</span></code></a></p></td>
-<td><p>Generate one versioned Python Data Entity view interface and codec from canonical JSON Schema.</p></td>
+<td><p>Generate an AAC Data Entity view and codec over the shared canonical-definition model.</p></td>
 </tr>
 </tbody>
 </table>
@@ -49,9 +49,10 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="python.eu.algites.frmw.aac.codegen.aic_python_data_entity_binding_generator.AIcPythonDataEntityBindingGenerator">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">python.eu.algites.frmw.aac.codegen.aic_python_data_entity_binding_generator.</span></span><span class="sig-name descname"><span class="pre">AIcPythonDataEntityBindingGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schemas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.schemas.registry.AIcSchemaRegistry</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.eu.algites.frmw.aac.codegen.aic_python_data_entity_binding_generator.AIcPythonDataEntityBindingGenerator" title="Link to this definition">¶</a></dt>
-<dd><p>Generate one versioned Python Data Entity view interface and codec from canonical JSON Schema.</p>
-<p>Version suffixes are part of the generated method names so one current implementation object
-can implement several historical schema views without method-signature collisions.</p>
+<dd><p>Generate an AAC Data Entity view and codec over the shared canonical-definition model.</p>
+<p>JSON definition parsing, definition identity, property normalization, and naming are delegated
+to <code class="docutils literal notranslate"><span class="pre">pub.tool.General</span></code>. Only the versioned Data Entity view and codec semantics remain AAC-
+specific here.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="python.eu.algites.frmw.aac.codegen.aic_python_data_entity_binding_generator.AIcPythonDataEntityBindingGenerator.schemas">
 <span class="sig-name descname"><span class="pre">schemas</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.codegen.aic_python_data_entity_binding_generator.AIcPythonDataEntityBindingGenerator.schemas" title="Link to this definition">¶</a></dt>

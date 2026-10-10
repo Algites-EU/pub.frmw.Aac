@@ -1,0 +1,135 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_requires_items_1
+============================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_requires_items_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_requires_items_1.AIigCatalogDefinitionReleaseRequiresItems_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigCatalogDefinitionReleaseRequiresItems_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/properties/Requires/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/properties/Requires/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/release/properties/Requires/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/release/properties/Requires/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/properties/Requires/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/properties/Requires/items. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this require.
+
+   .. attribute:: capability
+
+      Identity and human-facing metadata of the capability contract.
+
+   .. attribute:: versions
+
+      Lists the versions supported or selected by this require.
+
+   .. attribute:: cardinality
+
+      Specifies the cardinality for this require.
+
+   .. attribute:: mandatory
+
+      Indicates whether mandatory applies to this require.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :type:  ClassVar[str]
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this require.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CAPABILITY
+      :type:  ClassVar[str]
+      :value: 'Capability'
+
+
+      ** ``Capability``
+
+      **Field Description:** Identity and human-facing metadata of the capability contract.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VERSIONS
+      :type:  ClassVar[str]
+      :value: 'Versions'
+
+
+      ** ``Versions``
+
+      **Field Description:** Lists the versions supported or selected by this require.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CARDINALITY
+      :type:  ClassVar[str]
+      :value: 'Cardinality'
+
+
+      ** ``Cardinality``
+
+      **Field Description:** Specifies the cardinality for this require.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__MANDATORY
+      :type:  ClassVar[str]
+      :value: 'Mandatory'
+
+
+      ** ``Mandatory``
+
+      **Field Description:** Indicates whether mandatory applies to this require.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: capability
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: cardinality
+      :type:  str
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

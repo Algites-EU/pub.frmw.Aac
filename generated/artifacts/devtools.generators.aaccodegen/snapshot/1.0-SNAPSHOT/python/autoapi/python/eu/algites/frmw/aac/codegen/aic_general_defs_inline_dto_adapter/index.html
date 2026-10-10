@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter &#8212; devtools.generators.aaccodegen  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <script src="../../../../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter">
+<span id="python-eu-algites-frmw-aac-codegen-aic-general-defs-inline-dto-adapter"></span><h1>python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter<a class="headerlink" href="#module-python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter" title="python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AIcGeneralDefsInlineDtoAdapter</span></code></a></p></td>
+<td><p>Adapt registered AAC JSON definitions to the shared defs-codegen model and backend.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.</span></span><span class="sig-name descname"><span class="pre">AIcGeneralDefsInlineDtoAdapter</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter" title="Link to this definition">¶</a></dt>
+<dd><p>Adapt registered AAC JSON definitions to the shared defs-codegen model and backend.</p>
+<p>AAC capability bindings are emitted as one combined Python source unit, while the shared
+defs-codegen backend normally emits one standalone module per canonical definition. This
+adapter keeps schema normalization, naming, documentation, provenance, and DTO rendering in
+<code class="docutils literal notranslate"><span class="pre">pub.tool.General</span></code> and extracts only the generated declaration needed by the AAC binding.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.profile">
+<span class="sig-name descname"><span class="pre">profile</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.profile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.names">
+<span class="sig-name descname"><span class="pre">names</span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.names" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.normalize">
+<span class="sig-name descname"><span class="pre">normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.schemas.registry.AIcRegisteredSchema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.normalize" title="Link to this definition">¶</a></dt>
+<dd><p>Normalize one registered AAC schema through the shared JSON definitions reader.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.interface_type_name">
+<span class="sig-name descname"><span class="pre">interface_type_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">definition</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.interface_type_name" title="Link to this definition">¶</a></dt>
+<dd><p>Project an AAC interface name from the normalized definition using shared naming rules.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.property_name">
+<span class="sig-name descname"><span class="pre">property_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.property_name" title="Link to this definition">¶</a></dt>
+<dd><p>Project a Python property name using the shared Algites naming profile.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.schema_field_name_constant">
+<span class="sig-name descname"><span class="pre">schema_field_name_constant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.schema_field_name_constant" title="Link to this definition">¶</a></dt>
+<dd><p>Use the shared generator’s canonical field constant naming convention.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.schemas.registry.AIcRegisteredSchema</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.generate" title="Link to this definition">¶</a></dt>
+<dd><p>Return the generated DTO type name and inlinable class declaration.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.generate_with_runtime">
+<span class="sig-name descname"><span class="pre">generate_with_runtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">eu.algites.frmw.aac.core.schemas.registry.AIcRegisteredSchema</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter.generate_with_runtime" title="Link to this definition">¶</a></dt>
+<dd><p>Return the primary DTO together with its shared backend runtime preamble.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../../../../index.html">devtools.generators.aaccodegen</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../index.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../../../../../../../_sources/autoapi/python/eu/algites/frmw/aac/codegen/aic_general_defs_inline_dto_adapter/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

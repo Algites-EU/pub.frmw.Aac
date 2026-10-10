@@ -1,0 +1,111 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aiig_data_entity_inspect_storage_support_result_1
+================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aiig_data_entity_inspect_storage_support_result_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aiig_data_entity_inspect_storage_support_result_1.AIigDataEntityInspectStorageSupportResult_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigDataEntityInspectStorageSupportResult_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Defines the canonical Data Entity Inspect Storage Support Result schema and its serialized data contract. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-support-result_1.jsondef.schema.json (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-support-result_1.jsondef.schema.json); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-support-result_1.yamldef.schema.json (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-support-result_1.yamldef.schema.json)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-support-result_1.jsondef.schema.json/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-support-result_1.jsondef.schema.json. Do not edit manually.
+
+   .. attribute:: status
+
+      Outcome status reported by this operation.
+
+   .. attribute:: diagnostics
+
+      Diagnostic messages produced while processing this operation.
+
+   .. attribute:: metadata
+
+      Additional structured metadata associated with this data entity inspect storage support result.
+
+   .. attribute:: _schema
+
+      Optional absolute URI of the schema describing this root document.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__STATUS
+      :type:  ClassVar[str]
+      :value: 'status'
+
+
+      ** ``status``
+
+      **Field Description:** Outcome status reported by this operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DIAGNOSTICS
+      :type:  ClassVar[str]
+      :value: 'diagnostics'
+
+
+      ** ``diagnostics``
+
+      **Field Description:** Diagnostic messages produced while processing this operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__METADATA
+      :type:  ClassVar[str]
+      :value: 'metadata'
+
+
+      ** ``metadata``
+
+      **Field Description:** Additional structured metadata associated with this data entity inspect storage support result.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA
+      :type:  ClassVar[str]
+      :value: '$schema'
+
+
+      ** ``$schema``
+
+      **Field Description:** Optional absolute URI of the schema describing this root document.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: status
+      :type:  str
+
+
+   .. py:attribute:: diagnostics
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

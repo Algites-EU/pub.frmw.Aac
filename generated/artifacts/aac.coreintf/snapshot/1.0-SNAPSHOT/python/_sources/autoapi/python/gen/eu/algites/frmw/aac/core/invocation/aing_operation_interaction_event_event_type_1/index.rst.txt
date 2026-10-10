@@ -1,0 +1,53 @@
+python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_event_event_type_1
+============================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_event_event_type_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_event_event_type_1.AIngOperationInteractionEventEventType_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngOperationInteractionEventEventType_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Kind of interaction event represented by this entry. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.jsondef.schema.json#/properties/EventType (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.jsondef.schema.json#/properties/EventType); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.yamldef.schema.json#/properties/EventType (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.yamldef.schema.json#/properties/EventType)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.jsondef.schema.json#/properties/EventType/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.jsondef.schema.json#/properties/EventType. Do not edit manually.
+
+   Values:
+       STATUS: Canonical enum value status.
+       PROGRESS: Canonical enum value progress.
+       DETAIL: Canonical enum value detail.
+       DIAGNOSTIC: Canonical enum value diagnostic.
+
+
+   .. py:attribute:: STATUS
+      :value: 'status'
+
+
+
+   .. py:attribute:: PROGRESS
+      :value: 'progress'
+
+
+
+   .. py:attribute:: DETAIL
+      :value: 'detail'
+
+
+
+   .. py:attribute:: DIAGNOSTIC
+      :value: 'diagnostic'
+
+
+

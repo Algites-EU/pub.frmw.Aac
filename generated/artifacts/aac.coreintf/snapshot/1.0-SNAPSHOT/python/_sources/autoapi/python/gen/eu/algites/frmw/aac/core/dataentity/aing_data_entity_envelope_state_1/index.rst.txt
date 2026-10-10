@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_envelope_state_1
+================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_envelope_state_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_envelope_state_1.AIngDataEntityEnvelopeState_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngDataEntityEnvelopeState_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Lifecycle or storage state of this AAC data entity envelope. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-envelope_1.jsondef.schema.json#/properties/State (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-envelope_1.jsondef.schema.json#/properties/State); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-envelope_1.yamldef.schema.json#/properties/State (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-envelope_1.yamldef.schema.json#/properties/State)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-envelope_1.jsondef.schema.json#/properties/State/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-envelope_1.jsondef.schema.json#/properties/State. Do not edit manually.
+
+   Values:
+       ACTIVE: Canonical enum value active.
+       TOMBSTONE: Canonical enum value tombstone.
+
+
+   .. py:attribute:: ACTIVE
+      :value: 'active'
+
+
+
+   .. py:attribute:: TOMBSTONE
+      :value: 'tombstone'
+
+
+

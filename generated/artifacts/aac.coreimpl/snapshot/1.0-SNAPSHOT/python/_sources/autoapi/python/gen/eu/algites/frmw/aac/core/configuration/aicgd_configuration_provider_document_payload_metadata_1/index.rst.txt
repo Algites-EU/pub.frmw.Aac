@@ -1,0 +1,48 @@
+python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_provider_document_payload_metadata_1
+==========================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_provider_document_payload_metadata_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_provider_document_payload_metadata_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_provider_document_payload_metadata_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_provider_document_payload_metadata_1.AIcgdConfigurationProviderDocumentPayloadMetadata_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdConfigurationProviderDocumentPayloadMetadata_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.configuration.aiig_configuration_provider_document_payload_metadata_1.AIigConfigurationProviderDocumentPayloadMetadata_1`
+
+
+   Additional structured metadata associated with this payload. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/Payload/properties/Metadata (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/Payload/properties/Metadata); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.yamldef.schema.json#/properties/Payload/properties/Metadata (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.yamldef.schema.json#/properties/Payload/properties/Metadata)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/Payload/properties/Metadata/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/Payload/properties/Metadata. Do not edit manually.
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

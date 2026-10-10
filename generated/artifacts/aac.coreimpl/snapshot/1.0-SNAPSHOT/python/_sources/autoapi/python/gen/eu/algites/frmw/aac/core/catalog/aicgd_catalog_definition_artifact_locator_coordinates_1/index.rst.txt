@@ -1,0 +1,48 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_artifact_locator_coordinates_1
+===================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_artifact_locator_coordinates_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_artifact_locator_coordinates_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_artifact_locator_coordinates_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_artifact_locator_coordinates_1.AIcgdCatalogDefinitionArtifactLocatorCoordinates_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdCatalogDefinitionArtifactLocatorCoordinates_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_artifact_locator_coordinates_1.AIigCatalogDefinitionArtifactLocatorCoordinates_1`
+
+
+   Structured coordinates associated with this locator. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/artifact/properties/Locator/properties/Coordinates (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/artifact/properties/Locator/properties/Coordinates); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/artifact/properties/Locator/properties/Coordinates (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/artifact/properties/Locator/properties/Coordinates)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/artifact/properties/Locator/properties/Coordinates/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/artifact/properties/Locator/properties/Coordinates. Do not edit manually.
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

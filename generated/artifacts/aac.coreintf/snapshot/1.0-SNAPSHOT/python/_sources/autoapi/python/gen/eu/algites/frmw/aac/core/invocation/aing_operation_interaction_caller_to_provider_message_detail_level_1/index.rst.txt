@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_caller_to_provider_message_detail_level_1
+===================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_caller_to_provider_message_detail_level_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_caller_to_provider_message_detail_level_1.AIngOperationInteractionCallerToProviderMessageDetailLevel_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngOperationInteractionCallerToProviderMessageDetailLevel_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Specifies the detail level for this operation interaction caller to provider message. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json#/properties/DetailLevel (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json#/properties/DetailLevel); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.yamldef.schema.json#/properties/DetailLevel (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.yamldef.schema.json#/properties/DetailLevel)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json#/properties/DetailLevel/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json#/properties/DetailLevel. Do not edit manually.
+
+   Values:
+       SUMMARY: Canonical enum value summary.
+       DETAILED: Canonical enum value detailed.
+
+
+   .. py:attribute:: SUMMARY
+      :value: 'summary'
+
+
+
+   .. py:attribute:: DETAILED
+      :value: 'detailed'
+
+
+

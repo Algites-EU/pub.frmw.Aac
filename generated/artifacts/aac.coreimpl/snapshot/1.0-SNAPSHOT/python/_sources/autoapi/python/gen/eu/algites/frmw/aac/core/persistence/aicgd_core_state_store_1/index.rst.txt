@@ -1,0 +1,120 @@
+python.gen.eu.algites.frmw.aac.core.persistence.aicgd_core_state_store_1
+========================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.persistence.aicgd_core_state_store_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.persistence.aicgd_core_state_store_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.persistence.aicgd_core_state_store_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.persistence.aicgd_core_state_store_1.AIcgdCoreStateStore_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdCoreStateStore_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.persistence.aiig_core_state_store_1.AIigCoreStateStore_1`
+
+
+   Defines the canonical AAC Core State Store schema and its serialized data contract. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/persistence/core-state-store_1.jsondef.schema.json (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/persistence/core-state-store_1.jsondef.schema.json); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/persistence/core-state-store_1.yamldef.schema.json (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/persistence/core-state-store_1.yamldef.schema.json)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/persistence/core-state-store_1.jsondef.schema.json/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/persistence/core-state-store_1.jsondef.schema.json. Do not edit manually.
+
+   .. attribute:: format_version
+
+      Version of the persisted or exchanged document format.
+
+   .. attribute:: revision_kind
+
+      Specifies the revision kind for this AAC core state store.
+
+   .. attribute:: records
+
+      Data Entity records returned or persisted by this AAC core state store.
+
+   .. attribute:: _schema
+
+      Optional absolute URI of the schema describing this root document.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__FORMAT_VERSION
+      :value: 'FormatVersion'
+
+
+      ** ``FormatVersion``
+
+      **Field Description:** Version of the persisted or exchanged document format.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__REVISION_KIND
+      :value: 'RevisionKind'
+
+
+      ** ``RevisionKind``
+
+      **Field Description:** Specifies the revision kind for this AAC core state store.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__RECORDS
+      :value: 'Records'
+
+
+      ** ``Records``
+
+      **Field Description:** Data Entity records returned or persisted by this AAC core state store.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA
+      :value: '$schema'
+
+
+      ** ``$schema``
+
+      **Field Description:** Optional absolute URI of the schema describing this root document.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: format_version
+      :type:  int
+
+
+   .. py:attribute:: revision_kind
+      :type:  str
+
+
+   .. py:attribute:: records
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

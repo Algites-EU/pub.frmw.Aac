@@ -1,0 +1,95 @@
+python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_definition_schema_migration_step_1
+===========================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_definition_schema_migration_step_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_definition_schema_migration_step_1.AIigComponentDescriptorDefinitionSchemaMigrationStep_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigComponentDescriptorDefinitionSchemaMigrationStep_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Defines the reusable schema migration step structure used by this canonical schema. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/schemaMigrationStep (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/schemaMigrationStep); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/$defs/schemaMigrationStep (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/$defs/schemaMigrationStep)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/schemaMigrationStep/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/schemaMigrationStep. Do not edit manually.
+
+   .. attribute:: from_
+
+      Specifies the from for this schema migration step.
+
+   .. attribute:: to
+
+      Specifies the to for this schema migration step.
+
+   .. attribute:: migrator
+
+      Specifies the migrator for this schema migration step.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__FROM
+      :type:  ClassVar[str]
+      :value: 'From'
+
+
+      ** ``From``
+
+      **Field Description:** Specifies the from for this schema migration step.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TO
+      :type:  ClassVar[str]
+      :value: 'To'
+
+
+      ** ``To``
+
+      **Field Description:** Specifies the to for this schema migration step.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__MIGRATOR
+      :type:  ClassVar[str]
+      :value: 'Migrator'
+
+
+      ** ``Migrator``
+
+      **Field Description:** Specifies the migrator for this schema migration step.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: from_
+      :type:  int
+
+
+   .. py:attribute:: to
+      :type:  int
+
+
+   .. py:attribute:: migrator
+      :type:  str
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

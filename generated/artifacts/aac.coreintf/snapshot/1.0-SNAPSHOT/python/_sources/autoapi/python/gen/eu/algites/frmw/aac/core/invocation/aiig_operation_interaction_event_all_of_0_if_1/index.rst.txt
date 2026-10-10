@@ -1,0 +1,55 @@
+python.gen.eu.algites.frmw.aac.core.invocation.aiig_operation_interaction_event_all_of_0_if_1
+=============================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.invocation.aiig_operation_interaction_event_all_of_0_if_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.invocation.aiig_operation_interaction_event_all_of_0_if_1.AIigOperationInteractionEventAllOf0If_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigOperationInteractionEventAllOf0If_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.jsondef.schema.json#/allOf/0/if (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.jsondef.schema.json#/allOf/0/if); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.yamldef.schema.json#/allOf/0/if (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.yamldef.schema.json#/allOf/0/if)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.jsondef.schema.json#/allOf/0/if/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.jsondef.schema.json#/allOf/0/if. Do not edit manually.
+
+   .. attribute:: event_type
+
+      Identifies the kind of operation-interaction event.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__EVENT_TYPE
+      :type:  ClassVar[str]
+      :value: 'EventType'
+
+
+      ** ``EventType``
+
+      **Field Description:** Identifies the kind of operation-interaction event.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: event_type
+      :type:  str
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

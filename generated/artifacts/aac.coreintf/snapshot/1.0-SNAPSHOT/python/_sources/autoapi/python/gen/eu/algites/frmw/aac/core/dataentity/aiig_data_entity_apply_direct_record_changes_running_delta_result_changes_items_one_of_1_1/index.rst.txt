@@ -1,0 +1,135 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aiig_data_entity_apply_direct_record_changes_running_delta_result_changes_items_one_of_1_1
+=========================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aiig_data_entity_apply_direct_record_changes_running_delta_result_changes_items_one_of_1_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aiig_data_entity_apply_direct_record_changes_running_delta_result_changes_items_one_of_1_1.AIigDataEntityApplyDirectRecordChangesRunningDeltaResultChangesItemsOneOf1_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigDataEntityApplyDirectRecordChangesRunningDeltaResultChangesItemsOneOf1_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-running-delta-result_1.jsondef.schema.json#/properties/Changes/items/oneOf/1 (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-running-delta-result_1.jsondef.schema.json#/properties/Changes/items/oneOf/1); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-running-delta-result_1.yamldef.schema.json#/properties/Changes/items/oneOf/1 (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-running-delta-result_1.yamldef.schema.json#/properties/Changes/items/oneOf/1)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-running-delta-result_1.jsondef.schema.json#/properties/Changes/items/oneOf/1/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-running-delta-result_1.jsondef.schema.json#/properties/Changes/items/oneOf/1. Do not edit manually.
+
+   .. attribute:: change_id
+
+      Caller-supplied identifier used to correlate this individual change and its result.
+
+   .. attribute:: schema_id
+
+      Canonical schema identifier.
+
+   .. attribute:: uid
+
+      Stable logical UID of the Data Entity record.
+
+   .. attribute:: type
+
+      Type discriminator for this change.
+
+   .. attribute:: record_revision
+
+      Storage-provider record revision used for optimistic concurrency and change tracking.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CHANGE_ID
+      :type:  ClassVar[str]
+      :value: 'ChangeId'
+
+
+      ** ``ChangeId``
+
+      **Field Description:** Caller-supplied identifier used to correlate this individual change and its result.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA_ID
+      :type:  ClassVar[str]
+      :value: 'SchemaId'
+
+
+      ** ``SchemaId``
+
+      **Field Description:** Canonical schema identifier.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__UID
+      :type:  ClassVar[str]
+      :value: 'Uid'
+
+
+      ** ``Uid``
+
+      **Field Description:** Stable logical UID of the Data Entity record.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TYPE
+      :type:  ClassVar[str]
+      :value: 'Type'
+
+
+      ** ``Type``
+
+      **Field Description:** Type discriminator for this change.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__RECORD_REVISION
+      :type:  ClassVar[str]
+      :value: 'RecordRevision'
+
+
+      ** ``RecordRevision``
+
+      **Field Description:** Storage-provider record revision used for optimistic concurrency and change tracking.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: change_id
+      :type:  str
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: uid
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: record_revision
+      :type:  Any
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

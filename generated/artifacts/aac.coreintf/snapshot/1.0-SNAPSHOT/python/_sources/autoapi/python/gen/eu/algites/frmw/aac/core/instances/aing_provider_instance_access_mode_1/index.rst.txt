@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.instances.aing_provider_instance_access_mode_1
+==================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.instances.aing_provider_instance_access_mode_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.instances.aing_provider_instance_access_mode_1.AIngProviderInstanceAccessMode_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngProviderInstanceAccessMode_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Declares the permitted read/write access mode for this provider instance or resource. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/instances/provider-instance_1.jsondef.schema.json#/properties/AccessMode (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/instances/provider-instance_1.jsondef.schema.json#/properties/AccessMode); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/instances/provider-instance_1.yamldef.schema.json#/properties/AccessMode (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/instances/provider-instance_1.yamldef.schema.json#/properties/AccessMode)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/instances/provider-instance_1.jsondef.schema.json#/properties/AccessMode/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/instances/provider-instance_1.jsondef.schema.json#/properties/AccessMode. Do not edit manually.
+
+   Values:
+       READ_ONLY: Canonical enum value read_only.
+       READ_WRITE: Canonical enum value read_write.
+
+
+   .. py:attribute:: READ_ONLY
+      :value: 'read_only'
+
+
+
+   .. py:attribute:: READ_WRITE
+      :value: 'read_write'
+
+
+

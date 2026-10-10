@@ -1,0 +1,86 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aicgd_data_entity_query_records_request_references_items_1
+=========================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aicgd_data_entity_query_records_request_references_items_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aicgd_data_entity_query_records_request_references_items_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.dataentity.aicgd_data_entity_query_records_request_references_items_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aicgd_data_entity_query_records_request_references_items_1.AIcgdDataEntityQueryRecordsRequestReferencesItems_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdDataEntityQueryRecordsRequestReferencesItems_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.dataentity.aiig_data_entity_query_records_request_references_items_1.AIigDataEntityQueryRecordsRequestReferencesItems_1`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/References/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/References/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.yamldef.schema.json#/properties/References/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.yamldef.schema.json#/properties/References/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/References/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/References/items. Do not edit manually.
+
+   .. attribute:: target
+
+      Structured target associated with this reference.
+
+   .. attribute:: schema_path
+
+      Path within the canonical schema that contains the reference.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TARGET
+      :value: 'Target'
+
+
+      ** ``Target``
+
+      **Field Description:** Structured target associated with this reference.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA_PATH
+      :value: 'SchemaPath'
+
+
+      ** ``SchemaPath``
+
+      **Field Description:** Path within the canonical schema that contains the reference.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: target
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: schema_path
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

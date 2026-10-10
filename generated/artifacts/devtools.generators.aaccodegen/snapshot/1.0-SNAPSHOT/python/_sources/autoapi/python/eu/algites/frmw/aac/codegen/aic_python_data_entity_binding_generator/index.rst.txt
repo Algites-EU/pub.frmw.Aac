@@ -17,10 +17,11 @@ Module Contents
 
 .. py:class:: AIcPythonDataEntityBindingGenerator(schemas: eu.algites.frmw.aac.core.schemas.registry.AIcSchemaRegistry)
 
-   Generate one versioned Python Data Entity view interface and codec from canonical JSON Schema.
+   Generate an AAC Data Entity view and codec over the shared canonical-definition model.
 
-   Version suffixes are part of the generated method names so one current implementation object
-   can implement several historical schema views without method-signature collisions.
+   JSON definition parsing, definition identity, property normalization, and naming are delegated
+   to ``pub.tool.General``. Only the versioned Data Entity view and codec semantics remain AAC-
+   specific here.
 
 
    .. py:attribute:: schemas

@@ -1,0 +1,200 @@
+python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_requirements_items_1
+===================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_requirements_items_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_requirements_items_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_requirements_items_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_requirements_items_1.AIcgdComponentDescriptorComponentCapabilityProvidersItemsRequirementsItems_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdComponentDescriptorComponentCapabilityProvidersItemsRequirementsItems_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_requirements_items_1.AIigComponentDescriptorComponentCapabilityProvidersItemsRequirementsItems_1`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Requirements/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Requirements/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Requirements/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Requirements/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Requirements/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Requirements/items. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this requirement.
+
+   .. attribute:: capability
+
+      Identity and human-facing metadata of the capability contract.
+
+   .. attribute:: versions
+
+      Lists the versions supported or selected by this requirement.
+
+   .. attribute:: cardinality
+
+      Specifies the cardinality for this requirement.
+
+   .. attribute:: mandatory
+
+      Indicates whether mandatory applies to this requirement.
+
+   .. attribute:: name
+
+      Human-readable name of this requirement.
+
+   .. attribute:: description
+
+      Human-readable description of this requirement.
+
+   .. attribute:: requested_authorizations
+
+      Lists the requested authorizations associated with this requirement.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CAPABILITY
+      :value: 'Capability'
+
+
+      ** ``Capability``
+
+      **Field Description:** Identity and human-facing metadata of the capability contract.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VERSIONS
+      :value: 'Versions'
+
+
+      ** ``Versions``
+
+      **Field Description:** Lists the versions supported or selected by this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CARDINALITY
+      :value: 'Cardinality'
+
+
+      ** ``Cardinality``
+
+      **Field Description:** Specifies the cardinality for this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__MANDATORY
+      :value: 'Mandatory'
+
+
+      ** ``Mandatory``
+
+      **Field Description:** Indicates whether mandatory applies to this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__REQUESTED_AUTHORIZATIONS
+      :value: 'RequestedAuthorizations'
+
+
+      ** ``RequestedAuthorizations``
+
+      **Field Description:** Lists the requested authorizations associated with this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: capability
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: cardinality
+      :type:  str
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+
+
+   .. py:attribute:: name
+      :type:  Any
+
+
+   .. py:attribute:: description
+      :type:  Any
+
+
+   .. py:attribute:: requested_authorizations
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

@@ -1,0 +1,59 @@
+python.gen.eu.algites.frmw.aac.core.persistence.aing_transaction_state_phase_1
+==============================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.persistence.aing_transaction_state_phase_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.persistence.aing_transaction_state_phase_1.AIngTransactionStatePhase_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngTransactionStatePhase_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Specifies the phase for this AAC persistence transaction state. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/persistence/transaction-state_1.jsondef.schema.json#/properties/Phase (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/persistence/transaction-state_1.jsondef.schema.json#/properties/Phase); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/persistence/transaction-state_1.yamldef.schema.json#/properties/Phase (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/persistence/transaction-state_1.yamldef.schema.json#/properties/Phase)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/persistence/transaction-state_1.jsondef.schema.json#/properties/Phase/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/persistence/transaction-state_1.jsondef.schema.json#/properties/Phase. Do not edit manually.
+
+   Values:
+       PREPARED: Canonical enum value prepared.
+       COMMIT_STARTED: Canonical enum value commit_started.
+       COMMITTED: Canonical enum value committed.
+       CLEANUP_COMPLETED: Canonical enum value cleanup_completed.
+       ABORTED: Canonical enum value aborted.
+
+
+   .. py:attribute:: PREPARED
+      :value: 'prepared'
+
+
+
+   .. py:attribute:: COMMIT_STARTED
+      :value: 'commit_started'
+
+
+
+   .. py:attribute:: COMMITTED
+      :value: 'committed'
+
+
+
+   .. py:attribute:: CLEANUP_COMPLETED
+      :value: 'cleanup_completed'
+
+
+
+   .. py:attribute:: ABORTED
+      :value: 'aborted'
+
+
+

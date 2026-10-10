@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.observation.aing_observation_input_phase_1
+==============================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.observation.aing_observation_input_phase_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.observation.aing_observation_input_phase_1.AIngObservationInputPhase_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngObservationInputPhase_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Specifies the phase for this AAC observation input. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/observation/observation-input_1.jsondef.schema.json#/properties/Phase (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/observation/observation-input_1.jsondef.schema.json#/properties/Phase); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/observation/observation-input_1.yamldef.schema.json#/properties/Phase (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/observation/observation-input_1.yamldef.schema.json#/properties/Phase)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/observation/observation-input_1.jsondef.schema.json#/properties/Phase/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/observation/observation-input_1.jsondef.schema.json#/properties/Phase. Do not edit manually.
+
+   Values:
+       PRE: Canonical enum value pre.
+       POST: Canonical enum value post.
+
+
+   .. py:attribute:: PRE
+      :value: 'pre'
+
+
+
+   .. py:attribute:: POST
+      :value: 'post'
+
+
+

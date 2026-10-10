@@ -1,0 +1,295 @@
+python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_1
+=====================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_1.AIcgdComponentDescriptorComponent_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdComponentDescriptorComponent_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_1.AIigComponentDescriptorComponent_1`
+
+
+   Structured component associated with this AAC component descriptor. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this component.
+
+   .. attribute:: version
+
+      Version of this component.
+
+   .. attribute:: capability_groups
+
+      Lists the capability groups associated with this component.
+
+   .. attribute:: capability
+
+      Identity and human-facing metadata of the capability contract.
+
+   .. attribute:: component_configuration_schema
+
+      Specifies the component configuration schema for this component.
+
+   .. attribute:: capability_providers
+
+      Component-declared capability provider definitions. Each definition binds one implementation role to the capability contract versions it provides; configured provider instances are created from these definitions.
+
+   .. attribute:: lifecycle
+
+      Structured lifecycle associated with this component.
+
+   .. attribute:: metadata
+
+      Additional structured metadata associated with this component.
+
+   .. attribute:: name
+
+      Human-readable name of this component.
+
+   .. attribute:: description
+
+      Human-readable description of this component.
+
+   .. attribute:: entitlement_licensing_scopes
+
+      Lists the entitlement licensing scopes associated with this component.
+
+   .. attribute:: provided_capability_entitlements
+
+      Lists the provided capability entitlements associated with this component.
+
+   .. attribute:: data_entity_support
+
+      Lists the data entity support associated with this component.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VERSION
+      :value: 'Version'
+
+
+      ** ``Version``
+
+      **Field Description:** Version of this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CAPABILITY_GROUPS
+      :value: 'CapabilityGroups'
+
+
+      ** ``CapabilityGroups``
+
+      **Field Description:** Lists the capability groups associated with this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CAPABILITY
+      :value: 'Capability'
+
+
+      ** ``Capability``
+
+      **Field Description:** Identity and human-facing metadata of the capability contract.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__COMPONENT_CONFIGURATION_SCHEMA
+      :value: 'ComponentConfigurationSchema'
+
+
+      ** ``ComponentConfigurationSchema``
+
+      **Field Description:** Specifies the component configuration schema for this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CAPABILITY_PROVIDERS
+      :value: 'CapabilityProviders'
+
+
+      ** ``CapabilityProviders``
+
+      **Field Description:** Component-declared capability provider definitions. Each definition binds one implementation role to the capability contract versions it provides; configured provider instances are created from these definitions.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__LIFECYCLE
+      :value: 'Lifecycle'
+
+
+      ** ``Lifecycle``
+
+      **Field Description:** Structured lifecycle associated with this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__METADATA
+      :value: 'Metadata'
+
+
+      ** ``Metadata``
+
+      **Field Description:** Additional structured metadata associated with this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ENTITLEMENT_LICENSING_SCOPES
+      :value: 'EntitlementLicensingScopes'
+
+
+      ** ``EntitlementLicensingScopes``
+
+      **Field Description:** Lists the entitlement licensing scopes associated with this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PROVIDED_CAPABILITY_ENTITLEMENTS
+      :value: 'ProvidedCapabilityEntitlements'
+
+
+      ** ``ProvidedCapabilityEntitlements``
+
+      **Field Description:** Lists the provided capability entitlements associated with this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DATA_ENTITY_SUPPORT
+      :value: 'DataEntitySupport'
+
+
+      ** ``DataEntitySupport``
+
+      **Field Description:** Lists the data entity support associated with this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: capability_groups
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: capability
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: component_configuration_schema
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: capability_providers
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: lifecycle
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: name
+      :type:  Any
+
+
+   .. py:attribute:: description
+      :type:  Any
+
+
+   .. py:attribute:: entitlement_licensing_scopes
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: provided_capability_entitlements
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: data_entity_support
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

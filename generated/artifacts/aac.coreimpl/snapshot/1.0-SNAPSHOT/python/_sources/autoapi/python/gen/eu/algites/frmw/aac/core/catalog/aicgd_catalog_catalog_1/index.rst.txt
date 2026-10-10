@@ -1,0 +1,162 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_catalog_1
+===================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_catalog_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_catalog_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_catalog_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_catalog_1.AIcgdCatalogCatalog_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdCatalogCatalog_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_catalog_1.AIigCatalogCatalog_1`
+
+
+   Catalog data represented by this document. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/properties/Catalog (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/properties/Catalog); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/properties/Catalog (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/properties/Catalog)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/properties/Catalog/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/properties/Catalog. Do not edit manually.
+
+   .. attribute:: format_version
+
+      Version of the persisted or exchanged document format.
+
+   .. attribute:: product_id
+
+      Stable identifier of the product associated with this catalog.
+
+   .. attribute:: technology_id
+
+      Stable identifier of the technology associated with this catalog.
+
+   .. attribute:: components
+
+      Lists the components associated with this catalog.
+
+   .. attribute:: generated_at
+
+      Specifies the generated at for this catalog.
+
+   .. attribute:: metadata
+
+      Additional structured metadata associated with this catalog.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__FORMAT_VERSION
+      :value: 'FormatVersion'
+
+
+      ** ``FormatVersion``
+
+      **Field Description:** Version of the persisted or exchanged document format.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PRODUCT_ID
+      :value: 'ProductId'
+
+
+      ** ``ProductId``
+
+      **Field Description:** Stable identifier of the product associated with this catalog.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TECHNOLOGY_ID
+      :value: 'TechnologyId'
+
+
+      ** ``TechnologyId``
+
+      **Field Description:** Stable identifier of the technology associated with this catalog.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__COMPONENTS
+      :value: 'Components'
+
+
+      ** ``Components``
+
+      **Field Description:** Lists the components associated with this catalog.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__GENERATED_AT
+      :value: 'GeneratedAt'
+
+
+      ** ``GeneratedAt``
+
+      **Field Description:** Specifies the generated at for this catalog.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__METADATA
+      :value: 'Metadata'
+
+
+      ** ``Metadata``
+
+      **Field Description:** Additional structured metadata associated with this catalog.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: format_version
+      :type:  int
+
+
+   .. py:attribute:: product_id
+      :type:  str
+
+
+   .. py:attribute:: technology_id
+      :type:  str
+
+
+   .. py:attribute:: components
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: generated_at
+      :type:  str
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

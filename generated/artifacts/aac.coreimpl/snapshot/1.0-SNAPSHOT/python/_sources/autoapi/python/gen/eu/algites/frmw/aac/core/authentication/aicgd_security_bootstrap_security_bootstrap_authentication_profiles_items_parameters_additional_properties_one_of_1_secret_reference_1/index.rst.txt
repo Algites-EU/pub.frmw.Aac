@@ -1,0 +1,124 @@
+python.gen.eu.algites.frmw.aac.core.authentication.aicgd_security_bootstrap_security_bootstrap_authentication_profiles_items_parameters_additional_properties_one_of_1_secret_reference_1
+=========================================================================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.authentication.aicgd_security_bootstrap_security_bootstrap_authentication_profiles_items_parameters_additional_properties_one_of_1_secret_reference_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.authentication.aicgd_security_bootstrap_security_bootstrap_authentication_profiles_items_parameters_additional_properties_one_of_1_secret_reference_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.authentication.aicgd_security_bootstrap_security_bootstrap_authentication_profiles_items_parameters_additional_properties_one_of_1_secret_reference_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.authentication.aicgd_security_bootstrap_security_bootstrap_authentication_profiles_items_parameters_additional_properties_one_of_1_secret_reference_1.AIcgdSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParametersAdditionalPropertiesOneOf1SecretReference_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParametersAdditionalPropertiesOneOf1SecretReference_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_authentication_profiles_items_parameters_additional_properties_one_of_1_secret_reference_1.AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParametersAdditionalPropertiesOneOf1SecretReference_1`
+
+
+   Reference to secret material managed by an AAC secret provider. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/AuthenticationProfiles/items/properties/Parameters/additionalProperties/oneOf/1/properties/SecretReference (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/AuthenticationProfiles/items/properties/Parameters/additionalProperties/oneOf/1/properties/SecretReference); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.yamldef.schema.json#/properties/SecurityBootstrap/properties/AuthenticationProfiles/items/properties/Parameters/additionalProperties/oneOf/1/properties/SecretReference (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.yamldef.schema.json#/properties/SecurityBootstrap/properties/AuthenticationProfiles/items/properties/Parameters/additionalProperties/oneOf/1/properties/SecretReference)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/AuthenticationProfiles/items/properties/Parameters/additionalProperties/oneOf/1/properties/SecretReference/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/AuthenticationProfiles/items/properties/Parameters/additionalProperties/oneOf/1/properties/SecretReference. Do not edit manually.
+
+   .. attribute:: secret_provider_id
+
+      Identifier of the secret provider that resolves this reference.
+
+   .. attribute:: key
+
+      Provider-specific key identifying the referenced secret.
+
+   .. attribute:: version
+
+      Optional provider-specific version of the referenced secret.
+
+   .. attribute:: metadata
+
+      Additional structured metadata associated with the referenced value.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SECRET_PROVIDER_ID
+      :value: 'SecretProviderId'
+
+
+      ** ``SecretProviderId``
+
+      **Field Description:** Identifier of the secret provider that resolves this reference.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__KEY
+      :value: 'Key'
+
+
+      ** ``Key``
+
+      **Field Description:** Provider-specific key identifying the referenced secret.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VERSION
+      :value: 'Version'
+
+
+      ** ``Version``
+
+      **Field Description:** Optional provider-specific version of the referenced secret.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__METADATA
+      :value: 'Metadata'
+
+
+      ** ``Metadata``
+
+      **Field Description:** Additional structured metadata associated with the referenced value.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: secret_provider_id
+      :type:  str
+
+
+   .. py:attribute:: key
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  str
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

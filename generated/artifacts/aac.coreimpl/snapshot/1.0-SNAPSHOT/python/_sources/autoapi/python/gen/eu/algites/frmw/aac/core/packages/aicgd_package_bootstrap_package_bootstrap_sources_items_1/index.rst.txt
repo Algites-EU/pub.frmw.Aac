@@ -1,0 +1,219 @@
+python.gen.eu.algites.frmw.aac.core.packages.aicgd_package_bootstrap_package_bootstrap_sources_items_1
+======================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.packages.aicgd_package_bootstrap_package_bootstrap_sources_items_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.packages.aicgd_package_bootstrap_package_bootstrap_sources_items_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.packages.aicgd_package_bootstrap_package_bootstrap_sources_items_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.packages.aicgd_package_bootstrap_package_bootstrap_sources_items_1.AIcgdPackageBootstrapPackageBootstrapSourcesItems_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdPackageBootstrapPackageBootstrapSourcesItems_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.packages.aiig_package_bootstrap_package_bootstrap_sources_items_1.AIigPackageBootstrapPackageBootstrapSourcesItems_1`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json#/properties/PackageBootstrap/properties/Sources/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json#/properties/PackageBootstrap/properties/Sources/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.yamldef.schema.json#/properties/PackageBootstrap/properties/Sources/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.yamldef.schema.json#/properties/PackageBootstrap/properties/Sources/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json#/properties/PackageBootstrap/properties/Sources/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json#/properties/PackageBootstrap/properties/Sources/items. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this source.
+
+   .. attribute:: uri
+
+      URI or URL identifying the uri associated with this source.
+
+   .. attribute:: type
+
+      Type discriminator for this source.
+
+   .. attribute:: authentication_profile_id
+
+      Stable identifier of the authentication profile associated with this source.
+
+   .. attribute:: verifier_id
+
+      Stable identifier of the verifier associated with this source.
+
+   .. attribute:: priority
+
+      Specifies the priority for this source.
+
+   .. attribute:: settings
+
+      Structured settings associated with this source.
+
+   .. attribute:: name
+
+      Human-readable name of this source.
+
+   .. attribute:: description
+
+      Human-readable description of this source.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__URI
+      :value: 'Uri'
+
+
+      ** ``Uri``
+
+      **Field Description:** URI or URL identifying the uri associated with this source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TYPE
+      :value: 'Type'
+
+
+      ** ``Type``
+
+      **Field Description:** Type discriminator for this source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__AUTHENTICATION_PROFILE_ID
+      :value: 'AuthenticationProfileId'
+
+
+      ** ``AuthenticationProfileId``
+
+      **Field Description:** Stable identifier of the authentication profile associated with this source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VERIFIER_ID
+      :value: 'VerifierId'
+
+
+      ** ``VerifierId``
+
+      **Field Description:** Stable identifier of the verifier associated with this source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PRIORITY
+      :value: 'Priority'
+
+
+      ** ``Priority``
+
+      **Field Description:** Specifies the priority for this source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SETTINGS
+      :value: 'Settings'
+
+
+      ** ``Settings``
+
+      **Field Description:** Structured settings associated with this source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: uri
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: authentication_profile_id
+      :type:  str | None
+
+
+   .. py:attribute:: verifier_id
+      :type:  str | None
+
+
+   .. py:attribute:: priority
+      :type:  int
+
+
+   .. py:attribute:: settings
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: name
+      :type:  Any | None
+
+
+   .. py:attribute:: description
+      :type:  Any | None
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

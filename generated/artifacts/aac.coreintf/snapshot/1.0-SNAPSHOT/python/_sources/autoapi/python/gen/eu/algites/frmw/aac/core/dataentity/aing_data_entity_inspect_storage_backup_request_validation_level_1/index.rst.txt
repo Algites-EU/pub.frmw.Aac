@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_inspect_storage_backup_request_validation_level_1
+=================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_inspect_storage_backup_request_validation_level_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_inspect_storage_backup_request_validation_level_1.AIngDataEntityInspectStorageBackupRequestValidationLevel_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngDataEntityInspectStorageBackupRequestValidationLevel_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Selects the depth of backup validation to perform. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-backup-request_1.jsondef.schema.json#/properties/ValidationLevel (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-backup-request_1.jsondef.schema.json#/properties/ValidationLevel); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-backup-request_1.yamldef.schema.json#/properties/ValidationLevel (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-backup-request_1.yamldef.schema.json#/properties/ValidationLevel)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-backup-request_1.jsondef.schema.json#/properties/ValidationLevel/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-backup-request_1.jsondef.schema.json#/properties/ValidationLevel. Do not edit manually.
+
+   Values:
+       INTEGRITY: Canonical enum value integrity.
+       FULL: Canonical enum value full.
+
+
+   .. py:attribute:: INTEGRITY
+      :value: 'integrity'
+
+
+
+   .. py:attribute:: FULL
+      :value: 'full'
+
+
+

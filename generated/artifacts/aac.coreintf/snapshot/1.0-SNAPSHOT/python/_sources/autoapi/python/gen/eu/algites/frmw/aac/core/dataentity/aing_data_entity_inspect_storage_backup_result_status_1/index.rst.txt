@@ -1,0 +1,47 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_inspect_storage_backup_result_status_1
+======================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_inspect_storage_backup_result_status_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_inspect_storage_backup_result_status_1.AIngDataEntityInspectStorageBackupResultStatus_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngDataEntityInspectStorageBackupResultStatus_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Outcome status reported by this operation. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-backup-result_1.jsondef.schema.json#/properties/status (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-backup-result_1.jsondef.schema.json#/properties/status); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-backup-result_1.yamldef.schema.json#/properties/status (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-backup-result_1.yamldef.schema.json#/properties/status)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-backup-result_1.jsondef.schema.json#/properties/status/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-inspect-storage-backup-result_1.jsondef.schema.json#/properties/status. Do not edit manually.
+
+   Values:
+       VALID: Canonical enum value VALID.
+       INVALID: Canonical enum value INVALID.
+       NOT_FOUND: Canonical enum value NOT_FOUND.
+
+
+   .. py:attribute:: VALID
+      :value: 'VALID'
+
+
+
+   .. py:attribute:: INVALID
+      :value: 'INVALID'
+
+
+
+   .. py:attribute:: NOT_FOUND
+      :value: 'NOT_FOUND'
+
+
+

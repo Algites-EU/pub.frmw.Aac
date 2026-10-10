@@ -1,0 +1,86 @@
+python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_group_definition_display_text_one_of_1_1
+========================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_group_definition_display_text_one_of_1_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_group_definition_display_text_one_of_1_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_group_definition_display_text_one_of_1_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_group_definition_display_text_one_of_1_1.AIcgdCapabilityGroupDefinitionDisplayTextOneOf1_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdCapabilityGroupDefinitionDisplayTextOneOf1_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.capability.aiig_capability_group_definition_display_text_one_of_1_1.AIigCapabilityGroupDefinitionDisplayTextOneOf1_1`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-group_1.jsondef.schema.json#/$defs/displayText/oneOf/1 (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-group_1.jsondef.schema.json#/$defs/displayText/oneOf/1); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-group_1.yamldef.schema.json#/$defs/displayText/oneOf/1 (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-group_1.yamldef.schema.json#/$defs/displayText/oneOf/1)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-group_1.jsondef.schema.json#/$defs/displayText/oneOf/1/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-group_1.jsondef.schema.json#/$defs/displayText/oneOf/1. Do not edit manually.
+
+   .. attribute:: text
+
+      Human-readable display text.
+
+   .. attribute:: resource_key
+
+      Optional localization resource key for the human-readable text.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TEXT
+      :value: 'Text'
+
+
+      ** ``Text``
+
+      **Field Description:** Human-readable display text.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__RESOURCE_KEY
+      :value: 'ResourceKey'
+
+
+      ** ``ResourceKey``
+
+      **Field Description:** Optional localization resource key for the human-readable text.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: text
+      :type:  str
+
+
+   .. py:attribute:: resource_key
+      :type:  str
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

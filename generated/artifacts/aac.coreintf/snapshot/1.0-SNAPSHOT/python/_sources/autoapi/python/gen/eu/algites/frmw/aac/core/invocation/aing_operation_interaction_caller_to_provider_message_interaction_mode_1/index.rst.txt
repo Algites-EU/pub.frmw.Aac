@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_caller_to_provider_message_interaction_mode_1
+=======================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_caller_to_provider_message_interaction_mode_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_caller_to_provider_message_interaction_mode_1.AIngOperationInteractionCallerToProviderMessageInteractionMode_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngOperationInteractionCallerToProviderMessageInteractionMode_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Specifies the interaction mode for this operation interaction caller to provider message. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json#/properties/InteractionMode (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json#/properties/InteractionMode); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.yamldef.schema.json#/properties/InteractionMode (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.yamldef.schema.json#/properties/InteractionMode)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json#/properties/InteractionMode/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json#/properties/InteractionMode. Do not edit manually.
+
+   Values:
+       FOREGROUND: Canonical enum value foreground.
+       BACKGROUND: Canonical enum value background.
+
+
+   .. py:attribute:: FOREGROUND
+      :value: 'foreground'
+
+
+
+   .. py:attribute:: BACKGROUND
+      :value: 'background'
+
+
+

@@ -1,0 +1,69 @@
+python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter
+======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.codegen.aic_general_defs_inline_dto_adapter.AIcGeneralDefsInlineDtoAdapter
+
+
+Module Contents
+---------------
+
+.. py:class:: AIcGeneralDefsInlineDtoAdapter
+
+   Adapt registered AAC JSON definitions to the shared defs-codegen model and backend.
+
+   AAC capability bindings are emitted as one combined Python source unit, while the shared
+   defs-codegen backend normally emits one standalone module per canonical definition. This
+   adapter keeps schema normalization, naming, documentation, provenance, and DTO rendering in
+   ``pub.tool.General`` and extracts only the generated declaration needed by the AAC binding.
+
+
+   .. py:attribute:: profile
+
+
+   .. py:attribute:: names
+
+
+   .. py:method:: normalize(registered: eu.algites.frmw.aac.core.schemas.registry.AIcRegisteredSchema)
+
+      Normalize one registered AAC schema through the shared JSON definitions reader.
+
+
+
+   .. py:method:: interface_type_name(definition) -> str
+
+      Project an AAC interface name from the normalized definition using shared naming rules.
+
+
+
+   .. py:method:: property_name(source_name: str) -> str
+
+      Project a Python property name using the shared Algites naming profile.
+
+
+
+   .. py:method:: schema_field_name_constant(source_name: str) -> str
+
+      Use the shared generator's canonical field constant naming convention.
+
+
+
+   .. py:method:: generate(registered: eu.algites.frmw.aac.core.schemas.registry.AIcRegisteredSchema) -> tuple[str, str]
+
+      Return the generated DTO type name and inlinable class declaration.
+
+
+
+   .. py:method:: generate_with_runtime(registered: eu.algites.frmw.aac.core.schemas.registry.AIcRegisteredSchema) -> tuple[str, str, str]
+
+      Return the primary DTO together with its shared backend runtime preamble.
+
+
+

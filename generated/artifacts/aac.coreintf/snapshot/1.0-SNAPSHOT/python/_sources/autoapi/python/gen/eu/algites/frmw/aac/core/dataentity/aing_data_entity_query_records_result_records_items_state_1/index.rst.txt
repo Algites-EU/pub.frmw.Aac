@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_query_records_result_records_items_state_1
+==========================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_query_records_result_records_items_state_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_query_records_result_records_items_state_1.AIngDataEntityQueryRecordsResultRecordsItemsState_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngDataEntityQueryRecordsResultRecordsItemsState_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Lifecycle or storage state of this record. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-result_1.jsondef.schema.json#/properties/Records/items/properties/State (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-result_1.jsondef.schema.json#/properties/Records/items/properties/State); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-result_1.yamldef.schema.json#/properties/Records/items/properties/State (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-result_1.yamldef.schema.json#/properties/Records/items/properties/State)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-result_1.jsondef.schema.json#/properties/Records/items/properties/State/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-result_1.jsondef.schema.json#/properties/Records/items/properties/State. Do not edit manually.
+
+   Values:
+       ACTIVE: Canonical enum value active.
+       TOMBSTONE: Canonical enum value tombstone.
+
+
+   .. py:attribute:: ACTIVE
+      :value: 'active'
+
+
+
+   .. py:attribute:: TOMBSTONE
+      :value: 'tombstone'
+
+
+

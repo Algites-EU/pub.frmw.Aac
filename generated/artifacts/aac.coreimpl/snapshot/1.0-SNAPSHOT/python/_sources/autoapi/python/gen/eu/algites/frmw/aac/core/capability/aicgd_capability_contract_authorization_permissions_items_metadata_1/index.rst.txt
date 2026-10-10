@@ -1,0 +1,48 @@
+python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_contract_authorization_permissions_items_metadata_1
+===================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_contract_authorization_permissions_items_metadata_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_contract_authorization_permissions_items_metadata_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_contract_authorization_permissions_items_metadata_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.capability.aicgd_capability_contract_authorization_permissions_items_metadata_1.AIcgdCapabilityContractAuthorizationPermissionsItemsMetadata_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdCapabilityContractAuthorizationPermissionsItemsMetadata_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.capability.aiig_capability_contract_authorization_permissions_items_metadata_1.AIigCapabilityContractAuthorizationPermissionsItemsMetadata_1`
+
+
+   Additional structured metadata associated with this authorization permission. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/AuthorizationPermissions/items/properties/Metadata (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/AuthorizationPermissions/items/properties/Metadata); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.yamldef.schema.json#/properties/AuthorizationPermissions/items/properties/Metadata (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.yamldef.schema.json#/properties/AuthorizationPermissions/items/properties/Metadata)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/AuthorizationPermissions/items/properties/Metadata/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/AuthorizationPermissions/items/properties/Metadata. Do not edit manually.
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

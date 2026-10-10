@@ -1,0 +1,53 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_ensure_storage_support_result_status_1
+======================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_ensure_storage_support_result_status_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_ensure_storage_support_result_status_1.AIngDataEntityEnsureStorageSupportResultStatus_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngDataEntityEnsureStorageSupportResultStatus_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Outcome status reported by this operation. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-ensure-storage-support-result_1.jsondef.schema.json#/properties/status (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-ensure-storage-support-result_1.jsondef.schema.json#/properties/status); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-ensure-storage-support-result_1.yamldef.schema.json#/properties/status (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-ensure-storage-support-result_1.yamldef.schema.json#/properties/status)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-ensure-storage-support-result_1.jsondef.schema.json#/properties/status/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-ensure-storage-support-result_1.jsondef.schema.json#/properties/status. Do not edit manually.
+
+   Values:
+       NOT_PROVISIONED: Canonical enum value NOT_PROVISIONED.
+       READY: Canonical enum value READY.
+       RETIRED: Canonical enum value RETIRED.
+       INCOMPATIBLE: Canonical enum value INCOMPATIBLE.
+
+
+   .. py:attribute:: NOT_PROVISIONED
+      :value: 'NOT_PROVISIONED'
+
+
+
+   .. py:attribute:: READY
+      :value: 'READY'
+
+
+
+   .. py:attribute:: RETIRED
+      :value: 'RETIRED'
+
+
+
+   .. py:attribute:: INCOMPATIBLE
+      :value: 'INCOMPATIBLE'
+
+
+

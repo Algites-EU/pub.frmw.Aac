@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_apply_direct_record_changes_request_changes_items_one_of_0_state_1
+==================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_apply_direct_record_changes_request_changes_items_one_of_0_state_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_apply_direct_record_changes_request_changes_items_one_of_0_state_1.AIngDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf0State_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf0State_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Lifecycle or storage state of this change. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-request_1.jsondef.schema.json#/properties/Changes/items/oneOf/0/properties/State (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-request_1.jsondef.schema.json#/properties/Changes/items/oneOf/0/properties/State); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-request_1.yamldef.schema.json#/properties/Changes/items/oneOf/0/properties/State (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-request_1.yamldef.schema.json#/properties/Changes/items/oneOf/0/properties/State)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-request_1.jsondef.schema.json#/properties/Changes/items/oneOf/0/properties/State/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-request_1.jsondef.schema.json#/properties/Changes/items/oneOf/0/properties/State. Do not edit manually.
+
+   Values:
+       ACTIVE: Canonical enum value active.
+       TOMBSTONE: Canonical enum value tombstone.
+
+
+   .. py:attribute:: ACTIVE
+      :value: 'active'
+
+
+
+   .. py:attribute:: TOMBSTONE
+      :value: 'tombstone'
+
+
+

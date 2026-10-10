@@ -1,0 +1,219 @@
+python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_data_entity_support_1
+==========================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_data_entity_support_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_data_entity_support_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_data_entity_support_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_data_entity_support_1.AIcgdComponentDescriptorDefinitionDataEntitySupport_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdComponentDescriptorDefinitionDataEntitySupport_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_definition_data_entity_support_1.AIigComponentDescriptorDefinitionDataEntitySupport_1`
+
+
+   Defines the reusable data entity support structure used by this canonical schema. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/dataEntitySupport (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/dataEntitySupport); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/$defs/dataEntitySupport (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/$defs/dataEntitySupport)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/dataEntitySupport/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/dataEntitySupport. Do not edit manually.
+
+   .. attribute:: schema_id
+
+      Canonical schema identifier.
+
+   .. attribute:: readable_versions
+
+      Lists the readable versions supported or selected by this data entity support.
+
+   .. attribute:: writable_versions
+
+      Lists the writable versions supported or selected by this data entity support.
+
+   .. attribute:: preferred_write_version
+
+      Version of the preferred write associated with this data entity support.
+
+   .. attribute:: migrations
+
+      Lists the migrations associated with this data entity support.
+
+   .. attribute:: data_entity_requirements
+
+      Lists the data entity requirements associated with this data entity support.
+
+   .. attribute:: name
+
+      Human-readable name of this data entity support.
+
+   .. attribute:: description
+
+      Human-readable description of this data entity support.
+
+   .. attribute:: metadata
+
+      Additional structured metadata associated with this data entity support.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA_ID
+      :value: 'SchemaId'
+
+
+      ** ``SchemaId``
+
+      **Field Description:** Canonical schema identifier.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__READABLE_VERSIONS
+      :value: 'ReadableVersions'
+
+
+      ** ``ReadableVersions``
+
+      **Field Description:** Lists the readable versions supported or selected by this data entity support.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__WRITABLE_VERSIONS
+      :value: 'WritableVersions'
+
+
+      ** ``WritableVersions``
+
+      **Field Description:** Lists the writable versions supported or selected by this data entity support.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PREFERRED_WRITE_VERSION
+      :value: 'PreferredWriteVersion'
+
+
+      ** ``PreferredWriteVersion``
+
+      **Field Description:** Version of the preferred write associated with this data entity support.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__MIGRATIONS
+      :value: 'Migrations'
+
+
+      ** ``Migrations``
+
+      **Field Description:** Lists the migrations associated with this data entity support.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DATA_ENTITY_REQUIREMENTS
+      :value: 'DataEntityRequirements'
+
+
+      ** ``DataEntityRequirements``
+
+      **Field Description:** Lists the data entity requirements associated with this data entity support.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this data entity support.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this data entity support.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__METADATA
+      :value: 'Metadata'
+
+
+      ** ``Metadata``
+
+      **Field Description:** Additional structured metadata associated with this data entity support.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: writable_versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: preferred_write_version
+      :type:  int
+
+
+   .. py:attribute:: migrations
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: data_entity_requirements
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: name
+      :type:  Any
+
+
+   .. py:attribute:: description
+      :type:  Any
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

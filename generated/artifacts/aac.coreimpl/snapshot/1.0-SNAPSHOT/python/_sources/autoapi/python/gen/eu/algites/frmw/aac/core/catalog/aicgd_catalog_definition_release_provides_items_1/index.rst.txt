@@ -1,0 +1,86 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_release_provides_items_1
+=============================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_release_provides_items_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_release_provides_items_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_release_provides_items_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_release_provides_items_1.AIcgdCatalogDefinitionReleaseProvidesItems_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdCatalogDefinitionReleaseProvidesItems_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_provides_items_1.AIigCatalogDefinitionReleaseProvidesItems_1`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/properties/Provides/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/properties/Provides/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/release/properties/Provides/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/release/properties/Provides/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/properties/Provides/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/properties/Provides/items. Do not edit manually.
+
+   .. attribute:: capability
+
+      Identity and human-facing metadata of the capability contract.
+
+   .. attribute:: versions
+
+      Lists the versions supported or selected by this provide.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CAPABILITY
+      :value: 'Capability'
+
+
+      ** ``Capability``
+
+      **Field Description:** Identity and human-facing metadata of the capability contract.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VERSIONS
+      :value: 'Versions'
+
+
+      ** ``Versions``
+
+      **Field Description:** Lists the versions supported or selected by this provide.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: capability
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

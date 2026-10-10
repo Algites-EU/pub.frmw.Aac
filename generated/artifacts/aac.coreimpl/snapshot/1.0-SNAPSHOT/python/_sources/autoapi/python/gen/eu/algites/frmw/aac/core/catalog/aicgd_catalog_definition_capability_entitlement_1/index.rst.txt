@@ -1,0 +1,124 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_capability_entitlement_1
+=============================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_capability_entitlement_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_capability_entitlement_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_capability_entitlement_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_definition_capability_entitlement_1.AIcgdCatalogDefinitionCapabilityEntitlement_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdCatalogDefinitionCapabilityEntitlement_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_capability_entitlement_1.AIigCatalogDefinitionCapabilityEntitlement_1`
+
+
+   Defines the reusable capability entitlement structure used by this canonical schema. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/capabilityEntitlement (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/capabilityEntitlement); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/capabilityEntitlement (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/capabilityEntitlement)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/capabilityEntitlement/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/capabilityEntitlement. Do not edit manually.
+
+   .. attribute:: capability
+
+      Identity and human-facing metadata of the capability contract.
+
+   .. attribute:: permissions
+
+      Authorization or entitlement permissions associated with this capability entitlement.
+
+   .. attribute:: name
+
+      Human-readable name of this capability entitlement.
+
+   .. attribute:: description
+
+      Human-readable description of this capability entitlement.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CAPABILITY
+      :value: 'Capability'
+
+
+      ** ``Capability``
+
+      **Field Description:** Identity and human-facing metadata of the capability contract.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PERMISSIONS
+      :value: 'Permissions'
+
+
+      ** ``Permissions``
+
+      **Field Description:** Authorization or entitlement permissions associated with this capability entitlement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this capability entitlement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this capability entitlement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: capability
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: permissions
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: name
+      :type:  Any
+
+
+   .. py:attribute:: description
+      :type:  Any
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

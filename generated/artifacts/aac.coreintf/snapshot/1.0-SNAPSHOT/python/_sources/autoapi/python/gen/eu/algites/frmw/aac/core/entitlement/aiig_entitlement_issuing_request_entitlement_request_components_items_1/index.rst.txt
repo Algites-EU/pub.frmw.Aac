@@ -1,0 +1,75 @@
+python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_entitlement_request_components_items_1
+=======================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_entitlement_request_components_items_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_entitlement_request_components_items_1.AIigEntitlementIssuingRequestEntitlementRequestComponentsItems_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigEntitlementIssuingRequestEntitlementRequestComponentsItems_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.jsondef.schema.json#/properties/EntitlementRequest/properties/Components/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.jsondef.schema.json#/properties/EntitlementRequest/properties/Components/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.yamldef.schema.json#/properties/EntitlementRequest/properties/Components/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.yamldef.schema.json#/properties/EntitlementRequest/properties/Components/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.jsondef.schema.json#/properties/EntitlementRequest/properties/Components/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.jsondef.schema.json#/properties/EntitlementRequest/properties/Components/items. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this component.
+
+   .. attribute:: requested_grants
+
+      Lists the requested grants associated with this component.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :type:  ClassVar[str]
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__REQUESTED_GRANTS
+      :type:  ClassVar[str]
+      :value: 'RequestedGrants'
+
+
+      ** ``RequestedGrants``
+
+      **Field Description:** Lists the requested grants associated with this component.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: requested_grants
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

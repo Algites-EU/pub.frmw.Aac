@@ -1,0 +1,162 @@
+python.gen.eu.algites.frmw.aac.core.packages.aicgd_workspace_component_requirements_workspace_component_requirements_requirements_items_1
+=========================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.packages.aicgd_workspace_component_requirements_workspace_component_requirements_requirements_items_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.packages.aicgd_workspace_component_requirements_workspace_component_requirements_requirements_items_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.packages.aicgd_workspace_component_requirements_workspace_component_requirements_requirements_items_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.packages.aicgd_workspace_component_requirements_workspace_component_requirements_requirements_items_1.AIcgdWorkspaceComponentRequirementsWorkspaceComponentRequirementsRequirementsItems_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdWorkspaceComponentRequirementsWorkspaceComponentRequirementsRequirementsItems_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.packages.aiig_workspace_component_requirements_workspace_component_requirements_requirements_items_1.AIigWorkspaceComponentRequirementsWorkspaceComponentRequirementsRequirementsItems_1`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.jsondef.schema.json#/properties/WorkspaceComponentRequirements/properties/Requirements/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.jsondef.schema.json#/properties/WorkspaceComponentRequirements/properties/Requirements/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.yamldef.schema.json#/properties/WorkspaceComponentRequirements/properties/Requirements/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.yamldef.schema.json#/properties/WorkspaceComponentRequirements/properties/Requirements/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.jsondef.schema.json#/properties/WorkspaceComponentRequirements/properties/Requirements/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-requirements_1.jsondef.schema.json#/properties/WorkspaceComponentRequirements/properties/Requirements/items. Do not edit manually.
+
+   .. attribute:: component_id
+
+      Stable identifier of the AAC component associated with this requirement.
+
+   .. attribute:: versions
+
+      Lists the versions supported or selected by this requirement.
+
+   .. attribute:: required
+
+      Indicates whether required applies to this requirement.
+
+   .. attribute:: source_ids
+
+      Lists stable identifiers associated with this requirement.
+
+   .. attribute:: name
+
+      Human-readable name of this requirement.
+
+   .. attribute:: description
+
+      Human-readable description of this requirement.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__COMPONENT_ID
+      :value: 'ComponentId'
+
+
+      ** ``ComponentId``
+
+      **Field Description:** Stable identifier of the AAC component associated with this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VERSIONS
+      :value: 'Versions'
+
+
+      ** ``Versions``
+
+      **Field Description:** Lists the versions supported or selected by this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__REQUIRED
+      :value: 'Required'
+
+
+      ** ``Required``
+
+      **Field Description:** Indicates whether required applies to this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SOURCE_IDS
+      :value: 'SourceIds'
+
+
+      ** ``SourceIds``
+
+      **Field Description:** Lists stable identifiers associated with this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: required
+      :type:  bool
+
+
+   .. py:attribute:: source_ids
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: name
+      :type:  Any | None
+
+
+   .. py:attribute:: description
+      :type:  Any | None
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

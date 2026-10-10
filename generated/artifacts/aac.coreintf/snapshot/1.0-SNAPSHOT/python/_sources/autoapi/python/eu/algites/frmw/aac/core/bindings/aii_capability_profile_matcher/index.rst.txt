@@ -1,0 +1,37 @@
+python.eu.algites.frmw.aac.core.bindings.aii_capability_profile_matcher
+=======================================================================
+
+.. py:module:: python.eu.algites.frmw.aac.core.bindings.aii_capability_profile_matcher
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.eu.algites.frmw.aac.core.bindings.aii_capability_profile_matcher.AIiCapabilityProfileMatcher
+
+
+Module Contents
+---------------
+
+.. py:class:: AIiCapabilityProfileMatcher
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Select compatible provider binding-qualifier profiles for one consumer requirement.
+
+   Implementations are technology-specific resolution helpers instantiated independently of
+   provider runtime instances. Returned indexes refer to the normalized provider profile sequence
+   supplied for the exact capability-contract version being negotiated.
+
+
+   .. py:method:: match_profile_indexes(requirement: python.eu.algites.frmw.aac.core.descriptor.api.AIcConsumerRequirementDescriptor, capability_version: int, provider_instance_id: str, provider_profiles: Sequence[Mapping[str, object]], consumer_configuration: Mapping[str, object]) -> Sequence[int]
+      :abstractmethod:
+
+
+      Return indexes of provider profiles accepted by the consumer for this resolution.
+
+
+

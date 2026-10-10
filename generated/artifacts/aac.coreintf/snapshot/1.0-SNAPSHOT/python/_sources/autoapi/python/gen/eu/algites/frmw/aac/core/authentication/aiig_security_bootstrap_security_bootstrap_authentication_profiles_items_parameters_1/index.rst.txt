@@ -1,0 +1,35 @@
+python.gen.eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_authentication_profiles_items_parameters_1
+========================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_authentication_profiles_items_parameters_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_authentication_profiles_items_parameters_1.AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParameters_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigSecurityBootstrapSecurityBootstrapAuthenticationProfilesItemsParameters_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Structured parameters associated with this authentication profile. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/AuthenticationProfiles/items/properties/Parameters (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/AuthenticationProfiles/items/properties/Parameters); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.yamldef.schema.json#/properties/SecurityBootstrap/properties/AuthenticationProfiles/items/properties/Parameters (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.yamldef.schema.json#/properties/SecurityBootstrap/properties/AuthenticationProfiles/items/properties/Parameters)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/AuthenticationProfiles/items/properties/Parameters/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/AuthenticationProfiles/items/properties/Parameters. Do not edit manually.
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

@@ -1,0 +1,83 @@
+python.gen.eu.algites.frmw.aac.observation.simpleaudit.schemas.xmldefs.aicgd_simpleaudit_config_1
+=================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.observation.simpleaudit.schemas.xmldefs.aicgd_simpleaudit_config_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.observation.simpleaudit.schemas.xmldefs.aicgd_simpleaudit_config_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.observation.simpleaudit.schemas.xmldefs.aicgd_simpleaudit_config_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.observation.simpleaudit.schemas.xmldefs.aicgd_simpleaudit_config_1.AIcgdSimpleauditConfig_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdSimpleauditConfig_1
+
+   Defines the canonical AAC Simple Audit Configuration schema and its serialized data contract.
+
+   Generated from canonical definition https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/observation/simpleaudit/schemas/simpleaudit-config_1.xsd/1. Source: src/product/xmldefs/eu/algites/frmw/aac/observation/simpleaudit/schemas/simpleaudit-config_1.xsd. Do not edit manually.
+
+   .. attribute:: output
+
+      Structured output associated with this AAC simple audit configuration.
+
+   .. attribute:: format
+
+      Serialization or presentation format of this AAC simple audit configuration.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__OUTPUT
+      :value: 'Output'
+
+
+      ** ``Output``
+
+      **Field Description:** Structured output associated with this AAC simple audit configuration.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__FORMAT
+      :value: 'Format'
+
+
+      ** ``Format``
+
+      **Field Description:** Serialization or presentation format of this AAC simple audit configuration.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: output
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: format
+      :type:  Any
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

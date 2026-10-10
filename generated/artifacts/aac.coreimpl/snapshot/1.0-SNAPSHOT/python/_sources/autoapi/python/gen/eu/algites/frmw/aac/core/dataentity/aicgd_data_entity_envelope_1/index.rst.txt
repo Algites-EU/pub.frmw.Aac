@@ -1,0 +1,177 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aicgd_data_entity_envelope_1
+===========================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aicgd_data_entity_envelope_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aicgd_data_entity_envelope_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.dataentity.aicgd_data_entity_envelope_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aicgd_data_entity_envelope_1.AIcgdDataEntityEnvelope_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdDataEntityEnvelope_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.dataentity.aiig_data_entity_envelope_1.AIigDataEntityEnvelope_1`
+
+
+   Defines the canonical AAC Data Entity Envelope schema and its serialized data contract. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-envelope_1.jsondef.schema.json (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-envelope_1.jsondef.schema.json); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-envelope_1.yamldef.schema.json (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-envelope_1.yamldef.schema.json)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-envelope_1.jsondef.schema.json/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-envelope_1.jsondef.schema.json. Do not edit manually.
+
+   .. attribute:: uid
+
+      Stable logical UID of the Data Entity record.
+
+   .. attribute:: schema_id
+
+      Canonical schema identifier.
+
+   .. attribute:: schema_version
+
+      Canonical schema version.
+
+   .. attribute:: record_revision
+
+      Storage-provider record revision used for optimistic concurrency and change tracking.
+
+   .. attribute:: state
+
+      Lifecycle or storage state of this AAC data entity envelope.
+
+   .. attribute:: payload
+
+      Canonical payload carried by this AAC data entity envelope.
+
+   .. attribute:: _schema
+
+      Optional absolute URI of the schema describing this root document.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__UID
+      :value: 'Uid'
+
+
+      ** ``Uid``
+
+      **Field Description:** Stable logical UID of the Data Entity record.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA_ID
+      :value: 'SchemaId'
+
+
+      ** ``SchemaId``
+
+      **Field Description:** Canonical schema identifier.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA_VERSION
+      :value: 'SchemaVersion'
+
+
+      ** ``SchemaVersion``
+
+      **Field Description:** Canonical schema version.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__RECORD_REVISION
+      :value: 'RecordRevision'
+
+
+      ** ``RecordRevision``
+
+      **Field Description:** Storage-provider record revision used for optimistic concurrency and change tracking.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__STATE
+      :value: 'State'
+
+
+      ** ``State``
+
+      **Field Description:** Lifecycle or storage state of this AAC data entity envelope.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PAYLOAD
+      :value: 'Payload'
+
+
+      ** ``Payload``
+
+      **Field Description:** Canonical payload carried by this AAC data entity envelope.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA
+      :value: '$schema'
+
+
+      ** ``$schema``
+
+      **Field Description:** Optional absolute URI of the schema describing this root document.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: uid
+      :type:  str
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: record_revision
+      :type:  Any
+
+
+   .. py:attribute:: state
+      :type:  str
+
+
+   .. py:attribute:: payload
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

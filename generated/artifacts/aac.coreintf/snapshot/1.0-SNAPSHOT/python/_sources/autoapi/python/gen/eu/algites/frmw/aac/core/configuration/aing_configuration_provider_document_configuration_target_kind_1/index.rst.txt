@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.configuration.aing_configuration_provider_document_configuration_target_kind_1
+==================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.configuration.aing_configuration_provider_document_configuration_target_kind_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.configuration.aing_configuration_provider_document_configuration_target_kind_1.AIngConfigurationProviderDocumentConfigurationTargetKind_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngConfigurationProviderDocumentConfigurationTargetKind_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Kind of this configuration target. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/ConfigurationTarget/properties/Kind (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/ConfigurationTarget/properties/Kind); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.yamldef.schema.json#/properties/ConfigurationTarget/properties/Kind (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.yamldef.schema.json#/properties/ConfigurationTarget/properties/Kind)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/ConfigurationTarget/properties/Kind/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/ConfigurationTarget/properties/Kind. Do not edit manually.
+
+   Values:
+       COMPONENT: Canonical enum value component.
+       PROVIDER_INSTANCE: Canonical enum value provider_instance.
+
+
+   .. py:attribute:: COMPONENT
+      :value: 'component'
+
+
+
+   .. py:attribute:: PROVIDER_INSTANCE
+      :value: 'provider_instance'
+
+
+

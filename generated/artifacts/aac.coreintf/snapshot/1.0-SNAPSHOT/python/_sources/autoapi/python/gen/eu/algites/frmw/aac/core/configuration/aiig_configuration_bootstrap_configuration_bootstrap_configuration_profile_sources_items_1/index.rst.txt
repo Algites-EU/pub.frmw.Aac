@@ -1,0 +1,155 @@
+python.gen.eu.algites.frmw.aac.core.configuration.aiig_configuration_bootstrap_configuration_bootstrap_configuration_profile_sources_items_1
+============================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.configuration.aiig_configuration_bootstrap_configuration_bootstrap_configuration_profile_sources_items_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.configuration.aiig_configuration_bootstrap_configuration_bootstrap_configuration_profile_sources_items_1.AIigConfigurationBootstrapConfigurationBootstrapConfigurationProfileSourcesItems_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigConfigurationBootstrapConfigurationBootstrapConfigurationProfileSourcesItems_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.jsondef.schema.json#/properties/ConfigurationBootstrap/properties/ConfigurationProfileSources/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.jsondef.schema.json#/properties/ConfigurationBootstrap/properties/ConfigurationProfileSources/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.yamldef.schema.json#/properties/ConfigurationBootstrap/properties/ConfigurationProfileSources/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.yamldef.schema.json#/properties/ConfigurationBootstrap/properties/ConfigurationProfileSources/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.jsondef.schema.json#/properties/ConfigurationBootstrap/properties/ConfigurationProfileSources/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-bootstrap_1.jsondef.schema.json#/properties/ConfigurationBootstrap/properties/ConfigurationProfileSources/items. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this configuration profile source.
+
+   .. attribute:: uri
+
+      URI or URL identifying the uri associated with this configuration profile source.
+
+   .. attribute:: authentication_profile_id
+
+      Stable identifier of the authentication profile associated with this configuration profile source.
+
+   .. attribute:: required
+
+      Indicates whether required applies to this configuration profile source.
+
+   .. attribute:: name
+
+      Human-readable name of this configuration profile source.
+
+   .. attribute:: description
+
+      Human-readable description of this configuration profile source.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :type:  ClassVar[str]
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this configuration profile source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__URI
+      :type:  ClassVar[str]
+      :value: 'Uri'
+
+
+      ** ``Uri``
+
+      **Field Description:** URI or URL identifying the uri associated with this configuration profile source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__AUTHENTICATION_PROFILE_ID
+      :type:  ClassVar[str]
+      :value: 'AuthenticationProfileId'
+
+
+      ** ``AuthenticationProfileId``
+
+      **Field Description:** Stable identifier of the authentication profile associated with this configuration profile source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__REQUIRED
+      :type:  ClassVar[str]
+      :value: 'Required'
+
+
+      ** ``Required``
+
+      **Field Description:** Indicates whether required applies to this configuration profile source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :type:  ClassVar[str]
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this configuration profile source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :type:  ClassVar[str]
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this configuration profile source.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: uri
+      :type:  str
+
+
+   .. py:attribute:: authentication_profile_id
+      :type:  str
+
+
+   .. py:attribute:: required
+      :type:  bool
+
+
+   .. py:attribute:: name
+      :type:  Any
+
+
+   .. py:attribute:: description
+      :type:  Any
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

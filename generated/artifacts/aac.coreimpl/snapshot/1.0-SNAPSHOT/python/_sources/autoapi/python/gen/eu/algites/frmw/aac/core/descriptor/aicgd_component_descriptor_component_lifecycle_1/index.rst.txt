@@ -1,0 +1,105 @@
+python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_lifecycle_1
+===============================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_lifecycle_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_lifecycle_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_lifecycle_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_lifecycle_1.AIcgdComponentDescriptorComponentLifecycle_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdComponentDescriptorComponentLifecycle_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_lifecycle_1.AIigComponentDescriptorComponentLifecycle_1`
+
+
+   Structured lifecycle associated with this component. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/Lifecycle (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/Lifecycle); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/Lifecycle (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/Lifecycle)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/Lifecycle/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/Lifecycle. Do not edit manually.
+
+   .. attribute:: provision
+
+      Specifies the provision for this lifecycle.
+
+   .. attribute:: validate
+
+      Specifies the validate for this lifecycle.
+
+   .. attribute:: unprovision
+
+      Specifies the unprovision for this lifecycle.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PROVISION
+      :value: 'Provision'
+
+
+      ** ``Provision``
+
+      **Field Description:** Specifies the provision for this lifecycle.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VALIDATE
+      :value: 'Validate'
+
+
+      ** ``Validate``
+
+      **Field Description:** Specifies the validate for this lifecycle.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__UNPROVISION
+      :value: 'Unprovision'
+
+
+      ** ``Unprovision``
+
+      **Field Description:** Specifies the unprovision for this lifecycle.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: provision
+      :type:  str
+
+
+   .. py:attribute:: validate
+      :type:  str
+
+
+   .. py:attribute:: unprovision
+      :type:  str
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

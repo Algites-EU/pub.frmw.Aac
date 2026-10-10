@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.observation.aing_observation_input_outcome_1
+================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.observation.aing_observation_input_outcome_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.observation.aing_observation_input_outcome_1.AIngObservationInputOutcome_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngObservationInputOutcome_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Final or observed outcome of the invocation. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/observation/observation-input_1.jsondef.schema.json#/properties/Outcome (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/observation/observation-input_1.jsondef.schema.json#/properties/Outcome); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/observation/observation-input_1.yamldef.schema.json#/properties/Outcome (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/observation/observation-input_1.yamldef.schema.json#/properties/Outcome)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/observation/observation-input_1.jsondef.schema.json#/properties/Outcome/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/observation/observation-input_1.jsondef.schema.json#/properties/Outcome. Do not edit manually.
+
+   Values:
+       SUCCESS: Canonical enum value success.
+       ERROR: Canonical enum value error.
+
+
+   .. py:attribute:: SUCCESS
+      :value: 'success'
+
+
+
+   .. py:attribute:: ERROR
+      :value: 'error'
+
+
+

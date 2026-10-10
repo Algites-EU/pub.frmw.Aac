@@ -1,0 +1,35 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_entitlement_licensing_scopes_items_metadata_1
+=========================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_entitlement_licensing_scopes_items_metadata_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_entitlement_licensing_scopes_items_metadata_1.AIigCatalogDefinitionReleaseEntitlementLicensingScopesItemsMetadata_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigCatalogDefinitionReleaseEntitlementLicensingScopesItemsMetadata_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Additional structured metadata associated with this entitlement licensing scope. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/properties/EntitlementLicensingScopes/items/properties/Metadata (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/properties/EntitlementLicensingScopes/items/properties/Metadata); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/release/properties/EntitlementLicensingScopes/items/properties/Metadata (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/release/properties/EntitlementLicensingScopes/items/properties/Metadata)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/properties/EntitlementLicensingScopes/items/properties/Metadata/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/properties/EntitlementLicensingScopes/items/properties/Metadata. Do not edit manually.
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

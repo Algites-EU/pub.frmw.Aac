@@ -1,0 +1,175 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aiig_data_entity_apply_direct_record_changes_request_changes_items_one_of_0_1
+============================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aiig_data_entity_apply_direct_record_changes_request_changes_items_one_of_0_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aiig_data_entity_apply_direct_record_changes_request_changes_items_one_of_0_1.AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf0_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigDataEntityApplyDirectRecordChangesRequestChangesItemsOneOf0_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-request_1.jsondef.schema.json#/properties/Changes/items/oneOf/0 (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-request_1.jsondef.schema.json#/properties/Changes/items/oneOf/0); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-request_1.yamldef.schema.json#/properties/Changes/items/oneOf/0 (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-request_1.yamldef.schema.json#/properties/Changes/items/oneOf/0)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-request_1.jsondef.schema.json#/properties/Changes/items/oneOf/0/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-apply-direct-record-changes-request_1.jsondef.schema.json#/properties/Changes/items/oneOf/0. Do not edit manually.
+
+   .. attribute:: change_id
+
+      Caller-supplied identifier used to correlate this individual change and its result.
+
+   .. attribute:: schema_id
+
+      Canonical schema identifier.
+
+   .. attribute:: uid
+
+      Stable logical UID of the Data Entity record.
+
+   .. attribute:: type
+
+      Type discriminator for this change.
+
+   .. attribute:: schema_version
+
+      Canonical schema version.
+
+   .. attribute:: state
+
+      Lifecycle or storage state of this change.
+
+   .. attribute:: payload
+
+      Canonical payload carried by this change.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CHANGE_ID
+      :type:  ClassVar[str]
+      :value: 'ChangeId'
+
+
+      ** ``ChangeId``
+
+      **Field Description:** Caller-supplied identifier used to correlate this individual change and its result.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA_ID
+      :type:  ClassVar[str]
+      :value: 'SchemaId'
+
+
+      ** ``SchemaId``
+
+      **Field Description:** Canonical schema identifier.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__UID
+      :type:  ClassVar[str]
+      :value: 'Uid'
+
+
+      ** ``Uid``
+
+      **Field Description:** Stable logical UID of the Data Entity record.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TYPE
+      :type:  ClassVar[str]
+      :value: 'Type'
+
+
+      ** ``Type``
+
+      **Field Description:** Type discriminator for this change.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA_VERSION
+      :type:  ClassVar[str]
+      :value: 'SchemaVersion'
+
+
+      ** ``SchemaVersion``
+
+      **Field Description:** Canonical schema version.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__STATE
+      :type:  ClassVar[str]
+      :value: 'State'
+
+
+      ** ``State``
+
+      **Field Description:** Lifecycle or storage state of this change.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PAYLOAD
+      :type:  ClassVar[str]
+      :value: 'Payload'
+
+
+      ** ``Payload``
+
+      **Field Description:** Canonical payload carried by this change.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: change_id
+      :type:  str
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: uid
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: state
+      :type:  str
+
+
+   .. py:attribute:: payload
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

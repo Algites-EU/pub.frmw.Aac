@@ -1,0 +1,86 @@
+python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_provider_document_configuration_scope_1
+=============================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_provider_document_configuration_scope_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_provider_document_configuration_scope_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_provider_document_configuration_scope_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_provider_document_configuration_scope_1.AIcgdConfigurationProviderDocumentConfigurationScope_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdConfigurationProviderDocumentConfigurationScope_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.configuration.aiig_configuration_provider_document_configuration_scope_1.AIigConfigurationProviderDocumentConfigurationScope_1`
+
+
+   Scope within which this configuration document applies. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/ConfigurationScope (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/ConfigurationScope); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.yamldef.schema.json#/properties/ConfigurationScope (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.yamldef.schema.json#/properties/ConfigurationScope)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/ConfigurationScope/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/ConfigurationScope. Do not edit manually.
+
+   .. attribute:: type
+
+      Type discriminator for this configuration scope.
+
+   .. attribute:: id
+
+      Stable identifier of this configuration scope.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TYPE
+      :value: 'Type'
+
+
+      ** ``Type``
+
+      **Field Description:** Type discriminator for this configuration scope.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this configuration scope.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: id
+      :type:  str | None
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

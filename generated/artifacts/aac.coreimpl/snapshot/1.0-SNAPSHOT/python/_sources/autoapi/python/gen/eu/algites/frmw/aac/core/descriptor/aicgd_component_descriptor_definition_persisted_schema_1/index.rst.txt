@@ -1,0 +1,143 @@
+python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_persisted_schema_1
+=======================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_persisted_schema_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_persisted_schema_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_persisted_schema_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_persisted_schema_1.AIcgdComponentDescriptorDefinitionPersistedSchema_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdComponentDescriptorDefinitionPersistedSchema_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_definition_persisted_schema_1.AIigComponentDescriptorDefinitionPersistedSchema_1`
+
+
+   Defines the reusable persisted schema structure used by this canonical schema. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/persistedSchema (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/persistedSchema); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/$defs/persistedSchema (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/$defs/persistedSchema)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/persistedSchema/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/persistedSchema. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this persisted schema.
+
+   .. attribute:: write_version
+
+      Version of the write associated with this persisted schema.
+
+   .. attribute:: readable_versions
+
+      Lists the readable versions supported or selected by this persisted schema.
+
+   .. attribute:: resource
+
+      Specifies the resource for this persisted schema.
+
+   .. attribute:: migrations
+
+      Lists the migrations associated with this persisted schema.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this persisted schema.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__WRITE_VERSION
+      :value: 'WriteVersion'
+
+
+      ** ``WriteVersion``
+
+      **Field Description:** Version of the write associated with this persisted schema.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__READABLE_VERSIONS
+      :value: 'ReadableVersions'
+
+
+      ** ``ReadableVersions``
+
+      **Field Description:** Lists the readable versions supported or selected by this persisted schema.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__RESOURCE
+      :value: 'Resource'
+
+
+      ** ``Resource``
+
+      **Field Description:** Specifies the resource for this persisted schema.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__MIGRATIONS
+      :value: 'Migrations'
+
+
+      ** ``Migrations``
+
+      **Field Description:** Lists the migrations associated with this persisted schema.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: write_version
+      :type:  int
+
+
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: resource
+      :type:  str
+
+
+   .. py:attribute:: migrations
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

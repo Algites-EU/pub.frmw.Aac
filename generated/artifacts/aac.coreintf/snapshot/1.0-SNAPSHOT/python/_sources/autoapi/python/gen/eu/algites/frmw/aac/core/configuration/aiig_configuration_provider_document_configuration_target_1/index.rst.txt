@@ -1,0 +1,95 @@
+python.gen.eu.algites.frmw.aac.core.configuration.aiig_configuration_provider_document_configuration_target_1
+=============================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.configuration.aiig_configuration_provider_document_configuration_target_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.configuration.aiig_configuration_provider_document_configuration_target_1.AIigConfigurationProviderDocumentConfigurationTarget_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigConfigurationProviderDocumentConfigurationTarget_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Identifies the component, provider, or scope targeted by this persisted configuration. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/ConfigurationTarget (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/ConfigurationTarget); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.yamldef.schema.json#/properties/ConfigurationTarget (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.yamldef.schema.json#/properties/ConfigurationTarget)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/ConfigurationTarget/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-provider-document_1.jsondef.schema.json#/properties/ConfigurationTarget. Do not edit manually.
+
+   .. attribute:: kind
+
+      Kind of this configuration target.
+
+   .. attribute:: component_id
+
+      Stable identifier of the AAC component associated with this configuration target.
+
+   .. attribute:: provider_instance_id
+
+      Stable identifier of the provider instance associated with this configuration target.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__KIND
+      :type:  ClassVar[str]
+      :value: 'Kind'
+
+
+      ** ``Kind``
+
+      **Field Description:** Kind of this configuration target.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__COMPONENT_ID
+      :type:  ClassVar[str]
+      :value: 'ComponentId'
+
+
+      ** ``ComponentId``
+
+      **Field Description:** Stable identifier of the AAC component associated with this configuration target.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PROVIDER_INSTANCE_ID
+      :type:  ClassVar[str]
+      :value: 'ProviderInstanceId'
+
+
+      ** ``ProviderInstanceId``
+
+      **Field Description:** Stable identifier of the provider instance associated with this configuration target.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: kind
+      :type:  str
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: provider_instance_id
+      :type:  str
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

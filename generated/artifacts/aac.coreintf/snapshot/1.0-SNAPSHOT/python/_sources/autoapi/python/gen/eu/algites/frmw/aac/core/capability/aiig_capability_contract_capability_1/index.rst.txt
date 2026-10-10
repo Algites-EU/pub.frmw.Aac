@@ -1,0 +1,135 @@
+python.gen.eu.algites.frmw.aac.core.capability.aiig_capability_contract_capability_1
+====================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.capability.aiig_capability_contract_capability_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.capability.aiig_capability_contract_capability_1.AIigCapabilityContractCapability_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigCapabilityContractCapability_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Identity and human-facing metadata of the capability contract. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/Capability (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/Capability); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.yamldef.schema.json#/properties/Capability (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/capability/capability-contract_1.yamldef.schema.json#/properties/Capability)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/Capability/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/capability/capability-contract_1.jsondef.schema.json#/properties/Capability. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this capability.
+
+   .. attribute:: version
+
+      Version of this capability.
+
+   .. attribute:: group_id
+
+      Identifier of the capability group containing this capability.
+
+   .. attribute:: name
+
+      Human-readable name of this capability.
+
+   .. attribute:: description
+
+      Human-readable description of this capability.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :type:  ClassVar[str]
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this capability.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VERSION
+      :type:  ClassVar[str]
+      :value: 'Version'
+
+
+      ** ``Version``
+
+      **Field Description:** Version of this capability.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__GROUP_ID
+      :type:  ClassVar[str]
+      :value: 'GroupId'
+
+
+      ** ``GroupId``
+
+      **Field Description:** Identifier of the capability group containing this capability.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :type:  ClassVar[str]
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this capability.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :type:  ClassVar[str]
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this capability.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: group_id
+      :type:  str
+
+
+   .. py:attribute:: name
+      :type:  Any
+
+
+   .. py:attribute:: description
+      :type:  Any
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

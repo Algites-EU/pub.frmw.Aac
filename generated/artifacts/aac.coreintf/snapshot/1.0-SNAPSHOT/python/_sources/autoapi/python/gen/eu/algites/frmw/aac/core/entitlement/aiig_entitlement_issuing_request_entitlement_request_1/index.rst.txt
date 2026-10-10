@@ -1,0 +1,195 @@
+python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_entitlement_request_1
+======================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_entitlement_request_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_issuing_request_entitlement_request_1.AIigEntitlementIssuingRequestEntitlementRequest_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigEntitlementIssuingRequestEntitlementRequest_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Requested entitlement data supplied to an entitlement issuer. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.jsondef.schema.json#/properties/EntitlementRequest (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.jsondef.schema.json#/properties/EntitlementRequest); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.yamldef.schema.json#/properties/EntitlementRequest (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.yamldef.schema.json#/properties/EntitlementRequest)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.jsondef.schema.json#/properties/EntitlementRequest/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-issuing-request_1.jsondef.schema.json#/properties/EntitlementRequest. Do not edit manually.
+
+   .. attribute:: format_version
+
+      Version of the persisted or exchanged document format.
+
+   .. attribute:: request_id
+
+      Stable identifier of the request associated with this entitlement request.
+
+   .. attribute:: subject
+
+      Structured subject associated with this entitlement request.
+
+   .. attribute:: components
+
+      Lists the components associated with this entitlement request.
+
+   .. attribute:: requested_licensing_scope
+
+      Structured requested licensing scope associated with this entitlement request.
+
+   .. attribute:: generated_at
+
+      Specifies the generated at for this entitlement request.
+
+   .. attribute:: metadata
+
+      Additional structured metadata associated with this entitlement request.
+
+   .. attribute:: request_digest
+
+      Specifies the request digest for this entitlement request.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__FORMAT_VERSION
+      :type:  ClassVar[str]
+      :value: 'FormatVersion'
+
+
+      ** ``FormatVersion``
+
+      **Field Description:** Version of the persisted or exchanged document format.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__REQUEST_ID
+      :type:  ClassVar[str]
+      :value: 'RequestId'
+
+
+      ** ``RequestId``
+
+      **Field Description:** Stable identifier of the request associated with this entitlement request.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SUBJECT
+      :type:  ClassVar[str]
+      :value: 'Subject'
+
+
+      ** ``Subject``
+
+      **Field Description:** Structured subject associated with this entitlement request.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__COMPONENTS
+      :type:  ClassVar[str]
+      :value: 'Components'
+
+
+      ** ``Components``
+
+      **Field Description:** Lists the components associated with this entitlement request.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__REQUESTED_LICENSING_SCOPE
+      :type:  ClassVar[str]
+      :value: 'RequestedLicensingScope'
+
+
+      ** ``RequestedLicensingScope``
+
+      **Field Description:** Structured requested licensing scope associated with this entitlement request.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__GENERATED_AT
+      :type:  ClassVar[str]
+      :value: 'GeneratedAt'
+
+
+      ** ``GeneratedAt``
+
+      **Field Description:** Specifies the generated at for this entitlement request.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__METADATA
+      :type:  ClassVar[str]
+      :value: 'Metadata'
+
+
+      ** ``Metadata``
+
+      **Field Description:** Additional structured metadata associated with this entitlement request.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__REQUEST_DIGEST
+      :type:  ClassVar[str]
+      :value: 'RequestDigest'
+
+
+      ** ``RequestDigest``
+
+      **Field Description:** Specifies the request digest for this entitlement request.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: format_version
+      :type:  int
+
+
+   .. py:attribute:: request_id
+      :type:  str
+
+
+   .. py:attribute:: subject
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: components
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: requested_licensing_scope
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: generated_at
+      :type:  str
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: request_digest
+      :type:  str
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

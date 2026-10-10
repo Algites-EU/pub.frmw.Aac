@@ -1,0 +1,235 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_1
+=============================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_release_1.AIigCatalogDefinitionRelease_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigCatalogDefinitionRelease_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Defines the reusable release structure used by this canonical schema. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/release (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/release)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/release. Do not edit manually.
+
+   .. attribute:: version
+
+      Version of this release.
+
+   .. attribute:: artifacts
+
+      Lists the artifacts associated with this release.
+
+   .. attribute:: published_at
+
+      Specifies the published at for this release.
+
+   .. attribute:: release_notes_url
+
+      URI or URL identifying the release notes associated with this release.
+
+   .. attribute:: provides
+
+      Lists the provides associated with this release.
+
+   .. attribute:: requires
+
+      Indicates whether requires applies to this release.
+
+   .. attribute:: metadata
+
+      Additional structured metadata associated with this release.
+
+   .. attribute:: persistent_schemas
+
+      Lists the persistent schemas associated with this release.
+
+   .. attribute:: entitlement_licensing_scopes
+
+      Lists the entitlement licensing scopes associated with this release.
+
+   .. attribute:: provided_capability_entitlements
+
+      Lists the provided capability entitlements associated with this release.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VERSION
+      :type:  ClassVar[str]
+      :value: 'Version'
+
+
+      ** ``Version``
+
+      **Field Description:** Version of this release.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ARTIFACTS
+      :type:  ClassVar[str]
+      :value: 'Artifacts'
+
+
+      ** ``Artifacts``
+
+      **Field Description:** Lists the artifacts associated with this release.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PUBLISHED_AT
+      :type:  ClassVar[str]
+      :value: 'PublishedAt'
+
+
+      ** ``PublishedAt``
+
+      **Field Description:** Specifies the published at for this release.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__RELEASE_NOTES_URL
+      :type:  ClassVar[str]
+      :value: 'ReleaseNotesUrl'
+
+
+      ** ``ReleaseNotesUrl``
+
+      **Field Description:** URI or URL identifying the release notes associated with this release.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PROVIDES
+      :type:  ClassVar[str]
+      :value: 'Provides'
+
+
+      ** ``Provides``
+
+      **Field Description:** Lists the provides associated with this release.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__REQUIRES
+      :type:  ClassVar[str]
+      :value: 'Requires'
+
+
+      ** ``Requires``
+
+      **Field Description:** Indicates whether requires applies to this release.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__METADATA
+      :type:  ClassVar[str]
+      :value: 'Metadata'
+
+
+      ** ``Metadata``
+
+      **Field Description:** Additional structured metadata associated with this release.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PERSISTENT_SCHEMAS
+      :type:  ClassVar[str]
+      :value: 'PersistentSchemas'
+
+
+      ** ``PersistentSchemas``
+
+      **Field Description:** Lists the persistent schemas associated with this release.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ENTITLEMENT_LICENSING_SCOPES
+      :type:  ClassVar[str]
+      :value: 'EntitlementLicensingScopes'
+
+
+      ** ``EntitlementLicensingScopes``
+
+      **Field Description:** Lists the entitlement licensing scopes associated with this release.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PROVIDED_CAPABILITY_ENTITLEMENTS
+      :type:  ClassVar[str]
+      :value: 'ProvidedCapabilityEntitlements'
+
+
+      ** ``ProvidedCapabilityEntitlements``
+
+      **Field Description:** Lists the provided capability entitlements associated with this release.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: version
+      :type:  int
+
+
+   .. py:attribute:: artifacts
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: published_at
+      :type:  str
+
+
+   .. py:attribute:: release_notes_url
+      :type:  str
+
+
+   .. py:attribute:: provides
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: requires
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: persistent_schemas
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: entitlement_licensing_scopes
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: provided_capability_entitlements
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

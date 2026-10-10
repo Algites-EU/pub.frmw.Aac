@@ -1,0 +1,59 @@
+python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_provider_to_caller_message_execution_state_1
+======================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_provider_to_caller_message_execution_state_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_provider_to_caller_message_execution_state_1.AIngOperationInteractionProviderToCallerMessageExecutionState_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngOperationInteractionProviderToCallerMessageExecutionState_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Specifies the execution state for this operation interaction provider to caller message. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.jsondef.schema.json#/properties/ExecutionState (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.jsondef.schema.json#/properties/ExecutionState); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.yamldef.schema.json#/properties/ExecutionState (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.yamldef.schema.json#/properties/ExecutionState)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.jsondef.schema.json#/properties/ExecutionState/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.jsondef.schema.json#/properties/ExecutionState. Do not edit manually.
+
+   Values:
+       PENDING: Canonical enum value pending.
+       RUNNING: Canonical enum value running.
+       COMPLETED: Canonical enum value completed.
+       FAILED: Canonical enum value failed.
+       CANCELLED: Canonical enum value cancelled.
+
+
+   .. py:attribute:: PENDING
+      :value: 'pending'
+
+
+
+   .. py:attribute:: RUNNING
+      :value: 'running'
+
+
+
+   .. py:attribute:: COMPLETED
+      :value: 'completed'
+
+
+
+   .. py:attribute:: FAILED
+      :value: 'failed'
+
+
+
+   .. py:attribute:: CANCELLED
+      :value: 'cancelled'
+
+
+

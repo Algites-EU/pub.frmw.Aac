@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_restore_storage_backup_request_mode_1
+=====================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_restore_storage_backup_request_mode_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_restore_storage_backup_request_mode_1.AIngDataEntityRestoreStorageBackupRequestMode_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngDataEntityRestoreStorageBackupRequestMode_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Selects the operation mode for this request. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-restore-storage-backup-request_1.jsondef.schema.json#/properties/Mode (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-restore-storage-backup-request_1.jsondef.schema.json#/properties/Mode); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-restore-storage-backup-request_1.yamldef.schema.json#/properties/Mode (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-restore-storage-backup-request_1.yamldef.schema.json#/properties/Mode)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-restore-storage-backup-request_1.jsondef.schema.json#/properties/Mode/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-restore-storage-backup-request_1.jsondef.schema.json#/properties/Mode. Do not edit manually.
+
+   Values:
+       EMPTY_ONLY: Canonical enum value empty_only.
+       REPLACE_ALL: Canonical enum value replace_all.
+
+
+   .. py:attribute:: EMPTY_ONLY
+      :value: 'empty_only'
+
+
+
+   .. py:attribute:: REPLACE_ALL
+      :value: 'replace_all'
+
+
+

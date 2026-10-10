@@ -1,0 +1,257 @@
+python.gen.eu.algites.frmw.aac.core.packages.aicgd_workspace_component_lock_workspace_component_lock_entries_items_1
+====================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.packages.aicgd_workspace_component_lock_workspace_component_lock_entries_items_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.packages.aicgd_workspace_component_lock_workspace_component_lock_entries_items_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.packages.aicgd_workspace_component_lock_workspace_component_lock_entries_items_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.packages.aicgd_workspace_component_lock_workspace_component_lock_entries_items_1.AIcgdWorkspaceComponentLockWorkspaceComponentLockEntriesItems_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdWorkspaceComponentLockWorkspaceComponentLockEntriesItems_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.packages.aiig_workspace_component_lock_workspace_component_lock_entries_items_1.AIigWorkspaceComponentLockWorkspaceComponentLockEntriesItems_1`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-lock_1.jsondef.schema.json#/properties/WorkspaceComponentLock/properties/Entries/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-lock_1.jsondef.schema.json#/properties/WorkspaceComponentLock/properties/Entries/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/workspace-component-lock_1.yamldef.schema.json#/properties/WorkspaceComponentLock/properties/Entries/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/workspace-component-lock_1.yamldef.schema.json#/properties/WorkspaceComponentLock/properties/Entries/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-lock_1.jsondef.schema.json#/properties/WorkspaceComponentLock/properties/Entries/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/workspace-component-lock_1.jsondef.schema.json#/properties/WorkspaceComponentLock/properties/Entries/items. Do not edit manually.
+
+   .. attribute:: component_id
+
+      Stable identifier of the AAC component associated with this entry.
+
+   .. attribute:: component_version
+
+      Version of the AAC component associated with this entry.
+
+   .. attribute:: sha256
+
+      Specifies the sha256 for this entry.
+
+   .. attribute:: source_id
+
+      Stable identifier of the source associated with this entry.
+
+   .. attribute:: artifact_uri
+
+      URI or URL identifying the artifact associated with this entry.
+
+   .. attribute:: artifact_filename
+
+      Specifies the artifact filename for this entry.
+
+   .. attribute:: package_format
+
+      Specifies the package format for this entry.
+
+   .. attribute:: descriptor_path
+
+      Filesystem or logical descriptor path used by this entry.
+
+   .. attribute:: runtime_package
+
+      Specifies the runtime package for this entry.
+
+   .. attribute:: verifier_id
+
+      Stable identifier of the verifier associated with this entry.
+
+   .. attribute:: sidecars
+
+      Lists the sidecars associated with this entry.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__COMPONENT_ID
+      :value: 'ComponentId'
+
+
+      ** ``ComponentId``
+
+      **Field Description:** Stable identifier of the AAC component associated with this entry.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__COMPONENT_VERSION
+      :value: 'ComponentVersion'
+
+
+      ** ``ComponentVersion``
+
+      **Field Description:** Version of the AAC component associated with this entry.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SHA256
+      :value: 'Sha256'
+
+
+      ** ``Sha256``
+
+      **Field Description:** Specifies the sha256 for this entry.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SOURCE_ID
+      :value: 'SourceId'
+
+
+      ** ``SourceId``
+
+      **Field Description:** Stable identifier of the source associated with this entry.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ARTIFACT_URI
+      :value: 'ArtifactUri'
+
+
+      ** ``ArtifactUri``
+
+      **Field Description:** URI or URL identifying the artifact associated with this entry.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ARTIFACT_FILENAME
+      :value: 'ArtifactFilename'
+
+
+      ** ``ArtifactFilename``
+
+      **Field Description:** Specifies the artifact filename for this entry.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PACKAGE_FORMAT
+      :value: 'PackageFormat'
+
+
+      ** ``PackageFormat``
+
+      **Field Description:** Specifies the package format for this entry.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTOR_PATH
+      :value: 'DescriptorPath'
+
+
+      ** ``DescriptorPath``
+
+      **Field Description:** Filesystem or logical descriptor path used by this entry.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__RUNTIME_PACKAGE
+      :value: 'RuntimePackage'
+
+
+      ** ``RuntimePackage``
+
+      **Field Description:** Specifies the runtime package for this entry.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VERIFIER_ID
+      :value: 'VerifierId'
+
+
+      ** ``VerifierId``
+
+      **Field Description:** Stable identifier of the verifier associated with this entry.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SIDECARS
+      :value: 'Sidecars'
+
+
+      ** ``Sidecars``
+
+      **Field Description:** Lists the sidecars associated with this entry.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: component_id
+      :type:  str
+
+
+   .. py:attribute:: component_version
+      :type:  int
+
+
+   .. py:attribute:: sha256
+      :type:  str
+
+
+   .. py:attribute:: source_id
+      :type:  str
+
+
+   .. py:attribute:: artifact_uri
+      :type:  str
+
+
+   .. py:attribute:: artifact_filename
+      :type:  str
+
+
+   .. py:attribute:: package_format
+      :type:  str
+
+
+   .. py:attribute:: descriptor_path
+      :type:  str
+
+
+   .. py:attribute:: runtime_package
+      :type:  str | None
+
+
+   .. py:attribute:: verifier_id
+      :type:  str | None
+
+
+   .. py:attribute:: sidecars
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

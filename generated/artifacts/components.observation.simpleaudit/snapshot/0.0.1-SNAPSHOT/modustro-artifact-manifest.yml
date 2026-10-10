@@ -1,0 +1,12 @@
+ManifestVersion: 1
+Artifact:
+  RepositoryId: pub.frmw.Aac
+  LocalArtifactId: ""
+  ArtifactCoordinateId: pub.frmw.Aac_
+  Version: ""
+  SourcePath: ""
+  StructureKind: ""
+  Name: ""
+  Description: ""
+SourceMetadata:
+  DescriptorHierarchy:

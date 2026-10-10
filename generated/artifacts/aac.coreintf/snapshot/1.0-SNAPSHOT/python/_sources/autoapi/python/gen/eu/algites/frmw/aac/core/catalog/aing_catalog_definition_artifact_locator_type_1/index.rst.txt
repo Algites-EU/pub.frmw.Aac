@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aing_catalog_definition_artifact_locator_type_1
+===========================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aing_catalog_definition_artifact_locator_type_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aing_catalog_definition_artifact_locator_type_1.AIngCatalogDefinitionArtifactLocatorType_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngCatalogDefinitionArtifactLocatorType_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Type discriminator for this locator. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/artifact/properties/Locator/properties/Type (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/artifact/properties/Locator/properties/Type); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/artifact/properties/Locator/properties/Type (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/artifact/properties/Locator/properties/Type)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/artifact/properties/Locator/properties/Type/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/artifact/properties/Locator/properties/Type. Do not edit manually.
+
+   Values:
+       URI: Canonical enum value uri.
+       REPOSITORY: Canonical enum value repository.
+
+
+   .. py:attribute:: URI
+      :value: 'uri'
+
+
+
+   .. py:attribute:: REPOSITORY
+      :value: 'repository'
+
+
+

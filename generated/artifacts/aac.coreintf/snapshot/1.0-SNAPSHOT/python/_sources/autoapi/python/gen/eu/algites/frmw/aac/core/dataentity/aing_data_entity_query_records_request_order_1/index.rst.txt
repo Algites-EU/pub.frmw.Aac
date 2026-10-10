@@ -1,0 +1,41 @@
+python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_query_records_request_order_1
+=============================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_query_records_request_order_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.dataentity.aing_data_entity_query_records_request_order_1.AIngDataEntityQueryRecordsRequestOrder_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngDataEntityQueryRecordsRequestOrder_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Deterministic ordering requested for returned records. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/Order (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/Order); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.yamldef.schema.json#/properties/Order (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.yamldef.schema.json#/properties/Order)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/Order/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/dataentity/data-entity-query-records-request_1.jsondef.schema.json#/properties/Order. Do not edit manually.
+
+   Values:
+       UID_ASC: Canonical enum value uid_asc.
+       UID_DESC: Canonical enum value uid_desc.
+
+
+   .. py:attribute:: UID_ASC
+      :value: 'uid_asc'
+
+
+
+   .. py:attribute:: UID_DESC
+      :value: 'uid_desc'
+
+
+

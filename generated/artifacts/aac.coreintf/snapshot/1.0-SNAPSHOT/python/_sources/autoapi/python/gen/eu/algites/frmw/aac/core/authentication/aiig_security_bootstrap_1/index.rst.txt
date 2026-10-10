@@ -1,0 +1,71 @@
+python.gen.eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_1
+============================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_1.AIigSecurityBootstrap_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigSecurityBootstrap_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Defines the canonical AAC Security Bootstrap schema and its serialized data contract. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.yamldef.schema.json (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.yamldef.schema.json)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json. Do not edit manually.
+
+   .. attribute:: security_bootstrap
+
+      Security bootstrap configuration used to initialize trusted authentication and secret-provider facilities.
+
+   .. attribute:: _schema
+
+      Optional absolute URI of the schema describing this root document.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SECURITY_BOOTSTRAP
+      :type:  ClassVar[str]
+      :value: 'SecurityBootstrap'
+
+
+      ** ``SecurityBootstrap``
+
+      **Field Description:** Security bootstrap configuration used to initialize trusted authentication and secret-provider facilities.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA
+      :type:  ClassVar[str]
+      :value: '$schema'
+
+
+      ** ``$schema``
+
+      **Field Description:** Optional absolute URI of the schema describing this root document.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: security_bootstrap
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

@@ -1,0 +1,200 @@
+python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_profile_configuration_profile_configuration_scopes_items_1
+================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_profile_configuration_profile_configuration_scopes_items_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_profile_configuration_profile_configuration_scopes_items_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_profile_configuration_profile_configuration_scopes_items_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.configuration.aicgd_configuration_profile_configuration_profile_configuration_scopes_items_1.AIcgdConfigurationProfileConfigurationProfileConfigurationScopesItems_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdConfigurationProfileConfigurationProfileConfigurationScopesItems_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.configuration.aiig_configuration_profile_configuration_profile_configuration_scopes_items_1.AIigConfigurationProfileConfigurationProfileConfigurationScopesItems_1`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-profile_1.jsondef.schema.json#/properties/ConfigurationProfile/properties/ConfigurationScopes/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-profile_1.jsondef.schema.json#/properties/ConfigurationProfile/properties/ConfigurationScopes/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-profile_1.yamldef.schema.json#/properties/ConfigurationProfile/properties/ConfigurationScopes/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/configuration/configuration-profile_1.yamldef.schema.json#/properties/ConfigurationProfile/properties/ConfigurationScopes/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-profile_1.jsondef.schema.json#/properties/ConfigurationProfile/properties/ConfigurationScopes/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/configuration/configuration-profile_1.jsondef.schema.json#/properties/ConfigurationProfile/properties/ConfigurationScopes/items. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this configuration scope.
+
+   .. attribute:: type
+
+      Type discriminator for this configuration scope.
+
+   .. attribute:: resolver
+
+      Specifies the resolver for this configuration scope.
+
+   .. attribute:: policy_authority
+
+      Indicates whether policy authority applies to this configuration scope.
+
+   .. attribute:: mandatory
+
+      Indicates whether mandatory applies to this configuration scope.
+
+   .. attribute:: configuration_providers
+
+      Lists the configuration providers associated with this configuration scope.
+
+   .. attribute:: name
+
+      Human-readable name of this configuration scope.
+
+   .. attribute:: description
+
+      Human-readable description of this configuration scope.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this configuration scope.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TYPE
+      :value: 'Type'
+
+
+      ** ``Type``
+
+      **Field Description:** Type discriminator for this configuration scope.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__RESOLVER
+      :value: 'Resolver'
+
+
+      ** ``Resolver``
+
+      **Field Description:** Specifies the resolver for this configuration scope.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__POLICY_AUTHORITY
+      :value: 'PolicyAuthority'
+
+
+      ** ``PolicyAuthority``
+
+      **Field Description:** Indicates whether policy authority applies to this configuration scope.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__MANDATORY
+      :value: 'Mandatory'
+
+
+      ** ``Mandatory``
+
+      **Field Description:** Indicates whether mandatory applies to this configuration scope.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CONFIGURATION_PROVIDERS
+      :value: 'ConfigurationProviders'
+
+
+      ** ``ConfigurationProviders``
+
+      **Field Description:** Lists the configuration providers associated with this configuration scope.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this configuration scope.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this configuration scope.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: resolver
+      :type:  str
+
+
+   .. py:attribute:: policy_authority
+      :type:  bool
+
+
+   .. py:attribute:: mandatory
+      :type:  bool
+
+
+   .. py:attribute:: configuration_providers
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: name
+      :type:  Any
+
+
+   .. py:attribute:: description
+      :type:  Any
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

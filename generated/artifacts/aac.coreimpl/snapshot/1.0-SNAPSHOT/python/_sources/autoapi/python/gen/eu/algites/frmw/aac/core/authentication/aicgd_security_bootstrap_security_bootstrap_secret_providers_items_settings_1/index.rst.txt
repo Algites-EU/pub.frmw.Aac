@@ -1,0 +1,48 @@
+python.gen.eu.algites.frmw.aac.core.authentication.aicgd_security_bootstrap_security_bootstrap_secret_providers_items_settings_1
+================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.authentication.aicgd_security_bootstrap_security_bootstrap_secret_providers_items_settings_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.authentication.aicgd_security_bootstrap_security_bootstrap_secret_providers_items_settings_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.authentication.aicgd_security_bootstrap_security_bootstrap_secret_providers_items_settings_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.authentication.aicgd_security_bootstrap_security_bootstrap_secret_providers_items_settings_1.AIcgdSecurityBootstrapSecurityBootstrapSecretProvidersItemsSettings_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdSecurityBootstrapSecurityBootstrapSecretProvidersItemsSettings_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_secret_providers_items_settings_1.AIigSecurityBootstrapSecurityBootstrapSecretProvidersItemsSettings_1`
+
+
+   Structured settings associated with this secret provider. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/SecretProviders/items/properties/Settings (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/SecretProviders/items/properties/Settings); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.yamldef.schema.json#/properties/SecurityBootstrap/properties/SecretProviders/items/properties/Settings (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.yamldef.schema.json#/properties/SecurityBootstrap/properties/SecretProviders/items/properties/Settings)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/SecretProviders/items/properties/Settings/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/SecretProviders/items/properties/Settings. Do not edit manually.
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

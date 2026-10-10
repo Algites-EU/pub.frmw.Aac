@@ -1,0 +1,55 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_persistent_schema_all_of_2_then_all_of_0_any_of_0_1
+=======================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_persistent_schema_all_of_2_then_all_of_0_any_of_0_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_persistent_schema_all_of_2_then_all_of_0_any_of_0_1.AIigCatalogDefinitionPersistentSchemaAllOf2ThenAllOf0AnyOf0_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigCatalogDefinitionPersistentSchemaAllOf2ThenAllOf0AnyOf0_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/persistentSchema/allOf/2/then/allOf/0/anyOf/0 (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/persistentSchema/allOf/2/then/allOf/0/anyOf/0); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/persistentSchema/allOf/2/then/allOf/0/anyOf/0 (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/persistentSchema/allOf/2/then/allOf/0/anyOf/0)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/persistentSchema/allOf/2/then/allOf/0/anyOf/0/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/persistentSchema/allOf/2/then/allOf/0/anyOf/0. Do not edit manually.
+
+   .. attribute:: readable_versions
+
+      Schema versions that may be read by this declaration.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__READABLE_VERSIONS
+      :type:  ClassVar[str]
+      :value: 'ReadableVersions'
+
+
+      ** ``ReadableVersions``
+
+      **Field Description:** Schema versions that may be read by this declaration.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: readable_versions
+      :type:  Any | None
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

@@ -1,0 +1,143 @@
+python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_data_entity_requirement_1
+==============================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_data_entity_requirement_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_data_entity_requirement_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_data_entity_requirement_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_definition_data_entity_requirement_1.AIcgdComponentDescriptorDefinitionDataEntityRequirement_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdComponentDescriptorDefinitionDataEntityRequirement_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_definition_data_entity_requirement_1.AIigComponentDescriptorDefinitionDataEntityRequirement_1`
+
+
+   Defines the reusable data entity requirement structure used by this canonical schema. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/dataEntityRequirement (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/dataEntityRequirement); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/$defs/dataEntityRequirement (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/$defs/dataEntityRequirement)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/dataEntityRequirement/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/$defs/dataEntityRequirement. Do not edit manually.
+
+   .. attribute:: schema_id
+
+      Canonical schema identifier.
+
+   .. attribute:: access
+
+      Lists the access associated with this data entity requirement.
+
+   .. attribute:: readable_versions
+
+      Lists the readable versions supported or selected by this data entity requirement.
+
+   .. attribute:: writable_versions
+
+      Lists the writable versions supported or selected by this data entity requirement.
+
+   .. attribute:: required
+
+      Indicates whether required applies to this data entity requirement.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA_ID
+      :value: 'SchemaId'
+
+
+      ** ``SchemaId``
+
+      **Field Description:** Canonical schema identifier.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ACCESS
+      :value: 'Access'
+
+
+      ** ``Access``
+
+      **Field Description:** Lists the access associated with this data entity requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__READABLE_VERSIONS
+      :value: 'ReadableVersions'
+
+
+      ** ``ReadableVersions``
+
+      **Field Description:** Lists the readable versions supported or selected by this data entity requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__WRITABLE_VERSIONS
+      :value: 'WritableVersions'
+
+
+      ** ``WritableVersions``
+
+      **Field Description:** Lists the writable versions supported or selected by this data entity requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__REQUIRED
+      :value: 'Required'
+
+
+      ** ``Required``
+
+      **Field Description:** Indicates whether required applies to this data entity requirement.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: access
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: writable_versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: required
+      :type:  bool
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

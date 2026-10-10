@@ -1,0 +1,135 @@
+python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_runtime_1
+=======================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_runtime_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_runtime_1.AIigComponentDescriptorComponentCapabilityProvidersItemsRuntime_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigComponentDescriptorComponentCapabilityProvidersItemsRuntime_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Structured runtime associated with this capability provider. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Runtime (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Runtime); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Runtime (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Runtime)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Runtime/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Runtime. Do not edit manually.
+
+   .. attribute:: profile
+
+      Specifies the profile for this runtime.
+
+   .. attribute:: command
+
+      Lists the command associated with this runtime.
+
+   .. attribute:: cwd
+
+      Specifies the cwd for this runtime.
+
+   .. attribute:: environment
+
+      Structured environment associated with this runtime.
+
+   .. attribute:: timeout_seconds
+
+      Specifies the timeout seconds for this runtime.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PROFILE
+      :type:  ClassVar[str]
+      :value: 'Profile'
+
+
+      ** ``Profile``
+
+      **Field Description:** Specifies the profile for this runtime.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__COMMAND
+      :type:  ClassVar[str]
+      :value: 'Command'
+
+
+      ** ``Command``
+
+      **Field Description:** Lists the command associated with this runtime.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CWD
+      :type:  ClassVar[str]
+      :value: 'Cwd'
+
+
+      ** ``Cwd``
+
+      **Field Description:** Specifies the cwd for this runtime.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ENVIRONMENT
+      :type:  ClassVar[str]
+      :value: 'Environment'
+
+
+      ** ``Environment``
+
+      **Field Description:** Structured environment associated with this runtime.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TIMEOUT_SECONDS
+      :type:  ClassVar[str]
+      :value: 'TimeoutSeconds'
+
+
+      ** ``TimeoutSeconds``
+
+      **Field Description:** Specifies the timeout seconds for this runtime.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: profile
+      :type:  str
+
+
+   .. py:attribute:: command
+      :type:  tuple[str, Ellipsis]
+
+
+   .. py:attribute:: cwd
+      :type:  str
+
+
+   .. py:attribute:: environment
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: timeout_seconds
+      :type:  decimal.Decimal
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

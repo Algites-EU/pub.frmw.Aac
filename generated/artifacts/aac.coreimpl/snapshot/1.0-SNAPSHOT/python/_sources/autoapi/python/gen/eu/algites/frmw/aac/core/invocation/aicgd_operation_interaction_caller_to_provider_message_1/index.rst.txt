@@ -1,0 +1,215 @@
+python.gen.eu.algites.frmw.aac.core.invocation.aicgd_operation_interaction_caller_to_provider_message_1
+=======================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.invocation.aicgd_operation_interaction_caller_to_provider_message_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.invocation.aicgd_operation_interaction_caller_to_provider_message_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.invocation.aicgd_operation_interaction_caller_to_provider_message_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.invocation.aicgd_operation_interaction_caller_to_provider_message_1.AIcgdOperationInteractionCallerToProviderMessage_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdOperationInteractionCallerToProviderMessage_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.invocation.aiig_operation_interaction_caller_to_provider_message_1.AIigOperationInteractionCallerToProviderMessage_1`
+
+
+   Defines the canonical Operation Interaction Caller To Provider Message schema and its serialized data contract. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.yamldef.schema.json (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.yamldef.schema.json)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_1.jsondef.schema.json. Do not edit manually.
+
+   .. attribute:: last_accepted_state_result_revision
+
+      Specifies the last accepted state result revision for this operation interaction caller to provider message.
+
+   .. attribute:: interaction_mode
+
+      Specifies the interaction mode for this operation interaction caller to provider message.
+
+   .. attribute:: cancellation_requested
+
+      Indicates whether cancellation requested applies to this operation interaction caller to provider message.
+
+   .. attribute:: detail_level
+
+      Specifies the detail level for this operation interaction caller to provider message.
+
+   .. attribute:: failure_detail_level
+
+      Specifies the failure detail level for this operation interaction caller to provider message.
+
+   .. attribute:: state_result_delivery_mode
+
+      Specifies the state result delivery mode for this operation interaction caller to provider message.
+
+   .. attribute:: state_result_request_id
+
+      Stable identifier of the state result request associated with this operation interaction caller to provider message.
+
+   .. attribute:: reporting_interval_ms
+
+      Specifies the reporting interval ms for this operation interaction caller to provider message.
+
+   .. attribute:: _schema
+
+      Optional absolute URI of the schema describing this root document.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__LAST_ACCEPTED_STATE_RESULT_REVISION
+      :value: 'LastAcceptedStateResultRevision'
+
+
+      ** ``LastAcceptedStateResultRevision``
+
+      **Field Description:** Specifies the last accepted state result revision for this operation interaction caller to provider message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__INTERACTION_MODE
+      :value: 'InteractionMode'
+
+
+      ** ``InteractionMode``
+
+      **Field Description:** Specifies the interaction mode for this operation interaction caller to provider message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CANCELLATION_REQUESTED
+      :value: 'CancellationRequested'
+
+
+      ** ``CancellationRequested``
+
+      **Field Description:** Indicates whether cancellation requested applies to this operation interaction caller to provider message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DETAIL_LEVEL
+      :value: 'DetailLevel'
+
+
+      ** ``DetailLevel``
+
+      **Field Description:** Specifies the detail level for this operation interaction caller to provider message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__FAILURE_DETAIL_LEVEL
+      :value: 'FailureDetailLevel'
+
+
+      ** ``FailureDetailLevel``
+
+      **Field Description:** Specifies the failure detail level for this operation interaction caller to provider message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__STATE_RESULT_DELIVERY_MODE
+      :value: 'StateResultDeliveryMode'
+
+
+      ** ``StateResultDeliveryMode``
+
+      **Field Description:** Specifies the state result delivery mode for this operation interaction caller to provider message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__STATE_RESULT_REQUEST_ID
+      :value: 'StateResultRequestId'
+
+
+      ** ``StateResultRequestId``
+
+      **Field Description:** Stable identifier of the state result request associated with this operation interaction caller to provider message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__REPORTING_INTERVAL_MS
+      :value: 'ReportingIntervalMs'
+
+
+      ** ``ReportingIntervalMs``
+
+      **Field Description:** Specifies the reporting interval ms for this operation interaction caller to provider message.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA
+      :value: '$schema'
+
+
+      ** ``$schema``
+
+      **Field Description:** Optional absolute URI of the schema describing this root document.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: last_accepted_state_result_revision
+      :type:  int
+
+
+   .. py:attribute:: interaction_mode
+      :type:  str
+
+
+   .. py:attribute:: cancellation_requested
+      :type:  bool
+
+
+   .. py:attribute:: detail_level
+      :type:  str
+
+
+   .. py:attribute:: failure_detail_level
+      :type:  str
+
+
+   .. py:attribute:: state_result_delivery_mode
+      :type:  str
+
+
+   .. py:attribute:: state_result_request_id
+      :type:  int
+
+
+   .. py:attribute:: reporting_interval_ms
+      :type:  int | None
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

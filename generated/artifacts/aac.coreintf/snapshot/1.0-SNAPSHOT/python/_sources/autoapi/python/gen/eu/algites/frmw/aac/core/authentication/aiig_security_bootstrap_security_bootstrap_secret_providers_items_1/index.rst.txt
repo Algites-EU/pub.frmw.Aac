@@ -1,0 +1,155 @@
+python.gen.eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_secret_providers_items_1
+======================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_secret_providers_items_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.authentication.aiig_security_bootstrap_security_bootstrap_secret_providers_items_1.AIigSecurityBootstrapSecurityBootstrapSecretProvidersItems_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigSecurityBootstrapSecurityBootstrapSecretProvidersItems_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/SecretProviders/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/SecretProviders/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.yamldef.schema.json#/properties/SecurityBootstrap/properties/SecretProviders/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.yamldef.schema.json#/properties/SecurityBootstrap/properties/SecretProviders/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/SecretProviders/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/authentication/security-bootstrap_1.jsondef.schema.json#/properties/SecurityBootstrap/properties/SecretProviders/items. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this secret provider.
+
+   .. attribute:: type
+
+      Type discriminator for this secret provider.
+
+   .. attribute:: settings
+
+      Structured settings associated with this secret provider.
+
+   .. attribute:: bootstrap_safe
+
+      Indicates whether bootstrap safe applies to this secret provider.
+
+   .. attribute:: name
+
+      Human-readable name of this secret provider.
+
+   .. attribute:: description
+
+      Human-readable description of this secret provider.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :type:  ClassVar[str]
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this secret provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TYPE
+      :type:  ClassVar[str]
+      :value: 'Type'
+
+
+      ** ``Type``
+
+      **Field Description:** Type discriminator for this secret provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SETTINGS
+      :type:  ClassVar[str]
+      :value: 'Settings'
+
+
+      ** ``Settings``
+
+      **Field Description:** Structured settings associated with this secret provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__BOOTSTRAP_SAFE
+      :type:  ClassVar[str]
+      :value: 'BootstrapSafe'
+
+
+      ** ``BootstrapSafe``
+
+      **Field Description:** Indicates whether bootstrap safe applies to this secret provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :type:  ClassVar[str]
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this secret provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :type:  ClassVar[str]
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this secret provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  str
+
+
+   .. py:attribute:: settings
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: bootstrap_safe
+      :type:  bool
+
+
+   .. py:attribute:: name
+      :type:  Any
+
+
+   .. py:attribute:: description
+      :type:  Any
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

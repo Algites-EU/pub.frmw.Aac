@@ -1,0 +1,48 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_catalog_metadata_1
+============================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_catalog_metadata_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_catalog_metadata_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_catalog_metadata_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aicgd_catalog_catalog_metadata_1.AIcgdCatalogCatalogMetadata_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdCatalogCatalogMetadata_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_catalog_metadata_1.AIigCatalogCatalogMetadata_1`
+
+
+   Additional structured metadata associated with this catalog. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/properties/Catalog/properties/Metadata (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/properties/Catalog/properties/Metadata); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/properties/Catalog/properties/Metadata (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/properties/Catalog/properties/Metadata)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/properties/Catalog/properties/Metadata/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/properties/Catalog/properties/Metadata. Do not edit manually.
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

@@ -1,0 +1,135 @@
+python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_components_items_grants_items_permissions_items_1
+=======================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_components_items_grants_items_permissions_items_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.entitlement.aiig_entitlement_document_entitlement_components_items_grants_items_permissions_items_1.AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsPermissionsItems_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigEntitlementDocumentEntitlementComponentsItemsGrantsItemsPermissionsItems_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.jsondef.schema.json#/properties/Entitlement/properties/Components/items/properties/Grants/items/properties/Permissions/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.jsondef.schema.json#/properties/Entitlement/properties/Components/items/properties/Grants/items/properties/Permissions/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.yamldef.schema.json#/properties/Entitlement/properties/Components/items/properties/Grants/items/properties/Permissions/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.yamldef.schema.json#/properties/Entitlement/properties/Components/items/properties/Grants/items/properties/Permissions/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.jsondef.schema.json#/properties/Entitlement/properties/Components/items/properties/Grants/items/properties/Permissions/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/entitlement/entitlement-document_1.jsondef.schema.json#/properties/Entitlement/properties/Components/items/properties/Grants/items/properties/Permissions/items. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this permission.
+
+   .. attribute:: valid_from
+
+      Specifies the valid from for this permission.
+
+   .. attribute:: valid_until
+
+      Specifies the valid until for this permission.
+
+   .. attribute:: constraints
+
+      Structured constraints associated with this permission.
+
+   .. attribute:: metadata
+
+      Additional structured metadata associated with this permission.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :type:  ClassVar[str]
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this permission.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VALID_FROM
+      :type:  ClassVar[str]
+      :value: 'ValidFrom'
+
+
+      ** ``ValidFrom``
+
+      **Field Description:** Specifies the valid from for this permission.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__VALID_UNTIL
+      :type:  ClassVar[str]
+      :value: 'ValidUntil'
+
+
+      ** ``ValidUntil``
+
+      **Field Description:** Specifies the valid until for this permission.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CONSTRAINTS
+      :type:  ClassVar[str]
+      :value: 'Constraints'
+
+
+      ** ``Constraints``
+
+      **Field Description:** Structured constraints associated with this permission.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__METADATA
+      :type:  ClassVar[str]
+      :value: 'Metadata'
+
+
+      ** ``Metadata``
+
+      **Field Description:** Additional structured metadata associated with this permission.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: valid_from
+      :type:  str
+
+
+   .. py:attribute:: valid_until
+      :type:  str
+
+
+   .. py:attribute:: constraints
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

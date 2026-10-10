@@ -1,0 +1,59 @@
+python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_provider_to_caller_message_features_supported_state_result_delivery_modes_items_1
+===========================================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_provider_to_caller_message_features_supported_state_result_delivery_modes_items_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.invocation.aing_operation_interaction_provider_to_caller_message_features_supported_state_result_delivery_modes_items_1.AIngOperationInteractionProviderToCallerMessageFeaturesSupportedStateResultDeliveryModesItems_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngOperationInteractionProviderToCallerMessageFeaturesSupportedStateResultDeliveryModesItems_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.jsondef.schema.json#/properties/Features/properties/SupportedStateResultDeliveryModes/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.jsondef.schema.json#/properties/Features/properties/SupportedStateResultDeliveryModes/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.yamldef.schema.json#/properties/Features/properties/SupportedStateResultDeliveryModes/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.yamldef.schema.json#/properties/Features/properties/SupportedStateResultDeliveryModes/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.jsondef.schema.json#/properties/Features/properties/SupportedStateResultDeliveryModes/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_1.jsondef.schema.json#/properties/Features/properties/SupportedStateResultDeliveryModes/items. Do not edit manually.
+
+   Values:
+       ON_DEMAND_COMPLETE: Canonical enum value on_demand_complete.
+       ON_DEMAND_DELTA: Canonical enum value on_demand_delta.
+       ON_CHANGE_COMPLETE: Canonical enum value on_change_complete.
+       ON_CHANGE_DELTA: Canonical enum value on_change_delta.
+       ALWAYS_COMPLETE: Canonical enum value always_complete.
+
+
+   .. py:attribute:: ON_DEMAND_COMPLETE
+      :value: 'on_demand_complete'
+
+
+
+   .. py:attribute:: ON_DEMAND_DELTA
+      :value: 'on_demand_delta'
+
+
+
+   .. py:attribute:: ON_CHANGE_COMPLETE
+      :value: 'on_change_complete'
+
+
+
+   .. py:attribute:: ON_CHANGE_DELTA
+      :value: 'on_change_delta'
+
+
+
+   .. py:attribute:: ALWAYS_COMPLETE
+      :value: 'always_complete'
+
+
+

@@ -1,0 +1,143 @@
+python.gen.eu.algites.frmw.aac.core.packages.aicgd_package_bootstrap_package_bootstrap_1
+========================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.packages.aicgd_package_bootstrap_package_bootstrap_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.packages.aicgd_package_bootstrap_package_bootstrap_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.packages.aicgd_package_bootstrap_package_bootstrap_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.packages.aicgd_package_bootstrap_package_bootstrap_1.AIcgdPackageBootstrapPackageBootstrap_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdPackageBootstrapPackageBootstrap_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.packages.aiig_package_bootstrap_package_bootstrap_1.AIigPackageBootstrapPackageBootstrap_1`
+
+
+   Package-management bootstrap configuration. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json#/properties/PackageBootstrap (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json#/properties/PackageBootstrap); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.yamldef.schema.json#/properties/PackageBootstrap (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.yamldef.schema.json#/properties/PackageBootstrap)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json#/properties/PackageBootstrap/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/packages/package-bootstrap_1.jsondef.schema.json#/properties/PackageBootstrap. Do not edit manually.
+
+   .. attribute:: schema_version
+
+      Canonical schema version.
+
+   .. attribute:: layout
+
+      Structured layout associated with this package bootstrap.
+
+   .. attribute:: sources
+
+      Lists the sources associated with this package bootstrap.
+
+   .. attribute:: automation_policy
+
+      Structured automation policy associated with this package bootstrap.
+
+   .. attribute:: metadata
+
+      Additional structured metadata associated with this package bootstrap.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA_VERSION
+      :value: 'SchemaVersion'
+
+
+      ** ``SchemaVersion``
+
+      **Field Description:** Canonical schema version.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__LAYOUT
+      :value: 'Layout'
+
+
+      ** ``Layout``
+
+      **Field Description:** Structured layout associated with this package bootstrap.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SOURCES
+      :value: 'Sources'
+
+
+      ** ``Sources``
+
+      **Field Description:** Lists the sources associated with this package bootstrap.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__AUTOMATION_POLICY
+      :value: 'AutomationPolicy'
+
+
+      ** ``AutomationPolicy``
+
+      **Field Description:** Structured automation policy associated with this package bootstrap.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__METADATA
+      :value: 'Metadata'
+
+
+      ** ``Metadata``
+
+      **Field Description:** Additional structured metadata associated with this package bootstrap.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: schema_version
+      :type:  int
+
+
+   .. py:attribute:: layout
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: sources
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: automation_policy
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: metadata
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

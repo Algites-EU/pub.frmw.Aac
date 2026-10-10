@@ -1,0 +1,143 @@
+python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_operations_items_1
+=================================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_operations_items_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_operations_items_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_operations_items_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_operations_items_1.AIcgdComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_operations_items_1.AIigComponentDescriptorComponentCapabilityProvidersItemsOperationsItems_1`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Operations/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Operations/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Operations/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Operations/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Operations/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/properties/Operations/items. Do not edit manually.
+
+   .. attribute:: capability
+
+      Identity and human-facing metadata of the capability contract.
+
+   .. attribute:: capability_version
+
+      Canonical capability-contract version.
+
+   .. attribute:: operation
+
+      Specifies the operation for this operation.
+
+   .. attribute:: interaction
+
+      Structured interaction associated with this operation.
+
+   .. attribute:: parameters
+
+      Lists the parameters associated with this operation.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CAPABILITY
+      :value: 'Capability'
+
+
+      ** ``Capability``
+
+      **Field Description:** Identity and human-facing metadata of the capability contract.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CAPABILITY_VERSION
+      :value: 'CapabilityVersion'
+
+
+      ** ``CapabilityVersion``
+
+      **Field Description:** Canonical capability-contract version.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__OPERATION
+      :value: 'Operation'
+
+
+      ** ``Operation``
+
+      **Field Description:** Specifies the operation for this operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__INTERACTION
+      :value: 'Interaction'
+
+
+      ** ``Interaction``
+
+      **Field Description:** Structured interaction associated with this operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PARAMETERS
+      :value: 'Parameters'
+
+
+      ** ``Parameters``
+
+      **Field Description:** Lists the parameters associated with this operation.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: capability
+      :type:  str
+
+
+   .. py:attribute:: capability_version
+      :type:  int
+
+
+   .. py:attribute:: operation
+      :type:  str
+
+
+   .. py:attribute:: interaction
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: parameters
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

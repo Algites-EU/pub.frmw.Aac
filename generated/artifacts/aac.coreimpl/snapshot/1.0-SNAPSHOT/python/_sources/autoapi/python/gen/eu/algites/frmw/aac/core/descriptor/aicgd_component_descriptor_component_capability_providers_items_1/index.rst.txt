@@ -1,0 +1,276 @@
+python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_1
+================================================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_1
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_1.AIcSchemaTemporalValue
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_1.AIcSchemaDuration
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.descriptor.aicgd_component_descriptor_component_capability_providers_items_1.AIcgdComponentDescriptorComponentCapabilityProvidersItems_1
+
+
+Module Contents
+---------------
+
+.. py:data:: AIcSchemaTemporalValue
+
+.. py:data:: AIcSchemaDuration
+
+.. py:class:: AIcgdComponentDescriptorComponentCapabilityProvidersItems_1
+
+   Bases: :py:obj:`python.gen.eu.algites.frmw.aac.core.descriptor.aiig_component_descriptor_component_capability_providers_items_1.AIigComponentDescriptorComponentCapabilityProvidersItems_1`
+
+
+   Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/CapabilityProviders/items (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.yamldef.schema.json#/properties/Component/properties/CapabilityProviders/items)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/descriptor/component-descriptor_1.jsondef.schema.json#/properties/Component/properties/CapabilityProviders/items. Do not edit manually.
+
+   .. attribute:: id
+
+      Stable identifier of this capability provider.
+
+   .. attribute:: capabilities
+
+      Lists the capabilities associated with this capability provider.
+
+   .. attribute:: implementation_classes
+
+      Technology-specific implementation classes available for this provider definition.
+
+   .. attribute:: configuration_schema
+
+      Canonical schema reference used to validate this configuration.
+
+   .. attribute:: initial_instances
+
+      Lists the initial instances associated with this capability provider.
+
+   .. attribute:: runtime_factory_class
+
+      Implementation class responsible for constructing the runtime provider object.
+
+   .. attribute:: requirements
+
+      Indicates whether requirements applies to this capability provider.
+
+   .. attribute:: runtime
+
+      Structured runtime associated with this capability provider.
+
+   .. attribute:: name
+
+      Human-readable name of this capability provider.
+
+   .. attribute:: description
+
+      Human-readable description of this capability provider.
+
+   .. attribute:: readiness_requirements
+
+      Lists the readiness requirements associated with this capability provider.
+
+   .. attribute:: operations
+
+      Provider-specific metadata for concrete capability operations implemented by this provider definition.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__ID
+      :value: 'Id'
+
+
+      ** ``Id``
+
+      **Field Description:** Stable identifier of this capability provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CAPABILITIES
+      :value: 'Capabilities'
+
+
+      ** ``Capabilities``
+
+      **Field Description:** Lists the capabilities associated with this capability provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__IMPLEMENTATION_CLASSES
+      :value: 'ImplementationClasses'
+
+
+      ** ``ImplementationClasses``
+
+      **Field Description:** Technology-specific implementation classes available for this provider definition.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CONFIGURATION_SCHEMA
+      :value: 'ConfigurationSchema'
+
+
+      ** ``ConfigurationSchema``
+
+      **Field Description:** Canonical schema reference used to validate this configuration.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__INITIAL_INSTANCES
+      :value: 'InitialInstances'
+
+
+      ** ``InitialInstances``
+
+      **Field Description:** Lists the initial instances associated with this capability provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__RUNTIME_FACTORY_CLASS
+      :value: 'RuntimeFactoryClass'
+
+
+      ** ``RuntimeFactoryClass``
+
+      **Field Description:** Implementation class responsible for constructing the runtime provider object.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__REQUIREMENTS
+      :value: 'Requirements'
+
+
+      ** ``Requirements``
+
+      **Field Description:** Indicates whether requirements applies to this capability provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__RUNTIME
+      :value: 'Runtime'
+
+
+      ** ``Runtime``
+
+      **Field Description:** Structured runtime associated with this capability provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this capability provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this capability provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__READINESS_REQUIREMENTS
+      :value: 'ReadinessRequirements'
+
+
+      ** ``ReadinessRequirements``
+
+      **Field Description:** Lists the readiness requirements associated with this capability provider.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__OPERATIONS
+      :value: 'Operations'
+
+
+      ** ``Operations``
+
+      **Field Description:** Provider-specific metadata for concrete capability operations implemented by this provider definition.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: capabilities
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: implementation_classes
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: configuration_schema
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: initial_instances
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: runtime_factory_class
+      :type:  str
+
+
+   .. py:attribute:: requirements
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: runtime
+      :type:  Mapping[str, Any]
+
+
+   .. py:attribute:: name
+      :type:  Any
+
+
+   .. py:attribute:: description
+      :type:  Any
+
+
+   .. py:attribute:: readiness_requirements
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:attribute:: operations
+      :type:  tuple[Mapping[str, Any], Ellipsis]
+
+
+   .. py:method:: from_mapping(value: Mapping[str, object])
+      :classmethod:
+
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+
+

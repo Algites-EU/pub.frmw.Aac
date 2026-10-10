@@ -1,0 +1,291 @@
+python.gen.eu.algites.frmw.aac.core.invocation.aiig_operation_interaction_event_1
+=================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.invocation.aiig_operation_interaction_event_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.invocation.aiig_operation_interaction_event_1.AIigOperationInteractionEvent_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigOperationInteractionEvent_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Defines the canonical Operation Interaction Event schema and its serialized data contract. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.jsondef.schema.json (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.jsondef.schema.json); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.yamldef.schema.json (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.yamldef.schema.json)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.jsondef.schema.json/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_1.jsondef.schema.json. Do not edit manually.
+
+   .. attribute:: event_type
+
+      Kind of interaction event represented by this entry.
+
+   .. attribute:: progress_id
+
+      Identifier of the progress item represented by this event.
+
+   .. attribute:: parent_progress_id
+
+      Identifier of the parent progress item for nested progress reporting.
+
+   .. attribute:: phase_id
+
+      Identifier of the execution phase associated with this event.
+
+   .. attribute:: name
+
+      Human-readable name of this operation interaction event.
+
+   .. attribute:: description
+
+      Human-readable description of this operation interaction event.
+
+   .. attribute:: current
+
+      Current progress value.
+
+   .. attribute:: total
+
+      Expected total progress value when known.
+
+   .. attribute:: unit
+
+      Unit used for progress values.
+
+   .. attribute:: severity
+
+      Severity level associated with this event or diagnostic.
+
+   .. attribute:: code
+
+      Stable machine-readable code associated with this event or diagnostic.
+
+   .. attribute:: details
+
+      Additional structured details associated with this operation interaction event.
+
+   .. attribute:: _schema
+
+      Optional absolute URI of the schema describing this root document.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__EVENT_TYPE
+      :type:  ClassVar[str]
+      :value: 'EventType'
+
+
+      ** ``EventType``
+
+      **Field Description:** Kind of interaction event represented by this entry.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PROGRESS_ID
+      :type:  ClassVar[str]
+      :value: 'ProgressId'
+
+
+      ** ``ProgressId``
+
+      **Field Description:** Identifier of the progress item represented by this event.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PARENT_PROGRESS_ID
+      :type:  ClassVar[str]
+      :value: 'ParentProgressId'
+
+
+      ** ``ParentProgressId``
+
+      **Field Description:** Identifier of the parent progress item for nested progress reporting.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PHASE_ID
+      :type:  ClassVar[str]
+      :value: 'PhaseId'
+
+
+      ** ``PhaseId``
+
+      **Field Description:** Identifier of the execution phase associated with this event.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__NAME
+      :type:  ClassVar[str]
+      :value: 'Name'
+
+
+      ** ``Name``
+
+      **Field Description:** Human-readable name of this operation interaction event.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DESCRIPTION
+      :type:  ClassVar[str]
+      :value: 'Description'
+
+
+      ** ``Description``
+
+      **Field Description:** Human-readable description of this operation interaction event.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CURRENT
+      :type:  ClassVar[str]
+      :value: 'Current'
+
+
+      ** ``Current``
+
+      **Field Description:** Current progress value.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__TOTAL
+      :type:  ClassVar[str]
+      :value: 'Total'
+
+
+      ** ``Total``
+
+      **Field Description:** Expected total progress value when known.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__UNIT
+      :type:  ClassVar[str]
+      :value: 'Unit'
+
+
+      ** ``Unit``
+
+      **Field Description:** Unit used for progress values.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SEVERITY
+      :type:  ClassVar[str]
+      :value: 'Severity'
+
+
+      ** ``Severity``
+
+      **Field Description:** Severity level associated with this event or diagnostic.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__CODE
+      :type:  ClassVar[str]
+      :value: 'Code'
+
+
+      ** ``Code``
+
+      **Field Description:** Stable machine-readable code associated with this event or diagnostic.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__DETAILS
+      :type:  ClassVar[str]
+      :value: 'Details'
+
+
+      ** ``Details``
+
+      **Field Description:** Additional structured details associated with this operation interaction event.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA
+      :type:  ClassVar[str]
+      :value: '$schema'
+
+
+      ** ``$schema``
+
+      **Field Description:** Optional absolute URI of the schema describing this root document.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: event_type
+      :type:  str
+
+
+   .. py:attribute:: progress_id
+      :type:  str | None
+
+
+   .. py:attribute:: parent_progress_id
+      :type:  str | None
+
+
+   .. py:attribute:: phase_id
+      :type:  str | None
+
+
+   .. py:attribute:: name
+      :type:  Any | None
+
+
+   .. py:attribute:: description
+      :type:  Any | None
+
+
+   .. py:attribute:: current
+      :type:  decimal.Decimal | None
+
+
+   .. py:attribute:: total
+      :type:  decimal.Decimal | None
+
+
+   .. py:attribute:: unit
+      :type:  str | None
+
+
+   .. py:attribute:: severity
+      :type:  str
+
+
+   .. py:attribute:: code
+      :type:  str | None
+
+
+   .. py:attribute:: details
+      :type:  Mapping[str, Any]
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+

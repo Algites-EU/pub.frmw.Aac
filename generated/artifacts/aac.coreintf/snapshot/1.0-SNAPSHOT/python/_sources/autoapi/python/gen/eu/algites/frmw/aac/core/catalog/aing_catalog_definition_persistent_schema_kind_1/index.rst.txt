@@ -1,0 +1,47 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aing_catalog_definition_persistent_schema_kind_1
+============================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aing_catalog_definition_persistent_schema_kind_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aing_catalog_definition_persistent_schema_kind_1.AIngCatalogDefinitionPersistentSchemaKind_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIngCatalogDefinitionPersistentSchemaKind_1
+
+   Bases: :py:obj:`str`, :py:obj:`enum.Enum`
+
+
+   Kind of this persistent schema. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/persistentSchema/properties/Kind (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/persistentSchema/properties/Kind); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/persistentSchema/properties/Kind (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/persistentSchema/properties/Kind)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/persistentSchema/properties/Kind/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/persistentSchema/properties/Kind. Do not edit manually.
+
+   Values:
+       COMPONENT_CONFIGURATION: Canonical enum value component_configuration.
+       PROVIDER_CONFIGURATION: Canonical enum value provider_configuration.
+       DATA_ENTITY: Canonical enum value data_entity.
+
+
+   .. py:attribute:: COMPONENT_CONFIGURATION
+      :value: 'component_configuration'
+
+
+
+   .. py:attribute:: PROVIDER_CONFIGURATION
+      :value: 'provider_configuration'
+
+
+
+   .. py:attribute:: DATA_ENTITY
+      :value: 'data_entity'
+
+
+

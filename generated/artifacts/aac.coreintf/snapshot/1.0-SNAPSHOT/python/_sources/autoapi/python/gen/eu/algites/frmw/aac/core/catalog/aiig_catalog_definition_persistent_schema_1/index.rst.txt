@@ -1,0 +1,175 @@
+python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_persistent_schema_1
+=======================================================================================
+
+.. py:module:: python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_persistent_schema_1
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   python.gen.eu.algites.frmw.aac.core.catalog.aiig_catalog_definition_persistent_schema_1.AIigCatalogDefinitionPersistentSchema_1
+
+
+Module Contents
+---------------
+
+.. py:class:: AIigCatalogDefinitionPersistentSchema_1
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Defines the reusable persistent schema structure used by this canonical schema. Canonical representations: JSONDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/persistentSchema (aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/persistentSchema); YAMLDEFS: https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/persistentSchema (aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/catalog/catalog_1.yamldef.schema.json#/$defs/persistentSchema)
+
+   Generated from canonical definition https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/persistentSchema/1. Source: aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/catalog/catalog_1.jsondef.schema.json#/$defs/persistentSchema. Do not edit manually.
+
+   .. attribute:: kind
+
+      Kind of this persistent schema.
+
+   .. attribute:: schema_id
+
+      Canonical schema identifier.
+
+   .. attribute:: write_version
+
+      Version of the write associated with this persistent schema.
+
+   .. attribute:: provider_id
+
+      Stable identifier of the provider associated with this persistent schema.
+
+   .. attribute:: readable_versions
+
+      Lists the readable versions supported or selected by this persistent schema.
+
+   .. attribute:: writable_versions
+
+      Lists the writable versions supported or selected by this persistent schema.
+
+   .. attribute:: preferred_write_version
+
+      Version of the preferred write associated with this persistent schema.
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__KIND
+      :type:  ClassVar[str]
+      :value: 'Kind'
+
+
+      ** ``Kind``
+
+      **Field Description:** Kind of this persistent schema.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__SCHEMA_ID
+      :type:  ClassVar[str]
+      :value: 'SchemaId'
+
+
+      ** ``SchemaId``
+
+      **Field Description:** Canonical schema identifier.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__WRITE_VERSION
+      :type:  ClassVar[str]
+      :value: 'WriteVersion'
+
+
+      ** ``WriteVersion``
+
+      **Field Description:** Version of the write associated with this persistent schema.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PROVIDER_ID
+      :type:  ClassVar[str]
+      :value: 'ProviderId'
+
+
+      ** ``ProviderId``
+
+      **Field Description:** Stable identifier of the provider associated with this persistent schema.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__READABLE_VERSIONS
+      :type:  ClassVar[str]
+      :value: 'ReadableVersions'
+
+
+      ** ``ReadableVersions``
+
+      **Field Description:** Lists the readable versions supported or selected by this persistent schema.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__WRITABLE_VERSIONS
+      :type:  ClassVar[str]
+      :value: 'WritableVersions'
+
+
+      ** ``WritableVersions``
+
+      **Field Description:** Lists the writable versions supported or selected by this persistent schema.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: SCHEMA_FIELD_NAME__PREFERRED_WRITE_VERSION
+      :type:  ClassVar[str]
+      :value: 'PreferredWriteVersion'
+
+
+      ** ``PreferredWriteVersion``
+
+      **Field Description:** Version of the preferred write associated with this persistent schema.
+
+      :type: **Field Name
+
+
+   .. py:attribute:: kind
+      :type:  str
+
+
+   .. py:attribute:: schema_id
+      :type:  str
+
+
+   .. py:attribute:: write_version
+      :type:  int
+
+
+   .. py:attribute:: provider_id
+      :type:  str
+
+
+   .. py:attribute:: readable_versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: writable_versions
+      :type:  tuple[int, Ellipsis]
+
+
+   .. py:attribute:: preferred_write_version
+      :type:  int
+
+
+   .. py:method:: to_mapping() -> Mapping[str, object]
+      :abstractmethod:
+
+
+      Return canonical wire fields, omitting absent optional values.
+
+
+
