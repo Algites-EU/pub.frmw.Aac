@@ -91,5 +91,7 @@
     }
   },
   "x-aac-schema-id": "simpleaudit-config",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.observation.simpleaudit.schemas.simpleaudit-config",
+  "x-algites-schema-version": 1
 }

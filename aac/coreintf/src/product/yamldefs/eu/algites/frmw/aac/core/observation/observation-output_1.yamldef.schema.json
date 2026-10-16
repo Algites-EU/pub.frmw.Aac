@@ -26,5 +26,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.observation-output",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.observation.observation-output",
+  "x-algites-schema-version": 1
 }

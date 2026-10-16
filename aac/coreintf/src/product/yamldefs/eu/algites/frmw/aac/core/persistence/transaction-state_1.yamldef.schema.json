@@ -50,5 +50,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.persistence-transaction-state",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.persistence.transaction-state",
+  "x-algites-schema-version": 1
 }

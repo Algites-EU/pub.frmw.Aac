@@ -205,5 +205,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.security-bootstrap",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.authentication.security-bootstrap",
+  "x-algites-schema-version": 1
 }

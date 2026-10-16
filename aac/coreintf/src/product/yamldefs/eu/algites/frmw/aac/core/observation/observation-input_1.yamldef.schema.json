@@ -81,5 +81,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.observation-input",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.observation.observation-input",
+  "x-algites-schema-version": 1
 }

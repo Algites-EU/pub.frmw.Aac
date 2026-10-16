@@ -103,5 +103,7 @@
       "format": "uri",
       "description": "Optional absolute URI of the schema describing this root document."
     }
-  }
+  },
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.invocation.operation-interaction-provider-to-caller-message",
+  "x-algites-schema-version": 1
 }

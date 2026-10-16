@@ -77,8 +77,8 @@ Operations:
     input_dto = namespace["AIcgdSiteEditInput_1"]
     assert interface.__aac_source_id__ == "_AO.core.siteManagement"
     assert interface.__aac_source_version__ == 1
-    assert input_dto.__data_object__.id == "_AO.schema.site-edit-input"
-    assert input_dto.__data_object__.version == 1
+    assert input_dto.__data_object__.schema_id == "_AO.schema.site-edit-input"
+    assert input_dto.__data_object__.schema_version == 1
     assert input_dto.__data_object_fields__[0].name in {"site_id", "DisplayName"}
     assert 'class AIcgdSiteEditInput_1' not in source
     assert getattr(interface.edit_site_1, "__aac_authorization_all_of__") == ("EDIT_SITE",)
@@ -134,8 +134,8 @@ Operations:
     interface = namespace["AIigSourceRepositoryIdentification_1"]
     dto = namespace["AIcgdRepositoryIdentity_1"]
     assert interface.__aac_source_resource__ == "source-repository-identification_1.yml"
-    assert dto.__data_object__.id == "_AAC.schema.repository-identity"
-    assert dto.__data_object__.version == 1
+    assert dto.__data_object__.schema_id == "_AAC.schema.repository-identity"
+    assert dto.__data_object__.schema_version == 1
 
 
 def test_data_entity_binding_generator_uses_versioned_view_methods_and_codec(tmp_path):

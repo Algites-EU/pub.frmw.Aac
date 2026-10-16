@@ -89,5 +89,7 @@
   "x-aac-schema-id": "_AAC.schema.workspace-component-requirements",
   "x-aac-schema-version": 1,
   "title": "AAC Workspace Component Requirements 1",
-  "description": "Defines the canonical AAC Workspace Component Requirements schema and its serialized data contract."
+  "description": "Defines the canonical AAC Workspace Component Requirements schema and its serialized data contract.",
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.packages.workspace-component-requirements",
+  "x-algites-schema-version": 1
 }

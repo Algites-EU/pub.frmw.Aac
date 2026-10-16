@@ -88,5 +88,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.capability-group",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.capability.capability-group",
+  "x-algites-schema-version": 1
 }

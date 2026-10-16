@@ -1,4 +1,5 @@
 {
+  "$schema": "https://defs.dev.algites.eu/api/jsondefs/eu/algites/tool/codegen/defs/schema-field-bindings_1.jsondef.schema.json",
   "artifact": "aac/coreintf",
   "languages": [
     "python"

@@ -25,5 +25,7 @@
   "x-aac-schema-id": "_AAC.schema.package-source-manifest",
   "x-aac-schema-version": 1,
   "title": "AAC Package Source Manifest 1",
-  "description": "Defines the canonical AAC Package Source Manifest schema and its serialized data contract."
+  "description": "Defines the canonical AAC Package Source Manifest schema and its serialized data contract.",
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.packages.package-source-manifest",
+  "x-algites-schema-version": 1
 }

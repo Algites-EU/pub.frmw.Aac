@@ -267,5 +267,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.capability-contract",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.capability.capability-contract",
+  "x-algites-schema-version": 1
 }

@@ -120,5 +120,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.configuration-provider-document",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.configuration.configuration-provider-document",
+  "x-algites-schema-version": 1
 }

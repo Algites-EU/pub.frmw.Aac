@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 # .github/workflows/algites-create-lane.yml
 name: Algites Create Lane (Public)
 

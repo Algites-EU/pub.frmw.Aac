@@ -166,5 +166,7 @@
         ]
       }
     }
-  ]
+  ],
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.invocation.operation-interaction-event",
+  "x-algites-schema-version": 1
 }

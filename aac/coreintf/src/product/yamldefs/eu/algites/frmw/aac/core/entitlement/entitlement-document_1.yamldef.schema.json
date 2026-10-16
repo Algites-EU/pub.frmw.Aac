@@ -218,5 +218,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.entitlement-document",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.entitlement.entitlement-document",
+  "x-algites-schema-version": 1
 }

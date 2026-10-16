@@ -291,5 +291,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.entitlement-bootstrap",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.entitlement.entitlement-bootstrap",
+  "x-algites-schema-version": 1
 }

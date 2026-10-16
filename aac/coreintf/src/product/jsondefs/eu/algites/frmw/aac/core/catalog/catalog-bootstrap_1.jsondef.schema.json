@@ -125,5 +125,7 @@
   "x-aac-schema-id": "_AAC.schema.catalog-bootstrap",
   "x-aac-schema-version": 1,
   "title": "AAC Catalog Bootstrap 1",
-  "description": "Defines the canonical AAC Catalog Bootstrap schema and its serialized data contract."
+  "description": "Defines the canonical AAC Catalog Bootstrap schema and its serialized data contract.",
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.catalog.catalog-bootstrap",
+  "x-algites-schema-version": 1
 }

@@ -153,5 +153,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.entitlement-issuing-request",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.entitlement.entitlement-issuing-request",
+  "x-algites-schema-version": 1
 }

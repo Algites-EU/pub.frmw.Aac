@@ -146,5 +146,7 @@
       "format": "uri",
       "description": "Optional absolute URI of the schema describing this root document."
     }
-  }
+  },
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.dataentity.data-entity-apply-direct-record-changes-result",
+  "x-algites-schema-version": 1
 }

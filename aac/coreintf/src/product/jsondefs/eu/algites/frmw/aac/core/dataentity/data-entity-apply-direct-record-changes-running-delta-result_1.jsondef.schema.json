@@ -147,5 +147,7 @@
       "description": "Optional absolute URI of the schema describing this root document."
     }
   },
-  "$comment": "RUNNING delta containing only newly published committed change results represented by this state-result revision."
+  "$comment": "RUNNING delta containing only newly published committed change results represented by this state-result revision.",
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.dataentity.data-entity-apply-direct-record-changes-running-delta-result",
+  "x-algites-schema-version": 1
 }

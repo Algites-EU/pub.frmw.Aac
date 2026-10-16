@@ -31,5 +31,7 @@
       "format": "uri"
     }
   },
-  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-reliable-exchange_1.jsondef.schema.json"
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-reliable-exchange_1.jsondef.schema.json",
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.invocation.operation-interaction-reliable-exchange",
+  "x-algites-schema-version": 1
 }

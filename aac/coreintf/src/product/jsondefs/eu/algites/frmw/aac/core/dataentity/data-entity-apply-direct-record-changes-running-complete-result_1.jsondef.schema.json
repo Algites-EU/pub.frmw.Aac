@@ -147,5 +147,7 @@
       "description": "Optional absolute URI of the schema describing this root document."
     }
   },
-  "$comment": "Complete RUNNING snapshot of committed change results published so far for this invocation."
+  "$comment": "Complete RUNNING snapshot of committed change results published so far for this invocation.",
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.dataentity.data-entity-apply-direct-record-changes-running-complete-result",
+  "x-algites-schema-version": 1
 }

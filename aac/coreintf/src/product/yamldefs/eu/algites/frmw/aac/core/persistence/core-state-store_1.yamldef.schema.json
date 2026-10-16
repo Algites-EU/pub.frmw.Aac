@@ -51,5 +51,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.core-state-store",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.persistence.core-state-store",
+  "x-algites-schema-version": 1
 }

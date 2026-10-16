@@ -6,5 +6,7 @@
   "type": "integer",
   "minimum": 1,
   "x-aac-schema-id": "_AAC.schema.record-revision.monotonic-integer",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.common.persistence.record-revision-monotonic-integer",
+  "x-algites-schema-version": 1
 }

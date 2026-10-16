@@ -978,5 +978,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.component-descriptor",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.descriptor.component-descriptor",
+  "x-algites-schema-version": 1
 }

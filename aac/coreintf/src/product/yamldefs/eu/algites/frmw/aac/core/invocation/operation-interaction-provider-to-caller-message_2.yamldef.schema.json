@@ -143,5 +143,7 @@
         }
       }
     }
-  }
+  },
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.invocation.operation-interaction-provider-to-caller-message",
+  "x-algites-schema-version": 2
 }

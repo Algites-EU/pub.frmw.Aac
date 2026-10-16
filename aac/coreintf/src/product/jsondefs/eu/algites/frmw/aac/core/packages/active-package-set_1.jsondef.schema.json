@@ -90,5 +90,7 @@
     }
   },
   "x-aac-schema-id": "_AAC.schema.active-package-set",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.packages.active-package-set",
+  "x-algites-schema-version": 1
 }

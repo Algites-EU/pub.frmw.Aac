@@ -814,5 +814,7 @@
   "title": "AAC Component Catalog 1",
   "description": "Defines the canonical AAC Component Catalog schema and its serialized data contract.",
   "x-aac-schema-id": "_AAC.schema.catalog",
-  "x-aac-schema-version": 1
+  "x-aac-schema-version": 1,
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.catalog.catalog",
+  "x-algites-schema-version": 1
 }

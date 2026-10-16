@@ -44,5 +44,7 @@
         "ResourceKey"
       ]
     }
-  ]
+  ],
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.presentation.display-content",
+  "x-algites-schema-version": 1
 }

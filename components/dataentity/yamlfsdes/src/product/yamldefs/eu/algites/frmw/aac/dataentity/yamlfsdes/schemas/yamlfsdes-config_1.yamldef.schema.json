@@ -21,5 +21,7 @@
       "format": "uri",
       "description": "Optional absolute URI of the schema describing this root document."
     }
-  }
+  },
+  "x-algites-schema-id": "eu.algites.frmw.aac.dataentity.yamlfsdes.schemas.yamlfsdes-config",
+  "x-algites-schema-version": 1
 }

@@ -16,6 +16,41 @@ object names. This implementation uses the public General 1.1 pipeline:
    metadata. `AIcSmartDataObject.from_mapping()` / `to_mapping()` provide
    generic wire mapping; no AAC-specific DTO runtime is generated.
 
+## Generation pipeline
+
+The schema types are owned by General, not generated inline by AAC. The binding
+and Data Entity generators import the fully qualified General type identities
+rather than deriving class names from filename conventions.
+
+```mermaid
+flowchart TB
+    S["Canonical JSON / YAML schema"]
+    D["General Defs Codegen"]
+    I["AIig: read-only schema interface"]
+    G["General SDO Codegen"]
+    M["AIigd: mutable schema interface"]
+    O["AIcgd: SmartDataObject implementation"]
+    A["AAC-specific codegen"]
+    B["AAC capability binding and Data Entity view"]
+
+    S --> D --> I
+    I --> G
+    G --> M
+    G --> O
+    I --> A
+    M --> A
+    O --> A
+    A --> B
+```
+
+The General SDO runtime also provides typed virtual mappings with preserved
+concrete class and object identity (`toMapping_RawValues`,
+`toMapping_EffectiveValues`, and `AIsSmartDataObjectFactory`). These virtual
+mappings are **not** ordinary JSON dictionaries; a wire protocol must encode
+schema and instance references separately. The existing AAC invocation's
+plain mapping remains a wire-boundary adapter and does not guarantee
+lossless cyclic/polymorphic graph transport.
+
 ## CLI
 
 Generate a capability binding and standalone schema modules:

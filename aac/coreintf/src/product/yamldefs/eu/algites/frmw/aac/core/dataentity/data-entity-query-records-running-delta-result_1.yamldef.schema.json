@@ -87,5 +87,7 @@
       "description": "Optional absolute URI of the schema describing this root document."
     }
   },
-  "$comment": "RUNNING delta for query-records. records contains only the newly published portion represented by this state-result revision."
+  "$comment": "RUNNING delta for query-records. records contains only the newly published portion represented by this state-result revision.",
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.dataentity.data-entity-query-records-running-delta-result",
+  "x-algites-schema-version": 1
 }

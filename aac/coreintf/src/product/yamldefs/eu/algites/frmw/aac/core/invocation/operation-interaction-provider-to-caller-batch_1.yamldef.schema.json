@@ -22,5 +22,7 @@
       "format": "uri"
     }
   },
-  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-batch_1.yamldef.schema.json"
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-batch_1.yamldef.schema.json",
+  "x-algites-schema-id": "eu.algites.frmw.aac.core.invocation.operation-interaction-provider-to-caller-batch",
+  "x-algites-schema-version": 1
 }
