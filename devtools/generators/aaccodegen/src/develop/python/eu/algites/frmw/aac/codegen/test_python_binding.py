@@ -2,9 +2,35 @@ from eu.algites.frmw.aac.codegen import AIcPythonCapabilityBindingGenerator
 from eu.algites.frmw.aac.core.capability.catalog import AIcActiveContractCatalog
 from eu.algites.frmw.aac.core.invocation.dispatcher import AIcObjectCapabilityEndpoint
 from eu.algites.frmw.aac.core.invocation.api import AIcInvocationInput
+from pathlib import Path
+import sys
 
 
-def test_generated_python_binding_contains_dtos_authorization_and_is_invokable():
+def _load_binding_sources(generator, contract, root: Path, *, canonical_resource=None):
+    result = generator.generate_sources(contract, canonical_resource=canonical_resource)
+    for unit in result.schema_sources:
+        path = root / unit.relative_path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(unit.source, encoding='utf-8')
+    sys.path.insert(0, str(root))
+    namespace = {}
+    exec(result.binding_source, namespace)
+    return result, namespace
+
+
+def _load_entity_sources(generator, schema_id, version, root: Path):
+    result = generator.generate_sources(schema_id, version)
+    for unit in result.schema_sources:
+        path = root / unit.relative_path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(unit.source, encoding='utf-8')
+    sys.path.insert(0, str(root))
+    namespace = {}
+    exec(result.binding_source, namespace)
+    return result, namespace
+
+
+def test_generated_python_binding_contains_dtos_authorization_and_is_invokable(tmp_path):
     catalog = AIcActiveContractCatalog()
     catalog.admit_builtin_contracts()
     catalog.schema_registry.register("site-edit-input_1.json", {
@@ -44,18 +70,17 @@ Operations:
       - Kind: final_success_state_result
         Schema: {Id: _AO.schema.site-edit-output, Version: 1}
 ''')
-    source = AIcPythonCapabilityBindingGenerator(catalog.schema_registry).generate(admitted.contract)
-    namespace = {}
-    exec(source, namespace)
+    result, namespace = _load_binding_sources(
+        AIcPythonCapabilityBindingGenerator(catalog.schema_registry), admitted.contract, tmp_path)
+    source = result.binding_source
     interface = namespace["AIigSiteManagement_1"]
     input_dto = namespace["AIcgdSiteEditInput_1"]
     assert interface.__aac_source_id__ == "_AO.core.siteManagement"
     assert interface.__aac_source_version__ == 1
-    assert input_dto.__canonical_source_id__ == "_AO.schema.site-edit-input"
-    assert input_dto.__canonical_source_version__ == 1
-    assert input_dto.__canonical_source_resource__ == "site-edit-input_1.json"
-    assert "Request data used to edit one site." in input_dto.__doc__
-    assert "site_id: Stable site identifier." in input_dto.__doc__
+    assert input_dto.__data_object__.id == "_AO.schema.site-edit-input"
+    assert input_dto.__data_object__.version == 1
+    assert input_dto.__data_object_fields__[0].name in {"site_id", "DisplayName"}
+    assert 'class AIcgdSiteEditInput_1' not in source
     assert getattr(interface.edit_site_1, "__aac_authorization_all_of__") == ("EDIT_SITE",)
     assert getattr(interface.edit_site_1, "__aac_authorization_any_of__") == ("STANDARD_EDITOR", "ADVANCED_EDITOR")
 
@@ -63,7 +88,7 @@ Operations:
     class Impl(interface):
         def edit_site_1(self, request, interaction):
             assert isinstance(request, input_dto)
-            return output_dto(changed=True)
+            return output_dto.from_mapping({"Changed": True})
 
     result = AIcObjectCapabilityEndpoint(Impl()).invoke(AIcInvocationInput(
         "i", None, "_AO.core.siteManagement", 1, "edit_site", "provider", {"site_id": "s1", "DisplayName": "New"}
@@ -71,7 +96,7 @@ Operations:
     assert result.success and result.result == {"Changed": True}
 
 
-def test_generated_python_binding_reuses_one_dto_type_for_one_canonical_schema():
+def test_generated_python_binding_reuses_one_dto_type_for_one_canonical_schema(tmp_path):
     catalog = AIcActiveContractCatalog()
     catalog.admit_builtin_contracts()
     catalog.schema_registry.register("repository-identity_1.json", {
@@ -100,21 +125,20 @@ Operations:
       - Kind: final_success_state_result
         Schema: {Id: _AAC.schema.repository-identity, Version: 1}
 ''')
-    source = AIcPythonCapabilityBindingGenerator(catalog.schema_registry).generate(
-        admitted.contract, canonical_resource="source-repository-identification_1.yml"
-    )
-    assert source.count("class AIcgdRepositoryIdentity_1") == 1
-    namespace = {}
-    exec(source, namespace)
+    result, namespace = _load_binding_sources(
+        AIcPythonCapabilityBindingGenerator(catalog.schema_registry), admitted.contract, tmp_path,
+        canonical_resource="source-repository-identification_1.yml")
+    source = result.binding_source
+    assert 'class AIcgdRepositoryIdentity_1' not in source
+    assert len([unit for unit in result.schema_sources if unit.type_name == 'AIcgdRepositoryIdentity_1']) == 1
     interface = namespace["AIigSourceRepositoryIdentification_1"]
     dto = namespace["AIcgdRepositoryIdentity_1"]
     assert interface.__aac_source_resource__ == "source-repository-identification_1.yml"
-    assert dto.__canonical_source_id__ == "_AAC.schema.repository-identity"
-    assert dto.__canonical_source_version__ == 1
-    assert dto.__canonical_source_resource__ == "repository-identity_1.json"
+    assert dto.__data_object__.id == "_AAC.schema.repository-identity"
+    assert dto.__data_object__.version == 1
 
 
-def test_data_entity_binding_generator_uses_versioned_view_methods_and_codec():
+def test_data_entity_binding_generator_uses_versioned_view_methods_and_codec(tmp_path):
     from eu.algites.frmw.aac.core.schemas.registry import AIcSchemaRegistry
 
     schemas = AIcSchemaRegistry()
@@ -130,22 +154,23 @@ def test_data_entity_binding_generator_uses_versioned_view_methods_and_codec():
     })
     from eu.algites.frmw.aac.codegen import AIcPythonDataEntityBindingGenerator
 
-    source = AIcPythonDataEntityBindingGenerator(schemas).generate("_AO.entity.site", 2)
-    assert "class AIigSite_2" in source
-    assert "def get_name_2" in source
+    result, namespace = _load_entity_sources(
+        AIcPythonDataEntityBindingGenerator(schemas), "_AO.entity.site", 2, tmp_path)
+    source = result.binding_source
+    assert "class AIigSiteDataEntityView_2" in source
+    assert "def set_name_2" in source
+    assert "def get_name_2" not in source
     assert "def set_name_2" in source
     assert "class AIcgSiteCodec_2" in source
     assert "__aac_source_id__ = '_AO.entity.site'" in source
     assert "Canonical site data stored by the Data Entity provider." in source
     assert "Human-readable site name." in source
-    namespace = {}
-    exec(source, namespace)
-    interface = namespace["AIigSite_2"]
+    interface = namespace["AIigSiteDataEntityView_2"]
     codec = namespace["AIcgSiteCodec_2"]()
     assert interface.SCHEMA_FIELD_NAME__NAME == "Name"
 
     class Site(interface):
-        def get_name_2(self):
+        def getName(self):
             return self.name
 
         def set_name_2(self, value):
@@ -154,10 +179,10 @@ def test_data_entity_binding_generator_uses_versioned_view_methods_and_codec():
     site = Site()
     codec.deserialize_into({"Name": "Prague"}, site)
     assert codec.serialize(site) == {"Name": "Prague"}
-    assert site.get_name_2() == "Prague"
+    assert site.getName() == "Prague"
 
 
-def test_generated_caller_materializes_operation_specific_failure_exception_and_allows_typed_override():
+def test_generated_caller_materializes_operation_specific_failure_exception_and_allows_typed_override(tmp_path):
     import pytest
 
     from eu.algites.frmw.aac.core.instances.api import AIcBinding
@@ -186,9 +211,9 @@ Operations:
       - Kind: final_failed_state_result_extension
         Schema: {Id: _AO.schema.failure-data, Version: 1}
 ''')
-    source = AIcPythonCapabilityBindingGenerator(catalog.schema_registry).generate(admitted.contract)
-    namespace = {}
-    exec(source, namespace)
+    result, namespace = _load_binding_sources(
+        AIcPythonCapabilityBindingGenerator(catalog.schema_registry), admitted.contract, tmp_path)
+    source = result.binding_source
     interface = namespace["AIigFailureTest_1"]
     caller_type = namespace["AIcgFailureTestCaller_1"]
     generated_exception = namespace["AIxgFailureTestFailed_1"]
@@ -214,7 +239,7 @@ Operations:
     with pytest.raises(generated_exception) as captured:
         caller.run_1()
     assert isinstance(captured.value.additional_data, failure_dto)
-    assert captured.value.additional_data.reason == "BROKEN"
+    assert captured.value.additional_data.getReason() == "BROKEN"
 
     class CustomFailure(generated_exception):
         pass
@@ -262,14 +287,12 @@ Operations:
         AIcPythonCapabilityBindingGenerator(catalog.schema_registry).generate(admitted.contract)
 
 
-def test_inline_dtos_share_runtime_and_expose_schema_field_constants():
-    from dataclasses import fields
+def test_standalone_general_sdo_types_have_field_constants_and_no_inline_runtime(tmp_path):
     from eu.algites.frmw.aac.core.schemas.registry import AIcSchemaRegistry
     from eu.algites.frmw.aac.core.capability.api import (
         AIcCapabilityContract, AIcCapabilityOperation, AIcCapabilityOperationInteraction,
         AIcCapabilityRef, AIcSchemaRef, AInCapabilityOperationInteractionKind,
     )
-
     schemas = AIcSchemaRegistry()
     for name, field_name in (("request", "Name"), ("result", "Changed")):
         schemas.register(f"test-{name}_1.json", {
@@ -282,15 +305,12 @@ def test_inline_dtos_share_runtime_and_expose_schema_field_constants():
             AIcCapabilityOperationInteraction(AInCapabilityOperationInteractionKind.FINAL_SUCCESS_STATE_RESULT, AIcSchemaRef("test.result", 1)),
         )),
     ))
-    source = AIcPythonCapabilityBindingGenerator(schemas).generate(contract)
-    assert source.count("_AI_UNSET = object()") == 1
-    namespace = {}
-    exec(source, namespace)
+    generated, namespace = _load_binding_sources(AIcPythonCapabilityBindingGenerator(schemas), contract, tmp_path)
+    assert "_AI_UNSET" not in generated.binding_source
     request = namespace["AIcgdTestRequest_1"]
     result = namespace["AIcgdTestResult_1"]
     assert request.SCHEMA_FIELD_NAME__NAME == "Name"
     assert result.SCHEMA_FIELD_NAME__CHANGED == "Changed"
-    assert [field.name for field in fields(request)] == ["name"]
     assert request().to_mapping() == {}
     assert result().to_mapping() == {}
     assert request.from_mapping({"Name": "Prague"}).to_mapping() == {"Name": "Prague"}

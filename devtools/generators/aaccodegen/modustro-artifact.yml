@@ -23,6 +23,11 @@ Dependencies:
         Usages: [product_implementation]
         VersionRequirement:
           Exact: "1.1-SNAPSHOT"
+      - GroupId: eu.algites.tool.codegen
+        ArtifactId: pub.tool.General_generators.code.sdocodegen.impl
+        Usages: [product_implementation]
+        VersionRequirement:
+          Exact: "1.1-SNAPSHOT"
       - GroupId: eu.algites.lib.naming
         ArtifactId: pub.lib.General_naming.convention.coreimpl
         Usages: [product_implementation]

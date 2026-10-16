@@ -1,144 +1,122 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 from eu.algites.frmw.aac.core.schemas.registry import AIcSchemaRegistry
 from eu.algites.tool.codegen.defs.ain_definition_kind import AInDefinitionKind
-from eu.algites.tool.codegen.defs.ain_value_kind import AInValueKind
+from eu.algites.tool.codegen.defs.aic_generation_names import AIcGenerationNames
 
-from .aic_general_defs_inline_dto_adapter import AIcGeneralDefsInlineDtoAdapter
-
-
-def _python_type(prop) -> str:
-    if prop.reference is not None:
-        result = "object"
-    elif prop.value_kind is AInValueKind.STRING:
-        result = "str"
-    elif prop.value_kind is AInValueKind.INTEGER:
-        result = "int"
-    elif prop.value_kind is AInValueKind.NUMBER:
-        result = "float"
-    elif prop.value_kind is AInValueKind.BOOLEAN:
-        result = "bool"
-    elif prop.value_kind is AInValueKind.ARRAY:
-        item_type = {
-            AInValueKind.STRING: "str",
-            AInValueKind.INTEGER: "int",
-            AInValueKind.NUMBER: "float",
-            AInValueKind.BOOLEAN: "bool",
-        }.get(prop.item_value_kind, "object")
-        result = f"tuple[{item_type}, ...]"
-    elif prop.value_kind is AInValueKind.OBJECT:
-        result = "Mapping[str, object]"
-    else:
-        result = "object"
-    return f"{result} | None" if prop.nullable else result
+from .aic_aac_schema_type_generator import AIcAacSchemaTypeGenerator
 
 
 def _doc(value: str | None, fallback: str) -> str:
-    return " ".join((value or fallback).replace('"""', '\\"\\"\\"').split())
+    return " ".join((value or fallback).replace('"""', '\"\"\"').split())
+
+
+@dataclass(frozen=True, slots=True)
+class AIcdAacGeneratedDataEntitySources:
+    """Data Entity specialization plus its ordinary General-generated schema units."""
+
+    binding_source: str
+    schema_sources: tuple[object, ...]
 
 
 class AIcPythonDataEntityBindingGenerator:
-    """Generate an AAC Data Entity view and codec over the shared canonical-definition model.
+    """Generate only AAC-specific mutable views/codecs over standard General AIig types.
 
-    JSON definition parsing, definition identity, property normalization, and naming are delegated
-    to ``pub.tool.General``. Only the versioned Data Entity view and codec semantics remain AAC-
-    specific here.
+    Property identity, getters, canonical metadata and DTO rendering remain in
+    pub.tool.General. This adds just the versioned mutation contract and codec.
     """
 
     def __init__(self, schemas: AIcSchemaRegistry) -> None:
         self.schemas = schemas
-        self._defs = AIcGeneralDefsInlineDtoAdapter()
+        self._schema_types = AIcAacSchemaTypeGenerator()
 
     def generate(self, schema_id: str, version: int) -> str:
+        return self.generate_sources(schema_id, version).binding_source
+
+    def generate_sources(self, schema_id: str, version: int) -> AIcdAacGeneratedDataEntitySources:
         registered = self.schemas.get_identity(schema_id, version)
-        definition = self._defs.normalize(registered)
-        if definition.kind is not AInDefinitionKind.OBJECT:
-            raise ValueError("Data Entity view generation requires an object JSON definition")
-        interface_name = self._defs.interface_type_name(definition)
-        version_suffix = f"_{version}"
-        interface_stem = interface_name[len("AIig"):-len(version_suffix)] if interface_name.endswith(version_suffix) else interface_name[len("AIig"):]
-        codec_name = f"AIcg{interface_stem}Codec_{version}"
-        definition_doc = _doc(
-            definition.description,
-            f"Generated Data Entity view for canonical definition {schema_id}/{version}.",
-        )
+        generated = self._schema_types.generate(registered)
+        definition = generated.definition
+        if definition.kind is not AInDefinitionKind.OBJECT or generated.implementation is None:
+            raise ValueError('Data Entity view generation requires an object JSON definition')
+        base = generated.contract.primary_type
+        if base.source_definition_id != schema_id or base.source_definition_version != version:
+            raise ValueError('Canonical schema type identity mismatch')
+        base_name = base.type_name
+        stem = base_name[len('AIig'):-len(f'_{version}')] if base_name.endswith(f'_{version}') else base_name[len('AIig'):]
+        view_name = f'AIig{stem}DataEntityView_{version}'
+        codec_name = f'AIcg{stem}Codec_{version}'
         lines = [
-            "from __future__ import annotations",
-            "",
-            "from abc import abstractmethod",
-            "from typing import Mapping",
-            "from eu.algites.frmw.aac.core.dataentity.api import AIcDataEntityType, AIiDataEntityCodec, AIiDataEntityView",
-            "",
-            f"class {interface_name}(AIiDataEntityView):",
-            f'    """{definition_doc}',
-            "",
-            f"    Generated from canonical definition {schema_id}/{version}. Source: {registered.resource_name}. Do not edit manually.",
+            'from __future__ import annotations',
+            '',
+            'from abc import abstractmethod',
+            'from typing import Mapping',
+            f'from {base.module_name} import {base_name}',
+            'from eu.algites.frmw.aac.core.dataentity.api import AIcDataEntityType, AIiDataEntityCodec, AIiDataEntityView',
+            '',
+            f'class {view_name}({base_name}, AIiDataEntityView):',
+            f'    """AAC mutable view of the canonical General contract {schema_id}/{version}.',
+            '',
+            f'    {_doc(definition.description, "Generated Data Entity view.")}',
             '    """',
-            f"    __aac_source_id__ = {schema_id!r}",
-            f"    __aac_source_version__ = {version}",
-            f"    __aac_source_resource__ = {registered.resource_name!r}",
-            "",
+            f'    __aac_source_id__ = {schema_id!r}',
+            f'    __aac_source_version__ = {version}',
+            f'    __aac_source_resource__ = {registered.resource_name!r}',
+            '',
         ]
-        if not definition.properties:
-            lines.append("    pass")
+        name_helper = AIcGenerationNames()
         for prop in definition.properties:
-            constant = self._defs.schema_field_name_constant(prop.source_name)
-            lines.append(f"    {constant} = {prop.source_name!r}")
-        if definition.properties:
-            lines.append("")
-        for prop in definition.properties:
-            name = self._defs.property_name(prop.source_name)
-            value_type = _python_type(prop)
-            if not prop.required and "None" not in value_type:
-                value_type += " | None"
-            property_doc = _doc(prop.description, f"Canonical property {prop.source_name}.")
+            # Canonical getters and field constants are inherited from base AIig.
+            name = name_helper.property_name(prop.source_name, self._schema_types.profile)
             lines.extend([
-                "    @abstractmethod",
-                f"    def get_{name}_{version}(self) -> {value_type}:",
-                f'        """Return {property_doc}"""',
-                "        ...",
-                "",
-                "    @abstractmethod",
-                f"    def set_{name}_{version}(self, value: {value_type}) -> None:",
-                f'        """Set {property_doc}"""',
-                "        ...",
-                "",
+                '    @abstractmethod',
+                f'    def set_{name}_{version}(self, value: object) -> None:',
+                f'        """Update {_doc(prop.description, prop.source_name)}"""',
+                '        ...',
+                '',
             ])
         lines.extend([
-            f"class {codec_name}(AIiDataEntityCodec[{interface_name}]):",
-            f"    schema_id = {schema_id!r}",
-            f"    schema_version = {version}",
-            f"    view_type = {interface_name}",
-            "",
-            f"    def serialize(self, value: {interface_name}) -> Mapping[str, object]:",
-            "        result: dict[str, object] = {}",
+            '    def to_mapping(self) -> Mapping[str, object]:',
+            f'        return {codec_name}().serialize(self)',
+            '',
+            f'class {codec_name}(AIiDataEntityCodec[{view_name}]):',
+            f'    schema_id = {schema_id!r}',
+            f'    schema_version = {version}',
+            f'    view_type = {view_name}',
+            '',
+            f'    def serialize(self, value: {view_name}) -> Mapping[str, object]:',
+            '        result: dict[str, object] = {}',
         ])
         for prop in definition.properties:
-            name = self._defs.property_name(prop.source_name)
-            field = f"{interface_name}.{self._defs.schema_field_name_constant(prop.source_name)}"
+            name = name_helper.property_name(prop.source_name, self._schema_types.profile)
+            suffix = name[0].upper() + name[1:]
+            constant = name_helper.schema_field_name_constant(prop.source_name, self._schema_types.profile)
+            field = f'{view_name}.{constant}'
             if prop.required:
-                lines.append(f"        result[{field}] = value.get_{name}_{version}()")
+                lines.append(f'        result[{field}] = value.get{suffix}()')
             else:
                 lines.extend([
-                    f"        value_{name} = value.get_{name}_{version}()",
-                    f"        if value_{name} is not None:",
-                    f"            result[{field}] = value_{name}",
+                    f'        value_{name} = value.get{suffix}()',
+                    f'        if value_{name} is not None:',
+                    f'            result[{field}] = value_{name}',
                 ])
         lines.extend([
-            "        return result",
-            "",
-            f"    def deserialize_into(self, payload: Mapping[str, object], target: {interface_name}) -> None:",
+            '        return result',
+            '',
+            f'    def deserialize_into(self, payload: Mapping[str, object], target: {view_name}) -> None:',
         ])
-        if definition.properties:
-            for prop in definition.properties:
-                name = self._defs.property_name(prop.source_name)
-                field = f"{interface_name}.{self._defs.schema_field_name_constant(prop.source_name)}"
-                lines.append(f"        target.set_{name}_{version}(payload.get({field}))")
-        else:
-            lines.append("        return None")
+        for prop in definition.properties:
+            name = name_helper.property_name(prop.source_name, self._schema_types.profile)
+            constant = name_helper.schema_field_name_constant(prop.source_name, self._schema_types.profile)
+            lines.append(f'        target.set_{name}_{version}(payload.get({view_name}.{constant}))')
+        if not definition.properties:
+            lines.append('        return None')
         lines.extend([
-            "",
-            f"{interface_name}.TYPE = AIcDataEntityType({schema_id!r}, {version}, {interface_name})",
-            "",
+            '',
+            f'{view_name}.TYPE = AIcDataEntityType({schema_id!r}, {version}, {view_name})',
+            '',
         ])
-        return "\n".join(lines)
+        return AIcdAacGeneratedDataEntitySources(
+            "\n".join(lines), (generated.contract, generated.mutable_interface, generated.implementation))

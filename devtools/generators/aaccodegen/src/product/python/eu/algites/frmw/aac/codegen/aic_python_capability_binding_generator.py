@@ -4,7 +4,9 @@ import re
 from eu.algites.frmw.aac.core.capability.api import AIcCapabilityContract, AInCapabilityOperationInteractionKind
 from eu.algites.frmw.aac.core.schemas.registry import AIcSchemaRegistry
 
-from .aic_general_defs_inline_dto_adapter import AIcGeneralDefsInlineDtoAdapter
+from .aic_aac_schema_type_generator import AIcAacSchemaTypeGenerator
+from eu.algites.tool.codegen.defs.ain_defs_name_role import AInDefsNameRole
+from dataclasses import dataclass
 
 def _pascal(value: str) -> str:
     parts = [part for part in re.split(r"[^A-Za-z0-9]+", value) if part]
@@ -19,6 +21,14 @@ def _identifier(value: str) -> str:
         candidate += "_"
     return candidate
 
+@dataclass(frozen=True, slots=True)
+class AIcdAacGeneratedCapabilitySources:
+    """Binding source and self-contained standalone canonical schema source files."""
+
+    binding_source: str
+    schema_sources: tuple[object, ...]
+
+
 class AIcPythonCapabilityBindingGenerator:
     """Generate Python provider/caller bindings from one canonical capability contract.
 
@@ -29,7 +39,7 @@ class AIcPythonCapabilityBindingGenerator:
 
     def __init__(self, schemas: AIcSchemaRegistry) -> None:
         self.schemas = schemas
-        self._dto_generator = AIcGeneralDefsInlineDtoAdapter()
+        self._schema_types = AIcAacSchemaTypeGenerator()
 
     @staticmethod
     def _exception_stem(contract: AIcCapabilityContract, operation_id: str) -> str:
@@ -39,6 +49,12 @@ class AIcPythonCapabilityBindingGenerator:
         return capability_stem + _pascal(operation_id)
 
     def generate(self, contract: AIcCapabilityContract, *, canonical_resource: str | None = None) -> str:
+        """Generate only AAC binding code; schema units are emitted by generate_sources."""
+        return self.generate_sources(contract, canonical_resource=canonical_resource).binding_source
+
+    def generate_sources(self, contract: AIcCapabilityContract,
+                         *, canonical_resource: str | None = None) -> AIcdAacGeneratedCapabilitySources:
+        """Generate AAC binding plus reusable, separately importable General data types."""
         capability_stem = _pascal(contract.capability.id.split(".")[-1])
         interface_name = f"AIig{capability_stem}_{contract.capability.version}"
         caller_name = f"AIcg{capability_stem}Caller_{contract.capability.version}"
@@ -57,35 +73,43 @@ class AIcPythonCapabilityBindingGenerator:
             ")",
             "",
         ]
-        dto_by_identity: dict[tuple[str, int], str] = {}
         dto_by_operation_kind: dict[tuple[str, AInCapabilityOperationInteractionKind], str] = {}
-        identity_by_dto_name: dict[str, tuple[str, int]] = {}
-        emitted_schema_types: set[tuple[str, int]] = set()
-        shared_dto_runtime: str | None = None
+        dto_imports: dict[str, str] = {}
+        source_by_path: dict[str, object] = {}
+        identity_by_qualified_name: dict[str, tuple[str, int]] = {}
+        emitted: set[tuple[str, int]] = set()
         for operation in contract.operations:
             for interaction in operation.interactions:
                 registered = self.schemas.get_identity(interaction.schema.id, interaction.schema.version)
                 schema_identity = (registered.id, registered.version)
-                generated_name, runtime_source, generated_source = self._dto_generator.generate_with_runtime(registered)
-                class_name = generated_name
-                existing_identity = identity_by_dto_name.get(class_name)
-                if existing_identity is not None and existing_identity != schema_identity:
-                    raise ValueError(
-                        f"generated DTO name collision {class_name!r} for schemas "
-                        f"{existing_identity[0]}/{existing_identity[1]} and {registered.id}/{registered.version}; "
-                        "rename one canonical definition or introduce an explicit naming rule before generation"
-                    )
-                identity_by_dto_name[class_name] = schema_identity
-                dto_by_identity[schema_identity] = class_name
-                dto_by_operation_kind[(operation.id, interaction.kind)] = class_name
-                if schema_identity not in emitted_schema_types:
-                    if shared_dto_runtime is None:
-                        chunks.extend([runtime_source, ""])
-                        shared_dto_runtime = runtime_source
-                    elif shared_dto_runtime != runtime_source:
-                        raise ValueError("AAC inline DTOs require one consistent shared codegen runtime")
-                    chunks.extend([generated_source, ""])
-                    emitted_schema_types.add(schema_identity)
+                if schema_identity not in emitted:
+                    generated = self._schema_types.generate(registered)
+                    for unit in (generated.contract, generated.mutable_interface, generated.implementation):
+                        if unit is None:
+                            continue
+                        identity = unit.primary_type
+                        if identity.source_definition_id != registered.id or identity.source_definition_version != registered.version:
+                            raise ValueError(f'Canonical type identity mismatch for {registered.id}/{registered.version}')
+                        prior = identity_by_qualified_name.get(identity.fully_qualified_type_name)
+                        if prior is not None and prior != schema_identity:
+                            raise ValueError(f'generated DTO name collision {identity.fully_qualified_type_name!r} for schemas '
+                                             f'{prior[0]}/{prior[1]} and {registered.id}/{registered.version}')
+                        identity_by_qualified_name[identity.fully_qualified_type_name] = schema_identity
+                        source_by_path[unit.relative_path] = unit
+                        if identity.type_role in ("SMART_DATA_OBJECT_TYPE", AInDefsNameRole.ENUM_TYPE):
+                            dto_imports[identity.type_name] = identity.module_name
+                    emitted.add(schema_identity)
+                # This lookup is deliberately driven by metadata, never by source text.
+                data_units = [unit for unit in source_by_path.values()
+                              if unit.primary_type.source_definition_id == registered.id
+                              and unit.primary_type.source_definition_version == registered.version
+                              and unit.primary_type.type_role in ("SMART_DATA_OBJECT_TYPE", AInDefsNameRole.ENUM_TYPE)]
+                if len(data_units) != 1:
+                    raise ValueError(f'Canonical DTO for {registered.id}/{registered.version} is missing or ambiguous')
+                dto_by_operation_kind[(operation.id, interaction.kind)] = data_units[0].type_name
+        for type_name, module in sorted(dto_imports.items()):
+            chunks.append(f'from {module} import {type_name}')
+        chunks.append('')
 
         exception_by_operation: dict[str, str] = {}
         factory_by_operation: dict[str, str] = {}
@@ -222,4 +246,4 @@ class AIcPythonCapabilityBindingGenerator:
             else:
                 chunks.append("        return AIcOperationCompletion(completion.state)")
             chunks.append("")
-        return "\n".join(chunks)
+        return AIcdAacGeneratedCapabilitySources("\n".join(chunks), tuple(source_by_path.values()))

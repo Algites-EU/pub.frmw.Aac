@@ -94,7 +94,8 @@ def test_builtin_data_storage_contracts_generate_python_bindings():
         "_AAC.data-entity.retire-storage-support",
     )
     for capability_id in capability_ids:
-        source = generator.generate(catalog.get(capability_id, 1))
-        namespace = {}
-        exec(source, namespace)
-        assert any(name.startswith("AIig") for name in namespace)
+        generated = generator.generate_sources(catalog.get(capability_id, 1))
+        import ast
+        ast.parse(generated.binding_source)
+        assert 'class AIig' in generated.binding_source
+        assert all(unit.primary_type.fully_qualified_type_name for unit in generated.schema_sources)
