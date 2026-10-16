@@ -14,7 +14,7 @@ from eu.algites.frmw.aac.core.entitlement.api import AIcEntitlementContext
 from eu.algites.frmw.aac.core.configuration.api import AInConfigurationTargetKind, AIcConfigurationTarget, AIcEffectiveConfiguration
 from eu.algites.frmw.aac.core.invocation.api import (
     AInOperationInteractionEventType, AInOperationInteractionSeverity, AInStateResultDeliveryMode,
-    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCaller, AIcInvocationInput, AIcInvocationOutput,
+    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCallerOnProvider, AIcInvocationInput, AIcInvocationOutput,
     AIcOperationInteractionEvent, AIcOperationInteractionFeatures, current_operation_interaction,
 )
 from eu.algites.frmw.aac.core.presentation.api import AIcDisplayText

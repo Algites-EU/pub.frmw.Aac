@@ -13,9 +13,11 @@ from eu.algites.frmw.aac.core.invocation.api import (
     AIcOperationInteractionEvent,
     AIcOperationInteractionFeatures,
     AIcOperationInteractionProviderToCallerMessage,
-    AIiOperationInteractionCallerToProvider,
+    AIiOperationInteractionCallerToProviderOnCaller,
     AIiOperationFailureExceptionFactory,
     AIxCapabilityOperationFailed,
 )
 
 from .aic_operation_interaction_controller import AIcOperationInteractionController
+
+from .aic_operation_interaction_reliable_transport import (AIcOperationInteractionReliableProviderTransport, AIcOperationInteractionReliableCallerTransport)

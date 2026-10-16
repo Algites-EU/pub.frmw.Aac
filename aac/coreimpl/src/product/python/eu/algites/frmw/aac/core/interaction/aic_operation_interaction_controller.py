@@ -1,10 +1,21 @@
 from __future__ import annotations
 import copy
+from datetime import datetime, timezone
 from dataclasses import replace
 from threading import Condition, RLock
 from typing import Callable
+from eu.algites.frmw.aac.core.presentation.api import AIcDisplayText
 from eu.algites.frmw.aac.core.invocation.api import (
     AInOperationExecutionState,
+    AInOperationCancellationReason,
+    AIcOperationCancellationReasonRecord,
+    AIcOperationCancellationAcceptance,
+    AIcOperationInteractionDeliveryBuffer,
+    accept_cancellation_locally,
+    AIiOperationInteractionCallerToProviderOnProvider,
+    AIiOperationInteractionCoreControl,
+    AIiOperationInteractionProviderToCallerOnProvider,
+    AIiOperationInteractionProviderToCallerOnCaller,
     AInOperationInteractionDetailLevel,
     AInOperationInteractionFailureDetailLevel,
     AInOperationInteractionMode,
@@ -13,21 +24,23 @@ from eu.algites.frmw.aac.core.invocation.api import (
     AIcOperationInteractionEvent,
     AIcOperationInteractionFeatures,
     AIcOperationInteractionProviderToCallerMessage,
-    AIiOperationInteractionCallerToProvider,
+    AIiOperationInteractionCallerToProviderOnCaller,
     AIiOperationFailureExceptionFactory,
     AIxCapabilityOperationFailed,
 )
 
-class AIcOperationInteractionController(AIiOperationInteractionCallerToProvider):
+class AIcOperationInteractionController(AIiOperationInteractionCallerToProviderOnCaller, AIiOperationInteractionCallerToProviderOnProvider, AIiOperationInteractionProviderToCallerOnProvider, AIiOperationInteractionProviderToCallerOnCaller, AIiOperationInteractionCoreControl):
     """Thread-safe caller controller and provider interaction endpoint for one invocation."""
 
     def __init__(
         self,
-        listener: Callable[[AIcOperationInteractionProviderToCallerMessage], None] | None = None,
+        listener: Callable[[tuple[AIcOperationInteractionProviderToCallerMessage, ...]], None] | None = None,
         *,
+        delivery_buffer: AIcOperationInteractionDeliveryBuffer | None = None,
         caller_state: AIcOperationInteractionCallerToProviderMessage | None = None,
     ) -> None:
         self._listener = listener
+        self._delivery_buffer = delivery_buffer
         self._exception_factory: AIiOperationFailureExceptionFactory | None = None
         self._caller_state = caller_state or AIcOperationInteractionCallerToProviderMessage()
         self._features = AIcOperationInteractionFeatures()
@@ -36,12 +49,53 @@ class AIcOperationInteractionController(AIiOperationInteractionCallerToProvider)
         self._interaction_revision = 0
         self._state_result_revision = 0
         self._last_message = AIcOperationInteractionProviderToCallerMessage()
+        self._cancellation_acceptance: AIcOperationCancellationAcceptance | None = None
         self._terminal_state_result: object | None = None
         self._terminal_state_result_revision: int | None = None
         self._always_complete_state_result: object | None = None
         self._always_complete_state_result_revision: int | None = None
         self._lock = RLock()
         self._condition = Condition(self._lock)
+
+    def send_message(self, message: AIcOperationInteractionCallerToProviderMessage | AIcOperationInteractionProviderToCallerMessage) -> None:
+        """Explicit message publication on the corresponding endpoint.
+
+        In-process controller implements both directional endpoints. In a remote
+        deployment distinct bound endpoint adapters separate the two call sites.
+        """
+        if isinstance(message, AIcOperationInteractionCallerToProviderMessage):
+            self.receive_message(message)
+        elif isinstance(message, AIcOperationInteractionProviderToCallerMessage):
+            with self._lock:
+                self._interaction_revision += 1
+                publication = replace(message, interaction_revision=self._interaction_revision,
+                    published_at=datetime.now(timezone.utc))
+                self._last_message = publication
+                if self._delivery_buffer is not None:
+                    self._delivery_buffer.enqueue(publication)
+                if self._listener is not None:
+                    try:
+                        self._listener((copy.deepcopy(publication),))
+                    except Exception:
+                        pass
+        else:
+            raise TypeError("unsupported interaction message type")
+
+    def receive_message(self, message: AIcOperationInteractionCallerToProviderMessage) -> AIcOperationInteractionProviderToCallerMessage | None:
+        """Accept latest delivered C2P state; stale or duplicated revisions have no effect.
+
+        No implicit response: a concrete provider can override this method and
+        return one P2C message, which its transport appends after queued ones.
+        """
+        if not isinstance(message, AIcOperationInteractionCallerToProviderMessage):
+            raise TypeError("expected caller-to-provider message")
+        with self._lock:
+            if message.caller_interaction_revision <= self._caller_state.caller_interaction_revision:
+                return None
+            if self._cancellation_acceptance is not None:
+                message = replace(message, cancellation_schedule=self._caller_state.cancellation_schedule)
+            self._caller_state = message
+        return None
 
     def set_exception_factory(self, factory: AIiOperationFailureExceptionFactory | None) -> None:
         with self._lock:
@@ -127,6 +181,61 @@ class AIcOperationInteractionController(AIiOperationInteractionCallerToProvider)
         with self._lock:
             return self._caller_state
 
+    def accept_cancellation(self, reasons: frozenset[str]) -> AIcOperationCancellationAcceptance:
+        """Provider-local acceptance; no caller/controller round-trip in this path."""
+        with self._lock:
+            if self._cancellation_acceptance is not None:
+                return self._cancellation_acceptance
+            acceptance = accept_cancellation_locally(self._caller_state, reasons)
+            self._cancellation_acceptance = acceptance
+            self._publish_locked()
+            return acceptance
+
+    def record_cancellation_acceptance(self, acceptance: AIcOperationCancellationAcceptance) -> None:
+        """Ingest asynchronously reported evidence from an isolated provider."""
+        with self._lock:
+            if self._cancellation_acceptance is None:
+                self._cancellation_acceptance = acceptance
+                self._publish_locked()
+            elif self._cancellation_acceptance != acceptance:
+                raise ValueError("cancellation was already accepted using another snapshot")
+
+    def _change_caller_state_locked(self, **changes) -> AIcOperationInteractionCallerToProviderMessage:
+        self._caller_state = replace(
+            self._caller_state,
+            caller_interaction_revision=self._caller_state.caller_interaction_revision + 1,
+            **changes,
+        )
+        return self._caller_state
+
+    def receive_messages(self, messages: tuple[AIcOperationInteractionProviderToCallerMessage, ...]) -> None:
+        """Caller-side batch entrypoint: process EVERY publication before notifying host once."""
+        if not messages:
+            return
+        copied = copy.deepcopy(tuple(messages))
+        with self._lock:
+            last_revision = self._last_message.interaction_revision
+            for message in copied:
+                if message.interaction_revision <= last_revision:
+                    raise ValueError("stale or out-of-order provider-to-caller interaction revision")
+                last_revision = message.interaction_revision
+            before = (self._last_message, self._interaction_revision, self._cancellation_acceptance)
+            self._last_message = copied[-1]
+            self._interaction_revision = last_revision
+            if copied[-1].cancellation_acceptance is not None:
+                self._cancellation_acceptance = copied[-1].cancellation_acceptance
+            listener = self._listener
+        if listener is not None:
+            try:
+                listener(copied)
+            except BaseException:
+                # The transport will redeliver the full unacknowledged batch.
+                # Host-side effects must be idempotent by message revision.
+                with self._lock:
+                    if self._interaction_revision == last_revision:
+                        self._last_message, self._interaction_revision, self._cancellation_acceptance = before
+                raise
+
     def provider_snapshot(self) -> AIcOperationInteractionProviderToCallerMessage:
         with self._lock:
             if self._terminal_state_result_revision is not None:
@@ -138,24 +247,92 @@ class AIcOperationInteractionController(AIiOperationInteractionCallerToProvider)
                 )
             return replace(self._last_message, events=(), state_result=copy.deepcopy(self._last_message.state_result))
 
-    def request_cancellation(self) -> AIcOperationInteractionCallerToProviderMessage:
+    def schedule_cancellation(
+        self, deadline: datetime, *, message: AIcDisplayText | None = None,
+        origin: str | None = None,
+    ) -> AIcOperationInteractionCallerToProviderMessage:
+        if not isinstance(deadline, datetime) or deadline.tzinfo is None or deadline.utcoffset() is None:
+            raise ValueError("cancellation deadline must be timezone-aware")
         with self._lock:
-            if not self._features.cancellation:
+            if self._cancellation_acceptance is not None:
+                return self._caller_state  # No effective changes after provider acceptance.
+            if self._features_declared and not self._features.cancellation:
                 raise ValueError("operation does not declare cancellation support")
-            self._caller_state = replace(self._caller_state, cancellation_requested=True)
-            return self._caller_state
+            reason = AInOperationCancellationReason.CALLER_REQUEST.value
+            now = datetime.now(timezone.utc)
+            schedule = dict(self._caller_state.cancellation_schedule)
+            previous = schedule.get(reason)
+            schedule[reason] = AIcOperationCancellationReasonRecord(
+                reason=reason, current_deadline=deadline,
+                first_requested_at=previous.first_requested_at if previous else now,
+                last_requested_at=now,
+                request_count=(previous.request_count + 1 if previous else 1),
+                last_message=message, last_origin=origin,
+            )
+            return self._change_caller_state_locked(cancellation_schedule=schedule)
+
+    def cancel_now(self, *, message: AIcDisplayText | None = None,
+                   origin: str | None = None) -> AIcOperationInteractionCallerToProviderMessage:
+        return self.schedule_cancellation(datetime.now(timezone.utc), message=message, origin=origin)
+
+    def request_cancellation(self) -> AIcOperationInteractionCallerToProviderMessage:
+        return self.cancel_now()
+
+    def withdraw_cancellation(self) -> AIcOperationInteractionCallerToProviderMessage:
+        with self._lock:
+            if self._cancellation_acceptance is not None:
+                return self._caller_state
+            schedule = dict(self._caller_state.cancellation_schedule)
+            reason = AInOperationCancellationReason.CALLER_REQUEST.value
+            if reason not in schedule:
+                return self._caller_state
+            del schedule[reason]
+            return self._change_caller_state_locked(cancellation_schedule=schedule)
+
+    def schedule_framework_cancellation(
+        self, reason: AInOperationCancellationReason, deadline: datetime, *,
+        message: AIcDisplayText | None = None, origin: str | None = None,
+    ) -> AIcOperationInteractionCallerToProviderMessage:
+        """Core-only entrypoint; not exposed on the caller-facing interface."""
+        if not isinstance(reason, AInOperationCancellationReason) or reason is AInOperationCancellationReason.CALLER_REQUEST:
+            raise ValueError("use caller cancellation API for CALLER_REQUEST")
+        if not isinstance(deadline, datetime) or deadline.tzinfo is None or deadline.utcoffset() is None:
+            raise ValueError("cancellation deadline must be timezone-aware")
+        with self._lock:
+            if self._cancellation_acceptance is not None:
+                return self._caller_state
+            now = datetime.now(timezone.utc)
+            schedule = dict(self._caller_state.cancellation_schedule)
+            previous = schedule.get(reason.value)
+            schedule[reason.value] = AIcOperationCancellationReasonRecord(
+                reason=reason.value, current_deadline=deadline,
+                first_requested_at=previous.first_requested_at if previous else now,
+                last_requested_at=now, request_count=(previous.request_count + 1 if previous else 1),
+                last_message=message, last_origin=origin,
+            )
+            return self._change_caller_state_locked(cancellation_schedule=schedule)
+
+    def withdraw_framework_cancellation(self, reason: AInOperationCancellationReason) -> AIcOperationInteractionCallerToProviderMessage:
+        if not isinstance(reason, AInOperationCancellationReason) or reason is AInOperationCancellationReason.CALLER_REQUEST:
+            raise ValueError("framework cancellation withdrawal requires framework-owned reason")
+        with self._lock:
+            if self._cancellation_acceptance is not None:
+                return self._caller_state
+            schedule = dict(self._caller_state.cancellation_schedule)
+            if reason.value not in schedule:
+                return self._caller_state
+            del schedule[reason.value]
+            return self._change_caller_state_locked(cancellation_schedule=schedule)
 
     def set_interaction_mode(self, mode: AInOperationInteractionMode) -> AIcOperationInteractionCallerToProviderMessage:
         with self._lock:
-            self._caller_state = replace(self._caller_state, interaction_mode=mode)
-            return self._caller_state
+            return self._change_caller_state_locked(interaction_mode=mode)
 
     def set_detail_level(self, level: AInOperationInteractionDetailLevel) -> AIcOperationInteractionCallerToProviderMessage:
         with self._lock:
             if not self._features.detail_level:
                 raise ValueError("operation does not declare adjustable detail-level support")
-            self._caller_state = replace(self._caller_state, detail_level=level)
-            return self._caller_state
+            return self._change_caller_state_locked(detail_level=level)
 
     def set_reporting_interval_ms(self, value: int | None) -> AIcOperationInteractionCallerToProviderMessage:
         if value is not None and value < 0:
@@ -163,15 +340,13 @@ class AIcOperationInteractionController(AIiOperationInteractionCallerToProvider)
         with self._lock:
             if not self._features.reporting_interval:
                 raise ValueError("operation does not declare adjustable reporting-interval support")
-            self._caller_state = replace(self._caller_state, reporting_interval_ms=value)
-            return self._caller_state
+            return self._change_caller_state_locked(reporting_interval_ms=value)
 
     def set_failure_detail_level(
         self, level: AInOperationInteractionFailureDetailLevel
     ) -> AIcOperationInteractionCallerToProviderMessage:
         with self._lock:
-            self._caller_state = replace(self._caller_state, failure_detail_level=level)
-            return self._caller_state
+            return self._change_caller_state_locked(failure_detail_level=level)
 
     def set_state_result_delivery_mode(
         self, mode: AInStateResultDeliveryMode
@@ -179,16 +354,13 @@ class AIcOperationInteractionController(AIiOperationInteractionCallerToProvider)
         with self._lock:
             if self._features_declared and mode not in self._features.supported_state_result_delivery_modes:
                 raise ValueError(f"operation does not support state-result delivery mode {mode.value}")
-            self._caller_state = replace(self._caller_state, state_result_delivery_mode=mode)
-            return self._caller_state
+            return self._change_caller_state_locked(state_result_delivery_mode=mode)
 
     def request_state_result(self) -> AIcOperationInteractionCallerToProviderMessage:
         with self._lock:
-            self._caller_state = replace(
-                self._caller_state,
+            return self._change_caller_state_locked(
                 state_result_request_id=self._caller_state.state_result_request_id + 1,
             )
-            return self._caller_state
 
     def accept_state_result_revision(self, revision: int) -> AIcOperationInteractionCallerToProviderMessage:
         with self._lock:
@@ -196,8 +368,7 @@ class AIcOperationInteractionController(AIiOperationInteractionCallerToProvider)
                 raise ValueError("last accepted state-result revision cannot move backwards")
             if revision > self._state_result_revision:
                 raise ValueError("cannot accept a state-result revision that has not been published")
-            self._caller_state = replace(self._caller_state, last_accepted_state_result_revision=revision)
-            return self._caller_state
+            return self._change_caller_state_locked(last_accepted_state_result_revision=revision)
 
     def wait_for_terminal_state(self, timeout: float | None = None) -> AIcOperationInteractionProviderToCallerMessage:
         with self._condition:
@@ -291,11 +462,15 @@ class AIcOperationInteractionController(AIiOperationInteractionCallerToProvider)
             state_result=state_result,
             events=events,
             features=self._features,
+            published_at=datetime.now(timezone.utc),
+            cancellation_acceptance=self._cancellation_acceptance,
         )
         self._last_message = message
+        if self._delivery_buffer is not None:
+            self._delivery_buffer.enqueue(message)
         listener = self._listener
         if listener is not None:
             try:
-                listener(copy.deepcopy(message))
+                listener((copy.deepcopy(message),))
             except Exception:
                 return None

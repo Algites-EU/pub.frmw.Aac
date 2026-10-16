@@ -52,7 +52,7 @@ class AIcPythonCapabilityBindingGenerator:
             "from eu.algites.frmw.aac.core.invocation.api import (",
             "    AInOperationCompletionState, AIcOperationCompletion, AIcOperationFailure,",
             "    AIiCapabilityHandle, AIiOperationFailureExceptionFactory,",
-            "    AIiOperationInteractionCallerToProvider, AIiOperationInteractionProviderToCaller,",
+            "    AIiOperationInteractionCallerToProviderOnCaller, AIiOperationInteractionProviderToCallerOnProvider, AIcOperationInteractionCallerToProviderMessage,",
             "    AIxCapabilityOperationFailed, current_operation_interaction,",
             ")",
             "",
@@ -142,11 +142,11 @@ class AIcPythonCapabilityBindingGenerator:
             chunks.append("    @abstractmethod")
             if input_name:
                 chunks.append(
-                    f"    def {_identifier(operation.id)}_{contract.capability.version}(self, request: {input_name}, interaction: AIiOperationInteractionProviderToCaller) -> {return_name}: ..."
+                    f"    def {_identifier(operation.id)}_{contract.capability.version}(self, request: {input_name}, interaction: AIiOperationInteractionProviderToCallerOnProvider) -> {return_name}: ..."
                 )
             else:
                 chunks.append(
-                    f"    def {_identifier(operation.id)}_{contract.capability.version}(self, interaction: AIiOperationInteractionProviderToCaller) -> {return_name}: ..."
+                    f"    def {_identifier(operation.id)}_{contract.capability.version}(self, interaction: AIiOperationInteractionProviderToCallerOnProvider) -> {return_name}: ..."
                 )
             chunks.append("")
         chunks.append("    def __aac_invoke__(self, operation_id: str, arguments: Mapping[str, object]):")
@@ -182,7 +182,7 @@ class AIcPythonCapabilityBindingGenerator:
             args = []
             if input_name:
                 args.append(f"request: {input_name}")
-            args.append(f"interaction: AIiOperationInteractionCallerToProvider[{exception_name}] | None = None")
+            args.append(f"interaction: AIiOperationInteractionCallerToProviderOnCaller[{exception_name}, AIcOperationInteractionCallerToProviderMessage] | None = None")
             signature = ", ".join(args)
             chunks.append(
                 f"    def {method_name}(self, {signature}) -> AIcOperationCompletion[{success_type}, {cancelled_type}]:"

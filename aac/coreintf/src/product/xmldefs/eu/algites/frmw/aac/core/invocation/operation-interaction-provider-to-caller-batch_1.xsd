@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-batch_1.xsd" elementFormDefault="qualified"><xs:element name="OperationInteractionProviderToCallerBatch"><xs:complexType><xs:sequence><xs:element name="Messages" minOccurs="1" maxOccurs="unbounded" type="xs:anyType" /></xs:sequence></xs:complexType></xs:element></xs:schema>

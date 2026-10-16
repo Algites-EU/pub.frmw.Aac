@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 from typing import Callable, Mapping
 from ..instances.api import AIcBinding
 from .interaction import (
-    AIcOperationFailure, AIiOperationFailureExceptionFactory, AIiOperationInteractionProviderToCaller,
-    AIiOperationInteractionCallerToProvider, AIxCapabilityOperationFailed,
+    AIcOperationFailure, AIiOperationFailureExceptionFactory, AIiOperationInteractionProviderToCallerOnProvider,
+    AIiOperationInteractionCallerToProviderOnCaller, AIxCapabilityOperationFailed,
 )
 from .models import AInOperationCompletionState, AIcInvocationOutput, AIcOperationCompletion
 
@@ -19,22 +19,22 @@ class AIiCapabilityHandle(ABC):
     def invoke(
         self, operation_id: str, arguments: Mapping[str, object] | None = None, *,
         operation_parameters: Mapping[str, object] | None = None,
-        operation_interaction: AIiOperationInteractionProviderToCaller | None = None,
+        operation_interaction: AIiOperationInteractionProviderToCallerOnProvider | None = None,
         locale: str | None = None,
     ) -> AIcInvocationOutput: ...
 
 
     def new_operation_interaction(
         self, *,
-        listener: Callable[[object], None] | None = None,
+        listener: Callable[[tuple[AIcOperationInteractionProviderToCallerMessage, ...]], None] | None = None,
         exception_factory: AIiOperationFailureExceptionFactory | None = None,
-    ) -> AIiOperationInteractionCallerToProvider:
+    ) -> AIiOperationInteractionCallerToProviderOnCaller:
         raise NotImplementedError("this capability handle cannot create a caller interaction controller")
 
     def invoke_completion(
         self, operation_id: str, arguments: Mapping[str, object] | None = None, *,
         operation_parameters: Mapping[str, object] | None = None,
-        operation_interaction: AIiOperationInteractionCallerToProvider | None = None,
+        operation_interaction: AIiOperationInteractionCallerToProviderOnCaller | None = None,
         locale: str | None = None,
     ) -> AIcOperationCompletion:
         output = self.invoke(
@@ -65,6 +65,6 @@ class AIiCapabilityHandle(ABC):
     def start(
         self, operation_id: str, arguments: Mapping[str, object] | None = None, *,
         operation_parameters: Mapping[str, object] | None = None,
-        operation_interaction: AIiOperationInteractionCallerToProvider | None = None,
+        operation_interaction: AIiOperationInteractionCallerToProviderOnCaller | None = None,
         locale: str | None = None,
-    ) -> AIiOperationInteractionCallerToProvider: ...
+    ) -> AIiOperationInteractionCallerToProviderOnCaller: ...

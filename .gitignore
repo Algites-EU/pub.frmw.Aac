@@ -41,3 +41,7 @@ venv/
 
 
 
+
+# Generator-owned source trees are recreated before builds and tests.
+**/*.gen/
+**/*.extgen/

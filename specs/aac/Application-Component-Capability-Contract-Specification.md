@@ -547,7 +547,8 @@ The provider does not directly declare a terminal execution state. Core derives 
 Operation Interaction is one logical bidirectional protocol with two explicitly directional message models:
 
 ```text
-provider operation ── OperationInteractionProviderToCallerMessage ──> caller
+provider-side publish ONE ProviderToCallerMessage ──> Core transport/buffer
+caller-side receive ORDERED NONEMPTY LIST of ProviderToCallerMessage <── Core transport/buffer
 provider operation <── OperationInteractionCallerToProviderMessage ── caller
 ```
 
@@ -566,13 +567,27 @@ events[]
 interaction features
 ```
 
-`interaction_revision` starts at `0` before any provider-to-caller publication. The first published interaction message has revision `1`; each subsequent atomic provider-to-caller publication increments it monotonically.
+`interaction_revision` starts at `0` before any provider-to-caller publication. The first published interaction message has revision `1`; each subsequent atomic provider-to-caller publication increments it monotonically. Every provider publication is an individual immutable message with its own revision and, where available, UTC-aware `published_at` instant. The caller-side boundary receives a **non-empty ordered tuple/list of messages**, even when the transport accumulated multiple publications while the caller was disconnected. **No message, delta, or intermediate result may be discarded, overwritten by a later snapshot, coalesced, or silently skipped** in the provider-to-caller delivery protocol.
 
 `state_result_revision` also starts at `0`. Value `0` means that no logical state result has yet been published. The first logical state-result change has revision `1`; every subsequent logical state-result change increments it monotonically. A message can therefore advertise that a newer state result exists even when its payload is intentionally omitted by the selected delivery mode.
 
 When a message carries a state-result payload, `state_result_payload_revision` identifies the result revision represented by that payload. It MAY be lower than the latest `state_result_revision`, for example when a provider re-delivers a buffered operation-specific result revision. Core MUST NOT infer dependency, merge, replay or error semantics from gaps between result revisions.
 
 Revision gaps are observable, not inherently erroneous. A video/live-preview operation may legitimately accept revision 17 even when revision 16 was not consumed; another operation may define sequential deltas that cannot be applied across a gap. Such semantics belong exclusively to the capability operation contract and its consumer/provider implementations.
+
+### III.6.1a Batched caller-side delivery and non-push transports
+
+Operation Interaction distinguishes the **producer-side** `ProviderToCallerOnProvider` contract from the **consumer-side** `ProviderToCallerOnCaller` contract:
+
+- The provider publishes ONE logical message at a time. `report_events(events[])` is still a single publication with an internal event list; separate calls to `update_state_result()` generate separate revisions and MUST remain separate messages.
+- Framework-owned transport/IPC adapters buffer messages in original publication order whenever the underlying protocol cannot push provider-to-caller notifications. Each buffered message carries its own `interaction_revision` and `published_at` time; buffering MUST NOT change the contents or revision of any message.
+- At the next caller-visible interaction (e.g. an HTTP status poll, response, or reconnect), the adapter delivers the **entire available ordered batch** via ONE call `receive_messages(messages)`. A single live message is a one-element batch.
+- The caller MUST consume and apply **every** message, in order, including ALL state-result deltas and revisions. The caller MUST defer external reactions (actions, callbacks to providers, new business requests, UI side effects based on intermediate state) until the **whole delivered batch** has been incorporated. Only then may it react to the resulting combined knowledge. No intermediate message is expendable merely because a later one arrived in the same batch.
+- If an ordered batch cannot be delivered in full, the transport MUST retain or redeliver unacknowledged messages, using revision identities to detect duplicates; callers must be idempotent under at-least-once delivery. A gap or permanent loss MUST be reported as an error, not repaired by pretending that only the latest state matters.
+- The base in-memory delivery buffer covers buffering within one live process; protocols promising delivery across a process crash MUST additionally journal/persist their queue and acknowledgments. Batching does not itself guarantee durable delivery or exactly-once business effects.
+- Synchronous in-process interactions MAY deliver one-message batches immediately. The same caller-facing batch signature MUST still be used.
+
+This protocol is **not** a history-replay API. It transports live, individually relevant provider publications whose delivery was delayed. The framework MUST NOT interpret or merge their operation-specific state-result payloads. Provider-to-caller availability and ability to receive dynamic caller changes are independent transport capabilities; request/response-only providers may learn caller changes only through an additional request/polling mechanism, if one exists.
 
 ### III.6.2 Immutable state-result publication
 
@@ -649,6 +664,34 @@ Overall migration
 
 Human-facing event names/descriptions use `AIcDisplayText`. Intermediate telemetry may be throttled/coalesced according to host/provider policy because it is not itself the operation-specific state result. Listener/rendering failure MUST NOT by itself fail the provider operation.
 
+### III.6.6a Four endpoints, synchronous reply, and lossless transport delivery
+
+The logical Operation Interaction protocol MUST distinguish **four** interface endpoints, rather than only a producer and consumer:
+
+| Endpoint | Responsibility |
+| --- | --- |
+| `CallerToProviderOnCaller` | Caller issues cancellation, reporting preferences, result requests, and may `sendMessage(C2PM)` carrying a complete immutable caller state. |
+| `CallerToProviderOnProvider` | Provider accepts ONE C2P message using `receiveMessage(C2PM)` and MAY directly return ONE P2C response, or no response. |
+| `ProviderToCallerOnProvider` | Provider publishes a single P2C message through each `sendMessage(P2CM)` call, independent of a C2P request. |
+| `ProviderToCallerOnCaller` | Caller receives one ordered list/batch through `receiveMessages(List<P2CM>)`. Every not-previously-processed message MUST be processed; application reactions MUST NOT interleave within one batch. |
+
+All public interface message and result types SHOULD be generic, including callback and input message types, so technology-specific bindings can specialize their representations without changing the protocol. Concrete method naming follows target language conventions. Pre-existing AAC caller controls remain available; `sendMessage` complements rather than replaces those controls. Both producer paths (`sendMessage` and direct `receiveMessage` return) represent **different publications**; providers MUST NOT emit the same logical result through both paths unless intentional duplication is part of the operation contract.
+
+The interaction transport MAY be full duplex, half duplex, request/response, or polling. A provider MUST NOT be required to initiate a reverse network connection to the caller. On a request/response-only transport, its `sendMessage` publications are buffered; when a caller exchange occurs, the transport retrieves earlier queued publications, invokes `receiveMessage` if the caller supplied a C2P message, appends its optional direct P2C result, and delivers the ordered list with a single caller-side `receiveMessages` invocation. Concurrent P2C publication and direct response sequencing MUST be serialized at a per-invocation publication boundary. A caller MAY poll for queued P2C publications without changing its C2P application state; such polls are **transport operations** and do not require a fake C2P message.
+
+**Every P2C publication is semantically relevant and MUST remain individually observable.** No sender or receiver may coalesce/dismiss intermediate results even when a later result is available. When N publications are received in a single batch, the receiver first processes **all N** in order and only then triggers host/application reactions based on their processed contents. Transport duplicate suppression is the sole exception: exact replays of already processed sequenced messages MUST NOT be presented as new publications.
+
+A request/response transport guaranteeing lossless delivery MUST implement a **cumulative, contiguous acknowledgment**:
+
+1. The provider-side framework assigns monotonically increasing per-invocation P2C publication sequence/revision numbers at a single serialized enqueue boundary. It retains all unacknowledged publications (in an active outgoing buffer or an awaiting-ACK buffer). Moving a message into a transmitted batch MUST NOT discard its unacknowledged copy.
+2. Every response contains all P2C publications **not yet acknowledged**, in order, including earlier transmissions whose ACK was lost. The optional return from `receiveMessage` is enqueued after already queued publications.
+3. The caller-side transport suppresses replays already successfully processed. A gap in the **contiguous** sequence MUST NOT be silently skipped or acknowledged. All new contiguous publications are delivered together to `ProviderToCallerOnCaller.receiveMessages`. The transport advances its local acknowledgment watermark **only after successful processing** of the entire batch.
+4. On the next transport request, the caller includes its most recent successfully processed contiguous P2C sequence. The provider validates the ACK is not greater than the highest sequence previously sent and then removes acknowledged messages from its retention buffer.
+5. Duplicate C2P submissions caused by retry MUST NOT re-execute the same caller request; the transport uses the C2P interaction revision (and, where needed, request identity) for deduplication. C2P state snapshots may supersede earlier snapshots; distinct operation-specific one-shot commands MUST retain their own request identity and correct semantics.
+6. Batch transport and ACK headers/fields are framework-internal, **not** application methods or parameters on these four interfaces. The wire model `operation-interaction-reliable-exchange_1` describes the exchange shape. Implementations MAY separate request and response frame schemas while retaining equivalent semantics.
+
+These rules provide **at-least-once delivery with duplicate suppression at the active caller**. Exactly-once irreversible *business effects* are NOT guaranteed, and replay across process crashes requires durable ACK and message storage; an in-memory queue alone MUST NOT claim crash durability. Host callbacks with side effects SHOULD be idempotent by message revision. Per-invocation sequence/ACK state MUST NOT be mixed across invocations or execution attempts. Unbounded unacknowledged buffering requires quotas and backpressure/recovery policies; silently dropping messages is forbidden.
+
 ### III.6.7 Caller-to-provider interaction controls
 
 Caller-to-provider state includes at least:
@@ -656,7 +699,8 @@ Caller-to-provider state includes at least:
 ```text
 last_accepted_state_result_revision
 interaction_mode
-cancellation_requested
+caller_interaction_revision
+cancellation_schedule (sparse map of active reasons)
 detail_level
 reporting_interval_ms
 failure_detail_level
@@ -666,7 +710,15 @@ state_result_request_id
 
 `interaction_mode` has baseline values `FOREGROUND` and `BACKGROUND`. It is owned by the caller/host and describes the user's interaction/attention mode, not provider execution placement. `FOREGROUND -> BACKGROUND` does not change execution state, create a new process/thread or detach reporting. A host may keep the same running invocation visible in a task/status area while permitting unrelated work and later restore a foreground presentation.
 
-Cancellation is cooperative. A provider that declares cancellation support MUST observe `cancellation_requested` at safe interruption points and preserve its own transaction/consistency guarantees. Cancellation MUST NOT imply rollback across an irreversible commit boundary.
+Cancellation is cooperative and uses a **sparse map** keyed only by a framework-assigned cancellation reason. Normal execution has an empty map. Every present record embeds its own `reason`, absolute `current_deadline` (Java `Instant` / timezone-aware Python `datetime`), `first_requested_at`, `last_requested_at`, `request_count`, `last_message`, and `last_origin`. A caller is given `schedule_cancellation(deadline)`, `cancel_now()` and `withdraw_cancellation()` without the ability to forge a reason: its controller assigns `CALLER_REQUEST`. Framework-only controllers assign other reasons such as `ENGINE_SHUTDOWN` and `DEPENDENCY_FAILURE`. Several callers can alter the **same** reason; authorization is enforced above this interface, not by encoding caller session in the map key. Every actual change increments the caller snapshot revision; duplicate transport delivery of one revision is not a new request. An older snapshot MUST NOT replace a newer received revision.
+
+A cancellation record only applies when the provider's local time reaches its `current_deadline`. The earliest effective deadline among active reasons is the soonest cancellation opportunity. `cancelNow()` is a deadline of now. A deadline means **request cooperative cancellation at or after this instant**, not a technical HTTP/TCP timeout or a guarantee that execution has completed. Cancellation reasons are mutually independent; `DEADLINE_EXCEEDED` is NOT an additional reason. The caller can reschedule/extend/withdraw by changing/removing only its reason, before the provider has accepted cancellation. Withdrawal removes the record from the current map; there are no pre-created inactive entries. Complete modification history, if required, is the responsibility of framework audit/journal, NOT the provider snapshot.
+
+The provider may locally and irrevocably **accept** one or more currently effective reasons from the last complete caller interaction snapshot it actually received. Acceptance includes `accepted_reasons`, the **entire immutable caller snapshot** with its `caller_interaction_revision`, and the provider-local `accepted_at` instant. It does not require a controller round trip, acknowledgement, or agreement from another machine. After local acceptance later cancellation changes are irrelevant to that invocation, but progress/cleanup/final diagnostics may still be published. The provider reports acceptance opportunistically via its normal provider-to-caller publication, a later status poll, or the final response; if transport fails this evidence might never arrive. The timestamp is provider-local and must not be interpreted as a globally synchronized ordering primitive; the snapshot revision is the reference to the state the provider actually used. `accepted_at` is distinct from terminal `completed_at`.
+
+A successful withdrawal updates the framework's requested schedule; it does **not** guarantee that a remote provider has not already accepted the previously delivered schedule. In a pure one-shot HTTP request/response without polling or another channel, subsequent caller changes cannot be assumed visible to a running remote server. Interaction capability negotiation MUST distinguish the ability to create schedule requests, actually deliver them during execution, and report acceptance later.
+
+Cancellation MUST preserve the provider's own transaction/consistency guarantees and MUST NOT imply rollback across an irreversible commit boundary.
 
 `reporting_interval_ms` and `detail_level` are interaction preferences, not portable business parameters. A provider may use them to avoid expensive detail/progress production. A host may independently reduce its own rendering frequency.
 
@@ -688,7 +740,9 @@ A caller that needs live progress, partial results, cancellation, foreground/bac
 
 Isolation/RPC profiles MUST bridge the same directional Operation Interaction protocol rather than attempting to pass toolkit callbacks or process-local mutable objects across the boundary. The reference Python `PROCESS` profile bridges the protocol over its Core/runtime channel. The Python 3.14+ `SUBINTERPRETER` profile uses cross-interpreter queues plus a separate execution thread to bridge live messages while preserving interpreter isolation. Nested Core-mediated invocations SHOULD inherit the current interaction context unless the caller explicitly supplies another one.
 
-The canonical interaction models are `_AAC.schema.operation-interaction-provider-to-caller-message/1`, `_AAC.schema.operation-interaction-caller-to-provider-message/1`, `_AAC.schema.operation-interaction-event/1`, and `_AAC.schema.operation-failure/1`.
+The original canonical interaction models `/1` remain published for legacy consumers. The enhanced contracts are `_AAC.schema.operation-interaction-provider-to-caller-message/2`, `_AAC.schema.operation-interaction-caller-to-provider-message/2`, and `_AAC.schema.operation-interaction-provider-to-caller-batch/1`; the normalized interaction event schema becomes `/2` (matching existing Python wire enum values), while the common failure schema remains `/1`. Wire adapters MUST negotiate the new schema before sending its fields. An AAC Core's in-memory runtime may use the richer Python models independently of a legacy `/1` transport, but cannot promise lossless dynamic cancellation over a transport that cannot express it.
+
+`FAILED` denotes a known invocation failure, not proof that external effects did not occur. Losing contact with an executing remote provider is not by itself proof that the invocation terminated; the observation/uncertain external effect must be represented separately from the five established execution lifecycle states. `UNKNOWN` is not introduced as a terminal execution state by this change.
 
 ---
 
@@ -1366,12 +1420,12 @@ A generated provider interface receives the provider-facing interaction view onl
 public interface AIigRestoreStorageBackup_1 {
     AIcgdRestoreStorageBackupResult_1 restoreBackup_1(
         AIcgdRestoreStorageBackupRequest_1 input,
-        AIiOperationInteractionProviderToCaller interaction
+        AIiOperationInteractionProviderToCallerOnProvider interaction
     );
 }
 ```
 
-The generated caller-facing binding uses `AIiOperationInteractionCallerToProvider<E>` where `E` is the generated operation-specific failure exception base. Its completion result distinguishes `SUCCESS` and `CANCELLED`; `FAILED` is materialized as an exception. Conceptually:
+The generated caller-facing binding uses `AIiOperationInteractionCallerToProviderOnCaller<E>` where `E` is the generated operation-specific failure exception base. Its completion result distinguishes `SUCCESS` and `CANCELLED`; `FAILED` is materialized as an exception. Conceptually:
 
 ```java
 AIcOperationCompletion<
@@ -1379,11 +1433,11 @@ AIcOperationCompletion<
     AIcgdRestoreStorageBackupCancelledResult_1
 > restoreBackup_1(
     AIcgdRestoreStorageBackupRequest_1 input,
-    AIiOperationInteractionCallerToProvider<AIxgRestoreStorageBackupFailed_1> interaction
+    AIiOperationInteractionCallerToProviderOnCaller<AIxgRestoreStorageBackupFailed_1> interaction
 ) throws AIxgRestoreStorageBackupFailed_1;
 ```
 
-Java permits a bounded type variable in a `throws` clause, but generated operation bindings SHOULD normally expose the concrete generated operation exception because a capability may contain several operations with independent failure contracts. A caller MAY install a caller-local exception factory on `AIiOperationInteractionCallerToProvider<E>`; every exception produced by that factory MUST be `E` or a subclass of `E`. This permits application code to derive several local exception subclasses from the generated operation exception and select among them according to portable failure data.
+Java permits a bounded type variable in a `throws` clause, but generated operation bindings SHOULD normally expose the concrete generated operation exception because a capability may contain several operations with independent failure contracts. A caller MAY install a caller-local exception factory on `AIiOperationInteractionCallerToProviderOnCaller<E>`; every exception produced by that factory MUST be `E` or a subclass of `E`. This permits application code to derive several local exception subclasses from the generated operation exception and select among them according to portable failure data.
 
 The factory is caller-local technology binding state. It is never serialized or sent to the provider. If the caller does not install a custom factory, the generated typed binding installs the generated default factory. A typed generated binding MUST NOT silently fall back to the more general `AIxCapabilityOperationFailed`, because that would violate the generated `throws` contract. Absence of the required typed binding/factory is a framework/binding error. The generic `AIxCapabilityOperationFailed` fallback is reserved for dynamic/untyped invocation APIs.
 
@@ -1395,7 +1449,7 @@ Java annotations use the `AIa` prefix. They are generated language-binding metad
 
 Python bindings SHOULD likewise be generated from the canonical capability contract. Generated interfaces use `AIig..._N`; generated non-data classes use `AIcg..._N`; generated DTO/data-object classes use `AIcgd..._N`. The `g` marker denotes generated source. The optional `d` marker is used only for a type that is explicitly a data object/DTO and MUST NOT be added to a generated behavioral class merely because it is generated. Equivalent generated enum/interface forms follow the same type-letter + `g` rule (for example `AIng..._N` and `AIig..._N`).
 
-The generated Python provider method receives `AIiOperationInteractionProviderToCaller`. The generated caller facade accepts `AIiOperationInteractionCallerToProvider[GeneratedOperationFailure]`, installs the generated default failure factory when the caller has not supplied one, materializes `SUCCESS`/`CANCELLED` payloads into their generated schema types, and raises the generated operation-specific exception for `FAILED`. Python has no checked-exception declaration analogous to Java `throws`, but the runtime exception class and typed `additional_data` follow the same portable contract. A custom caller factory must return the generated operation exception or one of its subclasses.
+The generated Python provider method receives `AIiOperationInteractionProviderToCallerOnProvider`. The generated caller facade accepts `AIiOperationInteractionCallerToProviderOnCaller[GeneratedOperationFailure]`, installs the generated default failure factory when the caller has not supplied one, materializes `SUCCESS`/`CANCELLED` payloads into their generated schema types, and raises the generated operation-specific exception for `FAILED`. Python has no checked-exception declaration analogous to Java `throws`, but the runtime exception class and typed `additional_data` follow the same portable contract. A custom caller factory must return the generated operation exception or one of its subclasses.
 
 `_N` is the version of the canonical definition that directly defines the generated program type, not automatically the containing component or capability version. A DTO generated from schema version 1 therefore remains `..._1` even when capability version 2 reuses that unchanged schema. Multiple versions such as `AIcgdRepositoryIdentity_1` and `AIcgdRepositoryIdentity_2` MUST be able to coexist in one runtime.
 

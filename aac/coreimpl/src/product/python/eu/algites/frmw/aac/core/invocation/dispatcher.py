@@ -20,7 +20,7 @@ from eu.algites.frmw.aac.core.entitlement.api import (
 )
 from eu.algites.frmw.aac.core.invocation.api import (
     AInOperationCompletionState, AInOperationExecutionState, AInOperationInteractionFailureDetailLevel, AInStateResultDeliveryMode,
-    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCaller, AIiOperationInteractionCallerToProvider,
+    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCallerOnProvider, AIiOperationInteractionCallerToProviderOnCaller,
     AIcInvocationInput, AIcInvocationOutput, AIcNullOperationInteraction, AIcOperationCompletion, AIcOperationFailure, AIcOperationInteractionFeatures,
     AIiOperationFailureExceptionFactory, AIxCapabilityOperationFailed, AIxOperationCancelled,
     current_invocation_locale, current_operation_interaction, invocation_locale_context,
@@ -50,7 +50,7 @@ def authorization_principal_context(principal: AIcAuthorizationPrincipal | None)
     finally:
         _CURRENT_AUTHORIZATION_PRINCIPAL.reset(token)
 
-def _resolve_operation_interaction(explicit: AIiOperationInteractionProviderToCaller | None) -> AIiOperationInteractionProviderToCaller:
+def _resolve_operation_interaction(explicit: AIiOperationInteractionProviderToCallerOnProvider | None) -> AIiOperationInteractionProviderToCallerOnProvider:
     if explicit is not None:
         return explicit
     inherited = current_operation_interaction()
@@ -177,7 +177,7 @@ def invoke_handle_with_parent_context(
     operation_id: str,
     arguments: Mapping[str, object] | None = None,
     operation_parameters: Mapping[str, object] | None = None,
-    operation_interaction: AIiOperationInteractionProviderToCaller | None = None,
+    operation_interaction: AIiOperationInteractionProviderToCallerOnProvider | None = None,
     locale: str | None = None,
 ) -> AIcInvocationOutput:
     """Invoke a Core handle while restoring causal context received over a runtime boundary."""

@@ -5,7 +5,7 @@ import queue
 from typing import Mapping
 from eu.algites.frmw.aac.core.invocation.api import (
     AIiCapabilityEndpoint,
-    AIiOperationInteractionProviderToCaller,
+    AIiOperationInteractionProviderToCallerOnProvider,
     AIcInvocationInput,
     AIcInvocationOutput,
     AIcOperationInteractionCallerToProviderMessage,

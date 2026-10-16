@@ -15,18 +15,12 @@ Dependencies:
       - GroupId: eu.algites.frmw.aac
         ArtifactId: pub.frmw.Aac_aac.coreintf
         Usages: [product_implementation]
-        VersionRequirement:
-          Exact: "1.0-SNAPSHOT"
       - GroupId: eu.algites.frmw.aac
         ArtifactId: pub.frmw.Aac_aac.coreimpl
         Usages: [product_implementation]
-        VersionRequirement:
-          Exact: "1.0-SNAPSHOT"
       - GroupId: eu.algites.frmw.aac
         ArtifactId: pub.frmw.Aac_aac.uiintf
         Usages: [product_implementation]
-        VersionRequirement:
-          Exact: "1.0-SNAPSHOT"
   - DependencyKind: python
     Items:
       - ArtifactId: PySide6

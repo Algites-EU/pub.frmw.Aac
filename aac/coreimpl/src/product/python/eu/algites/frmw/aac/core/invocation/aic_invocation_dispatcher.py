@@ -23,7 +23,7 @@ from eu.algites.frmw.aac.core.entitlement.api import (
 )
 from eu.algites.frmw.aac.core.invocation.api import (
     AInOperationCompletionState, AInOperationExecutionState, AInOperationInteractionFailureDetailLevel, AInStateResultDeliveryMode,
-    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCaller, AIiOperationInteractionCallerToProvider,
+    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCallerOnProvider, AIiOperationInteractionCallerToProviderOnCaller,
     AIcInvocationInput, AIcInvocationOutput, AIcNullOperationInteraction, AIcOperationCompletion, AIcOperationFailure, AIcOperationInteractionFeatures,
     AIiOperationFailureExceptionFactory, AIxCapabilityOperationFailed, AIxOperationCancelled,
     current_invocation_locale, current_operation_interaction, invocation_locale_context,
@@ -40,7 +40,7 @@ from .aic_validated_operation_interaction_provider_proxy import AIcValidatedOper
 from ._context import CURRENT_AUTHORIZATION_PRINCIPAL as _CURRENT_AUTHORIZATION_PRINCIPAL
 from ._context import CURRENT_INVOCATION_ID as _CURRENT_INVOCATION_ID
 
-def _resolve_operation_interaction(explicit: AIiOperationInteractionProviderToCaller | None) -> AIiOperationInteractionProviderToCaller:
+def _resolve_operation_interaction(explicit: AIiOperationInteractionProviderToCallerOnProvider | None) -> AIiOperationInteractionProviderToCallerOnProvider:
     if explicit is not None:
         return explicit
     inherited = current_operation_interaction()
@@ -214,7 +214,7 @@ class AIcInvocationDispatcher:
 
     def _invoke_once(
         self, endpoint: AIiCapabilityEndpoint, invocation_input: AIcInvocationInput,
-        operation_interaction: AIiOperationInteractionProviderToCaller | None = None,
+        operation_interaction: AIiOperationInteractionProviderToCallerOnProvider | None = None,
     ) -> AIcInvocationOutput:
         operation = self.contracts.operation(
             invocation_input.capability_id,
@@ -393,10 +393,10 @@ class AIcInvocationDispatcher:
 
     def invoke(
         self, endpoint: AIiCapabilityEndpoint, invocation_input: AIcInvocationInput,
-        operation_interaction: AIiOperationInteractionProviderToCaller | None = None,
+        operation_interaction: AIiOperationInteractionProviderToCallerOnProvider | None = None,
     ) -> AIcInvocationOutput:
         interaction = _resolve_operation_interaction(operation_interaction)
-        controller = interaction if isinstance(interaction, AIiOperationInteractionCallerToProvider) else None
+        controller = interaction if isinstance(interaction, AIiOperationInteractionCallerToProviderOnCaller) else None
         operation = self.contracts.operation(
             invocation_input.capability_id, invocation_input.capability_version, invocation_input.operation_id
         )

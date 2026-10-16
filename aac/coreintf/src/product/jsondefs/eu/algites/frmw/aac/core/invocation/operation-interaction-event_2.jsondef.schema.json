@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-event_2.jsondef.schema.json",
+  "x-aac-schema-id": "_AAC.schema.operation-interaction-event",
+  "x-aac-schema-version": 2,
+  "title": "Operation Interaction Event 2",
+  "description": "Defines the canonical Operation Interaction Event schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "EventType"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "display_text": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Text": {
+          "type": "string",
+          "description": "Human-readable display text.",
+          "minLength": 1
+        },
+        "ResourceKey": {
+          "type": "string",
+          "description": "Optional localization resource key for the human-readable text.",
+          "minLength": 1
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "Text"
+          ]
+        },
+        {
+          "required": [
+            "ResourceKey"
+          ]
+        }
+      ],
+      "description": "Defines the reusable display text structure used by this canonical schema."
+    }
+  },
+  "properties": {
+    "EventType": {
+      "enum": [
+        "STATUS",
+        "PROGRESS",
+        "DETAIL",
+        "DIAGNOSTIC"
+      ],
+      "description": "Kind of interaction event represented by this entry."
+    },
+    "ProgressId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Identifier of the progress item represented by this event.",
+      "minLength": 1
+    },
+    "ParentProgressId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Identifier of the parent progress item for nested progress reporting.",
+      "minLength": 1
+    },
+    "PhaseId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Identifier of the execution phase associated with this event.",
+      "minLength": 1
+    },
+    "Name": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/display_text"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Human-readable name of this operation interaction event."
+    },
+    "Description": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/display_text"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Human-readable description of this operation interaction event."
+    },
+    "Current": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Current progress value.",
+      "minimum": 0
+    },
+    "Total": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Expected total progress value when known.",
+      "minimum": 0
+    },
+    "Unit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Unit used for progress values.",
+      "minLength": 1
+    },
+    "Severity": {
+      "enum": [
+        "INFO",
+        "WARNING",
+        "ERROR"
+      ],
+      "description": "Severity level associated with this event or diagnostic."
+    },
+    "Code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Stable machine-readable code associated with this event or diagnostic.",
+      "minLength": 1
+    },
+    "Details": {
+      "type": "object",
+      "description": "Additional structured details associated with this operation interaction event."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "EventType": {
+            "const": "PROGRESS",
+            "description": "Identifies the kind of operation-interaction event."
+          }
+        },
+        "required": [
+          "EventType"
+        ]
+      },
+      "then": {
+        "required": [
+          "ProgressId"
+        ]
+      }
+    }
+  ]
+}

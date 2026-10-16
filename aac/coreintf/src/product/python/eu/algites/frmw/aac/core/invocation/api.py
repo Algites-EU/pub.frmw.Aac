@@ -12,6 +12,10 @@ from .context import (
     operation_parameter_context,
 )
 from .interaction import (
+    AInOperationCancellationReason, AIcOperationCancellationReasonRecord, AIcOperationCancellationAcceptance,
+    AIiOperationInteractionCallerToProviderOnCaller, AIiOperationInteractionCallerToProviderOnProvider,
+    AIiOperationInteractionCoreControl, AIiOperationInteractionProviderToCallerOnProvider, AIiOperationInteractionProviderToCallerOnCaller, AIcOperationInteractionDeliveryBuffer,
+    accept_cancellation_locally, effective_cancellation_reasons,
     AInOperationExecutionState,
     AInOperationInteractionDetailLevel,
     AInOperationInteractionEventType,
@@ -26,8 +30,6 @@ from .interaction import (
     AIcOperationInteractionEvent,
     AIcOperationInteractionFeatures,
     AIcOperationInteractionProviderToCallerMessage,
-    AIiOperationInteractionProviderToCaller,
-    AIiOperationInteractionCallerToProvider,
     AIiOperationFailureExceptionFactory,
     AIxCapabilityOperationFailed,
     AIxOperationCancelled,

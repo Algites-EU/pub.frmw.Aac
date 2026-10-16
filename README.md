@@ -487,3 +487,8 @@ its updated version must be published before consuming these repositories.
 See [the generated-source conventions](specs/GENERATED-SOURCES.md) for the
 artifact split, cleanup of formerly tracked outputs, and CI verification.
 
+
+
+### Operation Interaction v2 design
+
+See [`specs/aac/Operation-Interaction-Delivery-and-Cancellation-Migration.md`](specs/aac/Operation-Interaction-Delivery-and-Cancellation-Migration.md) for sparse timed cancellation reasons, provider-local acceptance, ordered caller-side message batches and migration from `/1` wire contracts.

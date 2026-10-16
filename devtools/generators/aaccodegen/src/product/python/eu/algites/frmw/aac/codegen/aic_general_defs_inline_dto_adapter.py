@@ -4,7 +4,7 @@ from pathlib import Path
 
 from eu.algites.frmw.aac.core.schemas.registry import AIcRegisteredSchema
 from eu.algites.lib.naming.convention.aic_algites_naming_profiles import AIcAlgitesNamingProfiles
-from eu.algites.lib.naming.convention.ain_output_name_kind import AInOutputNameKind
+from eu.algites.tool.codegen.defs.ain_defs_name_role import AInDefsNameRole
 from eu.algites.tool.codegen.defs.aic_generation_names import AIcGenerationNames
 from eu.algites.tool.codegen.defs.aic_json_schema_reader import AIcJsonSchemaReader
 from eu.algites.tool.codegen.defs.aic_python_code_generation_backend import AIcPythonCodeGenerationBackend
@@ -47,7 +47,7 @@ class AIcGeneralDefsInlineDtoAdapter:
 
     def interface_type_name(self, definition) -> str:
         """Project an AAC interface name from the normalized definition using shared naming rules."""
-        return self.names.type_name(definition, self.profile, AInOutputNameKind.INTERFACE_TYPE)
+        return self.names.type_name(definition, self.profile, AInDefsNameRole.INTERFACE_TYPE)
 
     def property_name(self, source_name: str) -> str:
         """Project a Python property name using the shared Algites naming profile."""

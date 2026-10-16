@@ -4,6 +4,7 @@ $schema: https://defs.dev.algites.eu/api/yamldefs/eu/algites/tool/build/yamldefs
 
 Artifact:
   TechnologyKinds:
+  - java
   - python
   Name: Algites Application Components Core Implementation
   Description: Reusable implementations of the Algites Application Components 
@@ -15,13 +16,9 @@ Dependencies:
       - GroupId: eu.algites.frmw.aac
         ArtifactId: pub.frmw.Aac_aac.coreintf
         Usages: [product_implementation]
-        VersionRequirement:
-          Exact: "1.0-SNAPSHOT"
       - GroupId: eu.algites.frmw.aac
         ArtifactId: pub.frmw.Aac_components.observation.simpleaudit
         Usages: [develop_implementation]
-        VersionRequirement:
-          Exact: "1.0-SNAPSHOT"
   - DependencyKind: python
     Items:
       - ArtifactId: PyYAML

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x-aac-schema-id": "_AAC.schema.operation-interaction-reliable-exchange",
+  "x-aac-schema-version": 1,
+  "title": "AAC Operation Interaction Reliable Exchange 1",
+  "description": "Transport exchange: monotonic cumulative P2C acknowledgment, optional C2P snapshot, and ordered list of all unacknowledged P2C publications. No application-level ACK or request/reply handshake.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "AcknowledgedProviderRevision",
+    "Messages"
+  ],
+  "properties": {
+    "AcknowledgedProviderRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Highest contiguous P2C publication fully processed by caller; supplied by caller in next exchange."
+    },
+    "CallerMessage": {
+      "$ref": "operation-interaction-caller-to-provider-message_2.yamldef.schema.json"
+    },
+    "Messages": {
+      "type": "array",
+      "items": {
+        "$ref": "operation-interaction-provider-to-caller-message_2.yamldef.schema.json"
+      },
+      "description": "Zero or more ordered unacknowledged P2C messages, including optional direct response."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri"
+    }
+  },
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/yamldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-reliable-exchange_1.yamldef.schema.json"
+}

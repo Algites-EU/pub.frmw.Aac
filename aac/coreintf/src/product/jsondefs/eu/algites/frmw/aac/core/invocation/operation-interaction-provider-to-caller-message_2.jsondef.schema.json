@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_2.jsondef.schema.json",
+  "x-aac-schema-id": "_AAC.schema.operation-interaction-provider-to-caller-message",
+  "x-aac-schema-version": 2,
+  "title": "Operation Interaction Provider To Caller Message 2",
+  "description": "Defines the canonical Operation Interaction Provider To Caller Message schema and its serialized data contract.",
+  "type": "object",
+  "required": [
+    "InteractionRevision",
+    "ExecutionState",
+    "StateResultRevision",
+    "Events",
+    "Features"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "InteractionRevision": {
+      "type": "integer",
+      "description": "Specifies the interaction revision for this operation interaction provider to caller message.",
+      "minimum": 0
+    },
+    "ExecutionState": {
+      "enum": [
+        "PENDING",
+        "RUNNING",
+        "COMPLETED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "description": "Specifies the execution state for this operation interaction provider to caller message."
+    },
+    "StateResultRevision": {
+      "type": "integer",
+      "description": "Specifies the state result revision for this operation interaction provider to caller message.",
+      "minimum": 0
+    },
+    "StateResultPayloadRevision": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Specifies the state result payload revision for this operation interaction provider to caller message.",
+      "minimum": 1
+    },
+    "StateResult": {
+      "description": "Specifies the state result for this operation interaction provider to caller message."
+    },
+    "Events": {
+      "type": "array",
+      "description": "Interaction events emitted since the previous provider-to-caller update.",
+      "items": {
+        "$ref": "operation-interaction-event_2.jsondef.schema.json"
+      }
+    },
+    "Features": {
+      "type": "object",
+      "description": "Feature flags or negotiated interaction capabilities reported by the provider.",
+      "required": [
+        "ProgressReporting",
+        "Cancellation",
+        "DetailLevel",
+        "ReportingInterval",
+        "SupportedStateResultDeliveryModes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ProgressReporting": {
+          "type": "boolean",
+          "description": "Indicates whether progress reporting applies to this feature."
+        },
+        "Cancellation": {
+          "type": "boolean",
+          "description": "Indicates whether cancellation applies to this feature."
+        },
+        "DetailLevel": {
+          "type": "boolean",
+          "description": "Indicates whether detail level applies to this feature."
+        },
+        "ReportingInterval": {
+          "type": "boolean",
+          "description": "Indicates whether reporting interval applies to this feature."
+        },
+        "SupportedStateResultDeliveryModes": {
+          "type": "array",
+          "description": "Lists the supported state result delivery modes associated with this feature.",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "ON_DEMAND_COMPLETE",
+              "ON_DEMAND_DELTA",
+              "ON_CHANGE_COMPLETE",
+              "ON_CHANGE_DELTA",
+              "ALWAYS_COMPLETE"
+            ]
+          }
+        }
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional absolute URI of the schema describing this root document."
+    },
+    "PublishedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "UTC-capable timestamp attached to each provider publication, including buffered publications."
+    },
+    "CancellationAcceptance": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Optional provider-local acceptance evidence, delivered when the transport permits.",
+      "required": [
+        "AcceptedInteractionSnapshot",
+        "AcceptedReasons",
+        "AcceptedAt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "AcceptedInteractionSnapshot": {
+          "$ref": "operation-interaction-caller-to-provider-message_2.jsondef.schema.json"
+        },
+        "AcceptedReasons": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "AcceptedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Absolute effective time, serialized with an explicit UTC offset; Java Instant/Python aware datetime."
+        }
+      }
+    }
+  }
+}

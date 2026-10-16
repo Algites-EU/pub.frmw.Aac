@@ -29,7 +29,7 @@ from eu.algites.frmw.aac.core.dataentity.api import (
 )
 from eu.algites.frmw.aac.core.invocation.api import (
     AInOperationInteractionEventType, AInStateResultDeliveryMode, AIcOperationInteractionEvent, AIcOperationInteractionFeatures, AIxOperationCancelled,
-    current_operation_interaction,
+    current_operation_interaction, effective_cancellation_reasons,
 )
 from eu.algites.frmw.aac.core.presentation.api import AIcDisplayText
 from eu.algites.frmw.aac.core.runtime.api import AIiProviderRuntime
@@ -46,8 +46,10 @@ class AIcOperationProgress:
         if force or now - self._last_state_poll >= 0.1:
             self._state = self._interaction.caller_snapshot()
             self._last_state_poll = now
-        if self._state.cancellation_requested:
-            raise AIxOperationCancelled("operation cancellation was requested")
+        due = effective_cancellation_reasons(self._state)
+        if due:
+            self._interaction.accept_cancellation(due)
+            raise AIxOperationCancelled("operation cancellation was accepted: " + ", ".join(sorted(due)))
         return self._state
 
     def checkpoint(self) -> None:

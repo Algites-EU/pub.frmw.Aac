@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 from typing import Callable, Mapping
 from ..instances.api import AIcBinding
 from .interaction import (
-    AIcOperationFailure, AIiOperationFailureExceptionFactory, AIiOperationInteractionProviderToCaller,
-    AIiOperationInteractionCallerToProvider, AIxCapabilityOperationFailed,
+    AIcOperationFailure, AIiOperationFailureExceptionFactory, AIiOperationInteractionProviderToCallerOnProvider,
+    AIiOperationInteractionCallerToProviderOnCaller, AIxCapabilityOperationFailed,
 )
 from .models import AInOperationCompletionState, AIcInvocationOutput, AIcOperationCompletion
 

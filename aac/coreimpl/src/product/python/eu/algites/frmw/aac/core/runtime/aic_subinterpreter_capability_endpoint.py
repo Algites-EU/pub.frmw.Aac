@@ -5,7 +5,7 @@ import queue
 from typing import Mapping
 from eu.algites.frmw.aac.core.invocation.api import (
     AIiCapabilityEndpoint,
-    AIiOperationInteractionProviderToCaller,
+    AIiOperationInteractionProviderToCallerOnProvider,
     AIcInvocationInput,
     AIcInvocationOutput,
     AIcOperationInteractionCallerToProviderMessage,
@@ -99,8 +99,13 @@ class AIcSubinterpreterCapabilityEndpoint(AIiCapabilityEndpoint):
                     revision, state_result = data
                     interaction.deliver_state_result(state_result, revision=revision)
                     core_to_provider.put((request_id, True, None))
+                elif kind == "message":
+                    interaction.send_message(data)
                 elif kind == "caller_snapshot":
                     core_to_provider.put((request_id, True, interaction.caller_snapshot()))
+                elif kind == "cancellation_acceptance":
+                    if hasattr(interaction, "record_cancellation_acceptance"):
+                        interaction.record_cancellation_acceptance(data)
                 elif kind == "final":
                     if not isinstance(data, AIcInvocationOutput):
                         raise TypeError("subinterpreter returned an invalid invocation output")

@@ -210,7 +210,7 @@ class AIcProcessInteractionProvider(AIiProviderRuntime):
         implementation_class=provider.implementation_class_for("python"),
     )
     messages = []
-    interaction = AIcOperationInteractionController(messages.append)
+    interaction = AIcOperationInteractionController(messages.extend)
     interaction.declare_features(AIcOperationInteractionFeatures(
         progress_reporting=True, cancellation=True, detail_level=True, reporting_interval=True,
     ))

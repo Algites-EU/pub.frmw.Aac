@@ -6,12 +6,24 @@ from typing import Callable, Generic, Mapping, TypeVar
 from ..presentation.api import AIcDisplayText
 from ..interaction_types import AInStateResultDeliveryMode
 
+from .aic_operation_cancellation_acceptance import AIcOperationCancellationAcceptance
+from .aic_operation_interaction_provider_to_caller_message import AIcOperationInteractionProviderToCallerMessage
 from .aic_operation_interaction_caller_to_provider_message import AIcOperationInteractionCallerToProviderMessage
 from .aic_operation_interaction_event import AIcOperationInteractionEvent
 from .aic_operation_interaction_features import AIcOperationInteractionFeatures
 
-class AIiOperationInteractionProviderToCaller(ABC):
-    """Provider-facing half of one bidirectional, UI-neutral operation interaction."""
+P2CM = TypeVar("P2CM", bound=AIcOperationInteractionProviderToCallerMessage)
+
+
+class AIiOperationInteractionProviderToCallerOnProvider(Generic[P2CM], ABC):
+    """Provider endpoint: publish one P2C message at a time.
+
+    Higher-level AAC features and state-result methods are retained here.
+    An implementation may buffer publication until a transport can deliver it.
+    """
+
+    @abstractmethod
+    def send_message(self, message: P2CM) -> None: ...
 
     @abstractmethod
     def declare_features(self, features: AIcOperationInteractionFeatures) -> None: ...
@@ -36,3 +48,11 @@ class AIiOperationInteractionProviderToCaller(ABC):
 
     @abstractmethod
     def caller_snapshot(self) -> AIcOperationInteractionCallerToProviderMessage: ...
+
+    @abstractmethod
+    def accept_cancellation(self, reasons: frozenset[str]) -> AIcOperationCancellationAcceptance:
+        """Irrevocably accept effective reasons from the last locally observed snapshot.
+
+        This is a LOCAL decision; no synchronous callback/ack from Core is required.
+        Acceptance evidence is delivered opportunistically by transport.
+        """

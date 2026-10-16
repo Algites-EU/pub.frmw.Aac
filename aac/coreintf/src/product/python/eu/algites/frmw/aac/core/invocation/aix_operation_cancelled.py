@@ -7,7 +7,7 @@ from ..presentation.api import AIcDisplayText
 from ..interaction_types import AInStateResultDeliveryMode
 
 class AIxOperationCancelled(RuntimeError):
-    """Raised by a cooperative provider after observing cancellation_requested."""
+    """Raised by a cooperative provider after locally accepting effective cancellation reasons."""
 
     def __init__(
         self,

@@ -4,6 +4,7 @@ $schema: https://defs.dev.algites.eu/api/yamldefs/eu/algites/tool/build/yamldefs
 
 Artifact:
   TechnologyKinds:
+  - java
   - python
   Name: Algites Application Components Core Interfaces
   Description: Public bindings for Algites Application Components contracts and 

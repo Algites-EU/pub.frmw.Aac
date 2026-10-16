@@ -15,8 +15,6 @@ Dependencies:
       - GroupId: eu.algites.frmw.aac
         ArtifactId: pub.frmw.Aac_aac.coreintf
         Usages: [product_implementation]
-        VersionRequirement:
-          Exact: "1.0-SNAPSHOT"
   - DependencyKind: python
     Items:
       - ArtifactId: sigstore

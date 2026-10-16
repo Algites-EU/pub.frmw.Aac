@@ -322,7 +322,7 @@ def test_operation_interaction_is_separate_from_portable_input_and_bidirectional
             }
 
     messages = []
-    interaction = AIcOperationInteractionController(messages.append)
+    interaction = AIcOperationInteractionController(messages.extend)
     interaction.declare_features(AIcOperationInteractionFeatures(
         progress_reporting=True, cancellation=True, detail_level=True, reporting_interval=True,
     ))
@@ -385,7 +385,7 @@ def test_async_start_uses_same_interaction_lifecycle_and_propagates_locale():
     endpoints.register_object("provider", Provider())
     handle = AIcCoreCapabilityHandle(binding, endpoints, AIcInvocationDispatcher(catalog))
     messages = []
-    interaction = AIcOperationInteractionController(messages.append)
+    interaction = AIcOperationInteractionController(messages.extend)
     interaction.set_state_result_delivery_mode(AInStateResultDeliveryMode.ON_CHANGE_DELTA)
 
     returned = handle.start("run", {"Value": 7}, operation_interaction=interaction, locale="cs-CZ")

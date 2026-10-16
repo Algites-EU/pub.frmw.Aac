@@ -1,6 +1,7 @@
 from __future__ import annotations
 import dataclasses
 from contextvars import ContextVar
+from datetime import datetime
 import importlib
 import inspect
 import json
@@ -27,11 +28,13 @@ from ..configuration.api import (
 from ..invocation.api import (
     AInOperationInteractionDetailLevel, AInOperationInteractionEventType, AInOperationInteractionFailureDetailLevel,
     AInOperationInteractionMode, AInOperationInteractionSeverity, AInStateResultDeliveryMode,
-    AIiCapabilityHandle, AIiOperationInteractionProviderToCaller, AIiOperationInteractionCallerToProvider, AIcInvocationInput,
+    AIiCapabilityHandle, AIiOperationInteractionProviderToCallerOnProvider, AIiOperationInteractionCallerToProviderOnCaller, AIcInvocationInput,
     AIcInvocationOutput, AIcOperationInteractionCallerToProviderMessage, AIcOperationInteractionEvent,
-    AIcOperationInteractionFeatures, AIxCapabilityOperationFailed, AIxOperationCancelled, current_invocation_locale,
+    AIcOperationInteractionFeatures, AIcOperationCancellationReasonRecord, AIxCapabilityOperationFailed, AIxOperationCancelled, current_invocation_locale,
     binding_qualifier_profiles_context, current_operation_interaction, invocation_locale_context, operation_interaction_context, operation_parameter_context,
 )
+from ..invocation.aic_operation_cancellation_reason_record import AIcOperationCancellationReasonRecord
+from ..invocation.aic_immutable_cancellation_map import AIcImmutableCancellationMap
 from .provider import AIcProviderRuntimeContext, AIiProviderRuntime, AIiProviderRuntimeFactory
 
 from .aic_process_capability_handle import AIcProcessCapabilityHandle
@@ -423,10 +426,29 @@ def _display_text_from_dict(raw: object) -> AIcDisplayText | None:
 def _operation_interaction_caller_message_from_dict(
     raw: Mapping[str, object]
 ) -> AIcOperationInteractionCallerToProviderMessage:
+    raw_schedule = raw.get("CancellationSchedule", {})
+    if not isinstance(raw_schedule, Mapping):
+        raise TypeError("CancellationSchedule must be an object")
+    schedule = {}
+    for reason, item in raw_schedule.items():
+        if not isinstance(item, Mapping):
+            raise TypeError("cancellation schedule record must be an object")
+        msg = item.get("LastMessage")
+        schedule[str(reason)] = AIcOperationCancellationReasonRecord(
+            reason=str(item.get("Reason", reason)),
+            current_deadline=datetime.fromisoformat(str(item["CurrentDeadline"]).replace("Z", "+00:00")),
+            first_requested_at=datetime.fromisoformat(str(item["FirstRequestedAt"]).replace("Z", "+00:00")),
+            last_requested_at=datetime.fromisoformat(str(item["LastRequestedAt"]).replace("Z", "+00:00")),
+            request_count=int(item.get("RequestCount", 1)),
+            last_message=(AIcDisplayText(text=msg.get("Text"), resource_key=msg.get("ResourceKey"))
+                          if isinstance(msg, Mapping) else None),
+            last_origin=(str(item["LastOrigin"]) if item.get("LastOrigin") is not None else None),
+        )
     return AIcOperationInteractionCallerToProviderMessage(
+        caller_interaction_revision=int(raw.get("CallerInteractionRevision", 0)),
+        cancellation_schedule=schedule,
         last_accepted_state_result_revision=int(raw.get("LastAcceptedStateResultRevision", 0)),
         interaction_mode=AInOperationInteractionMode(str(raw.get("InteractionMode", "foreground"))),
-        cancellation_requested=bool(raw.get("CancellationRequested", False)),
         detail_level=AInOperationInteractionDetailLevel(str(raw.get("DetailLevel", "summary"))),
         reporting_interval_ms=(int(raw["ReportingIntervalMs"]) if raw.get("ReportingIntervalMs") is not None else None),
         failure_detail_level=AInOperationInteractionFailureDetailLevel(str(raw.get("FailureDetailLevel", "basic"))),
@@ -453,6 +475,8 @@ def _jsonable(value: object) -> object:
         return _jsonable(value.to_mapping())
     if dataclasses.is_dataclass(value) and not isinstance(value, type):
         return {"".join(part[:1].upper() + part[1:] for part in field.name.split("_")): _jsonable(getattr(value, field.name)) for field in dataclasses.fields(value)}
+    if isinstance(value, datetime):
+        return value.isoformat()
     if isinstance(value, Enum):
         return value.value
     if isinstance(value, Mapping):

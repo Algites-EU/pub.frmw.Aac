@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:annotation><xs:documentation>Transport-only AAC exchange: ACK and complete unacknowledged P2C batch. Application message payloads use their independently versioned schemas.</xs:documentation></xs:annotation>
+  <xs:element name="OperationInteractionReliableExchange">
+    <xs:complexType><xs:sequence>
+      <xs:element name="AcknowledgedProviderRevision" type="xs:nonNegativeInteger"/>
+      <xs:element name="CallerMessage" minOccurs="0">
+        <xs:complexType><xs:sequence><xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/></xs:sequence></xs:complexType>
+      </xs:element>
+      <xs:element name="Messages"><xs:complexType><xs:sequence>
+        <xs:element name="Message" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType><xs:sequence><xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/></xs:sequence></xs:complexType>
+        </xs:element>
+      </xs:sequence></xs:complexType></xs:element>
+    </xs:sequence></xs:complexType>
+  </xs:element>
+</xs:schema>

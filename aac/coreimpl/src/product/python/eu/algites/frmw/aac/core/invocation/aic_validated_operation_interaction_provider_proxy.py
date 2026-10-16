@@ -20,7 +20,7 @@ from eu.algites.frmw.aac.core.entitlement.api import (
 )
 from eu.algites.frmw.aac.core.invocation.api import (
     AInOperationCompletionState, AInOperationExecutionState, AInOperationInteractionFailureDetailLevel, AInStateResultDeliveryMode,
-    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCaller, AIiOperationInteractionCallerToProvider,
+    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCallerOnProvider, AIiOperationInteractionCallerToProviderOnCaller,
     AIcInvocationInput, AIcInvocationOutput, AIcNullOperationInteraction, AIcOperationCompletion, AIcOperationFailure, AIcOperationInteractionFeatures,
     AIiOperationFailureExceptionFactory, AIxCapabilityOperationFailed, AIxOperationCancelled,
     current_invocation_locale, current_operation_interaction, invocation_locale_context,
@@ -33,10 +33,10 @@ from eu.algites.frmw.aac.core.observation.dispatcher import AIcObservationDispat
 from eu.algites.frmw.aac.core.implementation.errors import AIxSchemaValidationError
 from eu.algites.frmw.aac.core.authorization.implementation import AIcComponentAuthorizationGrantStore
 
-class AIcValidatedOperationInteractionProviderProxy(AIiOperationInteractionProviderToCaller):
+class AIcValidatedOperationInteractionProviderProxy(AIiOperationInteractionProviderToCallerOnProvider):
     """Validate portable RUNNING state-result payloads while delegating interaction transport."""
 
-    def __init__(self, delegate: AIiOperationInteractionProviderToCaller, operation, schema_registry) -> None:
+    def __init__(self, delegate: AIiOperationInteractionProviderToCallerOnProvider, operation, schema_registry) -> None:
         self._delegate = delegate
         self._operation = operation
         self._schema_registry = schema_registry
@@ -59,6 +59,9 @@ class AIcValidatedOperationInteractionProviderProxy(AIiOperationInteractionProvi
         schema_ref = self._running_schema_ref()
         return self._schema_registry.normalize_value_identity(schema_ref.id, schema_ref.version, value)
 
+    def send_message(self, message) -> None:
+        self._delegate.send_message(message)
+
     def declare_features(self, features: AIcOperationInteractionFeatures) -> None:
         self._delegate.declare_features(features)
 
@@ -77,3 +80,6 @@ class AIcValidatedOperationInteractionProviderProxy(AIiOperationInteractionProvi
 
     def caller_snapshot(self):
         return self._delegate.caller_snapshot()
+
+    def accept_cancellation(self, reasons: frozenset[str]):
+        return self._delegate.accept_cancellation(reasons)

@@ -20,7 +20,7 @@ from eu.algites.frmw.aac.core.entitlement.api import (
 )
 from eu.algites.frmw.aac.core.invocation.api import (
     AInOperationCompletionState, AInOperationExecutionState, AInOperationInteractionFailureDetailLevel, AInStateResultDeliveryMode,
-    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCaller, AIiOperationInteractionCallerToProvider,
+    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCallerOnProvider, AIiOperationInteractionCallerToProviderOnCaller,
     AIcInvocationInput, AIcInvocationOutput, AIcNullOperationInteraction, AIcOperationCompletion, AIcOperationFailure, AIcOperationInteractionFeatures,
     AIiOperationFailureExceptionFactory, AIxCapabilityOperationFailed, AIxOperationCancelled,
     current_invocation_locale, current_operation_interaction, invocation_locale_context,
@@ -37,7 +37,7 @@ from .aic_endpoint_registry import AIcEndpointRegistry
 from .aic_invocation_dispatcher import AIcInvocationDispatcher
 from ._context import CURRENT_INVOCATION_ID as _CURRENT_INVOCATION_ID
 
-def _resolve_operation_interaction(explicit: AIiOperationInteractionProviderToCaller | None) -> AIiOperationInteractionProviderToCaller:
+def _resolve_operation_interaction(explicit: AIiOperationInteractionProviderToCallerOnProvider | None) -> AIiOperationInteractionProviderToCallerOnProvider:
     if explicit is not None:
         return explicit
     inherited = current_operation_interaction()
@@ -85,7 +85,7 @@ class AIcCoreCapabilityHandle(AIiCapabilityHandle):
     def invoke(
         self, operation_id: str, arguments: Mapping[str, object] | None = None, *,
         operation_parameters: Mapping[str, object] | None = None,
-        operation_interaction: AIiOperationInteractionProviderToCaller | None = None,
+        operation_interaction: AIiOperationInteractionProviderToCallerOnProvider | None = None,
         locale: str | None = None,
     ) -> AIcInvocationOutput:
         effective_locale = locale if locale is not None else current_invocation_locale()
@@ -110,9 +110,9 @@ class AIcCoreCapabilityHandle(AIiCapabilityHandle):
 
     def new_operation_interaction(
         self, *,
-        listener: Callable[[object], None] | None = None,
+        listener: Callable[[tuple[AIcOperationInteractionProviderToCallerMessage, ...]], None] | None = None,
         exception_factory: AIiOperationFailureExceptionFactory | None = None,
-    ) -> AIiOperationInteractionCallerToProvider:
+    ) -> AIiOperationInteractionCallerToProviderOnCaller:
         interaction = AIcOperationInteractionController(listener=listener)
         interaction.set_exception_factory(exception_factory)
         return interaction
@@ -120,7 +120,7 @@ class AIcCoreCapabilityHandle(AIiCapabilityHandle):
     def invoke_completion(
         self, operation_id: str, arguments: Mapping[str, object] | None = None, *,
         operation_parameters: Mapping[str, object] | None = None,
-        operation_interaction: AIiOperationInteractionCallerToProvider | None = None,
+        operation_interaction: AIiOperationInteractionCallerToProviderOnCaller | None = None,
         locale: str | None = None,
     ) -> AIcOperationCompletion:
         output = self.invoke(
@@ -149,9 +149,9 @@ class AIcCoreCapabilityHandle(AIiCapabilityHandle):
     def start(
         self, operation_id: str, arguments: Mapping[str, object] | None = None, *,
         operation_parameters: Mapping[str, object] | None = None,
-        operation_interaction: AIiOperationInteractionCallerToProvider | None = None,
+        operation_interaction: AIiOperationInteractionCallerToProviderOnCaller | None = None,
         locale: str | None = None,
-    ) -> AIiOperationInteractionCallerToProvider:
+    ) -> AIiOperationInteractionCallerToProviderOnCaller:
         interaction = operation_interaction or AIcOperationInteractionController()
         thread = threading.Thread(
             target=self.invoke,

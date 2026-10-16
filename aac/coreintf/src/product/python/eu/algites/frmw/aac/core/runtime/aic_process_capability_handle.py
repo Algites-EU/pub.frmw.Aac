@@ -27,7 +27,7 @@ from ..configuration.api import (
 from ..invocation.api import (
     AInOperationInteractionDetailLevel, AInOperationInteractionEventType, AInOperationInteractionFailureDetailLevel,
     AInOperationInteractionMode, AInOperationInteractionSeverity, AInStateResultDeliveryMode,
-    AIiCapabilityHandle, AIiOperationInteractionProviderToCaller, AIiOperationInteractionCallerToProvider, AIcInvocationInput,
+    AIiCapabilityHandle, AIiOperationInteractionProviderToCallerOnProvider, AIiOperationInteractionCallerToProviderOnCaller, AIcInvocationInput,
     AIcInvocationOutput, AIcOperationInteractionCallerToProviderMessage, AIcOperationInteractionEvent,
     AIcOperationInteractionFeatures, AIxCapabilityOperationFailed, AIxOperationCancelled, current_invocation_locale,
     current_operation_interaction, invocation_locale_context, operation_interaction_context, operation_parameter_context,
@@ -52,7 +52,7 @@ class AIcProcessCapabilityHandle(AIiCapabilityHandle):
     def invoke(
         self, operation_id: str, arguments: Mapping[str, object] | None = None, *,
         operation_parameters: Mapping[str, object] | None = None,
-        operation_interaction: AIiOperationInteractionProviderToCaller | None = None,
+        operation_interaction: AIiOperationInteractionProviderToCallerOnProvider | None = None,
         locale: str | None = None,
     ) -> AIcInvocationOutput:
         response = self._channel.core_invoke(
@@ -73,9 +73,9 @@ class AIcProcessCapabilityHandle(AIiCapabilityHandle):
     def start(
         self, operation_id: str, arguments: Mapping[str, object] | None = None, *,
         operation_parameters: Mapping[str, object] | None = None,
-        operation_interaction: AIiOperationInteractionCallerToProvider | None = None,
+        operation_interaction: AIiOperationInteractionCallerToProviderOnCaller | None = None,
         locale: str | None = None,
-    ) -> AIiOperationInteractionCallerToProvider:
+    ) -> AIiOperationInteractionCallerToProviderOnCaller:
         if operation_interaction is None:
             raise ValueError("process-local asynchronous invocation requires an explicit operation interaction controller")
         thread = threading.Thread(

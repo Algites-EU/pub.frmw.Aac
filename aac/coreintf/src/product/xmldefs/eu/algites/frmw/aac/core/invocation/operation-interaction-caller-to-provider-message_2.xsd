@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xs:schema xmlns:ns1="urn:algites:aac:xml-schema-compatibility:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_2.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical Operation Interaction Caller To Provider Message schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <ns1:canonicalJsonSchema sourceFormat="jsondefs">{"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-caller-to-provider-message_2.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical Operation Interaction Caller To Provider Message schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"CallerInteractionRevision":{"description":"Revision of the complete caller-to-provider interaction snapshot, incremented on each effective change.","minimum":0,"type":"integer"},"CancellationSchedule":{"additionalProperties":{"additionalProperties":false,"properties":{"CurrentDeadline":{"description":"Absolute effective time, serialized with an explicit UTC offset; Java Instant/Python aware datetime.","format":"date-time","type":"string"},"FirstRequestedAt":{"description":"Absolute effective time, serialized with an explicit UTC offset; Java Instant/Python aware datetime.","format":"date-time","type":"string"},"LastMessage":{"additionalProperties":false,"properties":{"ResourceKey":{"type":["string","null"]},"Text":{"type":["string","null"]}},"type":["object","null"]},"LastOrigin":{"type":["string","null"]},"LastRequestedAt":{"description":"Absolute effective time, serialized with an explicit UTC offset; Java Instant/Python aware datetime.","format":"date-time","type":"string"},"Reason":{"minLength":1,"type":"string"},"RequestCount":{"minimum":1,"type":"integer"}},"required":["Reason","CurrentDeadline","FirstRequestedAt","LastRequestedAt","RequestCount"],"type":"object"},"description":"Sparse active reasons only, keyed by reason; withdrawal removes the entry. Reason property must match map key.","type":"object"},"DetailLevel":{"description":"Specifies the detail level for this operation interaction caller to provider message.","enum":["SUMMARY","DETAILED"]},"FailureDetailLevel":{"description":"Specifies the failure detail level for this operation interaction caller to provider message.","enum":["BASIC","STACK_TRACE"]},"InteractionMode":{"description":"Specifies the interaction mode for this operation interaction caller to provider message.","enum":["FOREGROUND","BACKGROUND"]},"LastAcceptedStateResultRevision":{"description":"Specifies the last accepted state result revision for this operation interaction caller to provider message.","minimum":0,"type":"integer"},"ReportingIntervalMs":{"description":"Specifies the reporting interval ms for this operation interaction caller to provider message.","minimum":0,"type":["integer","null"]},"StateResultDeliveryMode":{"description":"Specifies the state result delivery mode for this operation interaction caller to provider message.","enum":["ON_DEMAND_COMPLETE","ON_DEMAND_DELTA","ON_CHANGE_COMPLETE","ON_CHANGE_DELTA","ALWAYS_COMPLETE"]},"StateResultRequestId":{"description":"Stable identifier of the state result request associated with this operation interaction caller to provider message.","minimum":0,"type":"integer"}},"required":["LastAcceptedStateResultRevision","InteractionMode","DetailLevel","FailureDetailLevel","StateResultDeliveryMode","StateResultRequestId","CallerInteractionRevision","CancellationSchedule"],"title":"Operation Interaction Caller To Provider Message 2","type":"object","x-aac-schema-id":"_AAC.schema.operation-interaction-caller-to-provider-message","x-aac-schema-version":2}</ns1:canonicalJsonSchema>
+      <ns1:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</ns1:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="OperationInteractionCallerToProviderMessage">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical Operation Interaction Caller To Provider Message schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="LastAcceptedStateResultRevision">
+          <xs:annotation>
+            <xs:documentation>Specifies the last accepted state result revision for this operation interaction caller to provider message.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+              <xs:minInclusive value="0" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="InteractionMode" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Specifies the interaction mode for this operation interaction caller to provider message.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="DetailLevel" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Specifies the detail level for this operation interaction caller to provider message.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="ReportingIntervalMs" minOccurs="0" nillable="true">
+          <xs:annotation>
+            <xs:documentation>Specifies the reporting interval ms for this operation interaction caller to provider message.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+              <xs:minInclusive value="0" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="FailureDetailLevel" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Specifies the failure detail level for this operation interaction caller to provider message.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="StateResultDeliveryMode" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Specifies the state result delivery mode for this operation interaction caller to provider message.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="StateResultRequestId">
+          <xs:annotation>
+            <xs:documentation>Stable identifier of the state result request associated with this operation interaction caller to provider message.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+              <xs:minInclusive value="0" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+      <xs:element name="CallerInteractionRevision" type="xs:nonNegativeInteger" /><xs:element name="CancellationSchedule" type="xs:anyType" /></xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

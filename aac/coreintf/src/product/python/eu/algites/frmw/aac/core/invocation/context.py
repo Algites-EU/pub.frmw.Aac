@@ -4,7 +4,7 @@ from contextlib import contextmanager
 from contextvars import ContextVar
 from typing import Mapping
 
-from .interaction import AIcNullOperationInteraction, AIiOperationInteractionProviderToCaller
+from .interaction import AIcNullOperationInteraction, AIiOperationInteractionProviderToCallerOnProvider
 
 _CURRENT_OPERATION_PARAMETERS: ContextVar[Mapping[str, object]] = ContextVar(
     "aac_current_operation_parameters", default={}
@@ -12,9 +12,8 @@ _CURRENT_OPERATION_PARAMETERS: ContextVar[Mapping[str, object]] = ContextVar(
 _CURRENT_BINDING_QUALIFIER_PROFILES: ContextVar[tuple[Mapping[str, object], ...]] = ContextVar(
     "aac_current_binding_qualifier_profiles", default=()
 )
-_NULL_OPERATION_INTERACTION = AIcNullOperationInteraction()
-_CURRENT_OPERATION_INTERACTION: ContextVar[AIiOperationInteractionProviderToCaller] = ContextVar(
-    "aac_current_operation_interaction", default=_NULL_OPERATION_INTERACTION
+_CURRENT_OPERATION_INTERACTION: ContextVar[AIiOperationInteractionProviderToCallerOnProvider] = ContextVar(
+    "aac_current_operation_interaction", default=None
 )
 _CURRENT_INVOCATION_LOCALE: ContextVar[str | None] = ContextVar(
     "aac_current_invocation_locale", default=None
@@ -31,9 +30,9 @@ def current_binding_qualifier_profiles() -> tuple[Mapping[str, object], ...]:
     return tuple(dict(profile) for profile in _CURRENT_BINDING_QUALIFIER_PROFILES.get())
 
 
-def current_operation_interaction() -> AIiOperationInteractionProviderToCaller:
+def current_operation_interaction() -> AIiOperationInteractionProviderToCallerOnProvider:
     """Return the provider-facing interaction channel for the current capability invocation."""
-    return _CURRENT_OPERATION_INTERACTION.get()
+    return _CURRENT_OPERATION_INTERACTION.get() or AIcNullOperationInteraction()
 
 
 def current_invocation_locale() -> str | None:
@@ -60,8 +59,8 @@ def binding_qualifier_profiles_context(binding_qualifier_profiles: tuple[Mapping
 
 
 @contextmanager
-def operation_interaction_context(interaction: AIiOperationInteractionProviderToCaller | None):
-    token = _CURRENT_OPERATION_INTERACTION.set(interaction or _NULL_OPERATION_INTERACTION)
+def operation_interaction_context(interaction: AIiOperationInteractionProviderToCallerOnProvider | None):
+    token = _CURRENT_OPERATION_INTERACTION.set(interaction or AIcNullOperationInteraction())
     try:
         yield
     finally:

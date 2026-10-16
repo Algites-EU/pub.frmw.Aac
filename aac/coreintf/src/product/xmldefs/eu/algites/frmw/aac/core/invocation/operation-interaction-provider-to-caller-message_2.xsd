@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xs:schema xmlns:ns1="urn:algites:aac:xml-schema-compatibility:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://defs.dev.algites.eu/api/xmldefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_2.xsd" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation>Defines the canonical Operation Interaction Provider To Caller Message schema and its serialized data contract.</xs:documentation>
+    <xs:appinfo>
+      <ns1:canonicalJsonSchema sourceFormat="jsondefs">{"$id":"https://raw.githubusercontent.com/Algites-EU/pub.frmw.Aac/main/aac/coreintf/src/product/jsondefs/eu/algites/frmw/aac/core/invocation/operation-interaction-provider-to-caller-message_2.jsondef.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"description":"Defines the canonical Operation Interaction Provider To Caller Message schema and its serialized data contract.","properties":{"$schema":{"description":"Optional absolute URI of the schema describing this root document.","format":"uri","type":"string"},"CancellationAcceptance":{"additionalProperties":false,"description":"Optional provider-local acceptance evidence, delivered when the transport permits.","properties":{"AcceptedAt":{"description":"Absolute effective time, serialized with an explicit UTC offset; Java Instant/Python aware datetime.","format":"date-time","type":"string"},"AcceptedInteractionSnapshot":{"$ref":"operation-interaction-caller-to-provider-message_2.jsondef.schema.json"},"AcceptedReasons":{"items":{"minLength":1,"type":"string"},"minItems":1,"type":"array","uniqueItems":true}},"required":["AcceptedInteractionSnapshot","AcceptedReasons","AcceptedAt"],"type":["object","null"]},"Events":{"description":"Interaction events emitted since the previous provider-to-caller update.","items":{"$ref":"operation-interaction-event_2.jsondef.schema.json"},"type":"array"},"ExecutionState":{"description":"Specifies the execution state for this operation interaction provider to caller message.","enum":["PENDING","RUNNING","COMPLETED","FAILED","CANCELLED"]},"Features":{"additionalProperties":false,"description":"Feature flags or negotiated interaction capabilities reported by the provider.","properties":{"Cancellation":{"description":"Indicates whether cancellation applies to this feature.","type":"boolean"},"DetailLevel":{"description":"Indicates whether detail level applies to this feature.","type":"boolean"},"ProgressReporting":{"description":"Indicates whether progress reporting applies to this feature.","type":"boolean"},"ReportingInterval":{"description":"Indicates whether reporting interval applies to this feature.","type":"boolean"},"SupportedStateResultDeliveryModes":{"description":"Lists the supported state result delivery modes associated with this feature.","items":{"enum":["ON_DEMAND_COMPLETE","ON_DEMAND_DELTA","ON_CHANGE_COMPLETE","ON_CHANGE_DELTA","ALWAYS_COMPLETE"]},"minItems":1,"type":"array","uniqueItems":true}},"required":["ProgressReporting","Cancellation","DetailLevel","ReportingInterval","SupportedStateResultDeliveryModes"],"type":"object"},"InteractionRevision":{"description":"Specifies the interaction revision for this operation interaction provider to caller message.","minimum":0,"type":"integer"},"PublishedAt":{"description":"UTC-capable timestamp attached to each provider publication, including buffered publications.","format":"date-time","type":["string","null"]},"StateResult":{"description":"Specifies the state result for this operation interaction provider to caller message."},"StateResultPayloadRevision":{"description":"Specifies the state result payload revision for this operation interaction provider to caller message.","minimum":1,"type":["integer","null"]},"StateResultRevision":{"description":"Specifies the state result revision for this operation interaction provider to caller message.","minimum":0,"type":"integer"}},"required":["InteractionRevision","ExecutionState","StateResultRevision","Events","Features"],"title":"Operation Interaction Provider To Caller Message 2","type":"object","x-aac-schema-id":"_AAC.schema.operation-interaction-provider-to-caller-message","x-aac-schema-version":2}</ns1:canonicalJsonSchema>
+      <ns1:validationNote>XSD 1.0 structural projection. For oneOf/anyOf/allOf, if/then/else, uniqueItems, JSON patterns, open-key maps and cross-field rules, the embedded canonical JSON schema remains authoritative.</ns1:validationNote>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="OperationInteractionProviderToCallerMessage">
+    <xs:annotation>
+      <xs:documentation>Defines the canonical Operation Interaction Provider To Caller Message schema and its serialized data contract.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="InteractionRevision">
+          <xs:annotation>
+            <xs:documentation>Specifies the interaction revision for this operation interaction provider to caller message.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+              <xs:minInclusive value="0" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="ExecutionState" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Specifies the execution state for this operation interaction provider to caller message.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="StateResultRevision">
+          <xs:annotation>
+            <xs:documentation>Specifies the state result revision for this operation interaction provider to caller message.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+              <xs:minInclusive value="0" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="StateResultPayloadRevision" minOccurs="0" nillable="true">
+          <xs:annotation>
+            <xs:documentation>Specifies the state result payload revision for this operation interaction provider to caller message.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+              <xs:minInclusive value="1" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="StateResult" minOccurs="0" type="xs:anyType">
+          <xs:annotation>
+            <xs:documentation>Specifies the state result for this operation interaction provider to caller message.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Events">
+          <xs:annotation>
+            <xs:documentation>Interaction events emitted since the previous provider-to-caller update.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="EventType" type="xs:anyType">
+                      <xs:annotation>
+                        <xs:documentation>Kind of interaction event represented by this entry.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="ProgressId" minOccurs="0" nillable="true">
+                      <xs:annotation>
+                        <xs:documentation>Identifier of the progress item represented by this event.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ParentProgressId" minOccurs="0" nillable="true">
+                      <xs:annotation>
+                        <xs:documentation>Identifier of the parent progress item for nested progress reporting.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="PhaseId" minOccurs="0" nillable="true">
+                      <xs:annotation>
+                        <xs:documentation>Identifier of the execution phase associated with this event.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Name" minOccurs="0" type="xs:anyType">
+                      <xs:annotation>
+                        <xs:documentation>Human-readable name of this operation interaction event.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Description" minOccurs="0" type="xs:anyType">
+                      <xs:annotation>
+                        <xs:documentation>Human-readable description of this operation interaction event.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Current" minOccurs="0" nillable="true">
+                      <xs:annotation>
+                        <xs:documentation>Current progress value.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:decimal">
+                          <xs:minInclusive value="0" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Total" minOccurs="0" nillable="true">
+                      <xs:annotation>
+                        <xs:documentation>Expected total progress value when known.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:decimal">
+                          <xs:minInclusive value="0" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Unit" minOccurs="0" nillable="true">
+                      <xs:annotation>
+                        <xs:documentation>Unit used for progress values.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Severity" minOccurs="0" type="xs:anyType">
+                      <xs:annotation>
+                        <xs:documentation>Severity level associated with this event or diagnostic.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Code" minOccurs="0" nillable="true">
+                      <xs:annotation>
+                        <xs:documentation>Stable machine-readable code associated with this event or diagnostic.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Details" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Additional structured details associated with this operation interaction event.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="MapEntry" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+                              </xs:sequence>
+                              <xs:attribute name="key" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Features">
+          <xs:annotation>
+            <xs:documentation>Feature flags or negotiated interaction capabilities reported by the provider.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProgressReporting" type="xs:boolean">
+                <xs:annotation>
+                  <xs:documentation>Indicates whether progress reporting applies to this feature.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Cancellation" type="xs:boolean">
+                <xs:annotation>
+                  <xs:documentation>Indicates whether cancellation applies to this feature.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="DetailLevel" type="xs:boolean">
+                <xs:annotation>
+                  <xs:documentation>Indicates whether detail level applies to this feature.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="ReportingInterval" type="xs:boolean">
+                <xs:annotation>
+                  <xs:documentation>Indicates whether reporting interval applies to this feature.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="SupportedStateResultDeliveryModes">
+                <xs:annotation>
+                  <xs:documentation>Lists the supported state result delivery modes associated with this feature.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Item" minOccurs="1" type="xs:anyType" maxOccurs="unbounded" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      <xs:element name="PublishedAt" type="xs:dateTime" minOccurs="0" /><xs:element name="CancellationAcceptance" type="xs:anyType" minOccurs="0" /></xs:sequence>
+      <xs:attribute name="schemaRef" type="xs:anyURI" use="optional">
+        <xs:annotation>
+          <xs:documentation>XML representation of the JSON $schema property.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -10,6 +10,7 @@ import subprocess
 import sys
 import threading
 import dataclasses
+from datetime import datetime
 from typing import Mapping, Sequence
 from uuid import uuid4
 from eu.algites.frmw.aac.core.descriptor.api import AIcProviderDefinitionDescriptor
@@ -18,7 +19,7 @@ from eu.algites.frmw.aac.core.entitlement.api import AIcEntitlementContext
 from eu.algites.frmw.aac.core.configuration.api import AInConfigurationTargetKind, AIcConfigurationTarget, AIcEffectiveConfiguration
 from eu.algites.frmw.aac.core.invocation.api import (
     AInOperationInteractionEventType, AInOperationInteractionSeverity, AInStateResultDeliveryMode,
-    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCaller, AIcInvocationInput, AIcInvocationOutput,
+    AIiCapabilityEndpoint, AIiCapabilityHandle, AIiOperationInteractionProviderToCallerOnProvider, AIcInvocationInput, AIcInvocationOutput,
     AIcOperationInteractionEvent, AIcOperationInteractionFeatures, current_operation_interaction,
 )
 from eu.algites.frmw.aac.core.presentation.api import AIcDisplayText
@@ -37,6 +38,8 @@ def _wire_value(aValue: object) -> object:
             _canonical_property_name(locField.name): _wire_value(getattr(aValue, locField.name))
             for locField in dataclasses.fields(aValue)
         }
+    if isinstance(aValue, datetime):
+        return aValue.isoformat()
     if hasattr(aValue, "value"):
         return getattr(aValue, "value")
     if isinstance(aValue, Mapping):
@@ -135,7 +138,7 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
         self._pending: dict[str, queue.Queue[dict[str, object]]] = {}
         self._pending_lock = threading.Lock()
         self._interaction_lock = threading.Lock()
-        self._active_interactions: dict[str, AIiOperationInteractionProviderToCaller] = {}
+        self._active_interactions: dict[str, AIiOperationInteractionProviderToCallerOnProvider] = {}
         self._write_lock = threading.Lock()
         self._request_lock = threading.RLock()
         self._closed = False
@@ -326,12 +329,16 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
                         self._handle_operation_interaction_features(frame)
                     elif kind == "operation_interaction_events":
                         self._handle_operation_interaction_events(frame)
+                    elif kind == "operation_interaction_message":
+                        self._handle_operation_interaction_message(frame)
                     elif kind == "operation_interaction_state_result_changed":
                         self._handle_operation_interaction_state_result_changed(frame)
                     elif kind == "operation_interaction_update_state_result":
                         self._handle_operation_interaction_update_state_result(frame)
                     elif kind == "operation_interaction_deliver_state_result":
                         self._handle_operation_interaction_deliver_state_result(frame)
+                    elif kind == "operation_interaction_cancellation_acceptance":
+                        self._handle_operation_interaction_cancellation_acceptance(frame)
                     elif kind == "operation_interaction_caller_snapshot":
                         self._handle_operation_interaction_caller_snapshot(frame)
                 except Exception as exc:
@@ -393,7 +400,7 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
         self._write(response)
 
 
-    def _interaction_for_frame(self, frame: Mapping[str, object]) -> AIiOperationInteractionProviderToCaller | None:
+    def _interaction_for_frame(self, frame: Mapping[str, object]) -> AIiOperationInteractionProviderToCallerOnProvider | None:
         invocation_id = str(frame.get("InvocationId", ""))
         with self._interaction_lock:
             return self._active_interactions.get(invocation_id)
@@ -439,6 +446,63 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
         )
         interaction.report_events(events)
 
+    def _handle_operation_interaction_message(self, frame: Mapping[str, object]) -> None:
+        """Convert a full P2C wire message without discarding individual events or deltas."""
+        interaction = self._interaction_for_frame(frame)
+        raw = frame.get("Message")
+        if interaction is None or not isinstance(raw, Mapping):
+            return
+        from eu.algites.frmw.aac.core.invocation.api import (
+            AIcOperationInteractionProviderToCallerMessage,
+            AInOperationExecutionState,
+        )
+        raw_features = raw.get("Features", {})
+        if not isinstance(raw_features, Mapping):
+            raise TypeError("invalid provider interaction features")
+        features = AIcOperationInteractionFeatures(
+            progress_reporting=bool(raw_features.get("ProgressReporting", False)),
+            cancellation=bool(raw_features.get("Cancellation", False)),
+            detail_level=bool(raw_features.get("DetailLevel", False)),
+            reporting_interval=bool(raw_features.get("ReportingInterval", False)),
+            supported_state_result_delivery_modes=tuple(
+                AInStateResultDeliveryMode(str(value)) for value in
+                raw_features.get("SupportedStateResultDeliveryModes", ("on_demand_complete",))
+            ),
+        )
+        raw_events = raw.get("Events", ())
+        if not isinstance(raw_events, (list, tuple)):
+            raise TypeError("invalid provider interaction events")
+        acceptance = None
+        raw_acceptance = raw.get("CancellationAcceptance")
+        if raw_acceptance is not None:
+            if not isinstance(raw_acceptance, Mapping):
+                raise TypeError("invalid cancellation acceptance")
+            from eu.algites.frmw.aac.core.runtime.process_host import _operation_interaction_caller_message_from_dict
+            from eu.algites.frmw.aac.core.invocation.aic_operation_cancellation_acceptance import AIcOperationCancellationAcceptance
+            raw_snapshot = raw_acceptance.get("AcceptedInteractionSnapshot")
+            raw_reasons = raw_acceptance.get("AcceptedReasons")
+            raw_accepted_at = raw_acceptance.get("AcceptedAt")
+            if not isinstance(raw_snapshot, Mapping) or not isinstance(raw_reasons, (list, tuple)) or not isinstance(raw_accepted_at, str):
+                raise TypeError("invalid cancellation acceptance fields")
+            acceptance = AIcOperationCancellationAcceptance(
+                accepted_interaction_snapshot=_operation_interaction_caller_message_from_dict(raw_snapshot),
+                accepted_reasons=frozenset(str(item) for item in raw_reasons),
+                accepted_at=datetime.fromisoformat(raw_accepted_at.replace("Z", "+00:00")),
+            )
+        raw_published_at = raw.get("PublishedAt")
+        message = AIcOperationInteractionProviderToCallerMessage(
+            interaction_revision=int(raw.get("InteractionRevision", 0)),
+            execution_state=AInOperationExecutionState(str(raw.get("ExecutionState", "PENDING"))),
+            state_result_revision=int(raw.get("StateResultRevision", 0)),
+            state_result_payload_revision=(int(raw["StateResultPayloadRevision"]) if raw.get("StateResultPayloadRevision") is not None else None),
+            state_result=raw.get("StateResult"),
+            events=tuple(_operation_interaction_event_from_dict(item) for item in raw_events if isinstance(item, Mapping)),
+            features=features,
+            published_at=(datetime.fromisoformat(raw_published_at.replace("Z", "+00:00")) if isinstance(raw_published_at, str) else None),
+            cancellation_acceptance=acceptance,
+        )
+        interaction.send_message(message)
+
     def _handle_operation_interaction_state_result_changed(self, frame: Mapping[str, object]) -> None:
         interaction = self._interaction_for_frame(frame)
         if interaction is None:
@@ -477,6 +541,27 @@ class AIcProcessProviderRuntime(AIiProviderRuntime, AIiCapabilityEndpoint):
             self._interaction_response(frame, error={"Type": "UnknownInvocation", "Message": "operation interaction is no longer active"})
             return
         self._interaction_response(frame, result={"Caller": _wire_value(interaction.caller_snapshot())})
+
+    def _handle_operation_interaction_cancellation_acceptance(self, frame: Mapping[str, object]) -> None:
+        interaction = self._interaction_for_frame(frame)
+        raw = frame.get("Acceptance")
+        if interaction is None or not isinstance(raw, Mapping):
+            return
+        from eu.algites.frmw.aac.core.runtime.process_host import _operation_interaction_caller_message_from_dict
+        from eu.algites.frmw.aac.core.invocation.aic_operation_cancellation_acceptance import AIcOperationCancellationAcceptance
+        from datetime import datetime
+        snapshot = raw.get("AcceptedInteractionSnapshot")
+        reasons = raw.get("AcceptedReasons")
+        timestamp = raw.get("AcceptedAt")
+        if not isinstance(snapshot, Mapping) or not isinstance(reasons, (list, tuple)) or not isinstance(timestamp, str):
+            return
+        evidence = AIcOperationCancellationAcceptance(
+            accepted_interaction_snapshot=_operation_interaction_caller_message_from_dict(snapshot),
+            accepted_reasons=frozenset(str(value) for value in reasons),
+            accepted_at=datetime.fromisoformat(timestamp.replace("Z", "+00:00")),
+        )
+        if hasattr(interaction, "record_cancellation_acceptance"):
+            interaction.record_cancellation_acceptance(evidence)
 
     def _process_failure_message(self) -> str:
         code = self._process.poll()

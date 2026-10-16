@@ -1,0 +1,3 @@
+package eu.algites.frmw.aac.core.invocation;
+
+public enum AInOperationCancellationReason { CALLER_REQUEST, ENGINE_SHUTDOWN, DEPENDENCY_FAILURE, ADMINISTRATIVE_REQUEST, RESOURCE_LIMIT_EXCEEDED, PROVIDER_UNAVAILABLE }
